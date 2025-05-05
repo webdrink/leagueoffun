@@ -31,9 +31,9 @@
 
 ## game-picker
 *Note: These might be resolved by user's manual edits, will re-check later if needed.*
-- [ ] App.tsx: Cannot find module 'react' or its corresponding type declarations.
-- [ ] vite.config.ts: Cannot find module 'vite' or its corresponding type declarations.
-- [ ] vite.config.ts: Cannot find module '@vitejs/plugin-react' or its corresponding type declarations.
+- [x] App.tsx: Cannot find module 'react' or its corresponding type declarations. *(Resolved: No longer present)*
+- [x] vite.config.ts: Cannot find module 'vite' or its corresponding type declarations. *(Resolved: No longer present)*
+- [x] vite.config.ts: Cannot find module '@vitejs/plugin-react' or its corresponding type declarations. *(Resolved: No longer present)*
 
 ## blamegame
 - [x] index.tsx (line 6): Argument of type 'HTMLElement | null' is not assignable to parameter of type 'Container'. Type 'null' is not assignable to type 'Container'. (Resolved)
@@ -46,6 +46,11 @@
 - [x] App.tsx (line 164): Property 'category' does not exist on type 'never'. (x2) (Resolved)
 - [x] App.tsx (line 165): Property 'text' does not exist on type 'never'. (Resolved)
 - [ ] index.css (lines 1, 2, 3): Unknown at rule @tailwind (Warning - likely IDE/linter issue, ignore for now)
+
+## scripts/generateGamesJson.ts
+- [x] Cannot find module 'fs' or its corresponding type declarations. *(Hint: Resolved by switching to CommonJS `require` syntax)*
+- [x] Cannot find module 'path' or its corresponding type declarations. *(Hint: Resolved by switching to CommonJS `require` syntax)*
+- [x] Cannot find name '__dirname'. (x2) *(Hint: Resolved by switching to CommonJS `require` syntax)*
 
 ## public
 - [x] games.json: Comments are not permitted in JSON. (Resolved)

@@ -1,0 +1,50 @@
+name: Deploy Game Picker + Games
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🟢 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: |
+          npm install --prefix game-picker
+          npm install --prefix games/blamegame
+
+      - name: 🧠 Generate games.json
+        run: |
+          npm install
+          npx tsx scripts/generateGamesJson.ts
+
+      - name: 🛠 Build Game Picker
+        run: |
+          npm run build --prefix game-picker
+
+      - name: 🚀 Deploy Game Picker to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./game-picker/dist
+          cname: leagueoffun.de
+
+      - name: 🚀 Deploy Blamegame to GitHub Pages
+        run: |
+          npm run build --prefix games/blamegame
+          echo "blamegame.leagueoffun.de" > games/blamegame/dist/CNAME
+          npx gh-pages -d games/blamegame/dist -b gh-pages-blamegame
