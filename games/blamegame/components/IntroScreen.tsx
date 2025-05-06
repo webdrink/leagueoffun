@@ -22,6 +22,7 @@ interface IntroScreenProps {
   volume: number;
   onOpenDebugPanel: () => void;
   onOpenInfoModal: () => void;
+  mainButtonLabel?: string;
 }
 
 const IntroScreen: React.FC<IntroScreenProps> = ({
@@ -36,7 +37,8 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
   onVolumeChange,
   volume,
   onOpenDebugPanel,
-  onOpenInfoModal
+  onOpenInfoModal,
+  mainButtonLabel
 }) => {
   return (
     <motion.div
@@ -65,7 +67,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
           disabled={isLoading || !!csvError}
           className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg rounded-lg shadow-md transition-transform hover:scale-105 duration-200"
         >
-          {isLoading ? 'Lädt...' : 'Spiel starten'}
+          {mainButtonLabel || (isLoading ? 'Lädt...' : 'Spiel starten')}
         </Button>
         <div className="flex items-center justify-between pt-2">
           <label htmlFor="nameBlameModeToggle" className="flex items-center cursor-pointer">

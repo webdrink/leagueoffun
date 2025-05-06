@@ -78,19 +78,19 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
       {nameBlameMode && activePlayers.length > 0 && (
         <div className="mt-6 w-full max-w-md">
           <p className="text-center text-sm text-white mb-2">
-            {activePlayers[currentPlayerIndex]?.name || ''}, wer ist schuld?
+            Wem gibst du die Schuld?
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-            {activePlayers.map(player => (
-              <Button
+            {activePlayers.map((player, i) => (
+              <button
                 key={player.id}
-                variant="outline"
                 onClick={() => onBlame(player.name)}
-                className="w-full truncate transition-transform hover:scale-105 duration-200 bg-white/80 hover:bg-white text-purple-700 border-purple-300"
-                disabled={player.name === activePlayers[currentPlayerIndex]?.name}
+                className={`bg-pink-100 hover:bg-pink-300 text-purple-700 font-semibold rounded-lg py-2 px-3 shadow transition-colors focus:outline-none focus:ring-2 focus:ring-pink-400 ${i === currentPlayerIndex ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={i === currentPlayerIndex}
+                title={i === currentPlayerIndex ? 'Du kannst dich nicht selbst auswählen' : ''}
               >
                 {player.name}
-              </Button>
+              </button>
             ))}
           </div>
         </div>

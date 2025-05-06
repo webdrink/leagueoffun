@@ -16,6 +16,7 @@ import LoadingContainer from './components/LoadingContainer';
 import QuestionScreen from './components/QuestionScreen';
 import SummaryScreen from './components/SummaryScreen';
 import ErrorDisplay from './components/ErrorDisplay';
+import GameContainer from './components/GameContainer';
 
 // Import constants and types
 import { LOADING_QUOTES, SOUND_PATHS, initialGameSettings } from './constants';
@@ -58,13 +59,15 @@ function App() {
     }, {} as Record<string, number>)
   };
   
-  // Start the roulette animation
+  // Start the roulette animation or go to player setup if needed
   const handleStartRoulette = () => {
-    if (playerManager.nameBlameMode && !playerManager.hasValidPlayerSetup()) {
-      setStep('playerSetup');
-      return;
+    if (playerManager.nameBlameMode) {
+      // If not enough players, go to player setup
+      if (playerManager.players.length < 2) {
+        setStep('playerSetup');
+        return;
+      }
     }
-    
     playSound(SOUND_PATHS.ROUND_START);
     setStep('roulette');
     
@@ -86,6 +89,15 @@ function App() {
     }, gameSettings.rouletteDurationMs);
   };
   
+  // Handler for the main button on the intro screen
+  const handleIntroMainButton = () => {
+    if (playerManager.nameBlameMode) {
+      setStep('playerSetup');
+    } else {
+      handleStartRoulette();
+    }
+  };
+
   // Handle advancing to the next question
   const handleNextQuestion = () => {
     if (questionsManager.index < questionsManager.currentRoundQuestions.length - 1) {
@@ -139,26 +151,28 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-500 to-pink-300 flex flex-col items-center justify-between py-4 px-4">
-      {/* Debug/Info buttons moved to IntroScreen */}
-      
+    <GameContainer>
       {/* Debug Panel */}
-      {debugMode && (
-        <DebugPanel
-          gameSettings={gameSettings}
-          setGameSettings={setGameSettings}
-          defaultGameSettings={initialGameSettings}
-          onClose={() => setDebugMode(false)}
-          questionStats={questionStats}
-        />
-      )}
+        {debugMode && (
+          <DebugPanel
+            gameSettings={gameSettings}
+            setGameSettings={setGameSettings}
+            defaultGameSettings={initialGameSettings}
+            onClose={() => setDebugMode(false)}
+            questionStats={questionStats}
+          />
+        )}
 
-      {/* Game title */}
-      <div className="text-center mb-4">
-        <h1 className="text-white text-5xl font-bold shadow-md bg-purple-800 rounded-xl px-6 py-2">
-          TheBlameGame
-        </h1>
-      </div>
+        {/* Game title */}
+        <div className="text-center mb-4">
+          <h1
+            className="text-white text-5xl font-bold shadow-md rounded-xl px-6 py-2 cursor-pointer"
+            onClick={handleRestart}
+            title="Zurück zum Start"
+          >
+            <span className="text-purple-700">Blame</span> Game
+          </h1>
+        </div>
 
       {/* Game screen transitions */}
       <div className="w-full max-w-md flex-grow flex items-center justify-center">
@@ -171,13 +185,14 @@ function App() {
               csvError={questionsManager.csvError}
               nameBlameMode={playerManager.nameBlameMode}
               soundEnabled={soundEnabled}
-              onStartGame={handleStartRoulette}
+              onStartGame={handleIntroMainButton}
               onToggleNameBlame={checked => playerManager.setNameBlameMode(checked)}
               onToggleSound={toggleSound}
               onVolumeChange={setVolume}
               volume={volume}
               onOpenDebugPanel={() => setDebugMode(true)}
               onOpenInfoModal={() => setIsInfoModalOpen(true)}
+              mainButtonLabel={playerManager.nameBlameMode ? 'Spieler Einrichten' : 'Spiel starten'}
             />
           )}
 
@@ -191,7 +206,12 @@ function App() {
               onRemovePlayer={playerManager.removePlayer}
               onTempPlayerNameChange={playerManager.setTempPlayerName}
               onAddPlayer={playerManager.addPlayer}
-              onStartGame={handleStartRoulette}
+              onStartGame={() => {
+                // Only start game if enough players
+                if (playerManager.players.length >= 3) {
+                  handleStartRoulette();
+                }
+              }}
               onBackToIntro={() => setStep('intro')}
             />
           )}
@@ -253,7 +273,7 @@ function App() {
         onResetAppData={handleResetAppData}
       />
       <footer className="mt-6 text-white text-xs">© 2025 Blame Game</footer>
-    </div>
+    </GameContainer>
   );
 }
 

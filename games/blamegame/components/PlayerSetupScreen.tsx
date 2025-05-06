@@ -30,6 +30,7 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
 }) => {
   const handleAddPlayerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (tempPlayerName.trim() === '') return; // Prevent adding empty names
     onAddPlayer();
   };
 
@@ -50,7 +51,7 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
       </div>
 
       <form onSubmit={handleAddPlayerSubmit} className="space-y-4 mb-6">
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 items-center">
           <Input
             type="text"
             value={tempPlayerName}
@@ -58,8 +59,21 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
             placeholder="Spielername eingeben"
             className={`flex-grow border-pink-300 focus:border-pink-500 focus:ring-pink-500 ${nameInputError ? 'border-red-500' : ''}`}
           />
-          <Button type="submit" className="bg-pink-500 hover:bg-pink-600 text-white">
-            <UserPlus size={20} className="mr-2" /> Spieler hinzufügen
+          <Button
+            type="submit"
+            className="relative flex items-center justify-center bg-pink-500 hover:bg-pink-600 text-white group px-3"
+            tabIndex={0}
+            aria-label="Spieler hinzufügen"
+            onClick={(e) => {
+              e.preventDefault();
+              if (tempPlayerName.trim() === '') return;
+              onAddPlayer();
+            }}
+          >
+            <UserPlus size={22} />
+            <span className="absolute left-full ml-2 opacity-0 group-hover:opacity-100 transition-opacity bg-pink-600 text-white rounded px-2 py-1 text-xs whitespace-nowrap z-10">
+              Spieler hinzufügen
+            </span>
           </Button>
         </div>
         {nameInputError && <p className="text-red-500 text-sm">{nameInputError}</p>}
@@ -80,6 +94,7 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
               size="icon"
               onClick={() => onRemovePlayer(player.id)}
               className="text-red-500 hover:text-red-700"
+              aria-label="Spieler entfernen"
             >
               <Trash2 size={18} />
             </Button>
@@ -92,13 +107,13 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
 
       <Button
         onClick={onStartGame}
-        disabled={players.length < 2}
+        disabled={players.length < 3}
         className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg rounded-lg shadow-md transition-transform hover:scale-105 duration-200 disabled:bg-gray-400"
       >
         Spiel starten ({players.length}/8)
       </Button>
-      {players.length < 2 && (
-        <p className="text-center text-sm text-pink-600 mt-2">Mindestens 2 Spieler benötigt.</p>
+      {players.length < 3 && (
+        <p className="text-center text-sm text-pink-600 mt-2">Mindestens 3 Spieler benötigt für den NameBlame Modus.</p>
       )}
     </motion.div>
   );
