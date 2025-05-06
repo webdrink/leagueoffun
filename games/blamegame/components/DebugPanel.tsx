@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from "./ui/button";
 import DebugInput from "./DebugInput";
-import type { GameSettings } from "../App"; // Path to App.tsx for GameSettings type
+import type { GameSettings } from "../types";
 import { XIcon, RotateCcwIcon } from 'lucide-react';
 
 interface DebugPanelProps {
@@ -13,6 +13,7 @@ interface DebugPanelProps {
     totalQuestions: number;
     playedQuestions: number;
     availableQuestions: number;
+    categories?: Record<string, number>;
   };
 }
 
@@ -74,7 +75,7 @@ const settingsConfig: Record<string, SectionConfig> = {
   }
 };
 
-const DebugPanel: React.FC<DebugPanelProps> = ({ gameSettings, setGameSettings, defaultGameSettings, onClose }) => {
+const DebugPanel: React.FC<DebugPanelProps> = ({ gameSettings, setGameSettings, defaultGameSettings, onClose, questionStats }) => {
   const handleSectionReset = (sectionKey: string) => {
     const sectionSettings = settingsConfig[sectionKey].settings;
     const updatedSettings = { ...gameSettings };
@@ -102,6 +103,39 @@ const DebugPanel: React.FC<DebugPanelProps> = ({ gameSettings, setGameSettings, 
             <XIcon size={24} />
           </Button>
         </div>
+
+        {questionStats && (
+          <div className="mb-6 p-4 bg-gray-700 rounded-md">
+            <h3 className="text-xl font-medium mb-3">Question Stats</h3>
+            <div className="grid grid-cols-3 gap-4 mb-4">
+              <div className="bg-gray-800 p-3 rounded-md text-center">
+                <div className="text-sm text-gray-400">Total</div>
+                <div className="text-xl font-bold">{questionStats.totalQuestions}</div>
+              </div>
+              <div className="bg-gray-800 p-3 rounded-md text-center">
+                <div className="text-sm text-gray-400">Played</div>
+                <div className="text-xl font-bold">{questionStats.playedQuestions}</div>
+              </div>
+              <div className="bg-gray-800 p-3 rounded-md text-center">
+                <div className="text-sm text-gray-400">Available</div>
+                <div className="text-xl font-bold">{questionStats.availableQuestions}</div>
+              </div>
+            </div>
+            {questionStats.categories && Object.keys(questionStats.categories).length > 0 && (
+              <div>
+                <h4 className="text-sm font-medium text-gray-300 mb-2">Categories:</h4>
+                <div className="max-h-40 overflow-y-auto text-sm">
+                  {Object.entries(questionStats.categories).map(([category, count]) => (
+                    <div key={category} className="flex justify-between py-1 border-b border-gray-600">
+                      <span>{category}</span>
+                      <span className="font-medium text-blue-300">{count}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         <div className="overflow-y-auto flex-grow pr-2 space-y-6">
           {Object.keys(settingsConfig).map((sectionKey) => (

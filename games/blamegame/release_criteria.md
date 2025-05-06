@@ -18,8 +18,8 @@
 
 ### 🔊 Sound & Feedback
 - [x] Sound Toggle works
-- [ ] Sound effects play correctly during events (question, start, end)
-- [ ] Volume control or mute option available
+- [x] Sound effects play correctly during events (question, start, end)
+- [x] Volume control or mute option available
 
 ### 💾 PWA & Offline Capability
 - [x] Manifest & Icons present
@@ -38,10 +38,10 @@
 
 ### 📱 Usability & UX
 - [x] App is fully usable on smartphones
-- [ ] UI is "Pass-the-Phone" friendly (large buttons, clear roles)
-- [ ] Text on cards never cut off (even with long questions)
+- [x] UI is "Pass-the-Phone" friendly (large buttons, clear roles)
+- [x] Text on cards never cut off (even with long questions)
 - [x] App is intuitive to use on first opening
-- [ ] A round feels complete (animation / end screen)
+- [x] A round feels complete (animation / end screen)
 
 ---
 
