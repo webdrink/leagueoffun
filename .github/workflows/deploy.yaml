@@ -24,16 +24,35 @@ jobs:
 
       - name: 📦 Install dependencies
         run: |
+          set -e # exit on first error
+          trap 'echo "❌ Deployment failed. Please check logs."' ERR
           npm install --prefix game-picker
           npm install --prefix games/blamegame
+          npm install # For root, for scripts/generateGamesJson.ts
 
       - name: 🧠 Generate games.json
         run: |
-          npm install
+          set -e # exit on first error
+          trap 'echo "❌ Deployment failed. Please check logs."' ERR
+          # npm install for root is now in the previous step
           npx tsx scripts/generateGamesJson.ts
+
+      - name: 🧐 Lint Game Picker
+        run: |
+          set -e # exit on first error
+          trap 'echo "❌ Deployment failed. Please check logs."' ERR
+          npm run lint --prefix game-picker
+
+      - name: 🧐 Type-check Game Picker
+        run: |
+          set -e # exit on first error
+          trap 'echo "❌ Deployment failed. Please check logs."' ERR
+          npm run typecheck --prefix game-picker
 
       - name: 🛠 Build Game Picker
         run: |
+          set -e # exit on first error
+          trap 'echo "❌ Deployment failed. Please check logs."' ERR
           npm run build --prefix game-picker
 
       - name: 🚀 Deploy Game Picker to GitHub Pages
@@ -43,8 +62,28 @@ jobs:
           publish_dir: ./game-picker/dist
           cname: leagueoffun.de
 
+      - name: 🧐 Lint Blamegame
+        run: |
+          set -e # exit on first error
+          trap 'echo "❌ Deployment failed. Please check logs."' ERR
+          npm run lint --prefix games/blamegame
+
+      - name: 🧐 Type-check Blamegame
+        run: |
+          set -e # exit on first error
+          trap 'echo "❌ Deployment failed. Please check logs."' ERR
+          npm run typecheck --prefix games/blamegame
+
+      - name: 🛠 Build Blamegame
+        run: |
+          set -e # exit on first error
+          trap 'echo "❌ Deployment failed. Please check logs."' ERR
+          npm run build --prefix games/blamegame
+
       - name: 🚀 Deploy Blamegame to GitHub Pages
         run: |
-          npm run build --prefix games/blamegame
+          set -e # exit on first error
+          trap 'echo "❌ Deployment failed. Please check logs."' ERR
+          # Build step moved before this
           echo "blamegame.leagueoffun.de" > games/blamegame/dist/CNAME
           npx gh-pages -d games/blamegame/dist -b gh-pages-blamegame

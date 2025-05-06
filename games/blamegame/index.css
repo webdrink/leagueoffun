@@ -21,3 +21,26 @@
   outline: 2px solid #6366f1;
   outline-offset: 2px;
 }
+
+/* Ensure background gradients and animations apply smoothly */
+body, #root, .app-container {
+  transition: background-color 1s ease-in-out, background-image 1s ease-in-out;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Example for a more complex night sky if not using individual star elements */
+/* 
+.night-theme-bg {
+  background-color: #0f172a; // slate-900
+  background-image: radial-gradient(white 0.5px, transparent 0.5px), radial-gradient(white 0.5px, transparent 0.5px);
+  background-size: 30px 30px, 60px 60px;
+  background-position: 0 0, 15px 15px;
+  animation: stars-background-anim 100s linear infinite;
+}
+
+@keyframes stars-background-anim {
+  from {background-position: 0 0, 15px 15px;}
+  to {background-position: 0 -1000px, 15px -1000px;}
+}
+*/

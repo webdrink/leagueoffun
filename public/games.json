@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "name": "blamegame",
+    "title": "Blamegame",
+    "description": "Who's to blame? A logic-based social trap.",
+    "domain": "blamegame.leagueoffun.de"
+  },
+  {
+    "name": "truthordrink",
+    "title": "Truthordrink",
+    "description": "Spicy questions. Honest answers. Or drinks.",
+    "domain": "truthordrink.leagueoffun.de"
+  }
+]

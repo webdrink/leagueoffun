@@ -1,4 +1,4 @@
-const fs = require('fs');
+import * as fs from 'fs';
 const path = require('path');
 
 const GAMES_DIR = path.resolve(__dirname, '../games');
@@ -7,7 +7,7 @@ const OUTPUT_FILE = path.resolve(__dirname, '../public/games.json');
 function readGames(): { name: string, title: string, description?: string, domain: string }[] {
   const entries = fs.readdirSync(GAMES_DIR, { withFileTypes: true });
 
-  const games = entries.filter(dirent => dirent.isDirectory()).map(dirent => {
+  const games = entries.filter((dirent: fs.Dirent) => dirent.isDirectory()).map((dirent: fs.Dirent) => {
     const name = dirent.name;
     const title = name.charAt(0).toUpperCase() + name.slice(1);
     const description = getDescriptionForGame(name); // optional
