@@ -60,7 +60,38 @@ interface Player {
   name: string;
 }
 
+interface NameBlameEntry {
+  from: string;   // Player who blamed
+  to: string;     // Player who was blamed
+  question: string;
+  timestamp: string; // ISO date string
+}
+
 // --- Constants ---
+
+// Fallback questions in case loading fails completely
+const FALLBACK_QUESTIONS: Question[] = [
+  {
+    category: "Beim Feiern",
+    text: "Wer würde versehentlich eine ganze Bar bezahlen, weil sich niemand traut, die Rechnung zu teilen?"
+  },
+  {
+    category: "In Beziehungen",
+    text: "Wer würde vergessen, wichtige Jahrestage zu feiern?"
+  },
+  {
+    category: "Bei der Arbeit",
+    text: "Wer würde sich bei einem Vorstellungsgespräch versprechen und es nicht mehr korrigieren können?"
+  },
+  {
+    category: "In der Schule",
+    text: "Wer würde einen Tag vor der Prüfung anfangen zu lernen?"
+  },
+  {
+    category: "In peinlichen Momenten",
+    text: "Wer würde in der Öffentlichkeit laut furzen und dann so tun, als wäre nichts passiert?"
+  }
+];
 
 const CATEGORY_EMOJIS: { [key: string]: string } = {
   "Beim Feiern": "🎉",
@@ -193,57 +224,75 @@ function App() {
   const [csvError, setCsvError] = useState<string | null>(null);
   const [playedQuestions, setPlayedQuestions] = useLocalStorage<string[]>('blamegame-played-questions', []);
   const [nameBlameMode, setNameBlameMode] = useLocalStorage<boolean>('blamegame-nameblame-mode', false);
-  const [players, setPlayers] = useLocalStorage<Player[]>('blamegame-player-names', [{ id: 'player1', name: '' }, { id: 'player2', name: '' }]);
-  const [nameBlameLog, setNameBlameLog] = useLocalStorage<Array<{ from: string, to: string, question: string }>>('blamegame-nameblame-log', []);
+  const [players, setPlayers] = useLocalStorage<Player[]>('blamegame-player-names', [{ id: 'player1', name: '' }, { id: 'player2', name: '' }]);  const [nameBlameLog, setNameBlameLog] = useLocalStorage<Array<NameBlameEntry>>('blamegame-nameblame-log', []);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
   const [debugMode, setDebugMode] = useState(false);
-  const [showPlayerSetup, setShowPlayerSetup] = useState(false);
-  const [tempPlayerName, setTempPlayerName] = useState("");
-
-  useEffect(() => {
+  const [nameInputError, setNameInputError] = useState<string | null>(null);
+  const [tempPlayerName, setTempPlayerName] = useState("");  useEffect(() => {
     setIsLoading(true);
     setCsvError(null);
-    fetch('blamegame_questions.csv')
+    
+    // First try to load questions from JSON
+    fetch('questions.json')
       .then(res => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.text();
+        if (!res.ok) throw new Error('JSON questions not found, falling back to CSV');
+        return res.json();
       })
-      .then(text => {
-        const lines = text.split('\n').filter(line => line.trim() !== '' && !line.startsWith('//'));
-        const header = lines.shift();
-        if (!header || !header.toLowerCase().includes('kategorie') || !header.toLowerCase().includes('frage')) {
-          console.warn("CSV header might be missing or incorrect. Assuming 'Kategorie;Frage;' structure.");
-        }
-        const parsed: Question[] = lines.map(line => {
-          const parts = line.split(';');
-          const category = parts[0]?.trim() || 'Unbekannt';
-          const text = parts[1]?.trim() || 'Keine Frage gefunden';
-          return { category, text };
-        }).filter(q => q.category !== 'Unbekannt' && q.text !== 'Keine Frage gefunden');
-
-        if (parsed.length > 0) {
-          setAllQuestions(parsed);
+      .then((data: Question[]) => {
+        if (data && data.length > 0) {
+          setAllQuestions(data);
           setCsvError(null);
+          console.log(`Loaded ${data.length} questions from JSON`);
         } else {
-          console.error("No valid questions parsed from CSV.", lines);
-          setCsvError('Keine gültigen Fragen im CSV gefunden oder CSV ist leer/falsch formatiert.');
+          throw new Error('JSON file empty or invalid');
         }
       })
-      .catch((error) => {
-        console.error("Error fetching or parsing CSV:", error);
-        setCsvError('Fehler beim Laden der Fragen. Prüfe die Konsole und die CSV-Datei.');
+      .catch(jsonError => {
+        console.warn('Failed to load JSON questions, falling back to CSV:', jsonError);
+        
+        // Fallback to CSV
+        fetch('blamegame_questions.csv')
+          .then(res => {
+            if (!res.ok) throw new Error(`CSV HTTP error! status: ${res.status}`);
+            return res.text();
+          })
+          .then(text => {
+            const lines = text.split('\n').filter(line => line.trim() !== '' && !line.startsWith('//'));
+            const header = lines.shift();
+            if (!header || !header.toLowerCase().includes('kategorie') || !header.toLowerCase().includes('frage')) {
+              console.warn("CSV header might be missing or incorrect. Assuming 'Kategorie;Frage;' structure.");
+            }
+            
+            const parsed: Question[] = lines.map(line => {
+              const parts = line.split(';');
+              const category = parts[0]?.trim() || 'Unbekannt';
+              const text = parts[1]?.trim() || 'Keine Frage gefunden';
+              return { category, text };
+            }).filter(q => q.category !== 'Unbekannt' && q.text !== 'Keine Frage gefunden');
+
+            if (parsed.length > 0) {
+              setAllQuestions(parsed);
+              setCsvError(null);
+              console.log(`Loaded ${parsed.length} questions from CSV`);
+            } else {
+              throw new Error('No valid questions found in CSV');
+            }
+          })
+          .catch(csvError => {
+            console.error('Error loading questions from CSV:', csvError);
+            setCsvError('Fehler beim Laden der Fragen. Weder JSON noch CSV konnten geladen werden.');
+            setAllQuestions(FALLBACK_QUESTIONS);
+          });
       })
       .finally(() => {
         setIsLoading(false);
       });
   }, []);
-
   const startRoulette = useCallback(() => {
-    if (isLoading || csvError || allQuestions.length === 0) {
+    if (isLoading) {
       return;
     }
+    
     if (nameBlameMode && players.filter(p => p.name.trim() !== '').length < 2) {
       setStep('playerSetup');
       return;
@@ -251,11 +300,19 @@ function App() {
 
     playSound(SOUND_ROUND_START);
 
-    let availableQuestions = allQuestions.filter(q => !playedQuestions.includes(q.text));
+    // Handle the case when no questions were loaded
+    let questionsToUse = allQuestions;
+    if (questionsToUse.length === 0) {
+      console.warn("No questions loaded, using fallback questions");
+      questionsToUse = FALLBACK_QUESTIONS;
+      setCsvError("Konnte keine Fragen laden. Verwende eingeschränkte Notzufragen.");
+    }
+
+    let availableQuestions = questionsToUse.filter(q => !playedQuestions.includes(q.text));
 
     if (availableQuestions.length < 15) {
       setPlayedQuestions([]);
-      availableQuestions = allQuestions;
+      availableQuestions = questionsToUse;
     }
 
     setStep('roulette');
@@ -310,16 +367,37 @@ function App() {
       setIndex(0);
       setCurrentPlayerIndex(0);
     }
-  }, [index, currentRoundQuestions, playSound, setPlayedQuestions, nameBlameMode, players]);
-
-  const handlePlayerNameChange = (id: string, newName: string) => {
+  }, [index, currentRoundQuestions, playSound, setPlayedQuestions, nameBlameMode, players]);  const handlePlayerNameChange = (id: string, newName: string) => {
     setPlayers(prevPlayers => prevPlayers.map(p => p.id === id ? { ...p, name: newName } : p));
   };
 
   const addPlayer = () => {
-    if (players.length < 10) {
-      setPlayers(prevPlayers => [...prevPlayers, { id: `player${Date.now()}`, name: '' }]);
+    if (players.length >= 10) {
+      setNameInputError("Maximal 10 Spieler erlaubt!");
+      return;
     }
+    
+    const trimmedName = tempPlayerName.trim();
+    
+    if (!trimmedName) {
+      setNameInputError("Bitte gib einen Namen ein.");
+      return;
+    }
+    
+    if (trimmedName.length > 20) {
+      setNameInputError("Name darf maximal 20 Zeichen lang sein.");
+      return;
+    }
+    
+    const isDuplicate = players.some(p => p.name.trim().toLowerCase() === trimmedName.toLowerCase());
+    if (isDuplicate) {
+      setNameInputError("Dieser Name existiert bereits.");
+      return;
+    }
+    
+    setPlayers(prevPlayers => [...prevPlayers, { id: `player${Date.now()}`, name: trimmedName }]);
+    setTempPlayerName(""); // Clear input after adding
+    setNameInputError(null); // Clear any error
   };
 
   const removePlayer = (id: string) => {
@@ -337,21 +415,20 @@ function App() {
     setPlayers(validPlayers);
     startRoulette();
   };
-
   const handleBlame = (blamedPlayerName: string) => {
     if (!currentQuestion || !nameBlameMode) return;
 
     const blamingPlayer = players[currentPlayerIndex];
     if (!blamingPlayer || !blamingPlayer.name) return;
 
-    setNameBlameLog(prevLog => [
-      ...prevLog,
-      {
-        from: blamingPlayer.name,
-        to: blamedPlayerName,
-        question: currentQuestion.text,
-      }
-    ]);
+    const entry: NameBlameEntry = {
+      from: blamingPlayer.name,
+      to: blamedPlayerName,
+      question: currentQuestion.text,
+      timestamp: new Date().toISOString()
+    };
+
+    setNameBlameLog(prevLog => [...prevLog, entry]);
     nextQuestion();
   };
 
@@ -471,9 +548,7 @@ function App() {
             </Button>
           </div>
         </motion.div>
-      )}
-
-      {step === 'playerSetup' && nameBlameMode && (
+      )}      {step === 'playerSetup' && nameBlameMode && (
         <motion.div
           key="playerSetup"
           initial={{ opacity: 0, y: 20 }}
@@ -482,6 +557,8 @@ function App() {
           className="bg-white/80 backdrop-blur-md p-8 rounded-xl shadow-2xl max-w-lg w-full"
         >
           <h2 className="text-2xl font-bold mb-6 text-gray-700 text-center">Spielernamen eingeben</h2>
+          
+          {/* Existing players list */}
           <div className="space-y-3 mb-6 max-h-60 overflow-y-auto pr-2">
             {players.map((player, idx) => (
               <div key={player.id} className="flex items-center space-x-2">
@@ -493,19 +570,48 @@ function App() {
                   className="flex-grow"
                 />
                 {players.length > 2 && (
-                  <Button variant="ghost" size="sm" onClick={() => removePlayer(player.id)} className="text-red-500 hover:text-red-700">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={() => removePlayer(player.id)} 
+                    className="text-red-500 hover:text-red-700"
+                    aria-label="Spieler entfernen"
+                  >
                     X
                   </Button>
                 )}
               </div>
             ))}
           </div>
-          <div className="flex justify-between items-center mb-6">
-            <Button onClick={addPlayer} disabled={players.length >= 10} variant="outline" size="sm">
-              + Spieler hinzufügen
-            </Button>
-            <span className="text-xs text-gray-500">{players.length} / 10 Spieler</span>
+          
+          {/* Add new player section */}
+          <div className="mb-6">
+            <div className="flex items-center space-x-2">
+              <Input
+                type="text"
+                placeholder="Neuer Spielername"
+                value={tempPlayerName}
+                onChange={(e) => setTempPlayerName(e.target.value)}
+                className="flex-grow"
+                onKeyDown={(e) => e.key === 'Enter' && addPlayer()}
+              />
+              <Button 
+                onClick={addPlayer} 
+                disabled={players.length >= 10} 
+                variant="outline" 
+                className="bg-green-100 hover:bg-green-200 text-green-800"
+              >
+                +
+              </Button>
+            </div>
+            {nameInputError && (
+              <p className="text-red-600 text-sm mt-2">{nameInputError}</p>
+            )}
+            <div className="flex justify-end mt-2">
+              <span className="text-xs text-gray-500">{players.length} / 10 Spieler</span>
+            </div>
           </div>
+          
           <Button 
             onClick={startNameBlameGame} 
             size="lg" 
@@ -606,11 +712,19 @@ function App() {
                 duration: gameSettings.questionCardTransitionSec,
               }}
               className="min-h-[150px] flex flex-col justify-between"
-            >
-              <div>
+            >              <div>
                 <div className="text-5xl mb-4">{getEmoji(currentQuestion.category)}</div>
                 <p className="text-sm text-gray-500 mb-2">{currentQuestion.category}</p>
-                <p className="text-xl md:text-2xl font-semibold text-gray-800 min-h-[60px]">{currentQuestion.text}</p>
+                <p 
+                  className="text-xl md:text-2xl font-semibold text-gray-800 min-h-[60px] overflow-y-auto max-h-[180px] py-2"
+                  style={{
+                    fontSize: `${gameSettings.questionFontSize}rem`,
+                    lineHeight: '1.4',
+                    scrollbarWidth: 'thin'
+                  }}
+                >
+                  {currentQuestion.text}
+                </p>
               </div>
               <div className="w-full mt-4">
                 <div className="h-2 bg-gray-200 rounded-full">
@@ -669,10 +783,9 @@ function App() {
           className="bg-white/80 backdrop-blur-md p-8 rounded-xl shadow-2xl text-center max-w-md w-full"
         >
           <h2 className="text-3xl font-bold mb-6 text-gray-700">Spielzusammenfassung!</h2>
-          
-          {nameBlameMode && nameBlameLog.length > 0 ? (
+            {nameBlameMode && nameBlameLog.length > 0 ? (
             <div className="text-left mb-6 max-h-60 overflow-y-auto pr-2">
-              <h3 className="text-xl font-semibold mb-3 text-gray-600">Wer hat wen beschuldigt:</h3>
+              <h3 className="text-xl font-semibold mb-3 text-gray-600 text-center">Blame-O-Meter:</h3>
               {(() => {
                 const blameCounts: { [key: string]: number } = {};
                 nameBlameLog.forEach(log => {
@@ -683,17 +796,38 @@ function App() {
                 if (sortedBlames.length > 0) {
                   const mostBlamed = sortedBlames[0];
                   return (
-                    <p className="text-lg text-center font-semibold text-pink-600 mb-4">
-                      {mostBlamed[0]} wurde am häufigsten beschuldigt ({mostBlamed[1]}x)!
-                    </p>
+                    <>
+                      <div className="text-lg text-center font-bold text-pink-600 mb-6 p-3 bg-pink-100 rounded-lg shadow-inner">
+                        <span className="block text-xs text-pink-400 uppercase tracking-wider mb-1">
+                          Most Blamed Award
+                        </span>
+                        {mostBlamed[0]} ({mostBlamed[1]}x)
+                      </div>
+                      
+                      <div className="mb-6">
+                        <h4 className="text-md font-semibold mb-2 text-gray-500">Blame Ranking:</h4>
+                        <div className="space-y-2">
+                          {sortedBlames.map(([name, count], index) => (
+                            <div key={name} className="flex items-center">
+                              <div className="w-6 text-center font-bold text-gray-500">{index + 1}.</div>
+                              <div className="flex-grow ml-2 font-medium">{name}</div>
+                              <div className="text-right font-bold text-purple-600">{count}x</div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </>
                   );
                 }
                 return null;
               })()}
-              <ul className="space-y-1 text-sm text-gray-500">
+              
+              <h4 className="text-md font-semibold mb-2 text-gray-500">Alle Beschuldigungen:</h4>
+              <ul className="space-y-1 text-sm text-gray-500 divide-y divide-gray-100">
                 {nameBlameLog.map((log, i) => (
-                  <li key={i} className="border-b border-gray-200 pb-1">
-                    <strong>{log.from}</strong> beschuldigte <strong>{log.to}</strong> für: "<em>{log.question}</em>"
+                  <li key={i} className="py-1">
+                    <strong className="text-blue-600">{log.from}</strong> beschuldigte <strong className="text-pink-600">{log.to}</strong> für: 
+                    <p className="italic mt-1 ml-4 text-gray-400">"{log.question}"</p>
                   </li>
                 ))}
               </ul>

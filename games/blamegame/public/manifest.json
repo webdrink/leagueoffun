@@ -1,0 +1,20 @@
+{
+  "name": "The Blame Game",
+  "short_name": "BlameGame",
+  "description": "A fun party game to decide who's to blame for various amusing scenarios.",
+  "icons": [
+    {
+      "src": "pwa-icon-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8b5cf6",
+  "orientation": "portrait",
+  "categories": ["entertainment", "games", "social"],
+  "lang": "de"
+}

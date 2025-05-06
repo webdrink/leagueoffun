@@ -9,6 +9,11 @@ interface DebugPanelProps {
   setGameSettings: React.Dispatch<React.SetStateAction<GameSettings>>;
   defaultGameSettings: GameSettings;
   onClose: () => void;
+  questionStats?: {
+    totalQuestions: number;
+    playedQuestions: number;
+    availableQuestions: number;
+  };
 }
 
 interface SettingConfigBase {
@@ -35,9 +40,8 @@ interface SectionConfig {
 const settingsConfig: Record<string, SectionConfig> = {
   gameRules: {
     title: "Game Rules",
-    settings: [
-      { name: 'numberOfRounds', label: 'Number of Rounds', type: 'number' },
-      { name: 'questionsPerRound', label: 'Questions Per Round', type: 'number' },
+    settings: [      { name: 'numberOfRounds', label: 'Number of Rounds', type: 'number' },
+      { name: 'questionsPerCategory', label: 'Questions Per Round', type: 'number' },
       { name: 'timePerQuestion', label: 'Time Per Question (s)', type: 'number' },
       { name: 'showScore', label: 'Show Score', type: 'boolean' },
       { name: 'allowSkip', label: 'Allow Skip Question', type: 'boolean' },
@@ -74,9 +78,14 @@ const DebugPanel: React.FC<DebugPanelProps> = ({ gameSettings, setGameSettings, 
   const handleSectionReset = (sectionKey: string) => {
     const sectionSettings = settingsConfig[sectionKey].settings;
     const updatedSettings = { ...gameSettings };
+    
+    // Type-safe way to copy the values
     sectionSettings.forEach(setting => {
-      updatedSettings[setting.name] = defaultGameSettings[setting.name];
+      const settingName = setting.name;
+      // Using type assertion to avoid TypeScript errors
+      (updatedSettings as any)[settingName] = (defaultGameSettings as any)[settingName];
     });
+    
     setGameSettings(updatedSettings);
   };
 

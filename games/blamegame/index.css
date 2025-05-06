@@ -22,6 +22,17 @@
   outline-offset: 2px;
 }
 
+:focus-visible {
+  outline: 3px solid #8b5cf6;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
+}
+
+/* Improve keyboard accessibility for interactive elements */
+button, a, [role="button"], input, select, textarea {
+  transition: outline-color 0.2s ease, outline-offset 0.2s ease, box-shadow 0.2s ease;
+}
+
 /* Ensure background gradients and animations apply smoothly */
 body, #root, .app-container {
   transition: background-color 1s ease-in-out, background-image 1s ease-in-out;
@@ -29,18 +40,50 @@ body, #root, .app-container {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Example for a more complex night sky if not using individual star elements */
-/* 
-.night-theme-bg {
-  background-color: #0f172a; // slate-900
-  background-image: radial-gradient(white 0.5px, transparent 0.5px), radial-gradient(white 0.5px, transparent 0.5px);
-  background-size: 30px 30px, 60px 60px;
-  background-position: 0 0, 15px 15px;
-  animation: stars-background-anim 100s linear infinite;
+/* Optimized night theme with star animation */
+.animate-stars {
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes stars-background-anim {
-  from {background-position: 0 0, 15px 15px;}
-  to {background-position: 0 -1000px, 15px -1000px;}
+/* Background star pattern - very light, doesn't affect performance */
+.animate-stars::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(1px 1px at 25% 15%, rgba(255, 255, 255, 0.2) 50%, transparent 50%),
+    radial-gradient(1px 1px at 50% 40%, rgba(255, 255, 255, 0.2) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 75% 60%, rgba(255, 255, 255, 0.3) 50%, transparent 50%),
+    radial-gradient(2px 2px at 20% 80%, rgba(255, 255, 255, 0.2) 50%, transparent 50%);
+  background-size: 550px 550px;
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 0;
 }
-*/
+
+/* Foreground star elements - more prominent but fewer in number */
+.animate-stars::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.9) 50%, transparent 50%),
+    radial-gradient(2px 2px at 25% 50%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
+    radial-gradient(2.5px 2.5px at 40% 30%, rgba(255, 255, 255, 0.7) 50%, transparent 50%),
+    radial-gradient(2px 2px at 60% 70%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
+    radial-gradient(3px 3px at 70% 40%, rgba(255, 255, 255, 0.7) 50%, transparent 50%),
+    radial-gradient(2px 2px at 85% 75%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
+    radial-gradient(3px 3px at 95% 15%, rgba(255, 255, 255, 0.9) 50%, transparent 50%),
+    radial-gradient(2px 2px at 15% 85%, rgba(255, 255, 255, 0.8) 50%, transparent 50%);
+  /* Using animation for the foreground stars */
+  animation: stars-shimmer 6s ease-in-out infinite alternate;
+}
