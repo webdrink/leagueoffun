@@ -14,7 +14,7 @@ import DebugPanel from './components/DebugPanel';
 import InfoModal from './components/InfoModal';
 import IntroScreen from './components/IntroScreen';
 import PlayerSetupScreen from './components/PlayerSetupScreen';
-import RouletteScreen from './components/RouletteScreen';
+import LoadingContainer from './components/LoadingContainer';
 import QuestionScreen from './components/QuestionScreen';
 import SummaryScreen from './components/SummaryScreen';
 import ErrorDisplay from './components/ErrorDisplay';
@@ -22,6 +22,9 @@ import ErrorDisplay from './components/ErrorDisplay';
 // Import constants and types
 import { LOADING_QUOTES, SOUND_PATHS, initialGameSettings } from './constants';
 import { GameStep, QuestionStats } from './types';
+
+// Import utilities
+import { getEmoji } from './utils';
 
 // Import CSS
 import './index.css';
@@ -139,26 +142,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-500 to-pink-300 flex flex-col items-center justify-between py-4 px-4">
-      {/* Debug/Info buttons */}
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => setDebugMode(!debugMode)}
-        className="fixed top-4 right-4 z-50 text-white bg-black/20 hover:bg-black/40"
-        title="Toggle Debug Panel"
-      >
-        <WrenchIcon size={24} />
-      </Button>
-      
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => setIsInfoModalOpen(true)}
-        className="fixed top-4 right-16 z-50 text-white bg-black/20 hover:bg-black/40"
-        title="Spielregeln & Info"
-      >
-        <InfoIcon size={24} />
-      </Button>
+      {/* Debug/Info buttons moved to IntroScreen */}
       
       {/* Debug Panel */}
       {debugMode && (
@@ -191,10 +175,11 @@ function App() {
               soundEnabled={soundEnabled}
               onStartGame={handleStartRoulette}
               onToggleNameBlame={checked => playerManager.setNameBlameMode(checked)}
-              onResetAppData={handleResetAppData}
               onToggleSound={toggleSound}
               onVolumeChange={setVolume}
               volume={volume}
+              onOpenDebugPanel={() => setDebugMode(true)}
+              onOpenInfoModal={() => setIsInfoModalOpen(true)}
             />
           )}
 
@@ -215,11 +200,18 @@ function App() {
 
           {/* Roulette Screen */}
           {step === 'roulette' && (
-            <RouletteScreen
-              selectedCategories={questionsManager.selectedCategories}
-              quoteIndex={quoteIndex}
+            <LoadingContainer
+              categories={Array.from(new Set(questionsManager.allQuestions.map(q => q.category)))}
+              getEmoji={getEmoji}
               loadingQuotes={LOADING_QUOTES}
-              gameSettings={gameSettings}
+              settings={{
+                loadingQuoteSpringStiffness: 120,
+                loadingQuoteSpringDamping: 10,
+                loadingQuoteTransitionDurationSec: 0.2,
+                cardFallDistance: -200,
+                cardFallStaggerDelaySec: 0.2,
+                cardStackOffsetY: -8,
+              }}
             />
           )}
 
@@ -260,6 +252,7 @@ function App() {
       <InfoModal 
         isOpen={isInfoModalOpen} 
         onClose={() => setIsInfoModalOpen(false)} 
+        onResetAppData={handleResetAppData}
       />
       <footer className="mt-6 text-white text-xs">© 2025 Blame Game</footer>
     </div>

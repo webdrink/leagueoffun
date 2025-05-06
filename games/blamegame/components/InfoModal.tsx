@@ -6,9 +6,10 @@ import { XIcon } from 'lucide-react';
 interface InfoModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onResetAppData: () => void;
 }
 
-const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
+const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose, onResetAppData }) => {
   if (!isOpen) return null;
 
   return (
@@ -78,12 +79,18 @@ const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
               </section>
             </div>
 
-            <div className="mt-6 text-center">
+            <div className="mt-6 text-center flex flex-col gap-2">
               <Button
                 onClick={onClose}
                 className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg shadow-md transition-transform hover:scale-105 duration-200"
               >
                 Verstanden!
+              </Button>
+              <Button
+                onClick={onResetAppData}
+                className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-lg shadow-md transition-transform hover:scale-105 duration-200"
+              >
+                App-Daten zurücksetzen
               </Button>
             </div>
           </motion.div>

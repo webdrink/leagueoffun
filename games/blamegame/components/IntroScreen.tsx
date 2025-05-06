@@ -17,10 +17,11 @@ interface IntroScreenProps {
   soundEnabled: boolean;
   onStartGame: () => void;
   onToggleNameBlame: (checked: boolean) => void;
-  onResetAppData: () => void;
   onToggleSound: () => void;
   onVolumeChange: (volume: number) => void;
   volume: number;
+  onOpenDebugPanel: () => void;
+  onOpenInfoModal: () => void;
 }
 
 const IntroScreen: React.FC<IntroScreenProps> = ({
@@ -31,10 +32,11 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
   soundEnabled,
   onStartGame,
   onToggleNameBlame,
-  onResetAppData,
   onToggleSound,
   onVolumeChange,
-  volume
+  volume,
+  onOpenDebugPanel,
+  onOpenInfoModal
 }) => {
   return (
     <motion.div
@@ -45,8 +47,8 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
       className="w-full max-w-md p-6 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl border-2 border-pink-100"
     >
       <div className="text-center mb-6">
-        <h2 className="text-3xl font-bold text-purple-700">Willkommen!</h2>
-        <p className="text-pink-600 mt-2">Bereit, jemandem die Schuld zu geben?</p>
+        <h2 className="text-3xl font-bold text-purple-700">Wem traust du was zu?</h2>
+        <p className="text-pink-600 mt-2">Was denkst du? Wer würde was tun?</p>
       </div>
 
       {csvError && (
@@ -85,6 +87,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
           </Button>
         </div>
         <div className="mt-1">
+          <div className="h-2" />
           <Slider
             value={[volume]}
             onValueChange={(newVolume) => onVolumeChange(newVolume[0])}
@@ -96,14 +99,15 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
           />
         </div>
       </div>
+      <div className="text-center mb-6">
+      </div>
 
-      <div className="mt-8 text-center">
-        <Button
-          variant="link"
-          onClick={onResetAppData}
-          className="text-xs text-pink-600 hover:text-pink-800"
-        >
-          App-Daten zurücksetzen
+      <div className="flex justify-end gap-2 mb-2">
+        <Button variant="ghost" size="icon" onClick={onOpenDebugPanel} className="text-purple-600 hover:text-purple-800">
+          <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-wrench"><path d="M14.7 6.3a5 5 0 0 0-6.6 6.6l-5.1 5.1a2 2 0 1 0 2.8 2.8l5.1-5.1a5 5 0 0 0 6.6-6.6m-2.8 2.8 2.8-2.8"/></svg>
+        </Button>
+        <Button variant="ghost" size="icon" onClick={onOpenInfoModal} className="text-purple-600 hover:text-purple-800">
+          <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
         </Button>
       </div>
     </motion.div>
