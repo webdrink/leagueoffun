@@ -4,7 +4,6 @@ import { Button } from './components/ui/button';
 import { WrenchIcon, InfoIcon } from 'lucide-react';
 
 // Import custom hooks
-import useTheme from './hooks/useTheme';
 import useSound from './hooks/useSound';
 import useQuestions from './hooks/useQuestions';
 import useNameBlameSetup from './hooks/useNameBlameSetup';
@@ -28,9 +27,6 @@ import { GameStep, QuestionStats } from './types';
 import './index.css';
 
 function App() {
-  // Theme based on time of day
-  const themeDetails = useTheme();
-  
   // Sound management
   const { soundEnabled, toggleSound, playSound, volume, setVolume } = useSound();
   
@@ -142,7 +138,7 @@ function App() {
   };
 
   return (
-    <div className={`flex flex-col items-center justify-center min-h-screen p-4 text-center text-gray-800 transition-colors duration-1000 ${themeDetails.gradient} ${themeDetails.animationClass || ''}`}>
+    <div className="min-h-screen bg-gradient-to-b from-pink-500 to-pink-300 flex flex-col items-center justify-between py-4 px-4">
       {/* Debug/Info buttons */}
       <Button
         variant="ghost"
@@ -176,81 +172,84 @@ function App() {
       )}
 
       {/* Game title */}
-      <h1 className="text-5xl md:text-6xl font-extrabold mb-6 text-white text-opacity-90 shadow-lg px-4 py-2 rounded-md bg-black bg-opacity-20">
-        TheBlameGame
-      </h1>
+      <div className="text-center mb-4">
+        <h1 className="text-white text-5xl font-bold shadow-md bg-purple-800 rounded-xl px-6 py-2">
+          TheBlameGame
+        </h1>
+      </div>
 
       {/* Game screen transitions */}
-      <AnimatePresence mode="wait">
-        {/* Intro Screen */}
-        {step === 'intro' && (
-          <IntroScreen
-            gameSettings={gameSettings}
-            isLoading={questionsManager.isLoading}
-            csvError={questionsManager.csvError}
-            nameBlameMode={playerManager.nameBlameMode}
-            soundEnabled={soundEnabled}
-            onStartGame={handleStartRoulette}
-            onToggleNameBlame={checked => playerManager.setNameBlameMode(checked)}
-            onResetAppData={handleResetAppData}
-            onToggleSound={toggleSound}
-            onVolumeChange={setVolume}
-            volume={volume}
-          />
-        )}
+      <div className="w-full max-w-md flex-grow flex items-center justify-center">
+        <AnimatePresence mode="wait">
+          {/* Intro Screen */}
+          {step === 'intro' && (
+            <IntroScreen
+              gameSettings={gameSettings}
+              isLoading={questionsManager.isLoading}
+              csvError={questionsManager.csvError}
+              nameBlameMode={playerManager.nameBlameMode}
+              soundEnabled={soundEnabled}
+              onStartGame={handleStartRoulette}
+              onToggleNameBlame={checked => playerManager.setNameBlameMode(checked)}
+              onResetAppData={handleResetAppData}
+              onToggleSound={toggleSound}
+              onVolumeChange={setVolume}
+              volume={volume}
+            />
+          )}
 
-        {/* Player Setup Screen */}
-        {step === 'playerSetup' && playerManager.nameBlameMode && (
-          <PlayerSetupScreen
-            players={playerManager.players}
-            tempPlayerName={playerManager.tempPlayerName}
-            nameInputError={playerManager.nameInputError}
-            onPlayerNameChange={playerManager.handlePlayerNameChange}
-            onRemovePlayer={playerManager.removePlayer}
-            onTempPlayerNameChange={playerManager.setTempPlayerName}
-            onAddPlayer={playerManager.addPlayer}
-            onStartGame={handleStartRoulette}
-            onBackToIntro={() => setStep('intro')}
-          />
-        )}
+          {/* Player Setup Screen */}
+          {step === 'playerSetup' && playerManager.nameBlameMode && (
+            <PlayerSetupScreen
+              players={playerManager.players}
+              tempPlayerName={playerManager.tempPlayerName}
+              nameInputError={playerManager.nameInputError}
+              onPlayerNameChange={playerManager.handlePlayerNameChange}
+              onRemovePlayer={playerManager.removePlayer}
+              onTempPlayerNameChange={playerManager.setTempPlayerName}
+              onAddPlayer={playerManager.addPlayer}
+              onStartGame={handleStartRoulette}
+              onBackToIntro={() => setStep('intro')}
+            />
+          )}
 
-        {/* Roulette Screen */}
-        {step === 'roulette' && (
-          <RouletteScreen
-            selectedCategories={questionsManager.selectedCategories}
-            quoteIndex={quoteIndex}
-            loadingQuotes={LOADING_QUOTES}
-            gameSettings={gameSettings}
-          />
-        )}
+          {/* Roulette Screen */}
+          {step === 'roulette' && (
+            <RouletteScreen
+              selectedCategories={questionsManager.selectedCategories}
+              quoteIndex={quoteIndex}
+              loadingQuotes={LOADING_QUOTES}
+              gameSettings={gameSettings}
+            />
+          )}
 
-        {/* Question Screen */}
-        {step === 'game' && questionsManager.currentQuestion && (
-          <QuestionScreen
-            question={questionsManager.currentQuestion}
-            cardKey={cardKey}
-            index={questionsManager.index}
-            totalQuestions={questionsManager.currentRoundQuestions.length}
-            gameSettings={gameSettings}
-            nameBlameMode={playerManager.nameBlameMode}
-            activePlayers={playerManager.getActivePlayers()}
-            currentPlayerIndex={playerManager.currentPlayerIndex}
-            onBlame={handleBlame}
-            onNext={handleNextQuestion}
-            onBack={questionsManager.goToPreviousQuestion}
-          />
-        )}
+          {/* Question Screen */}
+          {step === 'game' && questionsManager.currentQuestion && (
+            <QuestionScreen
+              question={questionsManager.currentQuestion}
+              index={questionsManager.index}
+              totalQuestions={questionsManager.currentRoundQuestions.length}
+              gameSettings={gameSettings}
+              nameBlameMode={playerManager.nameBlameMode}
+              activePlayers={playerManager.getActivePlayers()}
+              currentPlayerIndex={playerManager.currentPlayerIndex}
+              onBlame={handleBlame}
+              onNext={handleNextQuestion}
+              onBack={questionsManager.goToPreviousQuestion}
+            />
+          )}
 
-        {/* Summary Screen */}
-        {step === 'summary' && (
-          <SummaryScreen
-            nameBlameMode={playerManager.nameBlameMode}
-            nameBlameLog={playerManager.nameBlameLog}
-            questionsAnswered={questionsManager.currentRoundQuestions.length}
-            onRestart={handleRestart}
-          />
-        )}
-      </AnimatePresence>
+          {/* Summary Screen */}
+          {step === 'summary' && (
+            <SummaryScreen
+              nameBlameMode={playerManager.nameBlameMode}
+              nameBlameLog={playerManager.nameBlameLog}
+              questionsAnswered={questionsManager.currentRoundQuestions.length}
+              onRestart={handleRestart}
+            />
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* Error display */}
       {questionsManager.csvError && (
@@ -262,6 +261,7 @@ function App() {
         isOpen={isInfoModalOpen} 
         onClose={() => setIsInfoModalOpen(false)} 
       />
+      <footer className="mt-6 text-white text-xs">© 2025 Blame Game</footer>
     </div>
   );
 }

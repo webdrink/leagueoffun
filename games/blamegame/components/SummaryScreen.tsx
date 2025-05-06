@@ -20,85 +20,67 @@ const SummaryScreen: React.FC<SummaryScreenProps> = ({
   nameBlameMode,
   nameBlameLog,
   questionsAnswered,
-  onRestart
+  onRestart,
 }) => {
   // Calculate blame statistics
   const calculateBlameStats = (): BlameCount[] => {
     const blameCounts: Record<string, number> = {};
-    
-    nameBlameLog.forEach(log => {
+
+    nameBlameLog.forEach((log) => {
       blameCounts[log.to] = (blameCounts[log.to] || 0) + 1;
     });
-    
+
     return Object.entries(blameCounts)
       .map(([name, count]) => ({ name, count }))
       .sort((a, b) => b.count - a.count);
   };
 
-  const blameStats = nameBlameMode && nameBlameLog.length > 0 
-    ? calculateBlameStats() 
-    : [];
+  const calculateMostBlamed = (log: NameBlameEntry[]) => {
+    const stats = calculateBlameStats();
+    if (stats.length === 0) return null;
 
-  const mostBlamed = blameStats.length > 0 ? blameStats[0] : null;
+    const maxCount = stats[0].count;
+    const players = stats.filter((entry) => entry.count === maxCount).map((entry) => entry.name);
+
+    return { players, count: maxCount };
+  };
+
+  const mostBlamed = nameBlameMode ? calculateMostBlamed(nameBlameLog) : null;
 
   return (
     <>
       <Confetti duration={5000} pieces={150} />
       <motion.div
-        key="summary"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
-        className="bg-white/80 backdrop-blur-md p-8 rounded-xl shadow-2xl text-center max-w-md w-full"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+        className="w-full max-w-md p-6 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl border-2 border-pink-100 text-center"
       >
-        <h2 className="text-3xl font-bold mb-6 text-gray-700">Spielzusammenfassung!</h2>
-        
-        {nameBlameMode && nameBlameLog.length > 0 ? (
-          <div className="text-left mb-6 max-h-60 overflow-y-auto pr-2">
-            <h3 className="text-xl font-semibold mb-3 text-gray-600 text-center">Blame-O-Meter:</h3>
-            
-            {mostBlamed && (
-              <div className="text-lg text-center font-bold text-pink-600 mb-6 p-3 bg-pink-100 rounded-lg shadow-inner">
-                <span className="block text-xs text-pink-400 uppercase tracking-wider mb-1">
-                  Most Blamed Award
-                </span>
-                {mostBlamed.name} ({mostBlamed.count}x)
-              </div>
+        <h2 className="text-3xl font-bold text-purple-700 mb-4">Spielzusammenfassung</h2>
+        <p className="text-lg text-pink-600 mb-6">
+          Ihr habt {questionsAnswered} Fragen beantwortet!
+        </p>
+
+        {nameBlameMode && mostBlamed && (
+          <div className="mb-6 p-4 bg-pink-50 rounded-lg border border-pink-200">
+            <h3 className="text-xl font-semibold text-purple-600 mb-2">Meistbeschuldigter Spieler</h3>
+            {mostBlamed.players.length > 0 ? (
+              <>
+                <p className="text-2xl font-bold text-pink-500">
+                  {mostBlamed.players.join(', ')}
+                </p>
+                <p className="text-purple-600">mit {mostBlamed.count} Beschuldigungen</p>
+              </>
+            ) : (
+              <p className="text-purple-600">Niemand wurde beschuldigt!</p>
             )}
-            
-            <div className="mb-6">
-              <h4 className="text-md font-semibold mb-2 text-gray-500">Blame Ranking:</h4>
-              <div className="space-y-2">
-                {blameStats.map(({name, count}, index) => (
-                  <div key={name} className="flex items-center">
-                    <div className="w-6 text-center font-bold text-gray-500">{index + 1}.</div>
-                    <div className="flex-grow ml-2 font-medium">{name}</div>
-                    <div className="text-right font-bold text-purple-600">{count}x</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <h4 className="text-md font-semibold mb-2 text-gray-500">Alle Beschuldigungen:</h4>
-            <ul className="space-y-1 text-sm text-gray-500 divide-y divide-gray-100">
-              {nameBlameLog.map((log, i) => (
-                <li key={i} className="py-1">
-                  <strong className="text-blue-600">{log.from}</strong> beschuldigte <strong className="text-pink-600">{log.to}</strong> für: 
-                  <p className="italic mt-1 ml-4 text-gray-400">"{log.question}"</p>
-                </li>
-              ))}
-            </ul>
           </div>
-        ) : (
-          <p className="text-lg mb-6 text-gray-600">
-            Du hast alle {questionsAnswered} Fragen dieser Runde beantwortet!
-          </p>
         )}
 
         <Button
           onClick={onRestart}
-          size="lg"
-          className="transition-transform hover:scale-105 duration-300 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white mt-4"
+          className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg rounded-lg shadow-md transition-transform hover:scale-105 duration-200"
         >
           Neues Spiel
         </Button>

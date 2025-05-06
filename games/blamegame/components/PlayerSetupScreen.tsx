@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Player } from '../types';
+import { ArrowLeft, UserPlus, Trash2 } from 'react-feather';
 
 interface PlayerSetupScreenProps {
   players: Player[];
@@ -25,83 +26,80 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
   onTempPlayerNameChange,
   onAddPlayer,
   onStartGame,
-  onBackToIntro
+  onBackToIntro,
 }) => {
+  const handleAddPlayerSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onAddPlayer();
+  };
+
   return (
     <motion.div
-      key="playerSetup"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      className="bg-white/80 backdrop-blur-md p-8 rounded-xl shadow-2xl max-w-lg w-full"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.3 }}
+      className="w-full max-w-md p-6 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl border-2 border-pink-100"
     >
-      <h2 className="text-2xl font-bold mb-6 text-gray-700 text-center">Spielernamen eingeben</h2>
-      
-      {/* Existing players list */}
-      <div className="space-y-3 mb-6 max-h-60 overflow-y-auto pr-2">
-        {players.map((player, idx) => (
-          <div key={player.id} className="flex items-center space-x-2">
-            <Input
-              type="text"
-              placeholder={`Spieler ${idx + 1}`}
-              value={player.name}
-              onChange={(e) => onPlayerNameChange(player.id, e.target.value)}
-              className="flex-grow"
-            />
-            {players.length > 2 && (
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => onRemovePlayer(player.id)} 
-                className="text-red-500 hover:text-red-700"
-                aria-label="Spieler entfernen"
-              >
-                X
-              </Button>
-            )}
-          </div>
-        ))}
+      <div className="flex justify-between items-center mb-6">
+        <Button variant="ghost" size="icon" onClick={onBackToIntro} className="text-purple-600 hover:text-purple-800">
+          <ArrowLeft size={24} />
+        </Button>
+        <h2 className="text-2xl font-bold text-purple-700">Spieler einrichten</h2>
+        <div className="w-8"></div>
       </div>
-      
-      {/* Add new player section */}
-      <div className="mb-6">
-        <div className="flex items-center space-x-2">
+
+      <form onSubmit={handleAddPlayerSubmit} className="space-y-4 mb-6">
+        <div className="flex space-x-2">
           <Input
             type="text"
-            placeholder="Neuer Spielername"
             value={tempPlayerName}
             onChange={(e) => onTempPlayerNameChange(e.target.value)}
-            className="flex-grow"
-            onKeyDown={(e) => e.key === 'Enter' && onAddPlayer()}
+            placeholder="Spielername eingeben"
+            className={`flex-grow border-pink-300 focus:border-pink-500 focus:ring-pink-500 ${nameInputError ? 'border-red-500' : ''}`}
           />
-          <Button 
-            onClick={onAddPlayer} 
-            disabled={players.length >= 10} 
-            variant="outline" 
-            className="bg-green-100 hover:bg-green-200 text-green-800"
-          >
-            +
+          <Button type="submit" className="bg-pink-500 hover:bg-pink-600 text-white">
+            <UserPlus size={20} className="mr-2" /> Spieler hinzufügen
           </Button>
         </div>
-        {nameInputError && (
-          <p className="text-red-600 text-sm mt-2">{nameInputError}</p>
+        {nameInputError && <p className="text-red-500 text-sm">{nameInputError}</p>}
+      </form>
+
+      <div className="space-y-3 mb-6 max-h-60 overflow-y-auto pr-2">
+        {players.map((player, index) => (
+          <motion.div
+            key={player.id}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.05 }}
+            className="flex items-center justify-between p-3 bg-pink-50 rounded-lg border border-pink-200"
+          >
+            <span className="text-purple-700">{player.name}</span>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => onRemovePlayer(player.id)}
+              className="text-red-500 hover:text-red-700"
+            >
+              <Trash2 size={18} />
+            </Button>
+          </motion.div>
+        ))}
+        {players.length === 0 && (
+          <p className="text-center text-purple-600 py-4">Noch keine Spieler hinzugefügt.</p>
         )}
-        <div className="flex justify-end mt-2">
-          <span className="text-xs text-gray-500">{players.length} / 10 Spieler</span>
-        </div>
       </div>
-      
-      <Button 
-        onClick={onStartGame} 
-        size="lg" 
-        className="w-full transition-transform hover:scale-105 duration-300 bg-green-500 hover:bg-green-600 text-white"
-        disabled={players.filter(p => p.name.trim() !== '').length < 2}
+
+      <Button
+        onClick={onStartGame}
+        disabled={players.length < 2}
+        className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg rounded-lg shadow-md transition-transform hover:scale-105 duration-200 disabled:bg-gray-400"
       >
-        Spiel starten
+        Spiel starten ({players.length}/8)
       </Button>
-      <Button variant="link" onClick={onBackToIntro} className="mt-3 text-sm text-gray-600 w-full">
-        Zurück zum Hauptmenü
-      </Button>
+      {players.length < 2 && (
+        <p className="text-center text-sm text-pink-600 mt-2">Mindestens 2 Spieler benötigt.</p>
+      )}
     </motion.div>
   );
 };

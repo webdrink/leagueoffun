@@ -5,6 +5,9 @@ import { Checkbox } from './ui/checkbox';
 import { Label } from './ui/label';
 import VolumeControl from './VolumeControl';
 import { GameSettings } from '../types';
+import { Switch } from './ui/switch';
+import { Slider } from './ui/slider';
+import { Volume2, VolumeX } from 'react-feather';
 
 interface IntroScreenProps {
   gameSettings: GameSettings;
@@ -35,78 +38,73 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
 }) => {
   return (
     <motion.div
-      className="flex flex-col items-center justify-center mt-10 p-6 bg-white rounded-xl shadow-xl max-w-md w-full"
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{
-        type: 'spring',
-        stiffness: gameSettings.introSpringStiffness,
-        damping: gameSettings.introSpringDamping,
-        duration: gameSettings.introSpringDurationSec
-      }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="w-full max-w-md p-6 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl border-2 border-pink-100"
     >
-      <p className="mb-6 text-xl text-gray-800">Wer ist schuld? Finde es heraus!</p>
-      <p className="mb-8 text-md text-gray-600">Eine Person liest die Frage, gibt das Handy weiter – und weiter geht's!</p>
-      
-      <div className="space-y-4 mb-8 max-w-md mx-auto">
-        <div className="flex items-center justify-center space-x-2 bg-black/20 p-3 rounded-lg">
-          <Checkbox
-            id="nameBlameMode"
-            checked={nameBlameMode}
-            onCheckedChange={(checked) => onToggleNameBlame(Boolean(checked))}
+      <div className="text-center mb-6">
+        <h2 className="text-3xl font-bold text-purple-700">Willkommen!</h2>
+        <p className="text-pink-600 mt-2">Bereit, jemandem die Schuld zu geben?</p>
+      </div>
+
+      {csvError && (
+        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
+          <p className="font-semibold">Fehler beim Laden der Fragen:</p>
+          <p className="text-sm">{csvError}</p>
+          <p className="text-sm mt-1">Bitte überprüfe die CSV-Datei und versuche es erneut.</p>
+        </div>
+      )}
+
+      <div className="mt-6 flex flex-col space-y-3">
+        <Button
+          onClick={onStartGame}
+          disabled={isLoading || !!csvError}
+          className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg rounded-lg shadow-md transition-transform hover:scale-105 duration-200"
+        >
+          {isLoading ? 'Lädt...' : 'Spiel starten'}
+        </Button>
+        <div className="flex items-center justify-between pt-2">
+          <label htmlFor="nameBlameModeToggle" className="flex items-center cursor-pointer">
+            <Switch
+              id="nameBlameModeToggle"
+              checked={nameBlameMode}
+              onCheckedChange={onToggleNameBlame}
+              className="data-[state=checked]:bg-pink-500"
+            />
+            <span className="ml-2 text-sm text-purple-700">NameBlame Modus</span>
+          </label>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onToggleSound}
+            className="text-purple-600 hover:text-purple-800"
+          >
+            {soundEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
+          </Button>
+        </div>
+        <div className="mt-1">
+          <Slider
+            value={[volume]}
+            onValueChange={(newVolume) => onVolumeChange(newVolume[0])}
+            max={1}
+            step={0.1}
+            className="w-full [&>span:first-child]:h-2 [&>span:first-child>span]:bg-pink-500"
+            aria-label="Lautstärkeregler"
+            disabled={!soundEnabled}
           />
-          <Label htmlFor="nameBlameMode" className="text-lg">NameBlame Mode (Enter Player Names)</Label>
         </div>
       </div>
-      
-      <Button
-        onClick={onStartGame}
-        size="lg"
-        disabled={isLoading || !!csvError}
-        className="transition-transform hover:scale-105 duration-300 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
-      >
-        {isLoading ? "Lade Fragen..." : (nameBlameMode ? "Spieler einrichten" : "Spiel starten")}
-      </Button>
-      
-      <div className="mt-4 flex items-center justify-center space-x-4">
-        <Checkbox
-          id="nameBlameModeToggle"
-          checked={nameBlameMode}
-          onCheckedChange={(checked) => onToggleNameBlame(checked as boolean)}
-          className="mr-2"
-        />
-        <label htmlFor="nameBlameModeToggle" className="text-sm text-gray-600 cursor-pointer select-none">
-          NameBlame Modus
-        </label>
-      </div>
-      
-      <div className="mt-4 flex space-x-4">
+
+      <div className="mt-8 text-center">
         <Button
+          variant="link"
           onClick={onResetAppData}
-          variant="ghost"
-          size="sm"
-          className="text-gray-500 hover:text-gray-700"
+          className="text-xs text-pink-600 hover:text-pink-800"
         >
           App-Daten zurücksetzen
         </Button>
-        
-        <div className="flex flex-col items-center">
-          <Button
-            onClick={onToggleSound}
-            variant="ghost"
-            size="sm"
-            className="text-gray-500 hover:text-gray-700"
-          >
-            {soundEnabled ? '🔊 Ton An' : '🔇 Ton Aus'}
-          </Button>
-          
-          {soundEnabled && (
-            <VolumeControl 
-              volume={volume} 
-              onChange={onVolumeChange} 
-            />
-          )}
-        </div>
       </div>
     </motion.div>
   );

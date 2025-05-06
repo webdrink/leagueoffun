@@ -5,27 +5,31 @@
 @media (max-width: 500px) {
   .w-80, .h-64 {
     width: 95vw !important;
-    height: 60vw !important;
+    /* height: 60vw !important; */ /* Adjusted height for new card design */
     min-width: 0;
     min-height: 0;
   }
   .w-40, .h-60 {
     width: 40vw !important;
-    height: 30vw !important;
+    /* height: 30vw !important; */ /* Adjusted height for new card design */
     min-width: 0;
     min-height: 0;
+  }
+  /* Ensure card takes up vertical space on mobile */
+  .h-\[70vh\] { 
+    min-height: 60vh; /* Ensure a minimum height on smaller screens */
   }
 }
 
 :focus {
-  outline: 2px solid #6366f1;
+  outline: 2px solid #c084fc; /* Adjusted focus color to match purple theme */
   outline-offset: 2px;
 }
 
 :focus-visible {
-  outline: 3px solid #8b5cf6;
+  outline: 3px solid #a855f7; /* Adjusted focus color to match purple theme */
   outline-offset: 3px;
-  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.3); /* Adjusted shadow color */
 }
 
 /* Improve keyboard accessibility for interactive elements */
@@ -86,4 +90,10 @@ body, #root, .app-container {
     radial-gradient(2px 2px at 15% 85%, rgba(255, 255, 255, 0.8) 50%, transparent 50%);
   /* Using animation for the foreground stars */
   animation: stars-shimmer 6s ease-in-out infinite alternate;
+}
+
+/* Custom text-10xl utility if not available in default Tailwind */
+.text-10xl {
+  font-size: 10rem; /* 160px */
+  line-height: 1;
 }
