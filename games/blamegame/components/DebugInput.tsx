@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from "./ui/input";
 import { Switch } from "./ui/switch"; // Corrected path
 import { Label } from "./ui/label";
-import type { GameSettings } from "../App"; // Import as type
+import type { GameSettings } from "../types"; // Import as type
 
 interface DebugInputPropsBase {
   label: string;

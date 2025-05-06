@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card.tsx'; // Explicitly add .tsx extension
 import { getEmoji } from '../utils';
 import { Question, Player, GameSettings } from '../types';
+import QuestionCard from './QuestionCard';
 
 interface QuestionScreenProps {
   question: Question;
@@ -54,20 +55,9 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
           transition={{ duration: 0.4 }}
           className="w-full h-full flex-grow flex items-center justify-center"
         >
-          <Card className="h-[70vh] shadow-2xl border-2 border-pink-100 bg-white rounded-3xl flex items-center justify-center w-full">
-            <CardContent className="p-8 flex flex-col items-center text-center justify-center h-full">
-              <div className="text-8xl md:text-9xl lg:text-10xl mb-4">{getEmoji(question.category)}</div>
-              <div className="text-md text-gray-600 mb-10">{question.category}</div>
-              <h2 
-                className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-800 leading-snug"
-                style={{
-                  lineHeight: '1.4',
-                }}
-              >
-                {question.text}
-              </h2>
-            </CardContent>
-          </Card>
+          <div className="w-full h-[40vh] sm:h-[50vh] max-h-[60vw] max-w-full flex items-center justify-center">
+            <QuestionCard question={question} />
+          </div>
         </motion.div>
       </AnimatePresence>
 

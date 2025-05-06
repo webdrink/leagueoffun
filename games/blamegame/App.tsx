@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { Button } from './components/ui/button';
-import { WrenchIcon, InfoIcon } from 'lucide-react';
 
 // Import custom hooks
 import useSound from './hooks/useSound';
