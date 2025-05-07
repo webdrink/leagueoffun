@@ -44,13 +44,13 @@ jobs:
         run: pnpm run build
 
       - name: Setup Pages # Added step to configure GitHub Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v5 # Updated to v5
 
       - name: Upload artifact # Added step to upload build artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3 # Updated to v3
         with:
           path: './dist'
 
       - name: Deploy to GitHub Pages # Modified deployment step
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4 # Updated to v4
