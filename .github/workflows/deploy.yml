@@ -1,59 +1,60 @@
-name: Deploy to GitHub Pages
+name: 🚀 Deploy Blame Game to GitHub Pages
 
 on:
   push:
     branches:
-      - main # Or your default branch
+      - main # Trigger deployment on push to the main branch
 
 jobs:
   build-and-deploy:
+    name: 🏗️ Build and Deploy
     runs-on: ubuntu-latest
-    permissions: # Added permissions for GitHub Pages deployment
+    permissions: # Necessary permissions for GitHub Pages deployment
       contents: read
       pages: write
       id-token: write
-    environment: # Added environment for GitHub Pages
+    environment: # Configure the deployment environment for GitHub Pages
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4 # Updated to v4
 
-      # Corrected order: Install pnpm BEFORE setting up Node.js with pnpm caching
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v3 # Updated to v3
         with:
-          version: 8 # Specify your pnpm version
+          version: 8
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4 # Updated to v4
         with:
-          node-version: '18' # Specify your Node.js version
-          cache: 'pnpm' # Configure caching for pnpm
+          node-version: '18'
+          cache: 'pnpm' # Enable caching for pnpm
 
-      - name: Remove pnpm-workspace.yaml if present # Added step to remove workspace file
+      - name: 🧹 Remove pnpm-workspace.yaml (if exists)
         run: rm -f pnpm-workspace.yaml
+        shell: bash
 
-      - name: Install Dependencies
-        run: pnpm install
+      - name: ⚙️ Install Dependencies
+        run: pnpm install --frozen-lockfile # Use --frozen-lockfile for CI
 
-      - name: Lint
+      - name: 🎨 Lint Code
         run: pnpm run lint
 
-      - name: Type-check
+      - name: 🧐 Type-Check Code
         run: pnpm run typecheck
 
-      - name: Build
+      - name: 🛠️ Build Project
         run: pnpm run build
 
-      - name: Setup Pages # Added step to configure GitHub Pages
-        uses: actions/configure-pages@v5 # Updated to v5
+      - name: ⚙️ Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
-      - name: Upload artifact # Added step to upload build artifact
-        uses: actions/upload-pages-artifact@v3 # Updated to v3
+      - name: ⬆️ Upload Build Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './dist' # Path to the directory to upload
 
-      - name: Deploy to GitHub Pages # Modified deployment step
+      - name: 🚀 Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 # Updated to v4
+        uses: actions/deploy-pages@v4
