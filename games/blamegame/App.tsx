@@ -8,15 +8,18 @@ import useNameBlameSetup from './hooks/useNameBlameSetup';
 import useLocalStorage from './hooks/useLocalStorage';
 
 // Import components
-import DebugPanel from './components/DebugPanel';
-import InfoModal from './components/InfoModal';
-import IntroScreen from './components/IntroScreen';
-import PlayerSetupScreen from './components/PlayerSetupScreen';
-import LoadingContainer from './components/LoadingContainer';
-import QuestionScreen from './components/QuestionScreen';
-import SummaryScreen from './components/SummaryScreen';
-import ErrorDisplay from './components/ErrorDisplay';
-import GameContainer from './components/GameContainer';
+import Confetti from './components/core/Confetti';
+import ErrorDisplay from './components/core/ErrorDisplay';
+import GameContainer from './components/core/GameContainer';
+import InfoModal from './components/core/InfoModal';
+import VolumeControl from './components/core/VolumeControl';
+import DebugPanel from './components/debug/DebugPanel';
+import IntroScreen from './components/game/IntroScreen';
+import LoadingContainer from './components/game/LoadingContainer';
+import PlayerSetupScreen from './components/game/PlayerSetupScreen';
+import QuestionScreen from './components/game/QuestionScreen';
+import RouletteScreen from './components/game/RouletteScreen';
+import SummaryScreen from './components/game/SummaryScreen';
 
 // Import constants and types
 import { LOADING_QUOTES, SOUND_PATHS, initialGameSettings } from './constants';
@@ -159,6 +162,7 @@ function App() {
             setGameSettings={setGameSettings}
             defaultGameSettings={initialGameSettings}
             onClose={() => setDebugMode(false)}
+            onResetAppData={handleResetAppData}
             questionStats={questionStats}
           />
         )}
@@ -229,6 +233,7 @@ function App() {
                 cardFallDistance: -200,
                 cardFallStaggerDelaySec: 0.2,
                 cardStackOffsetY: -8,
+                loadingQuoteIntervalMs: gameSettings.loadingQuoteIntervalMs,
               }}
             />
           )}
@@ -256,6 +261,7 @@ function App() {
               nameBlameLog={playerManager.nameBlameLog}
               questionsAnswered={questionsManager.currentRoundQuestions.length}
               onRestart={handleRestart}
+              activePlayersCount={playerManager.getActivePlayers().length}
             />
           )}
         </AnimatePresence>
