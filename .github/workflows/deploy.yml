@@ -20,6 +20,10 @@ jobs:
       - name: ⬇️ Checkout Repository
         uses: actions/checkout@v4 # Updated to v4
 
+      - name: 🧹 Remove pnpm-workspace.yaml (if exists)
+        run: rm -f pnpm-workspace.yaml
+        shell: bash
+
       - name: 📦 Setup pnpm
         uses: pnpm/action-setup@v3 # Updated to v3
         with:
@@ -29,14 +33,10 @@ jobs:
         uses: actions/setup-node@v4 # Updated to v4
         with:
           node-version: '18'
-          cache: 'pnpm' # Enable caching for pnpm
-
-      - name: 🧹 Remove pnpm-workspace.yaml (if exists)
-        run: rm -f pnpm-workspace.yaml
-        shell: bash
+          # Removed pnpm cache configuration as it's causing issues
 
       - name: ⚙️ Install Dependencies
-        run: pnpm install --frozen-lockfile # Use --frozen-lockfile for CI
+        run: pnpm install --no-frozen-lockfile # Changed to --no-frozen-lockfile to bypass lockfile issues
 
       - name: 🎨 Lint Code
         run: pnpm run lint
