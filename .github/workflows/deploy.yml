@@ -39,7 +39,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile # Changed to --no-frozen-lockfile to bypass lockfile issues
 
       - name: 🎨 Lint Code
-        run: pnpm run lint -- --max-warnings=9999
+        run: pnpm run lint --max-warnings=9999
 
       - name: 🧐 Type-Check Code
         run: pnpm run typecheck
