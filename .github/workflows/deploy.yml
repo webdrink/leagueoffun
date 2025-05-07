@@ -8,38 +8,49 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions: # Added permissions for GitHub Pages deployment
+      contents: read
+      pages: write
+      id-token: write
+    environment: # Added environment for GitHub Pages
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18' # Specify your Node.js version
-          cache: 'pnpm' # Added pnpm caching
-
+      # Corrected order: Install pnpm BEFORE setting up Node.js with pnpm caching
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8 # Specify your pnpm version
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Specify your Node.js version
+          cache: 'pnpm' # Configure caching for pnpm
+
       - name: Install Dependencies
         run: pnpm install
 
       - name: Lint
-        run: pnpm run lint # Added lint step
+        run: pnpm run lint
 
       - name: Type-check
-        run: pnpm run typecheck # Added type-check step
+        run: pnpm run typecheck
 
       - name: Build
         run: pnpm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Setup Pages # Added step to configure GitHub Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact # Added step to upload build artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          # Optional: if your repo name is different from the project name
-          # publish_branch: gh-pages # Default is gh-pages
-          # cname: your-custom-domain.com # If you have a custom domain
+          path: './dist'
+
+      - name: Deploy to GitHub Pages # Modified deployment step
+        id: deployment
+        uses: actions/deploy-pages@v2
