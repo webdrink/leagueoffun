@@ -1,0 +1,15 @@
+<!-- filepath: pwa-icon-512x512.svg -->
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="128" fill="url(#paint0_linear)"/>
+  <path d="M256 126C184.2 126 126 184.2 126 256C126 327.8 184.2 386 256 386C327.8 386 386 327.8 386 256C386 184.2 327.8 126 256 126ZM256 348C205.4 348 164 306.6 164 256C164 205.4 205.4 164 256 164C306.6 164 348 205.4 348 256C348 306.6 306.6 348 256 348Z" fill="white"/>
+  <path d="M351.3 132.7C340.6 132.7 332 141.3 332 152C332 162.7 340.6 171.3 351.3 171.3C362 171.3 370.7 162.7 370.7 152C370.7 141.3 362 132.7 351.3 132.7Z" fill="white"/>
+  <path d="M304 256C304 282.5 282.5 304 256 304C229.5 304 208 282.5 208 256C208 229.5 229.5 208 256 208C282.5 208 304 229.5 304 256Z" fill="white"/>
+  <path d="M336 378L336 412L176 412L176 378L336 378Z" fill="white"/>
+  <path d="M336 100L336 134L176 134L176 100L336 100Z" fill="white"/>
+  <defs>
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+</svg>

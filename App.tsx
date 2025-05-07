@@ -1,0 +1,286 @@
+import React, { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+
+// Import custom hooks
+import useSound from './hooks/useSound';
+import useQuestions from './hooks/useQuestions';
+import useNameBlameSetup from './hooks/useNameBlameSetup';
+import useLocalStorage from './hooks/useLocalStorage';
+
+// Import components
+import Confetti from './components/core/Confetti';
+import ErrorDisplay from './components/core/ErrorDisplay';
+import GameContainer from './components/core/GameContainer';
+import InfoModal from './components/core/InfoModal';
+import VolumeControl from './components/core/VolumeControl';
+import DebugPanel from './components/debug/DebugPanel';
+import IntroScreen from './components/game/IntroScreen';
+import LoadingContainer from './components/game/LoadingContainer';
+import PlayerSetupScreen from './components/game/PlayerSetupScreen';
+import QuestionScreen from './components/game/QuestionScreen';
+import RouletteScreen from './components/game/RouletteScreen';
+import SummaryScreen from './components/game/SummaryScreen';
+
+// Import constants and types
+import { LOADING_QUOTES, SOUND_PATHS, initialGameSettings } from './constants';
+import { GameStep, QuestionStats } from './types';
+
+// Import utilities
+import { getEmoji } from './utils';
+
+// Import CSS
+import './index.css';
+
+function App() {
+  // Sound management
+  const { soundEnabled, toggleSound, playSound, volume, setVolume } = useSound();
+  
+  // Game state
+  const [step, setStep] = useState<GameStep>('intro');
+  const [debugMode, setDebugMode] = useState(false);
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+  const [gameSettings, setGameSettings] = useLocalStorage('blamegame-settings', initialGameSettings);
+  
+  // Questions management
+  const questionsManager = useQuestions(gameSettings);
+  
+  // Player management for NameBlame mode
+  const playerManager = useNameBlameSetup();
+  
+  // Local component state
+  const [quoteIndex, setQuoteIndex] = useState(0);
+  const [cardKey, setCardKey] = useState(0);
+  
+  // Question statistics for the debug panel
+  const questionStats: QuestionStats = {
+    totalQuestions: questionsManager.allQuestions.length,
+    playedQuestions: questionsManager.playedQuestions.length,
+    availableQuestions: questionsManager.allQuestions.filter(q => !questionsManager.playedQuestions.includes(q.text)).length,
+    categories: questionsManager.allQuestions.reduce((acc, q) => {
+      acc[q.category] = (acc[q.category] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>)
+  };
+  
+  // Start the roulette animation or go to player setup if needed
+  const handleStartRoulette = () => {
+    if (playerManager.nameBlameMode) {
+      // If not enough players, go to player setup
+      if (playerManager.players.length < 2) {
+        setStep('playerSetup');
+        return;
+      }
+    }
+    playSound(SOUND_PATHS.ROUND_START);
+    setStep('roulette');
+    
+    // Start the loading quote rotation
+    setQuoteIndex(0);
+    const quoteTimer = setInterval(() => {
+      setQuoteIndex(prev => (prev + 1) % LOADING_QUOTES.length);
+    }, gameSettings.loadingQuoteIntervalMs);
+    
+    // After animation, prepare questions for the game
+    setTimeout(async () => {
+      clearInterval(quoteTimer);
+      const success = await questionsManager.prepareRoundQuestions(gameSettings);
+      if (success) {
+        setStep('game');
+      } else {
+        setStep('intro');
+      }
+    }, gameSettings.rouletteDurationMs);
+  };
+  
+  // Handler for the main button on the intro screen
+  const handleIntroMainButton = () => {
+    if (playerManager.nameBlameMode) {
+      setStep('playerSetup');
+    } else {
+      handleStartRoulette();
+    }
+  };
+
+  // Handle advancing to the next question
+  const handleNextQuestion = () => {
+    if (questionsManager.index < questionsManager.currentRoundQuestions.length - 1) {
+      questionsManager.advanceToNextQuestion();
+      playSound(SOUND_PATHS.NEW_QUESTION);
+      if (playerManager.nameBlameMode) {
+        playerManager.advancePlayer();
+      }
+    } else {
+      // End of round, update played questions and show summary
+      const newlyPlayedQuestions = questionsManager.currentRoundQuestions.map(q => q.text);
+      questionsManager.setPlayedQuestions(prevPlayed => {
+        const updatedPlayed = [...new Set([...prevPlayed, ...newlyPlayedQuestions])];
+        return updatedPlayed;
+      });
+      playSound(SOUND_PATHS.SUMMARY_FUN);
+      setStep('summary');
+    }
+  };
+  
+  // Handle blaming a player in NameBlame mode
+  const handleBlame = (blamedPlayerName: string) => {
+    if (!questionsManager.currentQuestion || !playerManager.nameBlameMode) return;
+
+    const activePlayers = playerManager.getActivePlayers();
+    const blamingPlayer = activePlayers[playerManager.currentPlayerIndex];
+    if (!blamingPlayer || !blamingPlayer.name) return;
+
+    playerManager.recordNameBlame(
+      blamingPlayer.name, 
+      blamedPlayerName, 
+      questionsManager.currentQuestion.text
+    );
+    handleNextQuestion();
+  };
+  
+  // Reset the game for a new round
+  const handleRestart = () => {
+    questionsManager.resetQuestions();
+    setStep('intro');
+  };
+  
+  // Reset all app data
+  const handleResetAppData = () => {
+    questionsManager.setPlayedQuestions([]);
+    playerManager.resetPlayers();
+    playerManager.resetNameBlameLog();
+    setGameSettings(initialGameSettings);
+    setStep('intro');
+    alert('App-Daten wurden zurückgesetzt.');
+  };
+
+  return (
+    <GameContainer>
+      {/* Debug Panel */}
+        {debugMode && (
+          <DebugPanel
+            gameSettings={gameSettings}
+            setGameSettings={setGameSettings}
+            defaultGameSettings={initialGameSettings}
+            onClose={() => setDebugMode(false)}
+            onResetAppData={handleResetAppData}
+            questionStats={questionStats}
+          />
+        )}
+
+        {/* Game title */}
+        <div className="text-center mb-4">
+          <h1
+            className="text-white text-5xl font-bold shadow-md rounded-xl px-6 py-2 cursor-pointer"
+            onClick={handleRestart}
+            title="Zurück zum Start"
+          >
+            <span className="text-purple-700">Blame</span> Game
+          </h1>
+        </div>
+
+      {/* Game screen transitions */}
+      <div className="w-full max-w-md flex-grow flex items-center justify-center">
+        <AnimatePresence mode="wait">
+          {/* Intro Screen */}
+          {step === 'intro' && (
+            <IntroScreen
+              gameSettings={gameSettings}
+              isLoading={questionsManager.isLoading}
+              csvError={questionsManager.csvError}
+              nameBlameMode={playerManager.nameBlameMode}
+              soundEnabled={soundEnabled}
+              onStartGame={handleIntroMainButton}
+              onToggleNameBlame={checked => playerManager.setNameBlameMode(checked)}
+              onToggleSound={toggleSound}
+              onVolumeChange={setVolume}
+              volume={volume}
+              onOpenDebugPanel={() => setDebugMode(true)}
+              onOpenInfoModal={() => setIsInfoModalOpen(true)}
+              mainButtonLabel={playerManager.nameBlameMode ? 'Spieler Einrichten' : 'Spiel starten'}
+            />
+          )}
+
+          {/* Player Setup Screen */}
+          {step === 'playerSetup' && playerManager.nameBlameMode && (
+            <PlayerSetupScreen
+              players={playerManager.players}
+              tempPlayerName={playerManager.tempPlayerName}
+              nameInputError={playerManager.nameInputError}
+              onPlayerNameChange={playerManager.handlePlayerNameChange}
+              onRemovePlayer={playerManager.removePlayer}
+              onTempPlayerNameChange={playerManager.setTempPlayerName}
+              onAddPlayer={playerManager.addPlayer}
+              onStartGame={() => {
+                // Only start game if enough players
+                if (playerManager.players.length >= 3) {
+                  handleStartRoulette();
+                }
+              }}
+              onBackToIntro={() => setStep('intro')}
+            />
+          )}
+
+          {/* Roulette Screen */}
+          {step === 'roulette' && (
+            <LoadingContainer
+              categories={Array.from(new Set(questionsManager.allQuestions.map(q => q.category)))}
+              getEmoji={getEmoji}
+              loadingQuotes={LOADING_QUOTES}
+              settings={{
+                loadingQuoteSpringStiffness: 120,
+                loadingQuoteSpringDamping: 10,
+                loadingQuoteTransitionDurationSec: 0.2,
+                cardFallDistance: -200,
+                cardFallStaggerDelaySec: 0.2,
+                cardStackOffsetY: -8,
+                loadingQuoteIntervalMs: gameSettings.loadingQuoteIntervalMs,
+              }}
+            />
+          )}
+
+          {/* Question Screen */}
+          {step === 'game' && questionsManager.currentQuestion && (
+            <QuestionScreen
+              question={questionsManager.currentQuestion}
+              index={questionsManager.index}
+              totalQuestions={questionsManager.currentRoundQuestions.length}
+              gameSettings={gameSettings}
+              nameBlameMode={playerManager.nameBlameMode}
+              activePlayers={playerManager.getActivePlayers()}
+              currentPlayerIndex={playerManager.currentPlayerIndex}
+              onBlame={handleBlame}
+              onNext={handleNextQuestion}
+              onBack={questionsManager.goToPreviousQuestion}
+            />
+          )}
+
+          {/* Summary Screen */}
+          {step === 'summary' && (
+            <SummaryScreen
+              nameBlameMode={playerManager.nameBlameMode}
+              nameBlameLog={playerManager.nameBlameLog}
+              questionsAnswered={questionsManager.currentRoundQuestions.length}
+              onRestart={handleRestart}
+              activePlayersCount={playerManager.getActivePlayers().length}
+            />
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Error display */}
+      {questionsManager.csvError && (
+        <ErrorDisplay message={questionsManager.csvError} />
+      )}
+      
+      {/* Info modal */}
+      <InfoModal 
+        isOpen={isInfoModalOpen} 
+        onClose={() => setIsInfoModalOpen(false)} 
+        onResetAppData={handleResetAppData}
+      />
+      <footer className="mt-6 text-white text-xs">© 2025 Blame Game</footer>
+    </GameContainer>
+  );
+}
+
+export default App;

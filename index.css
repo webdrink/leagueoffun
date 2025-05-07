@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (max-width: 500px) {
+  .w-80, .h-64 {
+    width: 95vw !important;
+    /* height: 60vw !important; */ /* Adjusted height for new card design */
+    min-width: 0;
+    min-height: 0;
+  }
+  .w-40, .h-60 {
+    width: 40vw !important;
+    /* height: 30vw !important; */ /* Adjusted height for new card design */
+    min-width: 0;
+    min-height: 0;
+  }
+  /* Ensure card takes up vertical space on mobile */
+  .h-\[70vh\] { 
+    min-height: 60vh; /* Ensure a minimum height on smaller screens */
+  }
+}
+
+:focus {
+  outline: 2px solid #c084fc; /* Adjusted focus color to match purple theme */
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid #a855f7; /* Adjusted focus color to match purple theme */
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.3); /* Adjusted shadow color */
+}
+
+/* Improve keyboard accessibility for interactive elements */
+button, a, [role="button"], input, select, textarea {
+  transition: outline-color 0.2s ease, outline-offset 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Ensure background gradients and animations apply smoothly */
+body, #root, .app-container {
+  transition: background-color 1s ease-in-out, background-image 1s ease-in-out;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimized night theme with star animation */
+.animate-stars {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background star pattern - very light, doesn't affect performance */
+.animate-stars::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(1px 1px at 25% 15%, rgba(255, 255, 255, 0.2) 50%, transparent 50%),
+    radial-gradient(1px 1px at 50% 40%, rgba(255, 255, 255, 0.2) 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 75% 60%, rgba(255, 255, 255, 0.3) 50%, transparent 50%),
+    radial-gradient(2px 2px at 20% 80%, rgba(255, 255, 255, 0.2) 50%, transparent 50%);
+  background-size: 550px 550px;
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Foreground star elements - more prominent but fewer in number */
+.animate-stars::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.9) 50%, transparent 50%),
+    radial-gradient(2px 2px at 25% 50%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
+    radial-gradient(2.5px 2.5px at 40% 30%, rgba(255, 255, 255, 0.7) 50%, transparent 50%),
+    radial-gradient(2px 2px at 60% 70%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
+    radial-gradient(3px 3px at 70% 40%, rgba(255, 255, 255, 0.7) 50%, transparent 50%),
+    radial-gradient(2px 2px at 85% 75%, rgba(255, 255, 255, 0.8) 50%, transparent 50%),
+    radial-gradient(3px 3px at 95% 15%, rgba(255, 255, 255, 0.9) 50%, transparent 50%),
+    radial-gradient(2px 2px at 15% 85%, rgba(255, 255, 255, 0.8) 50%, transparent 50%);
+  /* Using animation for the foreground stars */
+  animation: stars-shimmer 6s ease-in-out infinite alternate;
+}
+
+/* Custom text-10xl utility if not available in default Tailwind */
+.text-10xl {
+  font-size: 10rem; /* 160px */
+  line-height: 1;
+}
