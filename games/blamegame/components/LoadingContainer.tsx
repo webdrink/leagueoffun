@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import LoadingCardStack from './LoadingCardStack.tsx';
 import { motion } from 'framer-motion';
+import LoadingQuote from './LoadingQuote.tsx'; // Import the new component
 
 interface LoadingContainerProps {
   categories: string[];
@@ -50,21 +51,18 @@ const LoadingContainer: React.FC<LoadingContainerProps> = ({
   return (
     <div className="flex flex-col items-center justify-center w-full h-full mt-16 relative">
       <div className="flex flex-col items-center justify-center w-full h-full mt-16">
-        <motion.div
-          className="mb-10 text-6xl font-semibold text-center text-white text-opacity-90"
-          key={quoteIndex}
-          initial={{ opacity: 0, y: -20, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.9 }}
-          transition={{
-            type: "spring",
-            stiffness: settings.loadingQuoteSpringStiffness,
-            damping: settings.loadingQuoteSpringDamping,
-            duration: settings.loadingQuoteTransitionDurationSec,
-          }}
-        >
-          {loadingQuotes[quoteIndex]}
-        </motion.div>
+        {/* Use the new LoadingQuote component */}
+        {loadingQuotes.length > 0 && (
+          <LoadingQuote
+            quote={loadingQuotes[quoteIndex]}
+            settings={{
+              stiffness: settings.loadingQuoteSpringStiffness,
+              damping: settings.loadingQuoteSpringDamping,
+              duration: settings.loadingQuoteTransitionDurationSec,
+            }}
+            className="mb-10" // Added margin bottom for spacing
+          />
+        )}
         <LoadingCardStack
           categories={categories.slice(0, revealedCount)}
           getEmoji={getEmoji}
