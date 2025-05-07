@@ -23,7 +23,7 @@ jobs:
       - name: 📦 Setup pnpm
         uses: pnpm/action-setup@v3 # Updated to v3
         with:
-          version: 8
+          version: 9 # Changed from 8 to 9 to match lockfileVersion '9.0'
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4 # Updated to v4
