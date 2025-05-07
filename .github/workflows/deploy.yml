@@ -31,6 +31,9 @@ jobs:
           node-version: '18' # Specify your Node.js version
           cache: 'pnpm' # Configure caching for pnpm
 
+      - name: Remove pnpm-workspace.yaml if present # Added step to remove workspace file
+        run: rm -f pnpm-workspace.yaml
+
       - name: Install Dependencies
         run: pnpm install
 
