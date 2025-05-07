@@ -1,12 +1,11 @@
 {
   "name": "blamegame",
   "version": "0.1.0",
-  "private": true,
-  "scripts": {
+  "private": true,  "scripts": {
     "dev": "vite --host",
     "build": "node scripts/convertCsvToJson.js && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .ts,.tsx",
+    "lint": "eslint . --ext .ts,.tsx --max-warnings=9999",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "prepare-data": "node scripts/convertCsvToJson.js"
   },
@@ -33,6 +32,7 @@
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "^3.4.17",

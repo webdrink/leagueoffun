@@ -87,10 +87,9 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
 
       {/* Controls Area */}
       <div className="w-full max-w-md px-4">
-        {nameBlameMode && activePlayers.length > 0 && (
-          <div className="mt-2 sm:mt-4">
+        {nameBlameMode && activePlayers.length > 0 && (          <div className="mt-2 sm:mt-4">
             <p className="text-center text-sm text-white mb-2">
-              Wer hat's verbockt? Wähle einen Spieler:
+              Wer hat&apos;s verbockt? Wähle einen Spieler:
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {activePlayers.map((player, i) => (

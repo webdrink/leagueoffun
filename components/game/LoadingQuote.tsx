@@ -24,9 +24,8 @@ const LoadingQuote: React.FC<LoadingQuoteProps> = ({ quote, settings, className 
         stiffness: settings.stiffness,
         damping: settings.damping,
         // duration is part of spring, not a direct property here, but influences behavior
-      }}
-    >
-      "{quote}"
+      }}    >
+      &ldquo;{quote}&rdquo;
     </motion.div>
   );
 };
