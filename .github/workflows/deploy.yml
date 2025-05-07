@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18' # Specify your Node.js version
+          cache: 'pnpm' # Added pnpm caching
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
@@ -24,6 +25,12 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install
+
+      - name: Lint
+        run: pnpm run lint # Added lint step
+
+      - name: Type-check
+        run: pnpm run typecheck # Added type-check step
 
       - name: Build
         run: pnpm run build
