@@ -8,6 +8,7 @@ import { GameSettings } from '../../types';
 import { Switch } from '../core/Switch';
 import { Slider } from '../core/Slider';
 import { Volume2, VolumeX, Settings as SettingsIcon, Info as InfoIcon } from 'lucide-react'; // Using lucide-react consistently
+import LanguageSelector from '../settings/LanguageSelector';
 
 interface IntroScreenProps {
   gameSettings: GameSettings;
@@ -86,14 +87,17 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
           </Label>
         </div>
       </div>
-      
-      <div className="mt-4 pt-4 border-t border-pink-200">
+        <div className="mt-4 pt-4 border-t border-pink-200">
         <VolumeControl 
           volume={volume} 
           onChange={onVolumeChange}
           soundEnabled={soundEnabled}
           onToggleSound={onToggleSound}
         />
+      </div>
+      
+      <div className="mt-4 pt-4 border-t border-pink-200">
+        <LanguageSelector />
       </div>
 
       <div className="mt-6 flex justify-end space-x-2">

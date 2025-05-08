@@ -65,11 +65,22 @@ const settingsConfig: Record<string, SectionConfig> = {
       { name: 'showIntroAnimation', label: 'Show Intro Animation (Future)', type: 'boolean' },
       { name: 'introAnimationDuration', label: 'Intro Animation Duration (ms) (Future)', type: 'number' },
     ],
-  },
-  theme: {
+  },  theme: {
     title: "Theme (Future)",
     settings: [
         { name: 'dynamicThemeEnabled', label: 'Dynamic Theme (Time-based)', type: 'boolean' },
+    ]
+  },
+  language: {
+    title: "Language",
+    settings: [
+        { name: 'language', label: 'Game Language', type: 'select', options: [
+            { value: 'de', label: 'Deutsch' },
+            { value: 'en', label: 'English' },
+            { value: 'fr', label: 'Français' },
+            { value: 'es', label: 'Español' },
+          ]
+        },
     ]
   }
   // Add more sections like 'sound', 'advanced', etc.

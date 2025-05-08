@@ -19,11 +19,11 @@ import QuestionScreen from './components/game/QuestionScreen';
 import SummaryScreen from './components/game/SummaryScreen';
 
 // Import constants and types
-import { LOADING_QUOTES, SOUND_PATHS, initialGameSettings } from './constants';
+import { LOADING_QUOTES, SOUND_PATHS, initialGameSettings } from './lib/constants';
 import { GameStep, QuestionStats } from './types';
 
 // Import utilities
-import { getEmoji } from './utils';
+import { getEmoji } from './lib/formatters';
 
 // Import CSS
 import './index.css';

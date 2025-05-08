@@ -29,12 +29,14 @@ export interface GameSettings {
   numberOfRounds: number;
   timePerQuestion: number;
   showScore: boolean;
-  allowSkip: boolean;
-  showIntroAnimation: boolean;
+  allowSkip: boolean;  showIntroAnimation: boolean;
   introAnimationDuration: number;
   questionFontSize: number;
   dynamicThemeEnabled: boolean;
   questionCardAnimation: string;
+  
+  // Language settings
+  language: string; // 'de', 'en', 'fr', 'es', etc.
 }
 
 export interface Question {

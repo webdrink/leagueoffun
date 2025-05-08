@@ -60,9 +60,9 @@ export const LOADING_QUOTES = [
 
 // Sound Asset Paths (relative to public folder for Vite)
 export const SOUND_PATHS = {
-  NEW_QUESTION: '/games/blamegame/assets/new_question.mp3',
-  ROUND_START: '/games/blamegame/assets/round_start.mp3',
-  SUMMARY_FUN: '/games/blamegame/assets/summary_fun.mp3'
+  NEW_QUESTION: '/games/blamegame/assets/audio/new_question.mp3',
+  ROUND_START: '/games/blamegame/assets/audio/round_start.mp3',
+  SUMMARY_FUN: '/games/blamegame/assets/audio/summary_fun.mp3'
 };
 
 // Fallback questions in case loading fails completely
@@ -115,6 +115,7 @@ export const initialGameSettings: GameSettings = {
   loadingQuoteSpringStiffness: 120,
   loadingQuoteSpringDamping: 10,
   loadingQuoteTransitionDurationSec: 0.5,
+  language: 'de', // Default language (German)
 
   numberOfRounds: 3,
   timePerQuestion: 30,

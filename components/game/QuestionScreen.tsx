@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../core/Button'; // Adjusted path
 import { Card, CardContent } from '../core/Card'; // Adjusted path
-import { getEmoji } from '../../utils'; // Path should be correct
+import { getEmoji } from '../../lib/formatters'; // Updated import path
 import { Question, Player, GameSettings } from '../../types'; // Path should be correct
 import QuestionCard from './QuestionCard'; // Adjusted path (same directory)
 import { ChevronLeft, ChevronRight } from 'lucide-react';

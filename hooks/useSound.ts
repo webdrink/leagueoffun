@@ -1,5 +1,6 @@
 import useLocalStorage from './useLocalStorage';
 import { useCallback } from 'react';
+import { playSoundWithErrorHandling } from './utils/soundUtils';
 
 interface UseSoundOutput {
   soundEnabled: boolean;
@@ -9,6 +10,10 @@ interface UseSoundOutput {
   setVolume: (value: number) => void;
 }
 
+/**
+ * Hook for sound management throughout the application
+ * @returns Object with sound controls and state
+ */
 const useSound = (): UseSoundOutput => {
   const [soundEnabled, setSoundEnabled] = useLocalStorage<boolean>('blamegame-sound-enabled', true);
   const [volume, setVolume] = useLocalStorage<number>('blamegame-sound-volume', 0.7);
@@ -18,14 +23,8 @@ const useSound = (): UseSoundOutput => {
   }, [setSoundEnabled]);
 
   const playSound = useCallback((soundSrc: string) => {
-    if (soundEnabled && typeof window !== 'undefined') {
-      try {
-        const audio = new Audio(soundSrc);
-        audio.volume = volume; // Set the volume
-        audio.play().catch(error => console.warn("Error playing sound:", error));
-      } catch (error) {
-        console.warn("Error creating or playing audio:", error);
-      }
+    if (soundEnabled) {
+      playSoundWithErrorHandling(soundSrc, volume);
     }
   }, [soundEnabled, volume]);
 

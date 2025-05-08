@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from '../core/Card'; // Adjusted path
-import { getEmoji } from '../../utils'; // Path should be correct if utils is in blamegame/
+import { getEmoji } from '../../lib/formatters'; // Updated import path
 import { Question } from '../../types'; // Path should be correct if types is in blamegame/
 
 interface QuestionCardProps {

@@ -3,6 +3,14 @@ import useLocalStorage from './useLocalStorage';
 import { Question, GameSettings, GameStep } from '../types';
 import { FALLBACK_QUESTIONS } from '../constants';
 import { getRandomCategories, getAvailableQuestions } from '../utils';
+import { 
+  loadQuestionsByCategories, 
+  loadAllQuestionsFromJson, 
+  loadAllCategories,
+  loadQuestionsFromCsv,
+  getFallbackQuestions 
+} from './utils/questionLoaders';
+import { useLanguage } from './utils/languageSupport';
 
 interface UseQuestionsOutput {
   allQuestions: Question[];
@@ -33,116 +41,120 @@ const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [index, setIndex] = useState(0);
   const [cardKey, setCardKey] = useState(0);
-
+  
+  // Get current language from language hook
+  const { currentLanguage } = useLanguage();
   // Load questions from JSON or CSV
   const loadQuestions = useCallback(async () => {
     setIsLoading(true);
     setCsvError(null);
     
     try {
-      // First try to load questions from JSON
-      const res = await fetch('questions.json');
+      // First try to load questions from the new category-based system with language support
+      console.log(`Loading questions with language: ${currentLanguage}`);
       
-      if (!res.ok) {
-        throw new Error('JSON questions not found, falling back to CSV');
+      // Load all available categories
+      const categories = await loadAllCategories(currentLanguage);
+      
+      if (categories && categories.length > 0) {
+        // Load a sample of questions to populate allQuestions
+        // We'll load more specific questions during gameplay based on selected categories
+        const randomCategories = getRandomCategories(categories, 3);
+        const questions = await loadQuestionsByCategories(randomCategories, currentLanguage);
+        
+        if (questions && questions.length > 0) {
+          setAllQuestions(questions);
+          setCsvError(null);
+          console.log(`Loaded ${questions.length} sample questions from categories`);
+          return;
+        }
       }
       
-      const data = await res.json();
-      
-      if (data && data.length > 0) {
-        setAllQuestions(data);
-        setCsvError(null);
-        console.log(`Loaded ${data.length} questions from JSON`);
-      } else {
-        throw new Error('JSON file empty or invalid');
-      }
+      // If that fails, try the old JSON file
+      const jsonQuestions = await loadAllQuestionsFromJson();
+      setAllQuestions(jsonQuestions);
+      setCsvError(null);
+      console.log(`Loaded ${jsonQuestions.length} questions from JSON`);
     } catch (jsonError) {
       console.warn('Failed to load JSON questions, falling back to CSV:', jsonError);
       
       try {
         // Fallback to CSV
-        const res = await fetch('blamegame_questions.csv');
-        
-        if (!res.ok) {
-          throw new Error(`CSV HTTP error! status: ${res.status}`);
-        }
-        
-        const text = await res.text();
-        const lines = text.split('\n').filter(line => line.trim() !== '' && !line.startsWith('//'));
-        const header = lines.shift();
-        
-        if (!header || !header.toLowerCase().includes('kategorie') || !header.toLowerCase().includes('frage')) {
-          console.warn("CSV header might be missing or incorrect. Assuming 'Kategorie;Frage;' structure.");
-        }
-        
-        const parsed: Question[] = lines.map(line => {
-          const parts = line.split(';');
-          const category = parts[0]?.trim() || 'Unbekannt';
-          const text = parts[1]?.trim() || 'Keine Frage gefunden';
-          return { category, text };
-        }).filter(q => q.category !== 'Unbekannt' && q.text !== 'Keine Frage gefunden');
-
-        if (parsed.length > 0) {
-          setAllQuestions(parsed);
-          setCsvError(null);
-          console.log(`Loaded ${parsed.length} questions from CSV`);
-        } else {
-          throw new Error('No valid questions found in CSV');
-        }
+        const csvQuestions = await loadQuestionsFromCsv();
+        setAllQuestions(csvQuestions);
+        setCsvError(null);
+        console.log(`Loaded ${csvQuestions.length} questions from CSV`);
       } catch (csvError) {
-        console.error('Error loading questions from CSV:', csvError);
+        console.error('Error loading questions from all sources:', csvError);
         setCsvError('Fehler beim Laden der Fragen. Weder JSON noch CSV konnten geladen werden.');
-        setAllQuestions(FALLBACK_QUESTIONS);
+        setAllQuestions(getFallbackQuestions());
       }
     } finally {
       setIsLoading(false);
     }
-  }, []);
-
+  }, [currentLanguage]);
   // Prepare questions for a new round
   const prepareRoundQuestions = useCallback(async (gameSettings: GameSettings): Promise<boolean> => {
     if (isLoading) {
       return false;
     }
 
-    // Handle the case when no questions were loaded
-    let questionsToUse = allQuestions;
-    if (questionsToUse.length === 0) {
-      console.warn("No questions loaded, using fallback questions");
-      questionsToUse = FALLBACK_QUESTIONS;
-      setCsvError("Konnte keine Fragen laden. Verwende eingeschränkte Notzufragen.");
-    }
-
-    let availableQuestions = getAvailableQuestions(questionsToUse, playedQuestions);
-
-    if (availableQuestions.length < 15) {
-      setPlayedQuestions([]);
-      availableQuestions = questionsToUse;
-    }
-
-    const allCategoryNames = availableQuestions.map(q => q.category);
-    const categoriesForRound = getRandomCategories(allCategoryNames, gameSettings.categoryCount);
-    setSelectedCategories(categoriesForRound);
-
-    if (availableQuestions.length > 0) {
-      let filteredAndLimited: Question[] = [];
-      categoriesForRound.forEach(cat => {
-        const questionsForCat = availableQuestions
-          .filter(q => q.category === cat)
-          .sort(() => 0.5 - Math.random())
-          .slice(0, gameSettings.questionsPerCategory);
-        filteredAndLimited = filteredAndLimited.concat(questionsForCat);
-      });
-      const shuffledRoundQuestions = filteredAndLimited.sort(() => 0.5 - Math.random());
-      setCurrentRoundQuestions(shuffledRoundQuestions);
-      setIndex(0);
-      setCardKey(prev => prev + 1);
-      return true;
-    } else {
-      setCsvError("Konnte das Spiel nicht starten, da keine Fragen geladen wurden.");
+    try {
+      // Get all available categories for the current language
+      const allCategoryNames = await loadAllCategories(currentLanguage);
+      
+      // Select random categories based on game settings
+      const categoriesForRound = getRandomCategories(allCategoryNames, gameSettings.categoryCount);
+      setSelectedCategories(categoriesForRound);
+      
+      // Load questions for the selected categories with the current language
+      const loadedQuestions = await loadQuestionsByCategories(categoriesForRound, currentLanguage);
+      
+      // Filter out already played questions
+      let availableQuestions = getAvailableQuestions(loadedQuestions, playedQuestions);
+      
+      // Reset played questions if we're running low
+      if (availableQuestions.length < 15) {
+        setPlayedQuestions([]);
+        availableQuestions = loadedQuestions;
+      }
+      
+      if (availableQuestions.length > 0) {
+        let filteredAndLimited: Question[] = [];
+        categoriesForRound.forEach(cat => {
+          const questionsForCat = availableQuestions
+            .filter(q => q.category === cat)
+            .sort(() => 0.5 - Math.random())
+            .slice(0, gameSettings.questionsPerCategory);
+          filteredAndLimited = filteredAndLimited.concat(questionsForCat);
+        });
+        
+        const shuffledRoundQuestions = filteredAndLimited.sort(() => 0.5 - Math.random());
+        setCurrentRoundQuestions(shuffledRoundQuestions);
+        setIndex(0);
+        setCardKey(prev => prev + 1);
+        return true;
+      } else {
+        setCsvError("Konnte das Spiel nicht starten, da keine Fragen geladen wurden.");
+        return false;
+      }
+    } catch (error) {
+      console.error("Error preparing round questions:", error);
+      setCsvError("Fehler beim Laden der Fragen für diese Runde.");
+      
+      // Fallback to using whatever questions we have in allQuestions
+      if (allQuestions.length > 0) {
+        const availableQuestions = getAvailableQuestions(allQuestions, playedQuestions);
+        const shuffled = availableQuestions.sort(() => 0.5 - Math.random()).slice(0, 20);
+        setCurrentRoundQuestions(shuffled);
+        setIndex(0);
+        setCardKey(prev => prev + 1);
+        return true;
+      }
+      
       return false;
     }
-  }, [isLoading, allQuestions, playedQuestions, setPlayedQuestions]);
+  }, [isLoading, allQuestions, playedQuestions, setPlayedQuestions, currentLanguage]);
 
   // Advance to the next question
   const advanceToNextQuestion = useCallback(() => {
@@ -167,11 +179,11 @@ const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
     setSelectedCategories([]);
     setCsvError(null);
   }, []);
-
-  // Load questions on initial mount
+  // Load questions on initial mount and when language changes
   useEffect(() => {
+    console.log("Loading questions for language:", currentLanguage);
     loadQuestions();
-  }, [loadQuestions]);
+  }, [loadQuestions, currentLanguage]);
 
   return {
     allQuestions,
