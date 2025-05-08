@@ -1,10 +1,94 @@
 [
   {
-    "text": "Sample question 1 for at_school in de",
+    "text": "Wer ist der Klassenclown?",
     "category": "at_school"
   },
   {
-    "text": "Sample question 2 for at_school in de",
+    "text": "Wer war am besten in Mathematik?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer ist der Klassenbeste?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer war am besten in Englisch?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer ist der Klassenliebling?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer war am besten in Geschichte?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer ist der Klassenstreber?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer ist am Besten in Biologie?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer ist der Klassenbester in Sport?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer ist am Besten in Chemie?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer ist der Klassenbeste in Kunst?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer ist der Klassenbeste in Musik?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer ist der Klassenbeste in Physik?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer ist der Klassenbeste in Informatik?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer ist der Klassenbeste in Sport?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer hat am meisten in der Schule gespickt?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer hat am meisten in der Schule geschummelt?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer hat am meisten in der Schule geschlafen?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer hat am meisten in der Schule gefehlt?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer hat am meisten in der Schule gelacht?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer hat am meisten in der Schule geweint?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wer war eher der Lehrer als der Schüler?",
+    "category": "at_school"
+  },
+  {
+    "text": "Wem hat die Schule Spaß gemacht?",
     "category": "at_school"
   }
 ]
