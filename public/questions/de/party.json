@@ -1,5 +1,30 @@
 [
   {
+    "questionId": "who_dances_wildest",
+    "text": "Wer tanzt am wildesten?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_drinks_most",
+    "text": "Wer trinkt am meisten?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_leaves_earliest",
+    "text": "Wer geht am frühesten?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_stays_until_end",
+    "text": "Wer bleibt bis zum Ende?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_gives_best_toasts",
+    "text": "Wer macht die besten Trinksprüche?",
+    "category": "party"
+  },
+  {
     "questionId": "who_dances_wildest_when_nobody_watching",
     "text": "Wer tanzt am wildesten, wenn niemand zuschaut?",
     "category": "party"

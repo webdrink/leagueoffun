@@ -1,10 +1,22 @@
 [
   {
-    "text": "Sample question 1 for in_bathroom in es",
+    "questionId": "who_takes_longest_showers",
+    "text": "¿Quién toma las duchas más largas?",
     "category": "in_bathroom"
   },
   {
-    "text": "Sample question 2 for in_bathroom in es",
+    "questionId": "who_leaves_toilet_seat_up",
+    "text": "¿Quién deja la tapa del inodoro arriba?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_uses_most_toilet_paper",
+    "text": "¿Quién usa más papel higiénico?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_forgets_to_flush",
+    "text": "¿Quién olvida tirar de la cadena?",
     "category": "in_bathroom"
   }
 ]

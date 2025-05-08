@@ -1,0 +1,22 @@
+[
+  {
+    "questionId": "who_is_most_punctual",
+    "text": "Qui est le plus ponctuel?",
+    "category": "typisch_deutsch"
+  },
+  {
+    "questionId": "who_follows_rules_most_strictly",
+    "text": "Qui suit les règles le plus strictement?",
+    "category": "typisch_deutsch"
+  },
+  {
+    "questionId": "who_separates_trash_most_carefully",
+    "text": "Qui trie les déchets le plus soigneusement?",
+    "category": "typisch_deutsch"
+  },
+  {
+    "questionId": "who_complains_about_weather_most",
+    "text": "Qui se plaint le plus de la météo?",
+    "category": "typisch_deutsch"
+  }
+]

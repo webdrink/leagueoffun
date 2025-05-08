@@ -1,10 +1,22 @@
 [
   {
-    "text": "Sample question 1 for in_past in fr",
+    "questionId": "who_would_miss_old_times_most",
+    "text": "Qui regretterait le plus les temps anciens?",
     "category": "in_past"
   },
   {
-    "text": "Sample question 2 for in_past in fr",
+    "questionId": "who_would_adapt_worst_to_past",
+    "text": "Qui s'adapterait le plus mal au passé?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_change_history",
+    "text": "Qui changerait l'histoire?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_live_in_medieval_times",
+    "text": "Qui vivrait à l'époque médiévale?",
     "category": "in_past"
   }
 ]

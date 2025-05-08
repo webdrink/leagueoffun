@@ -1,10 +1,22 @@
 [
   {
-    "text": "Sample question 1 for inner_monologue in fr",
+    "questionId": "who_overthinks_everything",
+    "text": "Qui réfléchit trop à tout?",
     "category": "inner_monologue"
   },
   {
-    "text": "Sample question 2 for inner_monologue in fr",
+    "questionId": "who_has_most_elaborate_daydreams",
+    "text": "Qui a les rêveries les plus élaborées?",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_argues_with_themselves",
+    "text": "Qui se dispute avec soi-même?",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_has_craziest_thoughts",
+    "text": "Qui a les pensées les plus folles?",
     "category": "inner_monologue"
   }
 ]

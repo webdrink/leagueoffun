@@ -1,101 +1,101 @@
 [
   {
-    "questionId": "wer_macht_die_besten_pausen",
+    "questionId": "who_takes_best_breaks",
     "text": "Wer macht die besten Pausen?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_druckt_sich_am_meisten_vor_aufgaben",
+    "questionId": "who_avoids_tasks_most",
     "text": "Wer drückt sich am meisten vor Aufgaben?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_ware_ein_super_chef",
+    "questionId": "who_would_be_great_boss",
     "text": "Wer wäre ein super Chef?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_hat_den_unaufgeraumtesten_schreibtisch",
+    "questionId": "who_has_messiest_desk",
     "text": "Wer hat den unaufgeräumtesten Schreibtisch?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_schreibt_die_langsten_mails",
+    "questionId": "who_writes_longest_emails",
     "text": "Wer schreibt die längsten Mails?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_wurde_heimlich_am_liebsten_kundigen",
+    "questionId": "who_secretly_wants_to_quit",
     "text": "Wer würde heimlich am liebsten kündigen?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_lebt_nur_fur_den_feierabend",
+    "questionId": "who_lives_only_for_after_work",
     "text": "Wer lebt nur für den Feierabend?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_ist_die_wandelnde_todoliste",
+    "questionId": "who_is_walking_todo_list",
     "text": "Wer ist die wandelnde To-Do-Liste?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_vergisst_standig_deadlines",
+    "questionId": "who_constantly_forgets_deadlines",
     "text": "Wer vergisst ständig Deadlines?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_bringt_die_besten_snacks_mit",
+    "questionId": "who_brings_best_snacks",
     "text": "Wer bringt die besten Snacks mit?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_bringt_immer_kuchen_mit",
+    "questionId": "who_always_brings_cake",
     "text": "Wer bringt immer Kuchen mit?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_vergisst_standig_das_passwort",
+    "questionId": "who_always_forgets_password",
     "text": "Wer vergisst ständig das Passwort?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_macht_die_besten_witze_im_buro",
+    "questionId": "who_tells_best_jokes",
     "text": "Wer macht die besten Witze im Büro?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_ist_immer_zu_spat_zum_meeting",
+    "questionId": "who_is_always_late_to_meetings",
     "text": "Wer ist immer zu spät zum Meeting?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_hat_den_buntesten_kalender",
+    "questionId": "who_has_most_colorful_calendar",
     "text": "Wer hat den buntesten Kalender?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_schreibt_die_kreativsten_emails",
+    "questionId": "who_writes_most_creative_emails",
     "text": "Wer schreibt die kreativsten E-Mails?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_macht_die_langsten_kaffeepausen",
+    "questionId": "who_takes_longest_coffee_breaks",
     "text": "Wer macht die längsten Kaffeepausen?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_hat_immer_einen_plan_b",
+    "questionId": "who_always_has_plan_b",
     "text": "Wer hat immer einen Plan B?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_bringt_die_meisten_ideen_ein",
+    "questionId": "who_brings_most_ideas",
     "text": "Wer bringt die meisten Ideen ein?",
     "category": "at_work"
   },
   {
-    "questionId": "wer_ist_der_heimliche_chef",
+    "questionId": "who_is_secret_boss",
     "text": "Wer ist der heimliche Chef?",
     "category": "at_work"
   },

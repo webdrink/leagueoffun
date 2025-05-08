@@ -1,10 +1,37 @@
 [
   {
-    "text": "Sample question 1 for in_fantasy in es",
+    "questionId": "who_would_live_in_fantasy_world",
+    "text": "¿Quién viviría en un mundo de fantasía?",
     "category": "in_fantasy"
   },
   {
-    "text": "Sample question 2 for in_fantasy in es",
+    "questionId": "who_would_tame_dragons",
+    "text": "¿Quién domaría dragones?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_be_great_wizard",
+    "text": "¿Quién sería un gran mago?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_quest_for_treasure",
+    "text": "¿Quién buscaría tesoros?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_fight_monsters",
+    "text": "¿Quién lucharía contra monstruos?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "in_fantasy_sample_question_1",
+    "text": "Pregunta de ejemplo 1 para in_fantasy en es",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "in_fantasy_sample_question_2",
+    "text": "Pregunta de ejemplo 2 para in_fantasy en es",
     "category": "in_fantasy"
   }
 ]

@@ -1,10 +1,37 @@
 [
   {
-    "text": "Sample question 1 for bad_decisions_land in en",
+    "questionId": "who_makes_worst_decisions",
+    "text": "Who makes the worst decisions?",
     "category": "bad_decisions_land"
   },
   {
-    "text": "Sample question 2 for bad_decisions_land in en",
+    "questionId": "who_never_learns_from_mistakes",
+    "text": "Who never learns from mistakes?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_is_most_impulsive",
+    "text": "Who is the most impulsive?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_do_it_for_a_dare",
+    "text": "Who would do it for a dare?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_ignores_warning_signs",
+    "text": "Who ignores warning signs?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "bad_decisions_land_sample_question_1",
+    "text": "Sample question 1 for bad decisions land",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "bad_decisions_land_sample_question_2",
+    "text": "Sample question 2 for bad decisions land",
     "category": "bad_decisions_land"
   }
 ]

@@ -10,6 +10,21 @@
     "category": "internet"
   },
   {
+    "questionId": "who_shares_fake_news",
+    "text": "Wer teilt Fake News?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_stalks_profiles",
+    "text": "Wer stalkt Profile?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_posts_too_many_comments",
+    "text": "Wer postet zu viele Kommentare?",
+    "category": "internet"
+  },
+  {
     "questionId": "who_falls_for_fake_news",
     "text": "Wer fällt auf Fake News herein?",
     "category": "internet"

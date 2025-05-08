@@ -1,10 +1,22 @@
 [
   {
-    "text": "Sample question 1 for parallel_universe in es",
+    "questionId": "who_would_be_different_person",
+    "text": "¿Quién sería una persona completamente diferente?",
     "category": "parallel_universe"
   },
   {
-    "text": "Sample question 2 for parallel_universe in es",
+    "questionId": "who_would_have_same_personality",
+    "text": "¿Quién tendría exactamente la misma personalidad?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_have_opposite_career",
+    "text": "¿Quién tendría una carrera opuesta?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_be_famous",
+    "text": "¿Quién sería famoso?",
     "category": "parallel_universe"
   }
 ]

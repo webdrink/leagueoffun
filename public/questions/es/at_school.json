@@ -1,10 +1,217 @@
 [
   {
-    "text": "Sample question 1 for at_school in es",
+    "questionId": "who_is_class_clown",
+    "text": "¿Quién es el payaso de la clase?",
     "category": "at_school"
   },
   {
-    "text": "Sample question 2 for at_school in es",
+    "questionId": "who_was_best_at_math",
+    "text": "¿Quién era el mejor en matemáticas?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_class_best",
+    "text": "¿Quién es el mejor de la clase?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_was_best_at_english",
+    "text": "¿Quién era el mejor en inglés?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_teacher_pet",
+    "text": "¿Quién es el favorito del profesor?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_was_best_at_history",
+    "text": "¿Quién era el mejor en historia?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_biology",
+    "text": "¿Quién es el mejor en biología?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_sports",
+    "text": "¿Quién es el mejor en deportes?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_chemistry",
+    "text": "¿Quién es el mejor en química?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_art",
+    "text": "¿Quién es el mejor en arte?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_music",
+    "text": "¿Quién es el mejor en música?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_physics",
+    "text": "¿Quién es el mejor en física?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_computer_science",
+    "text": "¿Quién es el mejor en informática?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_cheats_most_in_school",
+    "text": "¿Quién hace más trampas en la escuela?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_sleeps_most_in_school",
+    "text": "¿Quién duerme más en la escuela?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_misses_most_classes",
+    "text": "¿Quién falta más a clases?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_laughs_most_in_school",
+    "text": "¿Quién se ríe más en la escuela?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_cries_most_in_school",
+    "text": "¿Quién llora más en la escuela?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_teacher_more_than_student",
+    "text": "¿Quién es más maestro que estudiante?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_enjoys_school_most",
+    "text": "¿Quién disfruta más la escuela?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_has_best_excuses_for_homework",
+    "text": "¿Quién tiene las mejores excusas para no hacer la tarea?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_class_clown_during_break",
+    "text": "¿Quién es el payaso de la clase durante el recreo?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_most_prepared",
+    "text": "¿Quién está siempre preparado?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_always_forgets_homework",
+    "text": "¿Quién siempre olvida la tarea?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_sits_in_back_row",
+    "text": "¿Quién siempre se sienta en la última fila?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_always_raises_hand",
+    "text": "¿Quién siempre levanta la mano?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_sleeps_during_class",
+    "text": "¿Quién duerme durante la clase?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_texts_during_lectures",
+    "text": "¿Quién envía mensajes durante las clases?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_comes_unprepared_to_exams",
+    "text": "¿Quién llega sin preparación a los exámenes?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_copies_homework_last_minute",
+    "text": "¿Quién copia la tarea en el último minuto?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_brings_best_lunch_to_school",
+    "text": "¿Quién lleva el mejor almuerzo a la escuela?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_asks_for_deadline_extension",
+    "text": "¿Quién pide extensiones de plazo?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_arrives_last_minute_to_class",
+    "text": "¿Quién llega en el último minuto a clase?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_takes_best_notes",
+    "text": "¿Quién toma las mejores notas?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_forgets_school_supplies",
+    "text": "¿Quién olvida los materiales escolares?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_always_has_excuses",
+    "text": "¿Quién siempre tiene excusas?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_joins_too_many_clubs",
+    "text": "¿Quién se une a demasiados clubes?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_disrupts_class_most",
+    "text": "¿Quién interrumpe más la clase?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_stresses_over_minor_assignments",
+    "text": "¿Quién se estresa por tareas menores?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_procrastinates_until_deadline",
+    "text": "¿Quién procrastina hasta el plazo?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_studies_night_before_exam",
+    "text": "¿Quién estudia la noche antes del examen?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "at_school_sample_question_1",
+    "text": "Pregunta de ejemplo 1 para at_school en es",
+    "category": "at_school"
+  },
+  {
+    "questionId": "at_school_sample_question_2",
+    "text": "Pregunta de ejemplo 2 para at_school en es",
     "category": "at_school"
   }
 ]

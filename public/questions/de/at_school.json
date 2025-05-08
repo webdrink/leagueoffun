@@ -1,31 +1,31 @@
 [
   {
-    "questionId": "wer_ist_der_klassenclown",
+    "questionId": "who_is_class_clown",
     "text": "Wer ist der Klassenclown?",
     "category": "at_school"
   },
   {
-    "questionId": "wer_war_am_besten_in_mathematik",
+    "questionId": "who_was_best_at_math",
     "text": "Wer war am besten in Mathematik?",
     "category": "at_school"
   },
   {
-    "questionId": "wer_ist_der_klassenbeste",
+    "questionId": "who_is_class_best",
     "text": "Wer ist der Klassenbeste?",
     "category": "at_school"
   },
   {
-    "questionId": "wer_war_am_besten_in_englisch",
+    "questionId": "who_was_best_at_english",
     "text": "Wer war am besten in Englisch?",
     "category": "at_school"
   },
   {
-    "questionId": "wer_ist_der_klassenliebling",
+    "questionId": "who_is_teacher_pet",
     "text": "Wer ist der Klassenliebling?",
     "category": "at_school"
   },
   {
-    "questionId": "wer_war_am_besten_in_geschichte",
+    "questionId": "who_was_best_at_history",
     "text": "Wer war am besten in Geschichte?",
     "category": "at_school"
   },
@@ -252,16 +252,6 @@
   {
     "questionId": "who_studies_night_before_exam",
     "text": "Wer lernt erst in der Nacht vor der Prüfung?",
-    "category": "at_school"
-  },
-  {
-    "questionId": "at_school_sample_question_1",
-    "text": "Sample question 1 for at_school in de",
-    "category": "at_school"
-  },
-  {
-    "questionId": "at_school_sample_question_2",
-    "text": "Sample question 2 for at_school in de",
     "category": "at_school"
   }
 ]

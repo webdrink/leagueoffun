@@ -1,10 +1,22 @@
 [
   {
-    "text": "Sample question 1 for in_nature in fr",
+    "questionId": "who_complains_most_during_hike",
+    "text": "Qui se plaint le plus pendant une randonnée?",
     "category": "in_nature"
   },
   {
-    "text": "Sample question 2 for in_nature in fr",
+    "questionId": "who_gets_lost_in_woods",
+    "text": "Qui se perd dans les bois?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_could_survive_in_wilderness",
+    "text": "Qui pourrait survivre dans la nature sauvage?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_afraid_of_bugs",
+    "text": "Qui a peur des insectes?",
     "category": "in_nature"
   }
 ]

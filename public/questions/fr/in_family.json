@@ -1,10 +1,107 @@
 [
   {
-    "text": "Sample question 1 for in_family in fr",
+    "questionId": "who_starts_family_arguments",
+    "text": "Qui commence les disputes familiales?",
     "category": "in_family"
   },
   {
-    "text": "Sample question 2 for in_family in fr",
+    "questionId": "who_is_favorite_child",
+    "text": "Qui est l'enfant préféré?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_borrows_without_returning",
+    "text": "Qui emprunte sans rendre?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_eats_most_at_family_gatherings",
+    "text": "Qui mange le plus lors des réunions de famille?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_is_parents_favorite",
+    "text": "Wer ist der Liebling der Eltern?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_starts_family_arguments",
+    "text": "Wer beginnt Familienstreitigkeiten?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_remembers_family_birthdays",
+    "text": "Wer erinnert sich an Familien-Geburtstage?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_avoids_family_gatherings",
+    "text": "Wer vermeidet Familientreffen?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_tells_family_secrets",
+    "text": "Wer erzählt Familiengeheimnisse?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_is_most_responsible_sibling",
+    "text": "Wer ist das verantwortungsvollste Geschwisterteil?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_gets_away_with_everything",
+    "text": "Wer kommt mit allem davon?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_calls_parents_most_often",
+    "text": "Wer ruft die Eltern am häufigsten an?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_starts_family_traditions",
+    "text": "Wer beginnt Familientraditionen?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_tells_embarrassing_childhood_stories",
+    "text": "Wer erzählt peinliche Kindheitsgeschichten?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_takes_most_family_photos",
+    "text": "Wer macht die meisten Familienfotos?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_is_most_similar_to_parents",
+    "text": "Wer ist den Eltern am ähnlichsten?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_brings_unexpected_guests_home",
+    "text": "Wer bringt unerwartete Gäste mit nach Hause?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_causes_most_worry_to_parents",
+    "text": "Wer bereitet den Eltern die meisten Sorgen?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_gives_best_family_advice",
+    "text": "Wer gibt die besten Familienratschläge?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "in_family_sample_question_1",
+    "text": "Sample question 1 for in_family in de",
+    "category": "in_family"
+  },
+  {
+    "questionId": "in_family_sample_question_2",
+    "text": "Sample question 2 for in_family in de",
     "category": "in_family"
   }
 ]

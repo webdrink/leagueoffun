@@ -1,10 +1,37 @@
 [
   {
-    "text": "Sample question 1 for flirting in es",
+    "questionId": "who_flirts_with_everyone",
+    "text": "¿Quién coquetea con todos?",
     "category": "flirting"
   },
   {
-    "text": "Sample question 2 for flirting in es",
+    "questionId": "who_uses_worst_pickup_lines",
+    "text": "¿Quién usa las peores frases de ligue?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_is_most_oblivious_to_flirting",
+    "text": "¿Quién es más ajeno al coqueteo?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_gets_most_nervous_when_flirting",
+    "text": "¿Quién se pone más nervioso al coquetear?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_misinterprets_friendly_as_flirting",
+    "text": "¿Quién interpreta la amabilidad como coqueteo?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "flirting_sample_question_1",
+    "text": "Pregunta de muestra 1 para coqueteo en es",
+    "category": "flirting"
+  },
+  {
+    "questionId": "flirting_sample_question_2",
+    "text": "Pregunta de muestra 2 para coqueteo en es",
     "category": "flirting"
   }
 ]

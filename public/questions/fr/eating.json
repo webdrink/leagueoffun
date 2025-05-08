@@ -1,10 +1,37 @@
 [
   {
-    "text": "Sample question 1 for eating in fr",
+    "questionId": "who_always_takes_photos_of_food",
+    "text": "Qui prend toujours des photos de nourriture?",
     "category": "eating"
   },
   {
-    "text": "Sample question 2 for eating in fr",
+    "questionId": "who_steals_food_from_others_plates",
+    "text": "Qui vole de la nourriture des assiettes des autres?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_takes_longest_to_order",
+    "text": "Qui met le plus de temps à commander?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_complains_about_food",
+    "text": "Qui se plaint de la nourriture?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_never_pays_fair_share",
+    "text": "Qui ne paie jamais sa juste part?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_finishes_meal_first",
+    "text": "Qui finit son repas en premier?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_eats_messiest",
+    "text": "Qui mange le plus salement?",
     "category": "eating"
   }
 ]

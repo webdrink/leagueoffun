@@ -1,10 +1,22 @@
 [
   {
-    "text": "Sample question 1 for parties_with_strangers in es",
+    "questionId": "who_talks_to_everyone_at_party",
+    "text": "¿Quién habla con todos en la fiesta?",
     "category": "parties_with_strangers"
   },
   {
-    "text": "Sample question 2 for parties_with_strangers in es",
+    "questionId": "who_stands_in_corner_alone",
+    "text": "¿Quién se queda solo en un rincón?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_makes_new_friends_instantly",
+    "text": "¿Quién hace nuevos amigos al instante?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_forgets_names_immediately",
+    "text": "¿Quién olvida los nombres inmediatamente?",
     "category": "parties_with_strangers"
   }
 ]

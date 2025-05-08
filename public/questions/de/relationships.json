@@ -5,6 +5,21 @@
     "category": "relationships"
   },
   {
+    "questionId": "who_falls_in_love_quickly",
+    "text": "Wer verliebt sich schnell?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_gives_best_relationship_advice",
+    "text": "Wer gibt die besten Beziehungsratschläge?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_takes_longest_to_commit",
+    "text": "Wer braucht am längsten, um sich zu binden?",
+    "category": "relationships"
+  },
+  {
     "questionId": "who_ghosts_people_after_third_date",
     "text": "Wer ghostet Leute nach dem dritten Date?",
     "category": "relationships"

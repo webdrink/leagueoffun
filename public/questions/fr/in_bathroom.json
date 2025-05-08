@@ -1,10 +1,22 @@
 [
   {
-    "text": "Sample question 1 for in_bathroom in fr",
+    "questionId": "who_takes_longest_showers",
+    "text": "Qui prend les douches les plus longues?",
     "category": "in_bathroom"
   },
   {
-    "text": "Sample question 2 for in_bathroom in fr",
+    "questionId": "who_leaves_toilet_seat_up",
+    "text": "Qui laisse la lunette des toilettes relevée?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_uses_most_toilet_paper",
+    "text": "Qui utilise le plus de papier toilette?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_forgets_to_flush",
+    "text": "Qui oublie de tirer la chasse d'eau?",
     "category": "in_bathroom"
   }
 ]

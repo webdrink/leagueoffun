@@ -1,10 +1,22 @@
 [
   {
-    "text": "Sample question 1 for in_shared_apartment in es",
+    "questionId": "who_never_does_dishes",
+    "text": "¿Quién nunca lava los platos?",
     "category": "in_shared_apartment"
   },
   {
-    "text": "Sample question 2 for in_shared_apartment in es",
+    "questionId": "who_takes_longest_showers",
+    "text": "¿Quién toma las duchas más largas?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_eats_others_food",
+    "text": "¿Quién come la comida de los demás?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_is_messiest_roommate",
+    "text": "¿Quién es el compañero más desordenado?",
     "category": "in_shared_apartment"
   }
 ]

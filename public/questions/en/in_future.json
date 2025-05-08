@@ -1,10 +1,37 @@
 [
   {
-    "text": "Sample question 1 for in_future in en",
+    "questionId": "who_would_survive_future_tech_world",
+    "text": "Wer würde in einer technologischen Zukunftswelt überleben?",
     "category": "in_future"
   },
   {
-    "text": "Sample question 2 for in_future in en",
+    "questionId": "who_would_invent_something_revolutionary",
+    "text": "Wer würde etwas Revolutionäres erfinden?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_would_become_robot_best_friend",
+    "text": "Wer würde mit einem Roboter befreundet sein?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_would_adapt_best_to_future",
+    "text": "Wer würde sich am besten an die Zukunft anpassen?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_would_still_use_outdated_tech",
+    "text": "Wer würde noch veraltete Technik verwenden?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "in_future_sample_question_1",
+    "text": "Sample question 1 for in_future in de",
+    "category": "in_future"
+  },
+  {
+    "questionId": "in_future_sample_question_2",
+    "text": "Sample question 2 for in_future in de",
     "category": "in_future"
   }
 ]

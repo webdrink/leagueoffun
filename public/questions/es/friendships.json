@@ -1,10 +1,22 @@
 [
   {
-    "text": "Sample question 1 for friendships in es",
+    "questionId": "who_is_most_reliable_friend",
+    "text": "¿Quién es el amigo más confiable?",
     "category": "friendships"
   },
   {
-    "text": "Sample question 2 for friendships in es",
+    "questionId": "who_cancels_plans_most_often",
+    "text": "¿Quién cancela planes con más frecuencia?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_keeps_secrets_best",
+    "text": "¿Quién guarda mejor los secretos?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_remembers_birthdays",
+    "text": "¿Quién recuerda los cumpleaños?",
     "category": "friendships"
   }
 ]

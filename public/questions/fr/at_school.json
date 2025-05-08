@@ -1,10 +1,35 @@
 [
   {
-    "text": "Sample question 1 for at_school in fr",
+    "questionId": "who_is_class_clown",
+    "text": "Qui est le clown de la classe?",
     "category": "at_school"
   },
   {
-    "text": "Sample question 2 for at_school in fr",
+    "questionId": "who_was_best_at_math",
+    "text": "Qui était le meilleur en mathématiques?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_class_best",
+    "text": "Qui est le meilleur de la classe?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_was_best_at_english",
+    "text": "Qui était le meilleur en anglais?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_teacher_pet",
+    "text": "Qui est le chouchou du professeur?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_was_best_at_history",
+    "text": "Qui était le meilleur en histoire?",
+    "category": "at_school"
+  },
+  {
     "category": "at_school"
   }
 ]

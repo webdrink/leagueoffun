@@ -1,10 +1,22 @@
 [
   {
-    "text": "Sample question 1 for sports in fr",
+    "questionId": "who_is_most_competitive",
+    "text": "Qui est le plus compétitif?",
     "category": "sports"
   },
   {
-    "text": "Sample question 2 for sports in fr",
+    "questionId": "who_is_worst_loser",
+    "text": "Qui est le plus mauvais perdant?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_talks_during_sports_games",
+    "text": "Qui parle pendant les matchs sportifs?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_pretends_to_understand_rules",
+    "text": "Qui prétend comprendre les règles?",
     "category": "sports"
   }
 ]

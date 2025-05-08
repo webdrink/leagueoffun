@@ -1,10 +1,37 @@
 [
   {
-    "text": "Sample question 1 for parties_with_strangers in en",
+    "questionId": "who_talks_to_everyone_at_party",
+    "text": "Wer spricht mit jedem auf der Party?",
     "category": "parties_with_strangers"
   },
   {
-    "text": "Sample question 2 for parties_with_strangers in en",
+    "questionId": "who_hides_in_corner_at_parties",
+    "text": "Wer versteckt sich in der Ecke auf Partys?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_pretends_to_know_people",
+    "text": "Wer tut so, als würde er Leute kennen?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_leaves_without_saying_goodbye",
+    "text": "Wer geht ohne sich zu verabschieden?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_makes_friends_with_strangers",
+    "text": "Wer freundet sich mit Fremden an?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "parties_with_strangers_sample_question_1",
+    "text": "Sample question 1 for parties_with_strangers in de",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "parties_with_strangers_sample_question_2",
+    "text": "Sample question 2 for parties_with_strangers in de",
     "category": "parties_with_strangers"
   }
 ]

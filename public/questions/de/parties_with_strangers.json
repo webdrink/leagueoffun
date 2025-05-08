@@ -5,6 +5,21 @@
     "category": "parties_with_strangers"
   },
   {
+    "questionId": "who_stands_in_corner_alone",
+    "text": "Wer steht allein in einer Ecke?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_makes_new_friends_instantly",
+    "text": "Wer findet sofort neue Freunde?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_forgets_names_immediately",
+    "text": "Wer vergisst Namen sofort?",
+    "category": "parties_with_strangers"
+  },
+  {
     "questionId": "who_hides_in_corner_at_parties",
     "text": "Wer versteckt sich in der Ecke auf Partys?",
     "category": "parties_with_strangers"

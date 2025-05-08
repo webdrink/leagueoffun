@@ -1,9 +1,121 @@
 [
   {
+    "questionId": "who_would_survive_zombie_apocalypse",
+    "text": "Who would survive a zombie apocalypse?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_would_rule_world_after_apocalypse",
+    "text": "Who would rule the world after the apocalypse?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_would_trigger_apocalypse",
+    "text": "Who would trigger the apocalypse?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_would_survive_apocalypse_best",
+    "text": "Who would survive the apocalypse best?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_would_gather_most_supplies",
+    "text": "Who would gather the most supplies?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_survives_longest_in_apocalypse",
+    "text": "Who survives the longest in an apocalypse?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_becomes_group_leader",
+    "text": "Who becomes the leader of the group?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_has_most_useful_skills",
+    "text": "Who has the most useful skills?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_panics_first",
+    "text": "Who panics first?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_finds_best_shelter",
+    "text": "Who finds the best shelter?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_forgets_essential_supplies",
+    "text": "Who forgets essential supplies?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_sacrifices_themselves_for_group",
+    "text": "Who sacrifices themselves for the group?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_keeps_everyone_spirits_up",
+    "text": "Who keeps everyone's spirits up?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_goes_exploring_alone",
+    "text": "Who goes exploring alone?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_hoards_resources",
+    "text": "Who hoards resources?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_becomes_most_dangerous",
+    "text": "Who becomes the most dangerous?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_makes_worst_decisions",
+    "text": "Who makes the worst decisions?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_adapts_best_to_new_reality",
+    "text": "Who adapts best to the new reality?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_would_support_others_most",
+    "text": "Who would support others the most?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_would_guide_others",
+    "text": "Who would guide others the most?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_would_inspire_others",
+    "text": "Who would inspire others the most?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_hoards_toilet_paper_first",
+    "text": "Who hoards toilet paper first?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "apocalypse_sample_question_1",
     "text": "Sample question 1 for apocalypse in en",
     "category": "apocalypse"
   },
   {
+    "questionId": "apocalypse_sample_question_2",
     "text": "Sample question 2 for apocalypse in en",
     "category": "apocalypse"
   }

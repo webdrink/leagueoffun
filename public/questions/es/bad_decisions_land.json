@@ -1,10 +1,37 @@
 [
   {
-    "text": "Sample question 1 for bad_decisions_land in es",
+    "questionId": "who_makes_worst_decisions",
+    "text": "¿Quién toma las peores decisiones?",
     "category": "bad_decisions_land"
   },
   {
-    "text": "Sample question 2 for bad_decisions_land in es",
+    "questionId": "who_never_learns_from_mistakes",
+    "text": "¿Quién nunca aprende de sus errores?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_is_most_impulsive",
+    "text": "¿Quién es el más impulsivo?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_do_it_for_a_dare",
+    "text": "¿Quién lo haría por un reto?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_ignores_warning_signs",
+    "text": "¿Quién ignora las señales de advertencia?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "bad_decisions_land_sample_question_1",
+    "text": "Pregunta de ejemplo 1 para el país de las malas decisiones",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "bad_decisions_land_sample_question_2",
+    "text": "Pregunta de ejemplo 2 para el país de las malas decisiones",
     "category": "bad_decisions_land"
   }
 ]

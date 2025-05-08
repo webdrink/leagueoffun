@@ -1,10 +1,77 @@
 [
   {
-    "text": "Sample question 1 for embarrassing_moments in fr",
+    "questionId": "who_trips_in_public_most_often",
+    "text": "Qui trébuche en public le plus souvent?",
     "category": "embarrassing_moments"
   },
   {
-    "text": "Sample question 2 for embarrassing_moments in fr",
+    "questionId": "who_makes_awkward_comments",
+    "text": "Qui fait les commentaires les plus gênants?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_has_most_embarrassing_photos",
+    "text": "Qui a les photos les plus embarrassantes?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_calls_people_wrong_names",
+    "text": "Qui appelle les gens par le mauvais nom?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_has_wardrobe_malfunctions",
+    "text": "Qui a des problèmes de garde-robe?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_sends_texts_to_wrong_person",
+    "text": "Qui envoie des messages à la mauvaise personne?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_speaks_before_thinking",
+    "text": "Qui parle avant de réfléchir?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_has_embarrassing_laugh",
+    "text": "Qui a un rire embarrassant?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_gets_caught_in_lies",
+    "text": "Qui est pris en flagrant délit de mensonge?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_walks_into_glass_doors",
+    "text": "Qui marche contre des portes en verre?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_embarrasses_self_on_social_media",
+    "text": "Qui se ridiculise sur les réseaux sociaux?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_forgets_important_names",
+    "text": "Qui oublie des noms importants?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_has_food_stuck_in_teeth",
+    "text": "Qui a souvent de la nourriture coincée entre les dents?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "embarrassing_moments_sample_question_1",
+    "text": "Question d'exemple 1 pour embarrassing_moments en fr",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "embarrassing_moments_sample_question_2",
+    "text": "Question d'exemple 2 pour embarrassing_moments en fr",
     "category": "embarrassing_moments"
   }
 ]

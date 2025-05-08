@@ -1,10 +1,47 @@
 [
   {
-    "text": "Sample question 1 for in_past in es",
+    "questionId": "who_would_miss_old_times_most",
+    "text": "¿Quién extrañaría más los viejos tiempos?",
     "category": "in_past"
   },
   {
-    "text": "Sample question 2 for in_past in es",
+    "questionId": "who_would_adapt_worst_to_past",
+    "text": "¿Quién se adaptaría peor al pasado?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_change_history",
+    "text": "¿Quién cambiaría la historia?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_live_in_medieval_times",
+    "text": "¿Quién viviría en la época medieval?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_knows_most_about_history",
+    "text": "¿Quién sabe más sobre historia?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_be_best_time_traveler",
+    "text": "¿Quién sería el mejor viajero del tiempo?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_still_use_old_technology",
+    "text": "¿Quién seguiría usando tecnología antigua?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_lives_still_in_the_past",
+    "text": "¿Quién sigue viviendo en el pasado?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_knows_most_about_history",
+    "text": "¿Quién sabe más sobre historia?",
     "category": "in_past"
   }
 ]

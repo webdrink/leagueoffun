@@ -1,10 +1,37 @@
 [
   {
-    "text": "Sample question 1 for inner_monologue in en",
+    "questionId": "who_overthinks_everything",
+    "text": "Wer denkt über alles zu viel nach?",
     "category": "inner_monologue"
   },
   {
-    "text": "Sample question 2 for inner_monologue in en",
+    "questionId": "who_has_most_elaborate_daydreams",
+    "text": "Wer hat die ausgefeiltesten Tagträume?",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_argues_with_themselves",
+    "text": "Wer streitet mit sich selbst?",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_rehearses_conversations_in_head",
+    "text": "Wer probt Gespräche im Kopf?",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_creates_alternate_scenarios",
+    "text": "Wer erschafft alternative Szenarien?",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "inner_monologue_sample_question_1",
+    "text": "Sample question 1 for inner_monologue in de",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "inner_monologue_sample_question_2",
+    "text": "Sample question 2 for inner_monologue in de",
     "category": "inner_monologue"
   }
 ]

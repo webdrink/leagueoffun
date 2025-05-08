@@ -1,10 +1,22 @@
 [
   {
-    "text": "Sample question 1 for in_future in fr",
+    "questionId": "who_would_survive_future_tech_world",
+    "text": "Qui survivrait dans un monde technologique futur?",
     "category": "in_future"
   },
   {
-    "text": "Sample question 2 for in_future in fr",
+    "questionId": "who_would_invent_something_revolutionary",
+    "text": "Qui inventerait quelque chose de révolutionnaire?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_would_become_robot_best_friend",
+    "text": "Qui deviendrait ami avec un robot?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_would_travel_to_mars",
+    "text": "Qui voyagerait sur Mars?",
     "category": "in_future"
   }
 ]

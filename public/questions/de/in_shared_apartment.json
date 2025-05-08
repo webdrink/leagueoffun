@@ -1,7 +1,7 @@
 [
   {
     "questionId": "who_never_does_dishes",
-    "text": "Wer macht nie den Abwasch?",
+    "text": "Wer spült nie das Geschirr?",
     "category": "in_shared_apartment"
   },
   {
@@ -40,7 +40,7 @@
     "category": "in_shared_apartment"
   },
   {
-    "questionId": "who_showers_longest",
+    "questionId": "who_takes_longest_showers",
     "text": "Wer duscht am längsten?",
     "category": "in_shared_apartment"
   },
@@ -57,6 +57,11 @@
   {
     "questionId": "who_organizes_apartment_parties",
     "text": "Wer organisiert Wohnungspartys?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_is_messiest_roommate",
+    "text": "Wer ist der unordentlichste Mitbewohner?",
     "category": "in_shared_apartment"
   },
   {

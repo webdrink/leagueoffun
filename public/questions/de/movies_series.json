@@ -126,7 +126,7 @@
   },
   {
     "questionId": "who_talks_during_movies",
-    "text": "Wer redet während des Films?",
+    "text": "Wer redet während Filmen?",
     "category": "movies_series"
   },
   {
@@ -137,6 +137,11 @@
   {
     "questionId": "who_reveals_spoilers",
     "text": "Wer verrät Spoiler?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_spoils_endings",
+    "text": "Wer verrät Enden?",
     "category": "movies_series"
   },
   {
@@ -152,6 +157,16 @@
   {
     "questionId": "who_binge_watches_entire_series",
     "text": "Wer schaut ganze Serien am Stück?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_most_series",
+    "text": "Wer schaut die meisten Serien?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_falls_asleep_during_movies",
+    "text": "Wer schläft während Filmen ein?",
     "category": "movies_series"
   },
   {

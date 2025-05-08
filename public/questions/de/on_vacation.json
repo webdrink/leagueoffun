@@ -60,6 +60,21 @@
     "category": "on_vacation"
   },
   {
+    "questionId": "who_packs_too_much",
+    "text": "Wer packt zu viel ein?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_gets_food_poisoning",
+    "text": "Wer bekommt eine Lebensmittelvergiftung?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_plans_every_minute",
+    "text": "Wer plant jede Minute?",
+    "category": "on_vacation"
+  },
+  {
     "questionId": "on_vacation_sample_question_1",
     "text": "Sample question 1 for on_vacation in de",
     "category": "on_vacation"

@@ -1,12 +1,22 @@
 [
   {
     "questionId": "who_is_most_competitive",
-    "text": "Wer ist am wettkampforientiertesten?",
+    "text": "Wer ist am wettbewerbsorientiertesten?",
     "category": "sports"
   },
   {
-    "questionId": "who_is_bad_loser",
-    "text": "Wer ist ein schlechter Verlierer?",
+    "questionId": "who_is_worst_loser",
+    "text": "Wer ist der schlechteste Verlierer?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_talks_during_sports_games",
+    "text": "Wer redet während der Sportspiele?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_pretends_to_understand_rules",
+    "text": "Wer tut so, als würde er die Regeln verstehen?",
     "category": "sports"
   },
   {

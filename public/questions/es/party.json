@@ -1,50 +1,197 @@
 [
   {
-    "text": "Sample question 1 for party in es",
+    "questionId": "who_dances_wildest",
+    "text": "¿Quién baila más salvaje?",
     "category": "party"
   },
   {
-    "text": "Sample question 2 for party in es",
+    "questionId": "who_drinks_most",
+    "text": "¿Quién bebe más?",
     "category": "party"
   },
   {
-    "text": "¿Quién dejaría más probablemente la ventana abierta incluso en invierno?",
-    "emoji": "❄️"
+    "questionId": "who_leaves_earliest",
+    "text": "¿Quién se va más temprano?",
+    "category": "party"
   },
   {
-    "text": "¿Quién activaría accidentalmente una alarma de incendio?",
-    "emoji": "🔥"
+    "questionId": "who_stays_until_end",
+    "text": "¿Quién se queda hasta el final?",
+    "category": "party"
   },
   {
-    "text": "¿Quién organizaría más probablemente una fiesta secreta?",
-    "emoji": "🎉"
+    "questionId": "who_gives_best_toasts",
+    "text": "¿Quién hace los mejores brindis?",
+    "category": "party"
   },
   {
-    "text": "¿Quién tiene las excusas más creativas?",
-    "emoji": "🤔"
+    "questionId": "who_dances_wildest_when_nobody_watching",
+    "text": "Wer tanzt am wildesten, wenn niemand zuschaut?",
+    "category": "party"
   },
   {
-    "text": "¿Quién sobreviviría una semana sin smartphone?",
-    "emoji": "📵"
+    "questionId": "who_orders_most_embarrassing_drinks",
+    "text": "Wer bestellt die peinlichsten Drinks?",
+    "category": "party"
   },
   {
-    "text": "¿Quién impresionaría a todos en la pista de baile?",
-    "emoji": "💃"
+    "questionId": "who_most_likely_forgets_way_home",
+    "text": "Wer vergisst am ehesten den Heimweg?",
+    "category": "party"
   },
   {
-    "text": "¿Quién estallaría de risa por un video gracioso de TikTok?",
-    "emoji": "😂"
+    "questionId": "wer_flirtet_mit_dem_tursteher",
+    "text": "Wer flirtet mit dem Türsteher?",
+    "category": "party"
   },
   {
-    "text": "¿Quién se ofrecería voluntario para cantar primero en una fiesta de karaoke?",
-    "emoji": "🎤"
+    "questionId": "wer_macht_am_meisten_selfies_auf_der_tanzflache",
+    "text": "Wer macht am meisten Selfies auf der Tanzfläche?",
+    "category": "party"
   },
   {
-    "text": "¿Quién iría de fiesta toda la noche y directamente al trabajo?",
-    "emoji": "🥱"
+    "questionId": "wer_ist_am_schnellsten_betrunken",
+    "text": "Wer ist am schnellsten betrunken?",
+    "category": "party"
   },
   {
-    "text": "¿Quién olvidaría el día en que se celebra la fiesta?",
-    "emoji": "📅"
+    "questionId": "wer_bleibt_immer_bis_zum_bitteren_ende",
+    "text": "Wer bleibt immer bis zum bitteren Ende?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_ist_heimlicher_star_der_tanzflache",
+    "text": "Wer ist heimlicher Star der Tanzfläche?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_ruft_ex_betrunken_an",
+    "text": "Wer ruft ex betrunken an?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_braucht_am_nachsten_morgen_den_starksten_kaffe",
+    "text": "Wer braucht am nächsten Morgen den stärksten Kaffee?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_tanzt_auf_dem_tisch_bevor_die_musik_uberhaupt_",
+    "text": "Wer tanzt auf dem Tisch, bevor die Musik überhaupt läuft?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_ruft_mitten_in_der_nacht_afterparty_bei_mir",
+    "text": "Wer ruft mitten in der Nacht 'Afterparty bei mir!' und meint es ernst?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_macht_beim_trinken_plotzlich_philosophische_mo",
+    "text": "Wer macht beim Trinken plötzlich philosophische Monologe?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_nimmt_heimlich_videos_auf_um_sie_am_nachsten_m",
+    "text": "Wer nimmt heimlich Videos auf, um sie am nächsten Morgen zu zeigen?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_bringt_immer_eine_flasche_mit_aber_sie_ist_lee",
+    "text": "Wer bringt immer eine Flasche mit - aber sie ist leer?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_verliert_jedes_mal_mindestens_einen_schuh",
+    "text": "Wer verliert jedes Mal mindestens einen Schuh?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_denkt_jeder_song_sei_ihr_lied",
+    "text": "Wer denkt, jeder Song sei 'ihr Lied'?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_verschwindet_plotzlich_und_taucht_drei_stunden",
+    "text": "Wer verschwindet plötzlich - und taucht drei Stunden später mit Pizza auf?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_tanzt_mit_fremden_als_waren_es_alte_freunde",
+    "text": "Wer tanzt mit Fremden als wären es alte Freunde?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_erklart_um_3_uhr_morgens_seine_lebensvision",
+    "text": "Wer erklärt um 3 Uhr morgens seine Lebensvision?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_hat_immer_konfetti_dabei",
+    "text": "Wer hat immer Konfetti dabei?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_bestellt_shots_fur_alle_und_verschwindet_dann",
+    "text": "Wer bestellt Shots für alle und verschwindet dann?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_kusst_menschen_deren_namen_er_nie_erfahrt",
+    "text": "Wer küsst Menschen, deren Namen er nie erfährt?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_findet_sich_auf_fremden_instagramstories_wiede",
+    "text": "Wer findet sich auf fremden Instagram-Stories wieder?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_leave_window_open_in_winter",
+    "text": "Wer würde am ehesten das Fenster auch im Winter offen lassen?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_accidentally_trigger_fire_alarm",
+    "text": "Wer würde am ehesten aus Versehen einen Feueralarm auslösen?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_organize_secret_party",
+    "text": "Wer würde am ehesten eine geheime Party organisieren?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_has_most_creative_excuses",
+    "text": "Wer hat die kreativsten Ausreden?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_survive_without_smartphone",
+    "text": "Wer würde eine Woche ohne Smartphone überleben?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_impress_everyone_on_dance_floor",
+    "text": "Wer würde am ehesten auf der Tanzfläche alle beeindrucken?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_laugh_out_loud_at_tiktok",
+    "text": "Wer würde am ehesten aufgrund eines lustigen TikTok-Videos laut loslachen?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_volunteer_first_at_karaoke",
+    "text": "Wer würde am ehesten bei einer Karaoke-Party freiwillig als erster singen?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_party_all_night_then_work",
+    "text": "Wer würde am ehesten die ganze Nacht durchfeiern und direkt zur Arbeit gehen?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_forget_party_date",
+    "text": "Wer würde am ehesten den Tag vergessen, an dem die Party stattfindet?",
+    "category": "party"
   }
 ]

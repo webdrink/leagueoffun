@@ -118,13 +118,12 @@
     "es": "Momentos embarazosos",
     "fr": "Moments embarrassants",
     "emoji": "😳"
-  },
-  {
+  },  {
     "id": "flirting",
     "de": "Beim Flirten",
     "en": "Flirting",
-    "es": "Flirting",
-    "fr": "Flirting",
+    "es": "Coqueteando",
+    "fr": "Flirt",
     "emoji": "😘"
   },
   {
@@ -168,12 +167,28 @@
     "emoji": "🧙"
   },
   {
+  "id": "typisch_deutsch",
+  "de": "Typisch deutsch",
+  "en": "Typically German",
+  "es": "Típicamente alemán",
+  "fr": "Typiquement allemand",
+  "emoji": "🇩🇪"
+  },
+  {
     "id": "inner_monologue",
     "de": "Innerer Monolog",
     "en": "Inner monologue",
     "es": "Monólogo interior",
     "fr": "Monologue intérieur",
     "emoji": "💭"
+  },
+  {
+    "id": "kevin",
+    "de": "Kevin",
+    "en": "Kevin",
+    "es": "Kevin",
+    "fr": "Kevin",
+    "emoji": "😎🎈"
   },
   {
     "id": "bad_decisions_land",
@@ -190,21 +205,19 @@
     "es": "En un universo paralelo",
     "fr": "Dans un univers parallèle",
     "emoji": "🌌"
-  },
-  {
+  },  {
     "id": "apocalypse",
     "de": "Bei der Apokalypse",
     "en": "Apocalypse",
-    "es": "Apocalypse",
+    "es": "Apocalipsis",
     "fr": "Apocalypse",
     "emoji": "☢️"
-  },
-  {
+  },  {
     "id": "parties_with_strangers",
     "de": "Feiern mit Fremden",
     "en": "Parties with strangers",
     "es": "Fiestas con extraños",
-    "fr": "Parties avec des étrangers",
+    "fr": "Fêtes avec des inconnus",
     "emoji": "🎭"
   }
 ]

@@ -1,10 +1,262 @@
 [
   {
-    "text": "Sample question 1 for internet in es",
+    "questionId": "who_spends_most_time_on_social_media",
+    "text": "Wer verbringt die meiste Zeit in sozialen Medien?",
     "category": "internet"
   },
   {
-    "text": "Sample question 2 for internet in es",
+    "questionId": "who_posts_most_selfies",
+    "text": "¿Quién publica más selfies?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_shares_fake_news",
+    "text": "¿Quién comparte noticias falsas?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_stalks_profiles",
+    "text": "¿Quién investiga perfiles?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_posts_too_many_comments",
+    "text": "¿Quién publica demasiados comentarios?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_falls_for_fake_news",
+    "text": "Wer fällt auf Fake News herein?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_has_most_unused_subscriptions",
+    "text": "Wer hat die meisten ungenutzten Abonnements?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_shares_too_much_personal_info",
+    "text": "Wer teilt zu viele persönliche Informationen?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_has_strangest_search_history",
+    "text": "Wer hat die seltsamste Suchhistorie?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_watches_most_cat_videos",
+    "text": "Wer schaut die meisten Katzenvideos?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_always_corrects_others_online",
+    "text": "Wer korrigiert andere immer online?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_has_most_notifications",
+    "text": "Wer hat die meisten Benachrichtigungen?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_never_responds_to_messages",
+    "text": "Wer antwortet nie auf Nachrichten?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_spends_most_time_on_tiktok",
+    "text": "Wer verbringt die meiste Zeit auf TikTok?",
+    "category": "internet"
+  },
+  {
+    "questionId": "who_has_most_unread_emails",
+    "text": "Wer hat die meisten ungelesenen E-Mails?",
+    "category": "internet"
+  },
+  {
+    "questionId": "internet_sample_question_1",
+    "text": "Sample question 1 for internet in de",
+    "category": "internet"
+  },
+  {
+    "questionId": "internet_sample_question_2",
+    "text": "Sample question 2 for internet in de",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_kommentiert_alles_was_ihm_in_den_feed_kommt",
+    "text": "Wer kommentiert alles, was ihm in den Feed kommt?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_aus_versehen_ein_altes_foto_geli",
+    "text": "Wer hat schon mal aus Versehen ein altes Foto geliket?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_teilt_die_meisten_memes",
+    "text": "Wer teilt die meisten Memes?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_googelt_jede_kleinigkeit_sofort",
+    "text": "Wer googelt jede Kleinigkeit sofort?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_das_peinlichste_profilbild",
+    "text": "Wer hat das peinlichste Profilbild?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_liest_kommentare_und_antwortet_wutend",
+    "text": "Wer liest Kommentare – und antwortet wütend?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_stalkt_still_aber_grundlich",
+    "text": "Wer stalkt still, aber gründlich?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_was_super_peinliches_gepostet_un",
+    "text": "Wer hat schon mal was super Peinliches gepostet und gelöscht?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_gibt_sich_online_komplett_anders",
+    "text": "Wer gibt sich online komplett anders?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_postet_storys_aus_dem_supermarkt",
+    "text": "Wer postet Storys aus dem Supermarkt?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_einen_onlinewarenkorb_voller_dinge_die_er_",
+    "text": "Wer hat einen Online-Warenkorb voller Dinge, die er nie kauft?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_kommentiert_unter_promiposts_als_waren_sie_fre",
+    "text": "Wer kommentiert unter Promi-Posts, als wären sie Freunde?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_postet_urlaubsbilder_aus_dem_letzten_jahr_als_",
+    "text": "Wer postet Urlaubsbilder aus dem letzten Jahr als „Throwback“?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_mehr_follower_als_echte_freunde",
+    "text": "Wer hat mehr Follower als echte Freunde?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_macht_aus_jedem_like_ein_event",
+    "text": "Wer macht aus jedem Like ein Event?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_shitstorm_ausgelost_aus_ve",
+    "text": "Wer hat schon mal einen Shitstorm ausgelöst – aus Versehen?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_postet_screenshots_von_chats_mit_emojizensur",
+    "text": "Wer postet Screenshots von Chats – mit Emoji-Zensur?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_ein_profilbild_das_10_jahre_alt_ist",
+    "text": "Wer hat ein Profilbild, das 10 Jahre alt ist?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_schreibt_rezensionen_fur_produkte_die_er_nie_g",
+    "text": "Wer schreibt Rezensionen für Produkte, die er nie gekauft hat?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_eine_playlist_fur_jede_lebenslage_und_teil",
+    "text": "Wer hat eine Playlist für jede Lebenslage – und teilt sie ungefragt?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_einen_blog_uber_dinge_die_niemand_versteht",
+    "text": "Wer hat einen Blog über Dinge, die niemand versteht?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_verschickt_kettenbriefe_aus_nostalgie",
+    "text": "Wer verschickt Kettenbriefe – aus Nostalgie?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_einen_onlinefreund_den_niemand_kennt",
+    "text": "Wer hat einen Online-Freund, den niemand kennt?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_kommentiert_eigene_posts_um_diskussionen_zu_st",
+    "text": "Wer kommentiert eigene Posts, um Diskussionen zu starten?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_livestream_gemacht_fur_sic",
+    "text": "Wer hat schon mal einen Livestream gemacht – für sich selbst?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_ein_memearchiv_auf_dem_handy",
+    "text": "Wer hat ein Meme-Archiv auf dem Handy?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_postet_foodpics_die_aussehen_wie_kunstwerke",
+    "text": "Wer postet Foodpics, die aussehen wie Kunstwerke?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_einen_geheimen_tiktokaccount",
+    "text": "Wer hat einen geheimen TikTok-Account?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_liked_alles_um_nicht_aufzufallen",
+    "text": "Wer liked alles, um nicht aufzufallen?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_einen_onlinekalender_aber_vergisst_alle_te",
+    "text": "Wer hat einen Online-Kalender, aber vergisst alle Termine?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_einen_socialmediadetox_versucht_und_ist_ge",
+    "text": "Wer hat einen Social-Media-Detox versucht – und ist gescheitert?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_postet_motivationsspruche_und_halt_sich_nie_da",
+    "text": "Wer postet Motivationssprüche – und hält sich nie daran?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_einen_onlineshop_aber_keine_kunden",
+    "text": "Wer hat einen Online-Shop, aber keine Kunden?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_kommentiert_mit_gifs_die_niemand_versteht",
+    "text": "Wer kommentiert mit GIFs, die niemand versteht?",
+    "category": "internet"
+  },
+  {
+    "questionId": "wer_hat_einen_onlinecrush_den_er_nie_anschreibt",
+    "text": "Wer hat einen Online-Crush, den er nie anschreibt?",
     "category": "internet"
   }
 ]

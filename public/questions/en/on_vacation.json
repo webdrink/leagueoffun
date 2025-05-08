@@ -1,10 +1,72 @@
 [
   {
-    "text": "Sample question 1 for on_vacation in en",
+    "questionId": "who_overplans_vacation_itinerary",
+    "text": "Wer überplant den Urlaubsplan?",
     "category": "on_vacation"
   },
   {
-    "text": "Sample question 2 for on_vacation in en",
+    "questionId": "who_gets_sunburned_first",
+    "text": "Wer bekommt zuerst einen Sonnenbrand?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_takes_most_vacation_photos",
+    "text": "Wer macht die meisten Urlaubsfotos?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_spends_too_much_on_souvenirs",
+    "text": "Wer gibt zu viel für Souvenirs aus?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_packs_at_last_minute",
+    "text": "Wer packt in letzter Minute?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_gets_homesick_first",
+    "text": "Wer bekommt zuerst Heimweh?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_keeps_vacation_schedule",
+    "text": "Wer hält sich an den Urlaubsplan?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_learns_local_language",
+    "text": "Wer lernt die lokale Sprache?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_gets_lost_in_foreign_city",
+    "text": "Wer verläuft sich in einer fremden Stadt?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_overpacks_luggage",
+    "text": "Wer packt zu viel Gepäck ein?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_tries_most_local_foods",
+    "text": "Wer probiert die meisten lokalen Gerichte?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_never_wants_vacation_to_end",
+    "text": "Wer will nie, dass der Urlaub endet?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "on_vacation_sample_question_1",
+    "text": "Sample question 1 for on_vacation in de",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "on_vacation_sample_question_2",
+    "text": "Sample question 2 for on_vacation in de",
     "category": "on_vacation"
   }
 ]

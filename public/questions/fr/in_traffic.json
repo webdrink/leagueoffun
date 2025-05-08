@@ -1,10 +1,67 @@
 [
   {
-    "text": "Sample question 1 for in_traffic in fr",
+    "questionId": "who_gets_road_rage",
+    "text": "Qui s'énerve le plus sur la route?",
     "category": "in_traffic"
   },
   {
-    "text": "Sample question 2 for in_traffic in fr",
+    "questionId": "who_backseat_drives",
+    "text": "Qui donne des instructions depuis le siège passager?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_drives_too_slow",
+    "text": "Wer fährt zu langsam?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_drives_too_fast",
+    "text": "Qui conduit trop vite?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_changes_radio_stations",
+    "text": "Wer wechselt ständig die Radiosender?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_forgets_directions",
+    "text": "Qui oublie les directions?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_sings_loudly_in_car",
+    "text": "Wer singt laut im Auto?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_texts_while_driving",
+    "text": "Wer schreibt Nachrichten während der Fahrt?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_never_offers_to_drive",
+    "text": "Wer bietet nie an zu fahren?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_always_needs_bathroom_breaks",
+    "text": "Wer braucht immer Toilettenpausen?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_falls_asleep_in_car",
+    "text": "Wer schläft im Auto ein?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "in_traffic_sample_question_1",
+    "text": "Sample question 1 for in_traffic in de",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "in_traffic_sample_question_2",
+    "text": "Sample question 2 for in_traffic in de",
     "category": "in_traffic"
   }
 ]

@@ -1,10 +1,97 @@
 [
   {
-    "text": "Sample question 1 for in_bathroom in en",
+    "questionId": "who_takes_longest_in_bathroom",
+    "text": "Wer braucht am längsten im Badezimmer?",
     "category": "in_bathroom"
   },
   {
-    "text": "Sample question 2 for in_bathroom in en",
+    "questionId": "who_leaves_wet_towels_on_floor",
+    "text": "Wer lässt nasse Handtücher auf dem Boden liegen?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_sings_in_shower",
+    "text": "Wer singt unter der Dusche?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_forgets_to_buy_toilet_paper",
+    "text": "Wer vergisst, Toilettenpapier zu kaufen?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_has_most_beauty_products",
+    "text": "Wer hat die meisten Schönheitsprodukte?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_leaves_hair_in_drain",
+    "text": "Wer lässt Haare im Abfluss?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_uses_all_hot_water",
+    "text": "Wer verbraucht das ganze heiße Wasser?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_never_replaces_empty_roll",
+    "text": "Wer ersetzt nie die leere Rolle?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_takes_mirror_selfies",
+    "text": "Wer macht Spiegel-Selfies?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_uses_others_toiletries",
+    "text": "Wer benutzt die Toilettenartikel anderer?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_forgets_to_flush",
+    "text": "Wer vergisst zu spülen?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_talks_on_phone_in_bathroom",
+    "text": "Wer telefoniert im Badezimmer?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_uses_most_toilet_paper",
+    "text": "Wer verbraucht das meiste Toilettenpapier?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_makes_biggest_mess",
+    "text": "Wer macht die größte Unordnung?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_takes_baths_not_showers",
+    "text": "Wer nimmt Bäder statt Duschen?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_brushes_teeth_loudest",
+    "text": "Wer putzt die Zähne am lautesten?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_spends_time_on_phone_on_toilet",
+    "text": "Wer verbringt Zeit am Handy auf der Toilette?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "in_bathroom_sample_question_1",
+    "text": "Sample question 1 for in_bathroom in de",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "in_bathroom_sample_question_2",
+    "text": "Sample question 2 for in_bathroom in de",
     "category": "in_bathroom"
   }
 ]

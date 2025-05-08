@@ -1,10 +1,37 @@
 [
   {
-    "text": "Sample question 1 for flirting in en",
+    "questionId": "who_flirts_with_everyone",
+    "text": "Who flirts with everyone?",
     "category": "flirting"
   },
   {
-    "text": "Sample question 2 for flirting in en",
+    "questionId": "who_uses_worst_pickup_lines",
+    "text": "Who uses the worst pickup lines?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_is_most_oblivious_to_flirting",
+    "text": "Who is most oblivious to flirting?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_gets_most_nervous_when_flirting",
+    "text": "Who gets most nervous when flirting?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_misinterprets_friendly_as_flirting",
+    "text": "Who misinterprets friendliness as flirting?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "flirting_sample_question_1",
+    "text": "Sample question 1 for flirting",
+    "category": "flirting"
+  },
+  {
+    "questionId": "flirting_sample_question_2",
+    "text": "Sample question 2 for flirting",
     "category": "flirting"
   }
 ]

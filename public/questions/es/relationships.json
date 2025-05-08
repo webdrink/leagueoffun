@@ -1,10 +1,22 @@
 [
   {
-    "text": "Sample question 1 for relationships in es",
+    "questionId": "who_is_most_romantic",
+    "text": "¿Quién es más romántico?",
     "category": "relationships"
   },
   {
-    "text": "Sample question 2 for relationships in es",
+    "questionId": "who_falls_in_love_quickly",
+    "text": "¿Quién se enamora rápidamente?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_gives_best_relationship_advice",
+    "text": "¿Quién da los mejores consejos de relaciones?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_takes_longest_to_commit",
+    "text": "¿A quién le cuesta más comprometerse?",
     "category": "relationships"
   }
 ]

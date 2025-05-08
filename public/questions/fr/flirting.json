@@ -1,10 +1,37 @@
 [
   {
-    "text": "Sample question 1 for flirting in fr",
+    "questionId": "who_flirts_with_everyone",
+    "text": "Qui flirte avec tout le monde?",
     "category": "flirting"
   },
   {
-    "text": "Sample question 2 for flirting in fr",
+    "questionId": "who_uses_worst_pickup_lines",
+    "text": "Qui utilise les pires phrases de drague?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_is_most_oblivious_to_flirting",
+    "text": "Qui est le plus inconscient du flirt?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_gets_most_nervous_when_flirting",
+    "text": "Qui devient le plus nerveux en flirtant?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_misinterprets_friendly_as_flirting",
+    "text": "Qui interprète l'amabilité comme du flirt?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "flirting_sample_question_1",
+    "text": "Question exemple 1 pour flirter",
+    "category": "flirting"
+  },
+  {
+    "questionId": "flirting_sample_question_2",
+    "text": "Question exemple 2 pour flirter",
     "category": "flirting"
   }
 ]
