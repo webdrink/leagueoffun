@@ -8,17 +8,14 @@ import useNameBlameSetup from './hooks/useNameBlameSetup';
 import useLocalStorage from './hooks/useLocalStorage';
 
 // Import components
-import Confetti from './components/core/Confetti';
 import ErrorDisplay from './components/core/ErrorDisplay';
 import GameContainer from './components/core/GameContainer';
 import InfoModal from './components/core/InfoModal';
-import VolumeControl from './components/core/VolumeControl';
 import DebugPanel from './components/debug/DebugPanel';
 import IntroScreen from './components/game/IntroScreen';
 import LoadingContainer from './components/game/LoadingContainer';
 import PlayerSetupScreen from './components/game/PlayerSetupScreen';
 import QuestionScreen from './components/game/QuestionScreen';
-import RouletteScreen from './components/game/RouletteScreen';
 import SummaryScreen from './components/game/SummaryScreen';
 
 // Import constants and types
