@@ -1,9 +1,71 @@
 [
   {
+    "questionId": "who_never_does_dishes",
+    "text": "Wer macht nie den Abwasch?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_eats_others_food",
+    "text": "Wer isst das Essen anderer?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_is_loudest_at_night",
+    "text": "Wer ist nachts am lautesten?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_never_buys_toilet_paper",
+    "text": "Wer kauft nie Toilettenpapier?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_leaves_dirty_laundry_everywhere",
+    "text": "Wer lässt schmutzige Wäsche überall liegen?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_brings_too_many_guests_over",
+    "text": "Wer bringt zu viele Gäste mit?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_is_cleanest_roommate",
+    "text": "Wer ist der ordentlichste Mitbewohner?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_pays_bills_late",
+    "text": "Wer zahlt Rechnungen zu spät?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_showers_longest",
+    "text": "Wer duscht am längsten?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_leaves_empty_containers_in_fridge",
+    "text": "Wer lässt leere Behälter im Kühlschrank?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_borrows_without_asking",
+    "text": "Wer leiht sich Dinge ohne zu fragen?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_organizes_apartment_parties",
+    "text": "Wer organisiert Wohnungspartys?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "in_shared_apartment_sample_question_1",
     "text": "Sample question 1 for in_shared_apartment in de",
     "category": "in_shared_apartment"
   },
   {
+    "questionId": "in_shared_apartment_sample_question_2",
     "text": "Sample question 2 for in_shared_apartment in de",
     "category": "in_shared_apartment"
   }

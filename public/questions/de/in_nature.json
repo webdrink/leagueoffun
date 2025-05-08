@@ -1,9 +1,71 @@
 [
   {
+    "questionId": "who_complains_most_during_hike",
+    "text": "Wer beschwert sich am meisten während einer Wanderung?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_gets_lost_in_woods",
+    "text": "Wer verirrt sich im Wald?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_forgets_sunscreen",
+    "text": "Wer vergisst Sonnencreme?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_afraid_of_insects",
+    "text": "Wer hat Angst vor Insekten?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_takes_too_many_landscape_photos",
+    "text": "Wer macht zu viele Landschaftsfotos?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_packs_too_much_for_trips",
+    "text": "Wer packt zu viel für Ausflüge ein?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_identifies_plants_correctly",
+    "text": "Wer identifiziert Pflanzen richtig?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_wants_to_camp_longer",
+    "text": "Wer will länger campen?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_adventurous",
+    "text": "Wer ist am abenteuerlustigsten?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_attracts_most_mosquitoes",
+    "text": "Wer zieht die meisten Mücken an?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_always_needs_bathroom_in_wilderness",
+    "text": "Wer muss immer in der Wildnis zur Toilette?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_leaves_no_trace",
+    "text": "Wer hinterlässt keine Spuren?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "in_nature_sample_question_1",
     "text": "Sample question 1 for in_nature in de",
     "category": "in_nature"
   },
   {
+    "questionId": "in_nature_sample_question_2",
     "text": "Sample question 2 for in_nature in de",
     "category": "in_nature"
   }

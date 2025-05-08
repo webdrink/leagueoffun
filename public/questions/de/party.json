@@ -1,5 +1,125 @@
 [
   {
+    "questionId": "who_dances_wildest_when_nobody_watching",
+    "text": "Wer tanzt am wildesten, wenn niemand zuschaut?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_orders_most_embarrassing_drinks",
+    "text": "Wer bestellt die peinlichsten Drinks?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_most_likely_forgets_way_home",
+    "text": "Wer vergisst am ehesten den Heimweg?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_flirtet_mit_dem_tursteher",
+    "text": "Wer flirtet mit dem Türsteher?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_macht_am_meisten_selfies_auf_der_tanzflache",
+    "text": "Wer macht am meisten Selfies auf der Tanzfläche?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_ist_am_schnellsten_betrunken",
+    "text": "Wer ist am schnellsten betrunken?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_bleibt_immer_bis_zum_bitteren_ende",
+    "text": "Wer bleibt immer bis zum bitteren Ende?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_ist_heimlicher_star_der_tanzflache",
+    "text": "Wer ist heimlicher Star der Tanzfläche?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_ruft_ex_betrunken_an",
+    "text": "Wer ruft ex betrunken an?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_braucht_am_nachsten_morgen_den_starksten_kaffe",
+    "text": "Wer braucht am nächsten Morgen den stärksten Kaffee?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_tanzt_auf_dem_tisch_bevor_die_musik_uberhaupt_",
+    "text": "Wer tanzt auf dem Tisch, bevor die Musik überhaupt läuft?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_ruft_mitten_in_der_nacht_afterparty_bei_mir",
+    "text": "Wer ruft mitten in der Nacht 'Afterparty bei mir!' und meint es ernst?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_macht_beim_trinken_plotzlich_philosophische_mo",
+    "text": "Wer macht beim Trinken plötzlich philosophische Monologe?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_nimmt_heimlich_videos_auf_um_sie_am_nachsten_m",
+    "text": "Wer nimmt heimlich Videos auf, um sie am nächsten Morgen zu zeigen?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_bringt_immer_eine_flasche_mit_aber_sie_ist_lee",
+    "text": "Wer bringt immer eine Flasche mit - aber sie ist leer?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_verliert_jedes_mal_mindestens_einen_schuh",
+    "text": "Wer verliert jedes Mal mindestens einen Schuh?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_denkt_jeder_song_sei_ihr_lied",
+    "text": "Wer denkt, jeder Song sei 'ihr Lied'?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_verschwindet_plotzlich_und_taucht_drei_stunden",
+    "text": "Wer verschwindet plötzlich - und taucht drei Stunden später mit Pizza auf?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_tanzt_mit_fremden_als_waren_es_alte_freunde",
+    "text": "Wer tanzt mit Fremden als wären es alte Freunde?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_erklart_um_3_uhr_morgens_seine_lebensvision",
+    "text": "Wer erklärt um 3 Uhr morgens seine Lebensvision?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_hat_immer_konfetti_dabei",
+    "text": "Wer hat immer Konfetti dabei?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_bestellt_shots_fur_alle_und_verschwindet_dann",
+    "text": "Wer bestellt Shots für alle und verschwindet dann?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_kusst_menschen_deren_namen_er_nie_erfahrt",
+    "text": "Wer küsst Menschen, deren Namen er nie erfährt?",
+    "category": "party"
+  },
+  {
+    "questionId": "wer_findet_sich_auf_fremden_instagramstories_wiede",
+    "text": "Wer findet sich auf fremden Instagram-Stories wieder?",
+    "category": "party"
+  },
+  {
     "questionId": "who_would_leave_window_open_in_winter",
     "text": "Wer würde am ehesten das Fenster auch im Winter offen lassen?",
     "category": "party"

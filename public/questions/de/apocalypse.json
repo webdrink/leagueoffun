@@ -1,118 +1,247 @@
 [
   {
-    "text": "Wer Würde eine Zombieapokalypse überleben?",
+    "questionId": "wer_wurde_eine_zombieapokalypse_uberleben",
+    "text": "Wer würde eine Zombieapokalypse überleben?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_welt_nach_der_apokalypse_regieren",
     "text": "Wer würde die Welt nach der Apokalypse regieren?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_apokalypse_auslosen",
     "text": "Wer würde die Apokalypse auslösen?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_apokalypse_am_besten_uberstehen",
     "text": "Wer würde die Apokalypse am besten überstehen?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_meisten_vorrate_sammeln",
     "text": "Wer würde die meisten Vorräte sammeln?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_besten_uberlebensfahigkeiten_haben",
     "text": "Wer würde die besten Überlebensfähigkeiten haben?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_meisten_anderen_uberleben",
     "text": "Wer würde die meisten anderen überleben?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_besten_waffen_finden",
     "text": "Wer würde die besten Waffen finden?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_meisten_anderen_retten",
     "text": "Wer würde die meisten anderen retten?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_besten_uberlebensstrategien_entwickeln",
     "text": "Wer würde die besten Überlebensstrategien entwickeln?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_meisten_anderen_uberlisten",
     "text": "Wer würde die meisten anderen überlisten?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_besten_uberlebensgeschichten_erzahlen",
     "text": "Wer würde die besten Überlebensgeschichten erzählen?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_meisten_anderen_anstecken",
     "text": "Wer würde die meisten anderen anstecken?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_besten_uberlebensfahigkeiten_lehren",
     "text": "Wer würde die besten Überlebensfähigkeiten lehren?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_meisten_anderen_beschutzen",
     "text": "Wer würde die meisten anderen beschützen?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_besten_uberlebensstrategien_umsetzen",
     "text": "Wer würde die besten Überlebensstrategien umsetzen?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_meisten_anderen_inspirieren",
     "text": "Wer würde die meisten anderen inspirieren?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_besten_uberlebensgeschichten_schreiben",
     "text": "Wer würde die besten Überlebensgeschichten schreiben?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_meisten_anderen_motivieren",
     "text": "Wer würde die meisten anderen motivieren?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_besten_uberlebensfahigkeiten_anwenden",
     "text": "Wer würde die besten Überlebensfähigkeiten anwenden?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_wurde_die_meisten_anderen_unterstutzen",
     "text": "Wer würde die meisten anderen unterstützen?",
     "category": "apocalypse"
   },
   {
-    "text": "Wer würde die besten Überlebensstrategien entwickeln?",
-    "category": "apocalypse"
-  },
-  {
+    "questionId": "wer_wurde_die_meisten_anderen_anleiten",
     "text": "Wer würde die meisten anderen anleiten?",
     "category": "apocalypse"
   },
   {
-    "text": "Wer würde die besten Überlebensgeschichten erzählen?",
-    "category": "apocalypse"
-  },
-  {
+    "questionId": "wer_wurde_die_meisten_anderen_anregen",
     "text": "Wer würde die meisten anderen anregen?",
     "category": "apocalypse"
   },
   {
-    "text": "Wer würde die besten Überlebensfähigkeiten anwenden?",
+    "questionId": "wer_hortet_zuerst_klopapier",
+    "text": "Wer hortet zuerst Klopapier?",
     "category": "apocalypse"
   },
   {
+    "questionId": "wer_grundet_sofort_eine_sekte",
+    "text": "Wer gründet sofort eine Sekte?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "wer_baut_einen_bunker_und_dekoriert_ihn",
+    "text": "Wer baut einen Bunker – und dekoriert ihn?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "wer_tut_so_als_hatte_er_das_alles_kommen_sehen",
+    "text": "Wer tut so, als hätte er das alles kommen sehen?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "wer_wird_tiktokinfluencer_der_apokalypse",
+    "text": "Wer wird TikTok-Influencer der Apokalypse?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "wer_isst_alle_vorrate_am_ersten_tag",
+    "text": "Wer isst alle Vorräte am ersten Tag?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "wer_regt_sich_uber_schlechtes_wlan_auf_obwohl_alles",
+    "text": "Wer regt sich über schlechtes WLAN auf – obwohl alles brennt?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_survives_longest_in_apocalypse",
+    "text": "Wer überlebt am längsten bei einer Apokalypse?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_becomes_group_leader",
+    "text": "Wer wird der Anführer der Gruppe?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_has_most_useful_skills",
+    "text": "Wer hat die nützlichsten Fähigkeiten?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_panics_first",
+    "text": "Wer gerät zuerst in Panik?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_finds_best_shelter",
+    "text": "Wer findet den besten Unterschlupf?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_forgets_essential_supplies",
+    "text": "Wer vergisst wichtige Vorräte?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_sacrifices_themselves_for_group",
+    "text": "Wer opfert sich für die Gruppe?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_keeps_everyone_spirits_up",
+    "text": "Wer hält die Stimmung aller aufrecht?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_goes_exploring_alone",
+    "text": "Wer geht alleine auf Erkundung?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_hoards_resources",
+    "text": "Wer hortet Ressourcen?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_becomes_most_dangerous",
+    "text": "Wer wird am gefährlichsten?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_makes_worst_decisions",
+    "text": "Wer trifft die schlechtesten Entscheidungen?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_adapts_best_to_new_reality",
+    "text": "Wer passt sich am besten an die neue Realität an?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_would_support_others_most",
     "text": "Wer würde die meisten anderen unterstützen?",
     "category": "apocalypse"
   },
   {
-    "text": "Wer würde die besten Überlebensstrategien entwickeln?",
+    "questionId": "who_would_guide_others",
+    "text": "Wer würde die meisten anderen anleiten?",
     "category": "apocalypse"
   },
   {
-    "text": "Wer würde die meisten anderen anleiten?",
+    "questionId": "who_would_inspire_others",
+    "text": "Wer würde die meisten anderen anregen?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_hoards_toilet_paper_first",
+    "text": "Wer hortet zuerst Klopapier?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "apocalypse_sample_question_1",
+    "text": "Sample question 1 for apocalypse in de",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "apocalypse_sample_question_2",
+    "text": "Sample question 2 for apocalypse in de",
     "category": "apocalypse"
   }
 ]

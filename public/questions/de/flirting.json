@@ -1,9 +1,36 @@
 [
   {
+    "questionId": "who_flirts_with_everyone",
+    "text": "Wer flirtet mit jedem?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_uses_worst_pickup_lines",
+    "text": "Wer benutzt die schlechtesten Anmachsprüche?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_is_most_oblivious_to_flirting",
+    "text": "Wer bemerkt Flirtversuche am wenigsten?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_gets_most_nervous_when_flirting",
+    "text": "Wer wird beim Flirten am nervösesten?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "who_misinterprets_friendly_as_flirting",
+    "text": "Wer interpretiert Freundlichkeit als Flirten?",
+    "category": "flirting"
+  },
+  {
+    "questionId": "flirting_sample_question_1",
     "text": "Sample question 1 for flirting in de",
     "category": "flirting"
   },
   {
+    "questionId": "flirting_sample_question_2",
     "text": "Sample question 2 for flirting in de",
     "category": "flirting"
   }

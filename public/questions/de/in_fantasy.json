@@ -1,9 +1,36 @@
 [
   {
+    "questionId": "who_would_live_in_fantasy_world",
+    "text": "Wer würde in einer Fantasiewelt leben?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_tame_dragons",
+    "text": "Wer würde Drachen zähmen?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_be_great_wizard",
+    "text": "Wer wäre ein großartiger Zauberer?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_quest_for_treasure",
+    "text": "Wer würde nach Schätzen suchen?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_fight_monsters",
+    "text": "Wer würde Monster bekämpfen?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "in_fantasy_sample_question_1",
     "text": "Sample question 1 for in_fantasy in de",
     "category": "in_fantasy"
   },
   {
+    "questionId": "in_fantasy_sample_question_2",
     "text": "Sample question 2 for in_fantasy in de",
     "category": "in_fantasy"
   }

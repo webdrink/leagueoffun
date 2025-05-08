@@ -1,9 +1,71 @@
 [
   {
+    "questionId": "who_always_takes_photos_of_food",
+    "text": "Wer macht immer Fotos vom Essen?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_steals_food_from_others_plates",
+    "text": "Wer stiehlt Essen von den Tellern anderer?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_takes_longest_to_order",
+    "text": "Wer braucht am längsten zum Bestellen?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_complains_about_food",
+    "text": "Wer beschwert sich über das Essen?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_never_pays_fair_share",
+    "text": "Wer zahlt nie den gerechten Anteil?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_finishes_meal_first",
+    "text": "Wer beendet die Mahlzeit zuerst?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_eats_messiest",
+    "text": "Wer isst am unordentlichsten?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_has_strangest_food_combinations",
+    "text": "Wer hat die seltsamsten Essenskombinationen?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_is_picky_eater",
+    "text": "Wer ist ein wählerischer Esser?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_talks_with_mouth_full",
+    "text": "Wer spricht mit vollem Mund?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_saves_leftovers",
+    "text": "Wer bewahrt Reste auf?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_always_wants_dessert",
+    "text": "Wer will immer Nachtisch?",
+    "category": "eating"
+  },
+  {
+    "questionId": "eating_sample_question_1",
     "text": "Sample question 1 for eating in de",
     "category": "eating"
   },
   {
+    "questionId": "eating_sample_question_2",
     "text": "Sample question 2 for eating in de",
     "category": "eating"
   }

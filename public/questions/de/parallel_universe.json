@@ -1,9 +1,36 @@
 [
   {
+    "questionId": "who_would_be_different_person",
+    "text": "Wer wäre eine völlig andere Person?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_have_same_personality",
+    "text": "Wer hätte genau die gleiche Persönlichkeit?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_have_opposite_career",
+    "text": "Wer hätte einen völlig anderen Beruf?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_be_famous",
+    "text": "Wer wäre berühmt?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_live_completely_different_life",
+    "text": "Wer würde ein komplett anderes Leben führen?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "parallel_universe_sample_question_1",
     "text": "Sample question 1 for parallel_universe in de",
     "category": "parallel_universe"
   },
   {
+    "questionId": "parallel_universe_sample_question_2",
     "text": "Sample question 2 for parallel_universe in de",
     "category": "parallel_universe"
   }
