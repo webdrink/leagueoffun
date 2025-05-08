@@ -1,6 +1,7 @@
 // Game constants and configuration values
 
 import { GameSettings } from './types';
+import { DEFAULT_LANGUAGE } from './hooks/utils/languageSupport';
 
 // Category emoji mappings
 export const CATEGORY_EMOJIS: { [key: string]: string } = {
@@ -115,7 +116,7 @@ export const initialGameSettings: GameSettings = {
   loadingQuoteSpringStiffness: 120,
   loadingQuoteSpringDamping: 10,
   loadingQuoteTransitionDurationSec: 0.5,
-  language: 'de', // Default language (German)
+  language: DEFAULT_LANGUAGE, // Default language
 
   numberOfRounds: 3,
   timePerQuestion: 30,

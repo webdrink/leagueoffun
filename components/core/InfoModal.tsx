@@ -1,6 +1,7 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from './Button'; // Assuming Button is in the same core directory
+import useTranslation from '../../hooks/useTranslation';
 
 interface InfoModalProps {
   isOpen: boolean;
@@ -11,6 +12,8 @@ interface InfoModalProps {
 }
 
 const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose, onResetAppData, title = "Information", children }) => {
+  const { t } = useTranslation();
+  
   if (!isOpen) return null;
 
   return (
@@ -29,22 +32,21 @@ const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose, onResetAppData, 
             exit={{ scale: 0.9, opacity: 0 }}
             className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md relative"
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
-          >
-            <h2 className="text-xl font-semibold mb-4">{title}</h2>
+          >            <h2 className="text-xl font-semibold mb-4">{title || t('modal.info_title')}</h2>
             <div className="mb-6 space-y-3 text-sm text-gray-700">
               {children ? children : (
                 <>
-                  <p>Hier könnten Spielanleitungen, Informationen zum Datenschutz oder andere Hinweise stehen.</p>
-                  <p>Aktuell dient dieser Modal hauptsächlich zum Zurücksetzen der App-Daten.</p>
+                  <p>{t('modal.info_description')}</p>
+                  <p>{t('modal.reset_data_description')}</p>
                 </>
               )}
             </div>
             <div className="flex justify-end space-x-3">
               <Button onClick={onClose} variant="outline" className="bg-gray-200 hover:bg-gray-300 text-gray-800">
-                Schließen
+                {t('modal.close')}
               </Button>
               <Button onClick={() => { onResetAppData(); onClose(); }} className="bg-red-500 hover:bg-red-600 text-white">
-                App-Daten zurücksetzen
+                {t('modal.reset_app_data')}
               </Button>
             </div>
           </motion.div>

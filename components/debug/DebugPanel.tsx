@@ -3,6 +3,7 @@ import { Button } from "../core/Button"; // Adjusted path
 import DebugInput from "./DebugInput"; // Adjusted path (same directory)
 import type { GameSettings, QuestionStats } from "../../types"; // Path remains correct
 import { XIcon, RotateCcwIcon, Trash2Icon } from 'lucide-react';
+import useTranslation from '../../hooks/useTranslation';
 
 interface DebugPanelProps {
   gameSettings: GameSettings;
@@ -95,6 +96,7 @@ const DebugPanel: React.FC<DebugPanelProps> = ({
   onResetAppData,
   questionStats
 }) => {
+  const { t } = useTranslation();
 
   const handleSectionReset = (sectionKey: string) => {
     const sectionSettings = settingsConfig[sectionKey].settings;
@@ -114,10 +116,9 @@ const DebugPanel: React.FC<DebugPanelProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[100] p-2 sm:p-4">
-      <div className="bg-gray-800 text-white p-4 sm:p-6 rounded-lg shadow-2xl w-full max-w-lg md:max-w-xl max-h-[90vh] flex flex-col">
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[100] p-2 sm:p-4">      <div className="bg-gray-800 text-white p-4 sm:p-6 rounded-lg shadow-2xl w-full max-w-lg md:max-w-xl max-h-[90vh] flex flex-col">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl sm:text-2xl font-semibold">Debug Panel</h2>
+          <h2 className="text-xl sm:text-2xl font-semibold">{t('debug.panel_title')}</h2>
           <Button onClick={onClose} className="text-gray-400 hover:text-white bg-transparent hover:bg-gray-700 p-2">
             <XIcon size={20} />
           </Button>
@@ -125,25 +126,24 @@ const DebugPanel: React.FC<DebugPanelProps> = ({
 
         {questionStats && (
           <div className="mb-4 p-3 bg-gray-700 rounded-md">
-            <h3 className="text-lg font-medium mb-2">Question Stats</h3>
+            <h3 className="text-lg font-medium mb-2">{t('debug.question_stats')}</h3>
             <div className="grid grid-cols-3 gap-2 mb-2 text-xs sm:text-sm">
               {/* Stats items */}
               <div className="bg-gray-800 p-2 rounded-md text-center">
-                <div className="text-gray-400">Total</div>
+                <div className="text-gray-400">{t('debug.total')}</div>
                 <div className="text-lg font-bold">{questionStats.totalQuestions}</div>
               </div>
               <div className="bg-gray-800 p-2 rounded-md text-center">
-                <div className="text-gray-400">Played</div>
+                <div className="text-gray-400">{t('debug.played')}</div>
                 <div className="text-lg font-bold">{questionStats.playedQuestions}</div>
               </div>
               <div className="bg-gray-800 p-2 rounded-md text-center">
-                <div className="text-gray-400">Available</div>
+                <div className="text-gray-400">{t('debug.available')}</div>
                 <div className="text-lg font-bold">{questionStats.availableQuestions}</div>
               </div>
-            </div>
-            {questionStats.categories && Object.keys(questionStats.categories).length > 0 && (
+            </div>            {questionStats.categories && Object.keys(questionStats.categories).length > 0 && (
               <div>
-                <h4 className="text-xs sm:text-sm font-medium text-gray-300 mb-1">Categories:</h4>
+                <h4 className="text-xs sm:text-sm font-medium text-gray-300 mb-1">{t('debug.categories')}:</h4>
                 <div className="max-h-28 overflow-y-auto text-xs pr-1">
                   {Object.entries(questionStats.categories).map(([category, count]) => (
                     <div key={category} className="flex justify-between py-0.5 border-b border-gray-600 last:border-b-0">
@@ -161,12 +161,11 @@ const DebugPanel: React.FC<DebugPanelProps> = ({
           {Object.keys(settingsConfig).map((sectionKey) => (
             <div key={sectionKey} className="bg-gray-750 p-3 rounded-md">
               <div className="flex justify-between items-center mb-2">
-                <h3 className="text-base sm:text-lg font-medium">{settingsConfig[sectionKey].title}</h3>
-                <Button
+                <h3 className="text-base sm:text-lg font-medium">{settingsConfig[sectionKey].title}</h3>                <Button
                   onClick={() => handleSectionReset(sectionKey)}
                   className="text-xs bg-gray-600 hover:bg-gray-500 border-gray-500 text-white px-2 py-1"
                 >
-                  <RotateCcwIcon size={12} className="mr-1" /> Reset
+                  <RotateCcwIcon size={12} className="mr-1" /> {t('debug.reset')}
                 </Button>
               </div>
               {settingsConfig[sectionKey].settings.map((setting) => (
@@ -184,18 +183,17 @@ const DebugPanel: React.FC<DebugPanelProps> = ({
           ))}
         </div>
         
-        <div className="mt-4 pt-4 border-t border-gray-700 flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 sm:space-x-3">
-          <Button 
+        <div className="mt-4 pt-4 border-t border-gray-700 flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 sm:space-x-3">          <Button 
             onClick={handleResetAllSettings} 
             className="w-full sm:w-auto text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-2"
           >
-            <RotateCcwIcon size={14} className="mr-1.5" /> Reset All Settings
+            <RotateCcwIcon size={14} className="mr-1.5" /> {t('debug.reset_all_settings')}
           </Button>
           <Button 
-            onClick={() => { if(window.confirm('Are you sure you want to reset ALL app data? This includes settings and played questions.')) { onResetAppData(); onClose(); } }}
+            onClick={() => { if(window.confirm(t('debug.confirm_reset_data'))) { onResetAppData(); onClose(); } }}
             className="w-full sm:w-auto text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-2"
           >
-            <Trash2Icon size={14} className="mr-1.5" /> Reset App Data
+            <Trash2Icon size={14} className="mr-1.5" /> {t('debug.reset_app_data')}
           </Button>
         </div>
       </div>

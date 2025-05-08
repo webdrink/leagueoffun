@@ -1,0 +1,152 @@
+[
+  {
+    "questionId": "wer_vergisst_standig_den_schlussel",
+    "text": "Wer vergisst ständig den Schlüssel?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_isst_heimlich_im_bett",
+    "text": "Wer isst heimlich im Bett?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_lebt_im_chaos_aber_findet_alles",
+    "text": "Wer lebt im Chaos, aber findet alles?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_braucht_ewig_im_bad",
+    "text": "Wer braucht ewig im Bad?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_kauft_alles_doppelt_nur_um_nichts_zu_vergessen",
+    "text": "Wer kauft alles doppelt, nur um nichts zu vergessen?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_redet_mit_sich_selbst_beim_einkaufen",
+    "text": "Wer redet mit sich selbst beim Einkaufen?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_bestellt_am_haufigsten_essen",
+    "text": "Wer bestellt am häufigsten Essen?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_putzt_aus_frust",
+    "text": "Wer putzt aus Frust?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_denkt_zu_viel_uber_kleinigkeiten_nach",
+    "text": "Wer denkt zu viel über Kleinigkeiten nach?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_steht_am_langsten_unter_der_dusche",
+    "text": "Wer steht am längsten unter der Dusche?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_hat_einen_kalender_aber_benutzt_ihn_nie",
+    "text": "Wer hat einen Kalender, aber benutzt ihn nie?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_vergisst_was_er_gerade_gesucht_hat",
+    "text": "Wer vergisst, was er gerade gesucht hat?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_macht_todolisten_und_verliert_sie_sofort",
+    "text": "Wer macht To-Do-Listen und verliert sie sofort?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_bestellt_online_und_wundert_sich_uber_pakete",
+    "text": "Wer bestellt online und wundert sich über Pakete?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_redet_mit_dem_staubsauger",
+    "text": "Wer redet mit dem Staubsauger?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_hat_immer_einen_plan_b_aber_keinen_plan_a",
+    "text": "Wer hat immer einen Plan B, aber keinen Plan A?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_findet_ausreden_fur_alles_sogar_furs_aufstehen",
+    "text": "Wer findet Ausreden für alles – sogar fürs Aufstehen?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_hat_mehr_apps_als_kontakte",
+    "text": "Wer hat mehr Apps als Kontakte?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_vergisst_dass_er_schon_gegessen_hat",
+    "text": "Wer vergisst, dass er schon gegessen hat?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_macht_aus_dem_wocheneinkauf_ein_abenteuer",
+    "text": "Wer macht aus dem Wocheneinkauf ein Abenteuer?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_bringt_immer_die_falschen_einkaufe_mit",
+    "text": "Wer bringt immer die falschen Einkäufe mit?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_vergisst_dass_sonntag_ist_und_alles_zu_hat",
+    "text": "Wer vergisst, dass Sonntag ist und alles zu hat?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_macht_aus_dem_mullrausbringen_ein_event",
+    "text": "Wer macht aus dem Müllrausbringen ein Event?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_fragt_nach_dem_wetter_wenn_er_schon_draussen_i",
+    "text": "Wer fragt nach dem Wetter, wenn er schon draußen ist?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_bringt_immer_zu_viel_kleingeld_mit",
+    "text": "Wer bringt immer zu viel Kleingeld mit?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_vergisst_dass_er_schon_kaffee_gemacht_hat",
+    "text": "Wer vergisst, dass er schon Kaffee gemacht hat?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_macht_aus_dem_waschewaschen_ein_abenteuer",
+    "text": "Wer macht aus dem Wäschewaschen ein Abenteuer?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_bringt_immer_die_post_fur_die_nachbarn_mit",
+    "text": "Wer bringt immer die Post für die Nachbarn mit?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_fragt_nach_dem_wlanpasswort_im_eigenen_haus",
+    "text": "Wer fragt nach dem WLAN-Passwort im eigenen Haus?",
+    "category": "Im Alltag"
+  },
+  {
+    "questionId": "wer_vergisst_dass_er_schon_gegessen_hat_und_isst_n",
+    "text": "Wer vergisst, dass er schon gegessen hat – und isst nochmal?",
+    "category": "Im Alltag"
+  }
+]

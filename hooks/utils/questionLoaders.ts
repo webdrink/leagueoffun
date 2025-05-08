@@ -1,182 +1,178 @@
 /**
- * Utility functions for loading and managing questions
+ * Question loader utilities with language support
  */
-import { Question } from '../../types';
-import { FALLBACK_QUESTIONS } from '../../lib/constants';
-import { SupportedLanguage, DEFAULT_LANGUAGE } from './languageSupport';
-
-export interface CategoryInfo {
-  name: string;
-  count: number;
-  fileName: string;
-  emoji?: string;
-  id?: string;
-}
+import { Question, SupportedLanguage } from '../../types';
+import { DEFAULT_LANGUAGE } from './languageSupport';
 
 /**
- * Load all questions from JSON
- * @returns Promise resolving to an array of Question objects
+ * Loads all categories from the index file for a specific language
  */
-export const loadAllQuestionsFromJson = async (): Promise<Question[]> => {
+export const loadAllCategories = async (language: SupportedLanguage = DEFAULT_LANGUAGE): Promise<string[]> => {
   try {
-    const res = await fetch('questions.json');
+    // Try to load the language-specific index file
+    const langFile = language !== DEFAULT_LANGUAGE 
+      ? `index.${language}.json` 
+      : 'index.json';
     
-    if (!res.ok) {
-      throw new Error('JSON questions not found');
+    const response = await fetch(`/categories/${langFile}`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to load categories for ${language}`);
     }
     
-    const data = await res.json();
+    const categoryData = await response.json();
     
-    if (data && data.length > 0) {
-      console.log(`Loaded ${data.length} questions from JSON`);
-      return data;
-    } else {
-      throw new Error('JSON file empty or invalid');
-    }
+    // Extract names from the category data
+    return categoryData.map((cat: any) => cat.name);
   } catch (error) {
-    console.warn('Failed to load JSON questions:', error);
-    throw error;
+    console.error(`Error loading categories for ${language}:`, error);
+    
+    // Fallback to default language if not already trying
+    if (language !== DEFAULT_LANGUAGE) {
+      console.log(`Falling back to ${DEFAULT_LANGUAGE} categories`);
+      return loadAllCategories(DEFAULT_LANGUAGE);
+    }
+    
+    // If still failing, return empty array
+    console.error('Could not load any categories');
+    return [];
   }
 };
 
 /**
- * Load category information
- * @param language The language code to load categories for
- * @returns Promise resolving to an array of CategoryInfo objects
- */
-export const loadCategoryIndex = async (
-  language: SupportedLanguage = DEFAULT_LANGUAGE
-): Promise<CategoryInfo[]> => {
-  try {
-    // Try to load the language-specific index
-    let indexFile = language === DEFAULT_LANGUAGE 
-      ? 'categories/index.json' 
-      : `categories/index.${language}.json`;
-    
-    let res = await fetch(indexFile);
-    
-    // Fallback to default language if requested language is not available
-    if (!res.ok && language !== DEFAULT_LANGUAGE) {
-      console.warn(`Categories for ${language} not found, using default language`);
-      indexFile = 'categories/index.json';
-      res = await fetch(indexFile);
-    }
-    
-    if (!res.ok) {
-      throw new Error(`Category index not found: ${indexFile}`);
-    }
-    
-    const data = await res.json();
-    
-    if (data && data.length > 0) {
-      console.log(`Loaded ${data.length} categories from ${indexFile}`);
-      return data;
-    } else {
-      throw new Error(`Category index empty or invalid: ${indexFile}`);
-    }
-  } catch (error) {
-    console.warn('Failed to load category index:', error);
-    throw error;
-  }
-};
-
-/**
- * Load questions for specific categories
- * @param categories Array of category names to load
- * @param language The language code to load questions for
- * @returns Promise resolving to an array of Question objects
+ * Loads questions for specific categories with language support
  */
 export const loadQuestionsByCategories = async (
   categories: string[],
   language: SupportedLanguage = DEFAULT_LANGUAGE
 ): Promise<Question[]> => {
   try {
-    const categoryIndex = await loadCategoryIndex(language);
+    // Load the category index to get file names
+    const langFile = language !== DEFAULT_LANGUAGE 
+      ? `index.${language}.json` 
+      : 'index.json';
     
-    // Find the file names for requested categories
-    const filesToLoad = categories.map(categoryName => {
-      const match = categoryIndex.find(c => c.name === categoryName);
-      return match ? match.fileName : null;
-    }).filter(Boolean) as string[];
+    const response = await fetch(`/categories/${langFile}`);
     
-    if (filesToLoad.length === 0) {
-      throw new Error('No matching categories found');
+    if (!response.ok) {
+      throw new Error(`Failed to load category index for ${language}`);
     }
     
-    // For now, use the current directory structure
-    // In the future, this could use language-specific paths: `questions/${language}/${fileName}`
-    const promises = filesToLoad.map(fileName => 
-      fetch(`categories/${fileName}`)
-        .then(res => {
-          if (!res.ok) throw new Error(`Failed to load ${fileName}`);
-          return res.json();
-        })
+    const categoryData = await response.json();
+    
+    // Find the category objects that match our requested categories
+    const categoryObjects = categoryData.filter((cat: any) => 
+      categories.includes(cat.name)
     );
     
-    const results = await Promise.all(promises);
-    
-    // Flatten the array of arrays
-    const allQuestions = results.flat();
-    console.log(`Loaded ${allQuestions.length} questions from ${filesToLoad.length} categories in ${language}`);
-    
-    return allQuestions;
-  } catch (error) {
-    console.warn(`Failed to load questions for ${language}:`, error);
-    return FALLBACK_QUESTIONS;
-  }
-};
-
-/**
- * Load all available categories
- * @param language The language code to load categories for
- * @returns Array of category names
- */
-export const loadAllCategories = async (
-  language: SupportedLanguage = DEFAULT_LANGUAGE
-): Promise<string[]> => {
-  try {
-    const categoryIndex = await loadCategoryIndex(language);
-    return categoryIndex.map(category => category.name);
-  } catch (error) {
-    console.warn('Failed to load categories:', error);
-    // Return a fallback list of categories
-    return ['Beim Feiern', 'In Beziehungen', 'Bei der Arbeit'];
-  }
-};
-
-/**
- * Load questions from CSV as a fallback
- * @returns Promise resolving to an array of Question objects
- */
-export const loadQuestionsFromCsv = async (): Promise<Question[]> => {
-  try {
-    const res = await fetch('blamegame_questions.csv');
-    
-    if (!res.ok) {
-      throw new Error(`CSV HTTP error! status: ${res.status}`);
+    if (categoryObjects.length === 0) {
+      console.warn(`No matching categories found for ${categories.join(', ')}`);
+      return [];
     }
     
-    const text = await res.text();
-    const lines = text.split('\n').filter(line => line.trim() !== '' && !line.startsWith('//'));
-    
-    const questions = lines.map(line => {
-      const [category, text] = line.split(',').map(part => part.trim());
-      return { category, text };
+    // Load questions for each category in parallel
+    const questionPromises = categoryObjects.map(async (cat: any) => {
+      if (!cat.fileName) {
+        console.warn(`No fileName for category ${cat.name}`);
+        return [];
+      }
+      
+      try {
+        const questionResponse = await fetch(`/questions/${language}/${cat.fileName}`);
+        
+        if (!questionResponse.ok) {
+          throw new Error(`Failed to load questions for ${cat.name}`);
+        }
+        
+        const questions = await questionResponse.json();
+        
+        // Add category information to each question
+        return questions.map((q: any) => ({
+          ...q,
+          category: cat.name,
+          categoryId: cat.id,
+          emoji: cat.emoji
+        }));
+      } catch (error) {
+        console.error(`Error loading questions for ${cat.name}:`, error);
+        
+        // Try fallback to default language if not already
+        if (language !== DEFAULT_LANGUAGE) {
+          console.log(`Falling back to ${DEFAULT_LANGUAGE} questions for ${cat.name}`);
+          
+          try {
+            const fallbackResponse = await fetch(`/questions/${DEFAULT_LANGUAGE}/${cat.fileName}`);
+            
+            if (fallbackResponse.ok) {
+              const fallbackQuestions = await fallbackResponse.json();
+              
+              return fallbackQuestions.map((q: any) => ({
+                ...q,
+                category: cat.name,
+                categoryId: cat.id,
+                emoji: cat.emoji
+              }));
+            }
+          } catch (fallbackError) {
+            console.error(`Error with fallback questions for ${cat.name}:`, fallbackError);
+          }
+        }
+        
+        return [];
+      }
     });
     
-    console.log(`Loaded ${questions.length} questions from CSV`);
-    return questions;
+    const allCategoryQuestions = await Promise.all(questionPromises);
+    
+    // Flatten the array of arrays
+    return allCategoryQuestions.flat();
   } catch (error) {
-    console.warn('Failed to load CSV questions:', error);
-    throw error;
+    console.error(`Error loading questions by categories for ${language}:`, error);
+    
+    // Fallback to default language
+    if (language !== DEFAULT_LANGUAGE) {
+      console.log(`Falling back to ${DEFAULT_LANGUAGE} for all questions`);
+      return loadQuestionsByCategories(categories, DEFAULT_LANGUAGE);
+    }
+    
+    return [];
   }
 };
 
 /**
- * Get fallback questions if all other loading methods fail
- * @returns Array of fallback Question objects
+ * Loads all questions from the old JSON format (fallback)
+ */
+export const loadAllQuestionsFromJson = async (): Promise<Question[]> => {
+  try {
+    const response = await fetch('/questions.json');
+    
+    if (!response.ok) {
+      throw new Error('Failed to load questions.json');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error loading questions from JSON:', error);
+    throw error; // Let the caller handle the fallback
+  }
+};
+
+/**
+ * Legacy function to load questions from CSV
+ */
+export const loadQuestionsFromCsv = async (): Promise<Question[]> => {
+  throw new Error('CSV loading not implemented');
+};
+
+/**
+ * Provides fallback questions in case all loading methods fail
  */
 export const getFallbackQuestions = (): Question[] => {
-  console.warn('Using fallback questions');
-  return FALLBACK_QUESTIONS;
+  return [
+    { text: "Wer ist am hilfsbereitesten?", category: "Allgemein" },
+    { text: "Wer ist am kreativsten?", category: "Allgemein" },
+    { text: "Wer ist am abenteuerlustigsten?", category: "Allgemein" },
+    { text: "Wer ist am geduldigsten?", category: "Allgemein" },
+    { text: "Wer ist am optimistischsten?", category: "Allgemein" }
+  ];
 };

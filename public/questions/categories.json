@@ -1,0 +1,210 @@
+[
+  {
+    "id": "party",
+    "de": "Beim Feiern",
+    "en": "At Parties",
+    "es": "De Fiesta",
+    "fr": "En Fête",
+    "emoji": "🎉"
+  },
+  {
+    "id": "relationships",
+    "de": "Beziehungen",
+    "en": "In Relationships",
+    "es": "En Relaciones",
+    "fr": "Dans les Relations",
+    "emoji": "❤️"
+  },
+  {
+    "id": "daily_life",
+    "de": "Alltag",
+    "en": "[en] daily life",
+    "es": "[es] daily life",
+    "fr": "[fr] daily life",
+    "emoji": "🏠"
+  },
+  {
+    "id": "at_work",
+    "de": "Auf der Arbeit",
+    "en": "At Work",
+    "es": "En el Trabajo",
+    "fr": "Au Travail",
+    "emoji": "💼"
+  },
+  {
+    "id": "at_school",
+    "de": "In der Schule",
+    "en": "At School",
+    "es": "En la Escuela",
+    "fr": "À l'École",
+    "emoji": "🎒"
+  },
+  {
+    "id": "in_family",
+    "de": "In der Familie",
+    "en": "[en] in family",
+    "es": "[es] in family",
+    "fr": "[fr] in family",
+    "emoji": "👨‍👩‍👧‍👦"
+  },
+  {
+    "id": "in_nature",
+    "de": "In der Natur",
+    "en": "[en] in nature",
+    "es": "[es] in nature",
+    "fr": "[fr] in nature",
+    "emoji": "🌳"
+  },
+  {
+    "id": "on_vacation",
+    "de": "Im Urlaub",
+    "en": "[en] on vacation",
+    "es": "[es] on vacation",
+    "fr": "[fr] on vacation",
+    "emoji": "✈️"
+  },
+  {
+    "id": "sports",
+    "de": "Sport",
+    "en": "[en] sports",
+    "es": "[es] sports",
+    "fr": "[fr] sports",
+    "emoji": "⚽"
+  },
+  {
+    "id": "eating",
+    "de": "Beim Essen",
+    "en": "[en] eating",
+    "es": "[es] eating",
+    "fr": "[fr] eating",
+    "emoji": "🍽️"
+  },
+  {
+    "id": "in_traffic",
+    "de": "Im Verkehr",
+    "en": "[en] in traffic",
+    "es": "[es] in traffic",
+    "fr": "[fr] in traffic",
+    "emoji": "🚦"
+  },
+  {
+    "id": "in_shared_apartment",
+    "de": "In der WG",
+    "en": "[en] in shared apartment",
+    "es": "[es] in shared apartment",
+    "fr": "[fr] in shared apartment",
+    "emoji": "🏠"
+  },
+  {
+    "id": "internet",
+    "de": "Im Internet",
+    "en": "[en] internet",
+    "es": "[es] internet",
+    "fr": "[fr] internet",
+    "emoji": "💻"
+  },
+  {
+    "id": "movies_series",
+    "de": "Filme & Serien",
+    "en": "[en] movies series",
+    "es": "[es] movies series",
+    "fr": "[fr] movies series",
+    "emoji": "🎬"
+  },
+  {
+    "id": "embarrassing_moments",
+    "de": "Peinliche Momente",
+    "en": "[en] embarrassing moments",
+    "es": "[es] embarrassing moments",
+    "fr": "[fr] embarrassing moments",
+    "emoji": "😳"
+  },
+  {
+    "id": "flirting",
+    "de": "Beim Flirten",
+    "en": "[en] flirting",
+    "es": "[es] flirting",
+    "fr": "[fr] flirting",
+    "emoji": "😘"
+  },
+  {
+    "id": "in_bathroom",
+    "de": "Im Badezimmer",
+    "en": "[en] in bathroom",
+    "es": "[es] in bathroom",
+    "fr": "[fr] in bathroom",
+    "emoji": "🚿"
+  },
+  {
+    "id": "in_future",
+    "de": "In der Zukunft",
+    "en": "[en] in future",
+    "es": "[es] in future",
+    "fr": "[fr] in future",
+    "emoji": "🔮"
+  },
+  {
+    "id": "in_past",
+    "de": "In der Vergangenheit",
+    "en": "[en] in past",
+    "es": "[es] in past",
+    "fr": "[fr] in past",
+    "emoji": "⏮️"
+  },
+  {
+    "id": "friendships",
+    "de": "Freundschaften",
+    "en": "[en] friendships",
+    "es": "[es] friendships",
+    "fr": "[fr] friendships",
+    "emoji": "🤝"
+  },
+  {
+    "id": "in_fantasy",
+    "de": "In der Fantasie",
+    "en": "[en] in fantasy",
+    "es": "[es] in fantasy",
+    "fr": "[fr] in fantasy",
+    "emoji": "🧙"
+  },
+  {
+    "id": "inner_monologue",
+    "de": "Innerer Monolog",
+    "en": "[en] inner monologue",
+    "es": "[es] inner monologue",
+    "fr": "[fr] inner monologue",
+    "emoji": "💭"
+  },
+  {
+    "id": "bad_decisions_land",
+    "de": "Im Land der schlechten Entscheidungen",
+    "en": "[en] bad decisions land",
+    "es": "[es] bad decisions land",
+    "fr": "[fr] bad decisions land",
+    "emoji": "🤦"
+  },
+  {
+    "id": "parallel_universe",
+    "de": "In einem Paralleluniversum",
+    "en": "[en] parallel universe",
+    "es": "[es] parallel universe",
+    "fr": "[fr] parallel universe",
+    "emoji": "🌌"
+  },
+  {
+    "id": "apocalypse",
+    "de": "Bei der Apokalypse",
+    "en": "[en] apocalypse",
+    "es": "[es] apocalypse",
+    "fr": "[fr] apocalypse",
+    "emoji": "☢️"
+  },
+  {
+    "id": "parties_with_strangers",
+    "de": "Feiern mit Fremden",
+    "en": "[en] parties with strangers",
+    "es": "[es] parties with strangers",
+    "fr": "[fr] parties with strangers",
+    "emoji": "🎭"
+  }
+]

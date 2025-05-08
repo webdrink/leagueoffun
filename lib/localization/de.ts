@@ -1,0 +1,115 @@
+/**
+ * German translations
+ */
+import { Translations } from './types';
+
+const de: Translations = {
+  // General app keys
+  'app.title': 'Blame Game',
+  'app.footer': '© 2025 Blame Game',
+  'app.back': 'Zurück',
+  'app.next': 'Weiter',
+  'app.save': 'Speichern',
+  'app.cancel': 'Abbrechen',
+  'app.loading': 'Wird geladen...',
+  
+  // Intro screen
+  'intro.start_game': 'Spiel starten',
+  'intro.player_setup': 'Spieler einrichten',
+  'intro.settings': 'Einstellungen',
+  'intro.info': 'Info',
+  'intro.sound_toggle': 'Sound',
+  'intro.name_blame_toggle': 'NameBlame Modus',
+  'intro.enable_debug': 'Debug-Modus aktivieren',
+  'intro.heading': 'Wem traust du was zu?',
+  'intro.subheading': 'Was denkst du? Wer würde was tun?',
+  'intro.error_loading_questions': 'Fehler beim Laden der Fragen:',
+  'intro.error_check_files': 'Bitte überprüfe die Fragen-Datei und versuche es erneut.',
+  'intro.loading_questions': 'Lädt Fragen...',
+  
+  // Settings
+  'settings.title': 'Einstellungen',
+  'settings.language': 'Sprache / Language',
+  'settings.sound': 'Sound',
+  'settings.volume': 'Lautstärke',
+  'settings.animations': 'Animationen',
+  'settings.reset_data': 'App-Daten zurücksetzen',
+
+  // Player setup
+  'players.setup_title': 'Spieler einrichten',
+  'players.add_player': 'Spieler hinzufügen',
+  'players.player_name': 'Spielername',
+  'players.player_name_input': 'Spielername eingeben',
+  'players.start_game': 'Spiel starten',
+  'players.back': 'Zurück',
+  'players.max_players': 'Maximale Spieleranzahl erreicht!',
+  'players.min_players': 'Mindestens 3 Spieler erforderlich',
+  'players.name_required': 'Name erforderlich',
+  'players.name_exists': 'Name existiert bereits',
+  'players.remove': 'Entfernen',
+  'players.remove_player': 'Spieler {name} entfernen',
+  'players.add_players_to_start': 'Füge Spieler hinzu, um zu starten',
+  'players.minimum_players_needed': 'Du brauchst mindestens 2 Spieler, um zu starten',
+  
+  // Game
+  'game.question': 'Frage',
+  'game.select_player': 'Wähle einen Spieler',
+  'game.next_question': 'Nächste Frage',
+  'game.previous_question': 'Vorherige Frage',
+  'game.progress': 'Frage {current} von {total}',
+  'game.blame': 'Schuld geben',
+
+  // Questions (Added missing keys with German placeholders)
+  'questions.player_turn': 'Dein Zug',
+  'questions.counter': 'Frage {current} von {total}',
+  'questions.who_blame': 'Wen beschuldigst du?',
+  'questions.cannot_blame_self': 'Du kannst dich nicht selbst beschuldigen',
+  'questions.blame_player': 'Beschuldige {name}',
+  'questions.previous_question': 'Vorherige Frage',
+  'questions.next_question': 'Nächste Frage',
+  'questions.summary': 'Zusammenfassung',
+  'questions.next': 'Weiter',
+  'questions.show_summary': 'Zusammenfassung anzeigen',
+  
+  // Summary
+  'summary.title': 'Spiel vorbei!',
+  'summary.questions_answered': 'Ihr habt {count} Fragen gemeistert!',
+  'summary.most_blamed': 'Meistbeschuldigter',
+  'summary.play_again': 'Neues Spiel starten',
+  'summary.back_to_start': 'Zurück zum Start',
+  'summary.blame_stats': 'Blame-Statistik',
+  'summary.no_stats': 'Keine Beschuldigungen verteilt!',
+  
+  // Modal
+  'modal.info_title': 'Information',
+  'modal.info_description': 'Hier könnten Spielanleitungen, Informationen zum Datenschutz oder andere Hinweise stehen.',
+  'modal.reset_data_description': 'Aktuell dient dieser Modal hauptsächlich zum Zurücksetzen der App-Daten.',
+  'modal.close': 'Schließen',
+  'modal.reset_app_data': 'App-Daten zurücksetzen',
+
+  // Info section/modal (Added missing keys with German placeholders)
+  'info.title': 'Spielanleitung',
+  'info.how_to_play': 'So spielt man Blame Game',
+  'info.name_blame_explanation': 'Im NameBlame-Modus kannst du andere Spieler beschuldigen',
+  'info.confirm_reset': 'Bist du sicher, dass du alle App-Daten zurücksetzen möchtest?',
+
+  // Debug panel (Added missing keys with German placeholders)
+  'debug.panel_title': 'Debug Panel',
+  'debug.title': 'Debug Panel Titel',
+  'debug.question_stats': 'Fragen-Statistik',
+  'debug.total': 'Gesamt',
+  'debug.played': 'Gespielt',
+  'debug.available': 'Verfügbar',
+  'debug.categories': 'Kategorien',
+  'debug.reset': 'Zurücksetzen',
+  'debug.reset_all_settings': 'Alle Einstellungen zurücksetzen',
+  'debug.reset_app_data': 'App-Daten zurücksetzen',
+  'debug.confirm_reset_data': 'Bist du sicher, dass du ALLE App-Daten zurücksetzen möchtest? Dies umfasst Einstellungen und gespielte Fragen.',
+  'debug.settings': 'Einstellungen (Debug)',
+  'debug.questions': 'Fragen (Debug)',
+  'debug.animations': 'Animationen (Debug)',
+  'debug.language': 'Sprache (Debug)',
+  'debug.reset_data': 'Daten zurücksetzen (Debug)'
+};
+
+export default de;

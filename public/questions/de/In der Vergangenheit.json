@@ -1,0 +1,152 @@
+[
+  {
+    "questionId": "wer_wurde_gerne_eine_zeitreise_machen",
+    "text": "Wer würde gerne eine Zeitreise machen?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_die_peinlichsten_kindheitsfotos",
+    "text": "Wer hat die peinlichsten Kindheitsfotos?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_erinnert_sich_an_jeden_peinlichen_moment",
+    "text": "Wer erinnert sich an jeden peinlichen Moment?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_freund_zufallig_getr",
+    "text": "Wer hat schon mal einen alten Freund zufällig getroffen?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_wurde_gerne_einen_tag_in_der_schule_wiederhole",
+    "text": "Wer würde gerne einen Tag in der Schule wiederholen?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_die_meisten_alten_briefe_oder_tagebucher",
+    "text": "Wer hat die meisten alten Briefe oder Tagebücher?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_schwarm_wiedergetrof",
+    "text": "Wer hat schon mal einen alten Schwarm wiedergetroffen?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_kann_sich_an_seinen_ersten_schultag_erinnern",
+    "text": "Wer kann sich an seinen ersten Schultag erinnern?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_lehrer_getroffen",
+    "text": "Wer hat schon mal einen alten Lehrer getroffen?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_die_meisten_geschichten_aus_der_kindheit",
+    "text": "Wer hat die meisten Geschichten aus der Kindheit?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_ein_altes_hobby_wiederentdeckt",
+    "text": "Wer hat schon mal ein altes Hobby wiederentdeckt?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_die_meisten_jugendsunden",
+    "text": "Wer hat die meisten Jugendsünden?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_freund_aus_den_augen",
+    "text": "Wer hat schon mal einen alten Freund aus den Augen verloren?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_die_meisten_alten_klassenfotos",
+    "text": "Wer hat die meisten alten Klassenfotos?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_lieblingsfilm_wieder",
+    "text": "Wer hat schon mal einen alten Lieblingsfilm wieder geschaut?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_streit_wieder_aufgew",
+    "text": "Wer hat schon mal einen alten Streit wieder aufgewärmt?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_die_meisten_alten_kuscheltiere",
+    "text": "Wer hat die meisten alten Kuscheltiere?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_schwur_gebrochen",
+    "text": "Wer hat schon mal einen alten Schwur gebrochen?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_die_meisten_alten_postkarten",
+    "text": "Wer hat die meisten alten Postkarten?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_lieblingsort_besucht",
+    "text": "Wer hat schon mal einen alten Lieblingsort besucht?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_songtext_auswendig_g",
+    "text": "Wer hat schon mal einen alten Songtext auswendig gesungen?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_die_meisten_alten_freunde_auf_facebook",
+    "text": "Wer hat die meisten alten Freunde auf Facebook?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_lehrer_gegoogelt",
+    "text": "Wer hat schon mal einen alten Lehrer gegoogelt?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_schwarm_angeschriebe",
+    "text": "Wer hat schon mal einen alten Schwarm angeschrieben?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_die_meisten_alten_lieblingsbucher",
+    "text": "Wer hat die meisten alten Lieblingsbücher?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_freund_wiedergefunde",
+    "text": "Wer hat schon mal einen alten Freund wiedergefunden?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_lieblingsplatz_besuc",
+    "text": "Wer hat schon mal einen alten Lieblingsplatz besucht?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_die_meisten_alten_erinnerungsstucke",
+    "text": "Wer hat die meisten alten Erinnerungsstücke?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_traum_wieder_verfolg",
+    "text": "Wer hat schon mal einen alten Traum wieder verfolgt?",
+    "category": "In der Vergangenheit"
+  },
+  {
+    "questionId": "wer_hat_schon_mal_einen_alten_witz_wieder_erzahlt",
+    "text": "Wer hat schon mal einen alten Witz wieder erzählt?",
+    "category": "In der Vergangenheit"
+  }
+]

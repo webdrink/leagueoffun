@@ -4,6 +4,7 @@ import { Input } from '../core/Input';
 import { Button } from '../core/Button';
 import { Player } from '../../types';
 import { ArrowLeft, UserPlus, Trash2 } from 'lucide-react';
+import useTranslation from '../../hooks/useTranslation';
 
 interface PlayerSetupScreenProps {
   players: Player[];
@@ -28,6 +29,8 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
   onStartGame,
   onBackToIntro,
 }) => {
+  const { t } = useTranslation();
+  
   const handleAddPlayerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (tempPlayerName.trim() === '') return; 
@@ -42,11 +45,10 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
       transition={{ duration: 0.3 }}
       className="w-full max-w-md p-6 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl border-2 border-pink-100"
     >
-      <div className="flex justify-between items-center mb-6">
-        <Button onClick={onBackToIntro} className="text-purple-600 hover:text-purple-800 bg-transparent hover:bg-purple-50 p-2">
+      <div className="flex justify-between items-center mb-6">        <Button onClick={onBackToIntro} className="text-purple-600 hover:text-purple-800 bg-transparent hover:bg-purple-50 p-2">
           <ArrowLeft size={24} />
         </Button>
-        <h2 className="text-2xl font-bold text-purple-700">Spieler einrichten</h2>
+        <h2 className="text-2xl font-bold text-purple-700">{t('players.setup_title')}</h2>
         <div className="w-10"></div> {/* Spacer */}
       </div>
 
@@ -55,15 +57,13 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
           <Input
             type="text"
             value={tempPlayerName}
-            onChange={(e) => onTempPlayerNameChange(e.target.value)}
-            placeholder="Spielername"
+            onChange={(e) => onTempPlayerNameChange(e.target.value)}            placeholder={t('players.player_name')}
             className={`flex-grow border-pink-300 focus:border-pink-500 focus:ring-pink-500 ${nameInputError ? 'border-red-500' : ''}`}
-            aria-label="Spielername Eingabe"
+            aria-label={t('players.player_name_input')}
           />
           <Button
             type="submit"
-            className="bg-pink-500 hover:bg-pink-600 text-white px-3 py-2"
-            aria-label="Spieler hinzufügen"
+            className="bg-pink-500 hover:bg-pink-600 text-white px-3 py-2"            aria-label={t('players.add_player')}
             disabled={tempPlayerName.trim() === ''}
           >
             <UserPlus size={20} />
@@ -84,27 +84,24 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
             <span className="text-purple-700 font-medium">{player.name}</span>
             <Button
               onClick={() => onRemovePlayer(player.id)}
-              className="text-red-500 hover:text-red-700 bg-transparent hover:bg-red-100 p-1.5"
-              aria-label={`Spieler ${player.name} entfernen`}
+              className="text-red-500 hover:text-red-700 bg-transparent hover:bg-red-100 p-1.5"              aria-label={t('players.remove_player', { name: player.name })}
             >
               <Trash2 size={18} />
             </Button>
           </motion.div>
-        ))}
-        {players.length === 0 && (
-          <p className="text-center text-purple-500 py-4">Füge Spieler hinzu, um zu starten.</p>
+        ))}        {players.length === 0 && (
+          <p className="text-center text-purple-500 py-4">{t('players.add_players_to_start')}</p>
         )}
       </div>
 
       <Button
-        onClick={onStartGame}
-        disabled={players.length < 2} // Typically NameBlame needs at least 2, often 3 for good gameplay
+        onClick={onStartGame}        disabled={players.length < 2} // Typically NameBlame needs at least 2, often 3 for good gameplay
         className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg rounded-lg shadow-md transition-transform hover:scale-105 duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
-        Spiel starten ({players.length})
+        {t('players.start_game', { count: players.length })}
       </Button>
       {players.length < 2 && ( // Adjust message based on actual minimum
-        <p className="text-center text-sm text-pink-600 mt-2">Mindestens 2 Spieler benötigt.</p>
+        <p className="text-center text-sm text-pink-600 mt-2">{t('players.minimum_players_needed')}</p>
       )}
     </motion.div>
   );

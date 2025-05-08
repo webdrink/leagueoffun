@@ -1,45 +1,39 @@
 import React from 'react';
-import useLocalStorage from '../../hooks/useLocalStorage';
-import { GameSettings } from '../../types';
-import { SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE } from '../../hooks/utils/languageSupport';
+import { useGameSettings } from '../../hooks/useGameSettings';
+import { SUPPORTED_LANGUAGES } from '../../hooks/utils/languageSupport';
+import { SupportedLanguage } from '../../types';
+import useTranslation from '../../hooks/useTranslation';
 
-/**
- * Component for selecting the application language
- */
-const LanguageSelector: React.FC = () => {
-  const [gameSettings, setGameSettings] = useLocalStorage<GameSettings>(
-    'blamegame-settings', 
-    { language: DEFAULT_LANGUAGE } as any
-  );
+interface LanguageSelectorProps {
+  className?: string;
+}
+
+const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className = '' }) => {
+  const { gameSettings, updateGameSettings } = useGameSettings();
+  const { t } = useTranslation();
   
-  const currentLanguage = gameSettings.language || DEFAULT_LANGUAGE;
-  
-  const changeLanguage = (langCode: string) => {
-    setGameSettings((prev: GameSettings) => ({
-      ...prev,
-      language: langCode
-    }));
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newLanguage = e.target.value as SupportedLanguage;
+    updateGameSettings({ language: newLanguage });
   };
   
   return (
-    <div>
-      <h3 className="text-sm font-semibold mb-2 text-purple-700">Sprache / Language</h3>
-      <div className="flex flex-wrap gap-2">
-        {SUPPORTED_LANGUAGES.map(lang => (
-          <button
-            key={lang.code}
-            className={`px-3 py-1 rounded-full text-xs ${
-              currentLanguage === lang.code
-                ? 'bg-purple-600 text-white'
-                : 'bg-white text-purple-700 border border-purple-300'
-            }`}
-            onClick={() => changeLanguage(lang.code)}
-            aria-pressed={currentLanguage === lang.code}
-          >
-            {lang.displayName}
-          </button>
+    <div className={`flex flex-col ${className}`}>
+      <label htmlFor="language-select" className="mb-2 font-medium text-gray-700">
+        {t('settings.language')}
+      </label>
+      <select
+        id="language-select"
+        value={gameSettings.language}
+        onChange={handleLanguageChange}
+        className="p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+      >
+        {Object.entries(SUPPORTED_LANGUAGES).map(([code, name]) => (
+          <option key={code} value={code}>
+            {name}
+          </option>
         ))}
-      </div>
+      </select>
     </div>
   );
 };

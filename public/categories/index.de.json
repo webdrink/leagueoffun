@@ -1,0 +1,132 @@
+[
+  {
+    "id": "party",
+    "name": "Beim Feiern",
+    "emoji": "🎉"
+  },
+  {
+    "id": "relationships",
+    "name": "Beziehungen",
+    "emoji": "❤️"
+  },
+  {
+    "id": "daily_life",
+    "name": "Alltag",
+    "emoji": "🏠"
+  },
+  {
+    "id": "at_work",
+    "name": "Auf der Arbeit",
+    "emoji": "💼"
+  },
+  {
+    "id": "at_school",
+    "name": "In der Schule",
+    "emoji": "🎒"
+  },
+  {
+    "id": "in_family",
+    "name": "In der Familie",
+    "emoji": "👨‍👩‍👧‍👦"
+  },
+  {
+    "id": "in_nature",
+    "name": "In der Natur",
+    "emoji": "🌳"
+  },
+  {
+    "id": "on_vacation",
+    "name": "Im Urlaub",
+    "emoji": "✈️"
+  },
+  {
+    "id": "sports",
+    "name": "Sport",
+    "emoji": "⚽"
+  },
+  {
+    "id": "eating",
+    "name": "Beim Essen",
+    "emoji": "🍽️"
+  },
+  {
+    "id": "in_traffic",
+    "name": "Im Verkehr",
+    "emoji": "🚦"
+  },
+  {
+    "id": "in_shared_apartment",
+    "name": "In der WG",
+    "emoji": "🏠"
+  },
+  {
+    "id": "internet",
+    "name": "Im Internet",
+    "emoji": "💻"
+  },
+  {
+    "id": "movies_series",
+    "name": "Filme & Serien",
+    "emoji": "🎬"
+  },
+  {
+    "id": "embarrassing_moments",
+    "name": "Peinliche Momente",
+    "emoji": "😳"
+  },
+  {
+    "id": "flirting",
+    "name": "Beim Flirten",
+    "emoji": "😘"
+  },
+  {
+    "id": "in_bathroom",
+    "name": "Im Badezimmer",
+    "emoji": "🚿"
+  },
+  {
+    "id": "in_future",
+    "name": "In der Zukunft",
+    "emoji": "🔮"
+  },
+  {
+    "id": "in_past",
+    "name": "In der Vergangenheit",
+    "emoji": "⏮️"
+  },
+  {
+    "id": "friendships",
+    "name": "Freundschaften",
+    "emoji": "🤝"
+  },
+  {
+    "id": "in_fantasy",
+    "name": "In der Fantasie",
+    "emoji": "🧙"
+  },
+  {
+    "id": "inner_monologue",
+    "name": "Innerer Monolog",
+    "emoji": "💭"
+  },
+  {
+    "id": "bad_decisions_land",
+    "name": "Im Land der schlechten Entscheidungen",
+    "emoji": "🤦"
+  },
+  {
+    "id": "parallel_universe",
+    "name": "In einem Paralleluniversum",
+    "emoji": "🌌"
+  },
+  {
+    "id": "apocalypse",
+    "name": "Bei der Apokalypse",
+    "emoji": "☢️"
+  },
+  {
+    "id": "parties_with_strangers",
+    "name": "Feiern mit Fremden",
+    "emoji": "🎭"
+  }
+]

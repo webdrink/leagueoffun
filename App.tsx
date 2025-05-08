@@ -6,6 +6,8 @@ import useSound from './hooks/useSound';
 import useQuestions from './hooks/useQuestions';
 import useNameBlameSetup from './hooks/useNameBlameSetup';
 import useLocalStorage from './hooks/useLocalStorage';
+import useTranslation from './hooks/useTranslation';
+import { useLanguage } from './hooks/utils/languageSupport';
 
 // Import components
 import ErrorDisplay from './components/core/ErrorDisplay';
@@ -17,10 +19,12 @@ import LoadingContainer from './components/game/LoadingContainer';
 import PlayerSetupScreen from './components/game/PlayerSetupScreen';
 import QuestionScreen from './components/game/QuestionScreen';
 import SummaryScreen from './components/game/SummaryScreen';
+import LanguageChangeFeedback from './components/language/LanguageChangeFeedback';
 
 // Import constants and types
 import { LOADING_QUOTES, SOUND_PATHS, initialGameSettings } from './lib/constants';
 import { GameStep, QuestionStats } from './types';
+import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
 
 // Import utilities
 import { getEmoji } from './lib/formatters';
@@ -31,6 +35,9 @@ import './index.css';
 function App() {
   // Sound management
   const { soundEnabled, toggleSound, playSound, volume, setVolume } = useSound();
+  
+  // Translation hook
+  const { t } = useTranslation();
   
   // Game state
   const [step, setStep] = useState<GameStep>('intro');
@@ -165,13 +172,12 @@ function App() {
         )}
 
         {/* Game title */}
-        <div className="text-center mb-4">
-          <h1
+        <div className="text-center mb-4">          <h1
             className="text-white text-5xl font-bold shadow-md rounded-xl px-6 py-2 cursor-pointer"
             onClick={handleRestart}
-            title="Zurück zum Start"
+            title={t('app.back')}
           >
-            <span className="text-purple-700">Blame</span> Game
+            {t('app.title')}
           </h1>
         </div>
 
@@ -275,7 +281,13 @@ function App() {
         onClose={() => setIsInfoModalOpen(false)} 
         onResetAppData={handleResetAppData}
       />
-      <footer className="mt-6 text-white text-xs">© 2025 Blame Game</footer>
+      <footer className="mt-6 text-white text-xs">{t('app.footer')}</footer>
+      
+      {/* Language change feedback */}
+      <LanguageChangeFeedback 
+        language={gameSettings.language} 
+        languageName={SUPPORTED_LANGUAGES[gameSettings.language] || ''}
+      />
     </GameContainer>
   );
 }

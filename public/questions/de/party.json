@@ -1,0 +1,52 @@
+[
+  {
+    "questionId": "who_would_leave_window_open_in_winter",
+    "text": "Wer würde am ehesten das Fenster auch im Winter offen lassen?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_accidentally_trigger_fire_alarm",
+    "text": "Wer würde am ehesten aus Versehen einen Feueralarm auslösen?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_organize_secret_party",
+    "text": "Wer würde am ehesten eine geheime Party organisieren?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_has_most_creative_excuses",
+    "text": "Wer hat die kreativsten Ausreden?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_survive_without_smartphone",
+    "text": "Wer würde eine Woche ohne Smartphone überleben?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_impress_everyone_on_dance_floor",
+    "text": "Wer würde am ehesten auf der Tanzfläche alle beeindrucken?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_laugh_out_loud_at_tiktok",
+    "text": "Wer würde am ehesten aufgrund eines lustigen TikTok-Videos laut loslachen?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_volunteer_first_at_karaoke",
+    "text": "Wer würde am ehesten bei einer Karaoke-Party freiwillig als erster singen?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_party_all_night_then_work",
+    "text": "Wer würde am ehesten die ganze Nacht durchfeiern und direkt zur Arbeit gehen?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_would_forget_party_date",
+    "text": "Wer würde am ehesten den Tag vergessen, an dem die Party stattfindet?",
+    "category": "party"
+  }
+]

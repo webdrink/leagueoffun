@@ -1,161 +1,184 @@
 [
   {
-    "id": "beim_feiern",
-    "name": "[es] Beim Feiern",
-    "fileName": "Beim Feiern.json",
+    "id": "party",
+    "name": "De Fiesta",
+    "fileName": "party.json",
     "count": 61,
     "emoji": "🎉"
   },
   {
-    "id": "in_beziehungen",
-    "name": "[es] In Beziehungen",
-    "fileName": "In Beziehungen.json",
+    "id": "relationships",
+    "name": "En Relaciones",
+    "fileName": "relationships.json",
     "count": 20,
     "emoji": "❤️"
   },
   {
-    "id": "bei_der_arbeit",
-    "name": "[es] Bei der Arbeit",
-    "fileName": "Bei der Arbeit.json",
+    "id": "at_work",
+    "name": "En el Trabajo",
+    "fileName": "at_work.json",
     "count": 20,
     "emoji": "💼"
   },
   {
-    "id": "in_der_schule",
-    "name": "[es] In der Schule",
-    "fileName": "In der Schule.json",
-    "count": 40
+    "id": "at_school",
+    "name": "En la Escuela",
+    "fileName": "at_school.json",
+    "count": 40,
+    "emoji": "❓"
   },
   {
-    "id": "in_peinlichen_momenten",
-    "name": "[es] In peinlichen Momenten",
-    "fileName": "In peinlichen Momenten.json",
-    "count": 40
+    "id": "embarrassing_moments",
+    "name": "[es] embarrassing moments",
+    "fileName": "embarrassing_moments.json",
+    "count": 40,
+    "emoji": "❓"
   },
   {
-    "id": "im_urlaub",
-    "name": "[es] Im Urlaub",
-    "fileName": "Im Urlaub.json",
-    "count": 40
+    "id": "on_vacation",
+    "name": "[es] on vacation",
+    "fileName": "on_vacation.json",
+    "count": 40,
+    "emoji": "❓"
   },
   {
-    "id": "beim_sport",
-    "name": "[es] Beim Sport",
-    "fileName": "Beim Sport.json",
-    "count": 35
+    "id": "sports",
+    "name": "[es] sports",
+    "fileName": "sports.json",
+    "count": 35,
+    "emoji": "❓"
   },
   {
-    "id": "in_der_freundschaft",
-    "name": "[es] In der Freundschaft",
-    "fileName": "In der Freundschaft.json",
-    "count": 30
+    "id": "friendships",
+    "name": "[es] friendships",
+    "fileName": "friendships.json",
+    "count": 30,
+    "emoji": "❓"
   },
   {
-    "id": "im_alltag",
-    "name": "[es] Im Alltag",
-    "fileName": "Im Alltag.json",
-    "count": 30
+    "id": "daily_life",
+    "name": "[es] daily life",
+    "fileName": "daily_life.json",
+    "count": 30,
+    "emoji": "❓"
   },
   {
-    "id": "in_der_familie",
-    "name": "[es] In der Familie",
-    "fileName": "In der Familie.json",
-    "count": 30
+    "id": "in_family",
+    "name": "[es] in family",
+    "fileName": "in_family.json",
+    "count": 30,
+    "emoji": "❓"
   },
   {
-    "id": "in_der_zukunft",
-    "name": "[es] In der Zukunft",
-    "fileName": "In der Zukunft.json",
-    "count": 20
+    "id": "in_future",
+    "name": "[es] in future",
+    "fileName": "in_future.json",
+    "count": 20,
+    "emoji": "❓"
   },
   {
-    "id": "beim_essen",
-    "name": "[es] Beim Essen",
-    "fileName": "Beim Essen.json",
-    "count": 34
+    "id": "eating",
+    "name": "[es] eating",
+    "fileName": "eating.json",
+    "count": 34,
+    "emoji": "❓"
   },
   {
-    "id": "im_bad",
-    "name": "[es] Im Bad",
-    "fileName": "Im Bad.json",
-    "count": 34
+    "id": "in_bathroom",
+    "name": "[es] in bathroom",
+    "fileName": "in_bathroom.json",
+    "count": 34,
+    "emoji": "❓"
   },
   {
-    "id": "im_internet",
-    "name": "[es] Im Internet",
-    "fileName": "Im Internet.json",
-    "count": 35
+    "id": "internet",
+    "name": "[es] internet",
+    "fileName": "internet.json",
+    "count": 35,
+    "emoji": "❓"
   },
   {
-    "id": "im_stra_enverkehr",
-    "name": "[es] Im StraÃŸenverkehr",
-    "fileName": "Im StraÃŸenverkehr.json",
-    "count": 34
+    "id": "in_traffic",
+    "name": "[es] in traffic",
+    "fileName": "in_traffic.json",
+    "count": 34,
+    "emoji": "❓"
   },
   {
-    "id": "bei_filmen_serien",
-    "name": "[es] Bei Filmen & Serien",
-    "fileName": "Bei Filmen & Serien.json",
-    "count": 35
+    "id": "movies_series",
+    "name": "[es] movies series",
+    "fileName": "movies_series.json",
+    "count": 35,
+    "emoji": "❓"
   },
   {
-    "id": "in_der_wg",
-    "name": "[es] In der WG",
-    "fileName": "In der WG.json",
-    "count": 37
+    "id": "in_shared_apartment",
+    "name": "[es] in shared apartment",
+    "fileName": "in_shared_apartment.json",
+    "count": 37,
+    "emoji": "❓"
   },
   {
-    "id": "beim_flirten",
-    "name": "[es] Beim Flirten",
-    "fileName": "Beim Flirten.json",
-    "count": 30
+    "id": "flirting",
+    "name": "[es] flirting",
+    "fileName": "flirting.json",
+    "count": 30,
+    "emoji": "❓"
   },
   {
-    "id": "auf_partys_mit_fremden",
-    "name": "[es] Auf Partys mit Fremden",
-    "fileName": "Auf Partys mit Fremden.json",
-    "count": 32
+    "id": "parties_with_strangers",
+    "name": "[es] parties with strangers",
+    "fileName": "parties_with_strangers.json",
+    "count": 32,
+    "emoji": "❓"
   },
   {
-    "id": "beim_weltuntergang",
-    "name": "[es] Beim Weltuntergang",
-    "fileName": "Beim Weltuntergang.json",
-    "count": 28
+    "id": "apocalypse",
+    "name": "[es] apocalypse",
+    "fileName": "apocalypse.json",
+    "count": 28,
+    "emoji": "❓"
   },
   {
-    "id": "im_paralleluniversum",
-    "name": "[es] Im Paralleluniversum",
-    "fileName": "Im Paralleluniversum.json",
-    "count": 32
+    "id": "parallel_universe",
+    "name": "[es] parallel universe",
+    "fileName": "parallel_universe.json",
+    "count": 32,
+    "emoji": "❓"
   },
   {
-    "id": "im_land_der_schlechten_entscheidungen",
-    "name": "[es] Im Land der schlechten Entscheidungen",
-    "fileName": "Im Land der schlechten Entscheidungen.json",
-    "count": 30
+    "id": "bad_decisions_land",
+    "name": "[es] bad decisions land",
+    "fileName": "bad_decisions_land.json",
+    "count": 30,
+    "emoji": "❓"
   },
   {
-    "id": "im_inneren_monolog",
-    "name": "[es] Im inneren Monolog",
-    "fileName": "Im inneren Monolog.json",
-    "count": 30
+    "id": "inner_monologue",
+    "name": "[es] inner monologue",
+    "fileName": "inner_monologue.json",
+    "count": 30,
+    "emoji": "❓"
   },
   {
-    "id": "in_der_natur",
-    "name": "[es] In der Natur",
-    "fileName": "In der Natur.json",
-    "count": 30
+    "id": "in_nature",
+    "name": "[es] in nature",
+    "fileName": "in_nature.json",
+    "count": 30,
+    "emoji": "❓"
   },
   {
-    "id": "in_der_vergangenheit",
-    "name": "[es] In der Vergangenheit",
-    "fileName": "In der Vergangenheit.json",
-    "count": 30
+    "id": "in_past",
+    "name": "[es] in past",
+    "fileName": "in_past.json",
+    "count": 30,
+    "emoji": "❓"
   },
   {
-    "id": "in_der_fantasie",
-    "name": "[es] In der Fantasie",
-    "fileName": "In der Fantasie.json",
-    "count": 30
+    "id": "in_fantasy",
+    "name": "[es] in fantasy",
+    "fileName": "in_fantasy.json",
+    "count": 30,
+    "emoji": "❓"
   }
 ]

@@ -1,5 +1,7 @@
 // All shared types for the Blame Game application
 
+export type SupportedLanguage = 'en' | 'de' | 'es' | 'fr';
+
 export interface GameSettings {
   categoryCount: number;
   questionsPerCategory: number;
@@ -36,12 +38,14 @@ export interface GameSettings {
   questionCardAnimation: string;
   
   // Language settings
-  language: string; // 'de', 'en', 'fr', 'es', etc.
+  language: SupportedLanguage;
 }
 
 export interface Question {
-  category: string;
   text: string;
+  category?: string;
+  categoryId?: string;
+  emoji?: string;
 }
 
 export interface Player {
@@ -63,4 +67,108 @@ export interface QuestionStats {
   playedQuestions: number;
   availableQuestions: number;
   categories?: Record<string, number>;
+}
+
+export interface Translation {
+  common: {
+    app_name: string;
+    loading: string;
+    error: string;
+    success: string;
+    cancel: string;
+    confirm: string;
+    save: string;
+    next: string;
+    back: string;
+    submit: string;
+    reset: string;
+    yes: string;
+    no: string;
+  };
+  intro: {
+    title: string;
+    tagline: string;
+    start_button: string;
+    settings_button: string;
+    info_button: string;
+    start_team_mode: string;
+    start_name_blame: string;
+    loading_quote: string;
+  };
+  settings: {
+    title: string;
+    sound: string;
+    sound_on: string;
+    sound_off: string;
+    volume: string;
+    categories: string;
+    select_all: string;
+    deselect_all: string;
+    language: string;
+    theme: string;
+    reset: string;
+    save: string;
+    cancel: string;
+  };
+  player: {
+    setup_title: string;
+    add_player: string;
+    remove_player: string;
+    start_game: string;
+    player_name_placeholder: string;
+    min_players_warning: string;
+    max_players_warning: string;
+  };
+  game: {
+    question_count: string;
+    round: string;
+    of: string;
+    category: string;
+    blame_question: string;
+    select_player: string;
+    continue: string;
+    skip: string;
+    back: string;
+  };
+  summary: {
+    game_over: string;
+    questions_completed: string;
+    most_blamed_singular: string;
+    most_blamed_plural: string;
+    blame_count_singular: string;
+    blame_count_plural: string;
+    no_blames: string;
+    team_mode: string;
+    team_congratulation: string;
+    restart_game: string;
+  };
+  modal: {
+    info_title: string;
+    info_description: string;
+    reset_data_description: string;
+    close: string;
+    reset_app_data: string;
+  };  debug: {
+    title: string;
+    sound_settings: string;
+    sound_enabled: string;
+    volume: string;
+    game_state: string;
+    current_step: string;
+    debug_mode: string;
+    player_management: string;
+    player_count: string;
+    name_blame_mode: string;
+    question_stats: string;
+    total_questions: string;
+    played_questions: string;
+    available_questions: string;
+    categories: string;
+    category_count: string;
+    reset_data: string;
+    language_settings: string;
+    current_language: string;
+    translation_test: string;
+    no_categories_found: string;
+  };
 }
