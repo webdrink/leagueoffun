@@ -160,7 +160,7 @@ const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
         let filteredAndLimited: Question[] = [];
         categoriesForRound.forEach(cat => {
           const questionsForCat = availableQuestions
-            .filter(q => q.category === cat)
+            .filter(q => q.categoryId === cat)
             .sort(() => 0.5 - Math.random())
             .slice(0, gameSettings.questionsPerCategory);
           filteredAndLimited = filteredAndLimited.concat(questionsForCat);
