@@ -11,10 +11,10 @@ import { FALLBACK_QUESTIONS } from '../constants';
 import { getRandomCategories, getAvailableQuestions } from '../lib/utils/arrayUtils';
 import { 
   loadQuestionsFromJson, 
-  getFallbackQuestions
+  getFallbackQuestions,
+  Question as LoadedQuestion
 } from '../lib/utils/questionLoaders';
-import { useLanguage } from './utils/languageSupport';
-import { getAssetsPath } from '../lib/utils/assetUtils';
+import { useGameSettings } from './useGameSettings';
 
 interface UseQuestionsOutput {
   allQuestions: Question[];
@@ -46,7 +46,7 @@ interface UseQuestionsOutput {
  * @param gameSettings - The current game settings, including category and question counts.
  * @returns An object containing question state and manipulation functions
  */
-const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
+const useQuestions = (initialGameSettings: GameSettings): UseQuestionsOutput => {
   const [allQuestions, setAllQuestions] = useState<Question[]>([]);
   const [currentRoundQuestions, setCurrentRoundQuestions] = useState<Question[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -55,100 +55,32 @@ const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
   const [index, setIndex] = useState(0);
   const [cardKey, setCardKey] = useState(0);
   
-  // Get current language from language hook
-  const { currentLanguage } = useLanguage();
-
-  /**
-   * Loads categories from the categories.json file
-   */
-  const loadCategories = async () => {
-    try {
-      // Use getAssetsPath to ensure correct URL with base path
-      const url = getAssetsPath('questions/categories.json');
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-        throw new Error(`Failed to load categories: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error loading categories:', error);
-      throw error;
-    }
-  };
-
-  /**
-   * Loads questions for a specific category and language
-   */
-  const loadQuestionsForCategory = async (category: string, language: string) => {
-    try {
-      // Use getAssetsPath to ensure correct URL with base path
-      const url = getAssetsPath(`questions/${language}/${category}.json`);
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-        // Try fallback languages if primary language file is not found
-        return await tryFallbackLanguages(category, language);
-      }
-      
-      return await response.json();
-    } catch (error) {
-      // Try fallback languages if there was an error
-      return await tryFallbackLanguages(category, language);
-    }
-  };
-
-  /**
-   * Attempts to load questions from fallback languages if the primary language file is not found
-   */
-  const tryFallbackLanguages = async (category: string, primaryLanguage: string) => {
-    // Define fallback language order (e.g., try English, then German)
-    const fallbackLanguages = ['en', 'de'].filter(lang => lang !== primaryLanguage);
-    
-    for (const lang of fallbackLanguages) {
-      try {
-        // Use getAssetsPath to ensure correct URL with base path
-        const url = getAssetsPath(`questions/${lang}/${category}.json`);
-        const response = await fetch(url);
-        
-        if (response.ok) {
-          const data = await response.json();
-          console.log(`Used fallback language ${lang} for category ${category}`);
-          return data;
-        }
-      } catch (error) {
-        console.warn(`Fallback to ${lang} failed for ${category}:`, error);
-      }
-    }
-    
-    // If all fallbacks fail, return empty array
-    console.error(`No questions available for category ${category} in any language`);
-    return [];
-  };
+  // Get current language from gameSettings
+  const { gameSettings } = useGameSettings();
+  const currentLanguage = gameSettings.language;
 
   // Load questions from JSON
   const loadQuestions = useCallback(async () => {
-    setIsLoading(true);    
+    setIsLoading(true);
     try {
-      // First try to load questions from the new category-based system with language support
       console.log(`Loading questions with language: ${currentLanguage}`);
-      
-      // Attempt to load questions from JSON first
-      const jsonQuestions = await loadQuestionsFromJson(currentLanguage);
-      
-      if (jsonQuestions && jsonQuestions.length > 0) {        // Convert jsonQuestions to the format expected by setAllQuestions
-        const formattedQuestions: Question[] = jsonQuestions.map((q: any) => ({
+
+      const loadedJsonQuestions: LoadedQuestion[] = await loadQuestionsFromJson(currentLanguage);
+
+      if (loadedJsonQuestions && loadedJsonQuestions.length > 0) {
+        // Convert LoadedQuestion to the Question type expected by the hook (from types.ts)
+        const formattedQuestions: Question[] = loadedJsonQuestions.map((q: LoadedQuestion): Question => ({
           questionId: q.questionId,
-          text: q.text || '',
+          text: q.text || '', // Ensure text is always a string
           categoryId: q.categoryId,
           categoryName: q.categoryName,
           categoryEmoji: q.categoryEmoji
         }));
-        
         setAllQuestions(formattedQuestions);
-        console.log(`Loaded ${jsonQuestions.length} questions from JSON`);
+        console.log(`Loaded ${formattedQuestions.length} questions from JSON`);
+      } else {
+        console.warn('No questions loaded from JSON, using fallback questions.');
+        setAllQuestions(getFallbackQuestions());
       }
     } catch (error) {
       console.error('Error loading questions:', error);
@@ -159,65 +91,60 @@ const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
   }, [currentLanguage]);
 
   // Prepare questions for a new round
-  const prepareRoundQuestions = useCallback(async (gameSettings: GameSettings): Promise<boolean> => {
-    if (isLoading) {
+  const prepareRoundQuestions = useCallback(async (currentActiveGameSettings: GameSettings): Promise<boolean> => {
+    if (isLoading || allQuestions.length === 0) {
       return false;
     }
 
     try {
-      // Get all available categories for the current language
-      const allCategoryNames = await loadCategories();
-      
-      // Select random categories based on game settings
-      const categoriesForRound = getRandomCategories(allCategoryNames, gameSettings.categoryCount);
+      const uniqueCategoryIds = Array.from(new Set(allQuestions.map(q => q.categoryId)));
+      const categoriesForRound = getRandomCategories(uniqueCategoryIds, currentActiveGameSettings.categoryCount);
       setSelectedCategories(categoriesForRound);
-      
-      // Load questions for the selected categories with the current language
-      const questionsPromises = categoriesForRound.map(category => loadQuestionsForCategory(category, currentLanguage));
-      const loadedQuestions = (await Promise.all(questionsPromises)).flat();
-      
-      // Filter out already played questions
-      let availableQuestions = getAvailableQuestions(loadedQuestions, playedQuestions);
-      
-      // Reset played questions if we're running low
-      if (availableQuestions.length < 15) {
-        setPlayedQuestions([]);
-        availableQuestions = loadedQuestions;
+
+      const questionsForSelectedCategories = allQuestions.filter(q => categoriesForRound.includes(q.categoryId));
+      let availableQuestions = getAvailableQuestions(questionsForSelectedCategories, playedQuestions);
+
+      if (availableQuestions.length < currentActiveGameSettings.questionsPerCategory * categoriesForRound.length * 0.5 && availableQuestions.length < 15) {
+        console.log('Low on available questions, resetting played questions for selected categories.');
+        const questionsOfSelectedCategories = allQuestions.filter(q => categoriesForRound.includes(q.categoryId));
+        const playedQuestionsInSelectedCategories = playedQuestions.filter(pqId => questionsOfSelectedCategories.some(q => q.questionId === pqId));
+        const newPlayedQuestions = playedQuestions.filter(pqId => !playedQuestionsInSelectedCategories.includes(pqId));
+        setPlayedQuestions(newPlayedQuestions);
+        availableQuestions = getAvailableQuestions(questionsForSelectedCategories, newPlayedQuestions);
       }
       
       if (availableQuestions.length > 0) {
         let filteredAndLimited: Question[] = [];
-        categoriesForRound.forEach(cat => {
+        categoriesForRound.forEach(catId => {
           const questionsForCat = availableQuestions
-            .filter(q => q.categoryId === cat)
+            .filter(q => q.categoryId === catId)
             .sort(() => 0.5 - Math.random())
-            .slice(0, gameSettings.questionsPerCategory);
+            .slice(0, currentActiveGameSettings.questionsPerCategory);
           filteredAndLimited = filteredAndLimited.concat(questionsForCat);
         });
-        
+
         const shuffledRoundQuestions = filteredAndLimited.sort(() => 0.5 - Math.random());
         setCurrentRoundQuestions(shuffledRoundQuestions);
         setIndex(0);
         setCardKey(prev => prev + 1);
         return true;
       } else {
-        return false;
-      }
-    } catch (error) {
-      console.error("Error preparing round questions:", error);      
-      // Fallback to using whatever questions we have in allQuestions
-      if (allQuestions.length > 0) {
-        const availableQuestions = getAvailableQuestions(allQuestions, playedQuestions);
-        const shuffled = availableQuestions.sort(() => 0.5 - Math.random()).slice(0, 20);
-        setCurrentRoundQuestions(shuffled);
+        console.warn('No available questions for the selected categories after filtering. Using fallback questions for the round.');
+        const fallbackForRound = getFallbackQuestions().sort(() => 0.5 - Math.random()).slice(0, currentActiveGameSettings.questionsPerCategory * categoriesForRound.length);
+        setCurrentRoundQuestions(fallbackForRound);
         setIndex(0);
         setCardKey(prev => prev + 1);
-        return true;
+        return fallbackForRound.length > 0;
       }
-      
-      return false;
+    } catch (error) {
+      console.error("Error preparing round questions:", error);
+      const fallbackForRound = getFallbackQuestions().sort(() => 0.5 - Math.random()).slice(0, 10);
+      setCurrentRoundQuestions(fallbackForRound);
+      setIndex(0);
+      setCardKey(prev => prev + 1);
+      return fallbackForRound.length > 0;
     }
-  }, [isLoading, allQuestions, playedQuestions, setPlayedQuestions, currentLanguage]);
+  }, [isLoading, allQuestions, playedQuestions, setPlayedQuestions, currentLanguage, gameSettings.categoryCount, gameSettings.questionsPerCategory]);
 
   // Advance to the next question
   const advanceToNextQuestion = useCallback(() => {
@@ -244,7 +171,7 @@ const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
 
   // Load questions on initial mount and when language changes
   useEffect(() => {
-    console.log("Loading questions for language:", currentLanguage);
+    console.log("useQuestions: Loading questions for language:", currentLanguage);
     loadQuestions();
   }, [loadQuestions, currentLanguage]);
 
