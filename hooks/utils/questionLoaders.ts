@@ -154,30 +154,6 @@ export const loadQuestionsByCategories = async (
   }
 };
 
-/**
- * Loads all questions from the old JSON format (fallback)
- */
-export const loadAllQuestionsFromJson = async (): Promise<Question[]> => {
-  try {
-    const response = await fetch('questions.json');
-    
-    if (!response.ok) {
-      throw new Error('Failed to load questions.json');
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error('Error loading questions from JSON:', error);
-    throw error; // Let the caller handle the fallback
-  }
-};
-
-/**
- * Legacy function to load questions from CSV
- */
-export const loadQuestionsFromCsv = async (): Promise<Question[]> => {
-  throw new Error('CSV loading not implemented');
-};
 
 /**
  * Provides fallback questions in case all loading methods fail

@@ -66,7 +66,6 @@ const useGameState = (initialGameSettings: GameSettings): UseGameStateOutput => 
     currentRoundQuestions,
     currentQuestion,
     isLoading,
-    csvError,
     playedQuestions,
     selectedCategories,
     index,

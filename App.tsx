@@ -322,7 +322,6 @@ function App() {
           volume={volume}
           onVolumeChange={setVolume}
           isLoading={isLoadingQuestions}
-          csvError={errorLoadingQuestions}
           nameBlameMode={false} 
           onToggleNameBlame={(checked: boolean) => console.log('Name blame toggled:', checked)}
           onOpenDebugPanel={() => console.log('Open debug panel')} 

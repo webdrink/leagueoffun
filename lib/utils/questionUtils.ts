@@ -2,7 +2,7 @@
  * Utilities for loading and managing questions in the new structure
  */
 
-import { SupportedLanguage } from '../types';
+import { SupportedLanguage } from '../../types';
 
 /**
  * Type for a question in the new structure

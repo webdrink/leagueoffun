@@ -14,7 +14,6 @@ import useTranslation from '../../hooks/useTranslation';
 interface IntroScreenProps {
   gameSettings: GameSettings;
   isLoading: boolean;
-  csvError: string | null;
   nameBlameMode: boolean;
   soundEnabled: boolean;
   onStartGame: () => void;
@@ -35,7 +34,6 @@ interface IntroScreenProps {
  * @param {IntroScreenProps} props - The props for the IntroScreen component.
  * @param {GameSettings} props.gameSettings - The settings for the game.
  * @param {boolean} props.isLoading - Indicates whether the game is currently loading.
- * @param {string | null} props.csvError - Error message related to loading CSV files, if any.
  * @param {boolean} props.nameBlameMode - Indicates whether the "Name Blame" mode is enabled.
  * @param {boolean} props.soundEnabled - Indicates whether sound is enabled.
  * @param {() => void} props.onStartGame - Callback function triggered when the game starts.
@@ -52,7 +50,6 @@ interface IntroScreenProps {
 const IntroScreen: React.FC<IntroScreenProps> = ({
   gameSettings,
   isLoading,
-  csvError,
   nameBlameMode,
   soundEnabled,
   onStartGame,
@@ -75,14 +72,13 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
     >      <div className="text-center mb-6">
         <h1 className="text-3xl sm:text-4xl font-bold text-purple-700">{t('intro.heading')}</h1>
         <p className="text-pink-600 mt-2 text-sm sm:text-base">{t('intro.subheading')}</p>
-      </div>      {csvError && (
+      </div>      { (
         <motion.div 
           initial={{opacity: 0, height: 0}} 
           animate={{opacity:1, height: 'auto'}}
           className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md text-sm"
         >
           <p className="font-semibold">{t('intro.error_loading_questions')}</p>
-          <p>{csvError}</p>
           <p className="mt-1">{t('intro.error_check_files')}</p>
         </motion.div>
       )}
@@ -90,7 +86,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
       <div className="mt-6 flex flex-col space-y-4">
         <Button
           onClick={onStartGame}
-          disabled={isLoading || !!csvError}
+          disabled={isLoading}
           className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg rounded-lg shadow-md transition-transform hover:scale-105 duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
         >
           {mainButtonLabel || (isLoading ? t('intro.loading_questions') : t('intro.start_game'))}
