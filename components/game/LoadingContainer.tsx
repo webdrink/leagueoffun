@@ -7,6 +7,7 @@ interface LoadingContainerProps {
   categories: string[];
   getEmoji: (category: string) => string;
   loadingQuotes: string[];
+  currentQuote: string; // Added
   settings: {
     loadingQuoteSpringStiffness: number;
     loadingQuoteSpringDamping: number;
@@ -25,6 +26,7 @@ interface LoadingContainerProps {
  * @param categories - An array of category objects to be displayed in the loading card stack.
  * @param getEmoji - A function that returns an emoji for a given category.
  * @param loadingQuotes - An array of strings representing quotes to be cycled through during loading.
+ * @param currentQuote - A string representing the currently displayed quote.
  * @param settings - An object containing configuration options for loading quote intervals,
  *   spring animation parameters, and transition durations.
  *
@@ -36,6 +38,7 @@ const LoadingContainer: React.FC<LoadingContainerProps> = ({
   categories,
   getEmoji,
   loadingQuotes,
+  currentQuote, // Added
   settings
 }) => {
   const [quoteIndex, setQuoteIndex] = useState(0);
@@ -55,7 +58,7 @@ const LoadingContainer: React.FC<LoadingContainerProps> = ({
     <div className="flex flex-col items-center justify-center w-full h-full mt-8 sm:mt-16 relative">
       {loadingQuotes.length > 0 && (
         <LoadingQuote
-          quote={loadingQuotes[quoteIndex]}
+          quote={currentQuote} // Use prop here
           settings={{
             stiffness: settings.loadingQuoteSpringStiffness,
             damping: settings.loadingQuoteSpringDamping,

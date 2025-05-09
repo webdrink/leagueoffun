@@ -15,32 +15,37 @@
  *  - Handles language changes and reloads data accordingly.
  *
  * Dependencies: 
- *  - react, react-i18next
+ *  - react, react-i18next, framer-motion
  *  - ./types.ts (various type definitions)
- *  - ./types/questions.ts (for Category type) // This comment might be outdated if Category is from ./types
- *  - ./hooks/* (useGameSettings, useSound, useQuestions)
- *  - ./components/* (IntroScreen, InfoModal)
- *  - CSS files for styling.
+ *  - ./hooks/* (useGameSettings, useSound, useQuestions, useNameBlameSetup)
+ *  - ./components/* (IntroScreen, QuestionScreen, PlayerSetupScreen, LoadingContainer, InfoModal, GameContainer, LanguageChangeFeedback)
+ *  - ./lib/constants (LOADING_QUOTES)
+ *  - ./lib/formatters (getEmoji) - Assuming this exists or will be created
  *
  * Notes: 
  *  - Assumes App.tsx is in the project root, and other primary source directories
  *    (components, hooks, types.ts, lib) are also in the project root.
- *  - Error handling for data loading is included, displaying messages to the user.
  */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { GameSettings, GameStep, QuestionStats } from './types';
-import useSound from './hooks/useSound'; 
+import { AnimatePresence } from 'framer-motion';
+
+import { GameSettings, Question, GameStep, QuestionStats, Player, SupportedLanguage } from './types';
+import useSound from './hooks/useSound';
 import { useGameSettings } from './hooks/useGameSettings';
 import useQuestions from './hooks/useQuestions';
+import useNameBlameSetup from './hooks/useNameBlameSetup';
+
 import IntroScreen from './components/game/IntroScreen';
 import QuestionScreen from './components/game/QuestionScreen';
+import PlayerSetupScreen from './components/game/PlayerSetupScreen';
+import LoadingContainer from './components/game/LoadingContainer';
 import InfoModal from './components/core/InfoModal';
-import GameContainer from './components/game/GameContainer'; 
-import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
+import GameContainer from './components/game/GameContainer';
 import LanguageChangeFeedback from './components/language/LanguageChangeFeedback';
 
-// Import styles already handled by index.tsx
+import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
+import { LOADING_QUOTES } from './lib/constants'; 
 
 function App() {
   const { soundEnabled, toggleSound, playSound, volume, setVolume } = useSound();
@@ -52,20 +57,28 @@ function App() {
     currentRoundQuestions,
     currentQuestion,
     isLoading: isLoadingQuestionsFromHook,
-    playedQuestions,
     index: currentQuestionIndexFromHook,
-    loadQuestions: loadQuestionsFromHook,
     prepareRoundQuestions,
     advanceToNextQuestion,
     goToPreviousQuestion,
-    setPlayedQuestions: setPlayedQuestionsFromHook,
-    resetQuestions: resetQuestionsFromHook
   } = useQuestions(gameSettings);
+
+  const {
+    players, // Player[]
+    tempPlayerName,
+    nameInputError,
+    setTempPlayerName,
+    addPlayer,
+    removePlayer,
+    handlePlayerNameChange, // Added for completeness, if PlayerSetupScreen needs it
+  } = useNameBlameSetup();
 
   const [gameStep, setGameStep] = useState<GameStep>('intro');
   const [questionStats, setQuestionStats] = useState<Pick<QuestionStats, 'totalQuestions' | 'categories'>>({ totalQuestions: 0, categories: {} });
   const [errorLoadingQuestions, setErrorLoadingQuestions] = useState<string | null>(null);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [quoteIndex, setQuoteIndex] = useState(0);
+  const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0); // For NameBlame mode
 
   useEffect(() => {
     if (currentRoundQuestions && currentRoundQuestions.length > 0) {
@@ -81,18 +94,19 @@ function App() {
       });
       stats.categories = categoryMap;
       setQuestionStats(stats);
+      setErrorLoadingQuestions(null);
     } else {
       setQuestionStats({ totalQuestions: 0, categories: {} });
     }
   }, [currentRoundQuestions]);
 
   useEffect(() => {
-    if (!isLoadingQuestionsFromHook && allQuestions.length === 0 && gameStep !== 'intro') {
+    if (!isLoadingQuestionsFromHook && allQuestions.length === 0 && gameStep !== 'intro' && gameStep !== 'loading') {
       setErrorLoadingQuestions(t('error.noQuestionsLoaded'));
-    } else {
+    } else if (allQuestions.length > 0 && errorLoadingQuestions === t('error.noQuestionsLoaded')) {
       setErrorLoadingQuestions(null);
     }
-  }, [isLoadingQuestionsFromHook, allQuestions, gameStep, t]);
+  }, [isLoadingQuestionsFromHook, allQuestions, gameStep, t, errorLoadingQuestions]);
 
   useEffect(() => {
     if (gameSettings.language && i18n.language !== gameSettings.language) {
@@ -103,89 +117,179 @@ function App() {
     }
   }, [gameSettings.language, i18n]);
 
-  const handleStartGame = async () => {
-    const success = await prepareRoundQuestions(gameSettings);
-    if (success) {
-      setGameStep('game');
-      playSound('game_start');
-    } else {
-      setErrorLoadingQuestions(t('error.noQuestionsForRound'));
+  const handleStartGameFlow = async () => {
+    if (gameSettings.gameMode === 'nameBlame' && players.filter(p => p.name.trim() !== '').length < 2) {
+      setGameStep('playerSetup');
+      return;
     }
+
+    setGameStep('loading');
+    setQuoteIndex(0);
+    const quoteTimer = setInterval(() => {
+      setQuoteIndex(prev => (prev + 1) % LOADING_QUOTES.length);
+    }, gameSettings.loadingQuoteIntervalMs || 2000); // Default to 2s if not in settings
+
+    setTimeout(async () => {
+      clearInterval(quoteTimer);
+      const success = await prepareRoundQuestions(gameSettings);
+      if (success && currentRoundQuestions.length > 0) {
+        setGameStep('game');
+        setCurrentPlayerIndex(0); // Reset for new game
+        playSound('game_start');
+        setErrorLoadingQuestions(null);
+      } else {
+        setErrorLoadingQuestions(t('error.noQuestionsForRound'));
+        setGameStep('intro');
+      }
+    }, gameSettings.rouletteDurationMs || 3000); // Default to 3s if not in settings
+  };
+  
+  const handlePlayerSetupComplete = async () => {
+    if (players.filter(p => p.name.trim() !== '').length < 2 && gameSettings.gameMode === 'nameBlame') {
+      return;
+    }
+    handleStartGameFlow();
   };
 
   const handleNextQuestion = () => {
     if (currentQuestionIndexFromHook < currentRoundQuestions.length - 1) {
       advanceToNextQuestion();
+      if (gameSettings.gameMode === 'nameBlame') {
+        setCurrentPlayerIndex(prev => (prev + 1) % players.filter(p => p.name.trim() !== '').length);
+      }
       playSound('new_question');
     } else {
-      setGameStep('intro');
+      setGameStep('intro'); 
       playSound('summary_fun');
     }
   };
 
   const handlePreviousQuestion = () => {
     goToPreviousQuestion();
+    if (gameSettings.gameMode === 'nameBlame' && currentPlayerIndex > 0) {
+      setCurrentPlayerIndex(prev => prev -1);
+    }
   };
 
-  const handleLanguageChange = (newLanguage: string) => {
-    if (Object.keys(SUPPORTED_LANGUAGES).includes(newLanguage)) {
-      updateGameSettings({ language: newLanguage as keyof typeof SUPPORTED_LANGUAGES });
-    } else {
-      console.warn(`Attempted to change to unsupported language: ${newLanguage}`);
-      updateGameSettings({ language: 'en' });
-    }
+  const handleLanguageChange = (newLanguage: SupportedLanguage) => {
+    updateGameSettings({ language: newLanguage });
   };
 
   const handleTitleClick = () => {
     setGameStep('intro');
   };
+  
+  const getEmoji = (categoryId: string): string => {
+    let foundCategory = currentRoundQuestions.find(q => q.categoryId === categoryId);
+    if (!foundCategory) {
+      foundCategory = allQuestions.find(q => q.categoryId === categoryId);
+    }
+    return foundCategory?.categoryEmoji || '❓';
+  };
+
+  const handleBlame = (blamedPlayerName: string) => {
+    console.log(`${blamedPlayerName} was blamed for question: ${currentQuestion?.text}`);
+    handleNextQuestion(); 
+  };
 
   return (
     <GameContainer onTitleClick={handleTitleClick}>
-      {gameStep === 'intro' && (
-        <IntroScreen
-          onStartGame={handleStartGame}
-          gameSettings={gameSettings}
-          onToggleSound={toggleSound}
-          soundEnabled={soundEnabled}
-          volume={volume}
-          onVolumeChange={setVolume}
-          isLoading={isLoadingQuestionsFromHook}
-          nameBlameMode={false} 
-          onToggleNameBlame={(checked: boolean) => console.log('Name blame toggled:', checked)}
-          onOpenDebugPanel={() => console.log('Open debug panel')} 
-          onOpenInfoModal={() => setShowInfoModal(true)} 
-          mainButtonLabel={t('intro.start_game')}
-        />
-      )}
-      
-      {gameStep === 'game' && currentQuestion && (
-        <QuestionScreen
-          question={currentQuestion}
-          totalQuestions={currentRoundQuestions.length}
-          index={currentQuestionIndexFromHook}
-          onNext={handleNextQuestion} // Corrected prop name
-          onBack={handlePreviousQuestion} // Corrected prop name
-          gameSettings={gameSettings}
-          // Props from QuestionScreenProps that need to be supplied or handled:
-          nameBlameMode={false} // Placeholder - this state needs to be managed in App.tsx or a new hook
-          activePlayers={[]} // Placeholder - player state needs management
-          currentPlayerIndex={0} // Placeholder - player state needs management
-          onBlame={() => console.log("Blame action triggered")} // Placeholder - blame logic needed
-        />
-      )}
-      
+      <AnimatePresence mode="wait">
+        {gameStep === 'intro' && (
+          <IntroScreen
+            key="intro"
+            onStartGame={handleStartGameFlow}
+            gameSettings={gameSettings}
+            onUpdateGameSettings={updateGameSettings} 
+            onToggleSound={toggleSound}
+            soundEnabled={soundEnabled}
+            volume={volume}
+            onVolumeChange={setVolume}
+            isLoading={isLoadingQuestionsFromHook}
+            nameBlameMode={gameSettings.gameMode === 'nameBlame'}
+            onToggleNameBlame={(checked) => {
+              updateGameSettings({ gameMode: checked ? 'nameBlame' : 'classic' });
+            }}
+            onOpenDebugPanel={() => { /* TODO: Implement debug panel toggle */ }}
+            onOpenInfoModal={() => setShowInfoModal(true)}
+            mainButtonLabel={isLoadingQuestionsFromHook ? t('intro.loading_questions') : t('intro.start_game')}
+            errorLoadingQuestions={errorLoadingQuestions}
+            supportedLanguages={SUPPORTED_LANGUAGES} 
+            currentLanguage={gameSettings.language}
+            onLanguageChange={handleLanguageChange}
+            questionStats={questionStats}
+          />
+        )}
+
+        {gameStep === 'playerSetup' && (
+          <PlayerSetupScreen
+            key="playerSetup"
+            players={players} 
+            tempPlayerName={tempPlayerName}
+            nameInputError={nameInputError}
+            onTempPlayerNameChange={setTempPlayerName}
+            onAddPlayer={addPlayer}
+            onRemovePlayer={removePlayer} 
+            onStartGame={handlePlayerSetupComplete}
+            onBackToIntro={() => setGameStep('intro')}
+            onPlayerNameChange={handlePlayerNameChange} 
+          />
+        )}
+
+        {gameStep === 'loading' && (
+          <LoadingContainer
+            key="loading"
+            categories={(currentRoundQuestions.length > 0 ? currentRoundQuestions : allQuestions)
+              .map(q => q.categoryName)
+              .filter((value, index, self) => self.indexOf(value) === index && value) 
+              .slice(0, 10)}
+            getEmoji={getEmoji}
+            loadingQuotes={LOADING_QUOTES}
+            currentQuote={LOADING_QUOTES[quoteIndex % LOADING_QUOTES.length]} 
+            settings={{
+              loadingQuoteSpringStiffness: gameSettings.loadingQuoteSpringStiffness,
+              loadingQuoteSpringDamping: gameSettings.loadingQuoteSpringDamping,
+              loadingQuoteTransitionDurationSec: gameSettings.loadingQuoteTransitionDurationSec,
+              cardFallDistance: gameSettings.cardFallDistance,
+              cardFallStaggerDelaySec: gameSettings.cardFallStaggerDelaySec,
+              cardStackOffsetY: gameSettings.cardStackOffsetY,
+              loadingQuoteIntervalMs: gameSettings.loadingQuoteIntervalMs,
+            }}
+          />
+        )}
+
+        {gameStep === 'game' && currentQuestion && (
+          <QuestionScreen
+            key="game"
+            question={currentQuestion}
+            index={currentQuestionIndexFromHook}
+            totalQuestions={currentRoundQuestions.length}
+            gameSettings={gameSettings}
+            nameBlameMode={gameSettings.gameMode === 'nameBlame'}
+            activePlayers={players.filter(p => p.name.trim() !== '')} 
+            currentPlayerIndex={currentPlayerIndex} 
+            onBlame={handleBlame} 
+            onNext={handleNextQuestion}
+            onBack={handlePreviousQuestion}
+          />
+        )}
+      </AnimatePresence>
+
       {showInfoModal && (
         <InfoModal
           isOpen={showInfoModal}
           onClose={() => setShowInfoModal(false)}
-          onResetAppData={() => console.log('Reset App Data triggered from InfoModal')}
+          onResetAppData={() => {
+            console.log('Reset App Data triggered');
+            localStorage.clear();
+            window.location.reload();
+          }}
         />
       )}
       
-      <LanguageChangeFeedback 
-        language={gameSettings.language} 
-        languageName={SUPPORTED_LANGUAGES[gameSettings.language]} 
+      <LanguageChangeFeedback
+        language={gameSettings.language}
+        languageName={SUPPORTED_LANGUAGES[gameSettings.language] || gameSettings.language}
       />
     </GameContainer>
   );

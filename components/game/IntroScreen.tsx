@@ -4,7 +4,7 @@ import { Button } from '../core/Button';
 import { Checkbox } from '../core/Checkbox';
 import { Label } from '../core/Label';
 import VolumeControl from '../core/VolumeControl';
-import { GameSettings } from '../../types';
+import { GameSettings, QuestionStats, SupportedLanguage } from '../../types';
 import { Switch } from '../core/Switch';
 import { Slider } from '../core/Slider';
 import { Volume2, VolumeX, Settings as SettingsIcon, Info as InfoIcon } from 'lucide-react'; // Using lucide-react consistently
@@ -24,6 +24,12 @@ interface IntroScreenProps {
   onOpenDebugPanel: () => void;
   onOpenInfoModal: () => void;
   mainButtonLabel?: string;
+  onUpdateGameSettings: (newSettings: Partial<GameSettings>) => void;
+  errorLoadingQuestions: string | null;
+  supportedLanguages: Record<string, string>;
+  currentLanguage: SupportedLanguage;
+  onLanguageChange: (newLanguage: SupportedLanguage) => void;
+  questionStats: Pick<QuestionStats, 'totalQuestions' | 'categories'>;
 }
 
 /**
@@ -44,6 +50,12 @@ interface IntroScreenProps {
  * @param {() => void} props.onOpenDebugPanel - Callback function to open the debug panel.
  * @param {() => void} props.onOpenInfoModal - Callback function to open the information modal.
  * @param {string} [props.mainButtonLabel] - Optional label for the main button.
+ * @param {(newSettings: Partial<GameSettings>) => void} props.onUpdateGameSettings - Callback function to update game settings.
+ * @param {string | null} props.errorLoadingQuestions - Error message for loading questions.
+ * @param {Record<string, string>} props.supportedLanguages - Supported languages for the game.
+ * @param {SupportedLanguage} props.currentLanguage - The current language of the game.
+ * @param {(newLanguage: SupportedLanguage) => void} props.onLanguageChange - Callback function to change the language.
+ * @param {Pick<QuestionStats, 'totalQuestions' | 'categories'>} props.questionStats - Statistics about the questions.
  *
  * @returns {React.FC} A React functional component rendering the introductory screen.
  */
@@ -59,7 +71,13 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
   volume,
   onOpenDebugPanel,
   onOpenInfoModal,
-  mainButtonLabel
+  mainButtonLabel,
+  onUpdateGameSettings,
+  errorLoadingQuestions,
+  supportedLanguages,
+  currentLanguage,
+  onLanguageChange,
+  questionStats
 }) => {
   const { t } = useTranslation();
   return (
@@ -72,14 +90,14 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
     >      <div className="text-center mb-6">
         <h1 className="text-3xl sm:text-4xl font-bold text-purple-700">{t('intro.heading')}</h1>
         <p className="text-pink-600 mt-2 text-sm sm:text-base">{t('intro.subheading')}</p>
-      </div>      { (
+      </div>      {errorLoadingQuestions && (
         <motion.div 
           initial={{opacity: 0, height: 0}} 
           animate={{opacity:1, height: 'auto'}}
           className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md text-sm"
         >
           <p className="font-semibold">{t('intro.error_loading_questions')}</p>
-          <p className="mt-1">{t('intro.error_check_files')}</p>
+          <p className="mt-1">{errorLoadingQuestions}</p>
         </motion.div>
       )}
 

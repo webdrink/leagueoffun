@@ -27,11 +27,15 @@ export interface GameSettings {
   loadingQuoteSpringStiffness: number;
   loadingQuoteSpringDamping: number;
   loadingQuoteTransitionDurationSec: number;
+  cardFallDistance: number; // Added
+  cardFallStaggerDelaySec: number; // Added
+  cardStackOffsetY: number; // Added
 
   numberOfRounds: number;
   timePerQuestion: number;
   showScore: boolean;
-  allowSkip: boolean;  showIntroAnimation: boolean;
+  allowSkip: boolean;  
+  showIntroAnimation: boolean;
   introAnimationDuration: number;
   questionFontSize: number;
   dynamicThemeEnabled: boolean;
@@ -39,6 +43,7 @@ export interface GameSettings {
   
   // Language settings
   language: SupportedLanguage;
+  gameMode: 'classic' | 'nameBlame'; // Added
 }
 
 export interface Category {
@@ -58,6 +63,7 @@ export interface Question {
 export interface Player {
   id: string;
   name: string;
+  score?: number; // Optional: score for the player
 }
 
 export interface NameBlameEntry {
@@ -67,7 +73,7 @@ export interface NameBlameEntry {
   timestamp: string;
 }
 
-export type GameStep = 'intro' | 'playerSetup' | 'roulette' | 'game' | 'summary';
+export type GameStep = 'intro' | 'playerSetup' | 'loading' | 'roulette' | 'game' | 'summary'; // Added 'loading'
 
 export interface QuestionStats {
   totalQuestions: number;
@@ -155,7 +161,8 @@ export interface Translation {
     reset_data_description: string;
     close: string;
     reset_app_data: string;
-  };  debug: {
+  };  
+  debug: {
     title: string;
     sound_settings: string;
     sound_enabled: string;
