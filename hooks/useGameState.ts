@@ -25,6 +25,33 @@ interface UseGameStateOutput {
 /**
  * Main game state management hook
  */
+/**
+ * Custom React hook that manages the overall game state for the BlameGame application.
+ * 
+ * This hook encapsulates logic for handling game settings, steps, player management,
+ * question progression, sound effects, and various game modes (including NameBlame mode).
+ * It provides a unified interface for controlling the game flow, handling user actions,
+ * and resetting or restarting the game.
+ * 
+ * @param initialGameSettings - The initial configuration for the game, including settings such as round duration and quote intervals.
+ * @returns An object containing the current game state, setters for state variables, and functions to control game progression and data management:
+ * - `step`: The current step or phase of the game.
+ * - `gameSettings`: The current game settings.
+ * - `debugMode`: Whether debug mode is enabled.
+ * - `isInfoModalOpen`: Whether the info modal is open.
+ * - `setStep`: Function to set the current game step.
+ * - `setGameSettings`: Function to update the game settings.
+ * - `setDebugMode`: Function to toggle debug mode.
+ * - `setIsInfoModalOpen`: Function to open or close the info modal.
+ * - `startRoulette`: Function to start the roulette animation and prepare the game round.
+ * - `handleNextQuestion`: Function to advance to the next question or end the round.
+ * - `handleBlame`: Function to record a blame action in NameBlame mode and advance the game.
+ * - `restart`: Function to restart the game and reset questions.
+ * - `resetAppData`: Function to reset all app data, including players and settings.
+ *
+ * @see GameSettings
+ * @see UseGameStateOutput
+ */
 const useGameState = (initialGameSettings: GameSettings): UseGameStateOutput => {
   const [gameSettings, setGameSettings] = useLocalStorage<GameSettings>('blamegame-settings', initialGameSettings);
   const [step, setStep] = useState<GameStep>('intro');

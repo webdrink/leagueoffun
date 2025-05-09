@@ -8,6 +8,16 @@
  * @param defaultValue Default value if key doesn't exist
  * @returns The stored value or default value
  */
+/**
+ * Retrieves a value from localStorage by the specified key and parses it as JSON.
+ * If the key does not exist or an error occurs (e.g., invalid JSON or localStorage is unavailable),
+ * the provided default value is returned instead.
+ *
+ * @template T - The expected type of the value to retrieve.
+ * @param {string} key - The key under which the value is stored in localStorage.
+ * @param {T} defaultValue - The value to return if the key does not exist or an error occurs.
+ * @returns {T} The parsed value from localStorage, or the default value if not found or on error.
+ */
 export const getStorageValue = <T>(key: string, defaultValue: T): T => {
   if (typeof window === 'undefined') {
     return defaultValue;

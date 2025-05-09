@@ -58,15 +58,5 @@
     "questionId": "who_leaves_no_trace",
     "text": "Wer hinterlässt keine Spuren?",
     "category": "in_nature"
-  },
-  {
-    "questionId": "in_nature_sample_question_1",
-    "text": "Sample question 1 for in_nature in de",
-    "category": "in_nature"
-  },
-  {
-    "questionId": "in_nature_sample_question_2",
-    "text": "Sample question 2 for in_nature in de",
-    "category": "in_nature"
   }
 ]

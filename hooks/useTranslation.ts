@@ -8,6 +8,22 @@ import { useGameSettings } from './useGameSettings';
  * 
  * @returns Translation function and current language
  */
+/**
+ * Custom React hook for handling translations within the application.
+ *
+ * This hook provides a translation function `t` that retrieves localized strings
+ * based on a given key and optional interpolation parameters. It also exposes the
+ * current language and the underlying i18n instance for advanced usage.
+ *
+ * @returns An object containing:
+ * - `t`: A function to translate keys with optional parameters.
+ * - `currentLanguage`: The currently selected language code.
+ * - `i18n`: The i18n instance for advanced internationalization operations.
+ *
+ * @example
+ * const { t, currentLanguage } = useTranslation();
+ * const title = t('app.title');
+ */
 const useTranslation = () => {
   const { gameSettings } = useGameSettings();
   const { t: i18nT, i18n } = useReactI18nTranslation();

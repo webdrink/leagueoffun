@@ -26,6 +26,21 @@ interface UsePlayerSetupOutput {
 /**
  * Hook to manage player setup and NameBlame game mode
  */
+/**
+ * Custom React hook for managing the player setup and name blame logic in the BlameGame application.
+ *
+ * This hook provides state and utility functions for:
+ * - Managing player names and IDs with persistent local storage.
+ * - Adding, removing, and updating players (with validation and limits).
+ * - Handling temporary player name input and related errors.
+ * - Managing the "name blame" mode and log of blame actions.
+ * - Advancing the current player in a round-robin fashion.
+ * - Resetting players and the blame log to their initial states.
+ * - Validating the player setup for minimum requirements.
+ * - Retrieving only active players (with non-empty names).
+ *
+ * @returns {UsePlayerSetupOutput} An object containing player state, blame log, and all related handlers and utilities.
+ */
 const useNameBlameSetup = (): UsePlayerSetupOutput => {
   const [nameBlameMode, setNameBlameMode] = useLocalStorage<boolean>('blamegame-nameblame-mode', false);
   const [players, setPlayers] = useLocalStorage<Player[]>('blamegame-player-names', [

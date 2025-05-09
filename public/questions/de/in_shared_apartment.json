@@ -63,15 +63,5 @@
     "questionId": "who_is_messiest_roommate",
     "text": "Wer ist der unordentlichste Mitbewohner?",
     "category": "in_shared_apartment"
-  },
-  {
-    "questionId": "in_shared_apartment_sample_question_1",
-    "text": "Sample question 1 for in_shared_apartment in de",
-    "category": "in_shared_apartment"
-  },
-  {
-    "questionId": "in_shared_apartment_sample_question_2",
-    "text": "Sample question 2 for in_shared_apartment in de",
-    "category": "in_shared_apartment"
   }
 ]

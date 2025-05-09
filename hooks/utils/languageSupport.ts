@@ -60,6 +60,18 @@ export function isValidLanguage(language: string): boolean {
 /**
  * Hook to manage language throughout the application
  */
+/**
+ * Custom React hook to manage and persist the application's language setting.
+ *
+ * This hook provides the current language, a function to change the language,
+ * and a list of supported languages. It synchronizes the language setting with
+ * local storage and updates the state when the game settings change.
+ *
+ * @returns An object containing:
+ * - `currentLanguage`: The currently selected language.
+ * - `changeLanguage`: Function to update the language and persist it in settings.
+ * - `supportedLanguages`: Array of all supported language codes.
+ */
 export const useLanguage = () => {
   const [gameSettings, setGameSettings] = useLocalStorage<GameSettings>(
     'blamegame-settings',

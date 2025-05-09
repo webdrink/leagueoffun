@@ -11,6 +11,15 @@ interface LoadingQuoteProps {
   className?: string;
 }
 
+/**
+ * Animated component that displays a loading quote with smooth entrance and exit transitions.
+ *
+ * @param quote - The quote text to display.
+ * @param settings - Animation settings including `stiffness` and `damping` for the spring transition.
+ * @param className - Optional additional CSS classes for styling the quote container.
+ *
+ * Uses Framer Motion for animation. The component re-animates when the `quote` prop changes.
+ */
 const LoadingQuote: React.FC<LoadingQuoteProps> = ({ quote, settings, className }) => {
   return (
     <motion.div

@@ -18,7 +18,8 @@ const translations = {
   'game.next_question': 'Next Question',
   'game.summary': 'Summary',
   'game.play_again': 'Play Again',
-  
+  'questions.counter': 'Question {current} of {total}',
+
   // Settings
   'settings.language': 'Language',
   'settings.sound': 'Sound',

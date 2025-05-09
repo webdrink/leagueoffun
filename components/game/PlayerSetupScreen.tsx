@@ -18,6 +18,22 @@ interface PlayerSetupScreenProps {
   onBackToIntro: () => void;
 }
 
+/**
+ * PlayerSetupScreen component allows users to set up players before starting the game.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Array<{ id: string; name: string }>} props.players - The list of current players.
+ * @param {string} props.tempPlayerName - The temporary name input for a new player.
+ * @param {string | null} props.nameInputError - Error message for the player name input, if any.
+ * @param {(name: string) => void} props.onTempPlayerNameChange - Handler for updating the temporary player name input.
+ * @param {() => void} props.onAddPlayer - Handler for adding a new player to the list.
+ * @param {(id: string) => void} props.onRemovePlayer - Handler for removing a player by ID.
+ * @param {() => void} props.onStartGame - Handler for starting the game.
+ * @param {() => void} props.onBackToIntro - Handler for navigating back to the intro screen.
+ *
+ * @returns {JSX.Element} The rendered player setup screen.
+ */
 const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
   players,
   tempPlayerName,

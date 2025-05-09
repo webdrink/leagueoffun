@@ -1,0 +1,42 @@
+[
+  {
+    "questionId": "who_always_forgets_passport",
+    "text": "Wer vergisst immer den Reisepass?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_overpacks_for_trips",
+    "text": "Wer packt zu viel für Reisen ein?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_gets_lost_in_new_cities",
+    "text": "Wer verirrt sich in neuen Städten?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_takes_too_many_travel_photos",
+    "text": "Wer macht zu viele Reisefotos?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_always_arrives_late_at_airport",
+    "text": "Wer kommt immer zu spät am Flughafen an?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_plans_every_travel_detail",
+    "text": "Wer plant jedes Reisedetail?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_prefers_local_cuisine_abroad",
+    "text": "Wer bevorzugt lokale Küche im Ausland?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_needs_bathroom_breaks_most_often",
+    "text": "Wer braucht die meisten Toilettenpausen?",
+    "category": "travel"
+  }
+]

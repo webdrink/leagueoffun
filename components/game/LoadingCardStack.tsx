@@ -13,6 +13,23 @@ interface LoadingCardStackProps {
   };
 }
 
+/**
+ * A React functional component that renders a stack of animated loading cards.
+ * Each card represents a category and is displayed with an emoji and a name.
+ * The cards are animated using Framer Motion, with configurable settings for
+ * animation behavior such as fall distance, stagger delay, and stack offset.
+ *
+ * @component
+ * @param {LoadingCardStackProps} props - The props for the component.
+ * @param {string[]} props.categories - An array of category names to display on the cards.
+ * @param {(category: string) => string} props.getEmoji - A function that returns an emoji for a given category.
+ * @param {Object} props.settings - Configuration settings for the card animations.
+ * @param {number} props.settings.cardFallDistance - The initial vertical distance the cards fall from.
+ * @param {number} props.settings.cardStackOffsetY - The vertical offset between stacked cards.
+ * @param {number} props.settings.cardFallStaggerDelaySec - The delay in seconds between the animations of consecutive cards.
+ *
+ * @returns {JSX.Element} A JSX element representing the animated stack of loading cards.
+ */
 const LoadingCardStack: React.FC<LoadingCardStackProps> = ({
   categories,
   getEmoji,

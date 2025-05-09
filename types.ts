@@ -49,9 +49,10 @@ export interface Category {
 
 export interface Question {
   text: string;
-  category?: string;
-  categoryId?: string;
-  emoji?: string;
+  categoryId: string; // Renamed from category to categoryId, stores the ID
+  categoryName: string; // Stores the translated category name for display
+  categoryEmoji: string; // Stores the emoji for the category
+  questionId?: string; // Optional: a unique ID for the question itself
 }
 
 export interface Player {

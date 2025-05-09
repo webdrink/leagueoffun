@@ -8,6 +8,20 @@ interface LanguageSelectorProps {
   className?: string;
 }
 
+/**
+ * LanguageSelector component allows users to select their preferred language from a dropdown menu.
+ *
+ * @param {LanguageSelectorProps} props - The props for the component.
+ * @param {string} [props.className] - Optional additional CSS classes to apply to the root element.
+ *
+ * @returns {JSX.Element} The rendered language selector component.
+ *
+ * @remarks
+ * - Uses `useGameSettings` to access and update the current language in game settings.
+ * - Uses `useTranslation` for localized label text.
+ * - Renders a `<select>` element populated with supported languages from `SUPPORTED_LANGUAGES`.
+ * - On language change, updates the game settings with the new language.
+ */
 const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className = '' }) => {
   const { gameSettings, updateGameSettings } = useGameSettings();
   const { t } = useTranslation();

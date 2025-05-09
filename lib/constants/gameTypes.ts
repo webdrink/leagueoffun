@@ -16,6 +16,13 @@ export const DIFFICULTY_LEVELS = {
 } as const;
 
 // Question type constants
+/**
+ * Defines the available types of questions in the game.
+ * 
+ * @property TEXT - Represents a text-based question.
+ * @property IMAGE - Represents an image-based question.
+ * @property MULTIMEDIA - Represents a multimedia (e.g., audio or video) question.
+ */
 export const QUESTION_TYPES = {
   TEXT: 'text',
   IMAGE: 'image',

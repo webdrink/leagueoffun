@@ -16,6 +16,24 @@ interface SettingsScreenProps {
  * Settings screen component that allows users to configure app settings
  * including language preferences
  */
+/**
+ * SettingsScreen component displays the settings UI for the game, allowing users to update game settings such as language.
+ *
+ * @component
+ * @param {SettingsScreenProps} props - The props for the SettingsScreen component.
+ * @param {GameSettings} props.gameSettings - The current game settings.
+ * @param {(settings: GameSettings) => void} props.onUpdateSettings - Callback to update the game settings.
+ * @param {() => void} props.onBack - Callback to navigate back from the settings screen.
+ *
+ * @returns {JSX.Element} The rendered settings screen component.
+ *
+ * @example
+ * <SettingsScreen
+ *   gameSettings={gameSettings}
+ *   onUpdateSettings={handleUpdateSettings}
+ *   onBack={handleBack}
+ * />
+ */
 const SettingsScreen: React.FC<SettingsScreenProps> = ({
   gameSettings,
   onUpdateSettings,

@@ -1,242 +1,42 @@
 [
   {
-    "questionId": "kevin_vergisst_geburtstage",
-    "text": "Wer vergisst immer die Geburtstage seiner Freunde – außer den eigenen?",
+    "questionId": "who_is_most_like_kevin",
+    "text": "Wer ist am meisten wie Kevin?",
     "category": "kevin"
   },
   {
-    "questionId": "kevin_hat_die_lautesten_lacher",
-    "text": "Wer hat den lautesten Lacher im Raum?",
+    "questionId": "who_would_kevin_be_friends_with",
+    "text": "Mit wem würde Kevin befreundet sein?",
     "category": "kevin"
   },
   {
-    "questionId": "kevin_ist_der_schlechteste_luger",
-    "text": "Wer kann absolut nicht lügen, ohne rot zu werden?",
+    "questionId": "who_would_kevin_annoy_most",
+    "text": "Wen würde Kevin am meisten nerven?",
     "category": "kevin"
   },
   {
-    "questionId": "kevin_schickt_sprachnachrichten_die_podcasts_sind",
-    "text": "Wer schickt Sprachnachrichten, die länger sind als ein Podcast?",
+    "questionId": "who_would_help_kevin",
+    "text": "Wer würde Kevin helfen?",
     "category": "kevin"
   },
   {
-    "questionId": "kevin_vergisst_jede_verabredung",
-    "text": "Wer braucht drei Erinnerungen, um eine Verabredung nicht zu vergessen?",
+    "questionId": "who_would_understand_kevin",
+    "text": "Wer würde Kevin verstehen?",
     "category": "kevin"
   },
   {
-    "questionId": "kevin_verwendet_die_meisten_gifs",
-    "text": "Wer kommuniziert am liebsten nur mit GIFs?",
+    "questionId": "who_has_kevin_energy",
+    "text": "Wer hat Kevin-Energie?",
     "category": "kevin"
   },
   {
-    "questionId": "kevin_hat_die_meisten_insiderwitze",
-    "text": "Wer erfindet ständig neue Insider, die niemand versteht?",
+    "questionId": "who_would_laugh_at_kevins_jokes",
+    "text": "Wer würde über Kevins Witze lachen?",
     "category": "kevin"
   },
   {
-    "questionId": "kevin_bestellt_das_unnotigste_am_buffet",
-    "text": "Wer bestellt immer das Unnötigste vom Buffet?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_redet_immer_von_frueher",
-    "text": "Wer sagt am häufigsten 'Weißt du noch damals...?'",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_hat_die_lustigsten_spitznamen",
-    "text": "Wer vergibt jedem sofort einen albernen Spitznamen?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_vergisst_das_passwort",
-    "text": "Wer klickt bei jeder Website auf 'Passwort vergessen'?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_verliert_schluessel_jeden_tag",
-    "text": "Wer sucht jeden Tag mindestens einmal seinen Schlüssel?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_macht_selfies_mit_haustieren",
-    "text": "Wer macht die meisten Selfies mit fremden Haustieren?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_hat_die_seltsamsten_träume",
-    "text": "Wer erzählt immer von den seltsamsten Träumen?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_denkt_kaffee_ist_ein_lebensmittel",
-    "text": "Wer zählt Kaffee als vollwertige Mahlzeit?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_hat_die_meisten_screenshots",
-    "text": "Wer hat die peinlichsten Screenshots auf dem Handy?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_macht_jede_aktion_meme-würdig",
-    "text": "Wer wird am häufigsten zur Meme-Vorlage?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_liest_nie_die_anleitung",
-    "text": "Wer ignoriert bei allem zuerst die Anleitung?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_macht_immer_screenshots_von_chats",
-    "text": "Wer macht am meisten Screenshots von Chats und schickt sie weiter?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_hat_die_chaotischste_whatsappgruppe",
-    "text": "Wer ist Admin der chaotischsten WhatsApp-Gruppe aller Zeiten?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_hinterfragt_jede_spielregel",
-    "text": "Wer diskutiert bei jedem Spiel erstmal die Regeln?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_singt_mit_falschem_text",
-    "text": "Wer singt immer mit – aber mit komplett falschem Text?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_hat_die_seltsamste_weckermelodie",
-    "text": "Wer hat die peinlichste Weckermelodie?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_fährt_nie_tankvoll",
-    "text": "Wer fährt grundsätzlich mit fast leerem Tank?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_macht_unangekuendigte_monologe",
-    "text": "Wer hält plötzlich Monologe über völlig absurde Themen?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_verpasst_jeden_bus_um_3_sekunden",
-    "text": "Wer verpasst regelmäßig Bus oder Bahn – um genau 3 Sekunden?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_hat_den_chaotischsten_kuehlschrank",
-    "text": "Wer hat den chaotischsten Kühlschrankinhalt?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_hat_die_meisten_dinge_in_warenkoerben",
-    "text": "Wer hat die meisten Dinge in Online-Warenkörben – aber bestellt nie?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_macht_mit_alexa_kleinen_talk",
-    "text": "Wer führt regelmäßig Smalltalk mit Alexa oder Siri?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_sagt_immer_ich_bin_gleich_fertig",
-    "text": "Wer sagt ständig 'Ich bin gleich fertig' – und braucht noch 30 Minuten?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_wird_zum_dj_ohne_zu_fragen",
-    "text": "Wer übernimmt ungefragt die Musikbox auf jeder Party?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_kauft_die_nutzlosesten_gadgets",
-    "text": "Wer kauft die sinnlosesten, aber lustigsten Technik-Gadgets?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_schreibt_nachrichten_in_capslock",
-    "text": "Wer schreit in Textnachrichten mit CAPSLOCK?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_kann_aus_wenig_party_machen",
-    "text": "Wer braucht nur Musik und zwei Leute, um eine Party zu starten?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_hat_die_schraegsten_favoriten",
-    "text": "Wer hat die seltsamsten Lieblingsgerichte?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_kennt_jeden_filmquote",
-    "text": "Wer antwortet auf normale Fragen mit Filmzitaten?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_macht_die_meisten_wortspiele",
-    "text": "Wer macht bei jedem zweiten Satz ein Wortspiel?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_verliert_immer_bei_mensch_aergere_dich_nicht",
-    "text": "Wer verliert immer bei 'Mensch ärgere dich nicht' – und ärgert sich wirklich?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_trägt_die_ausgefallensten_socken",
-    "text": "Wer trägt die verrücktesten Socken?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_vergisst_immer_die_namensschilder",
-    "text": "Wer vergisst bei jeder Party sein Namensschild – obwohl er es selbst gebastelt hat?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_kann_jede_melodie_mitbeatboxen",
-    "text": "Wer beatboxt ungefragt jede Hintergrundmusik mit?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_hat_die_komischste_google_history",
-    "text": "Wer hat wahrscheinlich die seltsamste Google-Suchhistorie?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_lacht_immer_beim_falschen_moment",
-    "text": "Wer lacht garantiert im unpassendsten Moment?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_wuerde_sich_als_sushi_verkleiden",
-    "text": "Wer würde sich zu Karneval als Sushi verkleiden – und es durchziehen?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_wuerde_auf_der_buehne_improvisieren",
-    "text": "Wer könnte spontan auf die Bühne springen und irgendwas performen?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_hat_die_meisten_verlorenen_handys",
-    "text": "Wer hat schon die meisten Handys verloren – und trotzdem keins draus gelernt?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_wuerde_den_barmann_umarmen",
-    "text": "Wer würde am ehesten den Barkeeper umarmen?",
-    "category": "kevin"
-  },
-  {
-    "questionId": "kevin_ist_unerwartet_der_philosoph",
-    "text": "Wer wird betrunken plötzlich zum Philosophen?",
+    "questionId": "who_would_kevin_call_for_help",
+    "text": "Wen würde Kevin um Hilfe bitten?",
     "category": "kevin"
   }
 ]

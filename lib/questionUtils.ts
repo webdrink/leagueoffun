@@ -142,6 +142,18 @@ export const filterUnplayedQuestions = (
  * @param playedQuestionIds Array of IDs of questions that have already been played
  * @returns Promise<Question | null> A promise that resolves to a random question or null if no questions are available
  */
+/**
+ * Retrieves a random unplayed question from a specified category and language.
+ *
+ * Loads all questions for the given category and language, filters out questions
+ * that have already been played (based on their IDs), and returns a random unplayed
+ * question. If all questions have been played or an error occurs, returns `null`.
+ *
+ * @param category - The category from which to select a question.
+ * @param language - The language in which to load the questions.
+ * @param playedQuestionIds - An array of question IDs that have already been played.
+ * @returns A promise that resolves to a random unplayed `Question` object, or `null` if none are available or an error occurs.
+ */
 export const getRandomQuestionFromCategory = async (
   category: string,
   language: SupportedLanguage,

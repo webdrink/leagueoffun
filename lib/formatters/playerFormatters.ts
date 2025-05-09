@@ -18,6 +18,16 @@ export function generatePlayerId(): string {
  * @param existingPlayers List of existing players to check for duplicates
  * @returns Object with validation result and error message if invalid
  */
+/**
+ * Validates a player's name against several criteria:
+ * - The name must not be empty.
+ * - The name must not exceed 20 characters.
+ * - The name must not duplicate any existing player's name (case-insensitive, trimmed).
+ *
+ * @param name - The player's name to validate.
+ * @param existingPlayers - The list of existing players to check for duplicates.
+ * @returns An object indicating whether the name is valid and an error message if not.
+ */
 export function validatePlayerName(name: string, existingPlayers: Player[]): { valid: boolean; error: string | null } {
   const trimmedName = name.trim();
   

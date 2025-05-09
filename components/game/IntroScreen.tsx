@@ -27,6 +27,28 @@ interface IntroScreenProps {
   mainButtonLabel?: string;
 }
 
+/**
+ * IntroScreen component represents the introductory screen of the game.
+ * It provides options to start the game, toggle settings, and display errors or additional controls.
+ *
+ * @component
+ * @param {IntroScreenProps} props - The props for the IntroScreen component.
+ * @param {GameSettings} props.gameSettings - The settings for the game.
+ * @param {boolean} props.isLoading - Indicates whether the game is currently loading.
+ * @param {string | null} props.csvError - Error message related to loading CSV files, if any.
+ * @param {boolean} props.nameBlameMode - Indicates whether the "Name Blame" mode is enabled.
+ * @param {boolean} props.soundEnabled - Indicates whether sound is enabled.
+ * @param {() => void} props.onStartGame - Callback function triggered when the game starts.
+ * @param {(checked: boolean) => void} props.onToggleNameBlame - Callback function to toggle the "Name Blame" mode.
+ * @param {() => void} props.onToggleSound - Callback function to toggle sound on or off.
+ * @param {(volume: number) => void} props.onVolumeChange - Callback function to adjust the volume.
+ * @param {number} props.volume - The current volume level.
+ * @param {() => void} props.onOpenDebugPanel - Callback function to open the debug panel.
+ * @param {() => void} props.onOpenInfoModal - Callback function to open the information modal.
+ * @param {string} [props.mainButtonLabel] - Optional label for the main button.
+ *
+ * @returns {React.FC} A React functional component rendering the introductory screen.
+ */
 const IntroScreen: React.FC<IntroScreenProps> = ({
   gameSettings,
   isLoading,

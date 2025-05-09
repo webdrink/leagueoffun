@@ -18,6 +18,20 @@ interface LoadingContainerProps {
   };
 }
 
+/**
+ * LoadingContainer is a React functional component that displays a loading UI
+ * consisting of a rotating quote and a stack of loading cards representing categories.
+ *
+ * @param categories - An array of category objects to be displayed in the loading card stack.
+ * @param getEmoji - A function that returns an emoji for a given category.
+ * @param loadingQuotes - An array of strings representing quotes to be cycled through during loading.
+ * @param settings - An object containing configuration options for loading quote intervals,
+ *   spring animation parameters, and transition durations.
+ *
+ * The component cycles through the provided loadingQuotes at a configurable interval,
+ * displaying each quote with animation settings derived from the settings prop.
+ * It also renders a LoadingCardStack component to visually represent the loading state for categories.
+ */
 const LoadingContainer: React.FC<LoadingContainerProps> = ({
   categories,
   getEmoji,

@@ -17,11 +17,13 @@ A party game for friends! One person reads a question, passes the phone, and the
 - NameBlame Mode for personalized play with friends
 - Progressive Web App (PWA) support for offline play
 - Accessibility improvements for all users
+- Multilingual support with language selection (German/English)
 
 ## Development
 - Built with React, Vite, TypeScript, Tailwind CSS, and Framer Motion
-- Questions are loaded from JSON with CSV fallback for improved offline support
+- Questions are loaded from language-specific JSON files
 - PWA implementation using vite-plugin-pwa
+- Robust error handling for network and data loading issues
 
 ### Progressive Web App (PWA)
 This game supports installation as a Progressive Web App for offline play:
@@ -31,17 +33,21 @@ This game supports installation as a Progressive Web App for offline play:
 - Optimized assets for faster loading
 - Custom icon and splash screens
 
-### CSV to JSON Conversion
-For better offline support, questions are primarily loaded from `public/questions.json` with fallback to `blamegame_questions.csv`.
+### Multilingual Support
+The game now supports multiple languages:
 
-To convert the CSV to JSON:
-```bash
-# Run the conversion script
-node scripts/convertCsvToJson.js
+- Questions are organized in language-specific folders (`/public/questions/de/`, `/public/questions/en/`)
+- Language detection based on browser settings
+- Manual language selection in the settings
+- Proper content-type headers for all API requests
+- Fallback mechanisms when preferred language content is unavailable
 
-# Copy the generated JSON to the public folder
-cp src/data/questions.json public/
-```
+### Recent Fixes
+- Fixed JSON parsing errors when loading question data
+- Implemented fetch attempt limits to prevent infinite loading loops
+- Added proper error handling and user feedback for data loading issues
+- Fixed game UI rendering issues (blank screen after intro)
+- Enhanced internationalization support
 
 ### Sound Files
 The game uses three sound effects which need to be placed in the `/assets` folder:

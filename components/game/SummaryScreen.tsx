@@ -19,6 +19,18 @@ interface BlameCount {
   count: number;
 }
 
+/**
+ * SummaryScreen component displays the end-of-game summary, including statistics about blame assignments,
+ * number of questions answered, and active players. It also provides an option to restart the game.
+ *
+ * @param nameBlameMode - Boolean indicating if the blame mode is active.
+ * @param nameBlameLog - Array of blame log entries, each representing a blame event.
+ * @param questionsAnswered - Number of questions answered during the game.
+ * @param onRestart - Callback function to restart the game.
+ * @param activePlayersCount - Number of active players in the game.
+ *
+ * @returns React component rendering the summary screen with confetti animation, statistics, and restart button.
+ */
 const SummaryScreen: React.FC<SummaryScreenProps> = ({
   nameBlameMode,
   nameBlameLog,

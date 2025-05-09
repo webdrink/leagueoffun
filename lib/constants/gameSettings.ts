@@ -3,6 +3,44 @@
 import { GameSettings } from '../../types';
 
 // Default game settings
+/**
+ * Initial game settings for the application.
+ *
+ * @remarks
+ * This object defines the default configuration for various aspects of the game,
+ * including content, animation timings, spring physics, gameplay, and language.
+ *
+ * @property categoryCount - Number of categories to include in a game.
+ * @property questionsPerCategory - Number of questions per category.
+ * @property rouletteDurationMs - Duration of the roulette animation in milliseconds.
+ * @property loadingQuoteIntervalMs - Interval between loading quotes in milliseconds.
+ * @property introSpringStiffness - Controls how "springy" the intro animation is.
+ * @property introSpringDamping - Controls how quickly the intro animation settles.
+ * @property introSpringDurationSec - Duration of the intro spring animation in seconds.
+ * @property questionCardTransitionSec - Duration of question card transitions in seconds.
+ * @property questionCardSpringStiffness - Stiffness for question card springs.
+ * @property questionCardSpringDamping - Damping for question card springs.
+ * @property rouletteCardBaseDurationSec - Base duration for roulette card animations in seconds.
+ * @property rouletteCardStaggerDelaySec - Delay between consecutive card animations in seconds.
+ * @property rouletteCardStaggerDurationIncrementSec - Incremental duration per card in seconds.
+ * @property rouletteCardSpringStiffness - Stiffness for roulette card springs.
+ * @property rouletteCardSpringDamping - Damping for roulette card springs.
+ * @property rouletteCardSpreadFactor - How spread out the cards appear.
+ * @property rouletteCardRotationAngle - Maximum rotation angle for cards.
+ * @property loadingQuoteSpringStiffness - Stiffness for loading quote springs.
+ * @property loadingQuoteSpringDamping - Damping for loading quote springs.
+ * @property loadingQuoteTransitionDurationSec - Duration of loading quote transitions in seconds.
+ * @property numberOfRounds - Number of rounds in a game.
+ * @property timePerQuestion - Time allowed per question in seconds.
+ * @property showScore - Whether to show scores.
+ * @property allowSkip - Whether questions can be skipped.
+ * @property showIntroAnimation - Whether to show intro animation.
+ * @property introAnimationDuration - Duration of intro animation in milliseconds.
+ * @property questionFontSize - Font size for questions in rem units.
+ * @property dynamicThemeEnabled - Whether to use time-based themes.
+ * @property questionCardAnimation - Type of question card animation.
+ * @property language - Default language for the game.
+ */
 export const initialGameSettings: GameSettings = {
   // Content settings
   categoryCount: 10,               // Number of categories to include in a game

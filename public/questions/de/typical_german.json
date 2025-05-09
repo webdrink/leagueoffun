@@ -1,0 +1,42 @@
+[
+  {
+    "questionId": "who_is_most_punctual",
+    "text": "Wer ist am pünktlichsten?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_follows_rules_most_strictly",
+    "text": "Wer befolgt Regeln am strengsten?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_recycles_most_properly",
+    "text": "Wer trennt am korrektesten den Müll?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_plans_everything_in_advance",
+    "text": "Wer plant alles im Voraus?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_is_most_efficient",
+    "text": "Wer ist am effizientesten?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_complains_about_everything",
+    "text": "Wer beschwert sich über alles?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_is_most_organized",
+    "text": "Wer ist am organisiertesten?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_is_most_direct",
+    "text": "Wer ist am direktesten?",
+    "category": "typical_german"
+  }
+]

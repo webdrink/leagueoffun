@@ -8,6 +8,16 @@ interface ThemeDetails {
   animationClass?: string; // For background animations
 }
 
+/**
+ * Returns theme details based on the provided hour of the day.
+ *
+ * Determines the appropriate theme (morning, afternoon, evening, or night)
+ * by evaluating the given hour and returns an object containing the theme's
+ * name, gradient CSS classes, and an animation class.
+ *
+ * @param hour - The current hour in 24-hour format (0-23).
+ * @returns An object containing the theme's name, gradient, and animation class.
+ */
 const getThemeDetails = (hour: number): ThemeDetails => {
   if (hour >= 6 && hour < 12) {
     return {

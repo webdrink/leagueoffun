@@ -6,28 +6,38 @@ import { CATEGORY_EMOJIS } from '../constants';
 
 /**
  * Gets the emoji for a category, with fallback handling
- * Uses the categories index from public/categories/index.json if available
+ * Uses the categories from public/questions/categories.json if available
  * Falls back to hardcoded CATEGORY_EMOJIS if needed
- * 
+ *
  * @param category The category name to find an emoji for
  * @returns The emoji string for the category or a fallback emoji
  */
-export async function getEmojiFromIndex(category: string): Promise<string> {
-  try {
-    // Try to load from the categories index first
-    const response = await fetch('/categories/index.json');
+/**
+ * Retrieves the emoji associated with a given category.
+ * 
+ * This function first attempts to fetch the emoji from a remote `categories.json` file.
+ * It tries to find a direct match for the category ID, and if not found, attempts a partial match.
+ * If the fetch fails or no match is found, it falls back to a hardcoded emoji lookup.
+ * 
+ * @param category - The category identifier to look up.
+ * @returns A promise that resolves to the emoji string for the given category.
+ */
+export async function getEmojiFromIndex(category: string): Promise<string> {  try {
+    // Try to load from the categories file first
+    const response = await fetch('questions/categories.json');
     
     if (response.ok) {
       const categories = await response.json();
       
       // Direct match
-      const match = categories.find((cat: any) => cat.name === category);
+      const match = categories.find((cat: any) => cat.id === category);
       if (match && match.emoji) {
         return match.emoji;
       }
       
       // Partial match
-      const partialMatch = categories.find((cat: any) => category.includes(cat.name) || cat.name.includes(category));
+      const partialMatch = categories.find((cat: any) => 
+        category.includes(cat.id) || cat.id.includes(category));
       if (partialMatch && partialMatch.emoji) {
         return partialMatch.emoji;
       }

@@ -74,14 +74,50 @@
     "text": "Wer gibt die besten Familienratschläge?",
     "category": "in_family"
   },
+  
   {
-    "questionId": "in_family_sample_question_1",
-    "text": "Sample question 1 for in_family in de",
+    "questionId": "who_is_parents_favorite",
+    "text": "Wer ist der Liebling der Eltern?",
     "category": "in_family"
   },
   {
-    "questionId": "in_family_sample_question_2",
-    "text": "Sample question 2 for in_family in de",
+    "questionId": "who_starts_family_arguments",
+    "text": "Wer beginnt Familienstreitigkeiten?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_remembers_family_birthdays",
+    "text": "Wer erinnert sich an Familien-Geburtstage?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_avoids_family_gatherings",
+    "text": "Wer vermeidet Familientreffen?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_tells_family_secrets",
+    "text": "Wer erzählt Familiengeheimnisse?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_is_most_responsible_sibling",
+    "text": "Wer ist das verantwortungsvollste Geschwisterteil?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_gets_away_with_everything",
+    "text": "Wer kommt mit allem davon?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_calls_parents_most_often",
+    "text": "Wer ruft die Eltern am häufigsten an?",
+    "category": "in_family"
+  },
+  {
+    "questionId": "who_takes_care_of_family_members",
+    "text": "Wer kümmert sich am meisten um Familienmitglieder?",
     "category": "in_family"
   }
 ]

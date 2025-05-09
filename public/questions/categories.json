@@ -1,5 +1,205 @@
 [
   {
+    "id": "apocalypse",
+    "de": "Im Weltuntergang",
+    "en": "During the Apocalypse",
+    "es": "Durante el Apocalipsis",
+    "fr": "Pendant l'Apocalypse",
+    "emoji": "☄️"
+  },
+  {
+    "id": "at_school",
+    "de": "In der Schule",
+    "en": "At School",
+    "es": "En la Escuela",
+    "fr": "À l'École",
+    "emoji": "📚"
+  },
+  {
+    "id": "at_work",
+    "de": "Auf der Arbeit",
+    "en": "At Work",
+    "es": "En el Trabajo",
+    "fr": "Au Travail",
+    "emoji": "💼"
+  },
+  {
+    "id": "bad_decisions_land",
+    "de": "Land der Fehlentscheidungen",
+    "en": "Land of Bad Decisions",
+    "es": "Tierra de Malas Decisiones",
+    "fr": "Terre des Mauvaises Décisions",
+    "emoji": "🌀"
+  },
+  {
+    "id": "daily_life",
+    "de": "Alltag",
+    "en": "Daily Life",
+    "es": "Vida Diaria",
+    "fr": "Vie Quotidienne",
+    "emoji": "🏠"
+  },
+  {
+    "id": "eating",
+    "de": "Beim Essen",
+    "en": "While Eating",
+    "es": "Mientras Comes",
+    "fr": "En Mangeant",
+    "emoji": "🍽️"
+  },
+  {
+    "id": "embarrassing_moments",
+    "de": "Peinliche Momente",
+    "en": "Embarrassing Moments",
+    "es": "Momentos Embarazosos",
+    "fr": "Moments Gênants",
+    "emoji": "😳"
+  },
+  {
+    "id": "flirting",
+    "de": "Beim Flirten",
+    "en": "Flirting",
+    "es": "Coqueteando",
+    "fr": "En Draguant",
+    "emoji": "😉"
+  },
+  {
+    "id": "food",
+    "de": "Essen",
+    "en": "Food",
+    "es": "Comida",
+    "fr": "Nourriture",
+    "emoji": "🍕"
+  },
+  {
+    "id": "friendships",
+    "de": "In der Freundschaft",
+    "en": "Friendship",
+    "es": "Amistad",
+    "fr": "Amitié",
+    "emoji": "🤝"
+  },
+  {
+    "id": "in_bathroom",
+    "de": "Im Badezimmer",
+    "en": "In the Bathroom",
+    "es": "En el Baño",
+    "fr": "Dans la Salle de Bain",
+    "emoji": "🛁"
+  },
+  {
+    "id": "in_family",
+    "de": "In der Familie",
+    "en": "In the Family",
+    "es": "En la Familia",
+    "fr": "Dans la Famille",
+    "emoji": "👨‍👩‍👧‍👦"
+  },
+  {
+    "id": "in_fantasy",
+    "de": "In der Fantasie",
+    "en": "In Fantasy",
+    "es": "En la Fantasía",
+    "fr": "Dans la Fantaisie",
+    "emoji": "🐉"
+  },
+  {
+    "id": "in_future",
+    "de": "In der Zukunft",
+    "en": "In the Future",
+    "es": "En el Futuro",
+    "fr": "Dans le Futur",
+    "emoji": "🔮"
+  },
+  {
+    "id": "in_nature",
+    "de": "In der Natur",
+    "en": "In Nature",
+    "es": "En la Naturaleza",
+    "fr": "Dans la Nature",
+    "emoji": "🌳"
+  },
+  {
+    "id": "in_past",
+    "de": "In der Vergangenheit",
+    "en": "In the Past",
+    "es": "En el Pasado",
+    "fr": "Dans le Passé",
+    "emoji": "⌛"
+  },
+  {
+    "id": "in_shared_apartment",
+    "de": "In der WG",
+    "en": "In Shared Apartment",
+    "es": "En Piso Compartido",
+    "fr": "En Colocation",
+    "emoji": "🛋️"
+  },
+  {
+    "id": "in_traffic",
+    "de": "Im Straßenverkehr",
+    "en": "In Traffic",
+    "es": "En el Tráfico",
+    "fr": "Dans la Circulation",
+    "emoji": "🚗"
+  },
+  {
+    "id": "inner_monologue",
+    "de": "Innerer Monolog",
+    "en": "Inner Monologue",
+    "es": "Monólogo Interno",
+    "fr": "Monologue Intérieur",
+    "emoji": "🧠"
+  },
+  {
+    "id": "internet",
+    "de": "Im Internet",
+    "en": "On the Internet",
+    "es": "En Internet",
+    "fr": "Sur Internet",
+    "emoji": "🌐"
+  },
+  {
+    "id": "kevin",
+    "de": "Kevin",
+    "en": "Kevin",
+    "es": "Kevin",
+    "fr": "Kevin",
+    "emoji": "🧢"
+  },
+  {
+    "id": "movies_series",
+    "de": "Filme & Serien",
+    "en": "Movies & Series",
+    "es": "Películas y Series",
+    "fr": "Films et Séries",
+    "emoji": "🎬"
+  },
+  {
+    "id": "on_vacation",
+    "de": "Im Urlaub",
+    "en": "On Vacation",
+    "es": "De Vacaciones",
+    "fr": "En Vacances",
+    "emoji": "🏖️"
+  },
+  {
+    "id": "parallel_universe",
+    "de": "Im Paralleluniversum",
+    "en": "In a Parallel Universe",
+    "es": "En un Universo Paralelo",
+    "fr": "Dans un Univers Parallèle",
+    "emoji": "🪐"
+  },
+  {
+    "id": "parties_with_strangers",
+    "de": "Partys mit Fremden",
+    "en": "Parties with Strangers",
+    "es": "Fiestas con Desconocidos",
+    "fr": "Fêtes avec des Inconnus",
+    "emoji": "🥳"
+  },
+  {
     "id": "party",
     "de": "Beim Feiern",
     "en": "At Parties",
@@ -16,12 +216,12 @@
     "emoji": "❤️"
   },
   {
-    "id": "daily_life",
-    "de": "Alltag",
-    "en": "Daily Life",
-    "es": "Vida Diaria",
-    "fr": "Vie Quotidienne",
-    "emoji": "🏠"
+    "id": "sports",
+    "de": "Beim Sport",
+    "en": "While Doing Sports",
+    "es": "Haciendo Deporte",
+    "fr": "En Faisant du Sport",
+    "emoji": "🏃"
   },
   {
     "id": "travel",
@@ -32,11 +232,11 @@
     "emoji": "✈️"
   },
   {
-    "id": "food",
-    "de": "Essen",
-    "en": "Food",
-    "es": "Comida",
-    "fr": "Nourriture",
-    "emoji": "🍕"
+    "id": "typical_german",
+    "de": "Typisch Deutsch",
+    "en": "Typically German",
+    "es": "Típicamente Alemán",
+    "fr": "Typiquement Allemand",
+    "emoji": "🍺"
   }
 ]

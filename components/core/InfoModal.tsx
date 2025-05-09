@@ -11,6 +11,20 @@ interface InfoModalProps {
   children?: React.ReactNode;
 }
 
+/**
+ * InfoModal is a reusable modal component that displays informational content to the user.
+ * It supports internationalization, animated transitions, and provides actions for closing
+ * the modal or resetting application data.
+ *
+ * @param {InfoModalProps} props - The props for the InfoModal component.
+ * @param {boolean} props.isOpen - Determines whether the modal is visible.
+ * @param {() => void} props.onClose - Callback function invoked when the modal is closed.
+ * @param {() => void} props.onResetAppData - Callback function invoked to reset application data.
+ * @param {string} [props.title="Information"] - Optional title for the modal.
+ * @param {React.ReactNode} [props.children] - Optional custom content to display inside the modal.
+ *
+ * @returns {JSX.Element | null} The rendered modal component if open, otherwise null.
+ */
 const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose, onResetAppData, title = "Information", children }) => {
   const { t } = useTranslation();
   

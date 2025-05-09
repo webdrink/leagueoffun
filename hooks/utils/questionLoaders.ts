@@ -41,6 +41,25 @@ export const loadAllCategories = async (language: SupportedLanguage = DEFAULT_LA
 /**
  * Loads questions for specific categories with language support
  */
+/**
+ * Loads questions for the specified categories and language.
+ *
+ * This function fetches a category index file for the given language, filters the categories
+ * to match the provided list, and then loads the corresponding question files for each category.
+ * If loading questions for a specific language fails, it attempts to fall back to the default language.
+ * Each question is augmented with a `categoryId` and a generated `questionId` if not present.
+ *
+ * @param categories - An array of category names to load questions for.
+ * @param language - The language to load questions in. Defaults to `DEFAULT_LANGUAGE`.
+ * @returns A promise that resolves to an array of `Question` objects for the requested categories.
+ *
+ * @remarks
+ * - If a question file or category index cannot be loaded for the specified language,
+ *   the function will attempt to fall back to the default language.
+ * - If all attempts fail, an empty array is returned.
+ * - The returned questions will have `categoryId` set, but `categoryName` and `categoryEmoji`
+ *   are expected to be populated elsewhere (e.g., in `App.tsx`).
+ */
 export const loadQuestionsByCategories = async (
   categories: string[],
   language: SupportedLanguage = DEFAULT_LANGUAGE
@@ -82,7 +101,8 @@ export const loadQuestionsByCategories = async (
         
         return questions.map((q: any) => ({
           ...q,
-          category: cat.name,
+          categoryId: cat.id, // Corrected: this should be cat.id or a similar unique identifier
+          // categoryName and categoryEmoji will be populated in App.tsx
           questionId: q.questionId || `${cat.name}_${Math.random().toString(36).substr(2, 9)}`
         }));
       } catch (error) {
@@ -100,7 +120,8 @@ export const loadQuestionsByCategories = async (
               
               return fallbackQuestions.map((q: any) => ({
                 ...q,
-                category: cat.name,
+                categoryId: cat.id, // Corrected: this should be cat.id
+                // categoryName and categoryEmoji will be populated in App.tsx
                 questionId: q.questionId || `${cat.name}_${Math.random().toString(36).substr(2, 9)}`
               }));
             }
@@ -163,10 +184,10 @@ export const loadQuestionsFromCsv = async (): Promise<Question[]> => {
  */
 export const getFallbackQuestions = (): Question[] => {
   return [
-    { text: "Wer ist am hilfsbereitesten?", category: "Allgemein" },
-    { text: "Wer ist am kreativsten?", category: "Allgemein" },
-    { text: "Wer ist am abenteuerlustigsten?", category: "Allgemein" },
-    { text: "Wer ist am geduldigsten?", category: "Allgemein" },
-    { text: "Wer ist am optimistischsten?", category: "Allgemein" }
+    { text: "Wer ist am hilfsbereitesten?", categoryId: "Allgemein", categoryName: "Allgemein", categoryEmoji: "🤝" },
+    { text: "Wer ist am kreativsten?", categoryId: "Allgemein", categoryName: "Allgemein", categoryEmoji: "🎨" },
+    { text: "Wer ist am abenteuerlustigsten?", categoryId: "Allgemein", categoryName: "Allgemein", categoryEmoji: "🌍" },
+    { text: "Wer ist am geduldigsten?", categoryId: "Allgemein", categoryName: "Allgemein", categoryEmoji: "⏳" },
+    { text: "Wer ist am optimistischsten?", categoryId: "Allgemein", categoryName: "Allgemein", categoryEmoji: "😊" }
   ];
 };

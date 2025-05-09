@@ -1,0 +1,47 @@
+[
+  {
+    "questionId": "who_is_pickiest_eater",
+    "text": "Wer ist der wählerischste Esser?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_takes_food_photos_for_social_media",
+    "text": "Wer macht Essensfotos für soziale Medien?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_always_tries_new_restaurants",
+    "text": "Wer probiert immer neue Restaurants aus?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_eats_fastest",
+    "text": "Wer isst am schnellsten?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_always_hungry",
+    "text": "Wer hat immer Hunger?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_best_cook",
+    "text": "Wer ist der beste Koch?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_has_unusual_food_combinations",
+    "text": "Wer isst ungewöhnliche Essenzkombinationen?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_steals_food_from_others_plates",
+    "text": "Wer stiehlt Essen von den Tellern anderer?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_has_most_dietary_restrictions",
+    "text": "Wer hat die meisten Ernährungseinschränkungen?",
+    "category": "food"
+  }
+]

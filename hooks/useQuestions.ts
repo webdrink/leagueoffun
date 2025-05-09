@@ -32,6 +32,43 @@ interface UseQuestionsOutput {
 /**
  * Hook to manage the questions state and operations
  */
+/**
+ * Custom React hook for managing question selection, loading, and state for a game round.
+ *
+ * This hook handles:
+ * - Loading questions from various sources (category-based, JSON, CSV) with language support.
+ * - Selecting random categories and questions for each game round based on game settings.
+ * - Tracking played questions to avoid repeats, with local storage persistence.
+ * - Managing loading and error states during question retrieval.
+ * - Navigating between questions within a round.
+ * - Resetting state for new games or rounds.
+ *
+ * @param gameSettings - The current game settings, including category and question counts.
+ * @returns An object containing:
+ *   - `allQuestions`: All loaded questions.
+ *   - `currentRoundQuestions`: Questions selected for the current round.
+ *   - `currentQuestion`: The currently active question.
+ *   - `isLoading`: Whether questions are currently being loaded.
+ *   - `csvError`: Error message if loading questions failed.
+ *   - `playedQuestions`: Array of IDs of already played questions.
+ *   - `selectedCategories`: Categories selected for the current round.
+ *   - `index`: Index of the current question in the round.
+ *   - `loadQuestions`: Function to reload all questions.
+ *   - `prepareRoundQuestions`: Function to prepare questions for a new round.
+ *   - `advanceToNextQuestion`: Function to move to the next question.
+ *   - `goToPreviousQuestion`: Function to move to the previous question.
+ *   - `setPlayedQuestions`: Setter for played questions.
+ *   - `resetQuestions`: Function to reset all question-related state.
+ *
+ * @example
+ * const {
+ *   currentQuestion,
+ *   advanceToNextQuestion,
+ *   prepareRoundQuestions,
+ *   isLoading,
+ *   csvError
+ * } = useQuestions(gameSettings);
+ */
 const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
   const [allQuestions, setAllQuestions] = useState<Question[]>([]);
   const [currentRoundQuestions, setCurrentRoundQuestions] = useState<Question[]>([]);

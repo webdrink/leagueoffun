@@ -5,6 +5,13 @@ interface ErrorDisplayProps {
   message: string;
 }
 
+/**
+ * Displays an animated error message box using Framer Motion.
+ *
+ * @param {ErrorDisplayProps} props - The props for the ErrorDisplay component.
+ * @param {string} props.message - The error message to display.
+ * @returns {JSX.Element} The rendered error display component.
+ */
 const ErrorDisplay: React.FC<ErrorDisplayProps> = ({ message }) => {
   return (
     <motion.div
