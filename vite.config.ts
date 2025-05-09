@@ -11,7 +11,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'robots.txt', 'assets/*.mp3'],
       manifest: {
-        name: 'The Blame Game',
+        name: 'Blame Game',
         short_name: 'BlameGame',
         description: 'A party game for friends! Decide who is to blame for funny scenarios.',
         theme_color: '#8b5cf6',
