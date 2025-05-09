@@ -2,4 +2,4 @@
 
 export * from './soundUtils';
 export * from './storageUtils';
-export * from './questionLoaders';
+export * from './languageSupport';
