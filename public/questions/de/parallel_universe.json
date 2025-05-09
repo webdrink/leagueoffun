@@ -25,13 +25,48 @@
     "category": "parallel_universe"
   },
   {
-    "questionId": "parallel_universe_sample_question_1",
-    "text": "Sample question 1 for parallel_universe in de",
+    "questionId": "who_would_have_different_hobbies",
+    "text": "Wer hätte andere Hobbys?",
     "category": "parallel_universe"
   },
   {
-    "questionId": "parallel_universe_sample_question_2",
-    "text": "Sample question 2 for parallel_universe in de",
+    "questionId": "who_would_be_a_superhero",
+    "text": "Wer wäre ein Superheld?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_be_an_alien",
+    "text": "Wer wäre ein Außerirdischer?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_have_different_family",
+    "text": "Wer hätte eine andere Familie?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_have_different_friends",
+    "text": "Wer hätte andere Freunde?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_have_different_pets",
+    "text": "Wer hätte andere Haustiere?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_have_different_skills",
+    "text": "Wer hätte andere Fähigkeiten?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_be_a_villain",
+    "text": "Wer wäre ein Bösewicht?",
+    "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_have_different_interests",
+    "text": "Wer hätte andere Interessen?",
     "category": "parallel_universe"
   }
 ]

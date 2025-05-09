@@ -58,15 +58,5 @@
     "questionId": "who_always_wants_dessert",
     "text": "Wer will immer Nachtisch?",
     "category": "eating"
-  },
-  {
-    "questionId": "eating_sample_question_1",
-    "text": "Sample question 1 for eating in de",
-    "category": "eating"
-  },
-  {
-    "questionId": "eating_sample_question_2",
-    "text": "Sample question 2 for eating in de",
-    "category": "eating"
   }
 ]

@@ -25,13 +25,28 @@
     "category": "in_fantasy"
   },
   {
-    "questionId": "in_fantasy_sample_question_1",
-    "text": "Sample question 1 for in_fantasy in de",
+    "questionId": "who_would_become_hero_in_fantasy",
+    "text": "Wer würde ein Held in einer Fantasiewelt werden?",
     "category": "in_fantasy"
   },
   {
-    "questionId": "in_fantasy_sample_question_2",
-    "text": "Sample question 2 for in_fantasy in de",
+    "questionId": "who_would_find_magic_items",
+    "text": "Wer würde magische Gegenstände finden?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_have_fantasy_pets",
+    "text": "Wer hätte Fantasietiere?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_create_fantasy_world",
+    "text": "Wer würde eine Fantasiewelt erschaffen?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_become_king_or_queen",
+    "text": "Wer würde König oder Königin werden?",
     "category": "in_fantasy"
   }
 ]

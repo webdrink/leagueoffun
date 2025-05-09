@@ -75,13 +75,38 @@
     "category": "on_vacation"
   },
   {
-    "questionId": "on_vacation_sample_question_1",
-    "text": "Sample question 1 for on_vacation in de",
+    "questionId": "who_takes_the_most_souvenirs_home",
+    "text": "Wer bringt die meisten Souvenirs mit nach Hause?",
     "category": "on_vacation"
   },
   {
-    "questionId": "on_vacation_sample_question_2",
-    "text": "Sample question 2 for on_vacation in de",
+    "questionId": "who_is_the_first_to_get_sick",
+    "text": "Wer wird als erstes krank?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_is_the_best_travel_companion",
+    "text": "Wer ist der beste Reisebegleiter?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_is_the_worst_travel_companion",
+    "text": "Wer ist der schlechteste Reisebegleiter?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sunburned",
+    "text": "Wer wird am ehesten einen Sonnenbrand bekommen?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_food_poisoning",
+    "text": "Wer wird am ehesten eine Lebensmittelvergiftung bekommen?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_homesick",
+    "text": "Wer wird am ehesten Heimweh bekommen?",
     "category": "on_vacation"
   }
 ]

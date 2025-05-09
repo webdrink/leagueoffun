@@ -100,16 +100,6 @@
     "category": "at_work"
   },
   {
-    "questionId": "sample_question_1_at_work",
-    "text": "Sample question 1 for at_work in de",
-    "category": "at_work"
-  },
-  {
-    "questionId": "sample_question_2_at_work",
-    "text": "Sample question 2 for at_work in de",
-    "category": "at_work"
-  },
-  {
     "questionId": "who_is_always_late_to_work",
     "text": "Wer kommt immer zu spät zur Arbeit?",
     "category": "at_work"
@@ -212,16 +202,6 @@
   {
     "questionId": "who_volunteers_for_everything",
     "text": "Wer meldet sich für alles freiwillig?",
-    "category": "at_work"
-  },
-  {
-    "questionId": "at_work_sample_question_1",
-    "text": "Sample question 1 for at_work in de",
-    "category": "at_work"
-  },
-  {
-    "questionId": "at_work_sample_question_2",
-    "text": "Sample question 2 for at_work in de",
     "category": "at_work"
   }
 ]

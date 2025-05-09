@@ -235,13 +235,18 @@
     "category": "apocalypse"
   },
   {
-    "questionId": "apocalypse_sample_question_1",
-    "text": "Beispielfrage 1 für Apokalypse auf Deutsch",
+    "questionId": "who_immediately_founds_cult",
+    "text": "Wer gründet sofort eine Sekte?",
     "category": "apocalypse"
   },
   {
-    "questionId": "apocalypse_sample_question_2",
-    "text": "Beispielfrage 2 für Apokalypse auf Deutsch",
+    "questionId": "who_builds_bunker_and_decorates_it",
+    "text": "Wer baut einen Bunker und dekoriert ihn?",
+    "category": "apocalypse"
+  },
+  {
+    "questionId": "who_pretends_saw_it_all_coming",
+    "text": "Wer tut so, als hätte er das alles kommen sehen?",
     "category": "apocalypse"
   }
 ]

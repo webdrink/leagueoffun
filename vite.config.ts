@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'robots.txt', 'assets/*.mp3'],
+      includeAssets: ['favicon.svg', 'robots.txt', 'assets/*.mp3', 'questions/**'], // Added 'questions/**'
       manifest: {
         name: 'Blame Game',
         short_name: 'BlameGame',
@@ -19,14 +19,9 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: 'pwa-icon-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-icon-512x512.png',
+            src: 'pwa-icon-512x512.svg', // Corrected to .svg as this file exists
             sizes: '512x512',
-            type: 'image/png'
+            type: 'image/svg+xml' // Corrected type for SVG
           }
         ]
       },

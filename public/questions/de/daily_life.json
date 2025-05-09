@@ -98,15 +98,5 @@
     "questionId": "who_keeps_expired_food_in_fridge",
     "text": "Wer behält abgelaufene Lebensmittel im Kühlschrank?",
     "category": "daily_life"
-  },
-  {
-    "questionId": "daily_life_sample_question_1",
-    "text": "Sample question 1 for daily_life in de",
-    "category": "daily_life"
-  },
-  {
-    "questionId": "daily_life_sample_question_2",
-    "text": "Sample question 2 for daily_life in de",
-    "category": "daily_life"
   }
 ]

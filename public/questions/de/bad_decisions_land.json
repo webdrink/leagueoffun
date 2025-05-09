@@ -23,15 +23,5 @@
     "questionId": "who_ignores_warning_signs",
     "text": "Wer ignoriert Warnsignale?",
     "category": "bad_decisions_land"
-  },
-  {
-    "questionId": "bad_decisions_land_sample_question_1",
-    "text": "Beispielfrage 1 für schlechte Entscheidungen auf Deutsch",
-    "category": "bad_decisions_land"
-  },
-  {
-    "questionId": "bad_decisions_land_sample_question_2",
-    "text": "Beispielfrage 2 für schlechte Entscheidungen auf Deutsch",
-    "category": "bad_decisions_land"
   }
 ]

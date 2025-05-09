@@ -75,16 +75,6 @@
     "category": "internet"
   },
   {
-    "questionId": "internet_sample_question_1",
-    "text": "Sample question 1 for internet in de",
-    "category": "internet"
-  },
-  {
-    "questionId": "internet_sample_question_2",
-    "text": "Sample question 2 for internet in de",
-    "category": "internet"
-  },
-  {
     "questionId": "wer_kommentiert_alles_was_ihm_in_den_feed_kommt",
     "text": "Wer kommentiert alles, was ihm in den Feed kommt?",
     "category": "internet"

@@ -63,15 +63,5 @@
     "questionId": "who_has_food_stuck_in_teeth",
     "text": "Wer hat oft Essen zwischen den Zähnen?",
     "category": "embarrassing_moments"
-  },
-  {
-    "questionId": "embarrassing_moments_sample_question_1",
-    "text": "Sample question 1 for embarrassing_moments in de",
-    "category": "embarrassing_moments"
-  },
-  {
-    "questionId": "embarrassing_moments_sample_question_2",
-    "text": "Sample question 2 for embarrassing_moments in de",
-    "category": "embarrassing_moments"
   }
 ]

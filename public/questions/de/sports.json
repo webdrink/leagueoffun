@@ -58,15 +58,5 @@
     "questionId": "who_buys_exercise_equipment_never_uses",
     "text": "Wer kauft Fitnessgeräte und benutzt sie nie?",
     "category": "sports"
-  },
-  {
-    "questionId": "sports_sample_question_1",
-    "text": "Sample question 1 for sports in de",
-    "category": "sports"
-  },
-  {
-    "questionId": "sports_sample_question_2",
-    "text": "Sample question 2 for sports in de",
-    "category": "sports"
   }
 ]

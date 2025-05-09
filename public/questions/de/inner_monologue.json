@@ -28,15 +28,5 @@
     "questionId": "who_creates_alternate_scenarios",
     "text": "Wer erschafft alternative Szenarien?",
     "category": "inner_monologue"
-  },
-  {
-    "questionId": "inner_monologue_sample_question_1",
-    "text": "Sample question 1 for inner_monologue in de",
-    "category": "inner_monologue"
-  },
-  {
-    "questionId": "inner_monologue_sample_question_2",
-    "text": "Sample question 2 for inner_monologue in de",
-    "category": "inner_monologue"
   }
 ]

@@ -8,7 +8,7 @@ import { useState, useEffect, useCallback } from 'react';
 import useLocalStorage from './useLocalStorage';
 import { Question, GameSettings } from '../types';
 import { FALLBACK_QUESTIONS } from '../constants';
-import { getRandomCategories, getAvailableQuestions } from '../lib/utils/arrayUtils';
+import { getRandomCategories, getAvailableQuestions, shuffleArray } from '../lib/utils/arrayUtils';
 import { 
   loadQuestionsFromJson, 
   getFallbackQuestions,
@@ -55,7 +55,6 @@ const useQuestions = (initialGameSettings: GameSettings): UseQuestionsOutput => 
   const [index, setIndex] = useState(0);
   const [cardKey, setCardKey] = useState(0);
   
-  // Get current language from gameSettings
   const { gameSettings } = useGameSettings();
   const currentLanguage = gameSettings.language;
 
@@ -93,44 +92,60 @@ const useQuestions = (initialGameSettings: GameSettings): UseQuestionsOutput => 
   // Prepare questions for a new round
   const prepareRoundQuestions = useCallback(async (currentActiveGameSettings: GameSettings): Promise<boolean> => {
     if (isLoading || allQuestions.length === 0) {
+      console.log("Cannot prepare round: still loading or no questions available.");
       return false;
     }
+    if (!currentActiveGameSettings) {
+      console.warn("Game settings not provided to prepareRoundQuestions.");
+      // Provide a minimal fallback if settings are missing
+      const fallbackQuestions = getFallbackQuestions().slice(0, 10);
+      setCurrentRoundQuestions(fallbackQuestions);
+      setIndex(0);
+      setCardKey(prev => prev + 1);
+      return fallbackQuestions.length > 0;
+    }
+
+    const { categoryCount, questionsPerCategory } = currentActiveGameSettings;
 
     try {
-      const uniqueCategoryIds = Array.from(new Set(allQuestions.map(q => q.categoryId)));
-      const categoriesForRound = getRandomCategories(uniqueCategoryIds, currentActiveGameSettings.categoryCount);
-      setSelectedCategories(categoriesForRound);
-
-      const questionsForSelectedCategories = allQuestions.filter(q => categoriesForRound.includes(q.categoryId));
-      let availableQuestions = getAvailableQuestions(questionsForSelectedCategories, playedQuestions);
-
-      if (availableQuestions.length < currentActiveGameSettings.questionsPerCategory * categoriesForRound.length * 0.5 && availableQuestions.length < 15) {
-        console.log('Low on available questions, resetting played questions for selected categories.');
-        const questionsOfSelectedCategories = allQuestions.filter(q => categoriesForRound.includes(q.categoryId));
-        const playedQuestionsInSelectedCategories = playedQuestions.filter(pqId => questionsOfSelectedCategories.some(q => q.questionId === pqId));
-        const newPlayedQuestions = playedQuestions.filter(pqId => !playedQuestionsInSelectedCategories.includes(pqId));
-        setPlayedQuestions(newPlayedQuestions);
-        availableQuestions = getAvailableQuestions(questionsForSelectedCategories, newPlayedQuestions);
-      }
+      const allCategoryIds = Array.from(new Set(allQuestions.map(q => q.categoryId)));
       
-      if (availableQuestions.length > 0) {
-        let filteredAndLimited: Question[] = [];
-        categoriesForRound.forEach(catId => {
-          const questionsForCat = availableQuestions
-            .filter(q => q.categoryId === catId)
-            .sort(() => 0.5 - Math.random())
-            .slice(0, currentActiveGameSettings.questionsPerCategory);
-          filteredAndLimited = filteredAndLimited.concat(questionsForCat);
-        });
-
-        const shuffledRoundQuestions = filteredAndLimited.sort(() => 0.5 - Math.random());
-        setCurrentRoundQuestions(shuffledRoundQuestions);
+      if (allCategoryIds.length === 0) {
+        console.warn("No categories found in allQuestions. Cannot prepare round.");
+        setCurrentRoundQuestions(getFallbackQuestions().slice(0, questionsPerCategory)); // Use questionsPerCategory from settings
         setIndex(0);
         setCardKey(prev => prev + 1);
+        return currentRoundQuestions.length > 0;
+      }
+
+      const numCategoriesToSelect = Math.min(categoryCount, allCategoryIds.length);
+      const roundCategoryIds = getRandomCategories(allCategoryIds, numCategoriesToSelect);
+      setSelectedCategories(roundCategoryIds);
+
+      let newRoundQuestions: Question[] = [];
+
+      for (const catId of roundCategoryIds) {
+        const questionsInCat = allQuestions.filter(q => q.categoryId === catId);
+        const availableCatQuestions = getAvailableQuestions(questionsInCat, playedQuestions); // Filters out played ones
+        
+        const shuffledCatQuestions = shuffleArray([...availableCatQuestions]);
+        const selectedCatQuestions = shuffledCatQuestions.slice(0, questionsPerCategory); // Use questionsPerCategory from settings
+        
+        newRoundQuestions.push(...selectedCatQuestions);
+      }
+
+      const finalShuffledRoundQuestions = shuffleArray(newRoundQuestions);
+      
+      if (finalShuffledRoundQuestions.length > 0) {
+        setCurrentRoundQuestions(finalShuffledRoundQuestions);
+        setIndex(0);
+        setCardKey(prev => prev + 1);
+        console.log(`Prepared round with ${finalShuffledRoundQuestions.length} questions from ${roundCategoryIds.length} categories.`);
         return true;
       } else {
         console.warn('No available questions for the selected categories after filtering. Using fallback questions for the round.');
-        const fallbackForRound = getFallbackQuestions().sort(() => 0.5 - Math.random()).slice(0, currentActiveGameSettings.questionsPerCategory * categoriesForRound.length);
+        // Use categoryCount and questionsPerCategory from settings for fallback size
+        const fallbackForRound = shuffleArray(getFallbackQuestions()).slice(0, questionsPerCategory * numCategoriesToSelect);
         setCurrentRoundQuestions(fallbackForRound);
         setIndex(0);
         setCardKey(prev => prev + 1);
@@ -138,13 +153,14 @@ const useQuestions = (initialGameSettings: GameSettings): UseQuestionsOutput => 
       }
     } catch (error) {
       console.error("Error preparing round questions:", error);
-      const fallbackForRound = getFallbackQuestions().sort(() => 0.5 - Math.random()).slice(0, 10);
+      // Use questionsPerCategory from settings for general fallback size
+      const fallbackForRound = shuffleArray(getFallbackQuestions()).slice(0, questionsPerCategory); 
       setCurrentRoundQuestions(fallbackForRound);
       setIndex(0);
       setCardKey(prev => prev + 1);
       return fallbackForRound.length > 0;
     }
-  }, [isLoading, allQuestions, playedQuestions, setPlayedQuestions, currentLanguage, gameSettings.categoryCount, gameSettings.questionsPerCategory]);
+  }, [isLoading, allQuestions, playedQuestions, currentLanguage]);
 
   // Advance to the next question
   const advanceToNextQuestion = useCallback(() => {

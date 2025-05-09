@@ -115,16 +115,6 @@
     "category": "relationships"
   },
   {
-    "questionId": "relationship_sample_question_1",
-    "text": "Sample question 1 for relationships in de",
-    "category": "relationships"
-  },
-  {
-    "questionId": "relationship_sample_question_2",
-    "text": "Sample question 2 for relationships in de",
-    "category": "relationships"
-  },
-  {
     "questionId": "relationship_advice",
     "text": "Wer würde am ehesten guten Beziehungsrat geben?",
     "category": "relationships"

@@ -35,13 +35,28 @@
     "category": "friendships"
   },
   {
-    "questionId": "friendships_sample_question_1",
-    "text": "Sample question 1 for friendships in de",
+    "questionId": "who_is_most_supportive_friend",
+    "text": "Wer ist der unterstützendste Freund?",
     "category": "friendships"
   },
   {
-    "questionId": "friendships_sample_question_2",
-    "text": "Sample question 2 for friendships in de",
+    "questionId": "who_is_most_funny_friend",
+    "text": "Wer ist der lustigste Freund?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_is_most_adventurous_friend",
+    "text": "Wer ist der abenteuerlustigste Freund?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_is_most_loyal_friend",
+    "text": "Wer ist der loyalste Freund?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_is_most_generous_friend",
+    "text": "Wer ist der großzügigste Freund?",
     "category": "friendships"
   }
 ]

@@ -23,15 +23,5 @@
     "questionId": "who_misinterprets_friendly_as_flirting",
     "text": "Wer interpretiert Freundlichkeit als Flirten?",
     "category": "flirting"
-  },
-  {
-    "questionId": "flirting_sample_question_1",
-    "text": "Sample question 1 for flirting in de",
-    "category": "flirting"
-  },
-  {
-    "questionId": "flirting_sample_question_2",
-    "text": "Sample question 2 for flirting in de",
-    "category": "flirting"
   }
 ]

@@ -38,15 +38,5 @@
     "questionId": "who_makes_friends_with_strangers",
     "text": "Wer freundet sich mit Fremden an?",
     "category": "parties_with_strangers"
-  },
-  {
-    "questionId": "parties_with_strangers_sample_question_1",
-    "text": "Sample question 1 for parties_with_strangers in de",
-    "category": "parties_with_strangers"
-  },
-  {
-    "questionId": "parties_with_strangers_sample_question_2",
-    "text": "Sample question 2 for parties_with_strangers in de",
-    "category": "parties_with_strangers"
   }
 ]

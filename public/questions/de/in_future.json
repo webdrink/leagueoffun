@@ -25,13 +25,28 @@
     "category": "in_future"
   },
   {
-    "questionId": "in_future_sample_question_1",
-    "text": "Sample question 1 for in_future in de",
+    "questionId": "who_would_create_best_future_technology",
+    "text": "Wer würde die beste Zukunftstechnologie erschaffen?",
     "category": "in_future"
   },
   {
-    "questionId": "in_future_sample_question_2",
-    "text": "Sample question 2 for in_future in de",
+    "questionId": "who_would_become_futuristic_leader",
+    "text": "Wer würde in Zukunft Präsident werden?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_would_explore_space_first",
+    "text": "Wer würde als erster den Weltraum erkunden?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_would_create_best_virtual_world",
+    "text": "Wer würde die beste virtuelle Welt erschaffen?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_would_become_time_traveler",
+    "text": "Wer würde ein Zeitreisender werden?",
     "category": "in_future"
   }
 ]

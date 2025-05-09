@@ -53,15 +53,5 @@
     "questionId": "who_falls_asleep_in_car",
     "text": "Wer schläft im Auto ein?",
     "category": "in_traffic"
-  },
-  {
-    "questionId": "in_traffic_sample_question_1",
-    "text": "Sample question 1 for in_traffic in de",
-    "category": "in_traffic"
-  },
-  {
-    "questionId": "in_traffic_sample_question_2",
-    "text": "Sample question 2 for in_traffic in de",
-    "category": "in_traffic"
   }
 ]
