@@ -29,7 +29,7 @@ export interface Category {
  */
 export const loadCategories = async (language: SupportedLanguage): Promise<Category[]> => {
   try {
-    const response = await fetch(`/categories/index.${language}.json`);
+    const response = await fetch(`categories/index.${language}.json`);
     if (!response.ok) {
       throw new Error(`Failed to load categories for ${language}`);
     }
@@ -56,7 +56,7 @@ export const loadQuestionsForCategory = async (
   language: SupportedLanguage
 ): Promise<Question[]> => {
   try {
-    const response = await fetch(`/questions/${language}/${category}.json`);
+    const response = await fetch(`questions/${language}/${category}.json`);
     if (!response.ok) {
       throw new Error(`Failed to load questions for ${category} in ${language}`);
     }

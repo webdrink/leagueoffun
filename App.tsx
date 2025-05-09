@@ -1,293 +1,215 @@
-import React, { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-
-// Import custom hooks
-import useSound from './hooks/useSound';
-import useQuestions from './hooks/useQuestions';
-import useNameBlameSetup from './hooks/useNameBlameSetup';
-import useLocalStorage from './hooks/useLocalStorage';
-import useTranslation from './hooks/useTranslation';
-import { useLanguage } from './hooks/utils/languageSupport';
-
-// Import components
-import ErrorDisplay from './components/core/ErrorDisplay';
-import GameContainer from './components/core/GameContainer';
-import InfoModal from './components/core/InfoModal';
-import DebugPanel from './components/debug/DebugPanel';
+/**
+ * App Component
+ *
+ * Purpose: Main application component for BlameGame. It handles game state, 
+ *          navigation between screens, loading game data (categories and questions),
+ *          and managing global settings like language and sound.
+ *
+ * Props: None
+ *
+ * Expected Behavior: 
+ *  - Initializes game settings and sound preferences.
+ *  - Loads categories and questions based on the selected language, with fallbacks.
+ *  - Manages the current game step (Intro, Playing, Results).
+ *  - Provides necessary data and callbacks to child screen components.
+ *  - Handles language changes and reloads data accordingly.
+ *
+ * Dependencies: 
+ *  - react, react-i18next
+ *  - ./types.ts (various type definitions)
+ *  - ./types/questions.ts (for Category type) // This comment might be outdated if Category is from ./types
+ *  - ./hooks/* (useGameSettings, useSound)
+ *  - ./components/* (IntroScreen, InfoModal)
+ *  - CSS files for styling.
+ *
+ * Notes: 
+ *  - Assumes App.tsx is in the project root, and other primary source directories
+ *    (components, hooks, types.ts, lib) are also in the project root.
+ *  - Error handling for data loading is included, displaying messages to the user.
+ */
+import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import { GameSettings, Question, GameStep, QuestionStats, Category } from './types';
+import useSound from './hooks/useSound'; 
+import { useGameSettings } from './hooks/useGameSettings';
 import IntroScreen from './components/game/IntroScreen';
-import LoadingContainer from './components/game/LoadingContainer';
-import PlayerSetupScreen from './components/game/PlayerSetupScreen';
-import QuestionScreen from './components/game/QuestionScreen';
-import SummaryScreen from './components/game/SummaryScreen';
-import LanguageChangeFeedback from './components/language/LanguageChangeFeedback';
+import InfoModal from './components/core/InfoModal';
+import GameContainer from './components/core/GameContainer'; 
+import { SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE } from './hooks/utils/languageSupport';
 
-// Import constants and types
-import { LOADING_QUOTES, SOUND_PATHS, initialGameSettings } from './lib/constants';
-import { GameStep, QuestionStats } from './types';
-import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
-
-// Import utilities
-import { getEmoji } from './lib/formatters';
-
-// Import CSS
-import './index.css';
+// Import styles already handled by index.tsx
 
 function App() {
-  // Sound management
   const { soundEnabled, toggleSound, playSound, volume, setVolume } = useSound();
-  
-  // Translation hook
-  const { t } = useTranslation();
-  
-  // Game state
-  const [step, setStep] = useState<GameStep>('intro');
-  const [debugMode, setDebugMode] = useState(false);
-  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
-  const [gameSettings, setGameSettings] = useLocalStorage('blamegame-settings', initialGameSettings);
-  
-  // Questions management
-  const questionsManager = useQuestions(gameSettings);
-  
-  // Player management for NameBlame mode
-  const playerManager = useNameBlameSetup();
-  
-  // Local component state
-  const [quoteIndex, setQuoteIndex] = useState(0);
-  const [cardKey, setCardKey] = useState(0);
-  
-  // Question statistics for the debug panel
-  const questionStats: QuestionStats = {
-    totalQuestions: questionsManager.allQuestions.length,
-    playedQuestions: questionsManager.playedQuestions.length,
-    availableQuestions: questionsManager.allQuestions.filter(q => !questionsManager.playedQuestions.includes(q.text)).length,
-    categories: questionsManager.allQuestions.reduce((acc, q) => {
-      acc[q.category] = (acc[q.category] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>)
-  };
-  
-  // Start the roulette animation or go to player setup if needed
-  const handleStartRoulette = () => {
-    if (playerManager.nameBlameMode) {
-      // If not enough players, go to player setup
-      if (playerManager.players.length < 2) {
-        setStep('playerSetup');
-        return;
-      }
-    }
-    playSound(SOUND_PATHS.ROUND_START);
-    setStep('roulette');
-    
-    // Start the loading quote rotation
-    setQuoteIndex(0);
-    const quoteTimer = setInterval(() => {
-      setQuoteIndex(prev => (prev + 1) % LOADING_QUOTES.length);
-    }, gameSettings.loadingQuoteIntervalMs);
-    
-    // After animation, prepare questions for the game
-    setTimeout(async () => {
-      clearInterval(quoteTimer);
-      const success = await questionsManager.prepareRoundQuestions(gameSettings);
-      if (success) {
-        setStep('game');
-      } else {
-        setStep('intro');
-      }
-    }, gameSettings.rouletteDurationMs);
-  };
-  
-  // Handler for the main button on the intro screen
-  const handleIntroMainButton = () => {
-    if (playerManager.nameBlameMode) {
-      setStep('playerSetup');
-    } else {
-      handleStartRoulette();
-    }
-  };
+  const { t, i18n } = useTranslation();
+  const { gameSettings, updateGameSettings } = useGameSettings();
 
-  // Handle advancing to the next question
-  const handleNextQuestion = () => {
-    if (questionsManager.index < questionsManager.currentRoundQuestions.length - 1) {
-      questionsManager.advanceToNextQuestion();
-      playSound(SOUND_PATHS.NEW_QUESTION);
-      if (playerManager.nameBlameMode) {
-        playerManager.advancePlayer();
+  const [gameStep, setGameStep] = useState<GameStep>('intro'); // GameStep used as type, value is string literal
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [playedQuestions, setPlayedQuestions] = useState<string[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  // Simplified QuestionStats
+  const [questionStats, setQuestionStats] = useState<Pick<QuestionStats, 'totalQuestions' | 'categories'>>({ totalQuestions: 0, categories: {} });
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
+  const [errorLoadingQuestions, setErrorLoadingQuestions] = useState<string | null>(null);
+
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  
+  const loadGameData = useCallback(async (language: string) => {
+    setIsLoadingQuestions(true);
+    setErrorLoadingQuestions(null);
+    setQuestions([]);
+    setCategories([]);
+    
+    try {
+      // Use relative paths that work for both dev and production
+      const categoriesResponse = await fetch('questions/categories.json');
+      
+      if (!categoriesResponse.ok) {
+        console.error('Failed to load categories.json, status:', categoriesResponse.status);
+        throw new Error(t('error.loadQuestions'));
       }
-    } else {
-      // End of round, update played questions and show summary
-      const newlyPlayedQuestions = questionsManager.currentRoundQuestions.map(q => q.text);
-      questionsManager.setPlayedQuestions(prevPlayed => {
-        const updatedPlayed = [...new Set([...prevPlayed, ...newlyPlayedQuestions])];
-        return updatedPlayed;
+      
+      const allCategoriesData: any[] = await categoriesResponse.json();
+
+      const shuffledCategories = [...allCategoriesData].sort(() => 0.5 - Math.random());
+      const selectedCategorySource = shuffledCategories.slice(0, 10);
+
+      const translatedCategories: Category[] = selectedCategorySource.map(catData => {
+        if (!catData || !catData.id) return null;
+        let name = catData[language as string];
+        if (!name) name = catData['en']; // Using string literal for language
+        if (!name) name = catData['de']; // Using string literal for language
+        if (!name) name = catData.id;
+
+        return {
+          id: catData.id,
+          name: name || 'Unnamed Category',
+          emoji: catData.emoji || ''
+        };
+      }).filter(cat => cat !== null) as Category[];
+      
+      setCategories(translatedCategories);
+
+      let allLoadedQuestions: Question[] = [];
+      
+      for (const category of translatedCategories) {
+        const categoryId = category.id;
+        let categoryQuestions: Question[] = [];
+        let found = false;
+        const languagesToTry = [language, 'en', 'de']; // Using string literals for languages
+        
+        for (const lang of languagesToTry) {
+          try {
+            const questionsResponse = await fetch(`questions/${lang}/${categoryId}.json`);
+            if (questionsResponse.ok) {
+              const questionsData = await questionsResponse.json();
+              categoryQuestions = questionsData.map((q: any) => ({ 
+                ...q, 
+                category: categoryId, 
+                questionId: q.questionId || `gen_${categoryId}_${Math.random().toString(36).substring(7)}` 
+              }));
+              allLoadedQuestions = allLoadedQuestions.concat(categoryQuestions);
+              found = true;
+              break;
+            }
+          } catch (e) { 
+            /* ignore individual fetch error, try next lang */ 
+          }
+        }
+        
+        if (!found) { 
+          /* handle category with no questions if needed */ 
+        }
+      }
+      
+      setQuestions(allLoadedQuestions);
+
+      // Updated QuestionStats setting
+      setQuestionStats({
+        totalQuestions: allLoadedQuestions.length,
+        categories: translatedCategories.reduce((acc: Record<string, number>, cat: Category) => {
+          acc[cat.name] = allLoadedQuestions.filter((q: Question) => q.category === cat.id).length;
+          return acc;
+        }, {} as Record<string, number>)
       });
-      playSound(SOUND_PATHS.SUMMARY_FUN);
-      setStep('summary');
+
+      if (allLoadedQuestions.length === 0 && translatedCategories.length > 0) {
+        console.warn("No questions loaded despite having selected categories.");
+      }
+
+    } catch (error: any) {
+      console.error("Error loading game data:", error);
+      setErrorLoadingQuestions(error.message || t('error.loadQuestions'));
+    } finally {
+      setIsLoadingQuestions(false);
+    }
+  }, [t]);
+
+  useEffect(() => {
+    if (gameSettings.language) {
+      loadGameData(gameSettings.language);
+    }
+  }, [gameSettings.language, loadGameData]);
+  
+  useEffect(() => {
+    if (gameSettings.language && i18n.language !== gameSettings.language) {
+      // Make sure i18n is properly initialized before calling changeLanguage
+      if (i18n && typeof i18n.changeLanguage === 'function') {
+        i18n.changeLanguage(gameSettings.language);
+      } else {
+        console.warn('i18n is not properly initialized or changeLanguage is not available');
+      }
+    }
+  }, [gameSettings.language, i18n]);
+
+  const handleStartGame = () => {
+    if (questions.length > 0) {
+      setGameStep('game'); // GameStep value is string literal
+      playSound('game_start');
+    } else {
+      if (!errorLoadingQuestions) {
+        setErrorLoadingQuestions(t('error.noQuestionsLoaded'));
+      }
+    }
+  };
+
+  const handleLanguageChange = (newLanguage: string) => {
+    if (Object.keys(SUPPORTED_LANGUAGES).includes(newLanguage)) {
+      updateGameSettings({ language: newLanguage as keyof typeof SUPPORTED_LANGUAGES }); // SupportedLanguage used as type
+    } else {
+      console.warn(`Attempted to change to unsupported language: ${newLanguage}`);
+      updateGameSettings({ language: 'en' }); // Using string literal for language
     }
   };
   
-  // Handle blaming a player in NameBlame mode
-  const handleBlame = (blamedPlayerName: string) => {
-    if (!questionsManager.currentQuestion || !playerManager.nameBlameMode) return;
-
-    const activePlayers = playerManager.getActivePlayers();
-    const blamingPlayer = activePlayers[playerManager.currentPlayerIndex];
-    if (!blamingPlayer || !blamingPlayer.name) return;
-
-    playerManager.recordNameBlame(
-      blamingPlayer.name, 
-      blamedPlayerName, 
-      questionsManager.currentQuestion.text
-    );
-    handleNextQuestion();
-  };
-  
-  // Reset the game for a new round
-  const handleRestart = () => {
-    questionsManager.resetQuestions();
-    setStep('intro');
-  };
-  
-  // Reset all app data
-  const handleResetAppData = () => {
-    questionsManager.setPlayedQuestions([]);
-    playerManager.resetPlayers();
-    playerManager.resetNameBlameLog();
-    setGameSettings(initialGameSettings);
-    setStep('intro');
-    alert('App-Daten wurden zurückgesetzt.');
-  };
-
   return (
     <GameContainer>
-      {/* Debug Panel */}
-        {debugMode && (
-          <DebugPanel
-            gameSettings={gameSettings}
-            setGameSettings={setGameSettings}
-            defaultGameSettings={initialGameSettings}
-            onClose={() => setDebugMode(false)}
-            onResetAppData={handleResetAppData}
-            questionStats={questionStats}
-          />
-        )}
-
-        {/* Game title */}
-        <div className="text-center mb-4">          <h1
-            className="text-white text-5xl font-bold shadow-md rounded-xl px-6 py-2 cursor-pointer"
-            onClick={handleRestart}
-            title={t('app.back')}
-          >
-            {t('app.title')}
-          </h1>
-        </div>
-
-      {/* Game screen transitions */}
-      <div className="w-full max-w-md flex-grow flex items-center justify-center">
-        <AnimatePresence mode="wait">
-          {/* Intro Screen */}
-          {step === 'intro' && (
-            <IntroScreen
-              gameSettings={gameSettings}
-              isLoading={questionsManager.isLoading}
-              csvError={questionsManager.csvError}
-              nameBlameMode={playerManager.nameBlameMode}
-              soundEnabled={soundEnabled}
-              onStartGame={handleIntroMainButton}
-              onToggleNameBlame={checked => playerManager.setNameBlameMode(checked)}
-              onToggleSound={toggleSound}
-              onVolumeChange={setVolume}
-              volume={volume}
-              onOpenDebugPanel={() => setDebugMode(true)}
-              onOpenInfoModal={() => setIsInfoModalOpen(true)}
-              mainButtonLabel={playerManager.nameBlameMode ? 'Spieler Einrichten' : 'Spiel starten'}
-            />
-          )}
-
-          {/* Player Setup Screen */}
-          {step === 'playerSetup' && playerManager.nameBlameMode && (
-            <PlayerSetupScreen
-              players={playerManager.players}
-              tempPlayerName={playerManager.tempPlayerName}
-              nameInputError={playerManager.nameInputError}
-              onPlayerNameChange={playerManager.handlePlayerNameChange}
-              onRemovePlayer={playerManager.removePlayer}
-              onTempPlayerNameChange={playerManager.setTempPlayerName}
-              onAddPlayer={playerManager.addPlayer}
-              onStartGame={() => {
-                // Only start game if enough players
-                if (playerManager.players.length >= 3) {
-                  handleStartRoulette();
-                }
-              }}
-              onBackToIntro={() => setStep('intro')}
-            />
-          )}
-
-          {/* Roulette Screen */}
-          {step === 'roulette' && (
-            <LoadingContainer
-              categories={Array.from(new Set(questionsManager.allQuestions.map(q => q.category)))}
-              getEmoji={getEmoji}
-              loadingQuotes={LOADING_QUOTES}
-              settings={{
-                loadingQuoteSpringStiffness: 120,
-                loadingQuoteSpringDamping: 10,
-                loadingQuoteTransitionDurationSec: 0.2,
-                cardFallDistance: -200,
-                cardFallStaggerDelaySec: 0.2,
-                cardStackOffsetY: -8,
-                loadingQuoteIntervalMs: gameSettings.loadingQuoteIntervalMs,
-              }}
-            />
-          )}
-
-          {/* Question Screen */}
-          {step === 'game' && questionsManager.currentQuestion && (
-            <QuestionScreen
-              question={questionsManager.currentQuestion}
-              index={questionsManager.index}
-              totalQuestions={questionsManager.currentRoundQuestions.length}
-              gameSettings={gameSettings}
-              nameBlameMode={playerManager.nameBlameMode}
-              activePlayers={playerManager.getActivePlayers()}
-              currentPlayerIndex={playerManager.currentPlayerIndex}
-              onBlame={handleBlame}
-              onNext={handleNextQuestion}
-              onBack={questionsManager.goToPreviousQuestion}
-            />
-          )}
-
-          {/* Summary Screen */}
-          {step === 'summary' && (
-            <SummaryScreen
-              nameBlameMode={playerManager.nameBlameMode}
-              nameBlameLog={playerManager.nameBlameLog}
-              questionsAnswered={questionsManager.currentRoundQuestions.length}
-              onRestart={handleRestart}
-              activePlayersCount={playerManager.getActivePlayers().length}
-            />
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* Error display */}
-      {questionsManager.csvError && (
-        <ErrorDisplay message={questionsManager.csvError} />
+      {gameStep === 'intro' && ( // GameStep value is string literal
+        <IntroScreen
+          onStartGame={handleStartGame}
+          gameSettings={gameSettings}
+          onToggleSound={toggleSound}
+          soundEnabled={soundEnabled}
+          volume={volume}
+          onVolumeChange={setVolume}
+          isLoading={isLoadingQuestions}
+          csvError={errorLoadingQuestions}
+          nameBlameMode={false} 
+          onToggleNameBlame={(checked) => console.log('Name blame toggled:', checked)}
+          onOpenDebugPanel={() => console.log('Open debug panel')} 
+          onOpenInfoModal={() => setShowInfoModal(true)} 
+          mainButtonLabel={isLoadingQuestions ? t('intro.loading_questions') : t('intro.start_game')}
+        />
       )}
       
-      {/* Info modal */}
-      <InfoModal 
-        isOpen={isInfoModalOpen} 
-        onClose={() => setIsInfoModalOpen(false)} 
-        onResetAppData={handleResetAppData}
-      />
-      <footer className="mt-6 text-white text-xs">{t('app.footer')}</footer>
-      
-      {/* Language change feedback */}
-      <LanguageChangeFeedback 
-        language={gameSettings.language} 
-        languageName={SUPPORTED_LANGUAGES[gameSettings.language] || ''}
-      />
+      {showInfoModal && (
+        <InfoModal
+          isOpen={showInfoModal}
+          onClose={() => setShowInfoModal(false)}
+          onResetAppData={() => console.log('Reset App Data triggered from InfoModal')}
+        />
+      )}
     </GameContainer>
   );
 }

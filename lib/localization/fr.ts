@@ -14,7 +14,7 @@ const fr: Translations = {
   'app.loading': 'Chargement...',
   
   // Intro screen
-  'intro.start_game': 'Démarrer le jeu',
+  'intro.start_game': 'Commencer le jeu',
   'intro.player_setup': 'Configuration des joueurs',
   'intro.settings': 'Paramètres',
   'intro.info': 'Informations',
@@ -26,10 +26,15 @@ const fr: Translations = {
   'intro.error_loading_questions': 'Erreur lors du chargement des questions:',
   'intro.error_check_files': 'Veuillez vérifier les fichiers de questions et réessayer.',
   'intro.loading_questions': 'Chargement des questions...',
+  'intro.who_would': 'Qui serait le plus susceptible de...',
+  
+  // Errors
+  'error.loadQuestions': 'Erreur lors du chargement des questions. Veuillez vérifier les fichiers de questions et réessayer.',
+  'error.noQuestionsLoaded': 'Aucune question chargée. Veuillez vérifier les fichiers de questions et réessayer.',
   
   // Settings
   'settings.title': 'Paramètres',
-  'settings.language': 'Langue / Language',
+  'settings.language': 'Langue',
   'settings.sound': 'Son',
   'settings.volume': 'Volume',
   'settings.animations': 'Animations',
@@ -58,6 +63,8 @@ const fr: Translations = {
   'game.previous_question': 'Question précédente',
   'game.progress': 'Question {current} sur {total}',
   'game.blame': 'Blâmer',
+  'game.summary': 'Résumé',
+  'game.play_again': 'Rejouer',
 
   // Questions
   'questions.player_turn': 'À ton tour',

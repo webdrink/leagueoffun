@@ -25,12 +25,15 @@ const de: Translations = {
   'intro.subheading': 'Was denkst du? Wer würde was tun?',
   'intro.error_loading_questions': 'Fehler beim Laden der Fragen:',
   'intro.error_check_files': 'Bitte überprüfe die Fragen-Datei und versuche es erneut.',
-  'intro.loading_questions': 'Lädt Fragen...',
+  'intro.loading_questions': 'Fragen werden geladen...',
+  'intro.mainTitle': 'Wer würde was tun?',
+  'intro.subTitle': 'Was denkst du? Wer würde am ehesten...',
+  'intro.who_would': 'Wer würde am ehesten...',
   
   // Settings
   'settings.title': 'Einstellungen',
-  'settings.language': 'Sprache / Language',
-  'settings.sound': 'Sound',
+  'settings.language': 'Sprache',
+  'settings.sound': 'Ton',
   'settings.volume': 'Lautstärke',
   'settings.animations': 'Animationen',
   'settings.reset_data': 'App-Daten zurücksetzen',
@@ -58,6 +61,8 @@ const de: Translations = {
   'game.previous_question': 'Vorherige Frage',
   'game.progress': 'Frage {current} von {total}',
   'game.blame': 'Schuld geben',
+  'game.summary': 'Zusammenfassung',
+  'game.play_again': 'Nochmal spielen',
 
   // Questions (Added missing keys with German placeholders)
   'questions.player_turn': 'Dein Zug',
@@ -109,7 +114,13 @@ const de: Translations = {
   'debug.questions': 'Fragen (Debug)',
   'debug.animations': 'Animationen (Debug)',
   'debug.language': 'Sprache (Debug)',
-  'debug.reset_data': 'Daten zurücksetzen (Debug)'
+  'debug.reset_data': 'Daten zurücksetzen (Debug)',
+
+  // Additional keys
+  'startGame': 'Spiel starten',
+  'error.loadQuestions': 'Fehler beim Laden der Fragen. Bitte überprüfen Sie die Fragendateien und versuchen Sie es erneut.',
+  'loadingQuestions': 'Fragen werden geladen...',
+  'error.noQuestionsLoaded': 'Keine Fragen geladen. Bitte überprüfen Sie die Fragendateien und versuchen Sie es erneut.'
 };
 
 export default de;

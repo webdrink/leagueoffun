@@ -20,13 +20,12 @@ const LanguageTester: React.FC = () => {
   useEffect(() => {
     const loadCategories = async () => {
       setIsLoading(true);
-      
-      try {
+        try {
         const langFile = currentLanguage !== 'de'
           ? `index.${currentLanguage}.json`
           : 'index.json';
         
-        const response = await fetch(`/categories/${langFile}`);
+        const response = await fetch(`categories/${langFile}`);
         
         if (response.ok) {
           const data = await response.json();

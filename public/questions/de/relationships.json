@@ -123,5 +123,30 @@
     "questionId": "relationship_sample_question_2",
     "text": "Sample question 2 for relationships in de",
     "category": "relationships"
+  },
+  {
+    "questionId": "relationship_advice",
+    "text": "Wer würde am ehesten guten Beziehungsrat geben?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "first_date",
+    "text": "Wer würde das beste erste Date planen?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "forget_anniversary",
+    "text": "Wer würde am ehesten einen Jahrestag vergessen?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "matchmaker",
+    "text": "Wer wäre der beste Kuppler?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "secret_admirer",
+    "text": "Wer hätte am ehesten einen heimlichen Verehrer?",
+    "category": "relationships"
   }
 ]

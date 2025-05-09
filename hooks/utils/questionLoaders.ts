@@ -14,7 +14,7 @@ export const loadAllCategories = async (language: SupportedLanguage = DEFAULT_LA
       ? `index.${language}.json` 
       : 'index.json';
     
-    const response = await fetch(`/categories/${langFile}`);
+    const response = await fetch(`categories/${langFile}`);
     
     if (!response.ok) {
       throw new Error(`Failed to load categories for ${language}`);
@@ -33,8 +33,7 @@ export const loadAllCategories = async (language: SupportedLanguage = DEFAULT_LA
       return loadAllCategories(DEFAULT_LANGUAGE);
     }
     
-    // If still failing, return empty array
-    console.error('Could not load any categories');
+    // If all fails, return empty array
     return [];
   }
 };
@@ -52,7 +51,7 @@ export const loadQuestionsByCategories = async (
       ? `index.${language}.json` 
       : 'index.json';
     
-    const response = await fetch(`/categories/${langFile}`);
+    const response = await fetch(`categories/${langFile}`);
     
     if (!response.ok) {
       throw new Error(`Failed to load category index for ${language}`);
@@ -60,25 +59,20 @@ export const loadQuestionsByCategories = async (
     
     const categoryData = await response.json();
     
-    // Find the category objects that match our requested categories
-    const categoryObjects = categoryData.filter((cat: any) => 
+    // Get categories that match our requested list
+    const targetCategories = categoryData.filter((cat: any) => 
       categories.includes(cat.name)
     );
     
-    if (categoryObjects.length === 0) {
-      console.warn(`No matching categories found for ${categories.join(', ')}`);
-      return [];
-    }
-    
-    // Load questions for each category in parallel
-    const questionPromises = categoryObjects.map(async (cat: any) => {
+    // Load questions for each category
+    const allQuestionsPromises = targetCategories.map(async (cat: any) => {
       if (!cat.fileName) {
         console.warn(`No fileName for category ${cat.name}`);
         return [];
       }
       
       try {
-        const questionResponse = await fetch(`/questions/${language}/${cat.fileName}`);
+        const questionResponse = await fetch(`questions/${language}/${cat.fileName}`);
         
         if (!questionResponse.ok) {
           throw new Error(`Failed to load questions for ${cat.name}`);
@@ -86,22 +80,20 @@ export const loadQuestionsByCategories = async (
         
         const questions = await questionResponse.json();
         
-        // Add category information to each question
         return questions.map((q: any) => ({
           ...q,
           category: cat.name,
-          categoryId: cat.id,
-          emoji: cat.emoji
+          questionId: q.questionId || `${cat.name}_${Math.random().toString(36).substr(2, 9)}`
         }));
       } catch (error) {
         console.error(`Error loading questions for ${cat.name}:`, error);
         
-        // Try fallback to default language if not already
+        // Try fallback language
         if (language !== DEFAULT_LANGUAGE) {
           console.log(`Falling back to ${DEFAULT_LANGUAGE} questions for ${cat.name}`);
           
           try {
-            const fallbackResponse = await fetch(`/questions/${DEFAULT_LANGUAGE}/${cat.fileName}`);
+            const fallbackResponse = await fetch(`questions/${DEFAULT_LANGUAGE}/${cat.fileName}`);
             
             if (fallbackResponse.ok) {
               const fallbackQuestions = await fallbackResponse.json();
@@ -109,32 +101,34 @@ export const loadQuestionsByCategories = async (
               return fallbackQuestions.map((q: any) => ({
                 ...q,
                 category: cat.name,
-                categoryId: cat.id,
-                emoji: cat.emoji
+                questionId: q.questionId || `${cat.name}_${Math.random().toString(36).substr(2, 9)}`
               }));
             }
           } catch (fallbackError) {
-            console.error(`Error with fallback questions for ${cat.name}:`, fallbackError);
+            // Ignore fallback errors
           }
         }
         
+        // Return empty array if everything fails
         return [];
       }
     });
     
-    const allCategoryQuestions = await Promise.all(questionPromises);
+    // Wait for all promises to resolve
+    const allQuestionsArrays = await Promise.all(allQuestionsPromises);
     
     // Flatten the array of arrays
-    return allCategoryQuestions.flat();
+    return allQuestionsArrays.flat();
   } catch (error) {
-    console.error(`Error loading questions by categories for ${language}:`, error);
+    console.error(`Error loading questions by categories:`, error);
     
-    // Fallback to default language
+    // Fallback to default language if not already trying
     if (language !== DEFAULT_LANGUAGE) {
-      console.log(`Falling back to ${DEFAULT_LANGUAGE} for all questions`);
+      console.log(`Falling back to ${DEFAULT_LANGUAGE} for categories`);
       return loadQuestionsByCategories(categories, DEFAULT_LANGUAGE);
     }
     
+    // If all fails, return empty array
     return [];
   }
 };
@@ -144,7 +138,7 @@ export const loadQuestionsByCategories = async (
  */
 export const loadAllQuestionsFromJson = async (): Promise<Question[]> => {
   try {
-    const response = await fetch('/questions.json');
+    const response = await fetch('questions.json');
     
     if (!response.ok) {
       throw new Error('Failed to load questions.json');

@@ -1,34 +1,61 @@
 /**
- * Utilities for language support and localization in the app
+ * Language support utilities
+ * 
+ * This file provides helpers and constants for language support in the application.
  */
 
 import { useState, useEffect } from 'react';
 import useLocalStorage from '../useLocalStorage';
-import { SupportedLanguage, GameSettings } from '../../types';
-
-export const SUPPORTED_LANGUAGES: Record<SupportedLanguage, string> = {
-  en: 'English',
-  de: 'Deutsch',
-  es: 'Español',
-  fr: 'Français'
-};
-
-export const DEFAULT_LANGUAGE: SupportedLanguage = 'de';
+import { GameSettings } from '../../types';
 
 /**
- * Detects the browser language and returns a supported language or the default
+ * Map of supported languages with their display names
  */
-export const detectBrowserLanguage = (): SupportedLanguage => {
-  try {
-    const browserLang = navigator.language.split('-')[0];
-    return (browserLang in SUPPORTED_LANGUAGES) 
-      ? browserLang as SupportedLanguage 
-      : DEFAULT_LANGUAGE;
-  } catch (error) {
-    console.error('Error detecting browser language:', error);
-    return DEFAULT_LANGUAGE;
+export const SUPPORTED_LANGUAGES = {
+  'de': 'Deutsch',
+  'en': 'English',
+  'es': 'Español',
+  'fr': 'Français',
+} as const;
+
+/**
+ * Default language used if no language preference is found
+ */
+export const DEFAULT_LANGUAGE = 'de';
+
+/**
+ * Type for supported language codes
+ */
+export type SupportedLanguage = keyof typeof SUPPORTED_LANGUAGES;
+
+/**
+ * Array of supported language codes
+ */
+export const SUPPORTED_LANGUAGE_CODES = Object.keys(SUPPORTED_LANGUAGES) as SupportedLanguage[];
+
+/**
+ * Detects the browser language and returns a supported language code
+ * Falls back to 'de' if no match is found
+ */
+export function detectBrowserLanguage(): SupportedLanguage {
+  // Get browser language
+  const browserLang = navigator.language.split('-')[0];
+  
+  // Check if it's a supported language
+  if (SUPPORTED_LANGUAGE_CODES.includes(browserLang as SupportedLanguage)) {
+    return browserLang as SupportedLanguage;
   }
-};
+  
+  // Fall back to German
+  return DEFAULT_LANGUAGE;
+}
+
+/**
+ * Validates if a language code is supported
+ */
+export function isValidLanguage(language: string): boolean {
+  return SUPPORTED_LANGUAGE_CODES.includes(language as SupportedLanguage);
+}
 
 /**
  * Hook to manage language throughout the application

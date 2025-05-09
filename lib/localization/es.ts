@@ -26,10 +26,15 @@ const es: Translations = {
   'intro.error_loading_questions': 'Error al cargar preguntas:',
   'intro.error_check_files': 'Por favor revisa los archivos de preguntas e intenta de nuevo.',
   'intro.loading_questions': 'Cargando preguntas...',
-  
+  'intro.who_would': '¿Quién sería más probable que...',
+
+  // Errors
+  'error.loadQuestions': 'Error al cargar preguntas. Por favor, revise los archivos de preguntas e intente nuevamente.',
+  'error.noQuestionsLoaded': 'No se cargaron preguntas. Por favor, revise los archivos de preguntas e intente nuevamente.',
+
   // Settings
   'settings.title': 'Configuración',
-  'settings.language': 'Idioma / Language',
+  'settings.language': 'Idioma',
   'settings.sound': 'Sonido',
   'settings.volume': 'Volumen',
   'settings.animations': 'Animaciones',
@@ -58,6 +63,8 @@ const es: Translations = {
   'game.previous_question': 'Pregunta anterior',
   'game.progress': 'Pregunta {current} de {total}',
   'game.blame': 'Culpar',
+  'game.summary': 'Resumen',
+  'game.play_again': 'Jugar de nuevo',
 
   // Questions (Added, to be translated)
   'questions.player_turn': 'Tu turno', // Placeholder

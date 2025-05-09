@@ -41,6 +41,12 @@ export interface GameSettings {
   language: SupportedLanguage;
 }
 
+export interface Category {
+  id: string;
+  name: string;
+  emoji?: string;
+}
+
 export interface Question {
   text: string;
   category?: string;

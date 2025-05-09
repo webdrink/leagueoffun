@@ -193,5 +193,30 @@
     "questionId": "who_would_forget_party_date",
     "text": "Wer würde am ehesten den Tag vergessen, an dem die Party stattfindet?",
     "category": "party"
+  },
+  {
+    "questionId": "dance_on_table",
+    "text": "Wer würde am ehesten auf einem Tisch tanzen?",
+    "category": "party"
+  },
+  {
+    "questionId": "karaoke_queen",
+    "text": "Wer würde am ehesten beim Karaoke alle beeindrucken?",
+    "category": "party"
+  },
+  {
+    "questionId": "party_planner",
+    "text": "Wer würde die beste Party organisieren?",
+    "category": "party"
+  },
+  {
+    "questionId": "first_leave",
+    "text": "Wer würde als erster die Party verlassen?",
+    "category": "party"
+  },
+  {
+    "questionId": "last_standing",
+    "text": "Wer wäre der letzte, der noch wach ist?",
+    "category": "party"
   }
 ]
