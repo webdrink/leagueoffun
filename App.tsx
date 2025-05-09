@@ -123,25 +123,37 @@ function App() {
       return;
     }
 
+    // Immediately try to prepare questions before showing loading screen
+    // This helps ensure data is ready or an error is caught quickly.
+    const success = await prepareRoundQuestions(gameSettings);
+
+    if (!success || currentRoundQuestions.length === 0) {
+      setErrorLoadingQuestions(t('error.noQuestionsForRound'));
+      setGameStep('intro'); // Go back to intro if no questions could be prepared
+      return;
+    }
+
+    // If successful, now set to loading and proceed with animation
     setGameStep('loading');
+    setErrorLoadingQuestions(null); // Clear any previous error
     setQuoteIndex(0);
     const quoteTimer = setInterval(() => {
       setQuoteIndex(prev => (prev + 1) % LOADING_QUOTES.length);
-    }, gameSettings.loadingQuoteIntervalMs || 2000); // Default to 2s if not in settings
+    }, gameSettings.loadingQuoteIntervalMs || 2000);
 
-    setTimeout(async () => {
+    setTimeout(() => {
       clearInterval(quoteTimer);
-      const success = await prepareRoundQuestions(gameSettings);
-      if (success && currentRoundQuestions.length > 0) {
+      // Double-check questions are still there (should be, as prepareRoundQuestions was successful)
+      if (currentRoundQuestions.length > 0) {
         setGameStep('game');
-        setCurrentPlayerIndex(0); // Reset for new game
+        setCurrentPlayerIndex(0);
         playSound('game_start');
-        setErrorLoadingQuestions(null);
       } else {
-        setErrorLoadingQuestions(t('error.noQuestionsForRound'));
+        // This case should ideally not be hit if the initial check passed
+        setErrorLoadingQuestions(t('error.noQuestionsForRoundAfterLoading'));
         setGameStep('intro');
       }
-    }, gameSettings.rouletteDurationMs || 3000); // Default to 3s if not in settings
+    }, gameSettings.rouletteDurationMs || 3000);
   };
   
   const handlePlayerSetupComplete = async () => {
@@ -179,18 +191,21 @@ function App() {
     setGameStep('intro');
   };
   
-  const getEmoji = (categoryId: string): string => {
-    let foundCategory = currentRoundQuestions.find(q => q.categoryId === categoryId);
-    if (!foundCategory) {
-      foundCategory = allQuestions.find(q => q.categoryId === categoryId);
+  const getEmoji = (categoryName: string): string => {
+    // Find in current round first, then all questions as fallback
+    let questionWithCategory = currentRoundQuestions.find(q => q.categoryName === categoryName);
+    if (!questionWithCategory) {
+      questionWithCategory = allQuestions.find(q => q.categoryName === categoryName);
     }
-    return foundCategory?.categoryEmoji || '❓';
+    return questionWithCategory?.categoryEmoji || '❓';
   };
 
   const handleBlame = (blamedPlayerName: string) => {
     console.log(`${blamedPlayerName} was blamed for question: ${currentQuestion?.text}`);
     handleNextQuestion(); 
   };
+
+  const LOADING_QUOTES = t('loading.quotes', { returnObjects: true }) as string[] || [];
 
   return (
     <GameContainer onTitleClick={handleTitleClick}>
@@ -239,13 +254,13 @@ function App() {
         {gameStep === 'loading' && (
           <LoadingContainer
             key="loading"
-            categories={(currentRoundQuestions.length > 0 ? currentRoundQuestions : allQuestions)
+            categories={currentRoundQuestions
               .map(q => q.categoryName)
-              .filter((value, index, self) => self.indexOf(value) === index && value) 
-              .slice(0, 10)}
+              .filter((value, index, self) => value && self.indexOf(value) === index) 
+              .slice(0, gameSettings.categoryCount) // Use gameSettings.categoryCount
+            }
             getEmoji={getEmoji}
-            loadingQuotes={LOADING_QUOTES}
-            currentQuote={LOADING_QUOTES[quoteIndex % LOADING_QUOTES.length]} 
+            currentQuote={LOADING_QUOTES.length > 0 ? LOADING_QUOTES[quoteIndex % LOADING_QUOTES.length] : ""} // Ensure currentQuote is empty if no quotes
             settings={{
               loadingQuoteSpringStiffness: gameSettings.loadingQuoteSpringStiffness,
               loadingQuoteSpringDamping: gameSettings.loadingQuoteSpringDamping,
