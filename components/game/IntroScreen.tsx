@@ -87,7 +87,8 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
         </motion.div>
       )}
 
-      <div className="mt-6 flex flex-col space-y-4">        <Button
+      <div className="mt-6 flex flex-col space-y-4">
+        <Button
           onClick={onStartGame}
           disabled={isLoading || !!csvError}
           className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg rounded-lg shadow-md transition-transform hover:scale-105 duration-200 disabled:opacity-70 disabled:cursor-not-allowed"

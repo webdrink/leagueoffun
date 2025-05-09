@@ -132,10 +132,14 @@ function App() {
           // Add category and questions if successful
           selectedCategories.push(category);
           loadedCategoryIds.add(category.id);
+
+          // Get the correct localized category name based on current language
+          const categoryName = category[language as keyof typeof category] || category.id;
+
           allLoadedQuestions.push(...questionsData.map(q => ({ 
             ...q, 
             categoryId: category.id,
-            categoryName: category.name, // Populate categoryName from the fetched category
+            categoryName: categoryName, // Use the localized category name
             categoryEmoji: category.emoji || '❓' // Populate categoryEmoji, with a fallback
           })));
         } catch (error) {
@@ -194,10 +198,14 @@ function App() {
 
             selectedCategories.push(fallbackCategory);
             loadedCategoryIds.add(fallbackCategory.id);
+
+            // Get the correct localized category name based on current language
+            const categoryName = fallbackCategory[language as keyof typeof fallbackCategory] || fallbackCategory.id;
+
             allLoadedQuestions.push(...fallbackQuestions.map(q => ({ 
               ...q, 
               categoryId: fallbackCategory.id,
-              categoryName: fallbackCategory.name, // Populate categoryName
+              categoryName: categoryName, // Use the localized category name
               categoryEmoji: fallbackCategory.emoji || '❓' // Populate categoryEmoji
             })));
           } catch (error) {

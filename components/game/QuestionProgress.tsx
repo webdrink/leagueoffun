@@ -36,6 +36,7 @@ interface QuestionProgressProps {
 const QuestionProgress: React.FC<QuestionProgressProps> = ({ currentQuestion, totalQuestions }) => {
   const { t } = useTranslation();
   const progressPercentage = totalQuestions > 0 ? (currentQuestion / totalQuestions) * 100 : 0;
+  console.log(currentQuestion, '', totalQuestions, progressPercentage);
 
   return (
     <div className="w-full px-4 py-2">

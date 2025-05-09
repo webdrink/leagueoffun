@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite --host",
-    "build": "node scripts/convertCsvToJson.js && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.tsx --max-warnings=9999",
     "typecheck": "tsc --project tsconfig.json --noEmit",

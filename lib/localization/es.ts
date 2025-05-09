@@ -68,7 +68,7 @@ const es: Translations = {
 
   // Questions (Added, to be translated)
   'questions.player_turn': 'Tu turno', // Placeholder
-  'questions.counter': 'Pregunta {current} de {total}', // Placeholder
+  'questions.counter': 'Pregunta {{current}} de {{total}}', // Placeholder
   'questions.who_blame': '¿A quién culparías?', // Placeholder
   'questions.cannot_blame_self': 'No puedes culparte a ti mismo', // Placeholder
   'questions.blame_player': 'Culpar a {name}', // Placeholder

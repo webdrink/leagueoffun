@@ -66,7 +66,7 @@ const de: Translations = {
 
   // Questions (Added missing keys with German placeholders)
   'questions.player_turn': 'Dein Zug',
-  'questions.counter': 'Frage {current} von {total}',
+  'questions.counter': 'Frage {{current}} von {{total}}',
   'questions.who_blame': 'Wen beschuldigst du?',
   'questions.cannot_blame_self': 'Du kannst dich nicht selbst beschuldigen',
   'questions.blame_player': 'Beschuldige {name}',
@@ -87,8 +87,8 @@ const de: Translations = {
   
   // Modal
   'modal.info_title': 'Information',
-  'modal.info_description': 'Hier könnten Spielanleitungen, Informationen zum Datenschutz oder andere Hinweise stehen.',
-  'modal.reset_data_description': 'Aktuell dient dieser Modal hauptsächlich zum Zurücksetzen der App-Daten.',
+  'modal.info_description': 'Das Spielprinzip ist einfach: Du gibst der Person das Handy, welche am besten zur Frage passt. Die Person liest ihre Frage vor, erklärt sich oder gibt das Handy schnell mit der nächsten Karte weiter.',
+  'modal.reset_data_description': 'Aktuell dient dieser Seite hauptsächlich zum Zurücksetzen der App-Daten.',
   'modal.close': 'Schließen',
   'modal.reset_app_data': 'App-Daten zurücksetzen',
 

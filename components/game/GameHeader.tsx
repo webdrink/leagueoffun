@@ -28,13 +28,16 @@ interface GameHeaderProps {
  */
 const GameHeader: React.FC<GameHeaderProps> = ({ title, onTitleClick }) => {
   return (
-    <div className="w-full py-4">
-      <h1 
-        className="text-3xl font-bold text-white text-center cursor-pointer" // Add cursor-pointer
-        onClick={onTitleClick} // Add onClick handler
-      >
-        {title}
-      </h1>
+    <div className="w-full flex justify-center">
+      <div className="shadow-2xl rounded-2xl border-pink-200 px-8 py-6 max-w-2xl w-stretch flex justify-center items-center bg-white/70 backdrop-blur-md">
+        <h1
+          className="text-6xl sm:text-6xl font-extrabold text-purple-700 text-center cursor-pointer select-none font-mono tracking-tight drop-shadow-lg"
+          style={{ fontFamily: "'Orbitron', 'Montserrat', 'Segoe UI', monospace" }}
+          onClick={onTitleClick}
+        >
+          {title}
+        </h1>
+      </div>
     </div>
   );
 };

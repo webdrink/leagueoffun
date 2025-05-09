@@ -68,7 +68,7 @@ const fr: Translations = {
 
   // Questions
   'questions.player_turn': 'À ton tour',
-  'questions.counter': 'Question {current} sur {total}',
+  'questions.counter': 'Question {{current}} sur {{total}}',
   'questions.who_blame': 'Qui blâmerais-tu?',
   'questions.cannot_blame_self': 'Tu ne peux pas te blâmer toi-même',
   'questions.blame_player': 'Blâmer {name}',

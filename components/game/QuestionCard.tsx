@@ -13,10 +13,15 @@ interface QuestionCardProps {
  * @returns A React functional component that displays the question details inside a styled card.
  */
 const QuestionCard: React.FC<QuestionCardProps> = ({ question }) => {
+  console.log('QuestionCard received question:', question);
+    // Ensure we have fallbacks for potentially missing category information
+  const categoryEmoji = question.categoryEmoji || '❓';
+  const categoryName = question.categoryName || question.categoryId || '';
+
   return (
     <Card className="w-full h-full shadow-xl border-2 border-pink-100 bg-white rounded-2xl flex items-center justify-center p-1">
       <CardContent className="p-3 sm:p-6 flex flex-col items-center text-center justify-center h-full w-full">
-        {question.categoryEmoji && (
+        {categoryEmoji && (
           <div
             className="mb-2 sm:mb-3"
             style={{
@@ -24,14 +29,14 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question }) => {
               lineHeight: 1,
             }}
           >
-            {question.categoryEmoji}
+            {categoryEmoji}
           </div>
         )}
-        {question.categoryName && (
+        {categoryName && (
           <span
             className="inline-flex items-center px-2.5 py-1 mb-3 sm:mb-6 rounded-full text-xs sm:text-sm font-semibold bg-pink-100 text-pink-700 border border-pink-200 shadow-sm"
           >
-            {question.categoryName}
+            {categoryName}
           </span>
         )}
         <h2

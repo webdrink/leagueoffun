@@ -23,7 +23,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '../core/Button';
 import { Question, Player, GameSettings } from '../../types';
 import QuestionCard from './QuestionCard';
@@ -129,8 +128,8 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
                 <Button
                   key={player.id}
                   onClick={() => onBlame(player.name)}
-                  className={`bg-pink-100 hover:bg-pink-200 text-purple-700 font-semibold rounded-lg py-2.5 px-3 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-opacity-75
-                              ${i === currentPlayerIndex ? 'opacity-60 cursor-not-allowed !bg-gray-300 !text-gray-500' : 'hover:scale-105'}`}
+                  className={`bg-pink-400 hover:bg-pink-200 text-purple-700 font-semibold rounded-lg py-2.5 px-3 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-pink-00 focus:ring-opacity-75
+                        ${i === currentPlayerIndex ? 'opacity-60 cursor-not-allowed !bg-gray-300 !text-gray-500' : 'hover:scale-105'}`}
                   disabled={i === currentPlayerIndex}
                   title={i === currentPlayerIndex ? t('questions.cannot_blame_self') : t('questions.blame_player', { name: player.name })}
                 >
@@ -149,14 +148,14 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
               className="bg-white/80 hover:bg-white text-purple-700 border-purple-300 px-4 py-2.5 rounded-lg shadow disabled:opacity-60"
               aria-label={t('questions.previous_question')}
             >
-              <ChevronLeft size={20} className="mr-1" /> {t('app.back')}
+              {t('app.back')}
             </Button>
             <Button 
               onClick={handleNextWithDirection} 
               className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-lg shadow flex-grow"
               aria-label={index === totalQuestions - 1 ? t('questions.show_summary') : t('questions.next_question')}
             >
-              {index === totalQuestions - 1 ? t('questions.summary') : t('questions.next')} <ChevronRight size={20} className="ml-1" />
+              {index === totalQuestions - 1 ? t('questions.summary') : t('questions.next')}
             </Button>
           </div>
         )}
