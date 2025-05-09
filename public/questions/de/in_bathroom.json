@@ -43,5 +43,40 @@
     "questionId": "who_hoards_bathroom_products",
     "text": "Wer hortet Badezimmerprodukte?",
     "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_leaves_bathroom_messiest",
+    "text": "Wer hinterlässt das Badezimmer am unordentlichsten?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_takes_selfies_in_mirror",
+    "text": "Wer macht Selfies im Spiegel?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_has_most_bathroom_time",
+    "text": "Wer hat die meiste Zeit im Badezimmer?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_leaves_bathroom_light_on",
+    "text": "Wer lässt das Badezimmerlicht an?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_has_most_bathroom_essentials",
+    "text": "Wer hat die meisten Badezimmerutensilien?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_takes_bathroom_breaks_during_work",
+    "text": "Wer macht während der Arbeit die meisten Badezimmerpausen?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_has_most_bathroom_organization_skills",
+    "text": "Wer hat die besten Organisationsfähigkeiten im Badezimmer?",
+    "category": "in_bathroom"
   }
 ]

@@ -48,5 +48,40 @@
     "questionId": "who_would_become_king_or_queen",
     "text": "Wer würde König oder Königin werden?",
     "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_have_fantasy_powers",
+    "text": "Wer hätte Fantasiefähigkeiten?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_be_fantasy_sidekick",
+    "text": "Wer wäre der Sidekick in einer Fantasiewelt?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_have_fantasy_quests",
+    "text": "Wer hätte Fantasiequests?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_be_fantasy_guide",
+    "text": "Wer wäre der Führer in einer Fantasiewelt?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_find_hidden_treasures",
+    "text": "Wer würde versteckte Schätze finden?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_be_fantasy_villain",
+    "text": "Wer wäre der Bösewicht in einer Fantasiewelt?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_have_fantasy_adventures",
+    "text": "Wer hätte die besten Fantasieabenteuer?",
+    "category": "in_fantasy"
   }
 ]

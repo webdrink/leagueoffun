@@ -58,5 +58,45 @@
     "questionId": "who_always_wants_dessert",
     "text": "Wer will immer Nachtisch?",
     "category": "eating"
+  },
+  {
+    "questionId": "who_orders_the_same_thing_every_time",
+    "text": "Wer bestellt jedes Mal das Gleiche?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_is_always_on_a_diet",
+    "text": "Wer ist immer auf Diät?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_eats_the_most_snacks",
+    "text": "Wer isst die meisten Snacks?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_is_best_cook",
+    "text": "Wer ist der beste Koch?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_always_orders_takeout",
+    "text": "Wer bestellt immer Essen zum Mitnehmen?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_eats_the_fastest",
+    "text": "Wer isst am schnellsten?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_is_most_adventurous_eater",
+    "text": "Wer ist der abenteuerlustigste Esser?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_always_tries_new_restaurants",
+    "text": "Wer probiert immer neue Restaurants aus?",
+    "category": "eating"
   }
 ]

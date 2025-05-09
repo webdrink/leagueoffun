@@ -97,7 +97,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
           className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md text-sm"
         >
           <p className="font-semibold">{t('intro.error_loading_questions')}</p>
-          <p className="mt-1">{errorLoadingQuestions}</p>
+          <p className="mt-1">{t(errorLoadingQuestions)}</p>
         </motion.div>
       )}
 

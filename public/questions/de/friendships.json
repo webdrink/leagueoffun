@@ -58,5 +58,20 @@
     "questionId": "who_is_most_generous_friend",
     "text": "Wer ist der großzügigste Freund?",
     "category": "friendships"
+  },
+  {
+    "questionId": "who_is_most_empathetic_friend",
+    "text": "Wer ist der empathischste Freund?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_is_most_inspiring_friend",
+    "text": "Wer ist der inspirierendste Freund?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_is_most_organized_friend",
+    "text": "Wer ist der organisierteste Freund?",
+    "category": "friendships"
   }
 ]

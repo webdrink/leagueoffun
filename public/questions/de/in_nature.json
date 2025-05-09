@@ -50,6 +50,86 @@
     "category": "in_nature"
   },
   {
+    "questionId": "who_is_best_at_building_camps",
+    "text": "Wer kann am besten Lager aufbauen?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_fearless",
+    "text": "Wer ist am furchtlosesten?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_stung",
+    "text": "Wer wird am ehesten gestochen?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sunburned",
+    "text": "Wer wird am ehesten einen Sonnenbrand bekommen?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_poison_ivy",
+    "text": "Wer wird am ehesten mit Giftsumach in Kontakt kommen?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_stuck_in_a_tree",
+    "text": "Wer wird am ehesten in einem Baum stecken bleiben?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_rain",
+    "text": "Wer wird am ehesten im Regen erwischt?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sick_from_camping",
+    "text": "Wer wird am ehesten krank vom Campen?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_hurt_while_hiking",
+    "text": "Wer wird sich beim Wandern am ehesten verletzen?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_eaten_by_wildlife",
+    "text": "Wer wird am ehesten von Wildtieren gefressen?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_lost_in_the_dark",
+    "text": "Wer wird sich am ehesten im Dunkeln verirren?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_a_storm",
+    "text": "Wer wird am ehesten in einem Sturm erwischt?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sick_from_food",
+    "text": "Wer wird am ehesten krank vom Essen?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_a_snowstorm",
+    "text": "Wer wird am ehesten in einem Schneesturm erwischt?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_a_flood",
+    "text": "Wer wird am ehesten in einer Überschwemmung erwischt?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_a_hurricane",
+    "text": "Wer wird am ehesten in einem Hurrikan erwischt?",
+    "category": "in_nature"
+  },
+  {
     "questionId": "who_always_needs_bathroom_in_wilderness",
     "text": "Wer muss immer in der Wildnis zur Toilette?",
     "category": "in_nature"

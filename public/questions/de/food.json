@@ -40,6 +40,51 @@
     "category": "food"
   },
   {
+    "questionId": "who_is_most_adventurous_eater",
+    "text": "Wer ist der abenteuerlustigste Esser?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_always_orders_same_dish",
+    "text": "Wer bestellt immer das gleiche Gericht?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_try_new_recipes",
+    "text": "Wer probiert am ehesten neue Rezepte aus?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_eat_leftovers",
+    "text": "Wer isst am ehesten Reste?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_order_takeout",
+    "text": "Wer bestellt am ehesten Essen zum Mitnehmen?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_try_new_cuisines",
+    "text": "Wer probiert am ehesten neue Küchen aus?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_eat_dessert_first",
+    "text": "Wer isst am ehesten zuerst das Dessert?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_order_extra_sides",
+    "text": "Wer bestellt am ehesten zusätzliche Beilagen?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_eat_snacks_before_meals",
+    "text": "Wer isst am ehesten Snacks vor den Mahlzeiten?",
+    "category": "food"
+  },
+  {
     "questionId": "who_has_most_dietary_restrictions",
     "text": "Wer hat die meisten Ernährungseinschränkungen?",
     "category": "food"

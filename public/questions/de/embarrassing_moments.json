@@ -25,6 +25,36 @@
     "category": "embarrassing_moments"
   },
   {
+    "questionId": "who_sings_in_public",
+    "text": "Wer singt in der Öffentlichkeit?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_tells_cringe_jokes",
+    "text": "Wer erzählt die cringe Witze?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_dances_inappropriately",
+    "text": "Wer tanzt unangebracht?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_forgets_own_age",
+    "text": "Wer vergisst sein eigenes Alter?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_makes_funny_noises",
+    "text": "Wer macht die lustigsten Geräusche?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_tells_awkward_stories",
+    "text": "Wer erzählt die peinlichsten Geschichten?",
+    "category": "embarrassing_moments"
+  },
+  {
     "questionId": "who_sends_texts_to_wrong_person",
     "text": "Wer sendet Nachrichten an die falsche Person?",
     "category": "embarrassing_moments"
@@ -62,6 +92,26 @@
   {
     "questionId": "who_has_food_stuck_in_teeth",
     "text": "Wer hat oft Essen zwischen den Zähnen?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_makes_funny_faces_in_photos",
+    "text": "Wer macht die lustigsten Gesichter auf Fotos?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_always_says_wrong_things",
+    "text": "Wer sagt immer die falschen Dinge?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_dances_weirdly_in_public",
+    "text": "Wer tanzt seltsam in der Öffentlichkeit?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_always_has_awkward_silences",
+    "text": "Wer hat immer peinliche Stille?",
     "category": "embarrassing_moments"
   }
 ]

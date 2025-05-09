@@ -56,7 +56,8 @@ function App() {
     allQuestions,
     currentRoundQuestions,
     currentQuestion,
-    isLoading: isLoadingQuestionsFromHook,
+    isLoading: isLoadingQuestions,
+    isPreparingRound, // Get the new round preparation state
     index: currentQuestionIndexFromHook,
     prepareRoundQuestions,
     advanceToNextQuestion,
@@ -101,12 +102,12 @@ function App() {
   }, [currentRoundQuestions]);
 
   useEffect(() => {
-    if (!isLoadingQuestionsFromHook && allQuestions.length === 0 && gameStep !== 'intro' && gameStep !== 'loading') {
+    if (!isLoadingQuestions && allQuestions.length === 0 && gameStep !== 'intro' && gameStep !== 'loading') {
       setErrorLoadingQuestions(t('error.noQuestionsLoaded'));
     } else if (allQuestions.length > 0 && errorLoadingQuestions === t('error.noQuestionsLoaded')) {
       setErrorLoadingQuestions(null);
     }
-  }, [isLoadingQuestionsFromHook, allQuestions, gameStep, t, errorLoadingQuestions]);
+  }, [isLoadingQuestions, allQuestions, gameStep, t, errorLoadingQuestions]);
 
   useEffect(() => {
     if (gameSettings.language && i18n.language !== gameSettings.language) {
@@ -118,41 +119,50 @@ function App() {
   }, [gameSettings.language, i18n]);
 
   const handleStartGameFlow = async () => {
+    // Check first if we're in "nameBlame" mode but don't have enough players
     if (gameSettings.gameMode === 'nameBlame' && players.filter(p => p.name.trim() !== '').length < 2) {
       setGameStep('playerSetup');
       return;
     }
-
-    // Immediately try to prepare questions before showing loading screen
-    // This helps ensure data is ready or an error is caught quickly.
-    const success = await prepareRoundQuestions(gameSettings);
-
-    if (!success || currentRoundQuestions.length === 0) {
-      setErrorLoadingQuestions(t('error.noQuestionsForRound'));
-      setGameStep('intro'); // Go back to intro if no questions could be prepared
+    
+    // Check for ongoing data loading
+    if (isLoadingQuestions) {
+      setErrorLoadingQuestions(t('error.questionsStillLoading'));
+      return; // Don't proceed if initial questions are still loading
+    }
+    
+    // If we have no questions available at all (even after loading completed)
+    if (!isLoadingQuestions && allQuestions.length === 0) {
+      setErrorLoadingQuestions(t('error.noQuestionsAvailable'));
       return;
     }
-
-    // If successful, now set to loading and proceed with animation
+    
+    setErrorLoadingQuestions(null); // Clear any previous errors
+    
+    // Prepare questions for the round
+    const success = await prepareRoundQuestions(gameSettings);
+    
+    // Handle the case where prepareRoundQuestions fails
+    if (!success || currentRoundQuestions.length === 0) {
+      setErrorLoadingQuestions(t('error.noQuestionsForRound'));
+      return; // Stay on current screen
+    }
+    
+    // If successful, proceed to loading animation
     setGameStep('loading');
-    setErrorLoadingQuestions(null); // Clear any previous error
     setQuoteIndex(0);
+    
+    // Set up the cycling of quotes during loading
     const quoteTimer = setInterval(() => {
-      setQuoteIndex(prev => (prev + 1) % LOADING_QUOTES.length);
+      setQuoteIndex(prev => (prev + 1) % (LOADING_QUOTES.length || 1));
     }, gameSettings.loadingQuoteIntervalMs || 2000);
-
+    
+    // After loading animation duration, move to game
     setTimeout(() => {
       clearInterval(quoteTimer);
-      // Double-check questions are still there (should be, as prepareRoundQuestions was successful)
-      if (currentRoundQuestions.length > 0) {
-        setGameStep('game');
-        setCurrentPlayerIndex(0);
-        playSound('game_start');
-      } else {
-        // This case should ideally not be hit if the initial check passed
-        setErrorLoadingQuestions(t('error.noQuestionsForRoundAfterLoading'));
-        setGameStep('intro');
-      }
+      setGameStep('game');
+      setCurrentPlayerIndex(0);
+      playSound('game_start');
     }, gameSettings.rouletteDurationMs || 3000);
   };
   
@@ -220,14 +230,14 @@ function App() {
             soundEnabled={soundEnabled}
             volume={volume}
             onVolumeChange={setVolume}
-            isLoading={isLoadingQuestionsFromHook}
+            isLoading={isLoadingQuestions || isPreparingRound} // Disable button during initial loading OR round prep
             nameBlameMode={gameSettings.gameMode === 'nameBlame'}
             onToggleNameBlame={(checked) => {
               updateGameSettings({ gameMode: checked ? 'nameBlame' : 'classic' });
             }}
             onOpenDebugPanel={() => { /* TODO: Implement debug panel toggle */ }}
             onOpenInfoModal={() => setShowInfoModal(true)}
-            mainButtonLabel={isLoadingQuestionsFromHook ? t('intro.loading_questions') : t('intro.start_game')}
+            mainButtonLabel={isLoadingQuestions ? t('intro.loading_questions') : t('intro.start_game')}
             errorLoadingQuestions={errorLoadingQuestions}
             supportedLanguages={SUPPORTED_LANGUAGES} 
             currentLanguage={gameSettings.language}
