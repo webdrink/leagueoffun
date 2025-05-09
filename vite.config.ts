@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  base: '/', // Use root path for local development
+  base: '/blamegame/', // Use repository name for GitHub Pages deployment
   plugins: [
     react(),
     VitePWA({
