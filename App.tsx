@@ -5,26 +5,22 @@
  *          navigation between screens, loading game data (categories and questions),
  *          and managing global settings like language and sound.
  *
- * Props: None
+ * Child Components:
+ *  - IntroScreen
+ *  - QuestionScreen
+ *  - PlayerSetupScreen
+ *  - LoadingContainer
+ *  - InfoModal
+ *  - GameContainer
+ *  - LanguageChangeFeedback
+ *  - DebugPanel
  *
- * Expected Behavior: 
- *  - Initializes game settings and sound preferences.
- *  - Loads categories and questions based on the selected language, with fallbacks.
- *  - Manages the current game step (Intro, Playing, Results).
- *  - Provides necessary data and callbacks to child screen components.
- *  - Handles language changes and reloads data accordingly.
- *
- * Dependencies: 
- *  - react, react-i18next, framer-motion
- *  - ./types.ts (various type definitions)
- *  - ./hooks/* (useGameSettings, useSound, useQuestions, useNameBlameSetup)
- *  - ./components/* (IntroScreen, QuestionScreen, PlayerSetupScreen, LoadingContainer, InfoModal, GameContainer, LanguageChangeFeedback)
- *  - ./lib/constants (LOADING_QUOTES)
- *  - ./lib/formatters (getEmoji) - Assuming this exists or will be created
- *
- * Notes: 
- *  - Assumes App.tsx is in the project root, and other primary source directories
- *    (components, hooks, types.ts, lib) are also in the project root.
+ * Hooks Used:
+ *  - useSound
+ *  - useGameSettings
+ *  - useQuestions
+ *  - useNameBlameSetup
+ *  - useTranslation (from react-i18next)
  */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -43,9 +39,10 @@ import LoadingContainer from './components/game/LoadingContainer';
 import InfoModal from './components/core/InfoModal';
 import GameContainer from './components/game/GameContainer';
 import LanguageChangeFeedback from './components/language/LanguageChangeFeedback';
+import DebugPanel from './components/debug/DebugPanel';
 
 import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
-import { LOADING_QUOTES } from './lib/constants'; 
+import { LOADING_QUOTES, initialGameSettings } from './constants';
 
 function App() {
   const { soundEnabled, toggleSound, playSound, volume, setVolume } = useSound();
@@ -80,6 +77,10 @@ function App() {
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0); // For NameBlame mode
+
+  // State for debug panel
+  const [showDebug, setShowDebug] = useState(false);
+  
 
   useEffect(() => {
     if (currentRoundQuestions && currentRoundQuestions.length > 0) {
@@ -117,7 +118,6 @@ function App() {
         });
     }
   }, [gameSettings.language, i18n]);
-
   const handleStartGameFlow = async () => {
     // Check first if we're in "nameBlame" mode but don't have enough players
     if (gameSettings.gameMode === 'nameBlame' && players.filter(p => p.name.trim() !== '').length < 2) {
@@ -139,16 +139,7 @@ function App() {
     
     setErrorLoadingQuestions(null); // Clear any previous errors
     
-    // Prepare questions for the round
-    const success = await prepareRoundQuestions(gameSettings);
-    
-    // Handle the case where prepareRoundQuestions fails
-    if (!success || currentRoundQuestions.length === 0) {
-      setErrorLoadingQuestions(t('error.noQuestionsForRound'));
-      return; // Stay on current screen
-    }
-    
-    // If successful, proceed to loading animation
+    // Start loading animation immediately to provide visual feedback
     setGameStep('loading');
     setQuoteIndex(0);
     
@@ -157,13 +148,33 @@ function App() {
       setQuoteIndex(prev => (prev + 1) % (LOADING_QUOTES.length || 1));
     }, gameSettings.loadingQuoteIntervalMs || 2000);
     
-    // After loading animation duration, move to game
-    setTimeout(() => {
+    try {
+      // Prepare questions for the round - this might take a moment
+      console.log('Preparing round questions...');
+      const success = await prepareRoundQuestions(gameSettings);
+      
+      // Handle the case where prepareRoundQuestions fails
+      if (!success || (currentRoundQuestions && currentRoundQuestions.length === 0)) {
+        clearInterval(quoteTimer);
+        setGameStep('intro');
+        setErrorLoadingQuestions(t('error.noQuestionsForRound'));
+        return;
+      }
+      
+      // Ensure we show the loading animation for at least the minimum time
+      const minLoadingDuration = gameSettings.rouletteDurationMs || 3000;
+      setTimeout(() => {
+        clearInterval(quoteTimer);
+        setGameStep('game');
+        setCurrentPlayerIndex(0);
+        playSound('game_start');
+      }, minLoadingDuration);
+    } catch (error) {
+      console.error('Error preparing round:', error);
       clearInterval(quoteTimer);
-      setGameStep('game');
-      setCurrentPlayerIndex(0);
-      playSound('game_start');
-    }, gameSettings.rouletteDurationMs || 3000);
+      setGameStep('intro');
+      setErrorLoadingQuestions(t('error.failedToLoadQuestions'));
+    }
   };
   
   const handlePlayerSetupComplete = async () => {
@@ -259,18 +270,29 @@ function App() {
             onBackToIntro={() => setGameStep('intro')}
             onPlayerNameChange={handlePlayerNameChange} 
           />
-        )}
-
-        {gameStep === 'loading' && (
+        )}        {gameStep === 'loading' && (
           <LoadingContainer
             key="loading"
-            categories={currentRoundQuestions
-              .map(q => q.categoryName)
-              .filter((value, index, self) => value && self.indexOf(value) === index) 
-              .slice(0, gameSettings.categoryCount) // Use gameSettings.categoryCount
+            categories={allQuestions
+              .filter(q => currentRoundQuestions.some(cq => cq.categoryId === q.categoryId))
+              .reduce((acc, q) => {
+                // Find matching category object
+                const existingIndex = acc.findIndex(c => c.id === q.categoryId);
+                if (existingIndex === -1 && q.categoryName) { // Ensure categoryName is present
+                  // If category doesn't exist yet, create it
+                  acc.push({
+                    id: q.categoryId,
+                    emoji: q.categoryEmoji,
+                    name: q.categoryName // Store the name directly
+                  });
+                }
+                return acc;
+              }, [] as { id: string; emoji: string; name: string }[])
+              .slice(0, gameSettings.categoryCount)
+              .map(c => c.name) // Extract category name
             }
-            getEmoji={getEmoji}
-            currentQuote={LOADING_QUOTES.length > 0 ? LOADING_QUOTES[quoteIndex % LOADING_QUOTES.length] : ""} // Ensure currentQuote is empty if no quotes
+            getEmoji={getEmoji} // Pass down getEmoji
+            currentQuote={LOADING_QUOTES.length > 0 ? LOADING_QUOTES[quoteIndex % LOADING_QUOTES.length] : ""}
             settings={{
               loadingQuoteSpringStiffness: gameSettings.loadingQuoteSpringStiffness,
               loadingQuoteSpringDamping: gameSettings.loadingQuoteSpringDamping,
@@ -311,11 +333,45 @@ function App() {
           }}
         />
       )}
-      
-      <LanguageChangeFeedback
+        <LanguageChangeFeedback
         language={gameSettings.language}
         languageName={SUPPORTED_LANGUAGES[gameSettings.language] || gameSettings.language}
       />
+      
+      {/* Debug tools */}
+      <div onClick={() => setShowDebug(!showDebug)} className="fixed bottom-4 right-4 z-50">
+        <button 
+          className={`rounded-full w-10 h-10 flex items-center justify-center text-sm ${
+            showDebug ? 'bg-red-500 hover:bg-red-600' : 'bg-gray-600 hover:bg-gray-700'
+          } text-white`}
+          aria-label={showDebug ? 'Hide Debug Panel' : 'Show Debug Panel'}
+        >
+          D
+        </button>
+      </div>
+      
+      {showDebug && (
+        <DebugPanel
+          gameSettings={gameSettings}
+          setGameSettings={setGameSettings => updateGameSettings(
+            typeof setGameSettings === 'function' 
+              ? setGameSettings(gameSettings) 
+              : setGameSettings
+          )}
+          defaultGameSettings={initialGameSettings}
+          onClose={() => setShowDebug(false)}
+          onResetAppData={() => {
+            localStorage.clear();
+            window.location.reload();
+          }}
+          questionStats={{
+            totalQuestions: allQuestions.length,
+            playedQuestions: 0, // Add this if tracking played questions
+            availableQuestions: currentRoundQuestions.length,
+            categories: questionStats.categories
+          }}
+        />
+      )}
     </GameContainer>
   );
 }
