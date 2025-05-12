@@ -16,7 +16,6 @@ import {
   Question as LoadedQuestion,
   Category
 } from '../lib/utils/questionLoaders';
-import { useGameSettings } from './useGameSettings';
 
 interface UseQuestionsOutput {
   allQuestions: Question[];
@@ -49,7 +48,7 @@ interface UseQuestionsOutput {
  * @param gameSettings - The current game settings, including category and question counts.
  * @returns An object containing question state and manipulation functions
  */
-const useQuestions = (initialGameSettings: GameSettings): UseQuestionsOutput => {
+const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
   const [allQuestions, setAllQuestions] = useState<Question[]>([]);
   const [currentRoundQuestions, setCurrentRoundQuestions] = useState<Question[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -60,7 +59,6 @@ const useQuestions = (initialGameSettings: GameSettings): UseQuestionsOutput => 
   const [index, setIndex] = useState(0);
   const [cardKey, setCardKey] = useState(0);
   
-  const { gameSettings } = useGameSettings();
   const currentLanguage = gameSettings.language;
 
   // Load categories first, then questions

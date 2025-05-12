@@ -22,7 +22,7 @@
  *  - useNameBlameSetup
  *  - useTranslation (from react-i18next)
  */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence } from 'framer-motion';
 
@@ -77,10 +77,46 @@ function App() {
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0); // For NameBlame mode
+  const [currentLoadingQuote, setCurrentLoadingQuote] = useState<string>('');
+  const [activeLoadingQuotes, setActiveLoadingQuotes] = useState<string[]>([]);
 
   // State for debug panel
   const [showDebug, setShowDebug] = useState(false);
+
+  const getEmoji = useCallback((categoryName: string): string => {
+    // Find in current round first, then all questions as fallback
+    let questionWithCategory = currentRoundQuestions.find(q => q.categoryName === categoryName);
+    if (!questionWithCategory) {
+      questionWithCategory = allQuestions.find(q => q.categoryName === categoryName);
+    }
+    return questionWithCategory?.categoryEmoji || '❓';
+  }, [currentRoundQuestions, allQuestions]);
   
+  // Memoized categories for the loading screen to prevent unnecessary re-renders
+  const loadingCategoriesWithEmojis = React.useMemo(() => {
+    if (gameStep === 'loading' && currentRoundQuestions.length > 0) {
+      // Use a Set to ensure unique category names
+      const uniqueCategoryNames = Array.from(
+        new Set(currentRoundQuestions.map(q => q.categoryName).filter(Boolean))
+      );
+      
+      // Map to category objects with emojis and slice to match gameSettings.categoryCount
+      return uniqueCategoryNames
+        .map(name => ({
+          name,
+          emoji: getEmoji(name)
+        }))
+        .slice(0, gameSettings.categoryCount);
+    }
+    return []; // Return empty array if not loading or no questions
+  }, [
+    // Only depend on these values to prevent unnecessary recalculations
+    gameStep,
+    // Use a stable representation of currentRoundQuestions' category names
+    JSON.stringify(currentRoundQuestions.map(q => q.categoryName).filter(Boolean).sort()),
+    getEmoji,
+    gameSettings.categoryCount
+  ]);
 
   useEffect(() => {
     if (currentRoundQuestions && currentRoundQuestions.length > 0) {
@@ -118,6 +154,19 @@ function App() {
         });
     }
   }, [gameSettings.language, i18n]);
+
+  useEffect(() => {
+    if (activeLoadingQuotes.length > 0) {
+      // Ensure we're accessing a valid index in the array
+      const safeIndex = quoteIndex % activeLoadingQuotes.length;
+      const quote = activeLoadingQuotes[safeIndex];
+      // Ensure quote is a string, not a character
+      setCurrentLoadingQuote(typeof quote === 'string' ? quote : '');
+    } else {
+      setCurrentLoadingQuote(''); // Or some default if no quotes are active
+    }
+  }, [quoteIndex, activeLoadingQuotes]);
+
   const handleStartGameFlow = async () => {
     // Check first if we're in "nameBlame" mode but don't have enough players
     if (gameSettings.gameMode === 'nameBlame' && players.filter(p => p.name.trim() !== '').length < 2) {
@@ -141,11 +190,21 @@ function App() {
     
     // Start loading animation immediately to provide visual feedback
     setGameStep('loading');
+    const genericQuotes = t('loading.quotes', { returnObjects: true });
+    // Ensure genericQuotes is an array of strings, not individual characters
+    const quotesArray = Array.isArray(genericQuotes) 
+      ? genericQuotes 
+      : typeof genericQuotes === 'string' 
+        ? [genericQuotes] 
+        : [t('loading.defaultQuote')];
+    
+    setActiveLoadingQuotes(quotesArray);
     setQuoteIndex(0);
     
     // Set up the cycling of quotes during loading
     const quoteTimer = setInterval(() => {
-      setQuoteIndex(prev => (prev + 1) % (LOADING_QUOTES.length || 1));
+      // Interval will now use activeLoadingQuotes via the useEffect dependency
+      setQuoteIndex(prev => prev + 1);
     }, gameSettings.loadingQuoteIntervalMs || 2000);
     
     try {
@@ -154,11 +213,27 @@ function App() {
       const success = await prepareRoundQuestions(gameSettings);
       
       // Handle the case where prepareRoundQuestions fails
-      if (!success || (currentRoundQuestions && currentRoundQuestions.length === 0)) {
+      if (!success) { // Rely solely on the success flag
         clearInterval(quoteTimer);
         setGameStep('intro');
         setErrorLoadingQuestions(t('error.noQuestionsForRound'));
         return;
+      }
+
+      // Extract category names for quotes, ensuring proper handling
+      // First, get unique category names from the current round questions
+      const categoryNames = currentRoundQuestions
+        .map(q => q.categoryName || '')
+        .filter(name => name.length > 0); // Filter out empty names
+      
+      // Then remove duplicates by using a Set
+      const categoryNamesForQuotes = Array.from(new Set(categoryNames));
+      
+      console.log('Category names for quotes:', categoryNamesForQuotes);
+      
+      if (categoryNamesForQuotes.length > 0) {
+        setActiveLoadingQuotes(categoryNamesForQuotes);
+        setQuoteIndex(0); // Reset index to start cycling new quotes
       }
       
       // Ensure we show the loading animation for at least the minimum time
@@ -212,21 +287,10 @@ function App() {
     setGameStep('intro');
   };
   
-  const getEmoji = (categoryName: string): string => {
-    // Find in current round first, then all questions as fallback
-    let questionWithCategory = currentRoundQuestions.find(q => q.categoryName === categoryName);
-    if (!questionWithCategory) {
-      questionWithCategory = allQuestions.find(q => q.categoryName === categoryName);
-    }
-    return questionWithCategory?.categoryEmoji || '❓';
-  };
-
   const handleBlame = (blamedPlayerName: string) => {
     console.log(`${blamedPlayerName} was blamed for question: ${currentQuestion?.text}`);
     handleNextQuestion(); 
   };
-
-  const LOADING_QUOTES = t('loading.quotes', { returnObjects: true }) as string[] || [];
 
   return (
     <GameContainer onTitleClick={handleTitleClick}>
@@ -273,26 +337,8 @@ function App() {
         )}        {gameStep === 'loading' && (
           <LoadingContainer
             key="loading"
-            categories={allQuestions
-              .filter(q => currentRoundQuestions.some(cq => cq.categoryId === q.categoryId))
-              .reduce((acc, q) => {
-                // Find matching category object
-                const existingIndex = acc.findIndex(c => c.id === q.categoryId);
-                if (existingIndex === -1 && q.categoryName) { // Ensure categoryName is present
-                  // If category doesn't exist yet, create it
-                  acc.push({
-                    id: q.categoryId,
-                    emoji: q.categoryEmoji,
-                    name: q.categoryName // Store the name directly
-                  });
-                }
-                return acc;
-              }, [] as { id: string; emoji: string; name: string }[])
-              .slice(0, gameSettings.categoryCount)
-              .map(c => c.name) // Extract category name
-            }
-            getEmoji={getEmoji} // Pass down getEmoji
-            currentQuote={LOADING_QUOTES.length > 0 ? LOADING_QUOTES[quoteIndex % LOADING_QUOTES.length] : ""}
+            categoriesWithEmojis={loadingCategoriesWithEmojis} // Use the memoized value
+            currentQuote={currentLoadingQuote}
             settings={{
               loadingQuoteSpringStiffness: gameSettings.loadingQuoteSpringStiffness,
               loadingQuoteSpringDamping: gameSettings.loadingQuoteSpringDamping,

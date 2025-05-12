@@ -1,20 +1,55 @@
 import React from 'react';
-import LoadingCardStack from './LoadingCardStack'; // Adjusted path
-import { motion } from 'framer-motion';
-import LoadingQuote from './LoadingQuote'; // Adjusted path
+import { motion } from 'framer-motion'; // Added for integrated quote animation
+import LoadingCardStack from './LoadingCardStack';
+
+// A custom comparator for memoization without external dependencies
+const arePropsEqual = (prevProps: LoadingContainerProps, nextProps: LoadingContainerProps) => {
+  // Compare currentQuote directly (string comparison)
+  if (prevProps.currentQuote !== nextProps.currentQuote) {
+    return false;
+  }
+  
+  // Compare categoriesWithEmojis array length
+  if (prevProps.categoriesWithEmojis.length !== nextProps.categoriesWithEmojis.length) {
+    return false;
+  }
+  
+  // Compare each category object
+  for (let i = 0; i < prevProps.categoriesWithEmojis.length; i++) {
+    if (
+      prevProps.categoriesWithEmojis[i].name !== nextProps.categoriesWithEmojis[i].name ||
+      prevProps.categoriesWithEmojis[i].emoji !== nextProps.categoriesWithEmojis[i].emoji
+    ) {
+      return false;
+    }
+  }
+  
+  // Compare important settings
+  return (
+    prevProps.settings.loadingQuoteSpringStiffness === nextProps.settings.loadingQuoteSpringStiffness &&
+    prevProps.settings.loadingQuoteSpringDamping === nextProps.settings.loadingQuoteSpringDamping &&
+    prevProps.settings.cardFallDistance === nextProps.settings.cardFallDistance &&
+    prevProps.settings.cardFallStaggerDelaySec === nextProps.settings.cardFallStaggerDelaySec &&
+    prevProps.settings.cardStackOffsetY === nextProps.settings.cardStackOffsetY
+  );
+};
+
+interface CategoryInfo {
+  name: string;
+  emoji: string;
+}
 
 interface LoadingContainerProps {
-  categories: string[];
-  getEmoji: (category: string) => string;
-  currentQuote: string; // Prop for the current quote to display
+  categoriesWithEmojis: CategoryInfo[]; // Changed from categories and getEmoji
+  currentQuote: string;
   settings: {
     loadingQuoteSpringStiffness: number;
     loadingQuoteSpringDamping: number;
-    loadingQuoteTransitionDurationSec: number;
+    loadingQuoteTransitionDurationSec: number; // Used for quote animation
     cardFallDistance: number;
     cardFallStaggerDelaySec: number;
-    cardStackOffsetY: number; // This is used by LoadingCardStack
-    loadingQuoteIntervalMs: number; // Added missing property
+    cardStackOffsetY: number;
+    loadingQuoteIntervalMs: number;
   };
 }
 
@@ -22,44 +57,58 @@ interface LoadingContainerProps {
  * LoadingContainer is a React functional component that displays a loading UI
  * consisting of a rotating quote and a stack of loading cards representing categories.
  *
- * @param categories - An array of category objects to be displayed in the loading card stack.
- * @param getEmoji - A function that returns an emoji for a given category.
- * @param currentQuote - A string representing the currently displayed quote.
- * @param settings - An object containing configuration options for loading quote intervals,
- *   spring animation parameters, and transition durations.
+ * @param {LoadingContainerProps} props - The props for the component.
+ * @param {CategoryInfo[]} props.categoriesWithEmojis - An array of objects, each containing category name and emoji.
+ * @param {string} props.currentQuote - A string representing the currently displayed quote.
+ * @param {object} props.settings - An object containing configuration options for animations.
  *
- * The component displays the provided currentQuote with animation settings derived from the settings prop.
- * It also renders a LoadingCardStack component to visually represent the loading state for categories.
+ * Child Components:
+ *  - LoadingCardStack
+ *
+ * Referenced by:
+ *  - App.tsx
  */
 const LoadingContainer: React.FC<LoadingContainerProps> = ({
-  categories,
-  getEmoji,
-  currentQuote, // Use the passed currentQuote
+  categoriesWithEmojis, // Updated prop name
+  currentQuote,
   settings
 }) => {
-  // Internal state and useEffect for cycling quotes are removed.
-  // App.tsx now manages the currentQuote.
+  // Only log this in development
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('LoadingContainer received currentQuote:', currentQuote);
+  }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full mt-8 sm:mt-16 relative">
-      {currentQuote && ( // Display LoadingQuote only if currentQuote is non-empty
-        <LoadingQuote
-          quote={currentQuote}
-          settings={{
-            stiffness: settings.loadingQuoteSpringStiffness,
-            damping: settings.loadingQuoteSpringDamping,
-            duration: settings.loadingQuoteTransitionDurationSec,
-          }}
-          className="mb-8 sm:mb-10" 
-        />
-      )}
+    // REMOVED: fixed inset-0 and specific background gradient
+    // ADDED: w-full flex flex-col items-center justify-center p-4 space-y-8 to allow GameContainer to control layout
+    <div className="w-full flex flex-col items-center justify-center p-4 space-y-8">
+      {/* Integrated LoadingQuote Logic */}
+      <motion.div
+        key={currentQuote} // Ensure re-animation when quote changes
+        className="text-2xl sm:text-3xl font-semibold text-center text-white text-opacity-90 px-4"
+        initial={{ opacity: 0, y: -20, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 20, scale: 0.9 }}
+        transition={{
+          type: "spring",
+          stiffness: settings.loadingQuoteSpringStiffness,
+          damping: settings.loadingQuoteSpringDamping,
+          // duration for spring is influenced by stiffness/damping, not set directly like tween
+        }}
+      >
+        &ldquo;{currentQuote}&rdquo;
+      </motion.div>
+
       <LoadingCardStack
-        categories={categories} // Pass all categories, stack reveals them
-        getEmoji={getEmoji}
-        settings={settings} // Pass relevant parts of settings
+        categoriesWithEmojis={categoriesWithEmojis} // Pass the new prop
+        settings={{
+          cardFallDistance: settings.cardFallDistance,
+          cardFallStaggerDelaySec: settings.cardFallStaggerDelaySec,
+          cardStackOffsetY: settings.cardStackOffsetY,
+        }}
       />
     </div>
   );
 };
 
-export default LoadingContainer;
+export default React.memo(LoadingContainer, arePropsEqual); // Use our custom comparator for more precise memoization
