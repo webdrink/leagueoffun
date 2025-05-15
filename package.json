@@ -1,14 +1,16 @@
 {
-  "name": "blamegame",
-  "version": "0.1.0",
+  "name": "blamegame",  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
+    "build:domain": "VITE_BASE_PATH=/ vite build && node scripts/fix-deployment-paths.js",
+    "build:windows-domain": "set VITE_BASE_PATH=/ && vite build && node scripts/fix-deployment-paths.js",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.tsx --max-warnings=9999",
     "typecheck": "tsc --project tsconfig.json --noEmit",
-    "verify-assets": "node scripts/verify-assets.js"
+    "verify-assets": "node scripts/verify-assets.js",
+    "verify-build": "node scripts/verify-assets.js --verify-dist"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.3.1",

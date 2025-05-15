@@ -5,7 +5,8 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 
 export default defineConfig({
-  base: '/blamegame/', // Use repository name for GitHub Pages deployment
+  // When using a custom domain in GitHub Pages, we use '/' instead of '/blamegame/'
+  base: process.env.VITE_BASE_PATH || '/',
   plugins: [
     react(),
     VitePWA({

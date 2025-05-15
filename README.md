@@ -61,6 +61,32 @@ The game uses three sound effects which need to be placed in the `/assets` folde
 - [Freesound](https://freesound.org/) (Check license per sound)
 - [Mixkit](https://mixkit.co/free-sound-effects/) (Free with attribution)
 
+## Development and Deployment
+
+### Local Development
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+### Building for Production
+```bash
+# Standard build
+npm run build
+
+# Build for custom domain
+npm run build:windows-domain  # Windows
+npm run build:domain          # Linux/macOS
+```
+
+### Custom Domain
+The game is deployed to [blamegame.leagueoffun.de](https://blamegame.leagueoffun.de).
+
+For detailed instructions on custom domain setup, see [CUSTOM_DOMAIN_DEPLOYMENT.md](docs/CUSTOM_DOMAIN_DEPLOYMENT.md).
+
 ## Deployment
 - Add a `CNAME` file with the domain `blamegame.leagueoffun.de` to the `dist/` folder before deploying to GitHub Pages.
 

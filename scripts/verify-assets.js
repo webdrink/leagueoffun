@@ -15,6 +15,10 @@ const path = require('path');
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 const QUESTIONS_DIR = path.join(PUBLIC_DIR, 'questions');
 const ASSETS_DIR = path.join(PUBLIC_DIR, 'assets');
+const DIST_DIR = path.join(__dirname, '..', 'dist');
+
+// Check if we should also verify the dist directory (optional param)
+const verifyDist = process.argv.includes('--verify-dist');
 
 // Define supported languages
 const SUPPORTED_LANGUAGES = ['de', 'en', 'es', 'fr'];
@@ -114,6 +118,65 @@ const verifyPWAIcons = () => {
   return allValid;
 };
 
+// Verify CNAME file
+const verifyCNAME = () => {
+  const cnamePath = path.join(PUBLIC_DIR, 'CNAME');
+  
+  if (fileExists(cnamePath)) {
+    try {
+      const content = fs.readFileSync(cnamePath, 'utf8').trim();
+      if (content === 'blamegame.leagueoffun.de') {
+        console.log('✅ CNAME file exists with correct domain');
+        return true;
+      } else {
+        console.error(`❌ CNAME file has incorrect content: ${content}`);
+        return false;
+      }
+    } catch (error) {
+      console.error('❌ Error reading CNAME file:', error);
+      return false;
+    }
+  } else {
+    console.error('❌ CNAME file is missing');
+    return false;
+  }
+};
+
+// Verify dist directory for deployment
+const verifyDistDirectory = () => {
+  if (!verifyDist) {
+    return true; // Skip if not requested
+  }
+  
+  console.log('\nVerifying dist directory for deployment...');
+  
+  if (!fileExists(DIST_DIR)) {
+    console.error('❌ dist directory not found. Run "npm run build" first.');
+    return false;
+  }
+  
+  // Check for critical files in dist
+  const criticalFiles = [
+    'index.html',
+    'CNAME',
+    'questions/categories.json'
+  ];
+  
+  let allValid = true;
+  
+  criticalFiles.forEach(file => {
+    const filePath = path.join(DIST_DIR, file);
+    if (fileExists(filePath)) {
+      console.log(`✅ Dist file exists: ${file}`);
+    } else {
+      console.error(`❌ Missing from dist: ${file}`);
+      allValid = false;
+    }
+  });
+  
+  return allValid;
+};
+
 // Main verification function
 const verifyAssets = () => {
   console.log('Verifying static assets...');
@@ -123,6 +186,12 @@ const verifyAssets = () => {
   allValid = verifyCategoriesFile() && allValid;
   allValid = verifyLanguageDirectories() && allValid;
   allValid = verifyPWAIcons() && allValid;
+  allValid = verifyCNAME() && allValid;
+  
+  // Verify dist if requested
+  if (verifyDist) {
+    allValid = verifyDistDirectory() && allValid;
+  }
   
   if (allValid) {
     console.log('\n✅ All critical assets verified successfully!');

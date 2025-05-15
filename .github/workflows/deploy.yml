@@ -16,6 +16,8 @@ jobs:
     environment: # Configure the deployment environment for GitHub Pages
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      VITE_BASE_PATH: / # Set base path to '/' for custom domain
     steps:
       - name: ⬇️ Checkout Repository
         uses: actions/checkout@v4 # Updated to v4
@@ -44,8 +46,26 @@ jobs:
       - name: 🧐 Type-Check Code
         run: pnpm run typecheck
 
-      - name: 🛠️ Build Project
-        run: pnpm run build
+      - name: 🛠️ Build Project for Custom Domain
+        run: pnpm run build:domain
+
+      - name: 🔍 Verify Build
+        run: pnpm run verify-build
+
+      - name: 📝 Generate Build Report
+        run: |
+          echo "## Build Report" >> $GITHUB_STEP_SUMMARY
+          echo "- **Base Path:** \`${VITE_BASE_PATH}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **CNAME:** blamegame.leagueoffun.de" >> $GITHUB_STEP_SUMMARY
+          echo "- **Build Directory Structure:**" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          ls -la dist >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          if [ -f dist/CNAME ]; then
+            echo "✅ CNAME file found" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ CNAME file not found" >> $GITHUB_STEP_SUMMARY
+          fi
 
       - name: ⚙️ Configure GitHub Pages
         uses: actions/configure-pages@v5
