@@ -159,7 +159,7 @@ const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
       const roundCategoryIds = getRandomCategories(allCategoryIds, numCategoriesToSelect);
       setSelectedCategories(roundCategoryIds);
 
-      let newRoundQuestions: Question[] = [];
+      const newRoundQuestions: Question[] = [];
 
       for (const catId of roundCategoryIds) {
         const questionsInCat = allQuestions.filter(q => q.categoryId === catId);
