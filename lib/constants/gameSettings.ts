@@ -89,8 +89,9 @@ export const initialGameSettings: GameSettings = {
   questionFontSize: 1.5,           // Font size for questions (rem)
   dynamicThemeEnabled: true,       // Whether to use time-based themes
   questionCardAnimation: 'roulette',// Type of question card animation
-  
-  // Game mode and language settings
+    // Game mode and language settings
   gameMode: 'classic',             // Game mode (classic or nameBlame)
   language: 'de',                  // Default language (German)
+  selectCategories: false,         // Whether to allow manual category selection
+  selectedCategoryIds: [],         // IDs of manually selected categories
 };
