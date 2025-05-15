@@ -31,6 +31,7 @@ import useSound from './hooks/useSound';
 import { useGameSettings } from './hooks/useGameSettings';
 import useQuestions from './hooks/useQuestions';
 import useNameBlameSetup from './hooks/useNameBlameSetup';
+import { preloadEssentialAssets } from './lib/utils/preloadUtils';
 
 import IntroScreen from './components/game/IntroScreen';
 import QuestionScreen from './components/game/QuestionScreen';
@@ -40,6 +41,7 @@ import InfoModal from './components/core/InfoModal';
 import GameContainer from './components/game/GameContainer';
 import LanguageChangeFeedback from './components/language/LanguageChangeFeedback';
 import DebugPanel from './components/debug/DebugPanel';
+import AssetDebugInfo from './components/debug/AssetDebugInfo';
 
 import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
 import { LOADING_QUOTES, initialGameSettings } from './constants';
@@ -137,6 +139,13 @@ function App() {
       setQuestionStats({ totalQuestions: 0, categories: {} });
     }
   }, [currentRoundQuestions]);
+
+  // Preload essential assets on app initialization
+  useEffect(() => {
+    preloadEssentialAssets()
+      .then(() => console.log('Essential assets preloaded'))
+      .catch(err => console.error('Asset preloading failed:', err));
+  }, []); // Empty dependency array ensures this runs only once
 
   useEffect(() => {
     if (!isLoadingQuestions && allQuestions.length === 0 && gameStep !== 'intro' && gameStep !== 'loading') {
@@ -413,11 +422,13 @@ function App() {
           questionStats={{
             totalQuestions: allQuestions.length,
             playedQuestions: 0, // Add this if tracking played questions
-            availableQuestions: currentRoundQuestions.length,
-            categories: questionStats.categories
+            availableQuestions: currentRoundQuestions.length,            categories: questionStats.categories
           }}
         />
       )}
+      
+      {/* Asset debug information - visible when debug panel is open */}
+      <AssetDebugInfo show={showDebug} />
     </GameContainer>
   );
 }

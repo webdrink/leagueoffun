@@ -2,10 +2,11 @@
  * Question loader utilities for BlameGame application
  * 
  * This file provides functions for loading question data with proper path handling
- * for both development and production (GitHub Pages) environments.
+ * for both development and production environments, including custom domains.
  */
 
 import { getAssetsPath } from './assetUtils';
+import { fetchAsset, fetchWithRetry } from './fetchUtils';
 
 // Define types for our data structures
 export interface Category {
@@ -33,15 +34,12 @@ export interface Question extends BaseQuestion {
  */
 export const loadCategoriesFromJson = async (): Promise<Category[]> => {
   try {
-    // Use getAssetsPath to construct correct URL with the base path
-    const categoriesUrl = getAssetsPath('questions/categories.json');
-    const categoriesResponse = await fetch(categoriesUrl);
+    console.log('Loading categories...');
     
-    if (!categoriesResponse.ok) {
-      throw new Error(`Failed to load categories: ${categoriesResponse.status}`);
-    }
+    const response = await fetchAsset('questions/categories.json');
+    const categories: Category[] = await response.json();
     
-    const categories: Category[] = await categoriesResponse.json();
+    console.log(`Successfully loaded ${categories.length} categories`);
     return categories;
   } catch (error) {
     console.error('Error loading categories from JSON:', error);
@@ -58,6 +56,8 @@ export const loadCategoriesFromJson = async (): Promise<Category[]> => {
  */
 export const loadQuestionsFromJson = async (language: string = 'de', categories: Category[] = []): Promise<Question[]> => {
   try {
+    console.log(`Loading questions for language: ${language}`);
+    
     // If categories weren't provided, we need to fetch them
     if (!categories || categories.length === 0) {
       try {
@@ -76,12 +76,12 @@ export const loadQuestionsFromJson = async (language: string = 'de', categories:
     // Load questions for each category
     for (const category of categories) {
       try {
-        // Use getAssetsPath for correct path to category questions
-        const questionsUrl = getAssetsPath(`questions/${language}/${category.id}.json`);
-        const questionsResponse = await fetch(questionsUrl);
+        console.log(`Loading questions for category ${category.id} in ${language}`);
         
-        if (questionsResponse.ok) {
-          const loadedQuestions = await questionsResponse.json();
+        try {
+          const response = await fetchAsset(`questions/${language}/${category.id}.json`);
+          const loadedQuestions = await response.json();
+          
           // Convert to the expected Question format
           const enhancedQuestions = loadedQuestions.map((q: { questionId: string; text?: string; category: string }) => ({
             questionId: q.questionId,
@@ -90,13 +90,22 @@ export const loadQuestionsFromJson = async (language: string = 'de', categories:
             categoryName: category[language] || category.id,
             categoryEmoji: category.emoji
           }));
+          
           allQuestions.push(...enhancedQuestions);
-        } else {
-          console.warn(`Failed to load questions for category ${category.id}: ${questionsResponse.status}`);
+          console.log(`Loaded ${enhancedQuestions.length} questions for category ${category.id}`);
+        } catch (error) {
+          // Continue to next category if this one fails
+          console.warn(`Couldn't load questions for category ${category.id} in ${language}, skipping:`, error);
         }
       } catch (error) {
         console.error(`Error loading questions for category ${category.id}:`, error);
       }
+    }
+    
+    console.log(`Successfully loaded ${allQuestions.length} questions in total`);
+    
+    if (allQuestions.length === 0) {
+      console.warn(`No questions could be loaded for ${language}, using fallbacks`);
     }
     
     return allQuestions;
