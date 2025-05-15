@@ -29,7 +29,16 @@ const de: Translations = {
   'intro.mainTitle': 'Wer würde was tun?',
   'intro.subTitle': 'Was denkst du? Wer würde am ehesten...',
   'intro.who_would': 'Wer würde am ehesten...',
-  
+  'intro.select_categories': 'Manuelle Kategorieauswahl',
+
+  // Category pick screen
+  'category_pick.title': 'Kategorien auswählen',
+  'category_pick.confirm': 'Mit {{count}} Kategorien starten',
+  'category_pick.back': 'Zurück',
+  'category_pick.questions_available': '{{count}} Fragen',
+  'category_pick.max_categories': 'Maximal {{count}} Kategorien',
+  'category_pick.selected_count': '{{count}} ausgewählt',
+
   // Settings
   'settings.title': 'Einstellungen',
   'settings.language': 'Sprache',
@@ -88,7 +97,7 @@ const de: Translations = {
   // Modal
   'modal.info_title': 'Information',
   'modal.info_description': 'Das Spielprinzip ist einfach: Du gibst der Person das Handy, welche am besten zur Frage passt. Die Person liest ihre Frage vor, erklärt sich oder gibt das Handy schnell mit der nächsten Karte weiter.',
-  'modal.reset_data_description': 'Aktuell dient dieser Seite hauptsächlich zum Zurücksetzen der App-Daten.',
+  'modal.reset_data_description': 'Aktuell dient diese Seite hauptsächlich zum Zurücksetzen der App-Daten. \nMade with ❤️ by bziuk.com.',
   'modal.close': 'Schließen',
   'modal.reset_app_data': 'App-Daten zurücksetzen',
 

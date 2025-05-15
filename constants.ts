@@ -118,12 +118,14 @@ export const initialGameSettings: GameSettings = {
   loadingQuoteTransitionDurationSec: 0.5,
   
   // Added missing properties
-  cardFallDistance: 800,
+    cardFallDistance: 800,
   cardFallStaggerDelaySec: 0.1,
   cardStackOffsetY: 10,
   
   language: DEFAULT_LANGUAGE, // Default language
   gameMode: 'classic', // Added missing gameMode property
+  selectCategories: false, // Default to automatic category selection
+  selectedCategoryIds: [], // Empty by default
 
   numberOfRounds: 3,
   timePerQuestion: 30,

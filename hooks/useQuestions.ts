@@ -148,15 +148,26 @@ const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
       
       if (allCategoryIds.length === 0) {
         console.warn("No categories found in allQuestions. Cannot prepare round.");
-        setCurrentRoundQuestions(getFallbackQuestions().slice(0, questionsPerCategory)); 
+        setCurrentRoundQuestions(getFallbackQuestions().slice(0, questionsPerCategory));
         setIndex(0);
         setCardKey(prev => prev + 1);
         setIsPreparingRound(false);
         return false; // Explicitly return false on failure
       }
 
-      const numCategoriesToSelect = Math.min(categoryCount, allCategoryIds.length);
-      const roundCategoryIds = getRandomCategories(allCategoryIds, numCategoriesToSelect);
+      // Check if we should use manually selected categories instead of random ones
+      let roundCategoryIds: string[];
+      let numCategoriesToSelect = Math.min(categoryCount, allCategoryIds.length);
+      
+      if (currentActiveGameSettings.selectCategories && currentActiveGameSettings.selectedCategoryIds?.length) {
+        // Use manually selected categories
+        console.log('Using manually selected categories:', currentActiveGameSettings.selectedCategoryIds);
+        roundCategoryIds = currentActiveGameSettings.selectedCategoryIds;
+        numCategoriesToSelect = roundCategoryIds.length;
+      } else {
+        // Use random categories
+        roundCategoryIds = getRandomCategories(allCategoryIds, numCategoriesToSelect);
+      }
       setSelectedCategories(roundCategoryIds);
 
       const newRoundQuestions: Question[] = [];

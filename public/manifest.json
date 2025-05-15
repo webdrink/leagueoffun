@@ -1,7 +1,7 @@
 {
-  "name": "The Blame Game",
+  "name": "LOF - Blame Game",
   "short_name": "BlameGame",
-  "description": "A fun party game to decide who's to blame for various amusing scenarios.",
+  "description": "A party game like Who would rather.",
   "icons": [
     {
       "src": "pwa-icon-512x512.svg",

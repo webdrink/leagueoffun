@@ -39,3 +39,31 @@ export function getRandomCategories(allCategories: string[], count: number): str
 export function getAvailableQuestions(allQuestions: Question[], playedQuestions: string[]): Question[] {
   return allQuestions.filter(q => !playedQuestions.includes(q.text));
 }
+
+/**
+ * Utility function to get all categories with their question counts from allQuestions
+ */
+export const getCategoriesWithCounts = (allQuestions: Question[]) => {
+  const categoryMap = new Map<string, {id: string; emoji: string; name: string; questionCount: number}>();
+  
+  allQuestions.forEach(q => {
+    if (!categoryMap.has(q.categoryId)) {
+      categoryMap.set(q.categoryId, {
+        id: q.categoryId,
+        emoji: q.categoryEmoji || '📋',
+        name: q.categoryName || q.categoryId,
+        questionCount: 1
+      });
+    } else {
+      const current = categoryMap.get(q.categoryId);
+      if (current) {
+        categoryMap.set(q.categoryId, {
+          ...current,
+          questionCount: current.questionCount + 1
+        });
+      }
+    }
+  });
+  
+  return Array.from(categoryMap.values());
+};

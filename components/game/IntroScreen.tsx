@@ -30,6 +30,8 @@ interface IntroScreenProps {
   currentLanguage: SupportedLanguage;
   onLanguageChange: (newLanguage: SupportedLanguage) => void;
   questionStats: Pick<QuestionStats, 'totalQuestions' | 'categories'>;
+  showCategorySelectToggle?: boolean;
+  onToggleCategorySelect?: (checked: boolean) => void;
 }
 
 /**
@@ -56,6 +58,8 @@ interface IntroScreenProps {
  * @param {SupportedLanguage} props.currentLanguage - The current language of the game.
  * @param {(newLanguage: SupportedLanguage) => void} props.onLanguageChange - Callback function to change the language.
  * @param {Pick<QuestionStats, 'totalQuestions' | 'categories'>} props.questionStats - Statistics about the questions.
+ * @param {boolean} [props.showCategorySelectToggle] - Optional flag to show the category selection toggle.
+ * @param {(checked: boolean) => void} [props.onToggleCategorySelect] - Optional callback function to toggle category selection.
  *
  * @returns {React.FC} A React functional component rendering the introductory screen.
  */
@@ -77,7 +81,9 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
   supportedLanguages,
   currentLanguage,
   onLanguageChange,
-  questionStats
+  questionStats,
+  showCategorySelectToggle,
+  onToggleCategorySelect
 }) => {
   const { t } = useTranslation();
   return (
@@ -121,6 +127,20 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
             <span className="ml-2 text-sm text-purple-700">{t('intro.name_blame_toggle')}</span>
           </Label>
         </div>
+
+        {showCategorySelectToggle && (
+          <div className="flex items-center justify-between pt-2">
+            <Label htmlFor="categorySelectToggle" className="flex items-center cursor-pointer select-none">
+              <Switch
+                id="categorySelectToggle"
+                checked={gameSettings.selectCategories}
+                onCheckedChange={onToggleCategorySelect}
+                className="data-[state=checked]:bg-purple-500"
+              />
+              <span className="ml-2 text-sm text-purple-700">{t('intro.select_categories')}</span>
+            </Label>
+          </div>
+        )}
       </div>
         <div className="mt-4 pt-4 border-t border-pink-200">
         <VolumeControl 

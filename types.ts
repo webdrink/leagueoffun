@@ -37,13 +37,14 @@ export interface GameSettings {
   allowSkip: boolean;  
   showIntroAnimation: boolean;
   introAnimationDuration: number;
-  questionFontSize: number;
-  dynamicThemeEnabled: boolean;
+  questionFontSize: number;  dynamicThemeEnabled: boolean;
   questionCardAnimation: string;
   
   // Language settings
   language: SupportedLanguage;
   gameMode: 'classic' | 'nameBlame'; // Added
+  selectCategories: boolean; // Flag to enable manual category selection
+  selectedCategoryIds?: string[]; // IDs of manually selected categories
 }
 
 export interface Category {
@@ -73,7 +74,7 @@ export interface NameBlameEntry {
   timestamp: string;
 }
 
-export type GameStep = 'intro' | 'playerSetup' | 'loading' | 'roulette' | 'game' | 'summary'; // Added 'loading'
+export type GameStep = 'intro' | 'playerSetup' | 'categoryPick' | 'loading' | 'roulette' | 'game' | 'summary'; // Added 'categoryPick'
 
 export interface QuestionStats {
   totalQuestions: number;

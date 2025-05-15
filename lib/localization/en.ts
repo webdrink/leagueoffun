@@ -29,6 +29,7 @@ const en: Translations = {
   'intro.mainTitle': 'Who would do what?',
   'intro.subTitle': 'What do you think? Who would most likely...',
   'intro.who_would': 'Who would most likely...',
+  'intro.select_categories': 'Manual category selection',
 
   // Settings
   'settings.title': 'Settings',
@@ -115,6 +116,14 @@ const en: Translations = {
   'debug.animations': 'Animations (Debug)',
   'debug.language': 'Language (Debug)',
   'debug.reset_data': 'Reset Data (Debug)',
+
+  // Category pick screen
+  'category_pick.title': 'Select Categories',
+  'category_pick.confirm': 'Start with {{count}} Categories',
+  'category_pick.back': 'Back',
+  'category_pick.questions_available': '{{count}} Questions',
+  'category_pick.max_categories': 'Max {{count}} categories',
+  'category_pick.selected_count': '{{count}} selected',
 
   // Additional keys
   'startGame': 'Start Game',

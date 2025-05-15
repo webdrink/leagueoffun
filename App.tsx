@@ -42,9 +42,11 @@ import GameContainer from './components/game/GameContainer';
 import LanguageChangeFeedback from './components/language/LanguageChangeFeedback';
 import DebugPanel from './components/debug/DebugPanel';
 import AssetDebugInfo from './components/debug/AssetDebugInfo';
+import CategoryPickScreen from './components/game/CategoryPickScreen';
 
 import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
 import { LOADING_QUOTES, initialGameSettings } from './constants';
+import { getRandomCategories, getAvailableQuestions, shuffleArray, getCategoriesWithCounts } from './lib/utils/arrayUtils';
 
 function App() {
   const { soundEnabled, toggleSound, playSound, volume, setVolume } = useSound();
@@ -81,6 +83,8 @@ function App() {
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0); // For NameBlame mode
   const [currentLoadingQuote, setCurrentLoadingQuote] = useState<string>('');
   const [activeLoadingQuotes, setActiveLoadingQuotes] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [allCategoriesInfo, setAllCategoriesInfo] = useState<Array<{id: string; emoji: string; name: string; questionCount: number}>>([]);
 
   // State for debug panel
   const [showDebug, setShowDebug] = useState(false);
@@ -148,6 +152,13 @@ function App() {
   }, []); // Empty dependency array ensures this runs only once
 
   useEffect(() => {
+    // When allQuestions are loaded, compile category info for the category picker
+    if (allQuestions.length > 0) {
+      setAllCategoriesInfo(getCategoriesWithCounts(allQuestions));
+    }
+  }, [allQuestions]);
+
+  useEffect(() => {
     if (!isLoadingQuestions && allQuestions.length === 0 && gameStep !== 'intro' && gameStep !== 'loading') {
       setErrorLoadingQuestions(t('error.noQuestionsLoaded'));
     } else if (allQuestions.length > 0 && errorLoadingQuestions === t('error.noQuestionsLoaded')) {
@@ -175,11 +186,16 @@ function App() {
       setCurrentLoadingQuote(''); // Or some default if no quotes are active
     }
   }, [quoteIndex, activeLoadingQuotes]);
-
   const handleStartGameFlow = async () => {
     // Check first if we're in "nameBlame" mode but don't have enough players
     if (gameSettings.gameMode === 'nameBlame' && players.filter(p => p.name.trim() !== '').length < 2) {
       setGameStep('playerSetup');
+      return;
+    }
+    
+    // Check if we should go to the category selection screen
+    if (gameSettings.selectCategories && gameStep === 'intro') {
+      setGameStep('categoryPick');
       return;
     }
     
@@ -306,27 +322,25 @@ function App() {
       <AnimatePresence mode="wait">
         {gameStep === 'intro' && (
           <IntroScreen
-            key="intro"
-            onStartGame={handleStartGameFlow}
             gameSettings={gameSettings}
-            onUpdateGameSettings={updateGameSettings} 
-            onToggleSound={toggleSound}
-            soundEnabled={soundEnabled}
-            volume={volume}
-            onVolumeChange={setVolume}
-            isLoading={isLoadingQuestions || isPreparingRound} // Disable button during initial loading OR round prep
+            isLoading={isLoadingQuestions}
             nameBlameMode={gameSettings.gameMode === 'nameBlame'}
-            onToggleNameBlame={(checked) => {
-              updateGameSettings({ gameMode: checked ? 'nameBlame' : 'classic' });
-            }}
-            onOpenDebugPanel={() => { /* TODO: Implement debug panel toggle */ }}
+            soundEnabled={soundEnabled}
+            onStartGame={handleStartGameFlow}
+            onToggleNameBlame={(checked) => updateGameSettings({ gameMode: checked ? 'nameBlame' : 'classic' })}
+            onToggleSound={toggleSound}
+            onVolumeChange={setVolume}
+            volume={volume}
+            onOpenDebugPanel={() => setShowDebug(true)}
             onOpenInfoModal={() => setShowInfoModal(true)}
-            mainButtonLabel={isLoadingQuestions ? t('intro.loading_questions') : t('intro.start_game')}
+            onUpdateGameSettings={updateGameSettings}
             errorLoadingQuestions={errorLoadingQuestions}
-            supportedLanguages={SUPPORTED_LANGUAGES} 
+            supportedLanguages={{}}
             currentLanguage={gameSettings.language}
-            onLanguageChange={handleLanguageChange}
+            onLanguageChange={(newLanguage) => updateGameSettings({ language: newLanguage })}
             questionStats={questionStats}
+            showCategorySelectToggle={true}
+            onToggleCategorySelect={(checked) => updateGameSettings({ selectCategories: checked })}
           />
         )}
 
@@ -373,6 +387,25 @@ function App() {
             onBlame={handleBlame} 
             onNext={handleNextQuestion}
             onBack={handlePreviousQuestion}
+          />
+        )}
+
+        {gameStep === 'categoryPick' && (
+          <CategoryPickScreen 
+            allCategories={allCategoriesInfo}
+            selectedCategories={selectedCategories}
+            onSelectCategory={(categoryIds) => {
+              setSelectedCategories(categoryIds);
+              updateGameSettings({ selectedCategoryIds: categoryIds });
+            }}
+            onBack={() => setGameStep('intro')}
+            onConfirm={() => {
+              if (selectedCategories.length > 0) {
+                updateGameSettings({ selectedCategoryIds: selectedCategories });
+                handleStartGameFlow();
+              }
+            }}
+            maxSelectable={gameSettings.categoryCount}
           />
         )}
       </AnimatePresence>
