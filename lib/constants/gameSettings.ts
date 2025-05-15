@@ -73,7 +73,13 @@ export const initialGameSettings: GameSettings = {
   loadingQuoteSpringStiffness: 120,// Stiffness for loading quote springs
   loadingQuoteSpringDamping: 10,   // Damping for loading quote springs
   loadingQuoteTransitionDurationSec: 0.5, // Duration of loading quote transitions
-    // Gameplay settings
+  
+  // Card falling animation settings
+  cardFallDistance: 800,           // Distance cards fall in pixels
+  cardFallStaggerDelaySec: 0.1,    // Delay between consecutive cards falling
+  cardStackOffsetY: 10,            // Vertical offset for stacked cards
+  
+  // Gameplay settings
   numberOfRounds: 3,               // Number of rounds in a game
   timePerQuestion: 30,             // Time allowed per question (in seconds)
   showScore: true,                 // Whether to show scores
@@ -84,6 +90,7 @@ export const initialGameSettings: GameSettings = {
   dynamicThemeEnabled: true,       // Whether to use time-based themes
   questionCardAnimation: 'roulette',// Type of question card animation
   
-  // Language settings
+  // Game mode and language settings
+  gameMode: 'classic',             // Game mode (classic or nameBlame)
   language: 'de',                  // Default language (German)
 };

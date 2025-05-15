@@ -61,7 +61,8 @@ const LoadingCardStack: React.FC<LoadingCardStackProps> = ({
   settings
 }) => {
   // Only log this in development
-  if (process.env.NODE_ENV !== 'production') {
+  const isDevelopment = import.meta.env.DEV;
+  if (isDevelopment) {
     console.log('LoadingCardStack received categoriesWithEmojis:', categoriesWithEmojis);
   }
   return (

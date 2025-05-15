@@ -74,7 +74,8 @@ const LoadingContainer: React.FC<LoadingContainerProps> = ({
   settings
 }) => {
   // Only log this in development
-  if (process.env.NODE_ENV !== 'production') {
+  const isDevelopment = import.meta.env.DEV;
+  if (isDevelopment) {
     console.log('LoadingContainer received currentQuote:', currentQuote);
   }
 

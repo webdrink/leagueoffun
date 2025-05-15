@@ -116,7 +116,14 @@ export const initialGameSettings: GameSettings = {
   loadingQuoteSpringStiffness: 120,
   loadingQuoteSpringDamping: 10,
   loadingQuoteTransitionDurationSec: 0.5,
+  
+  // Added missing properties
+  cardFallDistance: 800,
+  cardFallStaggerDelaySec: 0.1,
+  cardStackOffsetY: 10,
+  
   language: DEFAULT_LANGUAGE, // Default language
+  gameMode: 'classic', // Added missing gameMode property
 
   numberOfRounds: 3,
   timePerQuestion: 30,
