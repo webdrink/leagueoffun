@@ -1,5 +1,37 @@
 [
   {
+    "id": "spicy",
+    "de": "Spicy",
+    "en": "Spicy",
+    "es": "Picante",
+    "fr": "Épicé",
+    "emoji": "🌶️"
+  },
+  {
+    "id": "party",
+    "de": "Beim Feiern",
+    "en": "At Parties",
+    "es": "En Fiestas",
+    "fr": "Aux Fêtes",
+    "emoji": "🎉"
+  },
+  {
+    "id": "dark_secrets",
+    "de": "Dunkle Geheimnisse",
+    "en": "Dark Secrets",
+    "es": "Secretos Oscuros",
+    "fr": "Secrets Sombres",
+    "emoji": "😈"
+  },
+  {
+    "id": "typical_german",
+    "de": "Typisch Deutsch",
+    "en": "Typically German",
+    "es": "Típicamente Alemán",
+    "fr": "Typiquement Allemand",
+    "emoji": "🍺"
+  },
+  {
     "id": "apocalypse",
     "de": "Im Weltuntergang",
     "en": "During the Apocalypse",
@@ -200,14 +232,6 @@
     "emoji": "🥳"
   },
   {
-    "id": "party",
-    "de": "Beim Feiern",
-    "en": "At Parties",
-    "es": "En Fiestas",
-    "fr": "Aux Fêtes",
-    "emoji": "🎉"
-  },
-  {
     "id": "relationships",
     "de": "Beziehungen",
     "en": "Relationships",
@@ -230,29 +254,5 @@
     "es": "Viajes",
     "fr": "Voyages",
     "emoji": "✈️"
-  },
-  {
-    "id": "typical_german",
-    "de": "Typisch Deutsch",
-    "en": "Typically German",
-    "es": "Típicamente Alemán",
-    "fr": "Typiquement Allemand",
-    "emoji": "🇩🇪"
-  },
-  {
-    "id": "spicy",
-    "de": "Spicy",
-    "en": "Spicy",
-    "es": "Picante",
-    "fr": "Épicé",
-    "emoji": "🌶️"
-  },
-  {
-    "id": "dark_secrets",
-    "de": "Dunkle Geheimnisse",
-    "en": "Dark Secrets",
-    "es": "Secretos Oscuros",
-    "fr": "Secrets Sombres",
-    "emoji": "😈"
   }
 ]
