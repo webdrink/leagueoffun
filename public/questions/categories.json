@@ -238,5 +238,21 @@
     "es": "Típicamente Alemán",
     "fr": "Typiquement Allemand",
     "emoji": "🇩🇪"
+  },
+  {
+    "id": "spicy",
+    "de": "Spicy",
+    "en": "Spicy",
+    "es": "Picante",
+    "fr": "Épicé",
+    "emoji": "🌶️"
+  },
+  {
+    "id": "dark_secrets",
+    "de": "Dunkle Geheimnisse",
+    "en": "Dark Secrets",
+    "es": "Secretos Oscuros",
+    "fr": "Secrets Sombres",
+    "emoji": "😈"
   }
 ]
