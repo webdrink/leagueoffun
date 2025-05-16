@@ -38,5 +38,55 @@
     "questionId": "who_needs_bathroom_breaks_most_often",
     "text": "Wer braucht die meisten Toilettenpausen?",
     "category": "travel"
+  },
+  {
+    "questionId": "who_packs_two_days_before_trip",
+    "text": "Wer packt erst zwei Stunden vor Abflug?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_claps_when_plane_lands",
+    "text": "Wer klatscht bei der Landung?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_convinces_security_to_smile_for_photo",
+    "text": "Wer versucht, die Security fürs Foto zum Lächeln zu bringen?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_travels_with_only_hand_luggage",
+    "text": "Wer reist immer nur mit Handgepäck?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_gets_lost_with_google_maps",
+    "text": "Wer verläuft sich trotz Google Maps?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_buys_souvenirs_for_pet",
+    "text": "Wer kauft Souvenirs für sein Haustier?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_eats_airport_snack_as_fine_dining",
+    "text": "Wer zelebriert Flughafensnacks wie Gourmetküche?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_tries_to_learn_basic_phrases_but_forgets",
+    "text": "Wer lernt Grundvokabeln und vergisst sie sofort?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_has_stamp_collection_in_passport",
+    "text": "Wer prahlt mit seinem Stempel-Pass?",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_posts_hourly_travel_updates",
+    "text": "Wer postet stündliche Reise-Updates?",
+    "category": "travel"
   }
 ]

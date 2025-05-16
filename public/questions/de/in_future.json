@@ -98,5 +98,55 @@
     "questionId": "who_would_become_time_traveler",
     "text": "Wer würde ein Zeitreisender werden?",
     "category": "in_future"
+  },
+  {
+    "questionId": "who_expects_flying_cars_by_2030",
+    "text": "Wer rechnet fest mit fliegenden Autos bis 2030?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_thinks_their_robot_will_do_chores",
+    "text": "Wer glaubt, dass ein Roboter bald alle Hausarbeiten erledigt?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_plans_to_upload_consciousness",
+    "text": "Wer plant, sein Bewusstsein hochzuladen?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_buys_crypto_for_retirement",
+    "text": "Wer kauft Krypto für die Rente?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_is_afraid_of_ai_taking_over",
+    "text": "Wer hat Angst, dass KI alles übernimmt?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_preorders_every_new_gadget",
+    "text": "Wer bestellt jedes neue Gadget vor?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_wants_to_live_on_mars",
+    "text": "Wer möchte auf dem Mars leben?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_expects_weekend_to_be_three_days",
+    "text": "Wer erwartet bald ein Drei-Tage-Wochenende als Standard?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_bets_on_time_travel_vacations",
+    "text": "Wer wettet auf Zeitreise-Urlaube?",
+    "category": "in_future"
+  },
+  {
+    "questionId": "who_believes_food_pills_will_replace_meals",
+    "text": "Wer glaubt, Nahrungspillen ersetzen bald Mahlzeiten?",
+    "category": "in_future"
   }
 ]

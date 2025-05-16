@@ -38,5 +38,55 @@
     "questionId": "who_makes_friends_with_strangers",
     "text": "Wer freundet sich mit Fremden an?",
     "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_introduces_themselves_with_fake_job",
+    "text": "Wer stellt sich mit einem Fake-Job vor?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_collects_strangers_instagram_handles",
+    "text": "Wer sammelt Instagram-Handles von Fremden?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_dances_with_coat_still_on",
+    "text": "Wer tanzt mit noch angezogenem Mantel?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_becomes_dj_using_phone_playlist",
+    "text": "Wer kapert die Musikanlage mit seiner Handy-Playlist?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_forgets_names_after_2_seconds",
+    "text": "Wer vergisst Namen nach zwei Sekunden?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_trades_shoes_with_random_person",
+    "text": "Wer tauscht Schuhe mit einer fremden Person?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_tells_same_story_multiple_times",
+    "text": "Wer erzählt dieselbe Story mehrmals?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_joins_group_photos_uninvited",
+    "text": "Wer springt ungefragt in Gruppenfotos?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_becomes_instant_therapist_for_stranger",
+    "text": "Wer wird spontan zur Therapeut:in für Fremde?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_leaves_with_wrong_jacket",
+    "text": "Wer geht am Ende mit der falschen Jacke nach Hause?",
+    "category": "parties_with_strangers"
   }
 ]

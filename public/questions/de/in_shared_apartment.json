@@ -63,5 +63,55 @@
     "questionId": "who_is_messiest_roommate",
     "text": "Wer ist der unordentlichste Mitbewohner?",
     "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_steals_roommates_milk",
+    "text": "Wer klaut immer die Milch der Mitbewohner:innen?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_has_left_dishes_for_science",
+    "text": "Wer lässt das Geschirr stehen, um \"Schimmel-Forschung\" zu betreiben?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_organises_house_meetings_for_fun",
+    "text": "Wer veranstaltet freiwillig WG-Plena?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_labels_everything_with_name",
+    "text": "Wer beschriftet alles mit seinem Namen?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_plays_loud_music_at_2am",
+    "text": "Wer hört um 2 Uhr nachts laute Musik?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_has_plants_take_over_livingroom",
+    "text": "Wer verwandelt das Wohnzimmer in einen Dschungel?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_invites_randoms_to_crash_on_couch",
+    "text": "Wer lässt ständig Fremde auf dem Sofa schlafen?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_fails_to_take_out_trash_on_turn",
+    "text": "Wer vergisst immer seinen Müll-Dienst?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_turns_bathroom_into_spa",
+    "text": "Wer macht aus dem Bad ein Day-Spa?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_has_emergency_chocolate_stash",
+    "text": "Wer hat einen geheimen Schokoladenvorrat?",
+    "category": "in_shared_apartment"
   }
 ]

@@ -73,5 +73,55 @@
     "questionId": "who_is_most_organized_friend",
     "text": "Wer ist der organisierteste Freund?",
     "category": "friendships"
+  },
+  {
+    "questionId": "who_leaves_voice_memos_instead_of_texts",
+    "text": "Wer schickt lieber 5-Minuten-Sprachnachrichten als Text?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_never_has_phone_charged",
+    "text": "Wer hat nie genug Akku, wenn man ihn braucht?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_forgets_birthdays_without_facebook",
+    "text": "Wer vergisst jeden Geburtstag ohne Facebook-Erinnerung?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_arrives_an_hour_late_but_with_coffee",
+    "text": "Wer kommt eine Stunde zu spät, bringt aber Kaffee mit?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_gives_questionable_life_advice",
+    "text": "Wer gibt fragwürdige Lebensratschläge?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_ghosts_groupchat_for_weeks",
+    "text": "Wer ghostet den Gruppenchat wochenlang?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_turns_every_story_into_a_monologue",
+    "text": "Wer macht aus jeder Story einen Monolog?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_sends_memes_in_critical_moments",
+    "text": "Wer schickt in ernsten Momenten Memes?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_knows_everyone_secrets",
+    "text": "Wer kennt alle Geheimnisse der anderen?",
+    "category": "friendships"
+  },
+  {
+    "questionId": "who_is_designated_group_therapist",
+    "text": "Wer ist die inoffizielle Gruppen-Therapeutin?",
+    "category": "friendships"
   }
 ]

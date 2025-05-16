@@ -218,5 +218,55 @@
     "questionId": "last_standing",
     "text": "Wer wäre der letzte, der noch wach ist?",
     "category": "party"
+  },
+  {
+    "questionId": "who_requests_free_bird_at_club",
+    "text": "Wer wünscht sich im Club \"Free Bird\"?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_spills_first_drink",
+    "text": "Wer verschüttet den ersten Drink?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_thinks_shots_are_hydration",
+    "text": "Wer hält Shots für Hydration?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_starts_karaoke_without_mic",
+    "text": "Wer startet Karaoke ohne Mikrofon?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_makes_toast_every_15_minutes",
+    "text": "Wer hält alle 15 Minuten einen Toast?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_takes_over_photobooth",
+    "text": "Wer blockiert die Fotobox alleine?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_loses_phone_in_sofa",
+    "text": "Wer verliert das Handy im Sofa?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_crashes_vip_area_uninvited",
+    "text": "Wer sneakt sich in den VIP-Bereich?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_does_splits_on_dancefloor",
+    "text": "Wer macht Spagat auf der Tanzfläche?",
+    "category": "party"
+  },
+  {
+    "questionId": "who_forgets_to_eat_before_drinking",
+    "text": "Wer vergisst vor dem Feiern zu essen?",
+    "category": "party"
   }
 ]

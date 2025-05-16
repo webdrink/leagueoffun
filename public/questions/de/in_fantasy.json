@@ -83,5 +83,55 @@
     "questionId": "who_would_have_fantasy_adventures",
     "text": "Wer hätte die besten Fantasieabenteuer?",
     "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_imagines_being_a_superhero",
+    "text": "Wer stellt sich vor, ein:e Superheld:in zu sein?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_dreams_of_dragon_pet",
+    "text": "Wer träumt von einem Drachen als Haustier?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_move_into_hogwarts_tomorrow",
+    "text": "Wer würde morgen nach Hogwarts ziehen?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_plans_apocalypse_escape_route",
+    "text": "Wer plant eine Fluchtroute für die Zombie-Apokalypse?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_believes_cats_rule_secretly",
+    "text": "Wer glaubt, Katzen regieren heimlich die Welt?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_wants_lightsaber_for_household",
+    "text": "Wer wünscht sich ein Lichtschwert für den Haushalt?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_has_entire_lotr_quotes_memorized",
+    "text": "Wer kann Herr-der-Ringe-Zitate auswendig aufsagen?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_thinks_they_have_hidden_magic_powers",
+    "text": "Wer ist überzeugt, geheime Zauberkräfte zu haben?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_choose_dragons_over_wifi",
+    "text": "Wer würde Drachen einem guten WLAN vorziehen?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_plots_kingdom_in_mirror",
+    "text": "Wer herrscht in Gedanken über ein Spiegelreich?",
+    "category": "in_fantasy"
   }
 ]

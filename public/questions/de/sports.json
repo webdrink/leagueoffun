@@ -58,5 +58,55 @@
     "questionId": "who_buys_exercise_equipment_never_uses",
     "text": "Wer kauft Fitnessgeräte und benutzt sie nie?",
     "category": "sports"
+  },
+  {
+    "questionId": "who_buys_fancy_gear_rarely_uses",
+    "text": "Wer kauft teure Sportausrüstung und nutzt sie nie?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_counts_warmup_as_workout",
+    "text": "Wer zählt Aufwärmen als Workout?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_joins_gym_for_sauna_only",
+    "text": "Wer tritt dem Fitnessstudio nur wegen der Sauna bei?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_competes_with_fitness_tracker",
+    "text": "Wer macht Wettkämpfe nur mit dem Schrittzähler?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_screams_like_tennis_star",
+    "text": "Wer schreit beim Sport wie ein Tennisprofi?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_wears_headband_for_style",
+    "text": "Wer trägt Stirnband nur als Modeaccessoire?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_celebrates_smallest_personal_record",
+    "text": "Wer feiert jeden Mini-Rekord ekstatisch?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_turns_every_activity_into_competition",
+    "text": "Wer macht aus allem einen Wettkampf?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_forgets_water_but_brings_protein_shake",
+    "text": "Wer vergisst Wasser, hat aber den Proteinshake dabei?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_streams_workout_live",
+    "text": "Wer streamt sein Workout live?",
+    "category": "sports"
   }
 ]
