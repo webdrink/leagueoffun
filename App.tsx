@@ -43,6 +43,7 @@ import LanguageChangeFeedback from './components/language/LanguageChangeFeedback
 import DebugPanel from './components/debug/DebugPanel';
 import AssetDebugInfo from './components/debug/AssetDebugInfo';
 import CategoryPickScreen from './components/game/CategoryPickScreen';
+import SummaryScreen from './components/game/SummaryScreen';
 
 import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
 import { LOADING_QUOTES, initialGameSettings } from './constants';
@@ -64,15 +65,16 @@ function App() {
     advanceToNextQuestion,
     goToPreviousQuestion,
   } = useQuestions(gameSettings);
-
   const {
     players, // Player[]
     tempPlayerName,
     nameInputError,
+    nameBlameLog, // Add this to access the blame log
     setTempPlayerName,
     addPlayer,
     removePlayer,
-    handlePlayerNameChange, // Added for completeness, if PlayerSetupScreen needs it
+    handlePlayerNameChange,
+    recordNameBlame, // Add this function to record blames 
   } = useNameBlameSetup();
 
   const [gameStep, setGameStep] = useState<GameStep>('intro');
@@ -80,11 +82,12 @@ function App() {
   const [errorLoadingQuestions, setErrorLoadingQuestions] = useState<string | null>(null);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [quoteIndex, setQuoteIndex] = useState(0);
-  const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0); // For NameBlame mode
+  const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
   const [currentLoadingQuote, setCurrentLoadingQuote] = useState<string>('');
   const [activeLoadingQuotes, setActiveLoadingQuotes] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [allCategoriesInfo, setAllCategoriesInfo] = useState<Array<{id: string; emoji: string; name: string; questionCount: number}>>([]);
+  const [stablePlayerOrderForRound, setStablePlayerOrderForRound] = useState<Player[]>([]); // For NameBlame mode player turn consistency
 
   // State for debug panel
   const [showDebug, setShowDebug] = useState(false);
@@ -165,6 +168,24 @@ function App() {
       setErrorLoadingQuestions(null);
     }
   }, [isLoadingQuestions, allQuestions, gameStep, t, errorLoadingQuestions]);
+
+  useEffect(() => {
+    if (gameStep === 'game') {
+      const currentActivePlayers = players.filter(p => p.name.trim() !== '');
+      // Only set if it\'s empty or if the player list/order has actually changed.
+      // This prevents resetting the order (and potentially currentPlayerIndex) if this effect re-runs mid-game due to other dependencies.
+      if (stablePlayerOrderForRound.length === 0 || JSON.stringify(stablePlayerOrderForRound.map(p=>p.id)) !== JSON.stringify(currentActivePlayers.map(p=>p.id))) {
+        setStablePlayerOrderForRound(currentActivePlayers);
+        console.log("Stable player order for round set to:", currentActivePlayers.map(p => p.name));
+        // setCurrentPlayerIndex(0) is handled in handleStartGameFlow when a new game starts
+      }
+    } else if (gameStep === 'intro') {
+      if (stablePlayerOrderForRound.length > 0) { // Only clear if not already empty
+          setStablePlayerOrderForRound([]);
+          console.log("Stable player order cleared (gameStep is intro).");
+      }
+    }
+  }, [gameStep, players]); // players dependency is important if player list can change before game starts
 
   useEffect(() => {
     if (gameSettings.language && i18n.language !== gameSettings.language) {
@@ -265,8 +286,8 @@ function App() {
       const minLoadingDuration = gameSettings.rouletteDurationMs || 3000;
       setTimeout(() => {
         clearInterval(quoteTimer);
-        setGameStep('game');
-        setCurrentPlayerIndex(0);
+        setGameStep('game'); // This will trigger the useEffect to set stablePlayerOrderForRound
+        setCurrentPlayerIndex(0); // Initialize for the new round
         playSound('game_start');
       }, minLoadingDuration);
     } catch (error) {
@@ -283,16 +304,22 @@ function App() {
     }
     handleStartGameFlow();
   };
-
   const handleNextQuestion = () => {
     if (currentQuestionIndexFromHook < currentRoundQuestions.length - 1) {
       advanceToNextQuestion();
       if (gameSettings.gameMode === 'nameBlame') {
-        setCurrentPlayerIndex(prev => (prev + 1) % players.filter(p => p.name.trim() !== '').length);
+        if (stablePlayerOrderForRound.length > 0) {
+          const nextPlayerIndex = (currentPlayerIndex + 1) % stablePlayerOrderForRound.length;
+          setCurrentPlayerIndex(nextPlayerIndex);
+          console.log(`Next question (NameBlame). Next player: ${stablePlayerOrderForRound[nextPlayerIndex]?.name} (index ${nextPlayerIndex}) from stable list:`, stablePlayerOrderForRound.map(p => p.name));
+        } else {
+          console.error("Error: stablePlayerOrderForRound is empty in handleNextQuestion (NameBlame). Turn cannot advance correctly.");
+          // Fallback or error handling might be needed if this state occurs.
+        }
       }
       playSound('new_question');
     } else {
-      setGameStep('intro'); 
+      setGameStep('summary'); 
       playSound('summary_fun');
     }
   };
@@ -300,6 +327,8 @@ function App() {
   const handlePreviousQuestion = () => {
     goToPreviousQuestion();
     if (gameSettings.gameMode === 'nameBlame' && currentPlayerIndex > 0) {
+      // No change needed here as it just decrements the index.
+      // The index will be interpreted against stablePlayerOrderForRound.
       setCurrentPlayerIndex(prev => prev -1);
     }
   };
@@ -310,12 +339,66 @@ function App() {
 
   const handleTitleClick = () => {
     setGameStep('intro');
-  };
-  
-  const handleBlame = (blamedPlayerName: string) => {
+  };  const handleBlame = (blamedPlayerName: string) => {
     console.log(`${blamedPlayerName} was blamed for question: ${currentQuestion?.text}`);
-    handleNextQuestion(); 
+    
+    if (stablePlayerOrderForRound.length === 0) {
+      console.error("Error: stablePlayerOrderForRound is empty in handleBlame. This indicates a problem with game state setup. Reverting to intro.");
+      setGameStep('intro'); 
+      return;
+    }
+
+    // Ensure currentPlayerIndex is valid for stablePlayerOrderForRound.
+    // This guards against potential race conditions or stale state if the index somehow gets out of sync.
+    const safeCurrentPlayerIndex = currentPlayerIndex % stablePlayerOrderForRound.length;
+    const blamingPlayer = stablePlayerOrderForRound[safeCurrentPlayerIndex];
+
+    if (blamingPlayer && currentQuestion) {
+      recordNameBlame(blamingPlayer.name, blamedPlayerName, currentQuestion.text);
+    } else {
+      console.error("Error: Could not identify blaming player or current question in handleBlame.");
+      // Potentially add more robust error handling here, e.g., reverting to intro or showing a user-facing error.
+    }
+    
+    if (currentQuestionIndexFromHook < currentRoundQuestions.length - 1) {
+      advanceToNextQuestion();
+      // Use stablePlayerOrderForRound for turn advancement
+      const nextPlayerIndex = (safeCurrentPlayerIndex + 1) % stablePlayerOrderForRound.length;
+      setCurrentPlayerIndex(nextPlayerIndex);
+      console.log(`Blame recorded. Next player: ${stablePlayerOrderForRound[nextPlayerIndex]?.name} (index ${nextPlayerIndex}) from stable list:`, stablePlayerOrderForRound.map(p => p.name));
+      playSound('new_question');
+    } else {
+      setGameStep('summary');
+      playSound('summary_fun');
+    }
   };
+
+  useEffect(() => {
+    // When gameStep changes to 'game', if stablePlayerOrderForRound is not yet set for this round,
+    // or if the players list from the hook has changed significantly (e.g. new game after setup)
+    // capture the current active player order.
+    // This also handles the initial game start.
+    if (gameStep === 'game') {
+      const currentActivePlayers = players.filter(p => p.name.trim() !== '');
+      // Only update if the list is different to avoid unnecessary re-renders if players haven't changed.
+      // A simple length check or stringify might be too naive for deep comparison if player objects change.
+      // For now, we'll set it if it's empty or if gameStep just became 'game'.
+      // A more robust check might involve comparing player IDs if they are stable.
+      // Using JSON.stringify on IDs to check for changes in player list or order.
+      if (stablePlayerOrderForRound.length === 0 || 
+          JSON.stringify(stablePlayerOrderForRound.map(p => p.id)) !== JSON.stringify(currentActivePlayers.map(p => p.id))) {
+        setStablePlayerOrderForRound(currentActivePlayers);
+        console.log('Stable player order for round set/updated:', currentActivePlayers.map(p => p.name));
+        // Reset currentPlayerIndex if the order is being freshly set for a new game,
+        // handleStartGameFlow already does this.
+      }
+    } else if (gameStep === 'intro') {
+      // Clear stable order when returning to intro, so it's fresh for the next game.
+      if (stablePlayerOrderForRound.length > 0) { // Only clear if not already empty
+        setStablePlayerOrderForRound([]);
+      }
+    }
+  }, [gameStep, players, stablePlayerOrderForRound]); // Added stablePlayerOrderForRound to dependencies to avoid stale closures if logic inside depended on it.
 
   return (
     <GameContainer onTitleClick={handleTitleClick}>
@@ -374,7 +457,7 @@ function App() {
           />
         )}
 
-        {gameStep === 'game' && currentQuestion && (
+        {gameStep === 'game' && currentQuestion && stablePlayerOrderForRound.length > 0 && (
           <QuestionScreen
             key="game"
             question={currentQuestion}
@@ -382,15 +465,13 @@ function App() {
             totalQuestions={currentRoundQuestions.length}
             gameSettings={gameSettings}
             nameBlameMode={gameSettings.gameMode === 'nameBlame'}
-            activePlayers={players.filter(p => p.name.trim() !== '')} 
+            activePlayers={stablePlayerOrderForRound} 
             currentPlayerIndex={currentPlayerIndex} 
             onBlame={handleBlame} 
             onNext={handleNextQuestion}
             onBack={handlePreviousQuestion}
           />
-        )}
-
-        {gameStep === 'categoryPick' && (
+        )}        {gameStep === 'categoryPick' && (
           <CategoryPickScreen 
             allCategories={allCategoriesInfo}
             selectedCategories={selectedCategories}
@@ -406,6 +487,19 @@ function App() {
               }
             }}
             maxSelectable={gameSettings.categoryCount}
+          />
+        )}
+        
+        {gameStep === 'summary' && (
+          <SummaryScreen 
+            key="summary"
+            nameBlameMode={gameSettings.gameMode === 'nameBlame'}
+            nameBlameLog={nameBlameLog}
+            questionsAnswered={currentRoundQuestions.length}
+            onRestart={() => {
+              setGameStep('intro');
+            }}
+            activePlayersCount={stablePlayerOrderForRound.length > 0 ? stablePlayerOrderForRound.length : players.filter(p => p.name.trim() !== '').length}
           />
         )}
       </AnimatePresence>

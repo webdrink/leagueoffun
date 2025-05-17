@@ -124,18 +124,25 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
               {t('questions.who_blame')}
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {activePlayers.map((player, i) => (
-                <Button
-                  key={player.id}
-                  onClick={() => onBlame(player.name)}
-                  className={`bg-pink-400 hover:bg-pink-200 text-purple-700 font-semibold rounded-lg py-2.5 px-3 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-pink-00 focus:ring-opacity-75
-                        ${i === currentPlayerIndex ? 'opacity-60 cursor-not-allowed !bg-gray-300 !text-gray-500' : 'hover:scale-105'}`}
-                  disabled={i === currentPlayerIndex}
-                  title={i === currentPlayerIndex ? t('questions.cannot_blame_self') : t('questions.blame_player', { name: player.name })}
-                >
-                  {player.name}
-                </Button>
-              ))}
+              {activePlayers.map((player) => {
+                // Get the current player by index
+                const currentPlayer = activePlayers[currentPlayerIndex];
+                // Disable button if this player is the current player (can't blame self)
+                const isSelf = currentPlayer && player.id === currentPlayer.id;
+                
+                return (
+                  <Button
+                    key={player.id}
+                    onClick={() => onBlame(player.name)}
+                    className={`bg-pink-400 hover:bg-pink-200 text-purple-700 font-semibold rounded-lg py-2.5 px-3 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-pink-00 focus:ring-opacity-75
+                          ${isSelf ? 'opacity-60 cursor-not-allowed !bg-gray-300 !text-gray-500' : 'hover:scale-105'}`}
+                    disabled={isSelf}
+                    title={isSelf ? t('questions.cannot_blame_self') : t('questions.blame_player', { name: player.name })}
+                  >
+                    {player.name}
+                  </Button>
+                );
+              })}
             </div>
           </div>
         )}

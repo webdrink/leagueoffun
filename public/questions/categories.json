@@ -1,5 +1,13 @@
 [
   {
+    "id": "alex",
+    "de": "Alex",
+    "en": "Alex",
+    "es": "Al€x",
+    "fr": "Aléx",
+    "emoji": "💀"
+  },
+  {
     "id": "spicy",
     "de": "Spicy",
     "en": "Spicy",
