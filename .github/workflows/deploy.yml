@@ -41,7 +41,7 @@ jobs:
         id: translation-check
         run: |
           # Run translation check to see if translations are needed
-          # Using --check-only flag to avoid actual translation API calls          if pnpm run translate:check --check-only; then
+          if pnpm run translate:check --check-only; then
             echo "needs-translation=false" >> $GITHUB_OUTPUT
             echo "✅ All translations are up to date"
           else

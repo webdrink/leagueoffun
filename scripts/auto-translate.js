@@ -151,16 +151,46 @@ async function main(){
   // translate category names if needed
   await ana.translateCategoryNames(serv);
   const missing=ana.getMissing();
-  
-  // In check-only mode, just report and exit with appropriate code
+    // In check-only mode, just report and exit with appropriate code
   if(CONFIG.checkOnly){
     let totalMissing=0;
+    
+    // First check missing translations in all categories/languages
     for(const [lang,cats] of Object.entries(missing)){
       for(const [catId,items] of Object.entries(cats)){
-        totalMissing+=items.length;
+        if(items.length > 0) {
+          console.log(`❌ Missing ${items.length} translations for ${lang}/${catId}`);
+          totalMissing+=items.length;
+        }
       }
     }
-    console.log(`📊 Found ${totalMissing} missing translations`);
+    
+    // Then check for significant differences in question counts
+    for(const l of CONFIG.languages){ 
+      if(l===CONFIG.baseLanguage) continue;
+      for(const c of ana.categories){
+        const baseCount = (ana.files[CONFIG.baseLanguage][c.id] || []).length;
+        const langCount = (ana.files[l][c.id] || []).length;
+        
+        if(langCount === 0 && baseCount > 0) {
+          console.log(`❌ Missing question file for ${l}/${c.id}`);
+          totalMissing += baseCount; // Count all missing questions
+        } else if(baseCount > 0 && langCount > 0) {
+          const difference = Math.abs(baseCount - langCount);
+          const percentage = Math.round((difference / baseCount) * 100);
+          if(percentage > 20) {
+            console.log(`❌ Significant question count difference for ${c.id}: ${CONFIG.baseLanguage}=${baseCount}, ${l}=${langCount} (${percentage}% difference)`);
+            totalMissing += difference; // Count the difference as missing translations
+          }
+        }
+      }
+    }
+    
+    if(totalMissing === 0) {
+      console.log(`✅ No missing translations found`);
+    } else {
+      console.log(`📊 Found ${totalMissing} missing translations`);
+    }
     process.exit(totalMissing > 0 ? 1 : 0);
   }
   
