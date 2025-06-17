@@ -18,7 +18,8 @@
  *  - App.tsx (implicitly, as it wraps all screen content)
  */
 import React from 'react';
-import GameHeader from './GameHeader'; // Import the new GameHeader component
+import GameHeader from './GameHeader'; // Title component specific to BlameGame
+import { GameLayout, GameHeader as LayoutHeader, GameBody, GameFooter } from '../core/GameLayout';
 
 interface GameContainerProps {
   children: React.ReactNode;
@@ -41,10 +42,17 @@ const GameContainer: React.FC<GameContainerProps> = ({ children, onTitleClick })
       className="min-h-screen w-full flex flex-col items-center justify-start px-2 sm:px-4 py-4 bg-gradient-to-b from-pink-500 to-pink-300"
       style={{ minHeight: '100dvh' }}
     >
-      <GameHeader title="BlameGame" onTitleClick={onTitleClick} /> {/* Pass onTitleClick to GameHeader */}
-      <div className="w-full max-w-md flex-grow flex flex-col items-center justify-center">
-        {children}
-      </div>
+      <GameLayout>
+        <LayoutHeader>
+          <GameHeader onTitleClick={onTitleClick} />
+        </LayoutHeader>
+        <GameBody>
+          <div className="w-full max-w-md flex-grow flex flex-col items-center justify-center">
+            {children}
+          </div>
+        </GameBody>
+        <GameFooter />
+      </GameLayout>
     </div>
   );
 };

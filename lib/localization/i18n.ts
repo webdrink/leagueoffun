@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { translations } from './index'; // Assuming this exports your translations map
+import { translations } from './index';
 
 // Configure i18next with required plugins
 i18n
@@ -11,7 +11,7 @@ i18n
     resources: translations,
     fallbackLng: 'de', // Default to German if translation is missing
     supportedLngs: ['de', 'en', 'es', 'fr'],
-    debug: false, // Set to false as default
+    debug: false,
     interpolation: {
       escapeValue: false, // React already protects from XSS
     },
@@ -23,7 +23,7 @@ i18n
     },
     react: {
       useSuspense: false, // Disable suspense to avoid issues
-    }
+    },
   });
 
 export default i18n;
