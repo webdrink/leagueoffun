@@ -118,6 +118,18 @@ const verifyPWAIcons = () => {
   return allValid;
 };
 
+// Verify game.json exists in public
+const verifyGameJson = () => {
+  const gamePath = path.join(PUBLIC_DIR, 'game.json');
+  if (fileExists(gamePath)) {
+    console.log('✅ game.json exists');
+    return true;
+  } else {
+    console.error('❌ game.json is missing');
+    return false;
+  }
+};
+
 // Verify CNAME file
 const verifyCNAME = () => {
   const cnamePath = path.join(PUBLIC_DIR, 'CNAME');
@@ -159,7 +171,8 @@ const verifyDistDirectory = () => {
   const criticalFiles = [
     'index.html',
     'CNAME',
-    'questions/categories.json'
+    'questions/categories.json',
+    'game.json'
   ];
   
   let allValid = true;
@@ -186,6 +199,7 @@ const verifyAssets = () => {
   allValid = verifyCategoriesFile() && allValid;
   allValid = verifyLanguageDirectories() && allValid;
   allValid = verifyPWAIcons() && allValid;
+  allValid = verifyGameJson() && allValid;
   allValid = verifyCNAME() && allValid;
   
   // Verify dist if requested
