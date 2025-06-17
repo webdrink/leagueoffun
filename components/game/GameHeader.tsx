@@ -12,9 +12,10 @@
  *  - React
  */
 import React from 'react';
+import { useGameStore } from '../../store/gameStore';
 
 interface GameHeaderProps {
-  title: string;
+  title?: string;
   onTitleClick?: () => void; // Add optional click handler prop
 }
 
@@ -27,6 +28,8 @@ interface GameHeaderProps {
  * @returns A styled header element containing the game title.
  */
 const GameHeader: React.FC<GameHeaderProps> = ({ title, onTitleClick }) => {
+  const storeTitle = useGameStore(state => state.gameInfo?.title);
+  const finalTitle = title ?? storeTitle ?? 'BlameGame';
   return (
     <div className="w-full flex justify-center">
       <div className="shadow-2xl rounded-2xl border-pink-200 px-8 py-6 max-w-2xl w-stretch flex justify-center items-center bg-white/70 backdrop-blur-md">
@@ -35,7 +38,7 @@ const GameHeader: React.FC<GameHeaderProps> = ({ title, onTitleClick }) => {
           style={{ fontFamily: "'Orbitron', 'Montserrat', 'Segoe UI', monospace" }}
           onClick={onTitleClick}
         >
-          {title}
+          {finalTitle}
         </h1>
       </div>
     </div>
