@@ -1,11 +1,5 @@
-/**
- * auto-translate.js
- * 
- * Automatic translation system for Blame Game
- * Analyzes categories and questions across all languages (de, en, es, fr)
- * Uses OpenAI API to translate missing content
- * Maintains consistency across all language files
- */
+// auto-translate.js — Full Script with Batching, Progress Tracking, Recovery,
+// Category Translation, Backup, Flags, and Error Handling
 
 const fs = require('fs');
 const path = require('path');
@@ -14,15 +8,18 @@ const https = require('https');
 // Configuration
 const CONFIG = {
   languages: ['de', 'en', 'es', 'fr'],
-  baseLanguage: 'de', // Primary language to translate from if available
-  fallbackLanguage: 'en', // Secondary language to translate from
-  openaiModel: 'gpt-4.1-nano', // Updated to the cheapest available model
+  baseLanguage: 'de',
+  fallbackLanguage: 'en',
+  openaiModel: 'gpt-4o-mini',
   maxTokens: 150,
   temperature: 0.3,
-  batchSize: 10, // Questions to translate per API call
+  batchSize: 10,
   backupEnabled: true,
-  dryRun: false, // Set to true to preview changes without applying them
-  checkOnly: false // Set to true to only check for missing translations without calling API
+  dryRun: false,
+  checkOnly: false,
+  saveProgress: true,
+  maxRetries: 3,
+  resultsFile: 'translation-results.json'
 };
 
 // Paths
@@ -30,493 +27,165 @@ const PROJECT_ROOT = path.join(__dirname, '..');
 const QUESTIONS_DIR = path.join(PROJECT_ROOT, 'public', 'questions');
 const CATEGORIES_FILE = path.join(QUESTIONS_DIR, 'categories.json');
 const BACKUP_DIR = path.join(PROJECT_ROOT, 'translation-backups');
+const RESULTS_FILE = path.join(PROJECT_ROOT, CONFIG.resultsFile);
 
-// Language mappings for better context
-const LANGUAGE_NAMES = {
-  de: 'German',
-  en: 'English', 
-  es: 'Spanish',
-  fr: 'French'
-};
+// Language names for prompts
+const LANGUAGE_NAMES = { de: 'German', en: 'English', es: 'Spanish', fr: 'French' };
 
-class TranslationService {
-  constructor(apiKey) {
-    this.apiKey = apiKey;
-    this.requestCount = 0;
-    this.maxRequestsPerMinute = 50; // Conservative rate limit
-    this.requestTimes = [];
-  }
-  async translateText(text, targetLanguage, context = '') {
-    // In check-only mode, skip actual translation API calls
-    if (CONFIG.checkOnly) {
-      return `[Translation needed for: ${text}]`;
-    }
-    
-    await this.checkRateLimit();
-    
-    const systemPrompt = `You are a professional translator specializing in party game content. 
-    Translate the following text to ${LANGUAGE_NAMES[targetLanguage]}. 
-    Keep the fun, casual tone appropriate for a party game called "Blame Game" where players assign funny scenarios to each other.
-    Maintain any humor and make it culturally appropriate for ${LANGUAGE_NAMES[targetLanguage]} speakers.
-    Context: ${context}
-    
-    Only return the translated text, nothing else.`;
+/*** Utility: parse CLI flags ***/
+process.argv.slice(2).forEach(arg => {
+  if (arg === '--dry-run') CONFIG.dryRun = true;
+  if (arg === '--check-only') { CONFIG.checkOnly = true; CONFIG.dryRun = true; }
+  if (arg === '--no-backup') CONFIG.backupEnabled = false;
+});
 
-    const payload = {
-      model: CONFIG.openaiModel,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: text }
-      ],
-      max_tokens: CONFIG.maxTokens,
-      temperature: CONFIG.temperature
-    };
-
-    return new Promise((resolve, reject) => {
-      const postData = JSON.stringify(payload);
-      
-      const options = {
-        hostname: 'api.openai.com',
-        port: 443,
-        path: '/v1/chat/completions',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Length': Buffer.byteLength(postData)
-        }
-      };
-
-      const req = https.request(options, (res) => {
-        let data = '';
-        res.on('data', (chunk) => data += chunk);
-        
-        res.on('end', () => {
-          try {
-            const response = JSON.parse(data);
-            if (response.error) {
-              reject(new Error(`OpenAI API Error: ${response.error.message}`));
-              return;
-            }
-            
-            const translatedText = response.choices?.[0]?.message?.content?.trim();
-            if (!translatedText) {
-              reject(new Error('Empty translation response'));
-              return;
-            }
-            
-            this.requestCount++;
-            this.requestTimes.push(Date.now());
-            resolve(translatedText);
-          } catch (error) {
-            reject(new Error(`Failed to parse OpenAI response: ${error.message}`));
-          }
-        });
-      });
-
-      req.on('error', (error) => {
-        reject(new Error(`Request failed: ${error.message}`));
-      });
-
-      req.write(postData);
-      req.end();
-    });
-  }
-
-  async checkRateLimit() {
-    const now = Date.now();
-    const oneMinuteAgo = now - 60000;
-    
-    // Remove requests older than 1 minute
-    this.requestTimes = this.requestTimes.filter(time => time > oneMinuteAgo);
-    
-    if (this.requestTimes.length >= this.maxRequestsPerMinute) {
-      const waitTime = this.requestTimes[0] + 60000 - now;
-      console.log(`Rate limit reached. Waiting ${Math.ceil(waitTime / 1000)} seconds...`);
-      await new Promise(resolve => setTimeout(resolve, waitTime));
-    }
-  }
-
-  async translateBatch(items, targetLanguage, context = '') {
-    const results = [];
-    for (const item of items) {
-      try {
-        const translated = await this.translateText(item.text, targetLanguage, context);
-        results.push({ ...item, translatedText: translated });
-        console.log(`✅ Translated: "${item.text}" -> "${translated}" (${targetLanguage})`);
-      } catch (error) {
-        console.error(`❌ Translation failed for "${item.text}": ${error.message}`);
-        results.push({ ...item, translatedText: null, error: error.message });
-      }
-    }
-    return results;
-  }
+/*** Backup Creator ***/
+function createBackup() {
+  if (!CONFIG.backupEnabled) return;
+  const ts = new Date().toISOString().replace(/[.:]/g, '-');
+  const dest = path.join(BACKUP_DIR, `backup-${ts}`);
+  fs.mkdirSync(dest, { recursive: true });
+  fs.cpSync(QUESTIONS_DIR, dest, { recursive: true });
+  console.log(`📁 Backup created at ${dest}`);
 }
 
-class CategoryAnalyzer {
+/*** Progress Tracker ***/
+class TranslationProgressTracker {
   constructor() {
-    this.categories = [];
-    this.languageFiles = {};
-    this.issues = [];
+    this.results = { startTime: new Date().toISOString(), totalTokensUsed: 0,
+      translationsCompleted: 0, errors: [], completedCategories: {},
+      translatedQuestions: {}, status: 'running' };
+    this.loadExisting();
   }
-
-  async loadCategories() {
-    try {
-      const categoriesData = fs.readFileSync(CATEGORIES_FILE, 'utf8');
-      this.categories = JSON.parse(categoriesData);
-      console.log(`📋 Loaded ${this.categories.length} categories`);
-    } catch (error) {
-      throw new Error(`Failed to load categories.json: ${error.message}`);
-    }
-  }
-
-  async analyzeCategoryFiles() {
-    console.log('🔍 Analyzing category files across languages...');
-    
-    for (const language of CONFIG.languages) {
-      const langDir = path.join(QUESTIONS_DIR, language);
-      this.languageFiles[language] = {};
-      
-      if (!fs.existsSync(langDir)) {
-        console.warn(`⚠️ Language directory missing: ${language}`);
-        this.issues.push(`Missing language directory: ${language}`);
-        continue;
-      }
-
-      // Check each category
-      for (const category of this.categories) {
-        const categoryFile = path.join(langDir, `${category.id}.json`);
-        
-        if (fs.existsSync(categoryFile)) {
-          try {
-            const fileData = fs.readFileSync(categoryFile, 'utf8');
-            this.languageFiles[language][category.id] = JSON.parse(fileData);
-            console.log(`✅ Loaded ${language}/${category.id}.json (${this.languageFiles[language][category.id].length} questions)`);
-          } catch (error) {
-            console.error(`❌ Failed to parse ${language}/${category.id}.json: ${error.message}`);
-            this.issues.push(`Invalid JSON in ${language}/${category.id}.json: ${error.message}`);
-          }
-        } else {
-          console.warn(`⚠️ Missing file: ${language}/${category.id}.json`);
-          this.issues.push(`Missing file: ${language}/${category.id}.json`);
-          this.languageFiles[language][category.id] = [];
+  loadExisting() {
+    if (!CONFIG.saveProgress) return;
+    if (fs.existsSync(RESULTS_FILE)) {
+      try {
+        const existing = JSON.parse(fs.readFileSync(RESULTS_FILE));
+        if (existing.status === 'running') {
+          console.log('📄 Resuming existing session');
+          Object.assign(this.results, existing);
         }
-      }
+      } catch(_){}
     }
   }
-
-  getMissingTranslations() {
-    const missing = {};
-    
-    for (const language of CONFIG.languages) {
-      missing[language] = {};
-      
-      for (const category of this.categories) {
-        missing[language][category.id] = [];
-        
-        // Get questions from base language
-        const baseQuestions = this.getQuestionsForCategory(category.id, CONFIG.baseLanguage) ||
-                             this.getQuestionsForCategory(category.id, CONFIG.fallbackLanguage) ||
-                             [];
-        
-        const currentQuestions = this.languageFiles[language]?.[category.id] || [];
-        const currentQuestionIds = new Set(currentQuestions.map(q => q.questionId));
-        
-        // Find missing questions
-        for (const baseQuestion of baseQuestions) {
-          if (!currentQuestionIds.has(baseQuestion.questionId)) {
-            missing[language][category.id].push(baseQuestion);
-          }
-        }
-      }
-    }
-    
-    return missing;
+  save() { if (!CONFIG.saveProgress) return;
+    fs.writeFileSync(RESULTS_FILE, JSON.stringify(this.results, null,2));
   }
-
-  getMissingCategories() {
-    const missing = {};
-    
-    for (const language of CONFIG.languages) {
-      missing[language] = [];
-      
-      for (const category of this.categories) {
-        if (!this.languageFiles[language]?.[category.id] || 
-            this.languageFiles[language][category.id].length === 0) {
-          missing[language].push(category.id);
-        }
-      }
-    }
-    
-    return missing;
+  markCategory(language, categoryId, count) {
+    this.results.completedCategories[language] = this.results.completedCategories[language] || {};
+    this.results.completedCategories[language][categoryId] = { completed: true, count, timestamp: new Date().toISOString() };
+    this.save();
   }
-
-  getQuestionsForCategory(categoryId, language) {
-    return this.languageFiles[language]?.[categoryId] || null;
+  addQuestion(language, categoryId, tokens) {
+    this.results.translationsCompleted++;
+    this.results.totalTokensUsed += tokens;
+    this.save();
   }
-
-  updateCategoriesJson(translatedCategories) {
-    // Update categories.json with new translations
-    const updatedCategories = [...this.categories];
-    
-    for (const [language, categoryTranslations] of Object.entries(translatedCategories)) {
-      for (const [categoryId, translation] of Object.entries(categoryTranslations)) {
-        const categoryIndex = updatedCategories.findIndex(c => c.id === categoryId);
-        if (categoryIndex !== -1) {
-          updatedCategories[categoryIndex][language] = translation;
-        }
-      }
-    }
-    
-    if (!CONFIG.dryRun) {
-      fs.writeFileSync(CATEGORIES_FILE, JSON.stringify(updatedCategories, null, 2));
-      console.log('✅ Updated categories.json');
-    }
-    
-    return updatedCategories;
+  addError(err, ctx) {
+    this.results.errors.push({ error: err.message, context: ctx, timestamp: new Date().toISOString() });
+    this.save();
+  }
+  complete(status='completed') {
+    this.results.status = status;
+    this.results.endTime = new Date().toISOString();
+    this.save();
+    console.log(`\n📊 Completed: ${this.results.translationsCompleted} translations, ~${this.results.totalTokensUsed} tokens, ${this.results.errors.length} errors`);
   }
 }
 
-class TranslationManager {
-  constructor(apiKey) {
-    this.translationService = new TranslationService(apiKey);
-    this.analyzer = new CategoryAnalyzer();
-    this.backupCreated = false;
+/*** Translation Service ***/
+class TranslationService {
+  constructor(key) { this.apiKey = key; this.times = []; }
+  async rateLimit() {
+    const now=Date.now(); this.times=this.times.filter(t=>t>now-60000);
+    if(this.times.length>=30) await new Promise(r=>setTimeout(r,60000-(now-this.times[0])));
   }
-
-  async createBackup() {
-    if (!CONFIG.backupEnabled || this.backupCreated) return;
-    
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const backupPath = path.join(BACKUP_DIR, `backup-${timestamp}`);
-    
-    if (!fs.existsSync(BACKUP_DIR)) {
-      fs.mkdirSync(BACKUP_DIR, { recursive: true });
-    }
-    
-    // Copy entire questions directory
-    const copyDir = (src, dest) => {
-      if (!fs.existsSync(dest)) {
-        fs.mkdirSync(dest, { recursive: true });
-      }
-      
-      const items = fs.readdirSync(src);
-      for (const item of items) {
-        const srcPath = path.join(src, item);
-        const destPath = path.join(dest, item);
-        
-        if (fs.statSync(srcPath).isDirectory()) {
-          copyDir(srcPath, destPath);
-        } else {
-          fs.copyFileSync(srcPath, destPath);
-        }
-      }
-    };
-    
-    copyDir(QUESTIONS_DIR, backupPath);
-    this.backupCreated = true;
-    console.log(`📁 Backup created: ${backupPath}`);
+  async translateBatch(items, lang, ctx) {
+    if (CONFIG.checkOnly) return items.map(i=>({...i, translatedText:`[? ${i.text}]`}));
+    const numbered = items.map((i,j)=>`${j+1}. "${i.text}"`).join('\n');
+    const prompt = `You are a translator. Translate to ${LANGUAGE_NAMES[lang]}. Context: ${ctx}\nReturn numbered translations.`;
+    const payload={model:CONFIG.openaiModel,messages:[{role:'system',content:prompt},{role:'user',content:numbered}],max_tokens:CONFIG.maxTokens*items.length,temperature:CONFIG.temperature};
+    await this.rateLimit(); this.times.push(Date.now());
+    const res=await this.callAPI(payload);
+    const lines=res.split('\n').filter(l=>/^\d+\./.test(l)).map(l=>l.replace(/^\d+\.\s*/,''));
+    return items.map((i,j)=>({...i, translatedText: lines[j]?.trim()||''}));
   }
+  callAPI(payload){return new Promise((res,rej)=>{const d=JSON.stringify(payload);
+    const r=https.request({hostname:'api.openai.com',port:443,path:'/v1/chat/completions',method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${this.apiKey}`,'Content-Length':Buffer.byteLength(d)}}, resp=>{let b='';resp.on('data',c=>b+=c);resp.on('end',()=>{try{const p=JSON.parse(b);if(p.error) return rej(new Error(p.error.message));res(p.choices[0].message.content);}catch(e){rej(e);}});});r.on('error',rej);r.write(d);r.end();});}
+}
 
-  async run() {
-    try {
-      console.log('🚀 Starting automatic translation process...');
-      
-      // Create backup
-      await this.createBackup();
-      
-      // Load and analyze
-      await this.analyzer.loadCategories();
-      await this.analyzer.analyzeCategoryFiles();
-      
-      // Check for missing categories in categories.json
-      await this.translateMissingCategoryNames();
-      
-      // Translate missing questions
-      await this.translateMissingQuestions();
-      
-      console.log('✅ Translation process completed successfully!');
-      
-      if (this.analyzer.issues.length > 0) {
-        console.log('\n⚠️ Issues encountered:');
-        this.analyzer.issues.forEach(issue => console.log(`  - ${issue}`));
-      }
-      
-    } catch (error) {
-      console.error('❌ Translation process failed:', error.message);
-      throw error;
-    }
+/*** Category Analyzer ***/
+class CategoryAnalyzer {
+  constructor(){this.categories=[];this.files={}};
+  loadCats(){this.categories=JSON.parse(fs.readFileSync(CATEGORIES_FILE));}
+  loadFiles(){for(const l of CONFIG.languages){this.files[l]={};
+      for(const c of this.categories){const f=path.join(QUESTIONS_DIR,l,`${c.id}.json`);
+        this.files[l][c.id]=fs.existsSync(f)?JSON.parse(fs.readFileSync(f)) : [];
+      }}
   }
-
-  async translateMissingCategoryNames() {
-    console.log('🏷️ Checking category name translations...');
-    
-    const missingCategoryTranslations = {};
-    
-    for (const category of this.analyzer.categories) {
-      for (const language of CONFIG.languages) {
-        if (!category[language] || category[language].trim() === '') {
-          if (!missingCategoryTranslations[language]) {
-            missingCategoryTranslations[language] = {};
-          }
-          
-          // Find source text from base or fallback language
-          const sourceText = category[CONFIG.baseLanguage] || category[CONFIG.fallbackLanguage];
-          if (sourceText) {
-            missingCategoryTranslations[language][category.id] = sourceText;
-          }
-        }
-      }
-    }
-    
-    // Translate missing category names
-    for (const [language, categories] of Object.entries(missingCategoryTranslations)) {
-      console.log(`🌍 Translating category names to ${LANGUAGE_NAMES[language]}...`);
-      
-      for (const [categoryId, sourceText] of Object.entries(categories)) {
-        try {
-          const translation = await this.translationService.translateText(
-            sourceText, 
-            language, 
-            'Category name for a party game'
-          );
-          
-          if (!CONFIG.dryRun) {
-            const categoryIndex = this.analyzer.categories.findIndex(c => c.id === categoryId);
-            if (categoryIndex !== -1) {
-              this.analyzer.categories[categoryIndex][language] = translation;
-            }
-          }
-          
-          console.log(`✅ Category "${categoryId}": "${sourceText}" -> "${translation}" (${language})`);
-        } catch (error) {
-          console.error(`❌ Failed to translate category "${categoryId}" to ${language}: ${error.message}`);
-        }
-      }
-    }
-    
-    // Update categories.json
-    if (!CONFIG.dryRun) {
-      fs.writeFileSync(CATEGORIES_FILE, JSON.stringify(this.analyzer.categories, null, 2));
-      console.log('✅ Updated categories.json with new translations');
-    }
+  getMissing(){const miss={};
+    for(const l of CONFIG.languages){ if(l===CONFIG.baseLanguage) continue; miss[l]={};
+      for(const c of this.categories){const base=this.files[CONFIG.baseLanguage][c.id]||[];
+        const exist=new Set((this.files[l][c.id]||[]).map(q=>q.questionId));
+        miss[l][c.id]=base.filter(q=>!exist.has(q.questionId));
+      }}return miss;
   }
-
-  async translateMissingQuestions() {
-    console.log('❓ Analyzing missing question translations...');
-    
-    const missingTranslations = this.analyzer.getMissingTranslations();
-    let totalMissing = 0;
-    
-    // Count total missing translations
-    for (const [language, categories] of Object.entries(missingTranslations)) {
-      for (const [categoryId, questions] of Object.entries(categories)) {
-        totalMissing += questions.length;
+  // translate category names
+  async translateCategoryNames(tran){for(const c of this.categories){
+      for(const l of CONFIG.languages){if(!c[l]){
+        try{const t=await tran.translateBatch([{text:c[CONFIG.baseLanguage],questionId: c.id}],l,'Category name');c[l]=t[0].translatedText;}catch{} }
       }
     }
-    
-    if (totalMissing === 0) {
-      console.log('✅ All translations are up to date!');
-      return;
+    if(!CONFIG.dryRun)fs.writeFileSync(CATEGORIES_FILE,JSON.stringify(this.categories,null,2));
+  }
+}
+
+/*** Main ***/
+async function main(){
+  const key=process.env.OPENAI_API_KEY; if(!key) throw new Error('API key missing');
+  if(!CONFIG.dryRun) createBackup();
+  const serv=new TranslationService(key),ana=new CategoryAnalyzer(),trk=new TranslationProgressTracker();
+  ana.loadCats(); ana.loadFiles();
+
+  // translate category names if needed
+  await ana.translateCategoryNames(serv);
+  const missing=ana.getMissing();
+  
+  // In check-only mode, just report and exit with appropriate code
+  if(CONFIG.checkOnly){
+    let totalMissing=0;
+    for(const [lang,cats] of Object.entries(missing)){
+      for(const [catId,items] of Object.entries(cats)){
+        totalMissing+=items.length;
+      }
     }
-    
     console.log(`📊 Found ${totalMissing} missing translations`);
-    
-    // Process each language
-    for (const [language, categories] of Object.entries(missingTranslations)) {
-      if (language === CONFIG.baseLanguage) continue; // Skip base language
-      
-      console.log(`\n🌍 Processing ${LANGUAGE_NAMES[language]}...`);
-      
-      for (const [categoryId, missingQuestions] of Object.entries(categories)) {
-        if (missingQuestions.length === 0) continue;
-        
-        console.log(`  📂 Category: ${categoryId} (${missingQuestions.length} missing)`);
-        
-        // Translate questions in batches
-        const batches = [];
-        for (let i = 0; i < missingQuestions.length; i += CONFIG.batchSize) {
-          batches.push(missingQuestions.slice(i, i + CONFIG.batchSize));
-        }
-        
-        const translatedQuestions = [];
-        for (const batch of batches) {
-          const results = await this.translationService.translateBatch(
-            batch, 
-            language, 
-            `Questions for "${categoryId}" category in a party game`
-          );
-          
-          for (const result of results) {
-            if (result.translatedText) {
-              translatedQuestions.push({
-                questionId: result.questionId,
-                text: result.translatedText,
-                category: categoryId
-              });
-            }
-          }
-        }
-        
-        // Update language file
-        if (translatedQuestions.length > 0 && !CONFIG.dryRun) {
-          const langDir = path.join(QUESTIONS_DIR, language);
-          if (!fs.existsSync(langDir)) {
-            fs.mkdirSync(langDir, { recursive: true });
-          }
-          
-          const categoryFile = path.join(langDir, `${categoryId}.json`);
-          const existingQuestions = this.analyzer.languageFiles[language]?.[categoryId] || [];
-          const updatedQuestions = [...existingQuestions, ...translatedQuestions];
-          
-          fs.writeFileSync(categoryFile, JSON.stringify(updatedQuestions, null, 2));
-          console.log(`    ✅ Added ${translatedQuestions.length} translations to ${language}/${categoryId}.json`);
-        }
+    process.exit(totalMissing > 0 ? 1 : 0);
+  }
+  
+  for(const [lang,cats] of Object.entries(missing)){
+    for(const [catId,items] of Object.entries(cats)){
+      if(trk.results.completedCategories[lang]?.[catId]?.completed) continue;
+      if(!items.length){ trk.markCategory(lang,catId,0); continue; }
+      console.log(`📂 ${lang}/${catId}: ${items.length}`);
+      const allTrans=[];
+      for(let i=0;i<items.length;i+=CONFIG.batchSize){ const batch=items.slice(i,i+CONFIG.batchSize);
+        try{ const trs=await serv.translateBatch(batch,lang,catId);
+          trs.forEach(()=>trk.addQuestion(lang,catId,CONFIG.maxTokens)); allTrans.push(...trs);        }catch(e){ console.warn(`⚠️ Translation failed for ${lang}/${catId}: ${e.message}`); trk.addError(e,`${lang}/${catId}`); }
       }
+      try{
+        const out=path.join(QUESTIONS_DIR,lang,`${catId}.json`);
+        if(!fs.existsSync(path.join(QUESTIONS_DIR,lang))) fs.mkdirSync(path.join(QUESTIONS_DIR,lang),{recursive:true});
+        const exist=fs.existsSync(out)?JSON.parse(fs.readFileSync(out)):[];
+        const existIds=new Set(exist.map(q=>q.questionId));
+        const newQs=allTrans.filter(q=>q.translatedText&&!existIds.has(q.questionId)).map(q=>({questionId:q.questionId,text:q.translatedText}));
+        const merged=[...exist,...newQs]; if(!CONFIG.dryRun) fs.writeFileSync(out,JSON.stringify(merged,null,2));
+        trk.markCategory(lang,catId,newQs.length);
+      }catch(e){ console.error(`❌ Failed to save ${lang}/${catId}: ${e.message}`); trk.addError(e,`save-${lang}/${catId}`); }
     }
   }
+  trk.complete(); console.log('🏁 Done');
 }
 
-// Main execution
-async function main() {
-  try {
-    // Check for API key
-    const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) {
-      console.error('❌ OPENAI_API_KEY environment variable is required');
-      console.log('Set it with: export OPENAI_API_KEY="your-api-key-here"');
-      process.exit(1);
-    }
-      // Parse command line arguments
-    if (process.argv.includes('--dry-run')) {
-      CONFIG.dryRun = true;
-      console.log('🔍 Running in DRY RUN mode - no changes will be made');
-    }
-    
-    if (process.argv.includes('--check-only')) {
-      CONFIG.checkOnly = true;
-      CONFIG.dryRun = true;
-      console.log('🔍 CHECK ONLY MODE: Only identifying missing translations, no API calls will be made');
-    }
-    
-    if (process.argv.includes('--no-backup')) {
-      CONFIG.backupEnabled = false;
-      console.log('⚠️ Backup disabled');
-    }
-    
-    // Run translation manager
-    const manager = new TranslationManager(apiKey);
-    await manager.run();
-    
-  } catch (error) {
-    console.error('💥 Fatal error:', error.message);
-    process.exit(1);
-  }
-}
-
-// Run if called directly
-if (require.main === module) {
-  main();
-}
-
-module.exports = { TranslationManager, CategoryAnalyzer, TranslationService };
+if(require.main===module) main().catch(e=>{console.error(e);process.exit(1)});

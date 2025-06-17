@@ -96,7 +96,7 @@ jobs:
       run: pnpm install --no-frozen-lockfile
       
     - name: 🔤 Run automatic translation
-      run: pnpm run translate --model gpt-4.1-nano
+      run: pnpm run translate
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       continue-on-error: false
@@ -115,12 +115,15 @@ jobs:
         
     - name: 📤 Commit and push translation updates
       if: steps.check-changes.outputs.changes == 'true'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
         git add public/questions/
         git commit -m "🌍 Auto-translate: Update translations [skip ci]"
-        git push
+        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+        git push origin HEAD:main
         
     - name: ✅ Validate translations after update
       run: pnpm run translate:validate

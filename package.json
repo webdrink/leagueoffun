@@ -17,6 +17,7 @@
     "translate:dry-run": "node scripts/auto-translate.js --dry-run",
     "translate:check": "node scripts/auto-translate.js --check-only",
     "translate:force": "node scripts/auto-translate.js --no-backup",
+    "translate:recover": "node scripts/recover-translations.js",
     "translate:validate": "node scripts/validate-translations.js"
   },
   "dependencies": {
