@@ -7,11 +7,18 @@
     "build": "vite build",
     "build:domain": "VITE_BASE_PATH=/ vite build && node scripts/fix-deployment-paths.js",
     "build:windows-domain": "set VITE_BASE_PATH=/ && vite build && node scripts/fix-deployment-paths.js",
+    "build:production": "npm run translate:check && npm run build && npm run verify-build",
+    "build:production-windows": "npm run translate:check && npm run build:windows-domain && npm run verify-build",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.tsx --max-warnings=9999",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "verify-assets": "node scripts/verify-assets.js",
-    "verify-build": "node scripts/verify-assets.js --verify-dist"
+    "verify-build": "node scripts/verify-assets.js --verify-dist",
+    "translate": "node scripts/auto-translate.js",
+    "translate:dry-run": "node scripts/auto-translate.js --dry-run",
+    "translate:check": "node scripts/auto-translate.js --dry-run",
+    "translate:force": "node scripts/auto-translate.js --no-backup",
+    "translate:validate": "node scripts/validate-translations.js"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.3.1",

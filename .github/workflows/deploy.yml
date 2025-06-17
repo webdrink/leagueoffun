@@ -1,9 +1,11 @@
-name: 🚀 Deploy Blame Game to GitHub Pages
+name: 🚀 Deploy Blame Game to GitHub Pages (DISABLED - Using translation-validation.yml)
 
 on:
-  push:
-    branches:
-      - main # Trigger deployment on push to the main branch
+  # Disabled to prevent conflicts with translation-validation.yml
+  workflow_dispatch: # Only allow manual trigger
+  # push:
+  #   branches:
+  #     - main # Trigger deployment on push to the main branch
 
 jobs:
   build-and-deploy:

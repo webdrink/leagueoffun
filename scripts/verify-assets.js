@@ -177,6 +177,163 @@ const verifyDistDirectory = () => {
   return allValid;
 };
 
+// Verify translation completeness across languages
+const verifyTranslations = () => {
+  console.log('\n🌍 Verifying translation completeness...');
+  
+  let allValid = true;
+  const issues = [];
+  
+  try {
+    // Load categories
+    const categoriesPath = path.join(QUESTIONS_DIR, 'categories.json');
+    const categoriesData = JSON.parse(fs.readFileSync(categoriesPath, 'utf8'));
+    
+    // Check category name translations
+    categoriesData.forEach(category => {
+      SUPPORTED_LANGUAGES.forEach(lang => {
+        if (!category[lang] || category[lang].trim() === '') {
+          issues.push(`Missing category name translation: ${category.id} (${lang})`);
+          allValid = false;
+        }
+      });
+    });
+    
+    // Check question file completeness
+    const questionCounts = {};
+    
+    SUPPORTED_LANGUAGES.forEach(lang => {
+      const langDir = path.join(QUESTIONS_DIR, lang);
+      questionCounts[lang] = {};
+      
+      if (dirExists(langDir)) {
+        categoriesData.forEach(category => {
+          const categoryFile = path.join(langDir, `${category.id}.json`);
+          if (fileExists(categoryFile)) {
+            try {
+              const questions = JSON.parse(fs.readFileSync(categoryFile, 'utf8'));
+              questionCounts[lang][category.id] = questions.length;
+              
+              // Validate question structure
+              questions.forEach((question, index) => {
+                if (!question.questionId) {
+                  issues.push(`Missing questionId in ${lang}/${category.id}.json at index ${index}`);
+                  allValid = false;
+                }
+                if (!question.text || question.text.trim() === '') {
+                  issues.push(`Empty question text in ${lang}/${category.id}.json at index ${index}`);
+                  allValid = false;
+                }
+                if (question.category !== category.id) {
+                  issues.push(`Category mismatch in ${lang}/${category.id}.json at index ${index}: expected "${category.id}", got "${question.category}"`);
+                  allValid = false;
+                }
+              });
+            } catch (error) {
+              issues.push(`Invalid JSON in ${lang}/${category.id}.json: ${error.message}`);
+              allValid = false;
+            }
+          } else {
+            questionCounts[lang][category.id] = 0;
+          }
+        });
+      }
+    });
+    
+    // Compare question counts across languages
+    const baseLanguage = 'de';
+    if (questionCounts[baseLanguage]) {
+      categoriesData.forEach(category => {
+        const baseCo = questionCounts[baseLanguage][category.id] || 0;
+        
+        SUPPORTED_LANGUAGES.forEach(lang => {
+          if (lang !== baseLanguage) {
+            const langCount = questionCounts[lang]?.[category.id] || 0;
+            const difference = Math.abs(baseCo - langCount);
+            
+            if (difference > 0) {
+              console.warn(`  ⚠️ Question count mismatch for ${category.id}: ${baseLanguage}=${baseCo}, ${lang}=${langCount} (diff: ${difference})`);
+            }
+          }
+        });
+      });
+    }
+    
+    // Report issues
+    if (issues.length > 0) {
+      console.error('\n❌ Translation issues found:');
+      issues.forEach(issue => console.error(`  - ${issue}`));
+    } else {
+      console.log('✅ All translations appear complete and valid');
+    }
+    
+  } catch (error) {
+    console.error(`❌ Error verifying translations: ${error.message}`);
+    allValid = false;
+  }
+  
+  return allValid;
+};
+
+// Verify question ID consistency across languages
+const verifyQuestionIdConsistency = () => {
+  console.log('\n🔍 Verifying question ID consistency...');
+  
+  let allValid = true;
+  
+  try {
+    const categoriesPath = path.join(QUESTIONS_DIR, 'categories.json');
+    const categoriesData = JSON.parse(fs.readFileSync(categoriesPath, 'utf8'));
+    
+    categoriesData.forEach(category => {
+      const questionIdsByLanguage = {};
+      
+      // Collect question IDs for each language
+      SUPPORTED_LANGUAGES.forEach(lang => {
+        const langDir = path.join(QUESTIONS_DIR, lang);
+        const categoryFile = path.join(langDir, `${category.id}.json`);
+        
+        if (fileExists(categoryFile)) {
+          try {
+            const questions = JSON.parse(fs.readFileSync(categoryFile, 'utf8'));
+            questionIdsByLanguage[lang] = new Set(questions.map(q => q.questionId));
+          } catch (error) {
+            console.error(`  ❌ Error reading ${lang}/${category.id}.json: ${error.message}`);
+            allValid = false;
+          }
+        } else {
+          questionIdsByLanguage[lang] = new Set();
+        }
+      });
+      
+      // Find all unique question IDs
+      const allQuestionIds = new Set();
+      Object.values(questionIdsByLanguage).forEach(ids => {
+        ids.forEach(id => allQuestionIds.add(id));
+      });
+      
+      // Check for missing translations
+      allQuestionIds.forEach(questionId => {
+        const missingLanguages = SUPPORTED_LANGUAGES.filter(lang => 
+          !questionIdsByLanguage[lang].has(questionId)
+        );
+        
+        if (missingLanguages.length > 0) {
+          console.warn(`  ⚠️ Question "${questionId}" in category "${category.id}" missing in: ${missingLanguages.join(', ')}`);
+        }
+      });
+    });
+    
+    console.log('✅ Question ID consistency check completed');
+    
+  } catch (error) {
+    console.error(`❌ Error verifying question ID consistency: ${error.message}`);
+    allValid = false;
+  }
+  
+  return allValid;
+};
+
 // Main verification function
 const verifyAssets = () => {
   console.log('Verifying static assets...');
@@ -192,6 +349,10 @@ const verifyAssets = () => {
   if (verifyDist) {
     allValid = verifyDistDirectory() && allValid;
   }
+  
+  // Verify translations
+  allValid = verifyTranslations() && allValid;
+  allValid = verifyQuestionIdConsistency() && allValid;
   
   if (allValid) {
     console.log('\n✅ All critical assets verified successfully!');
