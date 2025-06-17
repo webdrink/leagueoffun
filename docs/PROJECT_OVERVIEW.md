@@ -12,7 +12,7 @@ BlameGame is a party game built with **React**, **TypeScript**, **Tailwind CSS**
 - **components/game/** – Screens and logic specific to gameplay.
 - **components/settings/** – Configuration screens including language selection.
 - **hooks/** – Custom hooks handling state and data fetching.
-- **context/GameContext** – (currently empty) placeholder for global state.
+- **store/** – Shared Zustand store for global game state.
 - **lib/** – Utility functions and constants.
 
 ## Architecture Sketch

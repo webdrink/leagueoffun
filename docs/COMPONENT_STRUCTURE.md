@@ -36,6 +36,8 @@ The `components/core/` directory contains **reusable UI components** that are no
 - `Slider.tsx` - Range input slider
 - `Switch.tsx` - Toggle switch input
 - `VolumeControl.tsx` - Audio volume control
+- `DataLoader.tsx` - Generic loader using render props
+- `GameLayout.tsx` - Provides `GameHeader`, `GameBody`, and `GameFooter` shells
 
 ## 3. Game Components
 

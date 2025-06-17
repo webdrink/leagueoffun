@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import useLocalStorage from './useLocalStorage';
 import { GameSettings } from '../types';
 import { initialGameSettings } from '../constants';
+import { useGameStore } from '../store/gameStore';
 
 /**
  * Custom React hook for managing game settings using local storage.
@@ -14,21 +15,29 @@ import { initialGameSettings } from '../constants';
  * Uses the `useLocalStorage` hook to persist settings under the key `'blamegame-settings'`.
  */
 export const useGameSettings = () => {
-  const [gameSettings, setGameSettings] = useLocalStorage<GameSettings>(
-    'blamegame-settings', 
+  const storeGameSettings = useGameStore(state => state.gameSettings);
+  const setStoreGameSettings = useGameStore(state => state.setGameSettings);
+  const updateStoreGameSettings = useGameStore(state => state.updateGameSettings);
+
+  const [persistedSettings, setPersistedSettings] = useLocalStorage<GameSettings>(
+    'blamegame-settings',
     initialGameSettings
   );
 
-  const updateGameSettings = (newSettings: Partial<GameSettings>) => {
-    setGameSettings({
-      ...gameSettings,
-      ...newSettings
-    });
-  };
+  // Initialize store from persisted settings on mount
+  useEffect(() => {
+    setStoreGameSettings(persistedSettings);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Persist to localStorage whenever store settings change
+  useEffect(() => {
+    setPersistedSettings(storeGameSettings);
+  }, [storeGameSettings, setPersistedSettings]);
 
   return {
-    gameSettings,
-    setGameSettings,
-    updateGameSettings
+    gameSettings: storeGameSettings,
+    setGameSettings: setStoreGameSettings,
+    updateGameSettings: updateStoreGameSettings,
   };
 };
