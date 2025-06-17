@@ -253,5 +253,61 @@
     "questionId": "at_work_sample_question_2",
     "text": "Sample question 2 for at_work in de",
     "category": "at_work"
+  },
+  {
+    "questionId": "who_lives_only_for_after_work",
+    "text": "\"Qui vit seulement pour la fin de la journée de travail ?\""
+  },
+  {
+    "questionId": "who_is_walking_todo_list",
+    "text": "\"Qui est la liste de tâches ambulante ?\""
+  },
+  {
+    "questionId": "who_constantly_forgets_deadlines",
+    "text": "\"Qui oublie constamment les délais ?\""
+  },
+  {
+    "questionId": "who_brings_best_snacks",
+    "text": "\"Qui apporte les meilleures collations ?\""
+  },
+  {
+    "questionId": "who_always_brings_cake",
+    "text": "\"Qui apporte toujours des gâteaux ?\""
+  },
+  {
+    "questionId": "who_always_forgets_password",
+    "text": "\"Qui oublie constamment le mot de passe ?\""
+  },
+  {
+    "questionId": "who_tells_best_jokes",
+    "text": "\"Qui fait les meilleures blagues au bureau ?\""
+  },
+  {
+    "questionId": "who_is_always_late_to_meetings",
+    "text": "\"Qui est toujours en retard à la réunion ?\""
+  },
+  {
+    "questionId": "who_has_most_colorful_calendar",
+    "text": "\"Qui a le calendrier le plus coloré ?\""
+  },
+  {
+    "questionId": "who_writes_most_creative_emails",
+    "text": "\"Qui écrit les e-mails les plus créatifs ?\""
+  },
+  {
+    "questionId": "who_takes_longest_coffee_breaks",
+    "text": "\"Qui fait les pauses café les plus longues ?\""
+  },
+  {
+    "questionId": "who_always_has_plan_b",
+    "text": "\"Qui a toujours un plan B ?\""
+  },
+  {
+    "questionId": "who_brings_most_ideas",
+    "text": "\"Qui apporte le plus d'idées ?\""
+  },
+  {
+    "questionId": "who_is_secret_boss",
+    "text": "\"Qui est le chef secret ?\""
   }
 ]

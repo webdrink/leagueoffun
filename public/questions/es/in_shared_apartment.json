@@ -18,5 +18,81 @@
     "questionId": "who_is_messiest_roommate",
     "text": "¿Quién es el compañero más desordenado?",
     "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_is_loudest_at_night",
+    "text": "\"¿Quién es el más ruidoso por la noche?\""
+  },
+  {
+    "questionId": "who_never_buys_toilet_paper",
+    "text": "\"¿Quién nunca compra papel higiénico?\""
+  },
+  {
+    "questionId": "who_leaves_dirty_laundry_everywhere",
+    "text": "\"¿Quién deja la ropa sucia por todas partes?\""
+  },
+  {
+    "questionId": "who_brings_too_many_guests_over",
+    "text": "\"¿Quién trae demasiados invitados?\""
+  },
+  {
+    "questionId": "who_is_cleanest_roommate",
+    "text": "\"¿Quién es el compañero de piso más ordenado?\""
+  },
+  {
+    "questionId": "who_pays_bills_late",
+    "text": "\"¿Quién paga las facturas tarde?\""
+  },
+  {
+    "questionId": "who_leaves_empty_containers_in_fridge",
+    "text": "\"¿Quién deja envases vacíos en el refrigerador?\""
+  },
+  {
+    "questionId": "who_borrows_without_asking",
+    "text": "\"¿Quién toma cosas prestadas sin preguntar?\""
+  },
+  {
+    "questionId": "who_organizes_apartment_parties",
+    "text": "\"¿Quién organiza fiestas en el apartamento?\""
+  },
+  {
+    "questionId": "who_steals_roommates_milk",
+    "text": "\"¿Quién siempre roba la leche de los compañeros de piso?\""
+  },
+  {
+    "questionId": "who_has_left_dishes_for_science",
+    "text": "\"¿Quién deja los platos para hacer 'investigación sobre moho'?\""
+  },
+  {
+    "questionId": "who_organises_house_meetings_for_fun",
+    "text": "\"¿Quién organiza voluntariamente plenos de la casa compartida?\""
+  },
+  {
+    "questionId": "who_labels_everything_with_name",
+    "text": "\"¿Quién etiqueta todo con su nombre?\""
+  },
+  {
+    "questionId": "who_plays_loud_music_at_2am",
+    "text": "\"¿Quién escucha música alta a las 2 de la madrugada?\""
+  },
+  {
+    "questionId": "who_has_plants_take_over_livingroom",
+    "text": "\"¿Quién convierte la sala de estar en una selva?\""
+  },
+  {
+    "questionId": "who_invites_randoms_to_crash_on_couch",
+    "text": "\"¿Quién deja constantemente a extraños dormir en el sofá?\""
+  },
+  {
+    "questionId": "who_fails_to_take_out_trash_on_turn",
+    "text": "\"¿Quién siempre olvida su turno de basura?\""
+  },
+  {
+    "questionId": "who_turns_bathroom_into_spa",
+    "text": "\"¿Quién convierte el baño en un spa de día?\""
+  },
+  {
+    "questionId": "who_has_emergency_chocolate_stash",
+    "text": "\"¿Quién tiene un suministro secreto de chocolate?\""
   }
 ]

@@ -233,5 +233,105 @@
     "questionId": "who_studies_night_before_exam",
     "text": "Who studies the night before the exam?",
     "category": "at_school"
+  },
+  {
+    "questionId": "wer_ist_der_klassenstreber",
+    "text": "\"Who is the class nerd?\""
+  },
+  {
+    "questionId": "wer_ist_am_besten_in_biologie",
+    "text": "\"Who is the best in biology?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbester_in_sport",
+    "text": "\"Who is the top student in sports?\""
+  },
+  {
+    "questionId": "wer_ist_am_besten_in_chemie",
+    "text": "\"Who is the best in chemistry?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_kunst",
+    "text": "\"Who is the top student in art?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_musik",
+    "text": "\"Who is the top student in music?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_physik",
+    "text": "\"Who is the top student in physics?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_informatik",
+    "text": "\"Who is the top student in computer science?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_gespickt",
+    "text": "\"Who cheated the most in school?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_geschummelt",
+    "text": "\"Who has been the most dishonest in school?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_geschlafen",
+    "text": "\"Who slept the most in school?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_gefehlt",
+    "text": "\"Who missed the most school?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_gelacht",
+    "text": "\"Who laughed the most in school?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_geweint",
+    "text": "\"Who cried the most in school?\""
+  },
+  {
+    "questionId": "wer_war_eher_der_lehrer_als_der_schuler",
+    "text": "\"Who was more of a teacher than a student?\""
+  },
+  {
+    "questionId": "wem_hat_die_schule_spass_gemacht",
+    "text": "\"Who enjoyed school?\""
+  },
+  {
+    "questionId": "wer_hat_am_haufigsten_geschummelt",
+    "text": "\"Who cheated the most?\""
+  },
+  {
+    "questionId": "wer_hatte_den_schlimmsten_sitznachbarn",
+    "text": "\"Who had the worst seat neighbor?\""
+  },
+  {
+    "questionId": "wer_war_heimlich_verliebt_in_eine_lehrperson",
+    "text": "\"Who was secretly in love with a teacher?\""
+  },
+  {
+    "questionId": "wer_war_klassensprecherin_aus_versehen",
+    "text": "\"Who accidentally became class representative?\""
+  },
+  {
+    "questionId": "wer_hat_die_besten_ausreden_fur_nicht_gemachte_hau",
+    "text": "\"Who has the best excuses for not doing homework?\""
+  },
+  {
+    "questionId": "wer_war_der_pausenclown",
+    "text": "\"Who was the class clown?\""
+  },
+  {
+    "questionId": "wer_wurde_am_haufigsten_erwischt",
+    "text": "\"Who got caught the most often?\""
+  },
+  {
+    "questionId": "wer_hatte_den_hasslichsten_turnbeutel",
+    "text": "\"Who had the ugliest gym bag?\""
+  },
+  {
+    "questionId": "wer_war_immer_vorbereitet",
+    "text": "\"Who was always prepared?\""
   }
 ]

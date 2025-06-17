@@ -193,5 +193,65 @@
     "questionId": "who_would_forget_party_date",
     "text": "Wer würde am ehesten den Tag vergessen, an dem die Party stattfindet?",
     "category": "party"
+  },
+  {
+    "questionId": "dance_on_table",
+    "text": "\"Qui serait le plus susceptible de danser sur une table ?\""
+  },
+  {
+    "questionId": "karaoke_queen",
+    "text": "\"Qui serait le plus susceptible d'impressionner tout le monde au karaoke ?\""
+  },
+  {
+    "questionId": "party_planner",
+    "text": "\"Qui organiserait la meilleure fête ?\""
+  },
+  {
+    "questionId": "first_leave",
+    "text": "\"Qui serait le premier à quitter la fête ?\""
+  },
+  {
+    "questionId": "last_standing",
+    "text": "\"Qui serait le dernier à rester éveillé ?\""
+  },
+  {
+    "questionId": "who_requests_free_bird_at_club",
+    "text": "\"Qui demanderait 'Free Bird' au club ?\""
+  },
+  {
+    "questionId": "who_spills_first_drink",
+    "text": "\"Qui renverse le premier verre ?\""
+  },
+  {
+    "questionId": "who_thinks_shots_are_hydration",
+    "text": "\"Qui prend des shots pour s'hydrater ?\""
+  },
+  {
+    "questionId": "who_starts_karaoke_without_mic",
+    "text": "\"Qui commence le karaoke sans micro ?\""
+  },
+  {
+    "questionId": "who_makes_toast_every_15_minutes",
+    "text": "\"Qui porte un toast toutes les 15 minutes ?\""
+  },
+  {
+    "questionId": "who_takes_over_photobooth",
+    "text": "\"Qui bloque la photobox tout seul ?\""
+  },
+  {
+    "questionId": "who_loses_phone_in_sofa",
+    "text": "\"Qui perd son téléphone dans le canapé ?\""
+  },
+  {
+    "questionId": "who_crashes_vip_area_uninvited",
+    "text": "\"Qui se faufile dans la zone VIP ?\""
+  },
+  {
+    "questionId": "who_does_splits_on_dancefloor",
+    "text": "\"Qui fait le grand écart sur la piste de danse ?\""
+  },
+  {
+    "questionId": "who_forgets_to_eat_before_drinking",
+    "text": "\"Qui oublie de manger avant de faire la fête ?\""
   }
 ]

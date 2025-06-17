@@ -18,5 +18,61 @@
     "questionId": "who_forgets_names_immediately",
     "text": "¿Quién olvida los nombres inmediatamente?",
     "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_hides_in_corner_at_parties",
+    "text": "\"¿Quién se esconde en la esquina en las fiestas?\""
+  },
+  {
+    "questionId": "who_pretends_to_know_people",
+    "text": "\"¿Quién finge conocer a la gente?\""
+  },
+  {
+    "questionId": "who_leaves_without_saying_goodbye",
+    "text": "\"¿Quién se va sin despedirse?\""
+  },
+  {
+    "questionId": "who_makes_friends_with_strangers",
+    "text": "\"¿Quién se hace amigo de extraños?\""
+  },
+  {
+    "questionId": "who_introduces_themselves_with_fake_job",
+    "text": "\"¿Quién se presenta con un trabajo falso?\""
+  },
+  {
+    "questionId": "who_collects_strangers_instagram_handles",
+    "text": "\"¿Quién recoge nombres de usuario de Instagram de extraños?\""
+  },
+  {
+    "questionId": "who_dances_with_coat_still_on",
+    "text": "\"¿Quién baila con el abrigo puesto?\""
+  },
+  {
+    "questionId": "who_becomes_dj_using_phone_playlist",
+    "text": "\"¿Quién toma el control del equipo de música con su lista de reproducción del móvil?\""
+  },
+  {
+    "questionId": "who_forgets_names_after_2_seconds",
+    "text": "\"¿Quién olvida los nombres después de dos segundos?\""
+  },
+  {
+    "questionId": "who_trades_shoes_with_random_person",
+    "text": "\"¿Quién intercambia zapatos con una persona desconocida?\""
+  },
+  {
+    "questionId": "who_tells_same_story_multiple_times",
+    "text": "\"¿Quién cuenta la misma historia varias veces?\""
+  },
+  {
+    "questionId": "who_joins_group_photos_uninvited",
+    "text": "\"¿Quién salta sin ser invitado en las fotos de grupo?\""
+  },
+  {
+    "questionId": "who_becomes_instant_therapist_for_stranger",
+    "text": "\"¿Quién se convierte espontáneamente en terapeuta para extraños?\""
+  },
+  {
+    "questionId": "who_leaves_with_wrong_jacket",
+    "text": "\"¿Quién se va a casa al final con la chaqueta equivocada?\""
   }
 ]

@@ -213,5 +213,109 @@
     "questionId": "at_school_sample_question_2",
     "text": "Pregunta de ejemplo 2 para at_school en es",
     "category": "at_school"
+  },
+  {
+    "questionId": "wer_ist_der_klassenstreber",
+    "text": "\"¿Quién es el empollón de la clase?\""
+  },
+  {
+    "questionId": "wer_ist_am_besten_in_biologie",
+    "text": "\"¿Quién es el mejor en biología?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbester_in_sport",
+    "text": "\"¿Quién es el mejor de la clase en deportes?\""
+  },
+  {
+    "questionId": "wer_ist_am_besten_in_chemie",
+    "text": "\"¿Quién es el mejor en química?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_kunst",
+    "text": "\"¿Quién es el mejor de la clase en arte?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_musik",
+    "text": "\"¿Quién es el mejor de la clase en música?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_physik",
+    "text": "\"¿Quién es el mejor de la clase en física?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_informatik",
+    "text": "\"¿Quién es el mejor de la clase en informática?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_gespickt",
+    "text": "\"¿Quién ha copiado más en la escuela?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_geschummelt",
+    "text": "\"¿Quién ha hecho trampa más en la escuela?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_geschlafen",
+    "text": "\"¿Quién ha dormido más en la escuela?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_gefehlt",
+    "text": "\"¿Quién ha faltado más en la escuela?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_gelacht",
+    "text": "\"¿Quién ha reído más en la escuela?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_geweint",
+    "text": "\"¿Quién ha llorado más en la escuela?\""
+  },
+  {
+    "questionId": "wer_war_eher_der_lehrer_als_der_schuler",
+    "text": "\"¿Quién era más el profesor que el alumno?\""
+  },
+  {
+    "questionId": "wem_hat_die_schule_spass_gemacht",
+    "text": "\"¿A quién le divirtió la escuela?\""
+  },
+  {
+    "questionId": "wer_hat_am_haufigsten_geschummelt",
+    "text": "\"¿Quién hizo trampa con más frecuencia?\""
+  },
+  {
+    "questionId": "wer_hatte_den_schlimmsten_sitznachbarn",
+    "text": "\"¿Quién tuvo al peor compañero de asiento?\""
+  },
+  {
+    "questionId": "wer_war_heimlich_verliebt_in_eine_lehrperson",
+    "text": "\"¿Quién estaba secretamente enamorado de un profesor?\""
+  },
+  {
+    "questionId": "wer_war_klassensprecherin_aus_versehen",
+    "text": "\"¿Quién fue el representante de clase por accidente?\""
+  },
+  {
+    "questionId": "wer_hat_die_besten_ausreden_fur_nicht_gemachte_hau",
+    "text": "\"¿Quién tiene las mejores excusas para no haber hecho los deberes?\""
+  },
+  {
+    "questionId": "wer_war_der_pausenclown",
+    "text": "\"¿Quién era el payaso del recreo?\""
+  },
+  {
+    "questionId": "wer_wurde_am_haufigsten_erwischt",
+    "text": "\"¿Quién fue el que más veces fue atrapado?\""
+  },
+  {
+    "questionId": "wer_hatte_den_hasslichsten_turnbeutel",
+    "text": "\"¿Quién tenía la mochila de gimnasia más fea?\""
+  },
+  {
+    "questionId": "wer_war_immer_vorbereitet",
+    "text": "\"¿Quién siempre estaba preparado?\""
+  },
+  {
+    "questionId": "who_skips_most_classes",
+    "text": "\"¿Quién falta a más clases?\""
   }
 ]

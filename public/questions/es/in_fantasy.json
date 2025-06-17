@@ -33,5 +33,93 @@
     "questionId": "in_fantasy_sample_question_2",
     "text": "Pregunta de ejemplo 2 para in_fantasy en es",
     "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_become_hero_in_fantasy",
+    "text": "\"¿Quién se convertiría en un héroe en un mundo de fantasía?\""
+  },
+  {
+    "questionId": "who_would_find_magic_items",
+    "text": "\"¿Quién encontraría objetos mágicos?\""
+  },
+  {
+    "questionId": "who_would_have_fantasy_pets",
+    "text": "\"¿Quién tendría criaturas fantásticas?\""
+  },
+  {
+    "questionId": "who_would_create_fantasy_world",
+    "text": "\"¿Quién crearía un mundo de fantasía?\""
+  },
+  {
+    "questionId": "who_would_become_king_or_queen",
+    "text": "\"¿Quién se convertiría en rey o reina?\""
+  },
+  {
+    "questionId": "who_would_have_fantasy_powers",
+    "text": "\"¿Quién tendría habilidades fantásticas?\""
+  },
+  {
+    "questionId": "who_would_be_fantasy_sidekick",
+    "text": "\"¿Quién sería el compañero en un mundo de fantasía?\""
+  },
+  {
+    "questionId": "who_would_have_fantasy_quests",
+    "text": "\"¿Quién tendría misiones fantásticas?\""
+  },
+  {
+    "questionId": "who_would_be_fantasy_guide",
+    "text": "\"¿Quién sería el líder en un mundo de fantasía?\""
+  },
+  {
+    "questionId": "who_would_find_hidden_treasures",
+    "text": "\"¿Quién encontraría tesoros ocultos?\""
+  },
+  {
+    "questionId": "who_would_be_fantasy_villain",
+    "text": "\"¿Quién sería el villano en un mundo de fantasía?\""
+  },
+  {
+    "questionId": "who_would_have_fantasy_adventures",
+    "text": "\"¿Quién tendría las mejores aventuras de fantasía?\""
+  },
+  {
+    "questionId": "who_imagines_being_a_superhero",
+    "text": "\"¿Quién se imagina siendo un superhéroe?\""
+  },
+  {
+    "questionId": "who_dreams_of_dragon_pet",
+    "text": "\"¿Quién sueña con tener un dragón como mascota?\""
+  },
+  {
+    "questionId": "who_would_move_into_hogwarts_tomorrow",
+    "text": "\"¿Quién se mudaría a Hogwarts mañana?\""
+  },
+  {
+    "questionId": "who_plans_apocalypse_escape_route",
+    "text": "\"¿Quién planea una ruta de escape para el apocalipsis zombi?\""
+  },
+  {
+    "questionId": "who_believes_cats_rule_secretly",
+    "text": "\"¿Quién cree que los gatos gobiernan el mundo en secreto?\""
+  },
+  {
+    "questionId": "who_wants_lightsaber_for_household",
+    "text": "\"¿Quién desea tener un sable de luz para el hogar?\""
+  },
+  {
+    "questionId": "who_has_entire_lotr_quotes_memorized",
+    "text": "\"¿Quién puede recitar de memoria citas de El Señor de los Anillos?\""
+  },
+  {
+    "questionId": "who_thinks_they_have_hidden_magic_powers",
+    "text": "\"¿Quién está convencido de que tiene poderes mágicos secretos?\""
+  },
+  {
+    "questionId": "who_would_choose_dragons_over_wifi",
+    "text": "\"¿Quién preferiría dragones a un buen Wi-Fi?\""
+  },
+  {
+    "questionId": "who_plots_kingdom_in_mirror",
+    "text": "\"¿Quién reina en pensamientos sobre un reino de espejos?\""
   }
 ]

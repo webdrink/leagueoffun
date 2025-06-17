@@ -73,5 +73,45 @@
     "questionId": "embarrassing_moments_sample_question_2",
     "text": "Sample question 2 for embarrassing_moments in en",
     "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_sings_in_public",
+    "text": "\"Who sings in public?\""
+  },
+  {
+    "questionId": "who_tells_cringe_jokes",
+    "text": "\"Who tells the cringe jokes?\""
+  },
+  {
+    "questionId": "who_dances_inappropriately",
+    "text": "\"Who dances inappropriately?\""
+  },
+  {
+    "questionId": "who_forgets_own_age",
+    "text": "\"Who forgets their own age?\""
+  },
+  {
+    "questionId": "who_makes_funny_noises",
+    "text": "\"Who makes the funniest sounds?\""
+  },
+  {
+    "questionId": "who_tells_awkward_stories",
+    "text": "\"Who tells the most embarrassing stories?\""
+  },
+  {
+    "questionId": "who_makes_funny_faces_in_photos",
+    "text": "\"Who makes the funniest faces in photos?\""
+  },
+  {
+    "questionId": "who_always_says_wrong_things",
+    "text": "\"Who always says the wrong things?\""
+  },
+  {
+    "questionId": "who_dances_weirdly_in_public",
+    "text": "\"Who dances weirdly in public?\""
+  },
+  {
+    "questionId": "who_always_has_awkward_silences",
+    "text": "\"Who always has awkward silence?\""
   }
 ]

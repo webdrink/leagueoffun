@@ -68,5 +68,53 @@
     "questionId": "in_shared_apartment_sample_question_2",
     "text": "Sample question 2 for in_shared_apartment in de",
     "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_takes_longest_showers",
+    "text": "\"Who takes the longest shower?\""
+  },
+  {
+    "questionId": "who_is_messiest_roommate",
+    "text": "\"Who is the messiest roommate?\""
+  },
+  {
+    "questionId": "who_steals_roommates_milk",
+    "text": "\"Who always steals the roommates' milk?\""
+  },
+  {
+    "questionId": "who_has_left_dishes_for_science",
+    "text": "\"Who leaves the dishes out to conduct 'mold research'?\""
+  },
+  {
+    "questionId": "who_organises_house_meetings_for_fun",
+    "text": "\"Who voluntarily organizes roommate meetings?\""
+  },
+  {
+    "questionId": "who_labels_everything_with_name",
+    "text": "\"Who labels everything with their name?\""
+  },
+  {
+    "questionId": "who_plays_loud_music_at_2am",
+    "text": "\"Who plays loud music at 2 AM?\""
+  },
+  {
+    "questionId": "who_has_plants_take_over_livingroom",
+    "text": "\"Who turns the living room into a jungle?\""
+  },
+  {
+    "questionId": "who_invites_randoms_to_crash_on_couch",
+    "text": "\"Who constantly lets strangers sleep on the sofa?\""
+  },
+  {
+    "questionId": "who_fails_to_take_out_trash_on_turn",
+    "text": "\"Who always forgets their trash duty?\""
+  },
+  {
+    "questionId": "who_turns_bathroom_into_spa",
+    "text": "\"Who turns the bathroom into a day spa?\""
+  },
+  {
+    "questionId": "who_has_emergency_chocolate_stash",
+    "text": "\"Who has a secret chocolate stash?\""
   }
 ]

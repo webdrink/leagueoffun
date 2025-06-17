@@ -68,5 +68,37 @@
     "questionId": "eating_sample_question_2",
     "text": "Pregunta de ejemplo 2 para comer en es",
     "category": "eating"
+  },
+  {
+    "questionId": "who_orders_the_same_thing_every_time",
+    "text": "\"¿Quién pide siempre lo mismo?\""
+  },
+  {
+    "questionId": "who_is_always_on_a_diet",
+    "text": "\"¿Quién está siempre a dieta?\""
+  },
+  {
+    "questionId": "who_eats_the_most_snacks",
+    "text": "\"¿Quién come la mayoría de los bocadillos?\""
+  },
+  {
+    "questionId": "who_is_best_cook",
+    "text": "\"¿Quién es el mejor cocinero?\""
+  },
+  {
+    "questionId": "who_always_orders_takeout",
+    "text": "\"¿Quién siempre pide comida para llevar?\""
+  },
+  {
+    "questionId": "who_eats_the_fastest",
+    "text": "\"¿Quién come más rápido?\""
+  },
+  {
+    "questionId": "who_is_most_adventurous_eater",
+    "text": "\"¿Quién es el comensal más aventurero?\""
+  },
+  {
+    "questionId": "who_always_tries_new_restaurants",
+    "text": "\"¿Quién siempre prueba nuevos restaurantes?\""
   }
 ]

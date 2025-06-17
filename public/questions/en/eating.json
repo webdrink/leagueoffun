@@ -88,5 +88,37 @@
     "questionId": "eating_sample_question_2",
     "text": "Sample question 2 for eating in en",
     "category": "eating"
+  },
+  {
+    "questionId": "who_orders_the_same_thing_every_time",
+    "text": "\"Who orders the same thing every time?\""
+  },
+  {
+    "questionId": "who_is_always_on_a_diet",
+    "text": "\"Who is always on a diet?\""
+  },
+  {
+    "questionId": "who_eats_the_most_snacks",
+    "text": "\"Who eats the most snacks?\""
+  },
+  {
+    "questionId": "who_is_best_cook",
+    "text": "\"Who is the best cook?\""
+  },
+  {
+    "questionId": "who_always_orders_takeout",
+    "text": "\"Who always orders takeout?\""
+  },
+  {
+    "questionId": "who_eats_the_fastest",
+    "text": "\"Who eats the fastest?\""
+  },
+  {
+    "questionId": "who_is_most_adventurous_eater",
+    "text": "\"Who is the most adventurous eater?\""
+  },
+  {
+    "questionId": "who_always_tries_new_restaurants",
+    "text": "\"Who always tries new restaurants?\""
   }
 ]

@@ -33,5 +33,57 @@
     "questionId": "who_eats_messiest",
     "text": "Qui mange le plus salement?",
     "category": "eating"
+  },
+  {
+    "questionId": "who_has_strangest_food_combinations",
+    "text": "\"Qui a les combinaisons alimentaires les plus étranges ?\""
+  },
+  {
+    "questionId": "who_is_picky_eater",
+    "text": "\"Qui est un mangeur difficile ?\""
+  },
+  {
+    "questionId": "who_talks_with_mouth_full",
+    "text": "\"Qui parle la bouche pleine ?\""
+  },
+  {
+    "questionId": "who_saves_leftovers",
+    "text": "\"Qui garde les restes ?\""
+  },
+  {
+    "questionId": "who_always_wants_dessert",
+    "text": "\"Qui veut toujours un dessert ?\""
+  },
+  {
+    "questionId": "who_orders_the_same_thing_every_time",
+    "text": "\"Qui commande toujours la même chose ?\""
+  },
+  {
+    "questionId": "who_is_always_on_a_diet",
+    "text": "\"Qui est toujours au régime ?\""
+  },
+  {
+    "questionId": "who_eats_the_most_snacks",
+    "text": "\"Qui mange le plus de collations ?\""
+  },
+  {
+    "questionId": "who_is_best_cook",
+    "text": "\"Qui est le meilleur cuisinier ?\""
+  },
+  {
+    "questionId": "who_always_orders_takeout",
+    "text": "\"Qui commande toujours à emporter ?\""
+  },
+  {
+    "questionId": "who_eats_the_fastest",
+    "text": "\"Qui mange le plus vite ?\""
+  },
+  {
+    "questionId": "who_is_most_adventurous_eater",
+    "text": "\"Qui est le mangeur le plus aventurier ?\""
+  },
+  {
+    "questionId": "who_always_tries_new_restaurants",
+    "text": "\"Qui essaie toujours de nouveaux restaurants ?\""
   }
 ]

@@ -18,5 +18,101 @@
     "questionId": "who_takes_longest_to_commit",
     "text": "¿A quién le cuesta más comprometerse?",
     "category": "relationships"
+  },
+  {
+    "questionId": "who_ghosts_people_after_third_date",
+    "text": "\"¿Quién ghostea a las personas después de la tercera cita?\""
+  },
+  {
+    "questionId": "who_falls_in_love_too_quickly",
+    "text": "\"¿Quién se enamora demasiado rápido?\""
+  },
+  {
+    "questionId": "who_has_strictest_dating_rules",
+    "text": "\"¿Quién tiene las reglas de citas más estrictas?\""
+  },
+  {
+    "questionId": "who_would_write_love_letter",
+    "text": "\"¿Quién escribiría una carta de amor?\""
+  },
+  {
+    "questionId": "who_secretly_plans_wedding_in_mind",
+    "text": "\"¿Quién planea secretamente una boda en su cabeza?\""
+  },
+  {
+    "questionId": "who_is_worst_at_flirting",
+    "text": "\"¿Quién puede coquetear peor?\""
+  },
+  {
+    "questionId": "who_has_biggest_heart",
+    "text": "\"¿Quién tiene el corazón más grande?\""
+  },
+  {
+    "questionId": "who_gives_relationship_advice_but_is_single",
+    "text": "\"¿Quién tiene más consejos sobre relaciones, pero está soltero?\""
+  },
+  {
+    "questionId": "who_withdraws_quickest",
+    "text": "\"¿Quién se retira más rápido?\""
+  },
+  {
+    "questionId": "who_plans_first_date_for_weeks",
+    "text": "\"¿Quién planea la primera cita durante semanas?\""
+  },
+  {
+    "questionId": "who_forgets_anniversary",
+    "text": "\"¿Quién olvida el aniversario?\""
+  },
+  {
+    "questionId": "who_writes_longest_messages",
+    "text": "\"¿Quién escribe los mensajes más largos?\""
+  },
+  {
+    "questionId": "who_always_brings_small_gifts",
+    "text": "\"¿Quién siempre trae pequeños regalos?\""
+  },
+  {
+    "questionId": "who_takes_most_couple_selfies",
+    "text": "\"¿Quién hace más selfies de dos?\""
+  },
+  {
+    "questionId": "who_is_most_jealous",
+    "text": "\"¿Quién es el más celoso?\""
+  },
+  {
+    "questionId": "who_always_suggests_new_activities",
+    "text": "\"¿Quién siempre sugiere nuevas actividades?\""
+  },
+  {
+    "questionId": "who_takes_longest_to_respond",
+    "text": "\"¿Quién tarda más en responder?\""
+  },
+  {
+    "questionId": "who_talks_most_about_future",
+    "text": "\"¿Quién habla más sobre el futuro?\""
+  },
+  {
+    "questionId": "who_has_most_inside_jokes",
+    "text": "\"¿Quién tiene más chistes internos?\""
+  },
+  {
+    "questionId": "relationship_advice",
+    "text": "\"¿Quién sería el más propenso a dar buenos consejos sobre relaciones?\""
+  },
+  {
+    "questionId": "first_date",
+    "text": "\"¿Quién planearía la mejor primera cita?\""
+  },
+  {
+    "questionId": "forget_anniversary",
+    "text": "\"¿Quién sería más propenso a olvidar un aniversario?\""
+  },
+  {
+    "questionId": "matchmaker",
+    "text": "\"¿Quién sería el mejor celestino?\""
+  },
+  {
+    "questionId": "secret_admirer",
+    "text": "\"¿Quién tendría más probabilidades de tener un admirador secreto?\""
   }
 ]

@@ -68,5 +68,45 @@
     "questionId": "on_vacation_sample_question_2",
     "text": "Sample question 2 for on_vacation in de",
     "category": "on_vacation"
+  },
+  {
+    "questionId": "who_packs_too_much",
+    "text": "\"Who packs too much?\""
+  },
+  {
+    "questionId": "who_gets_food_poisoning",
+    "text": "\"Who will get food poisoning?\""
+  },
+  {
+    "questionId": "who_plans_every_minute",
+    "text": "\"Who plans every minute?\""
+  },
+  {
+    "questionId": "who_takes_the_most_souvenirs_home",
+    "text": "\"Who brings home the most souvenirs?\""
+  },
+  {
+    "questionId": "who_is_the_first_to_get_sick",
+    "text": "\"Who will get sick first?\""
+  },
+  {
+    "questionId": "who_is_the_best_travel_companion",
+    "text": "\"Who is the best travel companion?\""
+  },
+  {
+    "questionId": "who_is_the_worst_travel_companion",
+    "text": "\"Who is the worst travel companion?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sunburned",
+    "text": "\"Who is most likely to get a sunburn?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_food_poisoning",
+    "text": "\"Who is most likely to get food poisoning?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_homesick",
+    "text": "\"Who is most likely to get homesick?\""
   }
 ]

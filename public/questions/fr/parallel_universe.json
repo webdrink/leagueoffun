@@ -33,5 +33,81 @@
     "questionId": "parallel_universe_sample_question_2",
     "text": "Sample question 2 for parallel_universe in de",
     "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_have_different_hobbies",
+    "text": "\"Qui aurait d'autres passe-temps ?\""
+  },
+  {
+    "questionId": "who_would_be_a_superhero",
+    "text": "\"Qui serait un super-héros ?\""
+  },
+  {
+    "questionId": "who_would_be_an_alien",
+    "text": "\"Qui serait un extraterrestre ?\""
+  },
+  {
+    "questionId": "who_would_have_different_family",
+    "text": "\"Qui aurait une autre famille ?\""
+  },
+  {
+    "questionId": "who_would_have_different_friends",
+    "text": "\"Qui aurait d'autres amis ?\""
+  },
+  {
+    "questionId": "who_would_have_different_pets",
+    "text": "\"Qui aurait d'autres animaux de compagnie ?\""
+  },
+  {
+    "questionId": "who_would_have_different_skills",
+    "text": "\"Qui aurait d'autres compétences ?\""
+  },
+  {
+    "questionId": "who_would_be_a_villain",
+    "text": "\"Qui serait un méchant ?\""
+  },
+  {
+    "questionId": "who_would_have_different_interests",
+    "text": "\"Qui aurait d'autres intérêts ?\""
+  },
+  {
+    "questionId": "who_is_evil_twin_richer",
+    "text": "\"Qui a dans l'univers parallèle un jumeau riche et maléfique ?\""
+  },
+  {
+    "questionId": "who_becomes_popstar_on_other_earth",
+    "text": "\"Qui est une popstar sur une autre Terre ?\""
+  },
+  {
+    "questionId": "who_is_snail_overlord_elsewhere",
+    "text": "\"Qui règne quelque part en tant que seigneur des escargots ?\""
+  },
+  {
+    "questionId": "who_lives_in_reverse_gravity_world",
+    "text": "\"Qui vit dans un monde avec une gravité inversée ?\""
+  },
+  {
+    "questionId": "who_is_allergic_to_water_in_altverse",
+    "text": "\"Qui est allergique à l'eau dans l'autre univers ?\""
+  },
+  {
+    "questionId": "who_never_needs_sleep_in_other_reality",
+    "text": "\"Qui ne dort jamais dans une réalité ?\""
+  },
+  {
+    "questionId": "who_is_cat_in_quantum_dimension",
+    "text": "\"Qui est un chat dans une dimension quantique ?\""
+  },
+  {
+    "questionId": "who_invents_square_wheels_there",
+    "text": "\"Qui invente là-bas la roue carrée ?\""
+  },
+  {
+    "questionId": "who_runs_caffeine_free_coffee_shop",
+    "text": "\"Qui gère un café sans caféine dans le multivers ?\""
+  },
+  {
+    "questionId": "who_replaces_moon_with_cheese_planet",
+    "text": "\"Qui échange la lune contre une planète fromage ?\""
   }
 ]

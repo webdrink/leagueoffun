@@ -33,5 +33,93 @@
     "questionId": "in_fantasy_sample_question_2",
     "text": "Sample question 2 for in_fantasy in de",
     "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_become_hero_in_fantasy",
+    "text": "\"Who would become a hero in a fantasy world?\""
+  },
+  {
+    "questionId": "who_would_find_magic_items",
+    "text": "\"Who would find magical items?\""
+  },
+  {
+    "questionId": "who_would_have_fantasy_pets",
+    "text": "\"Who would have fantasy creatures?\""
+  },
+  {
+    "questionId": "who_would_create_fantasy_world",
+    "text": "\"Who would create a fantasy world?\""
+  },
+  {
+    "questionId": "who_would_become_king_or_queen",
+    "text": "\"Who would become king or queen?\""
+  },
+  {
+    "questionId": "who_would_have_fantasy_powers",
+    "text": "\"Who would have fantasy abilities?\""
+  },
+  {
+    "questionId": "who_would_be_fantasy_sidekick",
+    "text": "\"Who would be the sidekick in a fantasy world?\""
+  },
+  {
+    "questionId": "who_would_have_fantasy_quests",
+    "text": "\"Who would have fantasy quests?\""
+  },
+  {
+    "questionId": "who_would_be_fantasy_guide",
+    "text": "\"Who would be the leader in a fantasy world?\""
+  },
+  {
+    "questionId": "who_would_find_hidden_treasures",
+    "text": "\"Who would find hidden treasures?\""
+  },
+  {
+    "questionId": "who_would_be_fantasy_villain",
+    "text": "\"Who would be the villain in a fantasy world?\""
+  },
+  {
+    "questionId": "who_would_have_fantasy_adventures",
+    "text": "\"Who would have the best fantasy adventures?\""
+  },
+  {
+    "questionId": "who_imagines_being_a_superhero",
+    "text": "\"Who imagines being a superhero?\""
+  },
+  {
+    "questionId": "who_dreams_of_dragon_pet",
+    "text": "\"Who dreams of having a dragon as a pet?\""
+  },
+  {
+    "questionId": "who_would_move_into_hogwarts_tomorrow",
+    "text": "\"Who would move to Hogwarts tomorrow?\""
+  },
+  {
+    "questionId": "who_plans_apocalypse_escape_route",
+    "text": "\"Who is planning an escape route for the zombie apocalypse?\""
+  },
+  {
+    "questionId": "who_believes_cats_rule_secretly",
+    "text": "\"Who believes that cats secretly rule the world?\""
+  },
+  {
+    "questionId": "who_wants_lightsaber_for_household",
+    "text": "\"Who wishes for a lightsaber for household chores?\""
+  },
+  {
+    "questionId": "who_has_entire_lotr_quotes_memorized",
+    "text": "\"Who can recite Lord of the Rings quotes from memory?\""
+  },
+  {
+    "questionId": "who_thinks_they_have_hidden_magic_powers",
+    "text": "\"Who is convinced they have secret magical powers?\""
+  },
+  {
+    "questionId": "who_would_choose_dragons_over_wifi",
+    "text": "\"Who would prefer dragons over a good Wi-Fi?\""
+  },
+  {
+    "questionId": "who_plots_kingdom_in_mirror",
+    "text": "\"Who rules in thought over a realm of mirrors?\""
   }
 ]

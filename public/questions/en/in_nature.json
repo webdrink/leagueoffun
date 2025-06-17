@@ -68,5 +68,69 @@
     "questionId": "in_nature_sample_question_2",
     "text": "Sample question 2 for in_nature in de",
     "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_best_at_building_camps",
+    "text": "\"Who can set up camp the best?\""
+  },
+  {
+    "questionId": "who_is_most_fearless",
+    "text": "\"Who is the most fearless?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_stung",
+    "text": "\"Who is most likely to get stung?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sunburned",
+    "text": "\"Who is most likely to get a sunburn?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_poison_ivy",
+    "text": "\"Who is most likely to come into contact with poison ivy?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_stuck_in_a_tree",
+    "text": "\"Who is most likely to get stuck in a tree?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_rain",
+    "text": "\"Who is most likely to get caught in the rain?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sick_from_camping",
+    "text": "\"Who is most likely to get sick from camping?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_hurt_while_hiking",
+    "text": "\"Who is most likely to get injured while hiking?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_eaten_by_wildlife",
+    "text": "\"Who is most likely to be eaten by wild animals?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_lost_in_the_dark",
+    "text": "\"Who is most likely to get lost in the dark?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_a_storm",
+    "text": "\"Who is most likely to get caught in a storm?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sick_from_food",
+    "text": "\"Who is most likely to get sick from food?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_a_snowstorm",
+    "text": "\"Who is most likely to get caught in a snowstorm?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_a_flood",
+    "text": "\"Who is most likely to get caught in a flood?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_a_hurricane",
+    "text": "\"Who is most likely to get caught in a hurricane?\""
   }
 ]

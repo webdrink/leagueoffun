@@ -23,5 +23,73 @@
     "questionId": "who_plans_every_minute",
     "text": "¿Quién planifica cada minuto?",
     "category": "on_vacation"
+  },
+  {
+    "questionId": "who_overplans_vacation_itinerary",
+    "text": "\"¿Quién planea el plan de vacaciones?\""
+  },
+  {
+    "questionId": "who_takes_most_vacation_photos",
+    "text": "\"¿Quién toma la mayoría de las fotos de vacaciones?\""
+  },
+  {
+    "questionId": "who_spends_too_much_on_souvenirs",
+    "text": "\"¿Quién gasta demasiado en souvenirs?\""
+  },
+  {
+    "questionId": "who_packs_at_last_minute",
+    "text": "\"¿Quién empaca en el último minuto?\""
+  },
+  {
+    "questionId": "who_gets_homesick_first",
+    "text": "\"¿Quién siente nostalgia por casa primero?\""
+  },
+  {
+    "questionId": "who_keeps_vacation_schedule",
+    "text": "\"¿Quién se adhiere al plan de vacaciones?\""
+  },
+  {
+    "questionId": "who_gets_lost_in_foreign_city",
+    "text": "\"¿Quién se pierde en una ciudad extranjera?\""
+  },
+  {
+    "questionId": "who_overpacks_luggage",
+    "text": "\"¿Quién empaca demasiado equipaje?\""
+  },
+  {
+    "questionId": "who_tries_most_local_foods",
+    "text": "\"¿Quién prueba la mayoría de los platos locales?\""
+  },
+  {
+    "questionId": "who_never_wants_vacation_to_end",
+    "text": "\"¿Quién nunca quiere que se acabe las vacaciones?\""
+  },
+  {
+    "questionId": "who_takes_the_most_souvenirs_home",
+    "text": "\"¿Quién trae más souvenirs a casa?\""
+  },
+  {
+    "questionId": "who_is_the_first_to_get_sick",
+    "text": "\"¿Quién se enfermará primero?\""
+  },
+  {
+    "questionId": "who_is_the_best_travel_companion",
+    "text": "\"¿Quién es el mejor compañero de viaje?\""
+  },
+  {
+    "questionId": "who_is_the_worst_travel_companion",
+    "text": "\"¿Quién es el peor compañero de viaje?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sunburned",
+    "text": "\"¿Quién es más propenso a quemarse con el sol?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_food_poisoning",
+    "text": "\"¿Quién es más propenso a tener una intoxicación alimentaria?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_homesick",
+    "text": "\"¿Quién es más propenso a sentir nostalgia?\""
   }
 ]

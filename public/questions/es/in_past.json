@@ -43,5 +43,45 @@
     "questionId": "who_knows_most_about_history",
     "text": "¿Quién sabe más sobre historia?",
     "category": "in_past"
+  },
+  {
+    "questionId": "who_wants_to_visit_dinosaurs",
+    "text": "\"¿Quién querría ver dinosaurios en vivo?\""
+  },
+  {
+    "questionId": "who_thinks_they_were_a_viking",
+    "text": "\"¿Quién cree que fue un vikingo en una vida anterior?\""
+  },
+  {
+    "questionId": "who_misses_90s_ringtones",
+    "text": "\"¿Quién extraña los tonos de llamada de Nokia de los 90?\""
+  },
+  {
+    "questionId": "who_would_bring_smartphone_to_middle_ages",
+    "text": "\"¿Quién se llevaría un smartphone al Medioevo?\""
+  },
+  {
+    "questionId": "who_collects_vintage_cassettes",
+    "text": "\"¿Quién colecciona viejas cintas de música?\""
+  },
+  {
+    "questionId": "who_thinks_their_childhood_cartoon_best",
+    "text": "\"¿Quién piensa que sus series infantiles fueron LAS mejores?\""
+  },
+  {
+    "questionId": "who_was_tamagotchi_serial_killer",
+    "text": "\"¿Quién fue el asesino en serie de Tamagotchi?\""
+  },
+  {
+    "questionId": "who_have_scrapbooks_of_ticket_stubs",
+    "text": "\"¿Quién tiene un álbum de colección lleno de entradas de conciertos?\""
+  },
+  {
+    "questionId": "who_reminisces_about_pre_internet_bliss",
+    "text": "\"¿Quién habla con entusiasmo de la vida antes de Internet?\""
+  },
+  {
+    "questionId": "who_claims_they_invented_planking",
+    "text": "\"¿Quién afirma haber inventado el planking?\""
   }
 ]
