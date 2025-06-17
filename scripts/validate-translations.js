@@ -19,7 +19,7 @@ class ValidationReporter {
   constructor() {
     this.warnings = [];
     this.errors = [];
-    this.info = [];
+    this.infoMessages = [];
   }
 
   warn(message) {
@@ -33,13 +33,12 @@ class ValidationReporter {
   }
 
   info(message) {
-    this.info.push(message);
+    this.infoMessages.push(message);
     console.log(`ℹ️ ${message}`);
   }
-
   summary() {
     console.log('\n📊 Validation Summary:');
-    console.log(`  - Info: ${this.info.length}`);
+    console.log(`  - Info: ${this.infoMessages.length}`);
     console.log(`  - Warnings: ${this.warnings.length}`);
     console.log(`  - Errors: ${this.errors.length}`);
     
