@@ -1,16 +1,120 @@
-name: 🚀 Deploy Blame Game to GitHub Pages (DISABLED - Using translation-validation.yml)
+name: 🚀 Deploy Blame Game to GitHub Pages
 
 on:
-  # Disabled to prevent conflicts with translation-validation.yml
-  workflow_dispatch: # Only allow manual trigger
-  # push:
-  #   branches:
-  #     - main # Trigger deployment on push to the main branch
+  push:
+    branches:
+      - main # Trigger deployment on push to the main branch
 
 jobs:
+  check-translations:
+    name: 🌍 Check and Update Translations
+    runs-on: ubuntu-latest
+    outputs:
+      translations-updated: ${{ steps.check-result.outputs.updated }}
+      
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: ⚙️ Install Dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: 🔍 Check Translation Status
+        id: translation-check
+        run: |
+          # Run translation check to see if translations are needed
+          if pnpm run translate:check; then
+            echo "needs-translation=false" >> $GITHUB_OUTPUT
+            echo "✅ All translations are up to date"
+          else
+            echo "needs-translation=true" >> $GITHUB_OUTPUT
+            echo "⚠️ Missing translations detected"
+          fi
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        continue-on-error: true
+
+      - name: 🚀 Trigger Translation Workflow
+        if: steps.translation-check.outputs.needs-translation == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const result = await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'translation-validation.yml',
+              ref: 'main',
+              inputs: {
+                'triggered-by': 'deploy-workflow'
+              }
+            });
+            console.log('Translation workflow triggered:', result.status);
+
+      - name: ⏳ Wait for Translation Completion
+        if: steps.translation-check.outputs.needs-translation == 'true'
+        run: |
+          echo "⏳ Waiting for translation workflow to complete..."
+          sleep 30
+          
+          # Poll for workflow completion
+          for i in {1..20}; do
+            echo "🔄 Checking translation workflow status (attempt $i/20)..."
+            
+            # Get the latest workflow run
+            WORKFLOW_STATUS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository }}/actions/workflows/translation-validation.yml/runs?per_page=1" \
+              | jq -r '.workflow_runs[0].status')
+            
+            echo "Current status: $WORKFLOW_STATUS"
+            
+            if [ "$WORKFLOW_STATUS" = "completed" ]; then
+              echo "✅ Translation workflow completed"
+              break
+            fi
+            
+            if [ $i -eq 20 ]; then
+              echo "⚠️ Translation workflow timeout - proceeding with deployment"
+              exit 0
+            fi
+            
+            sleep 15
+          done
+
+      - name: 🔄 Refresh Repository State
+        if: steps.translation-check.outputs.needs-translation == 'true'
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+          echo "Repository refreshed with latest translations"
+
+      - name: 📊 Check Final Result
+        id: check-result
+        run: |
+          if [ "${{ steps.translation-check.outputs.needs-translation }}" = "true" ]; then
+            echo "updated=true" >> $GITHUB_OUTPUT
+            echo "🌍 Translations were updated"
+          else
+            echo "updated=false" >> $GITHUB_OUTPUT
+            echo "✅ No translation updates needed"
+          fi
   build-and-deploy:
     name: 🏗️ Build and Deploy
     runs-on: ubuntu-latest
+    needs: check-translations
     permissions: # Necessary permissions for GitHub Pages deployment
       contents: read
       pages: write
@@ -21,8 +125,11 @@ jobs:
     env:
       VITE_BASE_PATH: / # Set base path to '/' for custom domain
     steps:
-      - name: ⬇️ Checkout Repository
-        uses: actions/checkout@v4 # Updated to v4
+      - name: ⬇️ Checkout Repository (Latest with Translations)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: 🧹 Remove pnpm-workspace.yaml (if exists)
         run: rm -f pnpm-workspace.yaml
@@ -48,6 +155,9 @@ jobs:
       - name: 🧐 Type-Check Code
         run: pnpm run typecheck
 
+      - name: 🌍 Final Translation Validation
+        run: pnpm run translate:validate
+
       - name: 🛠️ Build Project for Custom Domain
         run: pnpm run build:domain
 
@@ -59,6 +169,11 @@ jobs:
           echo "## Build Report" >> $GITHUB_STEP_SUMMARY
           echo "- **Base Path:** \`${VITE_BASE_PATH}\`" >> $GITHUB_STEP_SUMMARY
           echo "- **CNAME:** blamegame.leagueoffun.de" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ needs.check-translations.outputs.translations-updated }}" = "true" ]; then
+            echo "- **Translations:** ✅ Updated during deployment" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- **Translations:** ✅ Up to date" >> $GITHUB_STEP_SUMMARY
+          fi
           echo "- **Build Directory Structure:**" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           ls -la dist >> $GITHUB_STEP_SUMMARY

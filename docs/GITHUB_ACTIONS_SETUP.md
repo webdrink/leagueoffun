@@ -1,4 +1,4 @@
-# GitHub Actions Setup for Automatic Translation
+# GitHub Actions Setup for Automatic Translation & Deployment
 
 ## Required Setup Steps
 
@@ -20,46 +20,75 @@ Ensure GitHub Actions are enabled in your repository:
 3. Under "Workflow permissions", select "Read and write permissions"
 4. Check "Allow GitHub Actions to create and approve pull requests"
 
-### 3. Verify Workflow File
+### 3. Enable GitHub Pages
 
-The workflow file should be at:
-```
-.github/workflows/translation-validation.yml
-```
+1. Go to **Settings** → **Pages**
+2. Under "Source", select "GitHub Actions"
+3. The custom domain `blamegame.leagueoffun.de` should be automatically configured
+
+### 4. Verify Workflow Files
+
+The workflow files should be at:
+- `.github/workflows/deploy.yml` (Main orchestrator)
+- `.github/workflows/translation-validation.yml` (Translation service)
 
 ## How It Works
 
-### Automatic Translation Flow
+### Orchestrated Translation & Deployment Flow
 
 ```mermaid
 flowchart TD
-    A[Developer pushes to main] --> B{Contains '[skip translate]'?}
-    B -->|Yes| C[Skip translation, build normally]
-    B -->|No| D[Validate existing translations]
-    D --> E[Run automatic translation]
-    E --> F{New translations created?}
-    F -->|Yes| G[Commit translations back to repo]
-    F -->|No| H[No changes needed]
-    G --> I[Build with complete translations]
-    H --> I
-    I --> J[Deploy to GitHub Pages]
-    C --> I
+    A[Developer pushes to main] --> B[deploy.yml: Check translations]
+    B --> C{Missing translations?}
+    C -->|No| D[Build & Deploy directly]
+    C -->|Yes| E[Trigger translation-validation.yml]
+    E --> F[Auto-translate missing content]
+    F --> G[Commit translations to repo]
+    G --> H[deploy.yml: Wait for completion]
+    H --> I[Refresh repo state]
+    I --> J[Build with latest translations]
+    J --> K[Deploy to GitHub Pages]
+    D --> K
 ```
+
+### Workflow Separation
+
+**deploy.yml** (Main Orchestrator):
+- Triggered on push to main
+- Checks for missing translations
+- Triggers translation workflow if needed
+- Waits for translation completion
+- Builds and deploys to GitHub Pages
+
+**translation-validation.yml** (Translation Service):
+- Triggered by deploy.yml via workflow_dispatch
+- Also triggered on direct pushes affecting translations
+- Validates and auto-translates content
+- Commits changes back to repository
+- Does NOT deploy (deployment is handled by deploy.yml)
 
 ### Trigger Conditions
 
-The workflow triggers on:
-- **Push to main branch**: Runs full translation and deployment
-- **Push to develop branch**: Validation only
-- **Pull requests to main**: Validation and build test only
+The workflows trigger under different conditions:
+
+**deploy.yml (Main Orchestrator)**:
+- **Push to main branch**: Checks translations, orchestrates translation if needed, then builds and deploys
+
+**translation-validation.yml (Translation Service)**:
+- **Push to main/develop**: Validates and auto-translates missing content
+- **Pull requests to main**: Validation and build test only  
+- **Workflow dispatch**: When triggered by deploy.yml for translation needs
 
 ### Translation Process
 
-1. **Validation**: Checks current translation status
-2. **Translation**: Uses OpenAI API to translate missing content
-3. **Auto-commit**: Commits new translations with `[skip ci]` to avoid loops
-4. **Build**: Creates production build with all translations
-5. **Deploy**: Deploys to GitHub Pages with custom domain
+1. **Check**: deploy.yml checks if translations are missing
+2. **Trigger**: If needed, triggers translation-validation.yml via workflow_dispatch
+3. **Translate**: translation-validation.yml translates missing content
+4. **Commit**: Auto-commits new translations with `[skip ci]` to avoid loops
+5. **Wait**: deploy.yml waits for translation completion
+6. **Refresh**: deploy.yml refreshes repository state with new translations
+7. **Build**: Creates production build with complete translations
+8. **Deploy**: Deploys to GitHub Pages with custom domain
 
 ## Commit Message Controls
 
@@ -96,6 +125,18 @@ Error: Permission denied (publickey)
 ```
 **Solution**: Ensure "Read and write permissions" are enabled in Actions settings
 
+#### Workflow Dispatch Failed
+```
+Error: Could not trigger translation workflow
+```
+**Solution**: Check that translation-validation.yml exists and workflows have proper permissions
+
+#### Translation Timeout
+```
+Translation workflow timeout - proceeding with deployment
+```
+**Solution**: Normal fallback behavior. Check translation workflow logs for specific issues
+
 #### API Rate Limits
 ```
 Rate limit reached. Waiting X seconds...
@@ -111,7 +152,7 @@ Rate limit reached. Waiting X seconds...
 ### Viewing Translation Changes
 
 When translations are automatically created:
-1. Check the latest commit by "GitHub Action"
+1. Check commits by "GitHub Action" in the repository history
 2. Review the changes in `public/questions/` directories
 3. Files will show added/modified translations for missing content
 
@@ -134,7 +175,7 @@ If you need to bypass automatic translation:
 
 ### Temporarily Disable
 1. Edit `.github/workflows/translation-validation.yml`
-2. Add `if: false` to the `auto-translate-and-deploy` job
+2. Add `if: false` to the `auto-translate-and-commit` job
 3. Commit and push
 
 ### Run Translation Locally

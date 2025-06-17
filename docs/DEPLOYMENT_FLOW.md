@@ -4,29 +4,42 @@
 
 When you add new questions to any language and commit to the main branch:
 
-### 🔄 **Single Unified Workflow**
+### 🔄 **Orchestrated Dual-Workflow System**
 
-**File**: `.github/workflows/translation-validation.yml`  
-**Status**: `deploy.yml` is disabled to prevent conflicts
+**Main Orchestrator**: `.github/workflows/deploy.yml`  
+**Translation Service**: `.github/workflows/translation-validation.yml`  
+**Status**: Both workflows active with clear separation of concerns
 
-### 📋 **3-Step Process**
+### 📋 **Automated 7-Step Process**
 
-#### 1. **Translation Validation** ✅
-- Validates existing translations
-- Checks for missing content
-- Runs OpenAI dry-run preview
+#### 1. **Translation Check** 🔍
+- `deploy.yml` checks if any translations are missing
+- Uses `pnpm run translate:check` (dry-run mode)
 
-#### 2. **Auto-Translation** 🌍 
-- **Triggers**: Push to main (unless `[skip translate]` in commit)
-- **Uses**: `OPENAI_API_KEY` secret
-- **Action**: Translates missing questions to all languages
-- **Commits**: New translations with `🌍 Auto-translate: Update translations [skip ci]`
+#### 2. **Translation Trigger** ⚡
+- **If missing translations**: Triggers `translation-validation.yml` via workflow_dispatch
+- **If complete**: Skips directly to build & deploy
 
-#### 3. **Build & Deploy** 🚀
-- **Tools**: pnpm (better than npm)
-- **Process**: Lint → TypeCheck → Build → Deploy
-- **Output**: GitHub Pages with custom domain
-- **CNAME**: `blamegame.leagueoffun.de`
+#### 3. **Auto-Translation** 🌍 
+- `translation-validation.yml` runs OpenAI translation
+- Uses `OPENAI_API_KEY` secret for missing content
+- Commits new translations with `🌍 Auto-translate: Update translations [skip ci]`
+
+#### 4. **Wait & Refresh** ⏳
+- `deploy.yml` waits for translation workflow completion
+- Refreshes repository state to get new translations
+
+#### 5. **Build Preparation** 🛠️
+- Installs dependencies with pnpm
+- Runs linting and type-checking
+
+#### 6. **Translation Validation** ✅
+- Final validation of all translations
+- Ensures complete coverage across all languages
+
+#### 7. **Build & Deploy** 🚀
+- **Build**: `pnpm run build:domain` with custom domain configuration
+- **Deploy**: GitHub Pages deployment to `blamegame.leagueoffun.de`
 
 ### 🎯 **Result**
 
@@ -40,8 +53,8 @@ Your game is automatically deployed with **complete translations** in all 4 lang
 
 1. **GitHub Secret**: `OPENAI_API_KEY` in repository settings
 2. **Permissions**: Read/write access for GitHub Actions
-3. **Workflow**: `translation-validation.yml` (active)
-4. **Workflow**: `deploy.yml` (disabled to prevent conflicts)
+3. **GitHub Pages**: Source set to "GitHub Actions"
+4. **Custom Domain**: `blamegame.leagueoffun.de` configured
 
 ### 🔧 **Manual Control**
 
