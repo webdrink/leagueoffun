@@ -16,12 +16,13 @@ const CONFIG = {
   languages: ['de', 'en', 'es', 'fr'],
   baseLanguage: 'de', // Primary language to translate from if available
   fallbackLanguage: 'en', // Secondary language to translate from
-  openaiModel: 'gpt-3.5-turbo',
+  openaiModel: 'gpt-4.1-nano', // Updated to the cheapest available model
   maxTokens: 150,
   temperature: 0.3,
   batchSize: 10, // Questions to translate per API call
   backupEnabled: true,
-  dryRun: false // Set to true to preview changes without applying them
+  dryRun: false, // Set to true to preview changes without applying them
+  checkOnly: false // Set to true to only check for missing translations without calling API
 };
 
 // Paths
@@ -45,8 +46,12 @@ class TranslationService {
     this.maxRequestsPerMinute = 50; // Conservative rate limit
     this.requestTimes = [];
   }
-
   async translateText(text, targetLanguage, context = '') {
+    // In check-only mode, skip actual translation API calls
+    if (CONFIG.checkOnly) {
+      return `[Translation needed for: ${text}]`;
+    }
+    
     await this.checkRateLimit();
     
     const systemPrompt = `You are a professional translator specializing in party game content. 
@@ -482,11 +487,16 @@ async function main() {
       console.log('Set it with: export OPENAI_API_KEY="your-api-key-here"');
       process.exit(1);
     }
-    
-    // Parse command line arguments
+      // Parse command line arguments
     if (process.argv.includes('--dry-run')) {
       CONFIG.dryRun = true;
       console.log('🔍 Running in DRY RUN mode - no changes will be made');
+    }
+    
+    if (process.argv.includes('--check-only')) {
+      CONFIG.checkOnly = true;
+      CONFIG.dryRun = true;
+      console.log('🔍 CHECK ONLY MODE: Only identifying missing translations, no API calls will be made');
     }
     
     if (process.argv.includes('--no-backup')) {

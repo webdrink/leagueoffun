@@ -13,10 +13,9 @@
     "lint": "eslint . --ext .ts,.tsx --max-warnings=9999",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "verify-assets": "node scripts/verify-assets.js",
-    "verify-build": "node scripts/verify-assets.js --verify-dist",
-    "translate": "node scripts/auto-translate.js",
+    "verify-build": "node scripts/verify-assets.js --verify-dist",    "translate": "node scripts/auto-translate.js",
     "translate:dry-run": "node scripts/auto-translate.js --dry-run",
-    "translate:check": "node scripts/auto-translate.js --dry-run",
+    "translate:check": "node scripts/auto-translate.js --check-only",
     "translate:force": "node scripts/auto-translate.js --no-backup",
     "translate:validate": "node scripts/validate-translations.js"
   },
