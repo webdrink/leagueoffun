@@ -1,7 +1,8 @@
 import React from 'react';
 import { DataLoader } from './DataLoader';
 import { useGameStore, GameInfo } from '../../store/gameStore';
-import { fetchAsset } from '../../lib/utils/fetchUtils';
+import { fetchAssetWithFallback } from '../../lib/utils/fetchUtils';
+import { logger } from '../../lib/utils/logger';
 
 /**
  * GameInfoLoader Component
@@ -14,7 +15,7 @@ import { fetchAsset } from '../../lib/utils/fetchUtils';
  *    loaded.
  *
  * Expected Behavior: On mount, this component retrieves `game.json` using
- * `fetchAsset`, stores the result via `useGameStore`, and then renders its
+ * `fetchAssetWithFallback`, stores the result via `useGameStore`, and then renders its
  * children. If the fetch fails, the underlying DataLoader handles the error
  * state.
  *
@@ -22,7 +23,7 @@ import { fetchAsset } from '../../lib/utils/fetchUtils';
  *  - React
  *  - DataLoader (for generic async handling)
  *  - zustand store from `useGameStore`
- *  - fetchAsset utility for path-safe fetches
+ *  - fetchAssetWithFallback utility for path-safe fetches
  *
  * Integrated by: index.tsx wraps the entire <App /> with this loader.
  */
@@ -30,8 +31,11 @@ export const GameInfoLoader: React.FC<React.PropsWithChildren> = ({ children }) 
   const setGameInfo = useGameStore(state => state.setGameInfo);
   return (
     <DataLoader<GameInfo>
-      fetchData={() => fetchAsset('game.json').then(res => res.json())}
-      onData={setGameInfo}
+      fetchData={() => fetchAssetWithFallback('game.json').then(res => res.json())}
+      onData={(info) => {
+        logger.log('GAME', 'Game info loaded');
+        setGameInfo(info);
+      }}
     >
       {() => <>{children}</>}
     </DataLoader>
