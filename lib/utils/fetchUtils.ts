@@ -65,11 +65,34 @@ export async function fetchAssetWithFallback(
   retries = 3,
   delay = 500
 ): Promise<Response> {
-  try {
-    return await fetchAsset(relativePath, retries, delay);
-  } catch (err) {
-    const fallbackUrl = `/blamegame/${relativePath}`.replace(/\/+/g, '/');
-    logger.warn('FETCH', `Primary asset fetch failed, trying fallback ${fallbackUrl}`);
-    return fetchWithRetry(fallbackUrl, retries, delay);
+  const normalize = (url: string) => url.replace(/\/+/g, '/');
+
+  // Previous commits only tried the configured base URL and a legacy
+  // `/blamegame/` path. Restore that behaviour while also guarding against
+  // servers that return HTML for missing assets.
+  const primaryUrl = getAssetsPath(relativePath);
+  const fallbackUrl = normalize(`/blamegame/${relativePath}`);
+
+  const candidates = [primaryUrl];
+  if (!candidates.includes(fallbackUrl)) candidates.push(fallbackUrl);
+
+  let lastError: unknown;
+
+  for (const url of candidates) {
+    try {
+      const response = await fetchWithRetry(url, retries, delay);
+      const contentType = response.headers.get('content-type') || '';
+
+      if (contentType.includes('text/html')) {
+        throw new Error(`Unexpected HTML response for ${url}`);
+      }
+
+      return response;
+    } catch (err) {
+      lastError = err;
+      logger.warn('FETCH', `Asset fetch failed for ${url}`, err);
+    }
   }
+
+  throw lastError as Error;
 }
