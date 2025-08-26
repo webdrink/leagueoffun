@@ -86,15 +86,17 @@ const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
   const loadQuestions = useCallback(async (loadedCategories: Category[]) => {
     setIsLoading(true);
     try {
-      console.log(`Loading questions with language: ${currentLanguage}`);
+      console.log(`🔄 loadQuestions: Starting with language: ${currentLanguage}, categories: ${loadedCategories?.length || 0}`);
 
       if (!loadedCategories || loadedCategories.length === 0) {
-        console.warn('No categories available. Cannot load questions properly.');
+        console.warn('⚠️ loadQuestions: No categories available. Cannot load questions properly.');
         setAllQuestions(getFallbackQuestions());
         return;
       }
 
+      console.log(`🔄 loadQuestions: Calling loadQuestionsFromJson`);
       const loadedJsonQuestions: LoadedQuestion[] = await loadQuestionsFromJson(currentLanguage, loadedCategories);
+      console.log(`🔄 loadQuestions: Received ${loadedJsonQuestions?.length || 0} questions from JSON`);
 
       if (loadedJsonQuestions && loadedJsonQuestions.length > 0) {
         // Convert LoadedQuestion to the Question type expected by the hook (from types.ts)
@@ -236,14 +238,18 @@ const useQuestions = (gameSettings: GameSettings): UseQuestionsOutput => {
 
   // Load questions on initial mount and when language changes
   useEffect(() => {
-    console.log("useQuestions: Loading data for language:", currentLanguage);
+    console.log("🔄 useQuestions: Loading data for language:", currentLanguage);
     const loadAllData = async () => {
+      console.log("🔄 useQuestions: Starting loadAllData");
       const loadedCategories = await loadCategories();
+      console.log("🔄 useQuestions: Categories loaded:", loadedCategories?.length || 0);
       // Only proceed with question loading if categories were successfully loaded
       if (loadedCategories && loadedCategories.length > 0) {
+        console.log("🔄 useQuestions: Proceeding to load questions");
         await loadQuestions(loadedCategories);
+        console.log("🔄 useQuestions: Questions loading completed");
       } else {
-        console.warn("No categories loaded, cannot load questions properly.");
+        console.warn("⚠️ useQuestions: No categories loaded, cannot load questions properly.");
         setAllQuestions(getFallbackQuestions());
         setIsLoading(false);
       }

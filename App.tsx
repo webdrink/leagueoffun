@@ -161,6 +161,39 @@ function App() {
     }
   }, [allQuestions]);
 
+  // Debug: Expose questions and categories to window for testing
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Expose all questions for testing
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).gameQuestions = allQuestions;
+      
+      // Create categories array with questions grouped by category for testing
+      const categoriesWithQuestions = allCategoriesInfo.map(cat => {
+        const categoryQuestions = allQuestions
+          .filter(q => q.categoryId === cat.id)
+          .map(q => q.text);
+        
+        return {
+          id: cat.id,
+          name: cat.name,
+          emoji: cat.emoji,
+          questionCount: cat.questionCount,
+          questions: categoryQuestions
+        };
+      });
+      
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).gameCategories = categoriesWithQuestions;
+      
+      console.log('Debug: Exposed to window -', {
+        gameQuestions: allQuestions.length,
+        gameCategories: categoriesWithQuestions.length,
+        totalQuestionsInCategories: categoriesWithQuestions.reduce((sum, cat) => sum + cat.questions.length, 0)
+      });
+    }
+  }, [allQuestions, allCategoriesInfo]);
+
   useEffect(() => {
     if (!isLoadingQuestions && allQuestions.length === 0 && gameStep !== 'intro' && gameStep !== 'loading') {
       setErrorLoadingQuestions(t('error.noQuestionsLoaded'));
@@ -236,15 +269,9 @@ function App() {
     
     // Start loading animation immediately to provide visual feedback
     setGameStep('loading');
-    const genericQuotes = t('loading.quotes', { returnObjects: true });
-    // Ensure genericQuotes is an array of strings, not individual characters
-    const quotesArray = Array.isArray(genericQuotes) 
-      ? genericQuotes 
-      : typeof genericQuotes === 'string' 
-        ? [genericQuotes] 
-        : [t('loading.defaultQuote')];
     
-    setActiveLoadingQuotes(quotesArray);
+    // Use the predefined loading quotes from constants
+    setActiveLoadingQuotes(LOADING_QUOTES);
     setQuoteIndex(0);
     
     // Set up the cycling of quotes during loading
@@ -266,22 +293,6 @@ function App() {
         return;
       }
 
-      // Extract category names for quotes, ensuring proper handling
-      // First, get unique category names from the current round questions
-      const categoryNames = currentRoundQuestions
-        .map(q => q.categoryName || '')
-        .filter(name => name.length > 0); // Filter out empty names
-      
-      // Then remove duplicates by using a Set
-      const categoryNamesForQuotes = Array.from(new Set(categoryNames));
-      
-      console.log('Category names for quotes:', categoryNamesForQuotes);
-      
-      if (categoryNamesForQuotes.length > 0) {
-        setActiveLoadingQuotes(categoryNamesForQuotes);
-        setQuoteIndex(0); // Reset index to start cycling new quotes
-      }
-      
       // Ensure we show the loading animation for at least the minimum time
       const minLoadingDuration = gameSettings.rouletteDurationMs || 3000;
       setTimeout(() => {
@@ -305,59 +316,90 @@ function App() {
     handleStartGameFlow();
   };
   const handleNextQuestion = () => {
+    console.log(`🎯 USER ACTION: Next question clicked - Current question: ${currentQuestionIndexFromHook + 1}/${currentRoundQuestions.length}, Mode: ${gameSettings.gameMode}`);
+    
     if (currentQuestionIndexFromHook < currentRoundQuestions.length - 1) {
       advanceToNextQuestion();
       if (gameSettings.gameMode === 'nameBlame') {
         if (stablePlayerOrderForRound.length > 0) {
+          const previousPlayerIndex = currentPlayerIndex;
           const nextPlayerIndex = (currentPlayerIndex + 1) % stablePlayerOrderForRound.length;
           setCurrentPlayerIndex(nextPlayerIndex);
-          console.log(`Next question (NameBlame). Next player: ${stablePlayerOrderForRound[nextPlayerIndex]?.name} (index ${nextPlayerIndex}) from stable list:`, stablePlayerOrderForRound.map(p => p.name));
+          console.log(`🔄 PLAYER TURN SWITCH (NameBlame): ${stablePlayerOrderForRound[previousPlayerIndex]?.name} → ${stablePlayerOrderForRound[nextPlayerIndex]?.name} (index ${previousPlayerIndex} → ${nextPlayerIndex})`);
+          console.log(`📊 Active players order:`, stablePlayerOrderForRound.map((p, i) => `${i}: ${p.name}`));
         } else {
-          console.error("Error: stablePlayerOrderForRound is empty in handleNextQuestion (NameBlame). Turn cannot advance correctly.");
-          // Fallback or error handling might be needed if this state occurs.
+          console.error("❌ ERROR: stablePlayerOrderForRound is empty in handleNextQuestion (NameBlame). Turn cannot advance correctly.");
+          console.error("🔍 DEBUG INFO:", { 
+            gameStep, 
+            gameMode: gameSettings.gameMode, 
+            playersCount: players.length, 
+            currentPlayerIndex 
+          });
         }
+      } else {
+        console.log(`➡️ CLASSIC MODE: Advanced to question ${currentQuestionIndexFromHook + 2}/${currentRoundQuestions.length}`);
       }
       playSound('new_question');
     } else {
+      console.log(`🏁 GAME END: Reached final question, showing summary`);
       setGameStep('summary'); 
       playSound('summary_fun');
     }
   };
 
   const handlePreviousQuestion = () => {
+    console.log(`🎯 USER ACTION: Previous question clicked - Current question: ${currentQuestionIndexFromHook + 1}/${currentRoundQuestions.length}, Mode: ${gameSettings.gameMode}`);
+    
     goToPreviousQuestion();
     if (gameSettings.gameMode === 'nameBlame' && currentPlayerIndex > 0) {
-      // No change needed here as it just decrements the index.
-      // The index will be interpreted against stablePlayerOrderForRound.
-      setCurrentPlayerIndex(prev => prev -1);
+      const previousPlayerIndex = currentPlayerIndex;
+      const newPlayerIndex = previousPlayerIndex - 1;
+      setCurrentPlayerIndex(newPlayerIndex);
+      console.log(`🔄 PLAYER TURN REVERSE (NameBlame): ${stablePlayerOrderForRound[previousPlayerIndex]?.name} → ${stablePlayerOrderForRound[newPlayerIndex]?.name} (index ${previousPlayerIndex} → ${newPlayerIndex})`);
+    } else if (gameSettings.gameMode === 'classic') {
+      console.log(`⬅️ CLASSIC MODE: Went back to question ${currentQuestionIndexFromHook}/${currentRoundQuestions.length}`);
     }
   };
 
-  const handleLanguageChange = (newLanguage: SupportedLanguage) => {
+  const _handleLanguageChange = (newLanguage: SupportedLanguage) => {
     updateGameSettings({ language: newLanguage });
   };
 
   const handleTitleClick = () => {
     setGameStep('intro');
   };  const handleBlame = (blamedPlayerName: string) => {
-    console.log(`${blamedPlayerName} was blamed for question: ${currentQuestion?.text}`);
+    const currentQuestionText = currentQuestion?.text || 'Unknown question';
+    console.log(`🎯 USER ACTION: Blame selected - Player blamed: "${blamedPlayerName}" for question: "${currentQuestionText}"`);
     
     if (stablePlayerOrderForRound.length === 0) {
-      console.error("Error: stablePlayerOrderForRound is empty in handleBlame. This indicates a problem with game state setup. Reverting to intro.");
+      console.error("❌ ERROR: stablePlayerOrderForRound is empty in handleBlame. This indicates a problem with game state setup. Reverting to intro.");
+      console.error("🔍 DEBUG INFO:", { 
+        gameStep, 
+        gameMode: gameSettings.gameMode, 
+        playersCount: players.length, 
+        currentPlayerIndex 
+      });
       setGameStep('intro'); 
       return;
     }
 
     // Ensure currentPlayerIndex is valid for stablePlayerOrderForRound.
-    // This guards against potential race conditions or stale state if the index somehow gets out of sync.
     const safeCurrentPlayerIndex = currentPlayerIndex % stablePlayerOrderForRound.length;
     const blamingPlayer = stablePlayerOrderForRound[safeCurrentPlayerIndex];
 
+    console.log(`👤 BLAME DETAILS: ${blamingPlayer?.name} (index ${safeCurrentPlayerIndex}) blamed ${blamedPlayerName}`);
+    console.log(`📊 Current player order:`, stablePlayerOrderForRound.map((p, i) => `${i}${i === safeCurrentPlayerIndex ? '*' : ''}: ${p.name}`));
+
     if (blamingPlayer && currentQuestion) {
       recordNameBlame(blamingPlayer.name, blamedPlayerName, currentQuestion.text);
+      console.log(`📝 BLAME RECORDED: ${blamingPlayer.name} → ${blamedPlayerName} for "${currentQuestion.text}"`);
     } else {
-      console.error("Error: Could not identify blaming player or current question in handleBlame.");
-      // Potentially add more robust error handling here, e.g., reverting to intro or showing a user-facing error.
+      console.error("❌ ERROR: Could not identify blaming player or current question in handleBlame.");
+      console.error("🔍 DEBUG INFO:", { 
+        blamingPlayer: blamingPlayer?.name, 
+        currentQuestion: currentQuestion?.text, 
+        safeCurrentPlayerIndex 
+      });
     }
     
     if (currentQuestionIndexFromHook < currentRoundQuestions.length - 1) {
@@ -365,9 +407,10 @@ function App() {
       // Use stablePlayerOrderForRound for turn advancement
       const nextPlayerIndex = (safeCurrentPlayerIndex + 1) % stablePlayerOrderForRound.length;
       setCurrentPlayerIndex(nextPlayerIndex);
-      console.log(`Blame recorded. Next player: ${stablePlayerOrderForRound[nextPlayerIndex]?.name} (index ${nextPlayerIndex}) from stable list:`, stablePlayerOrderForRound.map(p => p.name));
+      console.log(`🔄 NEXT TURN: ${blamingPlayer?.name} → ${stablePlayerOrderForRound[nextPlayerIndex]?.name} (index ${safeCurrentPlayerIndex} → ${nextPlayerIndex})`);
       playSound('new_question');
     } else {
+      console.log(`🏁 GAME END: Final blame recorded, showing summary`);
       setGameStep('summary');
       playSound('summary_fun');
     }
@@ -385,8 +428,10 @@ function App() {
       // For now, we'll set it if it's empty or if gameStep just became 'game'.
       // A more robust check might involve comparing player IDs if they are stable.
       // Using JSON.stringify on IDs to check for changes in player list or order.
-      if (stablePlayerOrderForRound.length === 0 || 
-          JSON.stringify(stablePlayerOrderForRound.map(p => p.id)) !== JSON.stringify(currentActivePlayers.map(p => p.id))) {
+      const currentActivePlayerIds = JSON.stringify(currentActivePlayers.map(p => p.id));
+      const stablePlayerIds = JSON.stringify(stablePlayerOrderForRound.map(p => p.id));
+      
+      if (currentActivePlayerIds !== stablePlayerIds) {
         setStablePlayerOrderForRound(currentActivePlayers);
         console.log('Stable player order for round set/updated:', currentActivePlayers.map(p => p.name));
         // Reset currentPlayerIndex if the order is being freshly set for a new game,
@@ -457,7 +502,7 @@ function App() {
           />
         )}
 
-        {gameStep === 'game' && currentQuestion && stablePlayerOrderForRound.length > 0 && (
+        {gameStep === 'game' && currentQuestion && (gameSettings.gameMode !== 'nameBlame' || stablePlayerOrderForRound.length > 0) && (
           <QuestionScreen
             key="game"
             question={currentQuestion}

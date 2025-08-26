@@ -63,6 +63,10 @@ const de: Translations = {
   'players.add_players_to_start': 'Füge Spieler hinzu, um zu starten',
   'players.minimum_players_needed': 'Du brauchst mindestens 2 Spieler, um zu starten',
   
+  // Loading screen
+  'loading.defaultQuote': 'Wird geladen...',
+  'loading.preparing': 'Vorbereitung läuft...',
+  
   // Game
   'game.question': 'Frage',
   'game.select_player': 'Wähle einen Spieler',
