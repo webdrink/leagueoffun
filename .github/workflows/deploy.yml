@@ -297,7 +297,38 @@ jobs:
             exit 1
           fi
 
-      - name: 🔍 Verify Build
+      - name: � Ensure GitHub Pages Compatibility
+        run: |
+          echo "🔧 Ensuring GitHub Pages compatibility..."
+          
+          # Ensure .nojekyll file exists to disable Jekyll processing
+          if [ ! -f "./dist/.nojekyll" ]; then
+            echo "📝 Adding .nojekyll file to disable Jekyll processing"
+            touch ./dist/.nojekyll
+          fi
+          
+          # Verify essential JSON files are present
+          echo "🔍 Verifying JSON files are included in build..."
+          if [ -f "./dist/questions/categories.json" ]; then
+            echo "✅ categories.json found"
+          else
+            echo "❌ categories.json missing - this will cause loading issues!"
+            exit 1
+          fi
+          
+          if [ -d "./dist/questions/de" ]; then
+            question_count=$(find ./dist/questions/de -name "*.json" | wc -l)
+            echo "✅ German questions found: $question_count files"
+          else
+            echo "❌ German questions directory missing!"
+            exit 1
+          fi
+          
+          # List all files for debugging
+          echo "📁 Build directory contents:"
+          find ./dist -type f | head -20
+
+      - name: �🔍 Verify Build
         run: pnpm run verify-build
 
       - name: 📝 Generate Build Report
