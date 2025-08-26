@@ -33,5 +33,85 @@
     "questionId": "flirting_sample_question_2",
     "text": "Pregunta de muestra 2 para coqueteo en es",
     "category": "flirting"
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_boss",
+    "text": "\"¿Quién es más probable que coquetee con su jefe?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_a_stranger",
+    "text": "\"¿Quién es más probable que coquetee con un extraño?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_friends_partner",
+    "text": "\"¿Quién es más probable que coquetee con la pareja de un amigo?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_exs_friend",
+    "text": "\"¿Quién es más probable que coquetee con el amigo del ex pareja?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_exs_parent",
+    "text": "\"¿Quién es más probable que coquetee con el padre del ex pareja?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_exs_sibling",
+    "text": "\"¿Quién es más probable que coquetee con el hermano del ex pareja?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_exs_colleague",
+    "text": "\"¿Quién es más probable que coquetee con el colega del ex pareja?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_exs_friend_group",
+    "text": "\"¿Quién es más probable que coquetee con el grupo de amigos del ex pareja?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_exs_family",
+    "text": "\"¿Quién es más probable que coquetee con la familia del ex pareja?\""
+  },
+  {
+    "questionId": "who_flirts_with_the_most_people",
+    "text": "\"¿Quién coquetea con más gente?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_rejected",
+    "text": "\"¿Quién es más probable que sea rechazado?\""
+  },
+  {
+    "questionId": "who_flirts_in_awkward_situations",
+    "text": "\"¿Quién coquetea en situaciones incómodas?\""
+  },
+  {
+    "questionId": "who_is_most_charming_when_flirting",
+    "text": "\"¿Quién es el más encantador al coquetear?\""
+  },
+  {
+    "questionId": "who_flirts_with_their_friends",
+    "text": "\"¿Quién coquetea con sus amigos?\""
+  },
+  {
+    "questionId": "who_flirts_with_their_ex",
+    "text": "\"¿Quién coquetea con su ex?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_flirting",
+    "text": "\"¿Quién es más probable que sea sorprendido coqueteando?\""
+  },
+  {
+    "questionId": "who_flirts_with_the_waiter",
+    "text": "\"¿Quién coquetea con el camarero?\""
+  },
+  {
+    "questionId": "who_flirts_with_their_ex",
+    "text": "\"¿Quién coquetea con su ex?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_flirting",
+    "text": "\"¿Quién es más probable que sea sorprendido coqueteando?\""
+  },
+  {
+    "questionId": "who_flirts_with_the_waiter",
+    "text": "\"¿Quién coquetea con el camarero?\""
   }
 ]

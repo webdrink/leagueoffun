@@ -243,5 +243,17 @@
     "questionId": "wer_hat_einen_onlinecrush_den_er_nie_anschreibt",
     "text": "Wer hat einen Online-Crush, den er nie anschreibt?",
     "category": "internet"
+  },
+  {
+    "questionId": "who_shares_fake_news",
+    "text": "\"Who shares fake news?\""
+  },
+  {
+    "questionId": "who_stalks_profiles",
+    "text": "\"Who stalks profiles?\""
+  },
+  {
+    "questionId": "who_posts_too_many_comments",
+    "text": "\"Who posts too many comments?\""
   }
 ]

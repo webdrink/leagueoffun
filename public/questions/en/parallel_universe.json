@@ -33,5 +33,81 @@
     "questionId": "parallel_universe_sample_question_2",
     "text": "Sample question 2 for parallel_universe in de",
     "category": "parallel_universe"
+  },
+  {
+    "questionId": "who_would_have_different_hobbies",
+    "text": "\"Who would have different hobbies?\""
+  },
+  {
+    "questionId": "who_would_be_a_superhero",
+    "text": "\"Who would be a superhero?\""
+  },
+  {
+    "questionId": "who_would_be_an_alien",
+    "text": "\"Who would be an alien?\""
+  },
+  {
+    "questionId": "who_would_have_different_family",
+    "text": "\"Who would have a different family?\""
+  },
+  {
+    "questionId": "who_would_have_different_friends",
+    "text": "\"Who would have different friends?\""
+  },
+  {
+    "questionId": "who_would_have_different_pets",
+    "text": "\"Who would have different pets?\""
+  },
+  {
+    "questionId": "who_would_have_different_skills",
+    "text": "\"Who would have different abilities?\""
+  },
+  {
+    "questionId": "who_would_be_a_villain",
+    "text": "\"Who would be a villain?\""
+  },
+  {
+    "questionId": "who_would_have_different_interests",
+    "text": "\"Who would have different interests?\""
+  },
+  {
+    "questionId": "who_is_evil_twin_richer",
+    "text": "\"Who has a richer, evil twin in the parallel universe?\""
+  },
+  {
+    "questionId": "who_becomes_popstar_on_other_earth",
+    "text": "\"Who is a pop star on another Earth?\""
+  },
+  {
+    "questionId": "who_is_snail_overlord_elsewhere",
+    "text": "\"Who rules somewhere as a snail overlord?\""
+  },
+  {
+    "questionId": "who_lives_in_reverse_gravity_world",
+    "text": "\"Who lives in a world with reversed gravity?\""
+  },
+  {
+    "questionId": "who_is_allergic_to_water_in_altverse",
+    "text": "\"Who is allergic to water in the other universe?\""
+  },
+  {
+    "questionId": "who_never_needs_sleep_in_other_reality",
+    "text": "\"Who never sleeps in one reality?\""
+  },
+  {
+    "questionId": "who_is_cat_in_quantum_dimension",
+    "text": "\"Who is a cat in a quantum dimension?\""
+  },
+  {
+    "questionId": "who_invents_square_wheels_there",
+    "text": "\"Who invents the square wheel there?\""
+  },
+  {
+    "questionId": "who_runs_caffeine_free_coffee_shop",
+    "text": "\"Who runs a decaf café in the multiverse?\""
+  },
+  {
+    "questionId": "who_replaces_moon_with_cheese_planet",
+    "text": "\"Who trades the moon for a cheese planet?\""
   }
 ]

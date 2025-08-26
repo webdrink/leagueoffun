@@ -103,5 +103,9 @@
     "questionId": "in_family_sample_question_2",
     "text": "Sample question 2 for in_family in de",
     "category": "in_family"
+  },
+  {
+    "questionId": "who_takes_care_of_family_members",
+    "text": "\"Qui s'occupe le plus des membres de la famille ?\""
   }
 ]

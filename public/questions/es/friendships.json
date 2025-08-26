@@ -18,5 +18,93 @@
     "questionId": "who_remembers_birthdays",
     "text": "¿Quién recuerda los cumpleaños?",
     "category": "friendships"
+  },
+  {
+    "questionId": "who_introduces_friends_to_new_people",
+    "text": "\"¿Quién presenta a amigos a nuevas personas?\""
+  },
+  {
+    "questionId": "who_gives_best_advice",
+    "text": "\"¿Quién da los mejores consejos?\""
+  },
+  {
+    "questionId": "who_remembers_friendship_anniversaries",
+    "text": "\"¿Quién recuerda los aniversarios de amistad?\""
+  },
+  {
+    "questionId": "who_brings_friends_together",
+    "text": "\"¿Quién reúne a los amigos?\""
+  },
+  {
+    "questionId": "who_is_most_supportive_friend",
+    "text": "\"¿Quién es el amigo más solidario?\""
+  },
+  {
+    "questionId": "who_is_most_funny_friend",
+    "text": "\"¿Quién es el amigo más divertido?\""
+  },
+  {
+    "questionId": "who_is_most_adventurous_friend",
+    "text": "\"¿Quién es el amigo más aventurero?\""
+  },
+  {
+    "questionId": "who_is_most_loyal_friend",
+    "text": "\"¿Quién es el amigo más leal?\""
+  },
+  {
+    "questionId": "who_is_most_generous_friend",
+    "text": "\"¿Quién es el amigo más generoso?\""
+  },
+  {
+    "questionId": "who_is_most_empathetic_friend",
+    "text": "\"¿Quién es el amigo más empático?\""
+  },
+  {
+    "questionId": "who_is_most_inspiring_friend",
+    "text": "\"¿Quién es el amigo más inspirador?\""
+  },
+  {
+    "questionId": "who_is_most_organized_friend",
+    "text": "\"¿Quién es el amigo más organizado?\""
+  },
+  {
+    "questionId": "who_leaves_voice_memos_instead_of_texts",
+    "text": "\"¿Quién prefiere enviar mensajes de voz de 5 minutos en lugar de texto?\""
+  },
+  {
+    "questionId": "who_never_has_phone_charged",
+    "text": "\"¿Quién nunca tiene suficiente batería cuando lo necesitas?\""
+  },
+  {
+    "questionId": "who_forgets_birthdays_without_facebook",
+    "text": "\"¿Quién olvida todos los cumpleaños sin el recordatorio de Facebook?\""
+  },
+  {
+    "questionId": "who_arrives_an_hour_late_but_with_coffee",
+    "text": "\"¿Quién llega una hora tarde, pero trae café?\""
+  },
+  {
+    "questionId": "who_gives_questionable_life_advice",
+    "text": "\"¿Quién da consejos de vida cuestionables?\""
+  },
+  {
+    "questionId": "who_ghosts_groupchat_for_weeks",
+    "text": "\"¿Quién ghostea el chat grupal durante semanas?\""
+  },
+  {
+    "questionId": "who_turns_every_story_into_a_monologue",
+    "text": "\"¿Quién convierte cada historia en un monólogo?\""
+  },
+  {
+    "questionId": "who_sends_memes_in_critical_moments",
+    "text": "\"¿Quién envía memes en momentos serios?\""
+  },
+  {
+    "questionId": "who_knows_everyone_secrets",
+    "text": "\"¿Quién conoce todos los secretos de los demás?\""
+  },
+  {
+    "questionId": "who_is_designated_group_therapist",
+    "text": "\"¿Quién es la terapeuta no oficial del grupo?\""
   }
 ]

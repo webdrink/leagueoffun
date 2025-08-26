@@ -58,5 +58,57 @@
     "questionId": "sports_sample_question_2",
     "text": "Sample question 2 for sports in de",
     "category": "sports"
+  },
+  {
+    "questionId": "who_is_worst_loser",
+    "text": "\"Who is the worst loser?\""
+  },
+  {
+    "questionId": "who_talks_during_sports_games",
+    "text": "\"Who talks during the sports games?\""
+  },
+  {
+    "questionId": "who_pretends_to_understand_rules",
+    "text": "\"Who pretends to understand the rules?\""
+  },
+  {
+    "questionId": "who_buys_fancy_gear_rarely_uses",
+    "text": "\"Who buys expensive sports equipment and never uses it?\""
+  },
+  {
+    "questionId": "who_counts_warmup_as_workout",
+    "text": "\"Who counts warming up as a workout?\""
+  },
+  {
+    "questionId": "who_joins_gym_for_sauna_only",
+    "text": "\"Who joins the gym just for the sauna?\""
+  },
+  {
+    "questionId": "who_competes_with_fitness_tracker",
+    "text": "\"Who competes only with a pedometer?\""
+  },
+  {
+    "questionId": "who_screams_like_tennis_star",
+    "text": "\"Who screams during sports like a tennis pro?\""
+  },
+  {
+    "questionId": "who_wears_headband_for_style",
+    "text": "\"Who wears a headband just as a fashion accessory?\""
+  },
+  {
+    "questionId": "who_celebrates_smallest_personal_record",
+    "text": "\"Who celebrates every mini-record ecstatically?\""
+  },
+  {
+    "questionId": "who_turns_every_activity_into_competition",
+    "text": "\"Who turns everything into a competition?\""
+  },
+  {
+    "questionId": "who_forgets_water_but_brings_protein_shake",
+    "text": "\"Who forgets water but has the protein shake with them?\""
+  },
+  {
+    "questionId": "who_streams_workout_live",
+    "text": "\"Who streams their workout live?\""
   }
 ]

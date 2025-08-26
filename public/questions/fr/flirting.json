@@ -33,5 +33,85 @@
     "questionId": "flirting_sample_question_2",
     "text": "Question exemple 2 pour flirter",
     "category": "flirting"
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_boss",
+    "text": "\"Qui va le plus probablement flirter avec son patron ?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_a_stranger",
+    "text": "\"Qui va le plus probablement flirter avec un étranger ?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_friends_partner",
+    "text": "\"Qui va le plus probablement flirter avec le partenaire d'un ami ?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_exs_friend",
+    "text": "\"Qui va le plus probablement flirter avec l'ami de l'ex-partenaire ?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_exs_parent",
+    "text": "\"Qui va le plus probablement flirter avec le parent de l'ex-partenaire ?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_exs_sibling",
+    "text": "\"Qui va le plus probablement flirter avec le frère ou la sœur de l'ex-partenaire ?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_exs_colleague",
+    "text": "\"Qui va le plus probablement flirter avec le collègue de l'ex-partenaire ?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_exs_friend_group",
+    "text": "\"Qui va le plus probablement flirter avec le groupe d'amis de l'ex-partenaire ?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_flirt_with_their_exs_family",
+    "text": "\"Qui va le plus probablement flirter avec la famille de l'ex-partenaire ?\""
+  },
+  {
+    "questionId": "who_flirts_with_the_most_people",
+    "text": "\"Qui flirte avec le plus de gens ?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_rejected",
+    "text": "\"Qui sera le plus souvent rejeté ?\""
+  },
+  {
+    "questionId": "who_flirts_in_awkward_situations",
+    "text": "\"Qui flirte dans des situations embarrassantes ?\""
+  },
+  {
+    "questionId": "who_is_most_charming_when_flirting",
+    "text": "\"Qui est le plus charmant en flirtant ?\""
+  },
+  {
+    "questionId": "who_flirts_with_their_friends",
+    "text": "\"Qui flirte avec ses amis ?\""
+  },
+  {
+    "questionId": "who_flirts_with_their_ex",
+    "text": "\"Qui flirte avec son ex ?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_flirting",
+    "text": "\"Qui sera le plus souvent surpris en train de flirter ?\""
+  },
+  {
+    "questionId": "who_flirts_with_the_waiter",
+    "text": "\"Qui flirte avec le serveur ?\""
+  },
+  {
+    "questionId": "who_flirts_with_their_ex",
+    "text": "\"Qui flirte avec son ex ?\""
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_flirting",
+    "text": "\"Qui sera le plus souvent surpris en train de flirter ?\""
+  },
+  {
+    "questionId": "who_flirts_with_the_waiter",
+    "text": "\"Qui flirte avec le serveur ?\""
   }
 ]

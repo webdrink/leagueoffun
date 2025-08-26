@@ -93,5 +93,81 @@
     "questionId": "in_bathroom_sample_question_2",
     "text": "Sample question 2 for in_bathroom in de",
     "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_takes_longest_showers",
+    "text": "\"Who takes the longest showers?\""
+  },
+  {
+    "questionId": "who_hoards_bathroom_products",
+    "text": "\"Who hoards bathroom products?\""
+  },
+  {
+    "questionId": "who_leaves_bathroom_messiest",
+    "text": "\"Who leaves the bathroom the messiest?\""
+  },
+  {
+    "questionId": "who_takes_selfies_in_mirror",
+    "text": "\"Who takes selfies in the mirror?\""
+  },
+  {
+    "questionId": "who_has_most_bathroom_time",
+    "text": "\"Who spends the most time in the bathroom?\""
+  },
+  {
+    "questionId": "who_leaves_bathroom_light_on",
+    "text": "\"Who leaves the bathroom light on?\""
+  },
+  {
+    "questionId": "who_has_most_bathroom_essentials",
+    "text": "\"Who has the most bathroom supplies?\""
+  },
+  {
+    "questionId": "who_takes_bathroom_breaks_during_work",
+    "text": "\"Who takes the most bathroom breaks during work?\""
+  },
+  {
+    "questionId": "who_has_most_bathroom_organization_skills",
+    "text": "\"Who has the best organizational skills in the bathroom?\""
+  },
+  {
+    "questionId": "who_sings_in_shower_like_concert",
+    "text": "\"Who sings a whole concert in the shower?\""
+  },
+  {
+    "questionId": "who_uses_face_mask_every_day",
+    "text": "\"Who does a face mask every day?\""
+  },
+  {
+    "questionId": "who_spends_an_hour_styling_hair",
+    "text": "\"Who needs an hour for hair styling?\""
+  },
+  {
+    "questionId": "who_leaves_empty_toilet_paper_roll",
+    "text": "\"Who leaves the empty toilet paper roll hanging?\""
+  },
+  {
+    "questionId": "who_brushes_teeth_while_dancing",
+    "text": "\"Who dances while brushing their teeth?\""
+  },
+  {
+    "questionId": "who_has_more_shampoo_than_clothes",
+    "text": "\"Who owns more shampoos than clothing items?\""
+  },
+  {
+    "questionId": "who_checks_phone_on_toilet_longest",
+    "text": "\"Who scrolls the longest on the toilet?\""
+  },
+  {
+    "questionId": "who_tried_diy_haircut_and_regretted",
+    "text": "\"Who cut their own hair and regrets it?\""
+  },
+  {
+    "questionId": "who_has_rubber_duck_collection",
+    "text": "\"Who collects rubber ducks?\""
+  },
+  {
+    "questionId": "who_uses_roommate_luxury_soap_secretly",
+    "text": "\"Who secretly uses their roommates' luxury soap?\""
   }
 ]

@@ -168,5 +168,85 @@
     "questionId": "who_would_forget_party_date",
     "text": "Wer würde am ehesten den Tag vergessen, an dem die Party stattfindet?",
     "category": "party"
+  },
+  {
+    "questionId": "who_dances_wildest",
+    "text": "\"Who dances the wildest?\""
+  },
+  {
+    "questionId": "who_drinks_most",
+    "text": "\"Who drinks the most?\""
+  },
+  {
+    "questionId": "who_leaves_earliest",
+    "text": "\"Who leaves the earliest?\""
+  },
+  {
+    "questionId": "who_stays_until_end",
+    "text": "\"Who stays until the end?\""
+  },
+  {
+    "questionId": "who_gives_best_toasts",
+    "text": "\"Who makes the best drinking toasts?\""
+  },
+  {
+    "questionId": "dance_on_table",
+    "text": "\"Who would be most likely to dance on a table?\""
+  },
+  {
+    "questionId": "karaoke_queen",
+    "text": "\"Who would be most likely to impress everyone at karaoke?\""
+  },
+  {
+    "questionId": "party_planner",
+    "text": "\"Who would organize the best party?\""
+  },
+  {
+    "questionId": "first_leave",
+    "text": "\"Who would be the first to leave the party?\""
+  },
+  {
+    "questionId": "last_standing",
+    "text": "\"Who would be the last one still awake?\""
+  },
+  {
+    "questionId": "who_requests_free_bird_at_club",
+    "text": "\"Who wishes to be at the club 'Free Bird'?\""
+  },
+  {
+    "questionId": "who_spills_first_drink",
+    "text": "\"Who spills the first drink?\""
+  },
+  {
+    "questionId": "who_thinks_shots_are_hydration",
+    "text": "\"Who holds shots for hydration?\""
+  },
+  {
+    "questionId": "who_starts_karaoke_without_mic",
+    "text": "\"Who starts karaoke without a microphone?\""
+  },
+  {
+    "questionId": "who_makes_toast_every_15_minutes",
+    "text": "\"Who makes a toast every 15 minutes?\""
+  },
+  {
+    "questionId": "who_takes_over_photobooth",
+    "text": "\"Who blocks the photo booth alone?\""
+  },
+  {
+    "questionId": "who_loses_phone_in_sofa",
+    "text": "\"Who loses their phone in the sofa?\""
+  },
+  {
+    "questionId": "who_crashes_vip_area_uninvited",
+    "text": "\"Who sneaks into the VIP area?\""
+  },
+  {
+    "questionId": "who_does_splits_on_dancefloor",
+    "text": "\"Who does the splits on the dance floor?\""
+  },
+  {
+    "questionId": "who_forgets_to_eat_before_drinking",
+    "text": "\"Who forgets to eat before partying?\""
   }
 ]

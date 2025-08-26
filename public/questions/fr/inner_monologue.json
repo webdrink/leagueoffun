@@ -18,5 +18,53 @@
     "questionId": "who_has_craziest_thoughts",
     "text": "Qui a les pensées les plus folles?",
     "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_rehearses_conversations_in_head",
+    "text": "\"Qui répète des conversations dans sa tête ?\""
+  },
+  {
+    "questionId": "who_creates_alternate_scenarios",
+    "text": "\"Qui crée des scénarios alternatifs ?\""
+  },
+  {
+    "questionId": "who_runs_through_social_scenarios",
+    "text": "\"Qui joue des scénarios sociaux dans sa tête ?\""
+  },
+  {
+    "questionId": "who_replays_embarrassing_moments_at_night",
+    "text": "\"Qui pense la nuit à des moments embarrassants de 2009 ?\""
+  },
+  {
+    "questionId": "who_practices_award_speech_in_shower",
+    "text": "\"Qui s'exerce sous la douche à un discours des Oscars ?\""
+  },
+  {
+    "questionId": "who_questions_if_they_locked_door",
+    "text": "\"Qui se demande sans cesse si la porte est verrouillée ?\""
+  },
+  {
+    "questionId": "who_argues_with_imaginary_rival",
+    "text": "\"Qui se dispute avec un rival imaginaire ?\""
+  },
+  {
+    "questionId": "who_composes_comebacks_too_late",
+    "text": "\"Qui trouve toujours les meilleures répliques trop tard ?\""
+  },
+  {
+    "questionId": "who_gives_self_pep_talk_before_calls",
+    "text": "\"Qui se fait des discours de motivation avant des appels téléphoniques ?\""
+  },
+  {
+    "questionId": "who_has_soundtrack_in_head",
+    "text": "\"Qui a une bande-son personnelle qui tourne dans sa tête ?\""
+  },
+  {
+    "questionId": "who_plans_world_domination_in_line",
+    "text": "\"Qui planifie la domination mondiale pendant qu'il fait la queue ?\""
+  },
+  {
+    "questionId": "who_thinks_barista_is_secretly_judging",
+    "text": "\"Qui croit que la barista l'évalue secrètement ?\""
   }
 ]

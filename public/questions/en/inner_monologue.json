@@ -33,5 +33,49 @@
     "questionId": "inner_monologue_sample_question_2",
     "text": "Sample question 2 for inner_monologue in de",
     "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_has_craziest_thoughts",
+    "text": "\"Who has the craziest thoughts?\""
+  },
+  {
+    "questionId": "who_runs_through_social_scenarios",
+    "text": "\"Who plays out social scenarios in their head?\""
+  },
+  {
+    "questionId": "who_replays_embarrassing_moments_at_night",
+    "text": "\"Who thinks about embarrassing moments from 2009 at night?\""
+  },
+  {
+    "questionId": "who_practices_award_speech_in_shower",
+    "text": "\"Who practices an Oscar speech in the shower?\""
+  },
+  {
+    "questionId": "who_questions_if_they_locked_door",
+    "text": "\"Who constantly wonders if the door is locked?\""
+  },
+  {
+    "questionId": "who_argues_with_imaginary_rival",
+    "text": "\"Who argues with an imaginary rival?\""
+  },
+  {
+    "questionId": "who_composes_comebacks_too_late",
+    "text": "\"Who always comes up with the best comebacks too late?\""
+  },
+  {
+    "questionId": "who_gives_self_pep_talk_before_calls",
+    "text": "\"Who gives themselves motivational speeches before phone calls?\""
+  },
+  {
+    "questionId": "who_has_soundtrack_in_head",
+    "text": "\"Who has their own soundtrack playing in their head?\""
+  },
+  {
+    "questionId": "who_plans_world_domination_in_line",
+    "text": "\"Who plans world domination while standing in line?\""
+  },
+  {
+    "questionId": "who_thinks_barista_is_secretly_judging",
+    "text": "\"Who believes that the barista is secretly judging him?\""
   }
 ]

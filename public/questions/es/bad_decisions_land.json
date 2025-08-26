@@ -33,5 +33,81 @@
     "questionId": "bad_decisions_land_sample_question_2",
     "text": "Pregunta de ejemplo 2 para el país de las malas decisiones",
     "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_takes_risks_without_thinking",
+    "text": "\"¿Quién asume riesgos sin pensar?\""
+  },
+  {
+    "questionId": "who_trusts_people_too_easily",
+    "text": "\"¿Quién confía demasiado en las personas?\""
+  },
+  {
+    "questionId": "who_makes_decisions_based_on_emotions",
+    "text": "\"¿Quién toma decisiones basadas en emociones?\""
+  },
+  {
+    "questionId": "who_would_follow_a_stranger_home",
+    "text": "\"¿Quién seguiría a un extraño a casa?\""
+  },
+  {
+    "questionId": "who_would_try_a_dangerous_stunt",
+    "text": "\"¿Quién probaría un truco peligroso?\""
+  },
+  {
+    "questionId": "who_would_steal_a_car",
+    "text": "\"¿Quién robaría un coche?\""
+  },
+  {
+    "questionId": "who_would_get_lost_in_the_woods",
+    "text": "\"¿Quién se perdería en el bosque?\""
+  },
+  {
+    "questionId": "who_would_try_a_strange_food",
+    "text": "\"¿Quién probaría una comida extraña?\""
+  },
+  {
+    "questionId": "who_would_jump_off_a_cliff",
+    "text": "\"¿Quién saltaría de un acantilado?\""
+  },
+  {
+    "questionId": "who_would_get_into_a_fight",
+    "text": "\"¿Quién se metería en una pelea?\""
+  },
+  {
+    "questionId": "who_would_try_to_fix_a_broken_device",
+    "text": "\"¿Quién intentaría reparar un dispositivo defectuoso?\""
+  },
+  {
+    "questionId": "who_would_ride_a_wild_animal",
+    "text": "\"¿Quién montaría un animal salvaje?\""
+  },
+  {
+    "questionId": "who_would_ask_a_stranger_for_money",
+    "text": "\"¿Quién le pediría dinero a un extraño?\""
+  },
+  {
+    "questionId": "who_would_try_to_sneak_into_a_party",
+    "text": "\"¿Quién intentaría colarse en una fiesta?\""
+  },
+  {
+    "questionId": "who_would_ride_a_skateboard_down_a_stairs",
+    "text": "\"¿Quién bajaría una escalera en patineta?\""
+  },
+  {
+    "questionId": "who_would_try_to_catch_a_fish_with_bare_hands",
+    "text": "\"¿Quién intentaría atrapar un pez con las manos desnudas?\""
+  },
+  {
+    "questionId": "who_would_try_to_jump_over_a_fire",
+    "text": "\"¿Quién intentaría saltar sobre un fuego?\""
+  },
+  {
+    "questionId": "who_would_ask_a_stranger_for_help",
+    "text": "\"¿Quién le pediría ayuda a un extraño?\""
+  },
+  {
+    "questionId": "who_would_try_to_fix_a_strange_machine",
+    "text": "\"¿Quién intentaría reparar una máquina extraña?\""
   }
 ]

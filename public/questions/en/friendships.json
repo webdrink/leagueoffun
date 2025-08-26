@@ -43,5 +43,77 @@
     "questionId": "friendships_sample_question_2",
     "text": "Sample question 2 for friendships in de",
     "category": "friendships"
+  },
+  {
+    "questionId": "who_is_most_supportive_friend",
+    "text": "\"Who is the most supportive friend?\""
+  },
+  {
+    "questionId": "who_is_most_funny_friend",
+    "text": "\"Who is the funniest friend?\""
+  },
+  {
+    "questionId": "who_is_most_adventurous_friend",
+    "text": "\"Who is the most adventurous friend?\""
+  },
+  {
+    "questionId": "who_is_most_loyal_friend",
+    "text": "\"Who is the most loyal friend?\""
+  },
+  {
+    "questionId": "who_is_most_generous_friend",
+    "text": "\"Who is the most generous friend?\""
+  },
+  {
+    "questionId": "who_is_most_empathetic_friend",
+    "text": "\"Who is the most empathetic friend?\""
+  },
+  {
+    "questionId": "who_is_most_inspiring_friend",
+    "text": "\"Who is the most inspiring friend?\""
+  },
+  {
+    "questionId": "who_is_most_organized_friend",
+    "text": "\"Who is the most organized friend?\""
+  },
+  {
+    "questionId": "who_leaves_voice_memos_instead_of_texts",
+    "text": "\"Who prefers to send 5-minute voice messages instead of texts?\""
+  },
+  {
+    "questionId": "who_never_has_phone_charged",
+    "text": "\"Who never has enough battery when you need them?\""
+  },
+  {
+    "questionId": "who_forgets_birthdays_without_facebook",
+    "text": "\"Who forgets every birthday without a Facebook reminder?\""
+  },
+  {
+    "questionId": "who_arrives_an_hour_late_but_with_coffee",
+    "text": "\"Who arrives an hour late but brings coffee?\""
+  },
+  {
+    "questionId": "who_gives_questionable_life_advice",
+    "text": "\"Who gives questionable life advice?\""
+  },
+  {
+    "questionId": "who_ghosts_groupchat_for_weeks",
+    "text": "\"Who ghosts the group chat for weeks?\""
+  },
+  {
+    "questionId": "who_turns_every_story_into_a_monologue",
+    "text": "\"Who turns every story into a monologue?\""
+  },
+  {
+    "questionId": "who_sends_memes_in_critical_moments",
+    "text": "\"Who sends memes during serious moments?\""
+  },
+  {
+    "questionId": "who_knows_everyone_secrets",
+    "text": "\"Who knows all the secrets of the others?\""
+  },
+  {
+    "questionId": "who_is_designated_group_therapist",
+    "text": "\"Who is the unofficial group therapist?\""
   }
 ]

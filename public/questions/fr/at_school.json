@@ -31,5 +31,181 @@
   },
   {
     "category": "at_school"
+  },
+  {
+    "questionId": "wer_ist_der_klassenstreber",
+    "text": "\"Qui est le premier de la classe ?\""
+  },
+  {
+    "questionId": "wer_ist_am_besten_in_biologie",
+    "text": "\"Qui est le meilleur en biologie ?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbester_in_sport",
+    "text": "\"Qui est le meilleur en sport ?\""
+  },
+  {
+    "questionId": "wer_ist_am_besten_in_chemie",
+    "text": "\"Qui est le meilleur en chimie ?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_kunst",
+    "text": "\"Qui est le meilleur en arts ?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_musik",
+    "text": "\"Qui est le meilleur en musique ?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_physik",
+    "text": "\"Qui est le meilleur en physique ?\""
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_informatik",
+    "text": "\"Qui est le meilleur en informatique ?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_gespickt",
+    "text": "\"Qui a le plus triché à l'école ?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_geschummelt",
+    "text": "\"Qui a le plus triché en classe ?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_geschlafen",
+    "text": "\"Qui a le plus dormi à l'école ?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_gefehlt",
+    "text": "\"Qui a le plus manqué à l'école ?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_gelacht",
+    "text": "\"Qui a le plus ri à l'école ?\""
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_geweint",
+    "text": "\"Qui a le plus pleuré à l'école ?\""
+  },
+  {
+    "questionId": "wer_war_eher_der_lehrer_als_der_schuler",
+    "text": "\"Qui était plus enseignant qu'élève ?\""
+  },
+  {
+    "questionId": "wem_hat_die_schule_spass_gemacht",
+    "text": "\"Qui s'est amusé à l'école ?\""
+  },
+  {
+    "questionId": "wer_hat_am_haufigsten_geschummelt",
+    "text": "\"Qui a triché le plus souvent ?\""
+  },
+  {
+    "questionId": "wer_hatte_den_schlimmsten_sitznachbarn",
+    "text": "\"Qui avait le pire voisin de siège ?\""
+  },
+  {
+    "questionId": "wer_war_heimlich_verliebt_in_eine_lehrperson",
+    "text": "\"Qui était secrètement amoureux d'un enseignant ?\""
+  },
+  {
+    "questionId": "wer_war_klassensprecherin_aus_versehen",
+    "text": "\"Qui a été délégué de classe par accident ?\""
+  },
+  {
+    "questionId": "wer_hat_die_besten_ausreden_fur_nicht_gemachte_hau",
+    "text": "\"Qui a les meilleures excuses pour ne pas avoir fait ses devoirs ?\""
+  },
+  {
+    "questionId": "wer_war_der_pausenclown",
+    "text": "\"Qui était le clown de la récréation ?\""
+  },
+  {
+    "questionId": "wer_wurde_am_haufigsten_erwischt",
+    "text": "\"Qui a été attrapé le plus souvent ?\""
+  },
+  {
+    "questionId": "wer_hatte_den_hasslichsten_turnbeutel",
+    "text": "\"Qui avait le sac de sport le plus moche ?\""
+  },
+  {
+    "questionId": "wer_war_immer_vorbereitet",
+    "text": "\"Qui était toujours préparé ?\""
+  },
+  {
+    "questionId": "who_always_forgets_homework",
+    "text": "\"Qui oublie toujours ses devoirs ?\""
+  },
+  {
+    "questionId": "who_sits_in_back_row",
+    "text": "\"Qui est toujours assis au dernier rang ?\""
+  },
+  {
+    "questionId": "who_always_raises_hand",
+    "text": "\"Qui lève toujours la main ?\""
+  },
+  {
+    "questionId": "who_sleeps_during_class",
+    "text": "\"Qui dort pendant le cours ?\""
+  },
+  {
+    "questionId": "who_texts_during_lectures",
+    "text": "\"Qui envoie des messages pendant le cours ?\""
+  },
+  {
+    "questionId": "who_comes_unprepared_to_exams",
+    "text": "\"Qui vient aux examens sans préparation ?\""
+  },
+  {
+    "questionId": "who_copies_homework_last_minute",
+    "text": "\"Qui copie les devoirs à la dernière minute ?\""
+  },
+  {
+    "questionId": "who_skips_most_classes",
+    "text": "\"Qui fait le plus de manquements ?\""
+  },
+  {
+    "questionId": "who_brings_best_lunch_to_school",
+    "text": "\"Qui apporte le meilleur déjeuner à l'école ?\""
+  },
+  {
+    "questionId": "who_asks_for_deadline_extension",
+    "text": "\"Qui demande des prolongations ?\""
+  },
+  {
+    "questionId": "who_arrives_last_minute_to_class",
+    "text": "\"Qui arrive à la dernière minute en cours ?\""
+  },
+  {
+    "questionId": "who_takes_best_notes",
+    "text": "\"Qui prend les meilleures notes ?\""
+  },
+  {
+    "questionId": "who_forgets_school_supplies",
+    "text": "\"Qui oublie son matériel scolaire ?\""
+  },
+  {
+    "questionId": "who_always_has_excuses",
+    "text": "\"Qui a toujours des excuses ?\""
+  },
+  {
+    "questionId": "who_joins_too_many_clubs",
+    "text": "\"Qui s'inscrit à trop de clubs ?\""
+  },
+  {
+    "questionId": "who_disrupts_class_most",
+    "text": "\"Qui perturbe le cours le plus ?\""
+  },
+  {
+    "questionId": "who_stresses_over_minor_assignments",
+    "text": "\"Qui se stresse pour de petites tâches ?\""
+  },
+  {
+    "questionId": "who_procrastinates_until_deadline",
+    "text": "\"Qui procrastine jusqu'à la date limite ?\""
+  },
+  {
+    "questionId": "who_studies_night_before_exam",
+    "text": "\"Qui étudie seulement la nuit avant l'examen ?\""
   }
 ]

@@ -193,5 +193,65 @@
     "questionId": "who_would_forget_party_date",
     "text": "Wer würde am ehesten den Tag vergessen, an dem die Party stattfindet?",
     "category": "party"
+  },
+  {
+    "questionId": "dance_on_table",
+    "text": "\"¿Quién sería el más probable en bailar sobre una mesa?\""
+  },
+  {
+    "questionId": "karaoke_queen",
+    "text": "\"¿Quién sería el más probable en impresionar a todos en el karaoke?\""
+  },
+  {
+    "questionId": "party_planner",
+    "text": "\"¿Quién organizaría la mejor fiesta?\""
+  },
+  {
+    "questionId": "first_leave",
+    "text": "\"¿Quién sería el primero en abandonar la fiesta?\""
+  },
+  {
+    "questionId": "last_standing",
+    "text": "\"¿Quién sería el último en quedarse despierto?\""
+  },
+  {
+    "questionId": "who_requests_free_bird_at_club",
+    "text": "\"¿Quién pediría \"Free Bird\" en el club?\""
+  },
+  {
+    "questionId": "who_spills_first_drink",
+    "text": "\"¿Quién derrama la primera bebida?\""
+  },
+  {
+    "questionId": "who_thinks_shots_are_hydration",
+    "text": "\"¿Quién ofrece shots para hidratarse?\""
+  },
+  {
+    "questionId": "who_starts_karaoke_without_mic",
+    "text": "\"¿Quién inicia el karaoke sin micrófono?\""
+  },
+  {
+    "questionId": "who_makes_toast_every_15_minutes",
+    "text": "\"¿Quién hace un brindis cada 15 minutos?\""
+  },
+  {
+    "questionId": "who_takes_over_photobooth",
+    "text": "\"¿Quién bloquea la fotocabina solo?\""
+  },
+  {
+    "questionId": "who_loses_phone_in_sofa",
+    "text": "\"¿Quién pierde el teléfono en el sofá?\""
+  },
+  {
+    "questionId": "who_crashes_vip_area_uninvited",
+    "text": "\"¿Quién se cuela en el área VIP?\""
+  },
+  {
+    "questionId": "who_does_splits_on_dancefloor",
+    "text": "\"¿Quién hace el espagat en la pista de baile?\""
+  },
+  {
+    "questionId": "who_forgets_to_eat_before_drinking",
+    "text": "\"¿Quién se olvida de comer antes de la fiesta?\""
   }
 ]

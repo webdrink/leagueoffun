@@ -18,5 +18,105 @@
     "questionId": "who_forgets_to_flush",
     "text": "Qui oublie de tirer la chasse d'eau?",
     "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_takes_longest_in_bathroom",
+    "text": "\"Qui met le plus de temps dans la salle de bain ?\""
+  },
+  {
+    "questionId": "who_leaves_wet_towels_on_floor",
+    "text": "\"Qui laisse des serviettes mouillées par terre ?\""
+  },
+  {
+    "questionId": "who_sings_in_shower",
+    "text": "\"Qui chante sous la douche ?\""
+  },
+  {
+    "questionId": "who_forgets_to_buy_toilet_paper",
+    "text": "\"Qui oublie d'acheter du papier toilette ?\""
+  },
+  {
+    "questionId": "who_has_most_beauty_products",
+    "text": "\"Qui a le plus de produits de beauté ?\""
+  },
+  {
+    "questionId": "who_leaves_hair_in_drain",
+    "text": "\"Qui laisse des cheveux dans le drain ?\""
+  },
+  {
+    "questionId": "who_uses_all_hot_water",
+    "text": "\"Qui utilise toute l'eau chaude ?\""
+  },
+  {
+    "questionId": "who_hoards_bathroom_products",
+    "text": "\"Qui fait des réserves de produits de salle de bain ?\""
+  },
+  {
+    "questionId": "who_leaves_bathroom_messiest",
+    "text": "\"Qui laisse la salle de bain dans le plus grand désordre ?\""
+  },
+  {
+    "questionId": "who_takes_selfies_in_mirror",
+    "text": "\"Qui prend des selfies dans le miroir ?\""
+  },
+  {
+    "questionId": "who_has_most_bathroom_time",
+    "text": "\"Qui passe le plus de temps dans la salle de bain ?\""
+  },
+  {
+    "questionId": "who_leaves_bathroom_light_on",
+    "text": "\"Qui laisse la lumière de la salle de bain allumée ?\""
+  },
+  {
+    "questionId": "who_has_most_bathroom_essentials",
+    "text": "\"Qui a le plus d'ustensiles de salle de bain ?\""
+  },
+  {
+    "questionId": "who_takes_bathroom_breaks_during_work",
+    "text": "\"Qui fait le plus de pauses dans la salle de bain pendant le travail ?\""
+  },
+  {
+    "questionId": "who_has_most_bathroom_organization_skills",
+    "text": "\"Qui a les meilleures compétences en organisation dans la salle de bain ?\""
+  },
+  {
+    "questionId": "who_sings_in_shower_like_concert",
+    "text": "\"Qui chante un concert entier sous la douche ?\""
+  },
+  {
+    "questionId": "who_uses_face_mask_every_day",
+    "text": "\"Qui fait un masque facial tous les jours ?\""
+  },
+  {
+    "questionId": "who_spends_an_hour_styling_hair",
+    "text": "\"Qui met une heure pour coiffer ses cheveux ?\""
+  },
+  {
+    "questionId": "who_leaves_empty_toilet_paper_roll",
+    "text": "\"Qui laisse le rouleau de papier toilette vide ?\""
+  },
+  {
+    "questionId": "who_brushes_teeth_while_dancing",
+    "text": "\"Qui danse en se brossant les dents ?\""
+  },
+  {
+    "questionId": "who_has_more_shampoo_than_clothes",
+    "text": "\"Qui possède plus de shampoings que de vêtements ?\""
+  },
+  {
+    "questionId": "who_checks_phone_on_toilet_longest",
+    "text": "\"Qui passe le plus de temps sur les toilettes ?\""
+  },
+  {
+    "questionId": "who_tried_diy_haircut_and_regretted",
+    "text": "\"Qui s'est coupé les cheveux tout seul et le regrette ?\""
+  },
+  {
+    "questionId": "who_has_rubber_duck_collection",
+    "text": "\"Qui collectionne les canards en plastique ?\""
+  },
+  {
+    "questionId": "who_uses_roommate_luxury_soap_secretly",
+    "text": "\"Qui utilise en secret le savon de luxe des colocataires ?\""
   }
 ]

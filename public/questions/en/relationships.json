@@ -108,5 +108,37 @@
     "questionId": "relationship_sample_question_2",
     "text": "Sample question 2 for relationships in de",
     "category": "relationships"
+  },
+  {
+    "questionId": "who_falls_in_love_quickly",
+    "text": "\"Who falls in love quickly?\""
+  },
+  {
+    "questionId": "who_gives_best_relationship_advice",
+    "text": "\"Who gives the best relationship advice?\""
+  },
+  {
+    "questionId": "who_takes_longest_to_commit",
+    "text": "\"Who takes the longest to commit?\""
+  },
+  {
+    "questionId": "relationship_advice",
+    "text": "\"Who would be most likely to give good relationship advice?\""
+  },
+  {
+    "questionId": "first_date",
+    "text": "\"Who would plan the best first date?\""
+  },
+  {
+    "questionId": "forget_anniversary",
+    "text": "\"Who would be most likely to forget an anniversary?\""
+  },
+  {
+    "questionId": "matchmaker",
+    "text": "\"Who would be the best matchmaker?\""
+  },
+  {
+    "questionId": "secret_admirer",
+    "text": "\"Who would most likely have a secret admirer?\""
   }
 ]

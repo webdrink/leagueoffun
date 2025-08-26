@@ -178,5 +178,85 @@
     "questionId": "movies_series_sample_question_2",
     "text": "Sample question 2 for movies_series in de",
     "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_most_movies",
+    "text": "\"Qui regarde le plus de films ?\""
+  },
+  {
+    "questionId": "who_binges_entire_series_in_one_day",
+    "text": "\"Qui regarde une série entière en une journée ?\""
+  },
+  {
+    "questionId": "who_always_spoils_movie_endings",
+    "text": "\"Qui révèle toujours la fin des films ?\""
+  },
+  {
+    "questionId": "who_cries_during_romantic_movies",
+    "text": "\"Qui pleure devant des films romantiques ?\""
+  },
+  {
+    "questionId": "who_quotes_movies_constantly",
+    "text": "\"Qui cite constamment des films ?\""
+  },
+  {
+    "questionId": "who_knows_most_movie_trivia",
+    "text": "\"Qui connaît le plus de faits sur les films ?\""
+  },
+  {
+    "questionId": "who_watches_same_movie_repeatedly",
+    "text": "\"Qui regarde le même film encore et encore ?\""
+  },
+  {
+    "questionId": "who_recommends_movies_to_everyone",
+    "text": "\"Qui recommande des films à tout le monde ?\""
+  },
+  {
+    "questionId": "who_is_the_movie_critic",
+    "text": "\"Qui est le plus grand critique de films ?\""
+  },
+  {
+    "questionId": "who_watches_movies_in_original_language",
+    "text": "\"Qui regarde des films en version originale ?\""
+  },
+  {
+    "questionId": "who_is_the_biggest_film_buff",
+    "text": "\"Qui est le plus grand fan de films ?\""
+  },
+  {
+    "questionId": "who_watches_movies_on_their_phone",
+    "text": "\"Qui regarde des films sur son téléphone ?\""
+  },
+  {
+    "questionId": "who_watches_movies_in_the_cinema",
+    "text": "\"Qui regarde des films au cinéma ?\""
+  },
+  {
+    "questionId": "who_watches_movies_with_friends",
+    "text": "\"Qui regarde des films avec des amis ?\""
+  },
+  {
+    "questionId": "who_watches_movies_with_family",
+    "text": "\"Qui regarde des films en famille ?\""
+  },
+  {
+    "questionId": "who_watches_movies_alone",
+    "text": "\"Qui regarde des films seul ?\""
+  },
+  {
+    "questionId": "who_watches_movies_with_popcorn",
+    "text": "\"Qui regarde des films avec du popcorn salé ?\""
+  },
+  {
+    "questionId": "who_watches_movies_with_subtitles",
+    "text": "\"Qui regarde des films avec des sous-titres ?\""
+  },
+  {
+    "questionId": "who_watches_movies_with_dubbed_audio",
+    "text": "\"Qui regarde des films en version doublée ?\""
+  },
+  {
+    "questionId": "who_watches_romance_movies",
+    "text": "\"Qui regarde des films romantiques ?\""
   }
 ]

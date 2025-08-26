@@ -1,0 +1,34 @@
+[
+  {
+    "questionId": "who_is_most_like_kevin",
+    "text": "\"¿Quién es más parecido a Kevin?\""
+  },
+  {
+    "questionId": "who_would_kevin_be_friends_with",
+    "text": "\"¿Con quién sería amigo Kevin?\""
+  },
+  {
+    "questionId": "who_would_kevin_annoy_most",
+    "text": "\"¿A quién le molestaría más Kevin?\""
+  },
+  {
+    "questionId": "who_would_help_kevin",
+    "text": "\"¿Quién ayudaría a Kevin?\""
+  },
+  {
+    "questionId": "who_would_understand_kevin",
+    "text": "\"¿Quién entendería a Kevin?\""
+  },
+  {
+    "questionId": "who_has_kevin_energy",
+    "text": "\"¿Quién tiene la energía de Kevin?\""
+  },
+  {
+    "questionId": "who_would_laugh_at_kevins_jokes",
+    "text": "\"¿Quién se reiría de los chistes de Kevin?\""
+  },
+  {
+    "questionId": "who_would_kevin_call_for_help",
+    "text": "\"¿A quién le pediría ayuda Kevin?\""
+  }
+]

@@ -38,5 +38,45 @@
     "questionId": "who_knows_most_about_history",
     "text": "Wer weiß am meisten über Geschichte?",
     "category": "in_past"
+  },
+  {
+    "questionId": "who_wants_to_visit_dinosaurs",
+    "text": "\"Who would like to see dinosaurs live?\""
+  },
+  {
+    "questionId": "who_thinks_they_were_a_viking",
+    "text": "\"Who believes they were a Viking in a past life?\""
+  },
+  {
+    "questionId": "who_misses_90s_ringtones",
+    "text": "\"Who misses Nokia ringtones from the 90s?\""
+  },
+  {
+    "questionId": "who_would_bring_smartphone_to_middle_ages",
+    "text": "\"Who would smuggle a smartphone into the Middle Ages?\""
+  },
+  {
+    "questionId": "who_collects_vintage_cassettes",
+    "text": "\"Who collects old music cassettes?\""
+  },
+  {
+    "questionId": "who_thinks_their_childhood_cartoon_best",
+    "text": "\"Who thinks their childhood shows were THE best?\""
+  },
+  {
+    "questionId": "who_was_tamagotchi_serial_killer",
+    "text": "\"Who was a Tamagotchi serial killer?\""
+  },
+  {
+    "questionId": "who_have_scrapbooks_of_ticket_stubs",
+    "text": "\"Who has a scrapbook full of concert tickets?\""
+  },
+  {
+    "questionId": "who_reminisces_about_pre_internet_bliss",
+    "text": "\"Who reminisces about life before the internet?\""
+  },
+  {
+    "questionId": "who_claims_they_invented_planking",
+    "text": "\"Who claims to have invented planking?\""
   }
 ]
