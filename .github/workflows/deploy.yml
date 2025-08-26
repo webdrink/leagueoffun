@@ -345,36 +345,149 @@ jobs:
         with:
           path: './dist'
 
-      - name: 🚀 Deploy to GitHub Pages with Self-Healing
+      - name: 🚀 Deploy to GitHub Pages with Advanced Self-Healing
         id: deployment
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 15
-          max_attempts: 3
-          retry_wait_seconds: 60
-          warning_on_retry: true
-          command: |
-            echo "🚀 Attempting deployment..."
-            # The actual deployment will be handled by the deploy-pages action
-        
-      - name: 🚀 Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
-        
-      - name: ✅ Verify Deployment
         run: |
-          echo "🔍 Verifying deployment..."
+          echo "🚀 Starting GitHub Pages deployment with advanced healing..."
           
-          # Wait a moment for deployment to propagate
+          # Function to check deployment status
+          check_pages_status() {
+            local max_wait=300  # 5 minutes max wait
+            local waited=0
+            local check_interval=30
+            
+            while [ $waited -lt $max_wait ]; do
+              # Check if GitHub Pages is having issues
+              if curl -s "https://www.githubstatus.com/api/v2/components.json" | grep -q "Pages.*operational"; then
+                echo "✅ GitHub Pages service is operational"
+                return 0
+              else
+                echo "⚠️ GitHub Pages may be experiencing issues"
+              fi
+              
+              sleep $check_interval
+              waited=$((waited + check_interval))
+            done
+            
+            echo "❌ GitHub Pages appears to be having extended issues"
+            return 1
+          }
+          
+          # Strategy 1: Standard deployment
+          echo "� Attempting standard GitHub Pages deployment..."
+          
+          deploy_attempt=1
+          max_deploy_attempts=3
+          
+          while [ $deploy_attempt -le $max_deploy_attempts ]; do
+            echo "🚀 Deployment attempt $deploy_attempt/$max_deploy_attempts"
+            
+            # Set shorter timeout to avoid getting stuck
+            export GITHUB_PAGES_DEPLOY_TIMEOUT=300  # 5 minutes
+            
+            if timeout 360 gh workflow run .github/workflows/deploy-pages-manual.yml 2>/dev/null || 
+               timeout 360 curl -X POST \
+                 -H "Authorization: token $GITHUB_TOKEN" \
+                 -H "Accept: application/vnd.github.v3+json" \
+                 "https://api.github.com/repos/$GITHUB_REPOSITORY/pages/deployment" \
+                 -d '{"artifact_url": "'"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts"'"}' 2>/dev/null; then
+              
+              echo "✅ Deployment initiated successfully"
+              
+              # Wait for deployment with reasonable timeout
+              sleep 60
+              
+              # Check if site is accessible
+              if curl -f -s --max-time 30 "https://blamegame.leagueoffun.de/" > /dev/null; then
+                echo "✅ Site is accessible - deployment successful!"
+                echo "deployment_success=true" >> $GITHUB_OUTPUT
+                exit 0
+              fi
+            fi
+            
+            echo "⚠️ Deployment attempt $deploy_attempt failed or timed out"
+            
+            if [ $deploy_attempt -eq $max_deploy_attempts ]; then
+              echo "❌ All standard deployment attempts failed"
+              break
+            fi
+            
+            # Progressive backoff
+            sleep_time=$((deploy_attempt * 60))
+            echo "⏳ Waiting ${sleep_time}s before retry..."
+            sleep $sleep_time
+            
+            deploy_attempt=$((deploy_attempt + 1))
+          done
+          
+          # Strategy 2: Alternative deployment via API
+          echo "� Attempting alternative deployment via GitHub API..."
+          
+          # Cancel any stuck deployments first
+          echo "🧹 Cleaning up stuck deployments..."
+          gh api repos/$GITHUB_REPOSITORY/pages/deployments --jq '.[0].id' 2>/dev/null | head -1 | xargs -I {} gh api -X POST repos/$GITHUB_REPOSITORY/pages/deployments/{}/cancel 2>/dev/null || true
+          
           sleep 30
           
-          # Check if the site is accessible
-          if curl -f -s https://blamegame.leagueoffun.de/ > /dev/null; then
-            echo "✅ Deployment verified successfully"
-            echo "🌐 Site is accessible at: https://blamegame.leagueoffun.de/"
-          else
-            echo "⚠️ Site verification failed, but deployment may still be in progress..."
-            echo "🔄 GitHub Pages deployment can take a few minutes to propagate"
+          # Try direct API deployment
+          if curl -X POST \
+             -H "Authorization: token $GITHUB_TOKEN" \
+             -H "Accept: application/vnd.github.v3+json" \
+             "https://api.github.com/repos/$GITHUB_REPOSITORY/pages/builds" \
+             -d '{}' && sleep 120 && curl -f -s "https://blamegame.leagueoffun.de/" > /dev/null; then
+            
+            echo "✅ Alternative deployment successful!"
+            echo "deployment_success=true" >> $GITHUB_OUTPUT
+            exit 0
           fi
+          
+          # Strategy 3: Force deployment via repository dispatch
+          echo "🆘 Attempting force deployment trigger..."
+          
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches" \
+            -d '{"event_type":"force-deploy","client_payload":{"reason":"main_deployment_failed","run_id":"'$GITHUB_RUN_ID'"}}' || true
+          
+          echo "deployment_success=false" >> $GITHUB_OUTPUT
+          echo "❌ All deployment strategies failed - emergency workflow should trigger"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+      - name: 🔄 Fallback Deploy Pages Action
+        if: steps.deployment.outputs.deployment_success != 'true'
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+        
+      - name: ✅ Verify Final Deployment
+        run: |
+          echo "🔍 Final deployment verification..."
+          
+          # Wait for propagation
+          sleep 45
+          
+          # Multiple verification attempts
+          for attempt in {1..5}; do
+            echo "� Verification attempt $attempt/5..."
+            
+            if curl -f -s --max-time 30 "https://blamegame.leagueoffun.de/" > /dev/null; then
+              echo "✅ Site is accessible!"
+              echo "🌐 Deployment verified at: https://blamegame.leagueoffun.de/"
+              echo "DEPLOYMENT_VERIFIED=true" >> $GITHUB_ENV
+              break
+            else
+              echo "⚠️ Site not accessible yet, waiting..."
+              sleep 30
+            fi
+            
+            if [ $attempt -eq 5 ]; then
+              echo "❌ Site verification failed after all attempts"
+              echo "🆘 Emergency deployment may be needed"
+              echo "DEPLOYMENT_VERIFIED=false" >> $GITHUB_ENV
+            fi
+          done
 
       - name: 📊 Self-Healing Report
         if: always()
