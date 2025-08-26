@@ -85,6 +85,16 @@ jobs:
       - name: 📥 Install Dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: 🔢 Update Version
+        run: |
+          echo "🔢 Managing version information..."
+          pnpm run version:update
+          
+          # Output version for other steps
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "📊 Updated to version: $VERSION"
+
       - name: 🌐 Auto-translate if needed
         if: needs.pre-deploy-checks.outputs.needs-translation == 'true'
         run: |
@@ -164,9 +174,33 @@ jobs:
               echo "⚠️ JSON files not yet accessible, but main site is up"
               echo "This might be due to CDN propagation delay"
             fi
+            
+            # Verify deployed version matches expected version
+            sleep 15
+            echo "🔍 Checking deployed version..."
+            if curl -f -s --max-time 30 "https://blamegame.leagueoffun.de/version.json" > /tmp/deployed_version.json; then
+              DEPLOYED_VERSION=$(cat /tmp/deployed_version.json | jq -r '.version')
+              EXPECTED_VERSION="${{ env.VERSION }}"
+              
+              echo "📊 Expected version: $EXPECTED_VERSION"
+              echo "📊 Deployed version: $DEPLOYED_VERSION"
+              
+              if [ "$DEPLOYED_VERSION" = "$EXPECTED_VERSION" ]; then
+                echo "✅ Version verification successful!"
+                echo "DEPLOYMENT_VERSION_VERIFIED=true" >> $GITHUB_ENV
+              else
+                echo "⚠️ Version mismatch detected!"
+                echo "Expected: $EXPECTED_VERSION, Deployed: $DEPLOYED_VERSION"
+                echo "DEPLOYMENT_VERSION_VERIFIED=false" >> $GITHUB_ENV
+              fi
+            else
+              echo "⚠️ Could not fetch version.json from deployed site"
+              echo "DEPLOYMENT_VERSION_VERIFIED=unknown" >> $GITHUB_ENV
+            fi
           else
             echo "⚠️ Site not immediately accessible, this might be normal"
             echo "CDN propagation can take a few minutes"
+            echo "DEPLOYMENT_VERSION_VERIFIED=unknown" >> $GITHUB_ENV
           fi
 
       - name: 📊 Deployment Report
@@ -174,8 +208,21 @@ jobs:
         run: |
           echo "## 🚀 Deployment Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔢 **Version**: ${{ env.VERSION }}" >> $GITHUB_STEP_SUMMARY
           echo "- 🏗️ **Build Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
           echo "- 🚀 **Deployment**: ${{ steps.deployment.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ **Version Verification**: ${{ env.DEPLOYMENT_VERSION_VERIFIED }}" >> $GITHUB_STEP_SUMMARY
           echo "- 🌐 **Site URL**: https://blamegame.leagueoffun.de/" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "_Deployment completed using simplified GitHub Pages action._" >> $GITHUB_STEP_SUMMARY
+          echo "_Deployment completed using simplified GitHub Pages action with version verification._" >> $GITHUB_STEP_SUMMARY
+          
+          # Show how to verify deployment manually
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔧 Manual Verification Commands" >> $GITHUB_STEP_SUMMARY
+          echo '```bash' >> $GITHUB_STEP_SUMMARY
+          echo "# Verify deployment status" >> $GITHUB_STEP_SUMMARY
+          echo "pnpm run deploy:verify" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "# Check version directly" >> $GITHUB_STEP_SUMMARY
+          echo "curl https://blamegame.leagueoffun.de/version.json" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
