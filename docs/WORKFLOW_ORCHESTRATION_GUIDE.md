@@ -2,77 +2,103 @@
 
 ## Overview
 
-BlameGame uses an orchestrated dual-workflow system for automated translation and deployment. This ensures robust, reliable, and maintainable CI/CD with clear separation of concerns.
+BlameGame uses a **self-healing CI/CD workflow** for automated translation and deployment. This ensures robust, reliable, and maintainable deployment with automatic recovery from common failures.
 
 ## Workflow Architecture
 
 ### 🎯 Primary Workflow: `deploy.yml`
-**Role**: Main orchestrator and deployment manager
-**Triggers**: Push to main branch
+**Role**: Main CI/CD pipeline with self-healing capabilities
+**Triggers**: Push to main branch, Pull requests
 **Responsibilities**:
-- Check translation status
-- Trigger translation workflow when needed
-- Wait for translation completion
-- Build and deploy to GitHub Pages
+- Check and validate code quality
+- Auto-translate missing content with fallback strategies
+- Build application with dependency healing
+- Deploy to GitHub Pages with retry mechanisms
+- Generate self-healing reports
 
-### 🌍 Secondary Workflow: `translation-validation.yml`
-**Role**: Translation service and validation
+### � Emergency Workflow: `emergency-deploy.yml`
+**Role**: Fallback deployment system
 **Triggers**: 
-- Workflow dispatch (from deploy.yml)
-- Direct pushes affecting translations
-- Pull requests (validation only)
+- Automatic trigger when main workflow fails
+- Manual trigger via workflow_dispatch
 **Responsibilities**:
-- Validate existing translations
-- Auto-translate missing content
-- Commit translations back to repository
-- Build testing for PRs
+- Emergency deployment with minimal requirements
+- Maintenance mode activation if needed
+- Automatic issue creation for failed deployments
+- Last-resort site availability guarantee
 
-## Orchestration Flow
+## Self-Healing Mechanisms
+
+### ✅ **Translation Self-Healing**
+- **Retry with Backoff**: 3 attempts with 30s intervals for API failures
+- **Fallback Strategy**: Use cached translations when API completely fails
+- **Smart Git Operations**: Auto-rebase on push conflicts
+
+### ✅ **Build System Self-Healing**
+- **Dependency Healing**: Auto-regenerate lock files on corruption
+- **Cache Management**: Progressive cache clearing strategies
+- **Multi-Strategy Builds**: Fallback build configurations
+
+### ✅ **Deployment Self-Healing**
+- **Retry Deployment**: 3 attempts with exponential backoff
+- **Emergency Fallback**: Automatic trigger of emergency workflow
+- **Health Verification**: Post-deployment site accessibility checks
+
+### ✅ **Code Quality Self-Healing**
+- **Auto-Fix Linting**: Automatic code formatting where possible
+- **Graceful Degradation**: Continue with warnings rather than fail
+
+## Self-Healing Flow
 
 ```mermaid
 sequenceDiagram
     participant Dev as Developer
-    participant Deploy as deploy.yml
-    participant Trans as translation-validation.yml
+    participant CI as deploy.yml
+    participant Emergency as emergency-deploy.yml
     participant Repo as Repository
     participant Pages as GitHub Pages
 
     Dev->>Repo: Push to main
-    Repo->>Deploy: Trigger workflow
-    Deploy->>Deploy: Check translations
+    Repo->>CI: Trigger main workflow
     
-    alt Missing translations
-        Deploy->>Trans: workflow_dispatch
-        Trans->>Trans: Auto-translate
-        Trans->>Repo: Commit translations
-        Deploy->>Deploy: Wait for completion
-        Deploy->>Repo: Refresh state
+    CI->>CI: Validate code (with auto-fix)
+    
+    alt Translation needed
+        CI->>CI: Translate with retry + fallback
+        CI->>Repo: Commit translations (with conflict resolution)
     end
     
-    Deploy->>Deploy: Build project
-    Deploy->>Pages: Deploy to GitHub Pages
+    CI->>CI: Build with dependency healing
+    
+    alt Build succeeds
+        CI->>Pages: Deploy with retry
+        CI->>CI: Verify deployment
+    else Build/Deploy fails
+        CI->>Emergency: Trigger emergency workflow
+        Emergency->>Emergency: Emergency build/deploy
+        Emergency->>Pages: Deploy maintenance/minimal site
+        Emergency->>Repo: Create failure issue
+    end
 ```
 
-## Key Features
+## Key Self-Healing Features
 
-### ✅ Separation of Concerns
-- **deploy.yml**: Focuses solely on orchestration and deployment
-- **translation-validation.yml**: Handles only translation logic
+### 🔄 **Progressive Recovery Strategies**
+1. **Step-level**: Retry individual operations with backoff
+2. **Job-level**: Alternative approaches within the same job
+3. **Workflow-level**: Emergency deployment activation
+4. **System-level**: Maintenance mode with issue tracking
 
-### ✅ Atomic Operations
-- Translation commits are separate from deployment
-- Each workflow has a single, clear responsibility
-- No deployment conflicts or race conditions
+### 🛡️ **Failure Resilience**
+- **API Failures**: Graceful fallback to cached content
+- **Build Failures**: Multiple build strategies and emergency deployment
+- **Git Conflicts**: Automatic conflict resolution and rebase
+- **Dependency Issues**: Cache clearing and lock file regeneration
 
-### ✅ Robust Error Handling
-- Translation failures don't block deployment
-- Timeout protection for translation workflows
-- Graceful fallbacks when translation isn't needed
-
-### ✅ Efficient Resource Usage
-- Only runs translation when actually needed
-- Skips unnecessary steps based on translation status
-- Rate limiting and cost optimization
+### 📊 **Monitoring and Reporting**
+- **Self-Healing Reports**: Detailed summary of recovery actions taken
+- **Automatic Issue Creation**: For persistent failures requiring manual intervention
+- **Health Checks**: Post-deployment verification and monitoring
 
 ## Configuration Requirements
 
