@@ -71,34 +71,42 @@
   },
   {
     "questionId": "who_orders_the_same_thing_every_time",
-    "text": "\"¿Quién pide siempre lo mismo?\""
+    "text": "\"¿Quién pide siempre lo mismo?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_is_always_on_a_diet",
-    "text": "\"¿Quién está siempre a dieta?\""
+    "text": "\"¿Quién está siempre a dieta?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_eats_the_most_snacks",
-    "text": "\"¿Quién come la mayoría de los bocadillos?\""
+    "text": "\"¿Quién come la mayoría de los bocadillos?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_is_best_cook",
-    "text": "\"¿Quién es el mejor cocinero?\""
+    "text": "\"¿Quién es el mejor cocinero?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_always_orders_takeout",
-    "text": "\"¿Quién siempre pide comida para llevar?\""
+    "text": "\"¿Quién siempre pide comida para llevar?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_eats_the_fastest",
-    "text": "\"¿Quién come más rápido?\""
+    "text": "\"¿Quién come más rápido?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_is_most_adventurous_eater",
-    "text": "\"¿Quién es el comensal más aventurero?\""
+    "text": "\"¿Quién es el comensal más aventurero?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_always_tries_new_restaurants",
-    "text": "\"¿Quién siempre prueba nuevos restaurantes?\""
+    "text": "\"¿Quién siempre prueba nuevos restaurantes?\"",
+    "category": "eating"
   }
 ]

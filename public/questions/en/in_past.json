@@ -1,32 +1,32 @@
 [
   {
     "questionId": "who_would_miss_old_times_most",
-    "text": "Wer würde die alten Zeiten am meisten vermissen?",
+    "text": "Wer wÃ¼rde die alten Zeiten am meisten vermissen?",
     "category": "in_past"
   },
   {
     "questionId": "who_would_adapt_worst_to_past",
-    "text": "Wer würde sich am schlechtesten an die Vergangenheit anpassen?",
+    "text": "Wer wÃ¼rde sich am schlechtesten an die Vergangenheit anpassen?",
     "category": "in_past"
   },
   {
     "questionId": "who_would_change_history",
-    "text": "Wer würde die Geschichte verändern?",
+    "text": "Wer wÃ¼rde die Geschichte verÃ¤ndern?",
     "category": "in_past"
   },
   {
     "questionId": "who_knows_most_about_history",
-    "text": "Wer weiß am meisten über Geschichte?",
+    "text": "Wer weiÃŸ am meisten Ã¼ber Geschichte?",
     "category": "in_past"
   },
   {
     "questionId": "who_would_be_best_time_traveler",
-    "text": "Wer wäre der beste Zeitreisende?",
+    "text": "Wer wÃ¤re der beste Zeitreisende?",
     "category": "in_past"
   },
   {
     "questionId": "who_would_still_use_old_technology",
-    "text": "Wer würde immer noch alte Technologie verwenden?",
+    "text": "Wer wÃ¼rde immer noch alte Technologie verwenden?",
     "category": "in_past"
   },
   {
@@ -36,47 +36,57 @@
   },
   {
     "questionId": "who_knows_most_about_history",
-    "text": "Wer weiß am meisten über Geschichte?",
+    "text": "Wer weiÃŸ am meisten Ã¼ber Geschichte?",
     "category": "in_past"
   },
   {
     "questionId": "who_wants_to_visit_dinosaurs",
-    "text": "\"Who would like to see dinosaurs live?\""
+    "text": "\"Who would like to see dinosaurs live?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_thinks_they_were_a_viking",
-    "text": "\"Who believes they were a Viking in a past life?\""
+    "text": "\"Who believes they were a Viking in a past life?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_misses_90s_ringtones",
-    "text": "\"Who misses Nokia ringtones from the 90s?\""
+    "text": "\"Who misses Nokia ringtones from the 90s?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_would_bring_smartphone_to_middle_ages",
-    "text": "\"Who would smuggle a smartphone into the Middle Ages?\""
+    "text": "\"Who would smuggle a smartphone into the Middle Ages?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_collects_vintage_cassettes",
-    "text": "\"Who collects old music cassettes?\""
+    "text": "\"Who collects old music cassettes?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_thinks_their_childhood_cartoon_best",
-    "text": "\"Who thinks their childhood shows were THE best?\""
+    "text": "\"Who thinks their childhood shows were THE best?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_was_tamagotchi_serial_killer",
-    "text": "\"Who was a Tamagotchi serial killer?\""
+    "text": "\"Who was a Tamagotchi serial killer?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_have_scrapbooks_of_ticket_stubs",
-    "text": "\"Who has a scrapbook full of concert tickets?\""
+    "text": "\"Who has a scrapbook full of concert tickets?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_reminisces_about_pre_internet_bliss",
-    "text": "\"Who reminisces about life before the internet?\""
+    "text": "\"Who reminisces about life before the internet?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_claims_they_invented_planking",
-    "text": "\"Who claims to have invented planking?\""
+    "text": "\"Who claims to have invented planking?\"",
+    "category": "in_past"
   }
 ]

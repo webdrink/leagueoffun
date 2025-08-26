@@ -1,27 +1,27 @@
 [
   {
     "questionId": "who_would_be_different_person",
-    "text": "Wer wäre eine völlig andere Person?",
+    "text": "Wer wÃ¤re eine vÃ¶llig andere Person?",
     "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_same_personality",
-    "text": "Wer hätte genau die gleiche Persönlichkeit?",
+    "text": "Wer hÃ¤tte genau die gleiche PersÃ¶nlichkeit?",
     "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_opposite_career",
-    "text": "Wer hätte einen völlig anderen Beruf?",
+    "text": "Wer hÃ¤tte einen vÃ¶llig anderen Beruf?",
     "category": "parallel_universe"
   },
   {
     "questionId": "who_would_be_famous",
-    "text": "Wer wäre berühmt?",
+    "text": "Wer wÃ¤re berÃ¼hmt?",
     "category": "parallel_universe"
   },
   {
     "questionId": "who_would_live_completely_different_life",
-    "text": "Wer würde ein komplett anderes Leben führen?",
+    "text": "Wer wÃ¼rde ein komplett anderes Leben fÃ¼hren?",
     "category": "parallel_universe"
   },
   {
@@ -36,78 +36,97 @@
   },
   {
     "questionId": "who_would_have_different_hobbies",
-    "text": "\"Who would have different hobbies?\""
+    "text": "\"Who would have different hobbies?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_be_a_superhero",
-    "text": "\"Who would be a superhero?\""
+    "text": "\"Who would be a superhero?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_be_an_alien",
-    "text": "\"Who would be an alien?\""
+    "text": "\"Who would be an alien?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_family",
-    "text": "\"Who would have a different family?\""
+    "text": "\"Who would have a different family?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_friends",
-    "text": "\"Who would have different friends?\""
+    "text": "\"Who would have different friends?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_pets",
-    "text": "\"Who would have different pets?\""
+    "text": "\"Who would have different pets?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_skills",
-    "text": "\"Who would have different abilities?\""
+    "text": "\"Who would have different abilities?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_be_a_villain",
-    "text": "\"Who would be a villain?\""
+    "text": "\"Who would be a villain?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_interests",
-    "text": "\"Who would have different interests?\""
+    "text": "\"Who would have different interests?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_is_evil_twin_richer",
-    "text": "\"Who has a richer, evil twin in the parallel universe?\""
+    "text": "\"Who has a richer, evil twin in the parallel universe?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_becomes_popstar_on_other_earth",
-    "text": "\"Who is a pop star on another Earth?\""
+    "text": "\"Who is a pop star on another Earth?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_is_snail_overlord_elsewhere",
-    "text": "\"Who rules somewhere as a snail overlord?\""
+    "text": "\"Who rules somewhere as a snail overlord?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_lives_in_reverse_gravity_world",
-    "text": "\"Who lives in a world with reversed gravity?\""
+    "text": "\"Who lives in a world with reversed gravity?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_is_allergic_to_water_in_altverse",
-    "text": "\"Who is allergic to water in the other universe?\""
+    "text": "\"Who is allergic to water in the other universe?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_never_needs_sleep_in_other_reality",
-    "text": "\"Who never sleeps in one reality?\""
+    "text": "\"Who never sleeps in one reality?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_is_cat_in_quantum_dimension",
-    "text": "\"Who is a cat in a quantum dimension?\""
+    "text": "\"Who is a cat in a quantum dimension?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_invents_square_wheels_there",
-    "text": "\"Who invents the square wheel there?\""
+    "text": "\"Who invents the square wheel there?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_runs_caffeine_free_coffee_shop",
-    "text": "\"Who runs a decaf café in the multiverse?\""
+    "text": "\"Who runs a decaf cafÃ© in the multiverse?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_replaces_moon_with_cheese_planet",
-    "text": "\"Who trades the moon for a cheese planet?\""
+    "text": "\"Who trades the moon for a cheese planet?\"",
+    "category": "parallel_universe"
   }
 ]

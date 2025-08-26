@@ -206,78 +206,97 @@
   },
   {
     "questionId": "who_watches_most_movies",
-    "text": "\"¿Quién ve más películas?\""
+    "text": "\"¿Quién ve más películas?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_binges_entire_series_in_one_day",
-    "text": "\"¿Quién ve una serie completa en un día?\""
+    "text": "\"¿Quién ve una serie completa en un día?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_always_spoils_movie_endings",
-    "text": "\"¿Quién siempre revela los finales de las películas?\""
+    "text": "\"¿Quién siempre revela los finales de las películas?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_cries_during_romantic_movies",
-    "text": "\"¿Quién llora con las películas románticas?\""
+    "text": "\"¿Quién llora con las películas románticas?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_quotes_movies_constantly",
-    "text": "\"¿Quién cita películas constantemente?\""
+    "text": "\"¿Quién cita películas constantemente?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_knows_most_movie_trivia",
-    "text": "\"¿Quién conoce más datos sobre películas?\""
+    "text": "\"¿Quién conoce más datos sobre películas?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_recommends_movies_to_everyone",
-    "text": "\"¿Quién recomienda películas a todos?\""
+    "text": "\"¿Quién recomienda películas a todos?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_is_the_movie_critic",
-    "text": "\"¿Quién es el mayor crítico de cine?\""
+    "text": "\"¿Quién es el mayor crítico de cine?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_watches_movies_in_original_language",
-    "text": "\"¿Quién ve películas en versión original?\""
+    "text": "\"¿Quién ve películas en versión original?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_is_the_biggest_film_buff",
-    "text": "\"¿Quién es el mayor fanático del cine?\""
+    "text": "\"¿Quién es el mayor fanático del cine?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_watches_movies_on_their_phone",
-    "text": "\"¿Quién ve películas en el móvil?\""
+    "text": "\"¿Quién ve películas en el móvil?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_watches_movies_in_the_cinema",
-    "text": "\"¿Quién ve películas en el cine?\""
+    "text": "\"¿Quién ve películas en el cine?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_watches_movies_with_friends",
-    "text": "\"¿Quién ve películas con amigos?\""
+    "text": "\"¿Quién ve películas con amigos?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_watches_movies_with_family",
-    "text": "\"¿Quién ve películas con la familia?\""
+    "text": "\"¿Quién ve películas con la familia?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_watches_movies_alone",
-    "text": "\"¿Quién ve películas solo?\""
+    "text": "\"¿Quién ve películas solo?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_watches_movies_with_popcorn",
-    "text": "\"¿Quién ve películas con palomitas saladas?\""
+    "text": "\"¿Quién ve películas con palomitas saladas?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_watches_movies_with_subtitles",
-    "text": "\"¿Quién ve películas con subtítulos?\""
+    "text": "\"¿Quién ve películas con subtítulos?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_watches_movies_with_dubbed_audio",
-    "text": "\"¿Quién ve películas con doblaje?\""
+    "text": "\"¿Quién ve películas con doblaje?\"",
+    "category": "movies_series"
   },
   {
     "questionId": "who_watches_romance_movies",
-    "text": "\"¿Quién ve películas románticas?\""
+    "text": "\"¿Quién ve películas románticas?\"",
+    "category": "movies_series"
   }
 ]

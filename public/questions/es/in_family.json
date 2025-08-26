@@ -106,6 +106,7 @@
   },
   {
     "questionId": "who_takes_care_of_family_members",
-    "text": "\"¿Quién se preocupa más por los miembros de la familia?\""
+    "text": "\"¿Quién se preocupa más por los miembros de la familia?\"",
+    "category": "in_family"
   }
 ]

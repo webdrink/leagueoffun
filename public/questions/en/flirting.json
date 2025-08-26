@@ -36,82 +36,102 @@
   },
   {
     "questionId": "who_is_most_likely_to_flirt_with_their_boss",
-    "text": "\"Who is most likely to flirt with their boss?\""
+    "text": "\"Who is most likely to flirt with their boss?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_is_most_likely_to_flirt_with_a_stranger",
-    "text": "\"Who is most likely to flirt with a stranger?\""
+    "text": "\"Who is most likely to flirt with a stranger?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_is_most_likely_to_flirt_with_their_friends_partner",
-    "text": "\"Who is most likely to flirt with a friend's partner?\""
+    "text": "\"Who is most likely to flirt with a friend's partner?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_is_most_likely_to_flirt_with_their_exs_friend",
-    "text": "\"Who is most likely to flirt with their ex-partner's friend?\""
+    "text": "\"Who is most likely to flirt with their ex-partner's friend?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_is_most_likely_to_flirt_with_their_exs_parent",
-    "text": "\"Who is most likely to flirt with their ex-partner's parent?\""
+    "text": "\"Who is most likely to flirt with their ex-partner's parent?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_is_most_likely_to_flirt_with_their_exs_sibling",
-    "text": "\"Who is most likely to flirt with their ex-partner's sibling?\""
+    "text": "\"Who is most likely to flirt with their ex-partner's sibling?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_is_most_likely_to_flirt_with_their_exs_colleague",
-    "text": "\"Who is most likely to flirt with their ex-partner's colleague?\""
+    "text": "\"Who is most likely to flirt with their ex-partner's colleague?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_is_most_likely_to_flirt_with_their_exs_friend_group",
-    "text": "\"Who is most likely to flirt with their ex-partner's friend group?\""
+    "text": "\"Who is most likely to flirt with their ex-partner's friend group?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_is_most_likely_to_flirt_with_their_exs_family",
-    "text": "\"Who is most likely to flirt with their ex-partner's family?\""
+    "text": "\"Who is most likely to flirt with their ex-partner's family?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_flirts_with_the_most_people",
-    "text": "\"Who flirts with the most people?\""
+    "text": "\"Who flirts with the most people?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_is_most_likely_to_get_rejected",
-    "text": "\"Who is most likely to be rejected?\""
+    "text": "\"Who is most likely to be rejected?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_flirts_in_awkward_situations",
-    "text": "\"Who flirts in awkward situations?\""
+    "text": "\"Who flirts in awkward situations?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_is_most_charming_when_flirting",
-    "text": "\"Who is the most charming when flirting?\""
+    "text": "\"Who is the most charming when flirting?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_flirts_with_their_friends",
-    "text": "\"Who flirts with their friends?\""
+    "text": "\"Who flirts with their friends?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_flirts_with_their_ex",
-    "text": "\"Who flirts with their ex?\""
+    "text": "\"Who flirts with their ex?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_is_most_likely_to_get_caught_flirting",
-    "text": "\"Who is most likely to get caught while flirting?\""
+    "text": "\"Who is most likely to get caught while flirting?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_flirts_with_the_waiter",
-    "text": "\"Who flirts with the waiter?\""
+    "text": "\"Who flirts with the waiter?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_flirts_with_their_ex",
-    "text": "\"Who flirts with their ex?\""
+    "text": "\"Who flirts with their ex?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_is_most_likely_to_get_caught_flirting",
-    "text": "\"Who is most likely to get caught while flirting?\""
+    "text": "\"Who is most likely to get caught while flirting?\"",
+    "category": "flirting"
   },
   {
     "questionId": "who_flirts_with_the_waiter",
-    "text": "\"Who flirts with the waiter?\""
+    "text": "\"Who flirts with the waiter?\"",
+    "category": "flirting"
   }
 ]

@@ -123,9 +123,9 @@ const SummaryScreen: React.FC<SummaryScreenProps> = ({
           >
             <div className="flex items-center justify-center text-xl font-semibold text-purple-600 mb-1">
               <Users size={26} className="mr-2 text-purple-500" />
-              Team-Runde
+              {t('summary.team_round')}
             </div>
-            <p className="text-purple-700 text-sm">Super gemacht, Team! {activePlayersCount} Spieler waren dabei.</p>
+            <p className="text-purple-700 text-sm">{t('summary.team_message', { activePlayersCount })}</p>
           </motion.div>
         )}
 
@@ -134,7 +134,7 @@ const SummaryScreen: React.FC<SummaryScreenProps> = ({
             onClick={onRestart}
             className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg sm:text-xl rounded-lg shadow-lg transition-all hover:scale-105 duration-200 focus:ring-purple-400"
           >
-            <Repeat size={20} className="mr-2" /> Neues Spiel starten
+            <Repeat size={20} className="mr-2" /> {t('summary.new_game')}
           </Button>
         </motion.div>
       </motion.div>

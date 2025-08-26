@@ -1,7 +1,7 @@
 [
   {
     "questionId": "who_overplans_vacation_itinerary",
-    "text": "Wer überplant den Urlaubsplan?",
+    "text": "Wer Ã¼berplant den Urlaubsplan?",
     "category": "on_vacation"
   },
   {
@@ -16,7 +16,7 @@
   },
   {
     "questionId": "who_spends_too_much_on_souvenirs",
-    "text": "Wer gibt zu viel für Souvenirs aus?",
+    "text": "Wer gibt zu viel fÃ¼r Souvenirs aus?",
     "category": "on_vacation"
   },
   {
@@ -31,7 +31,7 @@
   },
   {
     "questionId": "who_keeps_vacation_schedule",
-    "text": "Wer hält sich an den Urlaubsplan?",
+    "text": "Wer hÃ¤lt sich an den Urlaubsplan?",
     "category": "on_vacation"
   },
   {
@@ -41,12 +41,12 @@
   },
   {
     "questionId": "who_gets_lost_in_foreign_city",
-    "text": "Wer verläuft sich in einer fremden Stadt?",
+    "text": "Wer verlÃ¤uft sich in einer fremden Stadt?",
     "category": "on_vacation"
   },
   {
     "questionId": "who_overpacks_luggage",
-    "text": "Wer packt zu viel Gepäck ein?",
+    "text": "Wer packt zu viel GepÃ¤ck ein?",
     "category": "on_vacation"
   },
   {
@@ -71,42 +71,52 @@
   },
   {
     "questionId": "who_packs_too_much",
-    "text": "\"Who packs too much?\""
+    "text": "\"Who packs too much?\"",
+    "category": "on_vacation"
   },
   {
     "questionId": "who_gets_food_poisoning",
-    "text": "\"Who will get food poisoning?\""
+    "text": "\"Who will get food poisoning?\"",
+    "category": "on_vacation"
   },
   {
     "questionId": "who_plans_every_minute",
-    "text": "\"Who plans every minute?\""
+    "text": "\"Who plans every minute?\"",
+    "category": "on_vacation"
   },
   {
     "questionId": "who_takes_the_most_souvenirs_home",
-    "text": "\"Who brings home the most souvenirs?\""
+    "text": "\"Who brings home the most souvenirs?\"",
+    "category": "on_vacation"
   },
   {
     "questionId": "who_is_the_first_to_get_sick",
-    "text": "\"Who will get sick first?\""
+    "text": "\"Who will get sick first?\"",
+    "category": "on_vacation"
   },
   {
     "questionId": "who_is_the_best_travel_companion",
-    "text": "\"Who is the best travel companion?\""
+    "text": "\"Who is the best travel companion?\"",
+    "category": "on_vacation"
   },
   {
     "questionId": "who_is_the_worst_travel_companion",
-    "text": "\"Who is the worst travel companion?\""
+    "text": "\"Who is the worst travel companion?\"",
+    "category": "on_vacation"
   },
   {
     "questionId": "who_is_most_likely_to_get_sunburned",
-    "text": "\"Who is most likely to get a sunburn?\""
+    "text": "\"Who is most likely to get a sunburn?\"",
+    "category": "on_vacation"
   },
   {
     "questionId": "who_is_most_likely_to_get_food_poisoning",
-    "text": "\"Who is most likely to get food poisoning?\""
+    "text": "\"Who is most likely to get food poisoning?\"",
+    "category": "on_vacation"
   },
   {
     "questionId": "who_is_most_likely_to_get_homesick",
-    "text": "\"Who is most likely to get homesick?\""
+    "text": "\"Who is most likely to get homesick?\"",
+    "category": "on_vacation"
   }
 ]

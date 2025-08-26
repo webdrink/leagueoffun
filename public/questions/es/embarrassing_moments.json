@@ -76,42 +76,52 @@
   },
   {
     "questionId": "who_sings_in_public",
-    "text": "\"¿Quién canta en público?\""
+    "text": "\"¿Quién canta en público?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_tells_cringe_jokes",
-    "text": "\"¿Quién cuenta los chistes incómodos?\""
+    "text": "\"¿Quién cuenta los chistes incómodos?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_dances_inappropriately",
-    "text": "\"¿Quién baila de manera inapropiada?\""
+    "text": "\"¿Quién baila de manera inapropiada?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_forgets_own_age",
-    "text": "\"¿Quién olvida su propia edad?\""
+    "text": "\"¿Quién olvida su propia edad?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_makes_funny_noises",
-    "text": "\"¿Quién hace los ruidos más divertidos?\""
+    "text": "\"¿Quién hace los ruidos más divertidos?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_tells_awkward_stories",
-    "text": "\"¿Quién cuenta las historias más vergonzosas?\""
+    "text": "\"¿Quién cuenta las historias más vergonzosas?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_makes_funny_faces_in_photos",
-    "text": "\"¿Quién hace las caras más graciosas en las fotos?\""
+    "text": "\"¿Quién hace las caras más graciosas en las fotos?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_always_says_wrong_things",
-    "text": "\"¿Quién siempre dice las cosas equivocadas?\""
+    "text": "\"¿Quién siempre dice las cosas equivocadas?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_dances_weirdly_in_public",
-    "text": "\"¿Quién baila raro en público?\""
+    "text": "\"¿Quién baila raro en público?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_always_has_awkward_silences",
-    "text": "\"¿Quién siempre tiene silencios incómodos?\""
+    "text": "\"¿Quién siempre tiene silencios incómodos?\"",
+    "category": "embarrassing_moments"
   }
 ]

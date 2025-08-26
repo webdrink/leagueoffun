@@ -21,74 +21,92 @@
   },
   {
     "questionId": "who_makes_excuses_for_losing",
-    "text": "\"Qui trouve des excuses pour perdre ?\""
+    "text": "\"Qui trouve des excuses pour perdre ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_brags_about_victories",
-    "text": "\"Qui se vante de ses victoires ?\""
+    "text": "\"Qui se vante de ses victoires ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_cheats_at_games",
-    "text": "\"Qui triche aux jeux ?\""
+    "text": "\"Qui triche aux jeux ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_gives_up_easiest",
-    "text": "\"Qui abandonne le plus facilement ?\""
+    "text": "\"Qui abandonne le plus facilement ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_takes_games_too_seriously",
-    "text": "\"Qui prend les jeux trop au sérieux ?\""
+    "text": "\"Qui prend les jeux trop au sérieux ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_never_exercises",
-    "text": "\"Qui ne fait jamais de sport ?\""
+    "text": "\"Qui ne fait jamais de sport ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_shows_off_athletic_abilities",
-    "text": "\"Qui se vante de ses compétences sportives ?\""
+    "text": "\"Qui se vante de ses compétences sportives ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_buys_exercise_equipment_never_uses",
-    "text": "\"Qui achète des équipements de fitness et ne les utilise jamais ?\""
+    "text": "\"Qui achète des équipements de fitness et ne les utilise jamais ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_buys_fancy_gear_rarely_uses",
-    "text": "\"Qui achète du matériel de sport coûteux et ne l'utilise jamais ?\""
+    "text": "\"Qui achète du matériel de sport coûteux et ne l'utilise jamais ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_counts_warmup_as_workout",
-    "text": "\"Qui considère l'échauffement comme un entraînement ?\""
+    "text": "\"Qui considère l'échauffement comme un entraînement ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_joins_gym_for_sauna_only",
-    "text": "\"Qui rejoint la salle de sport uniquement à cause du sauna ?\""
+    "text": "\"Qui rejoint la salle de sport uniquement à cause du sauna ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_competes_with_fitness_tracker",
-    "text": "\"Qui participe à des compétitions seulement avec un podomètre ?\""
+    "text": "\"Qui participe à des compétitions seulement avec un podomètre ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_screams_like_tennis_star",
-    "text": "\"Qui crie en faisant du sport comme un professionnel du tennis ?\""
+    "text": "\"Qui crie en faisant du sport comme un professionnel du tennis ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_wears_headband_for_style",
-    "text": "\"Qui porte un bandeau uniquement comme accessoire de mode ?\""
+    "text": "\"Qui porte un bandeau uniquement comme accessoire de mode ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_celebrates_smallest_personal_record",
-    "text": "\"Qui célèbre chaque mini-record de manière extatique ?\""
+    "text": "\"Qui célèbre chaque mini-record de manière extatique ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_turns_every_activity_into_competition",
-    "text": "\"Qui transforme tout en compétition ?\""
+    "text": "\"Qui transforme tout en compétition ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_forgets_water_but_brings_protein_shake",
-    "text": "\"Qui oublie de prendre de l'eau, mais a son shake protéiné avec lui ?\""
+    "text": "\"Qui oublie de prendre de l'eau, mais a son shake protéiné avec lui ?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_streams_workout_live",
-    "text": "\"Qui diffuse son entraînement en direct ?\""
+    "text": "\"Qui diffuse son entraînement en direct ?\"",
+    "category": "sports"
   }
 ]

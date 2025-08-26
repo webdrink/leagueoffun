@@ -72,6 +72,8 @@ const es: Translations = {
   'questions.who_blame': '¿A quién culparías?', // Placeholder
   'questions.cannot_blame_self': 'No puedes culparte a ti mismo', // Placeholder
   'questions.blame_player': 'Culpar a {name}', // Placeholder
+  'questions.blamed_you_for': '{name} te culpó por', // New
+  'questions.next_blame': 'Siguiente', // New
   'questions.previous_question': 'Pregunta anterior', // Placeholder (can be same as game.previous_question)
   'questions.next_question': 'Siguiente pregunta', // Placeholder (can be same as game.next_question)
   'questions.summary': 'Resumen', // Placeholder
@@ -80,8 +82,18 @@ const es: Translations = {
   
   // Summary
   'summary.title': '¡Juego terminado!',
+  'summary.game_over': '¡Juego terminado!',
   'summary.questions_answered': '¡Superaste {count} preguntas!',
+  'summary.questions_completed': '¡Superaste {count} preguntas!',
   'summary.most_blamed': 'El más culpado',
+  'summary.most_blamed_singular': 'El más culpado',
+  'summary.most_blamed_plural': 'Los más culpados',
+  'summary.blame_count': '{count} culpa{s}',
+  'summary.plural_suffix': 's',
+  'summary.no_blames_given': '¡No se distribuyeron acusaciones!',
+  'summary.team_round': 'Ronda en equipo',
+  'summary.team_message': '¡Bien hecho, equipo! {activePlayersCount} jugadores participaron.',
+  'summary.new_game': 'Nuevo juego',
   'summary.play_again': 'Jugar de nuevo',
   'summary.back_to_start': 'Volver al inicio',
   'summary.blame_stats': 'Estadísticas de culpa',

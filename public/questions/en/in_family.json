@@ -21,7 +21,7 @@
   },
   {
     "questionId": "who_tells_family_secrets",
-    "text": "Wer erzählt Familiengeheimnisse?",
+    "text": "Wer erzÃ¤hlt Familiengeheimnisse?",
     "category": "in_family"
   },
   {
@@ -36,7 +36,7 @@
   },
   {
     "questionId": "who_calls_parents_most_often",
-    "text": "Wer ruft die Eltern am häufigsten an?",
+    "text": "Wer ruft die Eltern am hÃ¤ufigsten an?",
     "category": "in_family"
   },
   {
@@ -46,7 +46,7 @@
   },
   {
     "questionId": "who_tells_embarrassing_childhood_stories",
-    "text": "Wer erzählt peinliche Kindheitsgeschichten?",
+    "text": "Wer erzÃ¤hlt peinliche Kindheitsgeschichten?",
     "category": "in_family"
   },
   {
@@ -56,12 +56,12 @@
   },
   {
     "questionId": "who_is_most_similar_to_parents",
-    "text": "Wer ist den Eltern am ähnlichsten?",
+    "text": "Wer ist den Eltern am Ã¤hnlichsten?",
     "category": "in_family"
   },
   {
     "questionId": "who_brings_unexpected_guests_home",
-    "text": "Wer bringt unerwartete Gäste mit nach Hause?",
+    "text": "Wer bringt unerwartete GÃ¤ste mit nach Hause?",
     "category": "in_family"
   },
   {
@@ -71,7 +71,7 @@
   },
   {
     "questionId": "who_gives_best_family_advice",
-    "text": "Wer gibt die besten Familienratschläge?",
+    "text": "Wer gibt die besten FamilienratschlÃ¤ge?",
     "category": "in_family"
   },
   {
@@ -86,6 +86,7 @@
   },
   {
     "questionId": "who_takes_care_of_family_members",
-    "text": "\"Who takes care of family members the most?\""
+    "text": "\"Who takes care of family members the most?\"",
+    "category": "in_family"
   }
 ]

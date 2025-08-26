@@ -91,34 +91,42 @@
   },
   {
     "questionId": "who_orders_the_same_thing_every_time",
-    "text": "\"Who orders the same thing every time?\""
+    "text": "\"Who orders the same thing every time?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_is_always_on_a_diet",
-    "text": "\"Who is always on a diet?\""
+    "text": "\"Who is always on a diet?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_eats_the_most_snacks",
-    "text": "\"Who eats the most snacks?\""
+    "text": "\"Who eats the most snacks?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_is_best_cook",
-    "text": "\"Who is the best cook?\""
+    "text": "\"Who is the best cook?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_always_orders_takeout",
-    "text": "\"Who always orders takeout?\""
+    "text": "\"Who always orders takeout?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_eats_the_fastest",
-    "text": "\"Who eats the fastest?\""
+    "text": "\"Who eats the fastest?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_is_most_adventurous_eater",
-    "text": "\"Who is the most adventurous eater?\""
+    "text": "\"Who is the most adventurous eater?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_always_tries_new_restaurants",
-    "text": "\"Who always tries new restaurants?\""
+    "text": "\"Who always tries new restaurants?\"",
+    "category": "eating"
   }
 ]

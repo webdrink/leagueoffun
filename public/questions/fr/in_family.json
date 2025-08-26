@@ -106,6 +106,7 @@
   },
   {
     "questionId": "who_takes_care_of_family_members",
-    "text": "\"Qui s'occupe le plus des membres de la famille ?\""
+    "text": "\"Qui s'occupe le plus des membres de la famille ?\"",
+    "category": "in_family"
   }
 ]

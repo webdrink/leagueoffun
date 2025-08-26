@@ -24,7 +24,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../core/Button';
-import { Question, Player, GameSettings } from '../../types';
+import { Question, Player, GameSettings, NameBlameState } from '../../types';
 import QuestionCard from './QuestionCard';
 import QuestionProgress from './QuestionProgress'; // Import the new QuestionProgress component
 
@@ -39,6 +39,8 @@ interface QuestionScreenProps {
   onBlame: (blamedPlayerName: string) => void;
   onNext: () => void;
   onBack: () => void;
+  onNextBlame?: () => void; // Optional prop for handling "Next Blame" in NameBlame mode
+  blameState?: NameBlameState; // Optional prop for blame state in NameBlame mode
 }
 
 /**
@@ -70,7 +72,9 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
   currentPlayerIndex,
   onBlame,
   onNext,
-  onBack
+  onBack,
+  onNextBlame,
+  blameState
 }) => {
   const { t } = useTranslation();
   const [direction, setDirection] = useState(0); 
@@ -120,30 +124,63 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
       <div className="w-full max-w-md px-4">
         {nameBlameMode && activePlayers.length > 0 && (
           <div className="mt-2 sm:mt-4">
-            <p className="text-center text-sm text-white mb-2">
-              {t('questions.who_blame')}
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {activePlayers.map((player) => {
-                // Get the current player by index
-                const currentPlayer = activePlayers[currentPlayerIndex];
-                // Disable button if this player is the current player (can't blame self)
-                const isSelf = currentPlayer && player.id === currentPlayer.id;
-                
-                return (
-                  <Button
-                    key={player.id}
-                    onClick={() => onBlame(player.name)}
-                    className={`bg-pink-400 hover:bg-pink-200 text-purple-700 font-semibold rounded-lg py-2.5 px-3 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-pink-00 focus:ring-opacity-75
-                          ${isSelf ? 'opacity-60 cursor-not-allowed !bg-gray-300 !text-gray-500' : 'hover:scale-105'}`}
-                    disabled={isSelf}
-                    title={isSelf ? t('questions.cannot_blame_self') : t('questions.blame_player', { name: player.name })}
-                  >
-                    {player.name}
-                  </Button>
-                );
-              })}
-            </div>
+            {/* Show blame context when in 'blamed' phase */}
+            {blameState?.phase === 'blamed' && blameState.currentBlamer && blameState.currentBlamed && (
+              <div className="text-center mb-4 p-3 bg-pink-100 rounded-lg border-2 border-pink-300">
+                <p className="text-purple-700 font-semibold">
+                  {t('questions.blamed_you_for', { 
+                    blamer: blameState.currentBlamer,
+                    blamed: blameState.currentBlamed 
+                  })}
+                </p>
+                <p className="text-purple-600 text-sm mt-1">
+                  &ldquo;{blameState.currentQuestion}&rdquo;
+                </p>
+              </div>
+            )}
+            
+            {/* Show player selection when in 'selecting' phase or no blame state */}
+            {(!blameState || blameState.phase === 'selecting') && (
+              <>
+                <p className="text-center text-sm text-white mb-2">
+                  {t('questions.who_blame')}
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {activePlayers.map((player) => {
+                    // Get the current player by index
+                    const currentPlayer = activePlayers[currentPlayerIndex];
+                    // Disable button if this player is the current player (can't blame self)
+                    const isSelf = currentPlayer && player.id === currentPlayer.id;
+                    
+                    return (
+                      <Button
+                        key={player.id}
+                        onClick={() => onBlame(player.name)}
+                        className={`bg-pink-400 hover:bg-pink-200 text-purple-700 font-semibold rounded-lg py-2.5 px-3 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-pink-00 focus:ring-opacity-75
+                              ${isSelf ? 'opacity-60 cursor-not-allowed !bg-gray-300 !text-gray-500' : 'hover:scale-105'}`}
+                        disabled={isSelf}
+                        title={isSelf ? t('questions.cannot_blame_self') : t('questions.blame_player', { name: player.name })}
+                      >
+                        {player.name}
+                      </Button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+            
+            {/* Show "Next Blame" button when in 'blamed' phase */}
+            {blameState?.phase === 'blamed' && onNextBlame && (
+              <div className="mt-4 text-center">
+                <Button 
+                  onClick={onNextBlame} 
+                  className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg shadow font-semibold"
+                  aria-label={t('questions.next_blame')}
+                >
+                  {t('questions.next_blame')}
+                </Button>
+              </div>
+            )}
           </div>
         )}
 

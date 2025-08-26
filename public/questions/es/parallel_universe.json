@@ -21,82 +21,102 @@
   },
   {
     "questionId": "who_would_live_completely_different_life",
-    "text": "\"¿Quién llevaría una vida completamente diferente?\""
+    "text": "\"¿Quién llevaría una vida completamente diferente?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_hobbies",
-    "text": "\"¿Quién tendría otros pasatiempos?\""
+    "text": "\"¿Quién tendría otros pasatiempos?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_be_a_superhero",
-    "text": "\"¿Quién sería un superhéroe?\""
+    "text": "\"¿Quién sería un superhéroe?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_be_an_alien",
-    "text": "\"¿Quién sería un extraterrestre?\""
+    "text": "\"¿Quién sería un extraterrestre?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_family",
-    "text": "\"¿Quién tendría otra familia?\""
+    "text": "\"¿Quién tendría otra familia?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_friends",
-    "text": "\"¿Quién tendría otros amigos?\""
+    "text": "\"¿Quién tendría otros amigos?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_pets",
-    "text": "\"¿Quién tendría otras mascotas?\""
+    "text": "\"¿Quién tendría otras mascotas?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_skills",
-    "text": "\"¿Quién tendría otras habilidades?\""
+    "text": "\"¿Quién tendría otras habilidades?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_be_a_villain",
-    "text": "\"¿Quién sería un villano?\""
+    "text": "\"¿Quién sería un villano?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_interests",
-    "text": "\"¿Quién tendría otros intereses?\""
+    "text": "\"¿Quién tendría otros intereses?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_is_evil_twin_richer",
-    "text": "\"¿Quién tiene en el universo paralelo un gemelo malvado y más rico?\""
+    "text": "\"¿Quién tiene en el universo paralelo un gemelo malvado y más rico?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_becomes_popstar_on_other_earth",
-    "text": "\"¿Quién es un popstar en otra Tierra?\""
+    "text": "\"¿Quién es un popstar en otra Tierra?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_is_snail_overlord_elsewhere",
-    "text": "\"¿Quién gobierna en algún lugar como el Overlord de los caracoles?\""
+    "text": "\"¿Quién gobierna en algún lugar como el Overlord de los caracoles?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_lives_in_reverse_gravity_world",
-    "text": "\"¿Quién vive en un mundo con gravedad invertida?\""
+    "text": "\"¿Quién vive en un mundo con gravedad invertida?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_is_allergic_to_water_in_altverse",
-    "text": "\"¿Quién es alérgico al agua en el otro universo?\""
+    "text": "\"¿Quién es alérgico al agua en el otro universo?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_never_needs_sleep_in_other_reality",
-    "text": "\"¿Quién nunca duerme en una realidad?\""
+    "text": "\"¿Quién nunca duerme en una realidad?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_is_cat_in_quantum_dimension",
-    "text": "\"¿Quién es un gato en una dimensión cuántica?\""
+    "text": "\"¿Quién es un gato en una dimensión cuántica?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_invents_square_wheels_there",
-    "text": "\"¿Quién inventa allí la rueda cuadrada?\""
+    "text": "\"¿Quién inventa allí la rueda cuadrada?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_runs_caffeine_free_coffee_shop",
-    "text": "\"¿Quién opera una cafetería sin cafeína en el multiverso?\""
+    "text": "\"¿Quién opera una cafetería sin cafeína en el multiverso?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_replaces_moon_with_cheese_planet",
-    "text": "\"¿Quién intercambia la luna por un planeta de queso?\""
+    "text": "\"¿Quién intercambia la luna por un planeta de queso?\"",
+    "category": "parallel_universe"
   }
 ]

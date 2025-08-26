@@ -67,14 +67,18 @@ function App() {
   } = useQuestions(gameSettings);
   const {
     players, // Player[]
+    nameBlameMode, // Add this to access the NameBlame mode
     tempPlayerName,
     nameInputError,
     nameBlameLog, // Add this to access the blame log
+    blameState, // Add this to access blame state
     setTempPlayerName,
     addPlayer,
     removePlayer,
     handlePlayerNameChange,
     recordNameBlame, // Add this function to record blames 
+    updateBlameState, // Add this function to update blame state
+    resetBlameState, // Add this function to reset blame state
   } = useNameBlameSetup();
 
   const [gameStep, setGameStep] = useState<GameStep>('intro');
@@ -393,6 +397,18 @@ function App() {
     if (blamingPlayer && currentQuestion) {
       recordNameBlame(blamingPlayer.name, blamedPlayerName, currentQuestion.text);
       console.log(`📝 BLAME RECORDED: ${blamingPlayer.name} → ${blamedPlayerName} for "${currentQuestion.text}"`);
+      
+      // Enhanced NameBlame flow - transition to 'blamed' phase
+      if (nameBlameMode) {
+        updateBlameState({
+          phase: 'blamed',
+          currentBlamer: blamingPlayer.name,
+          currentBlamed: blamedPlayerName,
+          currentQuestion: currentQuestion.text
+        });
+        console.log(`🎯 NAMEBLAME: Transitioning to 'blamed' phase - ${blamedPlayerName} was blamed by ${blamingPlayer.name}`);
+        return; // Stay on the current question to show blame context
+      }
     } else {
       console.error("❌ ERROR: Could not identify blaming player or current question in handleBlame.");
       console.error("🔍 DEBUG INFO:", { 
@@ -402,15 +418,37 @@ function App() {
       });
     }
     
+    // Classic mode behavior or NameBlame continuation
+    advanceToNextPlayer();
+  };
+  
+  // New function to handle "Next Blame" button in NameBlame mode
+  const handleNextBlame = () => {
+    console.log(`🎯 NAMEBLAME: Next blame pressed, advancing to next player`);
+    advanceToNextPlayer();
+  };
+  
+  // Enhanced player advancement for NameBlame flow
+  const advanceToNextPlayer = () => {
     if (currentQuestionIndexFromHook < currentRoundQuestions.length - 1) {
       advanceToNextQuestion();
       // Use stablePlayerOrderForRound for turn advancement
+      const safeCurrentPlayerIndex = currentPlayerIndex % stablePlayerOrderForRound.length;
       const nextPlayerIndex = (safeCurrentPlayerIndex + 1) % stablePlayerOrderForRound.length;
       setCurrentPlayerIndex(nextPlayerIndex);
-      console.log(`🔄 NEXT TURN: ${blamingPlayer?.name} → ${stablePlayerOrderForRound[nextPlayerIndex]?.name} (index ${safeCurrentPlayerIndex} → ${nextPlayerIndex})`);
+      
+      // Reset blame state for next turn
+      if (nameBlameMode) {
+        resetBlameState();
+      }
+      
+      console.log(`🔄 NEXT TURN: ${stablePlayerOrderForRound[safeCurrentPlayerIndex]?.name} → ${stablePlayerOrderForRound[nextPlayerIndex]?.name} (index ${safeCurrentPlayerIndex} → ${nextPlayerIndex})`);
       playSound('new_question');
     } else {
-      console.log(`🏁 GAME END: Final blame recorded, showing summary`);
+      console.log(`🏁 GAME END: Final question completed, showing summary`);
+      if (nameBlameMode) {
+        resetBlameState();
+      }
       setGameStep('summary');
       playSound('summary_fun');
     }
@@ -515,6 +553,8 @@ function App() {
             onBlame={handleBlame} 
             onNext={handleNextQuestion}
             onBack={handlePreviousQuestion}
+            onNextBlame={handleNextBlame}
+            blameState={blameState}
           />
         )}        {gameStep === 'categoryPick' && (
           <CategoryPickScreen 

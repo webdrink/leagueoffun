@@ -21,102 +21,127 @@
   },
   {
     "questionId": "who_takes_longest_in_bathroom",
-    "text": "\"Qui met le plus de temps dans la salle de bain ?\""
+    "text": "\"Qui met le plus de temps dans la salle de bain ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_leaves_wet_towels_on_floor",
-    "text": "\"Qui laisse des serviettes mouillées par terre ?\""
+    "text": "\"Qui laisse des serviettes mouillées par terre ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_sings_in_shower",
-    "text": "\"Qui chante sous la douche ?\""
+    "text": "\"Qui chante sous la douche ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_forgets_to_buy_toilet_paper",
-    "text": "\"Qui oublie d'acheter du papier toilette ?\""
+    "text": "\"Qui oublie d'acheter du papier toilette ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_has_most_beauty_products",
-    "text": "\"Qui a le plus de produits de beauté ?\""
+    "text": "\"Qui a le plus de produits de beauté ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_leaves_hair_in_drain",
-    "text": "\"Qui laisse des cheveux dans le drain ?\""
+    "text": "\"Qui laisse des cheveux dans le drain ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_uses_all_hot_water",
-    "text": "\"Qui utilise toute l'eau chaude ?\""
+    "text": "\"Qui utilise toute l'eau chaude ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_hoards_bathroom_products",
-    "text": "\"Qui fait des réserves de produits de salle de bain ?\""
+    "text": "\"Qui fait des réserves de produits de salle de bain ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_leaves_bathroom_messiest",
-    "text": "\"Qui laisse la salle de bain dans le plus grand désordre ?\""
+    "text": "\"Qui laisse la salle de bain dans le plus grand désordre ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_takes_selfies_in_mirror",
-    "text": "\"Qui prend des selfies dans le miroir ?\""
+    "text": "\"Qui prend des selfies dans le miroir ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_has_most_bathroom_time",
-    "text": "\"Qui passe le plus de temps dans la salle de bain ?\""
+    "text": "\"Qui passe le plus de temps dans la salle de bain ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_leaves_bathroom_light_on",
-    "text": "\"Qui laisse la lumière de la salle de bain allumée ?\""
+    "text": "\"Qui laisse la lumière de la salle de bain allumée ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_has_most_bathroom_essentials",
-    "text": "\"Qui a le plus d'ustensiles de salle de bain ?\""
+    "text": "\"Qui a le plus d'ustensiles de salle de bain ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_takes_bathroom_breaks_during_work",
-    "text": "\"Qui fait le plus de pauses dans la salle de bain pendant le travail ?\""
+    "text": "\"Qui fait le plus de pauses dans la salle de bain pendant le travail ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_has_most_bathroom_organization_skills",
-    "text": "\"Qui a les meilleures compétences en organisation dans la salle de bain ?\""
+    "text": "\"Qui a les meilleures compétences en organisation dans la salle de bain ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_sings_in_shower_like_concert",
-    "text": "\"Qui chante un concert entier sous la douche ?\""
+    "text": "\"Qui chante un concert entier sous la douche ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_uses_face_mask_every_day",
-    "text": "\"Qui fait un masque facial tous les jours ?\""
+    "text": "\"Qui fait un masque facial tous les jours ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_spends_an_hour_styling_hair",
-    "text": "\"Qui met une heure pour coiffer ses cheveux ?\""
+    "text": "\"Qui met une heure pour coiffer ses cheveux ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_leaves_empty_toilet_paper_roll",
-    "text": "\"Qui laisse le rouleau de papier toilette vide ?\""
+    "text": "\"Qui laisse le rouleau de papier toilette vide ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_brushes_teeth_while_dancing",
-    "text": "\"Qui danse en se brossant les dents ?\""
+    "text": "\"Qui danse en se brossant les dents ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_has_more_shampoo_than_clothes",
-    "text": "\"Qui possède plus de shampoings que de vêtements ?\""
+    "text": "\"Qui possède plus de shampoings que de vêtements ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_checks_phone_on_toilet_longest",
-    "text": "\"Qui passe le plus de temps sur les toilettes ?\""
+    "text": "\"Qui passe le plus de temps sur les toilettes ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_tried_diy_haircut_and_regretted",
-    "text": "\"Qui s'est coupé les cheveux tout seul et le regrette ?\""
+    "text": "\"Qui s'est coupé les cheveux tout seul et le regrette ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_has_rubber_duck_collection",
-    "text": "\"Qui collectionne les canards en plastique ?\""
+    "text": "\"Qui collectionne les canards en plastique ?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_uses_roommate_luxury_soap_secretly",
-    "text": "\"Qui utilise en secret le savon de luxe des colocataires ?\""
+    "text": "\"Qui utilise en secret le savon de luxe des colocataires ?\"",
+    "category": "in_bathroom"
   }
 ]

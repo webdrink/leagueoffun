@@ -36,54 +36,67 @@
   },
   {
     "questionId": "who_has_strangest_food_combinations",
-    "text": "\"Qui a les combinaisons alimentaires les plus étranges ?\""
+    "text": "\"Qui a les combinaisons alimentaires les plus étranges ?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_is_picky_eater",
-    "text": "\"Qui est un mangeur difficile ?\""
+    "text": "\"Qui est un mangeur difficile ?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_talks_with_mouth_full",
-    "text": "\"Qui parle la bouche pleine ?\""
+    "text": "\"Qui parle la bouche pleine ?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_saves_leftovers",
-    "text": "\"Qui garde les restes ?\""
+    "text": "\"Qui garde les restes ?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_always_wants_dessert",
-    "text": "\"Qui veut toujours un dessert ?\""
+    "text": "\"Qui veut toujours un dessert ?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_orders_the_same_thing_every_time",
-    "text": "\"Qui commande toujours la même chose ?\""
+    "text": "\"Qui commande toujours la même chose ?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_is_always_on_a_diet",
-    "text": "\"Qui est toujours au régime ?\""
+    "text": "\"Qui est toujours au régime ?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_eats_the_most_snacks",
-    "text": "\"Qui mange le plus de collations ?\""
+    "text": "\"Qui mange le plus de collations ?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_is_best_cook",
-    "text": "\"Qui est le meilleur cuisinier ?\""
+    "text": "\"Qui est le meilleur cuisinier ?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_always_orders_takeout",
-    "text": "\"Qui commande toujours à emporter ?\""
+    "text": "\"Qui commande toujours à emporter ?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_eats_the_fastest",
-    "text": "\"Qui mange le plus vite ?\""
+    "text": "\"Qui mange le plus vite ?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_is_most_adventurous_eater",
-    "text": "\"Qui est le mangeur le plus aventurier ?\""
+    "text": "\"Qui est le mangeur le plus aventurier ?\"",
+    "category": "eating"
   },
   {
     "questionId": "who_always_tries_new_restaurants",
-    "text": "\"Qui essaie toujours de nouveaux restaurants ?\""
+    "text": "\"Qui essaie toujours de nouveaux restaurants ?\"",
+    "category": "eating"
   }
 ]

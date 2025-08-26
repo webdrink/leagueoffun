@@ -11,7 +11,7 @@
   },
   {
     "questionId": "who_falls_for_fake_news",
-    "text": "Wer fällt auf Fake News herein?",
+    "text": "Wer fÃ¤llt auf Fake News herein?",
     "category": "internet"
   },
   {
@@ -21,7 +21,7 @@
   },
   {
     "questionId": "who_shares_too_much_personal_info",
-    "text": "Wer teilt zu viele persönliche Informationen?",
+    "text": "Wer teilt zu viele persÃ¶nliche Informationen?",
     "category": "internet"
   },
   {
@@ -96,17 +96,17 @@
   },
   {
     "questionId": "wer_liest_kommentare_und_antwortet_wutend",
-    "text": "Wer liest Kommentare – und antwortet wütend?",
+    "text": "Wer liest Kommentare â€“ und antwortet wÃ¼tend?",
     "category": "internet"
   },
   {
     "questionId": "wer_stalkt_still_aber_grundlich",
-    "text": "Wer stalkt still, aber gründlich?",
+    "text": "Wer stalkt still, aber grÃ¼ndlich?",
     "category": "internet"
   },
   {
     "questionId": "wer_hat_schon_mal_was_super_peinliches_gepostet_un",
-    "text": "Wer hat schon mal was super Peinliches gepostet und gelöscht?",
+    "text": "Wer hat schon mal was super Peinliches gepostet und gelÃ¶scht?",
     "category": "internet"
   },
   {
@@ -126,12 +126,12 @@
   },
   {
     "questionId": "wer_kommentiert_unter_promiposts_als_waren_sie_fre",
-    "text": "Wer kommentiert unter Promi-Posts, als wären sie Freunde?",
+    "text": "Wer kommentiert unter Promi-Posts, als wÃ¤ren sie Freunde?",
     "category": "internet"
   },
   {
     "questionId": "wer_postet_urlaubsbilder_aus_dem_letzten_jahr_als_",
-    "text": "Wer postet Urlaubsbilder aus dem letzten Jahr als „Throwback“?",
+    "text": "Wer postet Urlaubsbilder aus dem letzten Jahr als â€žThrowbackâ€œ?",
     "category": "internet"
   },
   {
@@ -146,12 +146,12 @@
   },
   {
     "questionId": "wer_hat_schon_mal_einen_shitstorm_ausgelost_aus_ve",
-    "text": "Wer hat schon mal einen Shitstorm ausgelöst – aus Versehen?",
+    "text": "Wer hat schon mal einen Shitstorm ausgelÃ¶st â€“ aus Versehen?",
     "category": "internet"
   },
   {
     "questionId": "wer_postet_screenshots_von_chats_mit_emojizensur",
-    "text": "Wer postet Screenshots von Chats – mit Emoji-Zensur?",
+    "text": "Wer postet Screenshots von Chats â€“ mit Emoji-Zensur?",
     "category": "internet"
   },
   {
@@ -161,22 +161,22 @@
   },
   {
     "questionId": "wer_schreibt_rezensionen_fur_produkte_die_er_nie_g",
-    "text": "Wer schreibt Rezensionen für Produkte, die er nie gekauft hat?",
+    "text": "Wer schreibt Rezensionen fÃ¼r Produkte, die er nie gekauft hat?",
     "category": "internet"
   },
   {
     "questionId": "wer_hat_eine_playlist_fur_jede_lebenslage_und_teil",
-    "text": "Wer hat eine Playlist für jede Lebenslage – und teilt sie ungefragt?",
+    "text": "Wer hat eine Playlist fÃ¼r jede Lebenslage â€“ und teilt sie ungefragt?",
     "category": "internet"
   },
   {
     "questionId": "wer_hat_einen_blog_uber_dinge_die_niemand_versteht",
-    "text": "Wer hat einen Blog über Dinge, die niemand versteht?",
+    "text": "Wer hat einen Blog Ã¼ber Dinge, die niemand versteht?",
     "category": "internet"
   },
   {
     "questionId": "wer_verschickt_kettenbriefe_aus_nostalgie",
-    "text": "Wer verschickt Kettenbriefe – aus Nostalgie?",
+    "text": "Wer verschickt Kettenbriefe â€“ aus Nostalgie?",
     "category": "internet"
   },
   {
@@ -191,7 +191,7 @@
   },
   {
     "questionId": "wer_hat_schon_mal_einen_livestream_gemacht_fur_sic",
-    "text": "Wer hat schon mal einen Livestream gemacht – für sich selbst?",
+    "text": "Wer hat schon mal einen Livestream gemacht â€“ fÃ¼r sich selbst?",
     "category": "internet"
   },
   {
@@ -221,12 +221,12 @@
   },
   {
     "questionId": "wer_hat_einen_socialmediadetox_versucht_und_ist_ge",
-    "text": "Wer hat einen Social-Media-Detox versucht – und ist gescheitert?",
+    "text": "Wer hat einen Social-Media-Detox versucht â€“ und ist gescheitert?",
     "category": "internet"
   },
   {
     "questionId": "wer_postet_motivationsspruche_und_halt_sich_nie_da",
-    "text": "Wer postet Motivationssprüche – und hält sich nie daran?",
+    "text": "Wer postet MotivationssprÃ¼che â€“ und hÃ¤lt sich nie daran?",
     "category": "internet"
   },
   {
@@ -246,14 +246,17 @@
   },
   {
     "questionId": "who_shares_fake_news",
-    "text": "\"Who shares fake news?\""
+    "text": "\"Who shares fake news?\"",
+    "category": "internet"
   },
   {
     "questionId": "who_stalks_profiles",
-    "text": "\"Who stalks profiles?\""
+    "text": "\"Who stalks profiles?\"",
+    "category": "internet"
   },
   {
     "questionId": "who_posts_too_many_comments",
-    "text": "\"Who posts too many comments?\""
+    "text": "\"Who posts too many comments?\"",
+    "category": "internet"
   }
 ]

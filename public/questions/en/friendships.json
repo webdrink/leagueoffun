@@ -1,12 +1,12 @@
 [
   {
     "questionId": "who_is_most_reliable_friend",
-    "text": "Wer ist der zuverlässigste Freund?",
+    "text": "Wer ist der zuverlÃ¤ssigste Freund?",
     "category": "friendships"
   },
   {
     "questionId": "who_cancels_plans_most_often",
-    "text": "Wer sagt am häufigsten Pläne ab?",
+    "text": "Wer sagt am hÃ¤ufigsten PlÃ¤ne ab?",
     "category": "friendships"
   },
   {
@@ -21,12 +21,12 @@
   },
   {
     "questionId": "who_gives_best_advice",
-    "text": "Wer gibt die besten Ratschläge?",
+    "text": "Wer gibt die besten RatschlÃ¤ge?",
     "category": "friendships"
   },
   {
     "questionId": "who_remembers_friendship_anniversaries",
-    "text": "Wer erinnert sich an Freundschaftsjubiläen?",
+    "text": "Wer erinnert sich an FreundschaftsjubilÃ¤en?",
     "category": "friendships"
   },
   {
@@ -46,74 +46,92 @@
   },
   {
     "questionId": "who_is_most_supportive_friend",
-    "text": "\"Who is the most supportive friend?\""
+    "text": "\"Who is the most supportive friend?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_is_most_funny_friend",
-    "text": "\"Who is the funniest friend?\""
+    "text": "\"Who is the funniest friend?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_is_most_adventurous_friend",
-    "text": "\"Who is the most adventurous friend?\""
+    "text": "\"Who is the most adventurous friend?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_is_most_loyal_friend",
-    "text": "\"Who is the most loyal friend?\""
+    "text": "\"Who is the most loyal friend?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_is_most_generous_friend",
-    "text": "\"Who is the most generous friend?\""
+    "text": "\"Who is the most generous friend?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_is_most_empathetic_friend",
-    "text": "\"Who is the most empathetic friend?\""
+    "text": "\"Who is the most empathetic friend?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_is_most_inspiring_friend",
-    "text": "\"Who is the most inspiring friend?\""
+    "text": "\"Who is the most inspiring friend?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_is_most_organized_friend",
-    "text": "\"Who is the most organized friend?\""
+    "text": "\"Who is the most organized friend?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_leaves_voice_memos_instead_of_texts",
-    "text": "\"Who prefers to send 5-minute voice messages instead of texts?\""
+    "text": "\"Who prefers to send 5-minute voice messages instead of texts?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_never_has_phone_charged",
-    "text": "\"Who never has enough battery when you need them?\""
+    "text": "\"Who never has enough battery when you need them?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_forgets_birthdays_without_facebook",
-    "text": "\"Who forgets every birthday without a Facebook reminder?\""
+    "text": "\"Who forgets every birthday without a Facebook reminder?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_arrives_an_hour_late_but_with_coffee",
-    "text": "\"Who arrives an hour late but brings coffee?\""
+    "text": "\"Who arrives an hour late but brings coffee?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_gives_questionable_life_advice",
-    "text": "\"Who gives questionable life advice?\""
+    "text": "\"Who gives questionable life advice?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_ghosts_groupchat_for_weeks",
-    "text": "\"Who ghosts the group chat for weeks?\""
+    "text": "\"Who ghosts the group chat for weeks?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_turns_every_story_into_a_monologue",
-    "text": "\"Who turns every story into a monologue?\""
+    "text": "\"Who turns every story into a monologue?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_sends_memes_in_critical_moments",
-    "text": "\"Who sends memes during serious moments?\""
+    "text": "\"Who sends memes during serious moments?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_knows_everyone_secrets",
-    "text": "\"Who knows all the secrets of the others?\""
+    "text": "\"Who knows all the secrets of the others?\"",
+    "category": "friendships"
   },
   {
     "questionId": "who_is_designated_group_therapist",
-    "text": "\"Who is the unofficial group therapist?\""
+    "text": "\"Who is the unofficial group therapist?\"",
+    "category": "friendships"
   }
 ]

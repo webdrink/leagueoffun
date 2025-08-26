@@ -11,7 +11,7 @@
   },
   {
     "questionId": "who_makes_excuses_for_losing",
-    "text": "Wer findet Ausreden fürs Verlieren?",
+    "text": "Wer findet Ausreden fÃ¼rs Verlieren?",
     "category": "sports"
   },
   {
@@ -41,12 +41,12 @@
   },
   {
     "questionId": "who_shows_off_athletic_abilities",
-    "text": "Wer gibt mit sportlichen Fähigkeiten an?",
+    "text": "Wer gibt mit sportlichen FÃ¤higkeiten an?",
     "category": "sports"
   },
   {
     "questionId": "who_buys_exercise_equipment_never_uses",
-    "text": "Wer kauft Fitnessgeräte und benutzt sie nie?",
+    "text": "Wer kauft FitnessgerÃ¤te und benutzt sie nie?",
     "category": "sports"
   },
   {
@@ -61,54 +61,67 @@
   },
   {
     "questionId": "who_is_worst_loser",
-    "text": "\"Who is the worst loser?\""
+    "text": "\"Who is the worst loser?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_talks_during_sports_games",
-    "text": "\"Who talks during the sports games?\""
+    "text": "\"Who talks during the sports games?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_pretends_to_understand_rules",
-    "text": "\"Who pretends to understand the rules?\""
+    "text": "\"Who pretends to understand the rules?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_buys_fancy_gear_rarely_uses",
-    "text": "\"Who buys expensive sports equipment and never uses it?\""
+    "text": "\"Who buys expensive sports equipment and never uses it?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_counts_warmup_as_workout",
-    "text": "\"Who counts warming up as a workout?\""
+    "text": "\"Who counts warming up as a workout?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_joins_gym_for_sauna_only",
-    "text": "\"Who joins the gym just for the sauna?\""
+    "text": "\"Who joins the gym just for the sauna?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_competes_with_fitness_tracker",
-    "text": "\"Who competes only with a pedometer?\""
+    "text": "\"Who competes only with a pedometer?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_screams_like_tennis_star",
-    "text": "\"Who screams during sports like a tennis pro?\""
+    "text": "\"Who screams during sports like a tennis pro?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_wears_headband_for_style",
-    "text": "\"Who wears a headband just as a fashion accessory?\""
+    "text": "\"Who wears a headband just as a fashion accessory?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_celebrates_smallest_personal_record",
-    "text": "\"Who celebrates every mini-record ecstatically?\""
+    "text": "\"Who celebrates every mini-record ecstatically?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_turns_every_activity_into_competition",
-    "text": "\"Who turns everything into a competition?\""
+    "text": "\"Who turns everything into a competition?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_forgets_water_but_brings_protein_shake",
-    "text": "\"Who forgets water but has the protein shake with them?\""
+    "text": "\"Who forgets water but has the protein shake with them?\"",
+    "category": "sports"
   },
   {
     "questionId": "who_streams_workout_live",
-    "text": "\"Who streams their workout live?\""
+    "text": "\"Who streams their workout live?\"",
+    "category": "sports"
   }
 ]

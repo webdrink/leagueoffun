@@ -196,62 +196,77 @@
   },
   {
     "questionId": "dance_on_table",
-    "text": "\"¿Quién sería el más probable en bailar sobre una mesa?\""
+    "text": "\"¿Quién sería el más probable en bailar sobre una mesa?\"",
+    "category": "party"
   },
   {
     "questionId": "karaoke_queen",
-    "text": "\"¿Quién sería el más probable en impresionar a todos en el karaoke?\""
+    "text": "\"¿Quién sería el más probable en impresionar a todos en el karaoke?\"",
+    "category": "party"
   },
   {
     "questionId": "party_planner",
-    "text": "\"¿Quién organizaría la mejor fiesta?\""
+    "text": "\"¿Quién organizaría la mejor fiesta?\"",
+    "category": "party"
   },
   {
     "questionId": "first_leave",
-    "text": "\"¿Quién sería el primero en abandonar la fiesta?\""
+    "text": "\"¿Quién sería el primero en abandonar la fiesta?\"",
+    "category": "party"
   },
   {
     "questionId": "last_standing",
-    "text": "\"¿Quién sería el último en quedarse despierto?\""
+    "text": "\"¿Quién sería el último en quedarse despierto?\"",
+    "category": "party"
   },
   {
     "questionId": "who_requests_free_bird_at_club",
-    "text": "\"¿Quién pediría \"Free Bird\" en el club?\""
+    "text": "\"¿Quién pediría \"Free Bird\" en el club?\"",
+    "category": "party"
   },
   {
     "questionId": "who_spills_first_drink",
-    "text": "\"¿Quién derrama la primera bebida?\""
+    "text": "\"¿Quién derrama la primera bebida?\"",
+    "category": "party"
   },
   {
     "questionId": "who_thinks_shots_are_hydration",
-    "text": "\"¿Quién ofrece shots para hidratarse?\""
+    "text": "\"¿Quién ofrece shots para hidratarse?\"",
+    "category": "party"
   },
   {
     "questionId": "who_starts_karaoke_without_mic",
-    "text": "\"¿Quién inicia el karaoke sin micrófono?\""
+    "text": "\"¿Quién inicia el karaoke sin micrófono?\"",
+    "category": "party"
   },
   {
     "questionId": "who_makes_toast_every_15_minutes",
-    "text": "\"¿Quién hace un brindis cada 15 minutos?\""
+    "text": "\"¿Quién hace un brindis cada 15 minutos?\"",
+    "category": "party"
   },
   {
     "questionId": "who_takes_over_photobooth",
-    "text": "\"¿Quién bloquea la fotocabina solo?\""
+    "text": "\"¿Quién bloquea la fotocabina solo?\"",
+    "category": "party"
   },
   {
     "questionId": "who_loses_phone_in_sofa",
-    "text": "\"¿Quién pierde el teléfono en el sofá?\""
+    "text": "\"¿Quién pierde el teléfono en el sofá?\"",
+    "category": "party"
   },
   {
     "questionId": "who_crashes_vip_area_uninvited",
-    "text": "\"¿Quién se cuela en el área VIP?\""
+    "text": "\"¿Quién se cuela en el área VIP?\"",
+    "category": "party"
   },
   {
     "questionId": "who_does_splits_on_dancefloor",
-    "text": "\"¿Quién hace el espagat en la pista de baile?\""
+    "text": "\"¿Quién hace el espagat en la pista de baile?\"",
+    "category": "party"
   },
   {
     "questionId": "who_forgets_to_eat_before_drinking",
-    "text": "\"¿Quién se olvida de comer antes de la fiesta?\""
+    "text": "\"¿Quién se olvida de comer antes de la fiesta?\"",
+    "category": "party"
   }
 ]

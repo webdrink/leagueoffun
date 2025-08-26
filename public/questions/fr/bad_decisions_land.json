@@ -36,78 +36,97 @@
   },
   {
     "questionId": "who_takes_risks_without_thinking",
-    "text": "\"Qui prend des risques sans réfléchir ?\""
+    "text": "\"Qui prend des risques sans réfléchir ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_trusts_people_too_easily",
-    "text": "\"Qui fait trop facilement confiance aux gens ?\""
+    "text": "\"Qui fait trop facilement confiance aux gens ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_makes_decisions_based_on_emotions",
-    "text": "\"Qui prend des décisions basées sur les émotions ?\""
+    "text": "\"Qui prend des décisions basées sur les émotions ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_follow_a_stranger_home",
-    "text": "\"Qui suivrait un étranger jusqu'à chez lui ?\""
+    "text": "\"Qui suivrait un étranger jusqu'à chez lui ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_try_a_dangerous_stunt",
-    "text": "\"Qui essaierait un stunt dangereux ?\""
+    "text": "\"Qui essaierait un stunt dangereux ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_steal_a_car",
-    "text": "\"Qui volerait une voiture ?\""
+    "text": "\"Qui volerait une voiture ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_get_lost_in_the_woods",
-    "text": "\"Qui se perdrait dans la forêt ?\""
+    "text": "\"Qui se perdrait dans la forêt ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_try_a_strange_food",
-    "text": "\"Qui essaierait une nourriture étrange ?\""
+    "text": "\"Qui essaierait une nourriture étrange ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_jump_off_a_cliff",
-    "text": "\"Qui sauterait d'une falaise ?\""
+    "text": "\"Qui sauterait d'une falaise ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_get_into_a_fight",
-    "text": "\"Qui se mettrait dans une dispute ?\""
+    "text": "\"Qui se mettrait dans une dispute ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_try_to_fix_a_broken_device",
-    "text": "\"Qui essaierait de réparer un appareil défectueux ?\""
+    "text": "\"Qui essaierait de réparer un appareil défectueux ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_ride_a_wild_animal",
-    "text": "\"Qui monterait un animal sauvage ?\""
+    "text": "\"Qui monterait un animal sauvage ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_ask_a_stranger_for_money",
-    "text": "\"Qui demanderait de l'argent à un inconnu ?\""
+    "text": "\"Qui demanderait de l'argent à un inconnu ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_try_to_sneak_into_a_party",
-    "text": "\"Qui essaierait de s'introduire discrètement à une fête ?\""
+    "text": "\"Qui essaierait de s'introduire discrètement à une fête ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_ride_a_skateboard_down_a_stairs",
-    "text": "\"Qui descendrait des escaliers en skateboard ?\""
+    "text": "\"Qui descendrait des escaliers en skateboard ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_try_to_catch_a_fish_with_bare_hands",
-    "text": "\"Qui essaierait de attraper un poisson à mains nues ?\""
+    "text": "\"Qui essaierait de attraper un poisson à mains nues ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_try_to_jump_over_a_fire",
-    "text": "\"Qui essaierait de sauter par-dessus un feu ?\""
+    "text": "\"Qui essaierait de sauter par-dessus un feu ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_ask_a_stranger_for_help",
-    "text": "\"Qui demanderait de l'aide à un inconnu ?\""
+    "text": "\"Qui demanderait de l'aide à un inconnu ?\"",
+    "category": "bad_decisions_land"
   },
   {
     "questionId": "who_would_try_to_fix_a_strange_machine",
-    "text": "\"Qui essaierait de réparer une machine étrange ?\""
+    "text": "\"Qui essaierait de réparer une machine étrange ?\"",
+    "category": "bad_decisions_land"
   }
 ]

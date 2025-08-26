@@ -1,12 +1,12 @@
 [
   {
     "questionId": "who_takes_longest_in_bathroom",
-    "text": "Wer braucht am längsten im Badezimmer?",
+    "text": "Wer braucht am lÃ¤ngsten im Badezimmer?",
     "category": "in_bathroom"
   },
   {
     "questionId": "who_leaves_wet_towels_on_floor",
-    "text": "Wer lässt nasse Handtücher auf dem Boden liegen?",
+    "text": "Wer lÃ¤sst nasse HandtÃ¼cher auf dem Boden liegen?",
     "category": "in_bathroom"
   },
   {
@@ -21,17 +21,17 @@
   },
   {
     "questionId": "who_has_most_beauty_products",
-    "text": "Wer hat die meisten Schönheitsprodukte?",
+    "text": "Wer hat die meisten SchÃ¶nheitsprodukte?",
     "category": "in_bathroom"
   },
   {
     "questionId": "who_leaves_hair_in_drain",
-    "text": "Wer lässt Haare im Abfluss?",
+    "text": "Wer lÃ¤sst Haare im Abfluss?",
     "category": "in_bathroom"
   },
   {
     "questionId": "who_uses_all_hot_water",
-    "text": "Wer verbraucht das ganze heiße Wasser?",
+    "text": "Wer verbraucht das ganze heiÃŸe Wasser?",
     "category": "in_bathroom"
   },
   {
@@ -51,7 +51,7 @@
   },
   {
     "questionId": "who_forgets_to_flush",
-    "text": "Wer vergisst zu spülen?",
+    "text": "Wer vergisst zu spÃ¼len?",
     "category": "in_bathroom"
   },
   {
@@ -66,17 +66,17 @@
   },
   {
     "questionId": "who_makes_biggest_mess",
-    "text": "Wer macht die größte Unordnung?",
+    "text": "Wer macht die grÃ¶ÃŸte Unordnung?",
     "category": "in_bathroom"
   },
   {
     "questionId": "who_takes_baths_not_showers",
-    "text": "Wer nimmt Bäder statt Duschen?",
+    "text": "Wer nimmt BÃ¤der statt Duschen?",
     "category": "in_bathroom"
   },
   {
     "questionId": "who_brushes_teeth_loudest",
-    "text": "Wer putzt die Zähne am lautesten?",
+    "text": "Wer putzt die ZÃ¤hne am lautesten?",
     "category": "in_bathroom"
   },
   {
@@ -96,78 +96,97 @@
   },
   {
     "questionId": "who_takes_longest_showers",
-    "text": "\"Who takes the longest showers?\""
+    "text": "\"Who takes the longest showers?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_hoards_bathroom_products",
-    "text": "\"Who hoards bathroom products?\""
+    "text": "\"Who hoards bathroom products?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_leaves_bathroom_messiest",
-    "text": "\"Who leaves the bathroom the messiest?\""
+    "text": "\"Who leaves the bathroom the messiest?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_takes_selfies_in_mirror",
-    "text": "\"Who takes selfies in the mirror?\""
+    "text": "\"Who takes selfies in the mirror?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_has_most_bathroom_time",
-    "text": "\"Who spends the most time in the bathroom?\""
+    "text": "\"Who spends the most time in the bathroom?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_leaves_bathroom_light_on",
-    "text": "\"Who leaves the bathroom light on?\""
+    "text": "\"Who leaves the bathroom light on?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_has_most_bathroom_essentials",
-    "text": "\"Who has the most bathroom supplies?\""
+    "text": "\"Who has the most bathroom supplies?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_takes_bathroom_breaks_during_work",
-    "text": "\"Who takes the most bathroom breaks during work?\""
+    "text": "\"Who takes the most bathroom breaks during work?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_has_most_bathroom_organization_skills",
-    "text": "\"Who has the best organizational skills in the bathroom?\""
+    "text": "\"Who has the best organizational skills in the bathroom?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_sings_in_shower_like_concert",
-    "text": "\"Who sings a whole concert in the shower?\""
+    "text": "\"Who sings a whole concert in the shower?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_uses_face_mask_every_day",
-    "text": "\"Who does a face mask every day?\""
+    "text": "\"Who does a face mask every day?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_spends_an_hour_styling_hair",
-    "text": "\"Who needs an hour for hair styling?\""
+    "text": "\"Who needs an hour for hair styling?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_leaves_empty_toilet_paper_roll",
-    "text": "\"Who leaves the empty toilet paper roll hanging?\""
+    "text": "\"Who leaves the empty toilet paper roll hanging?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_brushes_teeth_while_dancing",
-    "text": "\"Who dances while brushing their teeth?\""
+    "text": "\"Who dances while brushing their teeth?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_has_more_shampoo_than_clothes",
-    "text": "\"Who owns more shampoos than clothing items?\""
+    "text": "\"Who owns more shampoos than clothing items?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_checks_phone_on_toilet_longest",
-    "text": "\"Who scrolls the longest on the toilet?\""
+    "text": "\"Who scrolls the longest on the toilet?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_tried_diy_haircut_and_regretted",
-    "text": "\"Who cut their own hair and regrets it?\""
+    "text": "\"Who cut their own hair and regrets it?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_has_rubber_duck_collection",
-    "text": "\"Who collects rubber ducks?\""
+    "text": "\"Who collects rubber ducks?\"",
+    "category": "in_bathroom"
   },
   {
     "questionId": "who_uses_roommate_luxury_soap_secretly",
-    "text": "\"Who secretly uses their roommates' luxury soap?\""
+    "text": "\"Who secretly uses their roommates' luxury soap?\"",
+    "category": "in_bathroom"
   }
 ]

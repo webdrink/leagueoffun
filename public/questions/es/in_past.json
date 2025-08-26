@@ -46,42 +46,52 @@
   },
   {
     "questionId": "who_wants_to_visit_dinosaurs",
-    "text": "\"¿Quién querría ver dinosaurios en vivo?\""
+    "text": "\"¿Quién querría ver dinosaurios en vivo?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_thinks_they_were_a_viking",
-    "text": "\"¿Quién cree que fue un vikingo en una vida anterior?\""
+    "text": "\"¿Quién cree que fue un vikingo en una vida anterior?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_misses_90s_ringtones",
-    "text": "\"¿Quién extraña los tonos de llamada de Nokia de los 90?\""
+    "text": "\"¿Quién extraña los tonos de llamada de Nokia de los 90?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_would_bring_smartphone_to_middle_ages",
-    "text": "\"¿Quién se llevaría un smartphone al Medioevo?\""
+    "text": "\"¿Quién se llevaría un smartphone al Medioevo?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_collects_vintage_cassettes",
-    "text": "\"¿Quién colecciona viejas cintas de música?\""
+    "text": "\"¿Quién colecciona viejas cintas de música?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_thinks_their_childhood_cartoon_best",
-    "text": "\"¿Quién piensa que sus series infantiles fueron LAS mejores?\""
+    "text": "\"¿Quién piensa que sus series infantiles fueron LAS mejores?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_was_tamagotchi_serial_killer",
-    "text": "\"¿Quién fue el asesino en serie de Tamagotchi?\""
+    "text": "\"¿Quién fue el asesino en serie de Tamagotchi?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_have_scrapbooks_of_ticket_stubs",
-    "text": "\"¿Quién tiene un álbum de colección lleno de entradas de conciertos?\""
+    "text": "\"¿Quién tiene un álbum de colección lleno de entradas de conciertos?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_reminisces_about_pre_internet_bliss",
-    "text": "\"¿Quién habla con entusiasmo de la vida antes de Internet?\""
+    "text": "\"¿Quién habla con entusiasmo de la vida antes de Internet?\"",
+    "category": "in_past"
   },
   {
     "questionId": "who_claims_they_invented_planking",
-    "text": "\"¿Quién afirma haber inventado el planking?\""
+    "text": "\"¿Quién afirma haber inventado el planking?\"",
+    "category": "in_past"
   }
 ]

@@ -76,42 +76,52 @@
   },
   {
     "questionId": "who_sings_in_public",
-    "text": "\"Qui chante en public ?\""
+    "text": "\"Qui chante en public ?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_tells_cringe_jokes",
-    "text": "\"Qui raconte les blagues gênantes ?\""
+    "text": "\"Qui raconte les blagues gênantes ?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_dances_inappropriately",
-    "text": "\"Qui danse de manière inappropriée ?\""
+    "text": "\"Qui danse de manière inappropriée ?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_forgets_own_age",
-    "text": "\"Qui oublie son propre âge ?\""
+    "text": "\"Qui oublie son propre âge ?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_makes_funny_noises",
-    "text": "\"Qui fait les bruits les plus drôles ?\""
+    "text": "\"Qui fait les bruits les plus drôles ?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_tells_awkward_stories",
-    "text": "\"Qui raconte les histoires les plus embarrassantes ?\""
+    "text": "\"Qui raconte les histoires les plus embarrassantes ?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_makes_funny_faces_in_photos",
-    "text": "\"Qui fait les visages les plus drôles sur les photos ?\""
+    "text": "\"Qui fait les visages les plus drôles sur les photos ?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_always_says_wrong_things",
-    "text": "\"Qui dit toujours les mauvaises choses ?\""
+    "text": "\"Qui dit toujours les mauvaises choses ?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_dances_weirdly_in_public",
-    "text": "\"Qui danse bizarrement en public ?\""
+    "text": "\"Qui danse bizarrement en public ?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_always_has_awkward_silences",
-    "text": "\"Qui a toujours des silences gênants ?\""
+    "text": "\"Qui a toujours des silences gênants ?\"",
+    "category": "embarrassing_moments"
   }
 ]

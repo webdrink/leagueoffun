@@ -256,58 +256,72 @@
   },
   {
     "questionId": "who_lives_only_for_after_work",
-    "text": "\"Qui vit seulement pour la fin de la journée de travail ?\""
+    "text": "\"Qui vit seulement pour la fin de la journée de travail ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_is_walking_todo_list",
-    "text": "\"Qui est la liste de tâches ambulante ?\""
+    "text": "\"Qui est la liste de tâches ambulante ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_constantly_forgets_deadlines",
-    "text": "\"Qui oublie constamment les délais ?\""
+    "text": "\"Qui oublie constamment les délais ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_brings_best_snacks",
-    "text": "\"Qui apporte les meilleures collations ?\""
+    "text": "\"Qui apporte les meilleures collations ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_always_brings_cake",
-    "text": "\"Qui apporte toujours des gâteaux ?\""
+    "text": "\"Qui apporte toujours des gâteaux ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_always_forgets_password",
-    "text": "\"Qui oublie constamment le mot de passe ?\""
+    "text": "\"Qui oublie constamment le mot de passe ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_tells_best_jokes",
-    "text": "\"Qui fait les meilleures blagues au bureau ?\""
+    "text": "\"Qui fait les meilleures blagues au bureau ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_is_always_late_to_meetings",
-    "text": "\"Qui est toujours en retard à la réunion ?\""
+    "text": "\"Qui est toujours en retard à la réunion ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_has_most_colorful_calendar",
-    "text": "\"Qui a le calendrier le plus coloré ?\""
+    "text": "\"Qui a le calendrier le plus coloré ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_writes_most_creative_emails",
-    "text": "\"Qui écrit les e-mails les plus créatifs ?\""
+    "text": "\"Qui écrit les e-mails les plus créatifs ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_takes_longest_coffee_breaks",
-    "text": "\"Qui fait les pauses café les plus longues ?\""
+    "text": "\"Qui fait les pauses café les plus longues ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_always_has_plan_b",
-    "text": "\"Qui a toujours un plan B ?\""
+    "text": "\"Qui a toujours un plan B ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_brings_most_ideas",
-    "text": "\"Qui apporte le plus d'idées ?\""
+    "text": "\"Qui apporte le plus d'idées ?\"",
+    "category": "at_work"
   },
   {
     "questionId": "who_is_secret_boss",
-    "text": "\"Qui est le chef secret ?\""
+    "text": "\"Qui est le chef secret ?\"",
+    "category": "at_work"
   }
 ]

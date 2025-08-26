@@ -74,6 +74,15 @@ export interface NameBlameEntry {
   timestamp: string;
 }
 
+export type NameBlamePhase = 'selecting' | 'blamed' | 'continuing';
+
+export interface NameBlameState {
+  phase: NameBlamePhase;
+  currentBlamer?: string;
+  currentBlamed?: string;
+  currentQuestion?: string;
+}
+
 export type GameStep = 'intro' | 'playerSetup' | 'categoryPick' | 'loading' | 'roulette' | 'game' | 'summary'; // Added 'categoryPick'
 
 export interface QuestionStats {

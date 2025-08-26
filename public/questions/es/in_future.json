@@ -21,110 +21,137 @@
   },
   {
     "questionId": "who_would_adapt_best_to_future",
-    "text": "\"¿Quién se adaptaría mejor al futuro?\""
+    "text": "\"¿Quién se adaptaría mejor al futuro?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_still_use_outdated_tech",
-    "text": "\"¿Quién seguiría utilizando tecnología obsoleta?\""
+    "text": "\"¿Quién seguiría utilizando tecnología obsoleta?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_create_best_future_technology",
-    "text": "\"¿Quién crearía la mejor tecnología del futuro?\""
+    "text": "\"¿Quién crearía la mejor tecnología del futuro?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_become_futuristic_leader",
-    "text": "\"¿Quién sería presidente en el futuro?\""
+    "text": "\"¿Quién sería presidente en el futuro?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_explore_space_first",
-    "text": "\"¿Quién exploraría el espacio primero?\""
+    "text": "\"¿Quién exploraría el espacio primero?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_create_best_virtual_reality_experience",
-    "text": "\"¿Quién crearía la mejor realidad virtual?\""
+    "text": "\"¿Quién crearía la mejor realidad virtual?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_become_tech_guru",
-    "text": "\"¿Quién se convertiría en un gurú de la tecnología?\""
+    "text": "\"¿Quién se convertiría en un gurú de la tecnología?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_create_best_ai",
-    "text": "\"¿Quién crearía la mejor inteligencia artificial?\""
+    "text": "\"¿Quién crearía la mejor inteligencia artificial?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_invent_best_future_gadget",
-    "text": "\"¿Quién inventaría el mejor gadget del futuro?\""
+    "text": "\"¿Quién inventaría el mejor gadget del futuro?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_create_best_virtual_assistant",
-    "text": "\"¿Quién crearía el mejor asistente virtual?\""
+    "text": "\"¿Quién crearía el mejor asistente virtual?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_become_space_colonist",
-    "text": "\"¿Quién se convertiría en un colonizador del espacio?\""
+    "text": "\"¿Quién se convertiría en un colonizador del espacio?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_create_best_virtual_reality_game",
-    "text": "\"¿Quién crearía el mejor juego de realidad virtual?\""
+    "text": "\"¿Quién crearía el mejor juego de realidad virtual?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_create_best_future_city",
-    "text": "\"¿Quién diseñaría la mejor ciudad del futuro?\""
+    "text": "\"¿Quién diseñaría la mejor ciudad del futuro?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_create_best_future_transportation",
-    "text": "\"¿Quién desarrollaría el mejor transporte del futuro?\""
+    "text": "\"¿Quién desarrollaría el mejor transporte del futuro?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_create_best_virtual_reality_app",
-    "text": "\"¿Quién crearía la mejor aplicación de realidad virtual?\""
+    "text": "\"¿Quién crearía la mejor aplicación de realidad virtual?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_create_best_virtual_world",
-    "text": "\"¿Quién construiría el mejor mundo virtual?\""
+    "text": "\"¿Quién construiría el mejor mundo virtual?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_would_become_time_traveler",
-    "text": "\"¿Quién se convertiría en un viajero del tiempo?\""
+    "text": "\"¿Quién se convertiría en un viajero del tiempo?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_expects_flying_cars_by_2030",
-    "text": "\"¿Quién espera tener coches voladores para 2030?\""
+    "text": "\"¿Quién espera tener coches voladores para 2030?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_thinks_their_robot_will_do_chores",
-    "text": "\"¿Quién cree que un robot pronto hará todas las tareas del hogar?\""
+    "text": "\"¿Quién cree que un robot pronto hará todas las tareas del hogar?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_plans_to_upload_consciousness",
-    "text": "\"¿Quién planea subir su conciencia?\""
+    "text": "\"¿Quién planea subir su conciencia?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_buys_crypto_for_retirement",
-    "text": "\"¿Quién compra criptomonedas para la jubilación?\""
+    "text": "\"¿Quién compra criptomonedas para la jubilación?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_is_afraid_of_ai_taking_over",
-    "text": "\"¿Quién tiene miedo de que la IA lo controle todo?\""
+    "text": "\"¿Quién tiene miedo de que la IA lo controle todo?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_preorders_every_new_gadget",
-    "text": "\"¿Quién reserva cada nuevo gadget por adelantado?\""
+    "text": "\"¿Quién reserva cada nuevo gadget por adelantado?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_wants_to_live_on_mars",
-    "text": "\"¿Quién quiere vivir en Marte?\""
+    "text": "\"¿Quién quiere vivir en Marte?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_expects_weekend_to_be_three_days",
-    "text": "\"¿Quién espera que pronto un fin de semana de tres días sea el estándar?\""
+    "text": "\"¿Quién espera que pronto un fin de semana de tres días sea el estándar?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_bets_on_time_travel_vacations",
-    "text": "\"¿Quién apuesta por vacaciones de viajes en el tiempo?\""
+    "text": "\"¿Quién apuesta por vacaciones de viajes en el tiempo?\"",
+    "category": "in_future"
   },
   {
     "questionId": "who_believes_food_pills_will_replace_meals",
-    "text": "\"¿Quién cree que las píldoras de alimento pronto reemplazarán las comidas?\""
+    "text": "\"¿Quién cree que las píldoras de alimento pronto reemplazarán las comidas?\"",
+    "category": "in_future"
   }
 ]

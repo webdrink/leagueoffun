@@ -1,34 +1,42 @@
 [
   {
     "questionId": "who_is_most_like_kevin",
-    "text": "\"Who is most like Kevin?\""
+    "text": "\"Who is most like Kevin?\"",
+    "category": "kevin"
   },
   {
     "questionId": "who_would_kevin_be_friends_with",
-    "text": "\"Who would Kevin be friends with?\""
+    "text": "\"Who would Kevin be friends with?\"",
+    "category": "kevin"
   },
   {
     "questionId": "who_would_kevin_annoy_most",
-    "text": "\"Who would annoy Kevin the most?\""
+    "text": "\"Who would annoy Kevin the most?\"",
+    "category": "kevin"
   },
   {
     "questionId": "who_would_help_kevin",
-    "text": "\"Who would help Kevin?\""
+    "text": "\"Who would help Kevin?\"",
+    "category": "kevin"
   },
   {
     "questionId": "who_would_understand_kevin",
-    "text": "\"Who would understand Kevin?\""
+    "text": "\"Who would understand Kevin?\"",
+    "category": "kevin"
   },
   {
     "questionId": "who_has_kevin_energy",
-    "text": "\"Who has Kevin energy?\""
+    "text": "\"Who has Kevin energy?\"",
+    "category": "kevin"
   },
   {
     "questionId": "who_would_laugh_at_kevins_jokes",
-    "text": "\"Who would laugh at Kevin's jokes?\""
+    "text": "\"Who would laugh at Kevin's jokes?\"",
+    "category": "kevin"
   },
   {
     "questionId": "who_would_kevin_call_for_help",
-    "text": "\"Who would Kevin ask for help?\""
+    "text": "\"Who would Kevin ask for help?\"",
+    "category": "kevin"
   }
 ]

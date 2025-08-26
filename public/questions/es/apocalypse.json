@@ -271,110 +271,137 @@
   },
   {
     "questionId": "who_would_have_best_survival_skills",
-    "text": "\"¿Quién tendría las mejores habilidades de supervivencia?\""
+    "text": "\"¿Quién tendría las mejores habilidades de supervivencia?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_outlive_most_others",
-    "text": "\"¿Quién sobreviviría a la mayoría de los demás?\""
+    "text": "\"¿Quién sobreviviría a la mayoría de los demás?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_find_best_weapons",
-    "text": "\"¿Quién encontraría las mejores armas?\""
+    "text": "\"¿Quién encontraría las mejores armas?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_save_most_others",
-    "text": "\"¿Quién salvaría a la mayoría de los demás?\""
+    "text": "\"¿Quién salvaría a la mayoría de los demás?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_develop_best_survival_strategies",
-    "text": "\"¿Quién desarrollaría las mejores estrategias de supervivencia?\""
+    "text": "\"¿Quién desarrollaría las mejores estrategias de supervivencia?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_outsmart_most_others",
-    "text": "\"¿Quién engañaría a la mayoría de los demás?\""
+    "text": "\"¿Quién engañaría a la mayoría de los demás?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_tell_best_survival_stories",
-    "text": "\"¿Quién contaría las mejores historias de supervivencia?\""
+    "text": "\"¿Quién contaría las mejores historias de supervivencia?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_infect_most_others",
-    "text": "\"¿Quién infectaría a la mayoría de los demás?\""
+    "text": "\"¿Quién infectaría a la mayoría de los demás?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_teach_best_survival_skills",
-    "text": "\"¿Quién enseñaría las mejores habilidades de supervivencia?\""
+    "text": "\"¿Quién enseñaría las mejores habilidades de supervivencia?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_protect_most_others",
-    "text": "\"¿Quién protegería a la mayoría de los demás?\""
+    "text": "\"¿Quién protegería a la mayoría de los demás?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_implement_best_survival_strategies",
-    "text": "\"¿Quién implementaría las mejores estrategias de supervivencia?\""
+    "text": "\"¿Quién implementaría las mejores estrategias de supervivencia?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_inspire_most_others",
-    "text": "\"¿Quién inspiraría a la mayoría de los demás?\""
+    "text": "\"¿Quién inspiraría a la mayoría de los demás?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_write_best_survival_stories",
-    "text": "\"¿Quién escribiría las mejores historias de supervivencia?\""
+    "text": "\"¿Quién escribiría las mejores historias de supervivencia?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_motivate_most_others",
-    "text": "\"¿Quién motivaría a la mayoría de los demás?\""
+    "text": "\"¿Quién motivaría a la mayoría de los demás?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_apply_best_survival_skills",
-    "text": "\"¿Quién aplicaría las mejores habilidades de supervivencia?\""
+    "text": "\"¿Quién aplicaría las mejores habilidades de supervivencia?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_support_most_others",
-    "text": "\"¿Quién apoyaría a la mayoría de los demás?\""
+    "text": "\"¿Quién apoyaría a la mayoría de los demás?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_guide_most_others",
-    "text": "\"¿Quién guiaría a la mayoría de los demás?\""
+    "text": "\"¿Quién guiaría a la mayoría de los demás?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_would_stimulate_most_others",
-    "text": "\"¿Quién estimularía a la mayoría de los demás?\""
+    "text": "\"¿Quién estimularía a la mayoría de los demás?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_immediately_founds_cult",
-    "text": "\"¿Quién fundaría una secta de inmediato?\""
+    "text": "\"¿Quién fundaría una secta de inmediato?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_builds_bunker_and_decorates_it",
-    "text": "\"¿Quién construiría un búnker y lo decoraría?\""
+    "text": "\"¿Quién construiría un búnker y lo decoraría?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_pretends_saw_it_all_coming",
-    "text": "\"¿Quién finge haber visto todo esto venir?\""
+    "text": "\"¿Quién finge haber visto todo esto venir?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_becomes_tiktok_influencer_apocalypse",
-    "text": "\"¿Quién será el influencer de TikTok de la apocalipsis?\""
+    "text": "\"¿Quién será el influencer de TikTok de la apocalipsis?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_eats_all_supplies_first_day",
-    "text": "\"¿Quién se come todas las provisiones en el primer día?\""
+    "text": "\"¿Quién se come todas las provisiones en el primer día?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_complains_bad_wifi_while_everything_burns",
-    "text": "\"¿Quién se queja de un mal Wi-Fi mientras todo arde?\""
+    "text": "\"¿Quién se queja de un mal Wi-Fi mientras todo arde?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_immediately_founds_cult",
-    "text": "\"¿Quién funda de inmediato una secta?\""
+    "text": "\"¿Quién funda de inmediato una secta?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_builds_bunker_and_decorates_it",
-    "text": "\"¿Quién construye un búnker y lo decora?\""
+    "text": "\"¿Quién construye un búnker y lo decora?\"",
+    "category": "apocalypse"
   },
   {
     "questionId": "who_pretends_saw_it_all_coming",
-    "text": "\"¿Quién finge haber visto todo esto venir?\""
+    "text": "\"¿Quién finge haber visto todo esto venir?\"",
+    "category": "apocalypse"
   }
 ]

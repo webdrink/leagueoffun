@@ -36,78 +36,97 @@
   },
   {
     "questionId": "who_would_have_different_hobbies",
-    "text": "\"Qui aurait d'autres passe-temps ?\""
+    "text": "\"Qui aurait d'autres passe-temps ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_be_a_superhero",
-    "text": "\"Qui serait un super-héros ?\""
+    "text": "\"Qui serait un super-héros ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_be_an_alien",
-    "text": "\"Qui serait un extraterrestre ?\""
+    "text": "\"Qui serait un extraterrestre ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_family",
-    "text": "\"Qui aurait une autre famille ?\""
+    "text": "\"Qui aurait une autre famille ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_friends",
-    "text": "\"Qui aurait d'autres amis ?\""
+    "text": "\"Qui aurait d'autres amis ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_pets",
-    "text": "\"Qui aurait d'autres animaux de compagnie ?\""
+    "text": "\"Qui aurait d'autres animaux de compagnie ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_skills",
-    "text": "\"Qui aurait d'autres compétences ?\""
+    "text": "\"Qui aurait d'autres compétences ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_be_a_villain",
-    "text": "\"Qui serait un méchant ?\""
+    "text": "\"Qui serait un méchant ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_would_have_different_interests",
-    "text": "\"Qui aurait d'autres intérêts ?\""
+    "text": "\"Qui aurait d'autres intérêts ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_is_evil_twin_richer",
-    "text": "\"Qui a dans l'univers parallèle un jumeau riche et maléfique ?\""
+    "text": "\"Qui a dans l'univers parallèle un jumeau riche et maléfique ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_becomes_popstar_on_other_earth",
-    "text": "\"Qui est une popstar sur une autre Terre ?\""
+    "text": "\"Qui est une popstar sur une autre Terre ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_is_snail_overlord_elsewhere",
-    "text": "\"Qui règne quelque part en tant que seigneur des escargots ?\""
+    "text": "\"Qui règne quelque part en tant que seigneur des escargots ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_lives_in_reverse_gravity_world",
-    "text": "\"Qui vit dans un monde avec une gravité inversée ?\""
+    "text": "\"Qui vit dans un monde avec une gravité inversée ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_is_allergic_to_water_in_altverse",
-    "text": "\"Qui est allergique à l'eau dans l'autre univers ?\""
+    "text": "\"Qui est allergique à l'eau dans l'autre univers ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_never_needs_sleep_in_other_reality",
-    "text": "\"Qui ne dort jamais dans une réalité ?\""
+    "text": "\"Qui ne dort jamais dans une réalité ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_is_cat_in_quantum_dimension",
-    "text": "\"Qui est un chat dans une dimension quantique ?\""
+    "text": "\"Qui est un chat dans une dimension quantique ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_invents_square_wheels_there",
-    "text": "\"Qui invente là-bas la roue carrée ?\""
+    "text": "\"Qui invente là-bas la roue carrée ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_runs_caffeine_free_coffee_shop",
-    "text": "\"Qui gère un café sans caféine dans le multivers ?\""
+    "text": "\"Qui gère un café sans caféine dans le multivers ?\"",
+    "category": "parallel_universe"
   },
   {
     "questionId": "who_replaces_moon_with_cheese_planet",
-    "text": "\"Qui échange la lune contre une planète fromage ?\""
+    "text": "\"Qui échange la lune contre une planète fromage ?\"",
+    "category": "parallel_universe"
   }
 ]

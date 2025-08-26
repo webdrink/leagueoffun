@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import useLocalStorage from './useLocalStorage';
-import { Player, NameBlameEntry } from '../types';
+import { Player, NameBlameEntry, NameBlamePhase, NameBlameState } from '../types';
 import { validatePlayerName, generatePlayerId } from '../utils';
 
 interface UsePlayerSetupOutput {
@@ -10,6 +10,7 @@ interface UsePlayerSetupOutput {
   tempPlayerName: string;
   nameBlameLog: NameBlameEntry[];
   currentPlayerIndex: number;
+  blameState: NameBlameState;
   setNameBlameMode: (value: boolean | ((val: boolean) => boolean)) => void;
   setTempPlayerName: (name: string) => void;
   addPlayer: () => void;
@@ -21,6 +22,9 @@ interface UsePlayerSetupOutput {
   hasValidPlayerSetup: () => boolean;
   resetNameBlameLog: () => void;
   getActivePlayers: () => Player[];
+  setBlamePhase: (phase: NameBlamePhase) => void;
+  updateBlameState: (updates: Partial<NameBlameState>) => void;
+  resetBlameState: () => void;
 }
 
 /**
@@ -51,6 +55,11 @@ const useNameBlameSetup = (): UsePlayerSetupOutput => {
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
   const [nameInputError, setNameInputError] = useState<string | null>(null);
   const [tempPlayerName, setTempPlayerName] = useState("");
+  
+  // NameBlame state management
+  const [blameState, setBlameState] = useState<NameBlameState>({
+    phase: 'selecting'
+  });
 
   // Add a new player
   const addPlayer = useCallback(() => {
@@ -126,6 +135,19 @@ const useNameBlameSetup = (): UsePlayerSetupOutput => {
     return players.filter(p => p.name.trim() !== '');
   }, [players]);
 
+  // Blame state management functions
+  const setBlamePhase = useCallback((phase: NameBlamePhase) => {
+    setBlameState(prev => ({ ...prev, phase }));
+  }, []);
+
+  const updateBlameState = useCallback((updates: Partial<NameBlameState>) => {
+    setBlameState(prev => ({ ...prev, ...updates }));
+  }, []);
+
+  const resetBlameState = useCallback(() => {
+    setBlameState({ phase: 'selecting' });
+  }, []);
+
   return {
     players,
     nameBlameMode,
@@ -133,6 +155,7 @@ const useNameBlameSetup = (): UsePlayerSetupOutput => {
     tempPlayerName,
     nameBlameLog,
     currentPlayerIndex,
+    blameState,
     setNameBlameMode,
     setTempPlayerName,
     addPlayer,
@@ -143,7 +166,10 @@ const useNameBlameSetup = (): UsePlayerSetupOutput => {
     recordNameBlame,
     hasValidPlayerSetup,
     resetNameBlameLog,
-    getActivePlayers
+    getActivePlayers,
+    setBlamePhase,
+    updateBlameState,
+    resetBlameState
   };
 };
 

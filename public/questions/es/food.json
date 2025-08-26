@@ -1,114 +1,142 @@
 [
   {
     "questionId": "who_is_pickiest_eater",
-    "text": "\"¿Quién es el más quisquilloso para comer?\""
+    "text": "\"¿Quién es el más quisquilloso para comer?\"",
+    "category": "food"
   },
   {
     "questionId": "who_takes_food_photos_for_social_media",
-    "text": "\"¿Quién toma fotos de comida para las redes sociales?\""
+    "text": "\"¿Quién toma fotos de comida para las redes sociales?\"",
+    "category": "food"
   },
   {
     "questionId": "who_always_tries_new_restaurants",
-    "text": "\"¿Quién siempre prueba nuevos restaurantes?\""
+    "text": "\"¿Quién siempre prueba nuevos restaurantes?\"",
+    "category": "food"
   },
   {
     "questionId": "who_eats_fastest",
-    "text": "\"¿Quién come más rápido?\""
+    "text": "\"¿Quién come más rápido?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_always_hungry",
-    "text": "\"¿Quién siempre tiene hambre?\""
+    "text": "\"¿Quién siempre tiene hambre?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_best_cook",
-    "text": "\"¿Quién es el mejor cocinero?\""
+    "text": "\"¿Quién es el mejor cocinero?\"",
+    "category": "food"
   },
   {
     "questionId": "who_has_unusual_food_combinations",
-    "text": "\"¿Quién come combinaciones de sabores inusuales?\""
+    "text": "\"¿Quién come combinaciones de sabores inusuales?\"",
+    "category": "food"
   },
   {
     "questionId": "who_steals_food_from_others_plates",
-    "text": "\"¿Quién roba comida de los platos de los demás?\""
+    "text": "\"¿Quién roba comida de los platos de los demás?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_adventurous_eater",
-    "text": "\"¿Quién es el comensal más aventurero?\""
+    "text": "\"¿Quién es el comensal más aventurero?\"",
+    "category": "food"
   },
   {
     "questionId": "who_always_orders_same_dish",
-    "text": "\"¿Quién siempre pide el mismo plato?\""
+    "text": "\"¿Quién siempre pide el mismo plato?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_try_new_recipes",
-    "text": "\"¿Quién es más propenso a probar nuevas recetas?\""
+    "text": "\"¿Quién es más propenso a probar nuevas recetas?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_eat_leftovers",
-    "text": "\"¿Quién es más propenso a comer sobras?\""
+    "text": "\"¿Quién es más propenso a comer sobras?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_order_takeout",
-    "text": "\"¿Quién es más propenso a pedir comida para llevar?\""
+    "text": "\"¿Quién es más propenso a pedir comida para llevar?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_try_new_cuisines",
-    "text": "\"¿Quién es más propenso a probar nuevas cocinas?\""
+    "text": "\"¿Quién es más propenso a probar nuevas cocinas?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_eat_dessert_first",
-    "text": "\"¿Quién es más propenso a comer primero el postre?\""
+    "text": "\"¿Quién es más propenso a comer primero el postre?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_order_extra_sides",
-    "text": "\"¿Quién es más propenso a pedir guarniciones adicionales?\""
+    "text": "\"¿Quién es más propenso a pedir guarniciones adicionales?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_eat_snacks_before_meals",
-    "text": "\"¿Quién es más propenso a comer bocadillos antes de las comidas?\""
+    "text": "\"¿Quién es más propenso a comer bocadillos antes de las comidas?\"",
+    "category": "food"
   },
   {
     "questionId": "who_has_most_dietary_restrictions",
-    "text": "\"¿Quién tiene más restricciones dietéticas?\""
+    "text": "\"¿Quién tiene más restricciones dietéticas?\"",
+    "category": "food"
   },
   {
     "questionId": "who_orders_extra_cheese_on_everything",
-    "text": "\"¿Quién pide queso extra en todo?\""
+    "text": "\"¿Quién pide queso extra en todo?\"",
+    "category": "food"
   },
   {
     "questionId": "who_eats_pizza_with_cutlery",
-    "text": "\"¿Quién come pizza con cubiertos?\""
+    "text": "\"¿Quién come pizza con cubiertos?\"",
+    "category": "food"
   },
   {
     "questionId": "who_photos_food_before_eating",
-    "text": "\"¿Quién fotografía cada plato antes de que se coma?\""
+    "text": "\"¿Quién fotografía cada plato antes de que se coma?\"",
+    "category": "food"
   },
   {
     "questionId": "who_would_pay_for_feet_pics_if_they_were_edible",
-    "text": "\"¿Quién pagaría por fotos de pies si se pudieran comer?\""
+    "text": "\"¿Quién pagaría por fotos de pies si se pudieran comer?\"",
+    "category": "food"
   },
   {
     "questionId": "who_calls_ketchup_a_vegetable",
-    "text": "\"¿Quién llama al ketchup porción de verduras?\""
+    "text": "\"¿Quién llama al ketchup porción de verduras?\"",
+    "category": "food"
   },
   {
     "questionId": "who_can_taste_the_difference_between_tap_and_bottled",
-    "text": "\"¿Quién supuestamente puede notar la diferencia entre agua del grifo y agua mineral?\""
+    "text": "\"¿Quién supuestamente puede notar la diferencia entre agua del grifo y agua mineral?\"",
+    "category": "food"
   },
   {
     "questionId": "who_licks_the_plate_clean",
-    "text": "\"¿Quién lame el plato hasta dejarlo limpio?\""
+    "text": "\"¿Quién lame el plato hasta dejarlo limpio?\"",
+    "category": "food"
   },
   {
     "questionId": "who_carries_hotsauce_in_pocket",
-    "text": "\"¿Quién siempre lleva Tabasco en el bolsillo?\""
+    "text": "\"¿Quién siempre lleva Tabasco en el bolsillo?\"",
+    "category": "food"
   },
   {
     "questionId": "who_eats_breakfast_for_dinner",
-    "text": "\"¿Quién cena cereales?\""
+    "text": "\"¿Quién cena cereales?\"",
+    "category": "food"
   },
   {
     "questionId": "who_tried_every_diet_for_one_day",
-    "text": "\"¿Quién ha seguido cada dieta exactamente un día?\""
+    "text": "\"¿Quién ha seguido cada dieta exactamente un día?\"",
+    "category": "food"
   }
 ]

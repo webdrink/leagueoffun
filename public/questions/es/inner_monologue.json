@@ -21,50 +21,62 @@
   },
   {
     "questionId": "who_rehearses_conversations_in_head",
-    "text": "\"¿Quién ensaya conversaciones en la cabeza?\""
+    "text": "\"¿Quién ensaya conversaciones en la cabeza?\"",
+    "category": "inner_monologue"
   },
   {
     "questionId": "who_creates_alternate_scenarios",
-    "text": "\"¿Quién crea escenarios alternativos?\""
+    "text": "\"¿Quién crea escenarios alternativos?\"",
+    "category": "inner_monologue"
   },
   {
     "questionId": "who_runs_through_social_scenarios",
-    "text": "\"¿Quién representa escenarios sociales en la mente?\""
+    "text": "\"¿Quién representa escenarios sociales en la mente?\"",
+    "category": "inner_monologue"
   },
   {
     "questionId": "who_replays_embarrassing_moments_at_night",
-    "text": "\"¿Quién piensa en momentos embarazosos de 2009 por la noche?\""
+    "text": "\"¿Quién piensa en momentos embarazosos de 2009 por la noche?\"",
+    "category": "inner_monologue"
   },
   {
     "questionId": "who_practices_award_speech_in_shower",
-    "text": "\"¿Quién practica un discurso de Oscar en la ducha?\""
+    "text": "\"¿Quién practica un discurso de Oscar en la ducha?\"",
+    "category": "inner_monologue"
   },
   {
     "questionId": "who_questions_if_they_locked_door",
-    "text": "\"¿Quién se pregunta constantemente si la puerta está cerrada con llave?\""
+    "text": "\"¿Quién se pregunta constantemente si la puerta está cerrada con llave?\"",
+    "category": "inner_monologue"
   },
   {
     "questionId": "who_argues_with_imaginary_rival",
-    "text": "\"¿Quién discute con un rival imaginario?\""
+    "text": "\"¿Quién discute con un rival imaginario?\"",
+    "category": "inner_monologue"
   },
   {
     "questionId": "who_composes_comebacks_too_late",
-    "text": "\"¿Quién siempre se le ocurren las mejores respuestas demasiado tarde?\""
+    "text": "\"¿Quién siempre se le ocurren las mejores respuestas demasiado tarde?\"",
+    "category": "inner_monologue"
   },
   {
     "questionId": "who_gives_self_pep_talk_before_calls",
-    "text": "\"¿Quién se da discursos de motivación antes de las llamadas telefónicas?\""
+    "text": "\"¿Quién se da discursos de motivación antes de las llamadas telefónicas?\"",
+    "category": "inner_monologue"
   },
   {
     "questionId": "who_has_soundtrack_in_head",
-    "text": "\"¿Quién tiene una banda sonora propia sonando en la cabeza?\""
+    "text": "\"¿Quién tiene una banda sonora propia sonando en la cabeza?\"",
+    "category": "inner_monologue"
   },
   {
     "questionId": "who_plans_world_domination_in_line",
-    "text": "\"¿Quién planea la dominación mundial mientras está en la fila?\""
+    "text": "\"¿Quién planea la dominación mundial mientras está en la fila?\"",
+    "category": "inner_monologue"
   },
   {
     "questionId": "who_thinks_barista_is_secretly_judging",
-    "text": "\"¿Quién cree que la barista lo está evaluando en secreto?\""
+    "text": "\"¿Quién cree que la barista lo está evaluando en secreto?\"",
+    "category": "inner_monologue"
   }
 ]

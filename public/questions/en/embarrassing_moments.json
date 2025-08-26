@@ -76,42 +76,52 @@
   },
   {
     "questionId": "who_sings_in_public",
-    "text": "\"Who sings in public?\""
+    "text": "\"Who sings in public?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_tells_cringe_jokes",
-    "text": "\"Who tells the cringe jokes?\""
+    "text": "\"Who tells the cringe jokes?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_dances_inappropriately",
-    "text": "\"Who dances inappropriately?\""
+    "text": "\"Who dances inappropriately?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_forgets_own_age",
-    "text": "\"Who forgets their own age?\""
+    "text": "\"Who forgets their own age?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_makes_funny_noises",
-    "text": "\"Who makes the funniest sounds?\""
+    "text": "\"Who makes the funniest sounds?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_tells_awkward_stories",
-    "text": "\"Who tells the most embarrassing stories?\""
+    "text": "\"Who tells the most embarrassing stories?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_makes_funny_faces_in_photos",
-    "text": "\"Who makes the funniest faces in photos?\""
+    "text": "\"Who makes the funniest faces in photos?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_always_says_wrong_things",
-    "text": "\"Who always says the wrong things?\""
+    "text": "\"Who always says the wrong things?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_dances_weirdly_in_public",
-    "text": "\"Who dances weirdly in public?\""
+    "text": "\"Who dances weirdly in public?\"",
+    "category": "embarrassing_moments"
   },
   {
     "questionId": "who_always_has_awkward_silences",
-    "text": "\"Who always has awkward silence?\""
+    "text": "\"Who always has awkward silence?\"",
+    "category": "embarrassing_moments"
   }
 ]

@@ -21,7 +21,7 @@
   },
   {
     "questionId": "who_would_write_love_letter",
-    "text": "Wer würde einen Liebesbrief schreiben?",
+    "text": "Wer wÃ¼rde einen Liebesbrief schreiben?",
     "category": "relationships"
   },
   {
@@ -36,7 +36,7 @@
   },
   {
     "questionId": "who_has_biggest_heart",
-    "text": "Wer hat das größte Herz?",
+    "text": "Wer hat das grÃ¶ÃŸte Herz?",
     "category": "relationships"
   },
   {
@@ -46,7 +46,7 @@
   },
   {
     "questionId": "who_withdraws_quickest",
-    "text": "Wer zieht sich am schnellsten zurück?",
+    "text": "Wer zieht sich am schnellsten zurÃ¼ck?",
     "category": "relationships"
   },
   {
@@ -61,7 +61,7 @@
   },
   {
     "questionId": "who_writes_longest_messages",
-    "text": "Wer schreibt die längsten Nachrichten?",
+    "text": "Wer schreibt die lÃ¤ngsten Nachrichten?",
     "category": "relationships"
   },
   {
@@ -76,22 +76,22 @@
   },
   {
     "questionId": "who_is_most_jealous",
-    "text": "Wer ist am eifersüchtigsten?",
+    "text": "Wer ist am eifersÃ¼chtigsten?",
     "category": "relationships"
   },
   {
     "questionId": "who_always_suggests_new_activities",
-    "text": "Wer schlägt immer neue Aktivitäten vor?",
+    "text": "Wer schlÃ¤gt immer neue AktivitÃ¤ten vor?",
     "category": "relationships"
   },
   {
     "questionId": "who_takes_longest_to_respond",
-    "text": "Wer braucht am längsten, um sich zu melden?",
+    "text": "Wer braucht am lÃ¤ngsten, um sich zu melden?",
     "category": "relationships"
   },
   {
     "questionId": "who_talks_most_about_future",
-    "text": "Wer redet am meisten über die Zukunft?",
+    "text": "Wer redet am meisten Ã¼ber die Zukunft?",
     "category": "relationships"
   },
   {
@@ -111,34 +111,42 @@
   },
   {
     "questionId": "who_falls_in_love_quickly",
-    "text": "\"Who falls in love quickly?\""
+    "text": "\"Who falls in love quickly?\"",
+    "category": "relationships"
   },
   {
     "questionId": "who_gives_best_relationship_advice",
-    "text": "\"Who gives the best relationship advice?\""
+    "text": "\"Who gives the best relationship advice?\"",
+    "category": "relationships"
   },
   {
     "questionId": "who_takes_longest_to_commit",
-    "text": "\"Who takes the longest to commit?\""
+    "text": "\"Who takes the longest to commit?\"",
+    "category": "relationships"
   },
   {
     "questionId": "relationship_advice",
-    "text": "\"Who would be most likely to give good relationship advice?\""
+    "text": "\"Who would be most likely to give good relationship advice?\"",
+    "category": "relationships"
   },
   {
     "questionId": "first_date",
-    "text": "\"Who would plan the best first date?\""
+    "text": "\"Who would plan the best first date?\"",
+    "category": "relationships"
   },
   {
     "questionId": "forget_anniversary",
-    "text": "\"Who would be most likely to forget an anniversary?\""
+    "text": "\"Who would be most likely to forget an anniversary?\"",
+    "category": "relationships"
   },
   {
     "questionId": "matchmaker",
-    "text": "\"Who would be the best matchmaker?\""
+    "text": "\"Who would be the best matchmaker?\"",
+    "category": "relationships"
   },
   {
     "questionId": "secret_admirer",
-    "text": "\"Who would most likely have a secret admirer?\""
+    "text": "\"Who would most likely have a secret admirer?\"",
+    "category": "relationships"
   }
 ]

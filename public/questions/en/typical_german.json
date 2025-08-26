@@ -1,202 +1,252 @@
 [
   {
     "questionId": "who_is_most_punctual",
-    "text": "\"Who is the most punctual?\""
+    "text": "\"Who is the most punctual?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "who_follows_rules_most_strictly",
-    "text": "\"Who follows rules the strictest?\""
+    "text": "\"Who follows rules the strictest?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "who_recycles_most_properly",
-    "text": "\"Who separates the trash the most correctly?\""
+    "text": "\"Who separates the trash the most correctly?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "who_plans_everything_in_advance",
-    "text": "\"Who plans everything in advance?\""
+    "text": "\"Who plans everything in advance?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "who_is_most_efficient",
-    "text": "\"Who is the most efficient?\""
+    "text": "\"Who is the most efficient?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "who_complains_about_everything",
-    "text": "\"Who complains about everything?\""
+    "text": "\"Who complains about everything?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "who_is_most_organized",
-    "text": "\"Who is the most organized?\""
+    "text": "\"Who is the most organized?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "who_is_most_direct",
-    "text": "\"Who is the most direct?\""
+    "text": "\"Who is the most direct?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_einen_aktenordner_fur_alles",
-    "text": "\"Who has a color-coded file folder for everything?\""
+    "text": "\"Who has a color-coded file folder for everything?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_sagt_ich_bin_nicht_rassistisch_aber",
-    "text": "\"Who starts discussions with 'I'm not racist, but...?' \""
+    "text": "\"Who starts discussions with 'I'm not racist, but...?' \"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_zeigt_auf_den_fahrplan_mit_absicht",
-    "text": "\"Who shows others the timetable with satisfaction when they are late?\""
+    "text": "\"Who shows others the timetable with satisfaction when they are late?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_steht_10_minuten_vor_abfahrt_am_gleis",
-    "text": "\"Who stands at the platform with a nervous look 10 minutes before departure?\""
+    "text": "\"Who stands at the platform with a nervous look 10 minutes before departure?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_klebt_sich_den_namen_auf_das_brot",
-    "text": "\"Who writes their name on the sandwich in the fridge?\""
+    "text": "\"Who writes their name on the sandwich in the fridge?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_eine_garagenordnung",
-    "text": "\"Who has a written garage policy?\""
+    "text": "\"Who has a written garage policy?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_beschwert_sich_uber_geruch_im_treppenhaus",
-    "text": "\"Who immediately complains about cooking smells in the stairwell?\""
+    "text": "\"Who immediately complains about cooking smells in the stairwell?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_klatscht_beim_landen_im_flugzeug",
-    "text": "\"Who claps when the airplane lands?\""
+    "text": "\"Who claps when the airplane lands?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_sagt_puuh_das_war_knapp_bei_orangen_lichtern",
-    "text": "\"Who says 'Phew, that was close' at every yellow traffic light?\""
+    "text": "\"Who says 'Phew, that was close' at every yellow traffic light?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_ist_stolz_auf_sein_pfandsystem",
-    "text": "\"Who defends the deposit system with national pride?\""
+    "text": "\"Who defends the deposit system with national pride?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_achtet_krankhaft_auf_die_rechtschreibung",
-    "text": "\"Who internally suffers when an apostrophe is incorrectly placed somewhere?\""
+    "text": "\"Who internally suffers when an apostrophe is incorrectly placed somewhere?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_sagt_danke_beim_aussteigen",
-    "text": "\"Who thanks the bus driver – even if he was in a bad mood?\""
+    "text": "\"Who thanks the bus driver â€“ even if he was in a bad mood?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_trennt_muell_mit_militaerischer_disziplin",
-    "text": "\"Who separates trash as if it were about saving the world?\""
+    "text": "\"Who separates trash as if it were about saving the world?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_rennt_wegen_einem_cent_zuruck_in_den_laden",
-    "text": "\"Who goes back to the checkout for 0.01€?\""
+    "text": "\"Who goes back to the checkout for 0.01â‚¬?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_angst_vor_der_mitteilung_der_hausverwaltung",
-    "text": "\"Who panics at a letter from the property management?\""
+    "text": "\"Who panics at a letter from the property management?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_verkauft_auf_kleinanzeigen_fur_1_euro_mit_abholung",
-    "text": "\"Who sells things for 1€ – but only with self-pickup and a time window?\""
+    "text": "\"Who sells things for 1â‚¬ â€“ but only with self-pickup and a time window?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_mehr_versicherung_als_freunde",
-    "text": "\"Who has more insurance policies than close friends?\""
+    "text": "\"Who has more insurance policies than close friends?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_zahlt_bar_aus_prinzip",
-    "text": "\"Who prefers to pay for contactless water in cash?\""
+    "text": "\"Who prefers to pay for contactless water in cash?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_einen_grillplatz_im_kofferraum",
-    "text": "\"Who ALWAYS has a disposable grill in the trunk?\""
+    "text": "\"Who ALWAYS has a disposable grill in the trunk?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_nimmt_das_parken_vor_dem_eigenen_haus_persoenlich",
-    "text": "\"Who considers parking in front of their own house a declaration of war?\""
+    "text": "\"Who considers parking in front of their own house a declaration of war?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_den_vorgarten_auf_den_millimeter_geplant",
-    "text": "\"Who mows the lawn in diagonal patterns?\""
+    "text": "\"Who mows the lawn in diagonal patterns?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_liest_die_bedienungsanleitung_vor_dem_aufbauen",
-    "text": "\"Who reads the manual from start to finish – before assembling?\""
+    "text": "\"Who reads the manual from start to finish â€“ before assembling?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_meldet_den_nachbarn_anonym",
-    "text": "\"Who reports neighbors anonymously for noise disturbances?\""
+    "text": "\"Who reports neighbors anonymously for noise disturbances?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_fuehrt_liste_von_geoeffneten_supermaerkten_am_feiertag",
-    "text": "\"Who always knows which supermarket is open on holidays?\""
+    "text": "\"Who always knows which supermarket is open on holidays?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_beim_camping_die_parzelle_abgeklebt",
-    "text": "\"Who marks off their camping plot with a measuring tape and caution tape?\""
+    "text": "\"Who marks off their camping plot with a measuring tape and caution tape?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_schreit_bitte_an_der_kasse",
-    "text": "\"Who calls out extra loudly 'PLEASE!' at the checkout?\""
+    "text": "\"Who calls out extra loudly 'PLEASE!' at the checkout?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_kennt_die_abfallkalender_auswendig",
-    "text": "\"Who knows the waste collection calendar by heart?\""
+    "text": "\"Who knows the waste collection calendar by heart?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_regt_sich_ueber_bollerwagen_an_ostern_auf",
-    "text": "\"Who complains loudly about beer carts on Good Friday?\""
+    "text": "\"Who complains loudly about beer carts on Good Friday?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_macht_powerpoint_fur_den_urlaub",
-    "text": "\"Who plans their vacation with Excel and PowerPoint?\""
+    "text": "\"Who plans their vacation with Excel and PowerPoint?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_bestellt_mit_sonderwuenschen_und_sagt_dann_ist_gut_so",
-    "text": "\"Who makes five special requests and then says 'But otherwise it’s fine!'?\""
+    "text": "\"Who makes five special requests and then says 'But otherwise itâ€™s fine!'?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_liebt_die_meldung_die_wartezeit_betraegt_ungefaehr",
-    "text": "\"Who secretly enjoys the notice 'The waiting time is about 12 minutes'?\""
+    "text": "\"Who secretly enjoys the notice 'The waiting time is about 12 minutes'?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_einen_ordner_nur_fur_steuern",
-    "text": "\"Who has a folder that is only titled 'Taxes 2018–present'?\""
+    "text": "\"Who has a folder that is only titled 'Taxes 2018â€“present'?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_wuenscht_sich_nur_ruhe",
-    "text": "\"Who simply says 'peace' when asked 'What do you wish for?'\""
+    "text": "\"Who simply says 'peace' when asked 'What do you wish for?'\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_mehr_schuhe_vor_der_tuer_als_im_schrank",
-    "text": "\"Who has more shoes in front of the door than in the closet?\""
+    "text": "\"Who has more shoes in front of the door than in the closet?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_kann_nicht_entspannen_wenn_die_spuelmaschine_fertig_ist",
-    "text": "\"Who can't relax when the dishwasher is done but not unloaded?\""
+    "text": "\"Who can't relax when the dishwasher is done but not unloaded?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_ein_festes_grillanzuendritual",
-    "text": "\"Who has a ritualized grill lighting procedure with instructions?\""
+    "text": "\"Who has a ritualized grill lighting procedure with instructions?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_mochtet_kein_kleingeld_wechseln",
-    "text": "\"Who hates changing small change – and still picks it up?\""
+    "text": "\"Who hates changing small change â€“ and still picks it up?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_einen_lieblings_stempel",
-    "text": "\"Who owns a personal favorite stamp?\""
+    "text": "\"Who owns a personal favorite stamp?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_sein_wlan_gastnetzwerk_mit_passwort_fuer_jeden_besuch",
-    "text": "\"Who has a new password for the guest Wi-Fi for every visitor?\""
+    "text": "\"Who has a new password for the guest Wi-Fi for every visitor?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_druckt_emails_aus",
-    "text": "\"Who prints out emails again for safety?\""
+    "text": "\"Who prints out emails again for safety?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_hat_ein_kalenderbuch_mit_farbcodes",
-    "text": "\"Who uses a calendar with color codes, Post-its, and an annual overview?\""
+    "text": "\"Who uses a calendar with color codes, Post-its, and an annual overview?\"",
+    "category": "typical_german"
   },
   {
     "questionId": "typical_german_fuehlt_sich_fur_die_ordentlichkeit_andrer_mitverantwortlich",
-    "text": "\"Who neatly returns other people's shopping carts?\""
+    "text": "\"Who neatly returns other people's shopping carts?\"",
+    "category": "typical_german"
   }
 ]

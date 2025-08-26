@@ -1,114 +1,142 @@
 [
   {
     "questionId": "who_is_pickiest_eater",
-    "text": "\"Who is the pickiest eater?\""
+    "text": "\"Who is the pickiest eater?\"",
+    "category": "food"
   },
   {
     "questionId": "who_takes_food_photos_for_social_media",
-    "text": "\"Who takes food photos for social media?\""
+    "text": "\"Who takes food photos for social media?\"",
+    "category": "food"
   },
   {
     "questionId": "who_always_tries_new_restaurants",
-    "text": "\"Who always tries new restaurants?\""
+    "text": "\"Who always tries new restaurants?\"",
+    "category": "food"
   },
   {
     "questionId": "who_eats_fastest",
-    "text": "\"Who eats the fastest?\""
+    "text": "\"Who eats the fastest?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_always_hungry",
-    "text": "\"Who is always hungry?\""
+    "text": "\"Who is always hungry?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_best_cook",
-    "text": "\"Who is the best cook?\""
+    "text": "\"Who is the best cook?\"",
+    "category": "food"
   },
   {
     "questionId": "who_has_unusual_food_combinations",
-    "text": "\"Who eats unusual food combinations?\""
+    "text": "\"Who eats unusual food combinations?\"",
+    "category": "food"
   },
   {
     "questionId": "who_steals_food_from_others_plates",
-    "text": "\"Who steals food from others' plates?\""
+    "text": "\"Who steals food from others' plates?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_adventurous_eater",
-    "text": "\"Who is the most adventurous eater?\""
+    "text": "\"Who is the most adventurous eater?\"",
+    "category": "food"
   },
   {
     "questionId": "who_always_orders_same_dish",
-    "text": "\"Who always orders the same dish?\""
+    "text": "\"Who always orders the same dish?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_try_new_recipes",
-    "text": "\"Who is most likely to try new recipes?\""
+    "text": "\"Who is most likely to try new recipes?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_eat_leftovers",
-    "text": "\"Who is most likely to eat leftovers?\""
+    "text": "\"Who is most likely to eat leftovers?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_order_takeout",
-    "text": "\"Who is most likely to order takeout?\""
+    "text": "\"Who is most likely to order takeout?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_try_new_cuisines",
-    "text": "\"Who is most likely to try new cuisines?\""
+    "text": "\"Who is most likely to try new cuisines?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_eat_dessert_first",
-    "text": "\"Who is most likely to eat dessert first?\""
+    "text": "\"Who is most likely to eat dessert first?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_order_extra_sides",
-    "text": "\"Who is most likely to order extra sides?\""
+    "text": "\"Who is most likely to order extra sides?\"",
+    "category": "food"
   },
   {
     "questionId": "who_is_most_likely_to_eat_snacks_before_meals",
-    "text": "\"Who is most likely to eat snacks before meals?\""
+    "text": "\"Who is most likely to eat snacks before meals?\"",
+    "category": "food"
   },
   {
     "questionId": "who_has_most_dietary_restrictions",
-    "text": "\"Who has the most dietary restrictions?\""
+    "text": "\"Who has the most dietary restrictions?\"",
+    "category": "food"
   },
   {
     "questionId": "who_orders_extra_cheese_on_everything",
-    "text": "\"Who orders extra cheese on everything?\""
+    "text": "\"Who orders extra cheese on everything?\"",
+    "category": "food"
   },
   {
     "questionId": "who_eats_pizza_with_cutlery",
-    "text": "\"Who eats pizza with cutlery?\""
+    "text": "\"Who eats pizza with cutlery?\"",
+    "category": "food"
   },
   {
     "questionId": "who_photos_food_before_eating",
-    "text": "\"Who photographs every dish before it is eaten?\""
+    "text": "\"Who photographs every dish before it is eaten?\"",
+    "category": "food"
   },
   {
     "questionId": "who_would_pay_for_feet_pics_if_they_were_edible",
-    "text": "\"Who would pay for foot pictures if they could be eaten?\""
+    "text": "\"Who would pay for foot pictures if they could be eaten?\"",
+    "category": "food"
   },
   {
     "questionId": "who_calls_ketchup_a_vegetable",
-    "text": "\"Who calls ketchup a serving of vegetables?\""
+    "text": "\"Who calls ketchup a serving of vegetables?\"",
+    "category": "food"
   },
   {
     "questionId": "who_can_taste_the_difference_between_tap_and_bottled",
-    "text": "\"Who can supposedly taste the difference between tap water and mineral water?\""
+    "text": "\"Who can supposedly taste the difference between tap water and mineral water?\"",
+    "category": "food"
   },
   {
     "questionId": "who_licks_the_plate_clean",
-    "text": "\"Who licks the plate clean?\""
+    "text": "\"Who licks the plate clean?\"",
+    "category": "food"
   },
   {
     "questionId": "who_carries_hotsauce_in_pocket",
-    "text": "\"Who always has Tabasco in their pocket?\""
+    "text": "\"Who always has Tabasco in their pocket?\"",
+    "category": "food"
   },
   {
     "questionId": "who_eats_breakfast_for_dinner",
-    "text": "\"Who eats cereal for dinner?\""
+    "text": "\"Who eats cereal for dinner?\"",
+    "category": "food"
   },
   {
     "questionId": "who_tried_every_diet_for_one_day",
-    "text": "\"Who has managed to stick to every diet for exactly one day?\""
+    "text": "\"Who has managed to stick to every diet for exactly one day?\"",
+    "category": "food"
   }
 ]
