@@ -20,6 +20,7 @@ const en: Translations = {
   'intro.info': 'Info',
   'intro.sound_toggle': 'Sound',
   'intro.name_blame_toggle': 'NameBlame Mode',
+  'intro.name_blame_explanation': 'In NameBlame mode, each question is shown once. The active player selects who to blame. The blamed player reads the question aloud and becomes the next active player.',
   'intro.enable_debug': 'Enable Debug Mode',
   'intro.heading': 'Guess who would do what?',
   'intro.subheading': 'What do you think? Do you know your friends?',
@@ -48,6 +49,7 @@ const en: Translations = {
   'players.back': 'Back',
   'players.max_players': 'Maximum number of players reached!',
   'players.min_players': 'At least 3 players required',
+  'players.min_players_nameblame_hint': 'You need at least 3 players for NameBlame mode.',
   'players.name_required': 'Name required',
   'players.name_exists': 'Name already exists',
   'players.remove': 'Remove',
@@ -70,8 +72,8 @@ const en: Translations = {
   'questions.counter': 'Question {{current}} of {{total}}',
   'questions.who_blame': 'Who do you blame?',
   'questions.cannot_blame_self': 'You cannot blame yourself',
-  'questions.blame_player': 'Blame {name}',
-  'questions.blamed_you_for': '{name} blamed you for',
+  'questions.blame_player': 'Blame {{name}}',
+  'questions.blamed_you_for': '{{name}} blamed you for',
   'questions.next_blame': 'Next',
   'questions.previous_question': 'Previous Question',
   'questions.next_question': 'Next Question',
@@ -97,6 +99,15 @@ const en: Translations = {
   'summary.back_to_start': 'Back to Start',
   'summary.blame_stats': 'Blame Statistics',
   'summary.no_stats': 'No blames given!',
+
+  // Blame notifications
+  'blame.notification_title': 'Blame Recorded!',
+  'blame.blamed_player_for': 'blamed',
+  'blame.notification_for_blamed': 'You were blamed by {{blamer}}!',
+  'blame.continue_to_next': 'Continue to next player',
+  'blame.continue_to_question': 'Continue to next question',
+  'blame.round_complete': 'All players have blamed - advancing to next question',
+  'blame.already_blamed_this_round': '{player} has already blamed in this round',
 
   // Modal
   'modal.info_title': 'Information',

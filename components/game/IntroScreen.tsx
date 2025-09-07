@@ -1,13 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../core/Button';
-import { Checkbox } from '../core/Checkbox';
 import { Label } from '../core/Label';
 import VolumeControl from '../core/VolumeControl';
 import { GameSettings, QuestionStats, SupportedLanguage } from '../../types';
 import { Switch } from '../core/Switch';
-import { Slider } from '../core/Slider';
-import { Volume2, VolumeX, Settings as SettingsIcon, Info as InfoIcon } from 'lucide-react'; // Using lucide-react consistently
+import { Settings as SettingsIcon, Info as InfoIcon } from 'lucide-react'; // Using lucide-react consistently
 import LanguageSelector from '../settings/LanguageSelector';
 import useTranslation from '../../hooks/useTranslation';
 
@@ -32,6 +30,7 @@ interface IntroScreenProps {
   questionStats: Pick<QuestionStats, 'totalQuestions' | 'categories'>;
   showCategorySelectToggle?: boolean;
   onToggleCategorySelect?: (checked: boolean) => void;
+  onNameBlameModeChange?: (enabled: boolean) => void; // Add callback for mode change navigation
 }
 
 /**
@@ -76,16 +75,24 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
   onOpenDebugPanel,
   onOpenInfoModal,
   mainButtonLabel,
-  onUpdateGameSettings,
+  onUpdateGameSettings: _onUpdateGameSettings,
   errorLoadingQuestions,
-  supportedLanguages,
-  currentLanguage,
-  onLanguageChange,
-  questionStats,
+  supportedLanguages: _supportedLanguages,
+  currentLanguage: _currentLanguage,
+  onLanguageChange: _onLanguageChange,
+  questionStats: _questionStats,
   showCategorySelectToggle,
-  onToggleCategorySelect
+  onToggleCategorySelect,
+  onNameBlameModeChange
 }) => {
   const { t } = useTranslation();
+  
+  const handleNameBlameModeToggle = (checked: boolean) => {
+    onToggleNameBlame(checked);
+    if (onNameBlameModeChange) {
+      onNameBlameModeChange(checked);
+    }
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -121,12 +128,20 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
             <Switch
               id="nameBlameModeToggle"
               checked={nameBlameMode}
-              onCheckedChange={onToggleNameBlame}
+              onCheckedChange={handleNameBlameModeToggle}
               className="data-[state=checked]:bg-pink-500"
             />
             <span className="ml-2 text-sm text-purple-700">{t('intro.name_blame_toggle')}</span>
           </Label>
         </div>
+        
+        {nameBlameMode && (
+          <div className="mt-3 p-3 bg-pink-50 border border-pink-200 rounded-lg">
+            <p className="text-xs text-purple-600 leading-relaxed">
+              {t('intro.name_blame_explanation')}
+            </p>
+          </div>
+        )}
 
         {showCategorySelectToggle && (
           <div className="flex items-center justify-between pt-2">

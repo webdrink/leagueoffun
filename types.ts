@@ -74,13 +74,38 @@ export interface NameBlameEntry {
   timestamp: string;
 }
 
-export type NameBlamePhase = 'selecting' | 'blamed' | 'continuing';
+// Updated: 'blamed' phase renamed to 'reveal'; 'continuing' removed per simplified flow
+export type NameBlamePhase = 'selecting' | 'reveal';
 
 export interface NameBlameState {
   phase: NameBlamePhase;
   currentBlamer?: string;
   currentBlamed?: string;
   currentQuestion?: string;
+}
+
+// Extended types for blame round progression
+export interface BlameRoundState {
+  currentQuestionId: string;
+  playersWhoBlamedThisQuestion: string[];
+  isBlameRoundComplete: boolean;
+  showBlameNotification: boolean;
+  lastBlameEvent: {
+    blamer: string;
+    blamed: string;
+    question: string;
+    timestamp: string;
+  } | null;
+}
+
+export interface BlameNotificationProps {
+  blamer: string;
+  blamed: string;
+  question: string;
+  isVisible: boolean;
+  onDismiss?: () => void;
+  autoHide?: boolean;
+  autoHideDelay?: number;
 }
 
 export type GameStep = 'intro' | 'playerSetup' | 'categoryPick' | 'loading' | 'roulette' | 'game' | 'summary'; // Added 'categoryPick'

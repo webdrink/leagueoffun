@@ -66,7 +66,7 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
   question,
   index,
   totalQuestions,
-  gameSettings,
+  gameSettings: _gameSettings, // unused in this simplified flow (retained for interface compatibility)
   nameBlameMode,
   activePlayers,
   currentPlayerIndex,
@@ -77,7 +77,10 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
   blameState
 }) => {
   const { t } = useTranslation();
-  const [direction, setDirection] = useState(0); 
+  const [direction, setDirection] = useState(0);
+  
+  // Get blame round info from store
+  // No store helpers needed in simplified single-blame chain flow
 
   const handleNextWithDirection = () => {
     setDirection(1);
@@ -90,6 +93,10 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
   };
 
   const currentPlayer = nameBlameMode ? activePlayers[currentPlayerIndex] : null;
+  
+  // Calculate remaining players for better button text
+  // Chain flow: always exactly one blame per question, so button always advances to next question.
+  const isLastPlayerInRound = true;
   return (
     <div className="w-full h-full flex flex-col items-center justify-between py-4">
       {/* Top area for player turn info and new QuestionProgress component */}
@@ -125,12 +132,11 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
         {nameBlameMode && activePlayers.length > 0 && (
           <div className="mt-2 sm:mt-4">
             {/* Show blame context when in 'blamed' phase */}
-            {blameState?.phase === 'blamed' && blameState.currentBlamer && blameState.currentBlamed && (
+            {blameState?.phase === 'reveal' && blameState.currentBlamer && blameState.currentBlamed && (
               <div className="text-center mb-4 p-3 bg-pink-100 rounded-lg border-2 border-pink-300">
                 <p className="text-purple-700 font-semibold">
                   {t('questions.blamed_you_for', { 
-                    blamer: blameState.currentBlamer,
-                    blamed: blameState.currentBlamed 
+                    name: blameState.currentBlamer
                   })}
                 </p>
                 <p className="text-purple-600 text-sm mt-1">
@@ -147,19 +153,20 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {activePlayers.map((player) => {
-                    // Get the current player by index
                     const currentPlayer = activePlayers[currentPlayerIndex];
-                    // Disable button if this player is the current player (can't blame self)
                     const isSelf = currentPlayer && player.id === currentPlayer.id;
-                    
                     return (
                       <Button
                         key={player.id}
                         onClick={() => onBlame(player.name)}
                         className={`bg-pink-400 hover:bg-pink-200 text-purple-700 font-semibold rounded-lg py-2.5 px-3 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-pink-00 focus:ring-opacity-75
                               ${isSelf ? 'opacity-60 cursor-not-allowed !bg-gray-300 !text-gray-500' : 'hover:scale-105'}`}
-                        disabled={isSelf}
-                        title={isSelf ? t('questions.cannot_blame_self') : t('questions.blame_player', { name: player.name })}
+                        disabled={!!isSelf}
+                        title={
+                          isSelf
+                            ? t('questions.cannot_blame_self')
+                            : t('questions.blame_player', { name: player.name })
+                        }
                       >
                         {player.name}
                       </Button>
@@ -170,14 +177,14 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
             )}
             
             {/* Show "Next Blame" button when in 'blamed' phase */}
-            {blameState?.phase === 'blamed' && onNextBlame && (
+            {blameState?.phase === 'reveal' && onNextBlame && (
               <div className="mt-4 text-center">
                 <Button 
                   onClick={onNextBlame} 
                   className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg shadow font-semibold"
-                  aria-label={t('questions.next_blame')}
+                  aria-label={isLastPlayerInRound ? t('blame.continue_to_question') : t('blame.continue_to_next')}
                 >
-                  {t('questions.next_blame')}
+                  {t('blame.continue_to_question')}
                 </Button>
               </div>
             )}

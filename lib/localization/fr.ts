@@ -49,6 +49,7 @@ const fr: Translations = {
   'players.back': 'Retour',
   'players.max_players': 'Nombre maximum de joueurs atteint!',
   'players.min_players': 'Au moins 3 joueurs sont nécessaires',
+  'players.min_players_nameblame_hint': 'Vous avez besoin d\'au moins 3 joueurs pour le mode NameBlame.',
   'players.name_required': 'Nom requis',
   'players.name_exists': 'Le nom existe déjà',
   'players.remove': 'Supprimer',
@@ -71,8 +72,8 @@ const fr: Translations = {
   'questions.counter': 'Question {{current}} sur {{total}}',
   'questions.who_blame': 'Qui blâmerais-tu?',
   'questions.cannot_blame_self': 'Tu ne peux pas te blâmer toi-même',
-  'questions.blame_player': 'Blâmer {name}',
-  'questions.blamed_you_for': '{name} t\'a blâmé pour',
+  'questions.blame_player': 'Blâmer {{name}}',
+  'questions.blamed_you_for': '{{name}} t\'a blâmé pour',
   'questions.next_blame': 'Suivant',
   'questions.previous_question': 'Question précédente',
   'questions.next_question': 'Question suivante',
@@ -98,6 +99,15 @@ const fr: Translations = {
   'summary.back_to_start': 'Retour au début',
   'summary.blame_stats': 'Statistiques de blâme',
   'summary.no_stats': 'Aucune accusation distribuée!',
+  
+  // Blame notifications
+  'blame.notification_title': 'Accusation enregistrée!',
+  'blame.blamed_player_for': 'a accusé',
+  'blame.notification_for_blamed': 'Vous avez été accusé par {{blamer}}!',
+  'blame.continue_to_next': 'Continuer au joueur suivant',
+  'blame.continue_to_question': 'Continuer à la question suivante',
+  'blame.round_complete': 'Tous les joueurs ont accusé - passage à la question suivante',
+  'blame.already_blamed_this_round': '{player} a déjà accusé dans ce tour',
   
   // Modal
   'modal.info_title': 'Informations',

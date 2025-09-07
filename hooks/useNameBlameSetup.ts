@@ -82,10 +82,8 @@ const useNameBlameSetup = (): UsePlayerSetupOutput => {
 
   // Remove a player
   const removePlayer = useCallback((id: string) => {
-    if (players.length > 2) {
-      setPlayers(prevPlayers => prevPlayers.filter(p => p.id !== id));
-    }
-  }, [players.length, setPlayers]);
+    setPlayers(prevPlayers => prevPlayers.filter(p => p.id !== id));
+  }, [setPlayers]);
 
   // Update a player's name
   const handlePlayerNameChange = useCallback((id: string, newName: string) => {

@@ -10,6 +10,7 @@ interface PlayerSetupScreenProps {
   players: Player[];
   tempPlayerName: string;
   nameInputError: string | null;
+  nameBlameMode?: boolean; // Add nameBlameMode prop
   onPlayerNameChange: (id: string, name: string) => void;
   onRemovePlayer: (id: string) => void;
   onTempPlayerNameChange: (name: string) => void;
@@ -38,7 +39,8 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
   players,
   tempPlayerName,
   nameInputError,
-  onPlayerNameChange,
+  nameBlameMode = false, // Default to false if not provided
+  onPlayerNameChange: _onPlayerNameChange,
   onRemovePlayer,
   onTempPlayerNameChange,
   onAddPlayer,
@@ -52,6 +54,13 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
     if (tempPlayerName.trim() === '') return; 
     onAddPlayer();
   };
+
+  // Calculate active players (with non-empty names)
+  const activePlayers = players.filter(p => p.name.trim() !== '');
+  
+  // Determine minimum players needed based on mode
+  const minPlayersNeeded = nameBlameMode ? 3 : 2;
+  const hasEnoughPlayers = activePlayers.length >= minPlayersNeeded;
 
   return (
     <motion.div
@@ -111,13 +120,19 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
       </div>
 
       <Button
-        onClick={onStartGame}        disabled={players.length < 2} // Typically NameBlame needs at least 2, often 3 for good gameplay
+        onClick={onStartGame}
+        disabled={!hasEnoughPlayers} // Use dynamic logic based on mode
         className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg rounded-lg shadow-md transition-transform hover:scale-105 duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
-        {t('players.start_game', { count: players.length })}
+        {t('players.start_game', { count: activePlayers.length })}
       </Button>
-      {players.length < 2 && ( // Adjust message based on actual minimum
-        <p className="text-center text-sm text-pink-600 mt-2">{t('players.minimum_players_needed')}</p>
+      {!hasEnoughPlayers && (
+        <p className="text-center text-sm text-pink-600 mt-2">
+          {nameBlameMode 
+            ? t('players.min_players_nameblame_hint')
+            : t('players.minimum_players_needed')
+          }
+        </p>
       )}
     </motion.div>
   );

@@ -20,6 +20,7 @@ const de: Translations = {
   'intro.info': 'Info',
   'intro.sound_toggle': 'Sound',
   'intro.name_blame_toggle': 'NameBlame Modus',
+  'intro.name_blame_explanation': 'Im NameBlame-Modus wird jede Frage nur einmal gezeigt. Der aktive Spieler wählt wen er beschuldigt. Der beschuldigte Spieler liest die Frage vor und wird zum nächsten aktiven Spieler.',
   'intro.enable_debug': 'Debug-Modus aktivieren',
   'intro.heading': 'Wem traust du was zu?',
   'intro.subheading': 'Was denkst du? Wer würde was tun?',
@@ -56,6 +57,7 @@ const de: Translations = {
   'players.back': 'Zurück',
   'players.max_players': 'Maximale Spieleranzahl erreicht!',
   'players.min_players': 'Mindestens 3 Spieler erforderlich',
+  'players.min_players_nameblame_hint': 'Du brauchst mindestens 3 Spieler für den NameBlame Modus.',
   'players.name_required': 'Name erforderlich',
   'players.name_exists': 'Name existiert bereits',
   'players.remove': 'Entfernen',
@@ -82,8 +84,8 @@ const de: Translations = {
   'questions.counter': 'Frage {{current}} von {{total}}',
   'questions.who_blame': 'Wen beschuldigst du?',
   'questions.cannot_blame_self': 'Du kannst dich nicht selbst beschuldigen',
-  'questions.blame_player': 'Beschuldige {name}',
-  'questions.blamed_you_for': '{name} hat dich beschuldigt für',
+  'questions.blame_player': 'Beschuldige {{name}}',
+  'questions.blamed_you_for': '{{name}} hat dich beschuldigt für',
   'questions.next_blame': 'Weiter',
   'questions.previous_question': 'Vorherige Frage',
   'questions.next_question': 'Nächste Frage',
@@ -109,6 +111,15 @@ const de: Translations = {
   'summary.back_to_start': 'Zurück zum Start',
   'summary.blame_stats': 'Blame-Statistik',
   'summary.no_stats': 'Keine Beschuldigungen verteilt!',
+  
+  // Blame notifications
+  'blame.notification_title': 'Beschuldigung aufgezeichnet!',
+  'blame.blamed_player_for': 'beschuldigte',
+  'blame.notification_for_blamed': 'Du wurdest von {{blamer}} beschuldigt!',
+  'blame.continue_to_next': 'Weiter zum nächsten Spieler',
+  'blame.continue_to_question': 'Weiter zur nächsten Frage',
+  'blame.round_complete': 'Alle Spieler haben beschuldigt - weiter zur nächsten Frage',
+  'blame.already_blamed_this_round': '{player} hat bereits in dieser Runde beschuldigt',
   
   // Modal
   'modal.info_title': 'Information',

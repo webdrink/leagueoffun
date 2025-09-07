@@ -257,7 +257,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 4706,
+                      "duration": 5377,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
                         "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:47:33",
@@ -331,7 +331,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1526ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1875ms\n"
                         },
                         {
                           "text": "🎯 USER ACTION: Verify app title\n"
@@ -340,7 +340,7 @@
                           "text": "🎮 GAME LOGIC: App container rendered\n"
                         },
                         {
-                          "text": "📸 SCREENSHOT: app-initialization-basic-initial-load-1756224494344.png\n"
+                          "text": "📸 SCREENSHOT: app-initialization-basic-initial-load-1757266692950.png\n"
                         },
                         {
                           "text": "🌐 DATA FLOW: Questions loaded\n"
@@ -357,7 +357,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:09.737Z",
+                      "startTime": "2025-09-07T17:38:07.329Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -407,7 +407,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 4461,
+                      "duration": 5246,
                       "errors": [],
                       "stdout": [
                         {
@@ -459,7 +459,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1588ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1898ms\n"
                         },
                         {
                           "text": "🌐 DATA FLOW: Waiting for categories to load\n"
@@ -477,7 +477,7 @@
                           "text": "📊 TEST REPORT: app-initialization-categories\n"
                         },
                         {
-                          "text": "   Duration: 2715ms\n"
+                          "text": "   Duration: 3045ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -497,7 +497,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:09.782Z",
+                      "startTime": "2025-09-07T17:38:07.331Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -526,7 +526,7 @@
                       "workerIndex": 2,
                       "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 4547,
+                      "duration": 5095,
                       "errors": [],
                       "stdout": [
                         {
@@ -578,7 +578,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1581ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1895ms\n"
                         },
                         {
                           "text": "🌐 DATA FLOW: Questions loaded\n"
@@ -599,7 +599,7 @@
                           "text": "📊 TEST REPORT: app-initialization-questions\n"
                         },
                         {
-                          "text": "   Duration: 2696ms\n"
+                          "text": "   Duration: 3034ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -619,7 +619,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:09.782Z",
+                      "startTime": "2025-09-07T17:38:07.298Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -648,10 +648,10 @@
                       "workerIndex": 3,
                       "parallelIndex": 3,
                       "status": "failed",
-                      "duration": 2016,
+                      "duration": 2564,
                       "error": {
-                        "message": "Error: page.goto: net::ERR_INTERNET_DISCONNECTED at http://localhost:5174/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5174/\", waiting until \"load\"\u001b[22m\n",
-                        "stack": "Error: page.goto: net::ERR_INTERNET_DISCONNECTED at http://localhost:5174/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5174/\", waiting until \"load\"\u001b[22m\n\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:139:16",
+                        "message": "Error: page.goto: net::ERR_INTERNET_DISCONNECTED at http://localhost:5173/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/\", waiting until \"load\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_INTERNET_DISCONNECTED at http://localhost:5173/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/\", waiting until \"load\"\u001b[22m\n\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:139:16",
                         "location": {
                           "file": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts",
                           "column": 16,
@@ -666,7 +666,7 @@
                             "column": 16,
                             "line": 139
                           },
-                          "message": "Error: page.goto: net::ERR_INTERNET_DISCONNECTED at http://localhost:5174/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5174/\", waiting until \"load\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 137 |\u001b[39m     tracker\u001b[33m.\u001b[39mlogDataFlow(\u001b[32m'Network set to offline'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 138 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 139 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 140 |\u001b[39m     \n \u001b[90m 141 |\u001b[39m     \u001b[90m// App should still load basic structure even offline\u001b[39m\n \u001b[90m 142 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'body'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:139:16\u001b[22m"
+                          "message": "Error: page.goto: net::ERR_INTERNET_DISCONNECTED at http://localhost:5173/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/\", waiting until \"load\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 137 |\u001b[39m     tracker\u001b[33m.\u001b[39mlogDataFlow(\u001b[32m'Network set to offline'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 138 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 139 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 140 |\u001b[39m     \n \u001b[90m 141 |\u001b[39m     \u001b[90m// App should still load basic structure even offline\u001b[39m\n \u001b[90m 142 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'body'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:139:16\u001b[22m"
                         }
                       ],
                       "stdout": [
@@ -676,7 +676,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:09.796Z",
+                      "startTime": "2025-09-07T17:38:07.328Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -726,7 +726,7 @@
                       "workerIndex": 4,
                       "parallelIndex": 4,
                       "status": "passed",
-                      "duration": 4183,
+                      "duration": 5130,
                       "errors": [],
                       "stdout": [
                         {
@@ -778,7 +778,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1558ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1899ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: localStorage read (gameSettings)\n"
@@ -793,7 +793,7 @@
                           "text": "📊 TEST REPORT: app-initialization-default-settings\n"
                         },
                         {
-                          "text": "   Duration: 2660ms\n"
+                          "text": "   Duration: 2989ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -813,7 +813,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:09.838Z",
+                      "startTime": "2025-09-07T17:38:07.353Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -842,7 +842,7 @@
                       "workerIndex": 5,
                       "parallelIndex": 5,
                       "status": "failed",
-                      "duration": 1504,
+                      "duration": 2625,
                       "error": {
                         "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
                         "stack": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:200:16",
@@ -865,7 +865,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:09.853Z",
+                      "startTime": "2025-09-07T17:38:07.336Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -910,7 +910,7 @@
                       "workerIndex": 6,
                       "parallelIndex": 6,
                       "status": "failed",
-                      "duration": 9533,
+                      "duration": 10884,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-testid=\"settings-button\"]').or(getByRole('button', { name: /settings|einstellungen/i })).or(locator('button').filter({ hasText: /⚙️|settings/i })).first()\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"settings-button\"]').or(getByRole('button', { name: /settings|einstellungen/i })).or(locator('button').filter({ hasText: /⚙️|settings/i })).first()\u001b[22m\n",
                         "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('[data-testid=\"settings-button\"]').or(getByRole('button', { name: /settings|einstellungen/i })).or(locator('button').filter({ hasText: /⚙️|settings/i })).first()\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"settings-button\"]').or(getByRole('button', { name: /settings|einstellungen/i })).or(locator('button').filter({ hasText: /⚙️|settings/i })).first()\u001b[22m\n\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:247:42",
@@ -981,7 +981,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1648ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1876ms\n"
                         },
                         {
                           "text": "🎯 USER ACTION: Game title visible\n"
@@ -992,7 +992,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:09.829Z",
+                      "startTime": "2025-09-07T17:38:07.328Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1059,7 +1059,7 @@
                       "workerIndex": 7,
                       "parallelIndex": 7,
                       "status": "passed",
-                      "duration": 3962,
+                      "duration": 5106,
                       "errors": [],
                       "stdout": [
                         {
@@ -1111,7 +1111,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1539ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1888ms\n"
                         },
                         {
                           "text": "🎵 AUDIO: Audio system check\n"
@@ -1132,7 +1132,7 @@
                           "text": "📊 TEST REPORT: audio-system-initialization\n"
                         },
                         {
-                          "text": "   Duration: 2571ms\n"
+                          "text": "   Duration: 2979ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -1152,7 +1152,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:09.865Z",
+                      "startTime": "2025-09-07T17:38:07.372Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1181,7 +1181,7 @@
                       "workerIndex": 8,
                       "parallelIndex": 8,
                       "status": "passed",
-                      "duration": 5335,
+                      "duration": 6312,
                       "errors": [],
                       "stdout": [
                         {
@@ -1233,7 +1233,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1608ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1879ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: localStorage write (audioSettings)\n"
@@ -1296,7 +1296,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 852ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 965ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: localStorage read (audioSettings)\n"
@@ -1314,7 +1314,7 @@
                           "text": "📊 TEST REPORT: audio-system-settings\n"
                         },
                         {
-                          "text": "   Duration: 3660ms\n"
+                          "text": "   Duration: 4129ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -1334,7 +1334,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:09.862Z",
+                      "startTime": "2025-09-07T17:38:07.373Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1363,7 +1363,7 @@
                       "workerIndex": 9,
                       "parallelIndex": 9,
                       "status": "passed",
-                      "duration": 3985,
+                      "duration": 4987,
                       "errors": [],
                       "stdout": [
                         {
@@ -1415,7 +1415,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1660ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1863ms\n"
                         },
                         {
                           "text": "🎵 AUDIO: Audio loading test completed\n"
@@ -1427,7 +1427,7 @@
                           "text": "📊 TEST REPORT: audio-system-loading-failures\n"
                         },
                         {
-                          "text": "   Duration: 2668ms\n"
+                          "text": "   Duration: 2970ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -1447,7 +1447,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:09.863Z",
+                      "startTime": "2025-09-07T17:38:07.351Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1476,7 +1476,7 @@
                       "workerIndex": 10,
                       "parallelIndex": 5,
                       "status": "failed",
-                      "duration": 2525,
+                      "duration": 3170,
                       "error": {
                         "message": "Error: locator.fill: Error: Element is not an <input>, <textarea> or [contenteditable] element\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"range\"]').or(locator('[role=\"slider\"]')).first()\u001b[22m\n\u001b[2m    - locator resolved to <span tabindex=\"0\" role=\"slider\" aria-valuemin=\"0\" aria-valuemax=\"1\" aria-valuenow=\"0.7\" aria-orientation=\"horizontal\" data-orientation=\"horizontal\" data-radix-collection-item=\"\" class=\"block h-5 w-5 rounded-full border-2 border-purple-500 bg-white ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50\"></span>\u001b[22m\n\u001b[2m    - fill(\"50\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and editable\u001b[22m\n",
                         "stack": "Error: locator.fill: Error: Element is not an <input>, <textarea> or [contenteditable] element\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"range\"]').or(locator('[role=\"slider\"]')).first()\u001b[22m\n\u001b[2m    - locator resolved to <span tabindex=\"0\" role=\"slider\" aria-valuemin=\"0\" aria-valuemax=\"1\" aria-valuenow=\"0.7\" aria-orientation=\"horizontal\" data-orientation=\"horizontal\" data-radix-collection-item=\"\" class=\"block h-5 w-5 rounded-full border-2 border-purple-500 bg-white ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50\"></span>\u001b[22m\n\u001b[2m    - fill(\"50\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and editable\u001b[22m\n\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\audio-system.spec.ts:142:36",
@@ -1547,7 +1547,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 843ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1169ms\n"
                         },
                         {
                           "text": "🎵 AUDIO: Volume controls detection\n"
@@ -1558,7 +1558,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:15.169Z",
+                      "startTime": "2025-09-07T17:38:14.346Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1608,7 +1608,7 @@
                       "workerIndex": 11,
                       "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 5464,
+                      "duration": 6196,
                       "errors": [],
                       "stdout": [
                         {
@@ -1660,7 +1660,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 956ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1135ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: localStorage write (audioSettings)\n"
@@ -1687,7 +1687,7 @@
                           "text": "📊 TEST REPORT: audio-system-gameplay-state\n"
                         },
                         {
-                          "text": "   Duration: 4367ms\n"
+                          "text": "   Duration: 4829ms\n"
                         },
                         {
                           "text": "   User Actions: 1\n"
@@ -1696,7 +1696,7 @@
                           "text": "   State Changes: 0\n"
                         },
                         {
-                          "text": "   Errors: 0\n"
+                          "text": "   Errors: 2\n"
                         },
                         {
                           "text": "   Screenshots: 0\n"
@@ -1705,9 +1705,19 @@
                           "text": "   Avg Interaction Time: 0ms\n"
                         }
                       ],
-                      "stderr": [],
+                      "stderr": [
+                        {
+                          "text": "❌ BROWSER ERROR: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.\n"
+                        },
+                        {
+                          "text": "❌ BROWSER ERROR: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.\n"
+                        },
+                        {
+                          "text": "❌ BROWSER ERROR: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.\n"
+                        }
+                      ],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:17.196Z",
+                      "startTime": "2025-09-07T17:38:14.347Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1750,10 +1760,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 7,
-                      "parallelIndex": 7,
+                      "workerIndex": 9,
+                      "parallelIndex": 9,
                       "status": "passed",
-                      "duration": 2030,
+                      "duration": 3524,
                       "errors": [],
                       "stdout": [
                         {
@@ -1805,7 +1815,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1353ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1663ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: localStorage write (gameSettings)\n"
@@ -1832,7 +1842,7 @@
                           "text": "📊 TEST REPORT: local-storage-settings\n"
                         },
                         {
-                          "text": "   Duration: 1666ms\n"
+                          "text": "   Duration: 3024ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -1852,7 +1862,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:15.049Z",
+                      "startTime": "2025-09-07T17:38:13.821Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1878,10 +1888,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 9,
-                      "parallelIndex": 9,
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
                       "status": "passed",
-                      "duration": 3746,
+                      "duration": 5042,
                       "errors": [],
                       "stdout": [
                         {
@@ -1933,7 +1943,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1442ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1689ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: localStorage write (gameState)\n"
@@ -1993,7 +2003,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 812ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1305ms\n"
                         },
                         {
                           "text": "🎯 USER ACTION: Page reloaded\n"
@@ -2011,7 +2021,7 @@
                           "text": "📊 TEST REPORT: local-storage-persistence\n"
                         },
                         {
-                          "text": "   Duration: 3013ms\n"
+                          "text": "   Duration: 4271ms\n"
                         },
                         {
                           "text": "   User Actions: 1\n"
@@ -2031,7 +2041,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:15.137Z",
+                      "startTime": "2025-09-07T17:38:13.855Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2057,10 +2067,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
+                      "workerIndex": 7,
+                      "parallelIndex": 7,
                       "status": "passed",
-                      "duration": 2770,
+                      "duration": 3542,
                       "errors": [],
                       "stdout": [
                         {
@@ -2112,7 +2122,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1491ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1685ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: Quota test completed (quotaTest)\n"
@@ -2124,7 +2134,7 @@
                           "text": "📊 TEST REPORT: local-storage-quota-limits\n"
                         },
                         {
-                          "text": "   Duration: 2116ms\n"
+                          "text": "   Duration: 2852ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -2144,7 +2154,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:15.190Z",
+                      "startTime": "2025-09-07T17:38:13.854Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2170,10 +2180,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 12,
-                      "parallelIndex": 0,
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
                       "status": "failed",
-                      "duration": 660,
+                      "duration": 788,
                       "error": {
                         "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
                         "stack": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\local-storage.spec.ts:147:16",
@@ -2196,7 +2206,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:18.214Z",
+                      "startTime": "2025-09-07T17:38:13.856Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -2238,10 +2248,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
+                      "workerIndex": 12,
+                      "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2798,
+                      "duration": 2913,
                       "errors": [],
                       "stdout": [
                         {
@@ -2293,7 +2303,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1488ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1107ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: localStorage write (nameBlamePlayers)\n"
@@ -2332,7 +2342,7 @@
                           "text": "📊 TEST REPORT: local-storage-nameblame-data\n"
                         },
                         {
-                          "text": "   Duration: 2047ms\n"
+                          "text": "   Duration: 1681ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -2352,7 +2362,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:15.192Z",
+                      "startTime": "2025-09-07T17:38:16.176Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2378,10 +2388,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 2864,
+                      "duration": 3695,
                       "errors": [],
                       "stdout": [
                         {
@@ -2433,7 +2443,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1459ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1700ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: Concurrent operations completed (concurrent)\n"
@@ -2445,7 +2455,7 @@
                           "text": "📊 TEST REPORT: local-storage-concurrent-operations\n"
                         },
                         {
-                          "text": "   Duration: 2094ms\n"
+                          "text": "   Duration: 2934ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -2465,7 +2475,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:15.199Z",
+                      "startTime": "2025-09-07T17:38:13.863Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2494,7 +2504,7 @@
                       "workerIndex": 8,
                       "parallelIndex": 8,
                       "status": "failed",
-                      "duration": 4356,
+                      "duration": 5974,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"e\u001b[7mn\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27me\"\u001b[39m",
                         "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"e\u001b[7mn\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27me\"\u001b[39m\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\local-storage.spec.ts:308:28",
@@ -2565,7 +2575,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1291ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1667ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: localStorage write (i18nextLng)\n"
@@ -2625,7 +2635,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 854ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1301ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: localStorage read (i18nextLng)\n"
@@ -2694,7 +2704,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 843ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1045ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: localStorage read (i18nextLng)\n"
@@ -2705,7 +2715,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:15.706Z",
+                      "startTime": "2025-09-07T17:38:14.374Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -2752,10 +2762,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 7,
-                      "parallelIndex": 7,
+                      "workerIndex": 13,
+                      "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 1746,
+                      "duration": 2495,
                       "errors": [],
                       "stdout": [
                         {
@@ -2807,7 +2817,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 998ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 989ms\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: localStorage write (gameSettings)\n"
@@ -2837,7 +2847,7 @@
                           "text": "💾 PERSISTENCE: localStorage write (userPrefs)\n"
                         },
                         {
-                          "text": "   Value: { lastPlayed: \u001b[33m1756224500316\u001b[39m }\n"
+                          "text": "   Value: { lastPlayed: \u001b[33m1757266701324\u001b[39m }\n"
                         },
                         {
                           "text": "💾 PERSISTENCE: Test data stored for cleanup test\n"
@@ -2867,7 +2877,7 @@
                           "text": "📊 TEST REPORT: local-storage-cleanup\n"
                         },
                         {
-                          "text": "   Duration: 1348ms\n"
+                          "text": "   Duration: 1360ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -2887,7 +2897,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:18.831Z",
+                      "startTime": "2025-09-07T17:38:18.558Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -2930,10 +2940,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
+                      "workerIndex": 9,
+                      "parallelIndex": 9,
                       "status": "failed",
-                      "duration": 1733,
+                      "duration": 2566,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
                         "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\translation-system.spec.ts:27:33",
@@ -3004,7 +3014,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 936ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1511ms\n"
                         },
                         {
                           "text": "🌐 DATA FLOW: Translation system check\n"
@@ -3015,7 +3025,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:19.192Z",
+                      "startTime": "2025-09-07T17:38:17.454Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -3062,10 +3072,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
+                      "workerIndex": 7,
+                      "parallelIndex": 7,
                       "status": "passed",
-                      "duration": 1784,
+                      "duration": 2335,
                       "errors": [],
                       "stdout": [
                         {
@@ -3117,7 +3127,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 966ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1257ms\n"
                         },
                         {
                           "text": "🎯 USER ACTION: Testing language on de\n"
@@ -3159,7 +3169,7 @@
                           "text": "📊 TEST REPORT: translation-system-languages\n"
                         },
                         {
-                          "text": "   Duration: 1304ms\n"
+                          "text": "   Duration: 1848ms\n"
                         },
                         {
                           "text": "   User Actions: 4\n"
@@ -3179,7 +3189,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:19.300Z",
+                      "startTime": "2025-09-07T17:38:18.277Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -3205,10 +3215,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 13,
-                      "parallelIndex": 5,
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 5515,
+                      "duration": 5386,
                       "errors": [],
                       "stdout": [
                         {
@@ -3260,7 +3270,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 957ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1200ms\n"
                         },
                         {
                           "text": "🌐 DATA FLOW: German translation found\n"
@@ -3302,7 +3312,7 @@
                           "text": "📊 TEST REPORT: translation-system-ui\n"
                         },
                         {
-                          "text": "   Duration: 4359ms\n"
+                          "text": "   Duration: 4840ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -3322,7 +3332,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:22.234Z",
+                      "startTime": "2025-09-07T17:38:18.398Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -3349,9 +3359,9 @@
                   "results": [
                     {
                       "workerIndex": 14,
-                      "parallelIndex": 0,
+                      "parallelIndex": 5,
                       "status": "passed",
-                      "duration": 2104,
+                      "duration": 2457,
                       "errors": [],
                       "stdout": [
                         {
@@ -3403,7 +3413,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 953ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1027ms\n"
                         },
                         {
                           "text": "🌐 DATA FLOW: Fallback behavior test\n"
@@ -3415,7 +3425,7 @@
                           "text": "📊 TEST REPORT: translation-system-fallback\n"
                         },
                         {
-                          "text": "   Duration: 1247ms\n"
+                          "text": "   Duration: 1398ms\n"
                         },
                         {
                           "text": "   User Actions: 0\n"
@@ -3435,7 +3445,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:22.413Z",
+                      "startTime": "2025-09-07T17:38:22.200Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -3461,10 +3471,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
+                      "workerIndex": 15,
+                      "parallelIndex": 6,
                       "status": "failed",
-                      "duration": 3613,
+                      "duration": 3983,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m\"unknown\"\u001b[39m\nReceived array: \u001b[31m[\"es\", \"de\", \"en\", \"fr\"]\u001b[39m",
                         "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m\"unknown\"\u001b[39m\nReceived array: \u001b[31m[\"es\", \"de\", \"en\", \"fr\"]\u001b[39m\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\translation-system.spec.ts:210:38",
@@ -3535,7 +3545,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1030ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1001ms\n"
                         },
                         {
                           "text": "🎯 USER ACTION: Changed language to Spanish\n"
@@ -3601,7 +3611,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 786ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 707ms\n"
                         },
                         {
                           "text": "🎯 USER ACTION: Page reloaded\n"
@@ -3615,7 +3625,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:20.207Z",
+                      "startTime": "2025-09-07T17:38:22.355Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -3662,10 +3672,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 15,
-                      "parallelIndex": 6,
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
                       "status": "failed",
-                      "duration": 1771,
+                      "duration": 1673,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m\"unknown\"\u001b[39m\nReceived array: \u001b[31m[\"de\", \"en\", \"es\", \"fr\"]\u001b[39m",
                         "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m\"unknown\"\u001b[39m\nReceived array: \u001b[31m[\"de\", \"en\", \"es\", \"fr\"]\u001b[39m\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\translation-system.spec.ts:240:38",
@@ -3736,7 +3746,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 974ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 987ms\n"
                         },
                         {
                           "text": "🌐 DATA FLOW: Browser language detection\n"
@@ -3747,7 +3757,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:22.741Z",
+                      "startTime": "2025-09-07T17:38:20.850Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -3794,10 +3804,10 @@
                   "projectName": "foundation-tests",
                   "results": [
                     {
-                      "workerIndex": 9,
+                      "workerIndex": 16,
                       "parallelIndex": 9,
                       "status": "failed",
-                      "duration": 3761,
+                      "duration": 4012,
                       "error": {
                         "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m\"unknown\"\u001b[39m\nReceived array: \u001b[31m[\"de\", \"en\", \"es\", \"fr\"]\u001b[39m",
                         "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m\"unknown\"\u001b[39m\nReceived array: \u001b[31m[\"de\", \"en\", \"es\", \"fr\"]\u001b[39m\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\translation-system.spec.ts:278:38",
@@ -3868,7 +3878,7 @@
                           "text": "🔄 STATE CHANGE: 🔄 useQuestions: Questions loading completed\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 847ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 1020ms\n"
                         },
                         {
                           "text": "🎯 USER ACTION: Rapid language switch on de\n"
@@ -3939,7 +3949,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-08-26T16:08:20.732Z",
+                      "startTime": "2025-09-07T17:38:22.964Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -3978,20 +3988,20 @@
       ]
     },
     {
-      "title": "flows\\classic-mode\\quick-start.spec.ts",
-      "file": "flows/classic-mode/quick-start.spec.ts",
+      "title": "flows\\nameblame-mode\\blame-progression.spec.ts",
+      "file": "flows/nameblame-mode/blame-progression.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Classic Mode: Quick Start Flow",
-          "file": "flows/classic-mode/quick-start.spec.ts",
-          "line": 21,
+          "title": "NameBlame Chain Progression Flow",
+          "file": "flows/nameblame-mode/blame-progression.spec.ts",
+          "line": 16,
           "column": 6,
           "specs": [
             {
-              "title": "should complete full classic mode game flow",
+              "title": "should follow blame chain: blame → reveal → next question with blamed player active",
               "ok": true,
               "tags": [],
               "tests": [
@@ -3999,19 +4009,19 @@
                   "timeout": 60000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "classic-mode-flows",
-                  "projectName": "classic-mode-flows",
+                  "projectId": "nameblame-mode-flows",
+                  "projectName": "nameblame-mode-flows",
                   "results": [],
                   "status": "skipped"
                 }
               ],
-              "id": "fd8b17a39ca6fe0e6178-11cfa5cbd1d5d79f49f7",
-              "file": "flows/classic-mode/quick-start.spec.ts",
-              "line": 22,
+              "id": "734632246a5b205b904f-596c0c54427c949db11a",
+              "file": "flows/nameblame-mode/blame-progression.spec.ts",
+              "line": 18,
               "column": 7
             },
             {
-              "title": "should handle rapid question navigation",
+              "title": "should display proper blame context in reveal phase",
               "ok": true,
               "tags": [],
               "tests": [
@@ -4019,19 +4029,19 @@
                   "timeout": 60000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "classic-mode-flows",
-                  "projectName": "classic-mode-flows",
+                  "projectId": "nameblame-mode-flows",
+                  "projectName": "nameblame-mode-flows",
                   "results": [],
                   "status": "skipped"
                 }
               ],
-              "id": "fd8b17a39ca6fe0e6178-0ccfa4531d6a6b488299",
-              "file": "flows/classic-mode/quick-start.spec.ts",
-              "line": 201,
+              "id": "734632246a5b205b904f-3174047a84ba9c5cc4e7",
+              "file": "flows/nameblame-mode/blame-progression.spec.ts",
+              "line": 141,
               "column": 7
             },
             {
-              "title": "should maintain game state during navigation",
+              "title": "should follow blame chain: blame → reveal → next question with blamed player active",
               "ok": true,
               "tags": [],
               "tests": [
@@ -4039,15 +4049,155 @@
                   "timeout": 60000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "classic-mode-flows",
-                  "projectName": "classic-mode-flows",
+                  "projectId": "cross-browser-firefox",
+                  "projectName": "cross-browser-firefox",
                   "results": [],
                   "status": "skipped"
                 }
               ],
-              "id": "fd8b17a39ca6fe0e6178-ceb9d8ddd32cd027e075",
-              "file": "flows/classic-mode/quick-start.spec.ts",
-              "line": 249,
+              "id": "734632246a5b205b904f-f5f22d5ec7ecf35ed03c",
+              "file": "flows/nameblame-mode/blame-progression.spec.ts",
+              "line": 18,
+              "column": 7
+            },
+            {
+              "title": "should display proper blame context in reveal phase",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "cross-browser-firefox",
+                  "projectName": "cross-browser-firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "734632246a5b205b904f-63b2619b7d5cf04514ca",
+              "file": "flows/nameblame-mode/blame-progression.spec.ts",
+              "line": 141,
+              "column": 7
+            },
+            {
+              "title": "should follow blame chain: blame → reveal → next question with blamed player active",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "cross-browser-webkit",
+                  "projectName": "cross-browser-webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "734632246a5b205b904f-dc9025513c69e7f7087a",
+              "file": "flows/nameblame-mode/blame-progression.spec.ts",
+              "line": 18,
+              "column": 7
+            },
+            {
+              "title": "should display proper blame context in reveal phase",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "cross-browser-webkit",
+                  "projectName": "cross-browser-webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "734632246a5b205b904f-e79f3ac7e1df32464d20",
+              "file": "flows/nameblame-mode/blame-progression.spec.ts",
+              "line": 141,
+              "column": 7
+            },
+            {
+              "title": "should follow blame chain: blame → reveal → next question with blamed player active",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "734632246a5b205b904f-f8d7d533095005ee5d97",
+              "file": "flows/nameblame-mode/blame-progression.spec.ts",
+              "line": 18,
+              "column": 7
+            },
+            {
+              "title": "should display proper blame context in reveal phase",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "734632246a5b205b904f-0cf389ad4751dabb6e45",
+              "file": "flows/nameblame-mode/blame-progression.spec.ts",
+              "line": 141,
+              "column": 7
+            },
+            {
+              "title": "should follow blame chain: blame → reveal → next question with blamed player active",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "734632246a5b205b904f-21489bbad8d4bd2df07e",
+              "file": "flows/nameblame-mode/blame-progression.spec.ts",
+              "line": 18,
+              "column": 7
+            },
+            {
+              "title": "should display proper blame context in reveal phase",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "734632246a5b205b904f-256006bf3bf716cfea1e",
+              "file": "flows/nameblame-mode/blame-progression.spec.ts",
+              "line": 141,
               "column": 7
             }
           ]
@@ -4057,10 +4207,10 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-08-26T16:08:08.067Z",
-    "duration": 20177.104,
+    "startTime": "2025-09-07T17:38:05.799Z",
+    "duration": 21669.803,
     "expected": 16,
-    "skipped": 3,
+    "skipped": 10,
     "unexpected": 11,
     "flaky": 0
   }
