@@ -38,13 +38,6 @@ export interface BlameState {
   currentQuestionId: string;
   playersWhoBlamedThisQuestion: string[];
   isBlameRoundComplete: boolean;
-  showBlameNotification: boolean;
-  lastBlameEvent: {
-    blamer: string;
-    blamed: string;
-    question: string;
-    timestamp: string;
-  } | null;
 }
 
 export interface BlameActions {
@@ -68,8 +61,6 @@ export interface BlameActions {
   isPlayerAllowedToBlame: (playerName: string) => boolean;
   getRemainingPlayersToBlame: (activePlayers: string[]) => string[];
   completeBlameRound: () => void;
-  showNotification: (blamer: string, blamed: string, question: string) => void;
-  hideNotification: () => void;
   
   // Utility actions
   resetBlameGameState: () => void;
@@ -87,8 +78,6 @@ const initialBlameState: BlameState = {
   currentQuestionId: '',
   playersWhoBlamedThisQuestion: [],
   isBlameRoundComplete: false,
-  showBlameNotification: false,
-  lastBlameEvent: null,
 };
 
 export const useBlameGameStore = create<BlameGameStore>((set, get) => ({
@@ -208,8 +197,6 @@ export const useBlameGameStore = create<BlameGameStore>((set, get) => ({
       currentQuestionId: questionId,
       playersWhoBlamedThisQuestion: [],
       isBlameRoundComplete: false,
-      showBlameNotification: false,
-      lastBlameEvent: null,
       blamePhase: 'selecting',
     });
     console.log(`🎯 Started new blame round for question: ${questionId} with ${activePlayers.length} players`);
@@ -245,24 +232,6 @@ export const useBlameGameStore = create<BlameGameStore>((set, get) => ({
       isBlameRoundComplete: true,
     });
     console.log('🏁 Blame sequence mark (unused in simplified flow)');
-  },
-  
-  showNotification: (blamer: string, blamed: string, question: string) => {
-    const timestamp = new Date().toISOString();
-    set({
-      showBlameNotification: true,
-      lastBlameEvent: { blamer, blamed, question, timestamp },
-      blamePhase: 'reveal',
-    });
-    console.log(`🔔 Showing blame notification: ${blamer} → ${blamed}`);
-  },
-  
-  hideNotification: () => {
-    set({
-      showBlameNotification: false,
-      lastBlameEvent: null,
-    });
-    console.log('🔕 Hiding blame notification');
   },
 }));
 

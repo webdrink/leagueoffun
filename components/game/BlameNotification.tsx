@@ -4,6 +4,10 @@
  * Purpose: Displays a notification when a player has been blamed in NameBlame mode.
  * Shows clear feedback about who blamed whom for which question, with optional auto-dismiss.
  * 
+ * NOTE: This component is currently NOT used in the active game flow but is preserved
+ * for potential future use in other game modes or features. It was removed from 
+ * NameBlame mode as it displayed redundant information that users already see.
+ * 
  * Props:
  * - blamer: Name of the player who made the blame
  * - blamed: Name of the player who was blamed

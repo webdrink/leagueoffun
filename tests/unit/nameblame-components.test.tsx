@@ -52,7 +52,6 @@ test.describe('BlameGameStore Unit Tests', () => {
     expect(storeState.currentBlamer).toBe(null);
     expect(storeState.currentBlamed).toBe(null);
     expect(storeState.blameLog).toEqual([]);
-    expect(storeState.showBlameNotification).toBe(false);
   });
 
   test('should start blame round correctly', async ({ page }) => {
@@ -119,31 +118,6 @@ test.describe('BlameGameStore Unit Tests', () => {
     expect(result.blamePhase).toBe('continuing');
   });
 
-  test('should handle notifications correctly', async ({ page }) => {
-    const result = await page.evaluate(() => {
-      const store = window.blameGameStore;
-      const s = store.getState();
-      s.showNotification('Alice', 'Bob', 'Test question');
-      const showState = store.getState();
-      s.hideNotification();
-      const hideState = store.getState();
-      return {
-        notificationShown: showState.showBlameNotification,
-        lastEvent: showState.lastBlameEvent,
-        phaseAfterShow: showState.blamePhase,
-        notificationHidden: hideState.showBlameNotification,
-        eventAfterHide: hideState.lastBlameEvent
-      };
-    });
-
-    expect(result.notificationShown).toBe(true);
-    expect(result.lastEvent?.blamer).toBe('Alice');
-    expect(result.lastEvent?.blamed).toBe('Bob');
-    expect(result.phaseAfterShow).toBe('blamed');
-    expect(result.notificationHidden).toBe(false);
-    expect(result.eventAfterHide).toBe(null);
-  });
-
   test('should calculate blame statistics correctly', async ({ page }) => {
     const result = await page.evaluate(() => {
       const store = window.blameGameStore;
@@ -173,7 +147,6 @@ test.describe('BlameGameStore Unit Tests', () => {
       const s = store.getState();
       s.recordBlame('Alice', 'Bob', 'Test');
       s.startBlameRound('q1', ['Alice', 'Bob']);
-      s.showNotification('Alice', 'Bob', 'Test');
       s.resetBlameGameState();
       return store.getState();
     });
@@ -183,7 +156,6 @@ test.describe('BlameGameStore Unit Tests', () => {
     expect(result.currentBlamed).toBe(null);
     expect(result.blameLog).toEqual([]);
     expect(result.blameStats).toEqual({});
-    expect(result.showBlameNotification).toBe(false);
     expect(result.isBlameRoundComplete).toBe(false);
     expect(result.playersWhoBlamedThisQuestion).toEqual([]);
   });

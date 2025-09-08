@@ -44,7 +44,6 @@ import DebugPanel from './components/debug/DebugPanel';
 import AssetDebugInfo from './components/debug/AssetDebugInfo';
 import CategoryPickScreen from './components/game/CategoryPickScreen';
 import SummaryScreen from './components/game/SummaryScreen';
-import BlameNotification from './components/game/BlameNotification';
 
 import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
 import { LOADING_QUOTES, initialGameSettings } from './constants';
@@ -88,11 +87,8 @@ function App() {
     startBlameRound,
   // getRemainingPlayersToBlame, (no longer needed in simplified flow)
   // completeBlameRound, (round concept simplified to single blame per question)
-    showNotification,
-    hideNotification,
     recordBlame: recordBlameInStore,
-    showBlameNotification,
-    lastBlameEvent
+    currentBlamed
   } = useBlameGameStore();
 
   const [gameStep, setGameStep] = useState<GameStep>('intro');
@@ -446,7 +442,6 @@ function App() {
           startBlameRound(questionId, activePlayerNames);
         }
 
-        showNotification(blamingPlayer.name, blamedPlayerName, currentQuestion.text);
         updateBlameState({
           phase: 'reveal',
           currentBlamer: blamingPlayer.name,
@@ -477,16 +472,14 @@ function App() {
   // New function to handle "Next Blame" button in NameBlame mode
   const handleNextBlame = () => {
     console.log(`🎯 NAMEBLAME: Next Blame pressed (reveal acknowledged)`);
-    console.log(`🔍 DEBUG: nameBlameMode = ${nameBlameMode}, gameSettings.gameMode = ${gameSettings.gameMode}, lastBlameEvent =`, lastBlameEvent);
+    console.log(`🔍 DEBUG: nameBlameMode = ${nameBlameMode}, gameSettings.gameMode = ${gameSettings.gameMode}`);
     if (stablePlayerOrderForRound.length === 0) {
       console.error('❌ EDGE CASE: No stable player order, returning to intro');
       setGameStep('intro');
       return;
     }
-    const last = lastBlameEvent;
-    hideNotification();
-    if (gameSettings.gameMode === 'nameBlame' && last) {
-      const nextIndex = stablePlayerOrderForRound.findIndex(p => p.name === last.blamed);
+    if (gameSettings.gameMode === 'nameBlame') {
+      const nextIndex = stablePlayerOrderForRound.findIndex(p => p.name === currentBlamed);
       if (nextIndex !== -1) {
         setCurrentPlayerIndex(nextIndex);
       }
@@ -574,18 +567,6 @@ function App() {
 
   return (
     <GameContainer onTitleClick={handleTitleClick}>
-      {/* Blame Notification - Global overlay */}
-      {lastBlameEvent && (
-        <BlameNotification
-          blamer={lastBlameEvent.blamer}
-          blamed={lastBlameEvent.blamed}
-          question={lastBlameEvent.question}
-          isVisible={showBlameNotification}
-          onDismiss={hideNotification}
-          autoHide={true}
-          autoHideDelay={4000}
-        />
-      )}
       
       <AnimatePresence mode="wait">
         {gameStep === 'intro' && (
