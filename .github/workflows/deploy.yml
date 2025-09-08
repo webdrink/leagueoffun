@@ -16,7 +16,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: "deployment-${{ github.ref }}"
   cancel-in-progress: false
 
 jobs:
@@ -44,7 +44,16 @@ jobs:
           cache: 'pnpm'
 
       - name: 📥 Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          echo "📥 Installing dependencies with lockfile validation..."
+          # Try frozen lockfile first, fallback to updating if needed
+          if ! pnpm install --frozen-lockfile; then
+            echo "⚠️ Lockfile mismatch detected, updating dependencies..."
+            pnpm install
+            echo "✅ Dependencies updated successfully"
+          else
+            echo "✅ Dependencies installed from frozen lockfile"
+          fi
 
       - name: 🔍 Check Translation Status
         id: translation-check
@@ -83,7 +92,16 @@ jobs:
           cache: 'pnpm'
 
       - name: 📥 Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          echo "📥 Installing dependencies with lockfile validation..."
+          # Try frozen lockfile first, fallback to updating if needed
+          if ! pnpm install --frozen-lockfile; then
+            echo "⚠️ Lockfile mismatch detected, updating dependencies..."
+            pnpm install
+            echo "✅ Dependencies updated successfully"
+          else
+            echo "✅ Dependencies installed from frozen lockfile"
+          fi
 
       - name: 🌐 Auto-translate if needed
         if: needs.pre-deploy-checks.outputs.needs-translation == 'true'

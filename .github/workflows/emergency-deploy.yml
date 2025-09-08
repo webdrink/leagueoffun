@@ -8,12 +8,12 @@ on:
         required: true
         default: 'Main workflow failed'
   
-  # Automatically trigger if main workflow fails
-  workflow_run:
-    workflows: ["🚀 Deploy Blame Game to GitHub Pages"]
-    types:
-      - completed
-    branches: [main]
+  # Disabled automatic trigger to prevent deployment loops
+  # workflow_run:
+  #   workflows: ["🚀 Deploy Blame Game to GitHub Pages"]
+  #   types:
+  #     - completed
+  #   branches: [main]
 
 permissions:
   contents: read
