@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from "../core/Button"; // Adjusted path
 import DebugInput from "./DebugInput"; // Adjusted path (same directory)
 import type { GameSettings, QuestionStats } from "../../types"; // Path remains correct
-import { XIcon, RotateCcwIcon, Trash2Icon } from 'lucide-react';
+import { XIcon, RotateCcwIcon, Trash2Icon, EyeIcon, EyeOffIcon } from 'lucide-react';
 import useTranslation from '../../hooks/useTranslation';
+import type { EventBus, GameEvent } from '../../framework/core/events/eventBus';
 
 interface DebugPanelProps {
   gameSettings: GameSettings;
@@ -12,6 +13,7 @@ interface DebugPanelProps {
   onClose: () => void;
   onResetAppData: () => void; // Added for resetting all app data
   questionStats?: QuestionStats;
+  eventBus?: EventBus; // Optional EventBus for live event stream
 }
 
 interface SettingConfigBase {
@@ -94,9 +96,23 @@ const DebugPanel: React.FC<DebugPanelProps> = ({
   defaultGameSettings,
   onClose,
   onResetAppData,
-  questionStats
+  questionStats,
+  eventBus
 }) => {
   const { t } = useTranslation();
+  const [showEventStream, setShowEventStream] = useState(false);
+  const [events, setEvents] = useState<GameEvent[]>([]);
+
+  // Subscribe to EventBus if provided
+  useEffect(() => {
+    if (!eventBus) return;
+    
+    const unsubscribe = eventBus.subscribe((evt: GameEvent) => {
+      setEvents(prev => [...prev.slice(-19), evt]); // Keep last 20 events
+    });
+
+    return unsubscribe;
+  }, [eventBus]);
 
   const handleSectionReset = (sectionKey: string) => {
     const sectionSettings = settingsConfig[sectionKey].settings;
@@ -105,7 +121,7 @@ const DebugPanel: React.FC<DebugPanelProps> = ({
     sectionSettings.forEach(setting => {
       const settingName = setting.name;
       // Type assertion to copy values from defaultGameSettings
-      (updatedSettings as any)[settingName] = (defaultGameSettings as any)[settingName];
+      (updatedSettings as unknown as Record<string, unknown>)[settingName] = (defaultGameSettings as unknown as Record<string, unknown>)[settingName];
     });
     
     setGameSettings(updatedSettings);
@@ -123,6 +139,38 @@ const DebugPanel: React.FC<DebugPanelProps> = ({
             <XIcon size={20} />
           </Button>
         </div>
+
+        {/* EventBus Stream */}
+        {eventBus && (
+          <div className="mb-4 p-3 bg-gray-700 rounded-md">
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-lg font-medium">Event Stream ({events.length})</h3>
+              <Button
+                onClick={() => setShowEventStream(!showEventStream)}
+                className="text-xs bg-gray-600 hover:bg-gray-500 px-2 py-1"
+              >
+                {showEventStream ? <EyeOffIcon size={12} /> : <EyeIcon size={12} />}
+                {showEventStream ? ' Hide' : ' Show'}
+              </Button>
+            </div>
+            {showEventStream && (
+              <div className="bg-gray-800 p-2 rounded text-xs max-h-32 overflow-y-auto">
+                {events.length === 0 ? (
+                  <div className="text-gray-400">No events yet...</div>
+                ) : (
+                  events.slice(-10).map((evt, i) => (
+                    <div key={i} className="mb-1 font-mono">
+                      <span className="text-blue-300">{evt.type}</span>
+                      {'phaseId' in evt && <span className="text-yellow-300 ml-2">→ {evt.phaseId}</span>}
+                      {'action' in evt && <span className="text-green-300 ml-2">{evt.action}</span>}
+                      {'error' in evt && <span className="text-red-300 ml-2">{evt.error}</span>}
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+          </div>
+        )}
 
         {questionStats && (
           <div className="mb-4 p-3 bg-gray-700 rounded-md">

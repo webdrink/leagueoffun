@@ -49,6 +49,8 @@ import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
 import { LOADING_QUOTES, initialGameSettings } from './constants';
 import { getCategoriesWithCounts } from './lib/utils/arrayUtils';
 import { useBlameGameStore } from './store/BlameGameStore';
+import { useFrameworkEventBus } from './hooks/useFrameworkEventBus';
+import { dispatchAdvance, dispatchSelectTarget, createDispatchContext } from './lib/utils/frameworkActions';
 
 function App() {
   const { soundEnabled, toggleSound, playSound, volume, setVolume } = useSound();
@@ -105,6 +107,12 @@ function App() {
 
   // State for debug panel
   const [showDebug, setShowDebug] = useState(false);
+  
+  // Access framework EventBus for debug integration
+  const frameworkEventBus = useFrameworkEventBus();
+  
+  // Create dispatch context for framework actions
+  const dispatchContext = createDispatchContext(frameworkEventBus);
 
   const getEmoji = useCallback((categoryName: string): string => {
     // Find in current round first, then all questions as fallback
@@ -337,33 +345,45 @@ function App() {
   const handleNextQuestion = () => {
     console.log(`🎯 USER ACTION: Next question clicked - Current question: ${currentQuestionIndexFromHook + 1}/${currentRoundQuestions.length}, Mode: ${gameSettings.gameMode}`);
     
-    if (currentQuestionIndexFromHook < currentRoundQuestions.length - 1) {
-      advanceToNextQuestion();
-      if (gameSettings.gameMode === 'nameBlame') {
-        if (stablePlayerOrderForRound.length > 0) {
-          const previousPlayerIndex = currentPlayerIndex;
-          const nextPlayerIndex = (currentPlayerIndex + 1) % stablePlayerOrderForRound.length;
-          setCurrentPlayerIndex(nextPlayerIndex);
-          console.log(`🔄 PLAYER TURN SWITCH (NameBlame): ${stablePlayerOrderForRound[previousPlayerIndex]?.name} → ${stablePlayerOrderForRound[nextPlayerIndex]?.name} (index ${previousPlayerIndex} → ${nextPlayerIndex})`);
-          console.log(`📊 Active players order:`, stablePlayerOrderForRound.map((p, i) => `${i}: ${p.name}`));
+    // Create legacy handler for fallback
+    const legacyAdvanceHandler = () => {
+      if (currentQuestionIndexFromHook < currentRoundQuestions.length - 1) {
+        advanceToNextQuestion();
+        if (gameSettings.gameMode === 'nameBlame') {
+          if (stablePlayerOrderForRound.length > 0) {
+            const previousPlayerIndex = currentPlayerIndex;
+            const nextPlayerIndex = (currentPlayerIndex + 1) % stablePlayerOrderForRound.length;
+            setCurrentPlayerIndex(nextPlayerIndex);
+            console.log(`🔄 PLAYER TURN SWITCH (NameBlame): ${stablePlayerOrderForRound[previousPlayerIndex]?.name} → ${stablePlayerOrderForRound[nextPlayerIndex]?.name} (index ${previousPlayerIndex} → ${nextPlayerIndex})`);
+            console.log(`📊 Active players order:`, stablePlayerOrderForRound.map((p, i) => `${i}: ${p.name}`));
+          } else {
+            console.error("❌ ERROR: stablePlayerOrderForRound is empty in handleNextQuestion (NameBlame). Turn cannot advance correctly.");
+            console.error("🔍 DEBUG INFO:", { 
+              gameStep, 
+              gameMode: gameSettings.gameMode, 
+              playersCount: players.length, 
+              currentPlayerIndex 
+            });
+          }
         } else {
-          console.error("❌ ERROR: stablePlayerOrderForRound is empty in handleNextQuestion (NameBlame). Turn cannot advance correctly.");
-          console.error("🔍 DEBUG INFO:", { 
-            gameStep, 
-            gameMode: gameSettings.gameMode, 
-            playersCount: players.length, 
-            currentPlayerIndex 
-          });
+          console.log(`➡️ CLASSIC MODE: Advanced to question ${currentQuestionIndexFromHook + 2}/${currentRoundQuestions.length}`);
         }
+        playSound('new_question');
       } else {
-        console.log(`➡️ CLASSIC MODE: Advanced to question ${currentQuestionIndexFromHook + 2}/${currentRoundQuestions.length}`);
+        console.log(`🏁 GAME END: Reached final question, showing summary`);
+        setGameStep('summary'); 
+        playSound('summary_fun');
       }
-      playSound('new_question');
-    } else {
-      console.log(`🏁 GAME END: Reached final question, showing summary`);
-      setGameStep('summary'); 
-      playSound('summary_fun');
-    }
+    };
+
+    // Use framework dispatcher if available, otherwise fall back to legacy handler
+    dispatchAdvance(dispatchContext, legacyAdvanceHandler, {
+      currentIndex: currentQuestionIndexFromHook,
+      totalQuestions: currentRoundQuestions.length,
+      gameMode: gameSettings.gameMode,
+      currentPlayerIndex,
+      playersCount: stablePlayerOrderForRound.length
+    });
   };
 
   const handlePreviousQuestion = () => {
@@ -390,83 +410,89 @@ function App() {
     const currentQuestionText = currentQuestion?.text || 'Unknown question';
     console.log(`🎯 USER ACTION: Blame selected - Player blamed: "${blamedPlayerName}" for question: "${currentQuestionText}"`);
     
-    // Edge case: Ensure game state is valid
-    if (stablePlayerOrderForRound.length === 0) {
-      console.error("❌ ERROR: stablePlayerOrderForRound is empty in handleBlame. This indicates a problem with game state setup. Reverting to intro.");
-      console.error("🔍 DEBUG INFO:", { 
-        gameStep, 
-        gameMode: gameSettings.gameMode, 
-        playersCount: players.length, 
-        currentPlayerIndex 
-      });
-      setGameStep('intro'); 
-      return;
-    }
-
-    // Edge case: Ensure sufficient players for NameBlame mode
-    if (gameSettings.gameMode === 'nameBlame' && stablePlayerOrderForRound.length < 3) {
-      console.error("❌ EDGE CASE: Insufficient players for NameBlame mode in handleBlame");
-      setGameStep('playerSetup');
-      return;
-    }
-
-    // Ensure currentPlayerIndex is valid for stablePlayerOrderForRound.
-    const safeCurrentPlayerIndex = currentPlayerIndex % stablePlayerOrderForRound.length;
-    const blamingPlayer = stablePlayerOrderForRound[safeCurrentPlayerIndex];
-
-    // Edge case: Ensure blaming player exists
-    if (!blamingPlayer) {
-      console.error("❌ EDGE CASE: Could not identify blaming player in handleBlame");
-      setGameStep('intro');
-      return;
-    }
-
-    console.log(`👤 BLAME DETAILS: ${blamingPlayer?.name} (index ${safeCurrentPlayerIndex}) blamed ${blamedPlayerName}`);
-    console.log(`📊 Current player order:`, stablePlayerOrderForRound.map((p, i) => `${i}${i === safeCurrentPlayerIndex ? '*' : ''}: ${p.name}`));
-
-    if (blamingPlayer && currentQuestion) {
-      // Record blame in both stores
-      recordNameBlame(blamingPlayer.name, blamedPlayerName, currentQuestion.text);
-      recordBlameInStore(blamingPlayer.name, blamedPlayerName, currentQuestion.text);
-      
-      console.log(`📝 BLAME RECORDED: ${blamingPlayer.name} → ${blamedPlayerName} for "${currentQuestion.text}"`);
-      console.log(`🔍 DEBUG: nameBlameMode = ${nameBlameMode}, gameSettings.gameMode = ${gameSettings.gameMode}`);
-      
-      // Enhanced NameBlame flow - show notification and transition to 'reveal' phase
-      if (gameSettings.gameMode === 'nameBlame') {
-        // Only start a blame round once per question; detect by empty playersWhoBlamedThisQuestion and matching questionId
-        const questionId = `q${currentQuestionIndexFromHook}-${currentQuestion.text.slice(0, 10)}`;
-        const activePlayerNames = stablePlayerOrderForRound.map(p => p.name);
-        const existingRoundQuestionId = useBlameGameStore.getState().currentQuestionId;
-        if (!existingRoundQuestionId || existingRoundQuestionId !== questionId) {
-          startBlameRound(questionId, activePlayerNames);
-        }
-
-        updateBlameState({
-          phase: 'reveal',
-          currentBlamer: blamingPlayer.name,
-          currentBlamed: blamedPlayerName,
-          currentQuestion: currentQuestion.text
+    // Create legacy handler for fallback
+    const legacyBlameHandler = (target: string) => {
+      // Edge case: Ensure game state is valid
+      if (stablePlayerOrderForRound.length === 0) {
+        console.error("❌ ERROR: stablePlayerOrderForRound is empty in handleBlame. This indicates a problem with game state setup. Reverting to intro.");
+        console.error("🔍 DEBUG INFO:", { 
+          gameStep, 
+          gameMode: gameSettings.gameMode, 
+          playersCount: players.length, 
+          currentPlayerIndex 
         });
-        console.log(`🎯 NAMEBLAME: Transitioning to 'reveal' phase - ${blamedPlayerName} was blamed by ${blamingPlayer.name}`);
-        console.log(`🔍 DEBUG: Updated blame state to 'reveal' phase`);
-        return; // Stay on the current question to show blame context
-      } else {
-        console.log(`❌ DEBUG: nameBlameMode is false, not transitioning to reveal phase`);
+        setGameStep('intro'); 
+        return;
       }
-    } else {
-      console.error("❌ ERROR: Could not identify blaming player or current question in handleBlame.");
-      console.error("🔍 DEBUG INFO:", { 
-        blamingPlayer: blamingPlayer?.name, 
-        currentQuestion: currentQuestion?.text, 
-        safeCurrentPlayerIndex 
-      });
-    }
-    
-    // Classic mode behavior - only advance in classic mode
-    if (gameSettings.gameMode === 'classic') {
-      advanceToNextPlayer();
-    }
+
+      // Edge case: Ensure sufficient players for NameBlame mode
+      if (gameSettings.gameMode === 'nameBlame' && stablePlayerOrderForRound.length < 3) {
+        console.error("❌ EDGE CASE: Insufficient players for NameBlame mode in handleBlame");
+        setGameStep('playerSetup');
+        return;
+      }
+
+      // Ensure currentPlayerIndex is valid for stablePlayerOrderForRound.
+      const safeCurrentPlayerIndex = currentPlayerIndex % stablePlayerOrderForRound.length;
+      const blamingPlayer = stablePlayerOrderForRound[safeCurrentPlayerIndex];
+
+      // Edge case: Ensure blaming player exists
+      if (!blamingPlayer) {
+        console.error("❌ EDGE CASE: Could not identify blaming player in handleBlame");
+        setGameStep('intro');
+        return;
+      }
+
+      console.log(`👤 BLAME DETAILS: ${blamingPlayer?.name} (index ${safeCurrentPlayerIndex}) blamed ${target}`);
+      console.log(`📊 Current player order:`, stablePlayerOrderForRound.map((p, i) => `${i}${i === safeCurrentPlayerIndex ? '*' : ''}: ${p.name}`));
+
+      if (blamingPlayer && currentQuestion) {
+        // Record blame in both stores
+        recordNameBlame(blamingPlayer.name, target, currentQuestion.text);
+        recordBlameInStore(blamingPlayer.name, target, currentQuestion.text);
+        
+        console.log(`📝 BLAME RECORDED: ${blamingPlayer.name} → ${target} for "${currentQuestion.text}"`);
+        console.log(`🔍 DEBUG: nameBlameMode = ${nameBlameMode}, gameSettings.gameMode = ${gameSettings.gameMode}`);
+        
+        // Enhanced NameBlame flow - show notification and transition to 'reveal' phase
+        if (gameSettings.gameMode === 'nameBlame') {
+          // Only start a blame round once per question; detect by empty playersWhoBlamedThisQuestion and matching questionId
+          const questionId = `q${currentQuestionIndexFromHook}-${currentQuestion.text.slice(0, 10)}`;
+          const activePlayerNames = stablePlayerOrderForRound.map(p => p.name);
+          const existingRoundQuestionId = useBlameGameStore.getState().currentQuestionId;
+          if (!existingRoundQuestionId || existingRoundQuestionId !== questionId) {
+            startBlameRound(questionId, activePlayerNames);
+          }
+
+          updateBlameState({
+            phase: 'reveal',
+            currentBlamer: blamingPlayer.name,
+            currentBlamed: target,
+            currentQuestion: currentQuestion.text
+          });
+          console.log(`🎯 NAMEBLAME: Transitioning to 'reveal' phase - ${target} was blamed by ${blamingPlayer.name}`);
+          console.log(`🔍 DEBUG: Updated blame state to 'reveal' phase`);
+          return; // Stay on the current question to show blame context
+        } else {
+          console.log(`❌ DEBUG: nameBlameMode is false, not transitioning to reveal phase`);
+        }
+      } else {
+        console.error("❌ ERROR: Could not identify blaming player or current question in handleBlame.");
+        console.error("🔍 DEBUG INFO:", { 
+          blamingPlayer: blamingPlayer?.name, 
+          currentQuestion: currentQuestion?.text, 
+          safeCurrentPlayerIndex 
+        });
+      }
+      
+      // Classic mode behavior - only advance in classic mode
+      if (gameSettings.gameMode === 'classic') {
+        advanceToNextPlayer();
+      }
+    };
+
+    // Use framework dispatcher if available, otherwise fall back to legacy handler
+    dispatchSelectTarget(dispatchContext, legacyBlameHandler, blamedPlayerName);
   };
   
   // New function to handle "Next Blame" button in NameBlame mode
@@ -726,6 +752,7 @@ function App() {
             playedQuestions: 0, // Add this if tracking played questions
             availableQuestions: currentRoundQuestions.length,            categories: questionStats.categories
           }}
+          eventBus={frameworkEventBus || undefined}
         />
       )}
       

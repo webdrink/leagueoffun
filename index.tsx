@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // Import i18n instance before App to ensure it's initialized
 import './lib/localization/i18n';
-import App from './App';
+import GameHost from './framework/core/GameHost';
 import { GameInfoLoader } from './components/core/GameInfoLoader';
 import { registerSW } from 'virtual:pwa-register';
 
@@ -29,7 +29,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <GameInfoLoader>
-      <App />
+      <GameHost />
     </GameInfoLoader>
   </React.StrictMode>
 );

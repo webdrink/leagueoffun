@@ -1,0 +1,90 @@
+{
+  "id": "nameblame",
+  "title": "BlameGame",
+  "description": "Wer würde was tun?",
+  "version": "1.0.0",
+  "minPlayers": 3,
+  "maxPlayers": 12,
+  "tags": ["party", "social"],
+  "themeRef": "default",
+  "i18nNamespaces": ["game.nameblame"],
+  "screens": {
+    "intro": "IntroScreen",
+    "setup": "PlayerSetupScreen", 
+    "play": "QuestionScreen",
+    "summary": "SummaryScreen"
+  },
+  "phases": [
+    { "id": "intro", "screenId": "intro", "allowedActions": ["ADVANCE"] },
+    { "id": "setup", "screenId": "setup", "allowedActions": ["ADVANCE", "BACK"] },
+    { "id": "play", "screenId": "play", "allowedActions": ["ADVANCE", "SELECT_TARGET", "REVEAL"] },
+    { "id": "summary", "screenId": "summary", "allowedActions": ["RESTART"] }
+  ],
+  "contentProvider": {
+    "type": "static-questions",
+    "source": "/questions/en/all.json",
+    "shuffle": true
+  },
+  "ui": {
+    "layout": {
+      "showHeader": true,
+      "showFooter": true,
+      "headerStyle": "minimal"
+    },
+    "features": {
+      "soundControl": false,
+      "volumeControl": false,
+      "languageSelector": true,
+      "categorySelection": true,
+      "gameMode": "nameblame",
+      "playerSetup": true,
+      "infoModal": true,
+      "settingsPanel": true,
+      "kofiLink": false,
+      "githubLink": false,
+      "versionDisplay": true,
+      "darkModeToggle": true
+    },
+    "branding": {
+      "showFrameworkBadge": true,
+      "gameName": "BlameGame",
+      "tagline": "intro.tagline",
+      "mainQuestion": "intro.main_question",
+      "subtitle": "intro.subtitle"
+    },
+    "theme": {
+      "primaryGradient": "from-pink-400 via-purple-500 to-indigo-600",
+      "cardBackground": "bg-white",
+      "accentColor": "purple",
+      "colors": {
+        "primary": "purple-500",
+        "secondary": "pink-500",
+        "accent": "indigo-600",
+        "neutral": "gray-600",
+        "highlight": "yellow-500"
+      }
+    }
+  },
+  "gameSettings": {
+    "categoriesPerGame": 5,
+    "questionsPerCategory": 8,
+    "maxQuestionsTotal": 40,
+    "allowRepeatQuestions": false,
+    "shuffleQuestions": true,
+    "shuffleCategories": true,
+    "gameTimeLimit": 0,
+    "autoAdvanceTime": 0,
+    "allowSkipQuestions": true,
+    "showProgress": true,
+    "enableSounds": true,
+    "enableAnimations": true
+  },
+  "featureFlags": {
+    "allowRejoin": true,
+    "showDebugPanel": true
+  },
+  "multiplayer": {
+    "supportsRoom": true,
+    "requiresRoom": false
+  }
+}

@@ -206,13 +206,13 @@
   "suites": [],
   "errors": [
     {
-      "message": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments.",
-      "stack": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments."
+      "message": "Error: No tests found",
+      "stack": "Error: No tests found"
     }
   ],
   "stats": {
-    "startTime": "2025-09-08T09:08:59.135Z",
-    "duration": 3795.114,
+    "startTime": "2025-09-21T09:47:44.742Z",
+    "duration": 143.17499999999995,
     "expected": 0,
     "skipped": 0,
     "unexpected": 0,
