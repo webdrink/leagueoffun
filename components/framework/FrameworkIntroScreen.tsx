@@ -27,7 +27,8 @@ const FrameworkIntroScreen: React.FC = () => {
   
   // Global game settings (persisted)
   const { gameSettings, updateGameSettings } = useGameSettings();
-  const isNameBlame = gameSettings.gameMode === 'nameBlame' || gameSettings.gameMode === 'nameblame';
+  // gameMode is a union 'classic' | 'nameBlame'; avoid comparing to lowercase variant to satisfy TS
+  const isNameBlame = gameSettings.gameMode === 'nameBlame';
   // Local UI state mirrors store for immediate responsiveness if needed
   const [gameMode, setGameMode] = useState(isNameBlame);
 
@@ -48,7 +49,7 @@ const FrameworkIntroScreen: React.FC = () => {
     // Update local for instant UI response
     setGameMode(checked);
     // Persist to store synchronously so phase transition can read it
-  updateGameSettings({ gameMode: checked ? 'nameBlame' : 'classic' } as Partial<GameSettings>);
+    updateGameSettings({ gameMode: checked ? 'nameBlame' : 'classic' } as Partial<GameSettings>);
     console.log('Game mode changed to:', checked ? 'nameBlame' : 'classic');
   };
 

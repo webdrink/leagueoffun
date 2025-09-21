@@ -20,19 +20,19 @@ Replace legacy `App` conditional rendering with the modular `FrameworkRouter` dr
 
 ## Technical Steps
 - [x] Create this plan file
-- [ ] Update `FrameworkRouter` to execute `onEnter` for initial phase
-- [ ] Refactor `GameHost`:
-  - [ ] Discover configs on mount
-  - [ ] Determine initial selected game (URL > storage > first config)
-  - [ ] Persist selection on change
-  - [ ] Resolve module from registry & run `init`
-  - [ ] Compose screen registry mapping (config.screens screenId -> component)
-  - [ ] Build PhaseController map from `module.getPhaseControllers()`
-  - [ ] Render `FrameworkRouter` with config
-  - [ ] Provide a lightweight dev header + back-to-menu button (dev only)
-- [ ] Emit lifecycle events `LIFECYCLE/INIT`, then `LIFECYCLE/READY` after module init
-- [ ] Error handling path: emit `ERROR` event & render message if module/config mismatch
-- [ ] Persist selected game using `storageSet(STORAGE_KEYS.selectedGame)`
+- [x] Update `FrameworkRouter` to execute `onEnter` for initial phase
+- [x] Refactor `GameHost`:
+  - [x] Discover configs on mount
+  - [x] Determine initial selected game (URL > storage > first config)
+  - [x] Persist selection on change
+  - [x] Resolve module from registry & run `init`
+  - [x] Compose screen registry mapping (config.screens screenId -> component)
+  - [x] Build PhaseController map from `module.getPhaseControllers()`
+  - [x] Render `FrameworkRouter` with config
+  - [x] Provide a lightweight dev header + back-to-menu button (dev only)
+- [x] Emit lifecycle events `LIFECYCLE/INIT`, then `LIFECYCLE/READY` after module init
+- [x] Error handling path: emit `ERROR` event & render message if module/config mismatch
+- [x] Persist selected game using `storageSet(STORAGE_KEYS.selectedGame)`
 
 ## Edge Cases
 - URL game id invalid -> ignore and fall back to stored/first
@@ -46,14 +46,14 @@ Replace legacy `App` conditional rendering with the modular `FrameworkRouter` dr
 
 ## Checklist
 - [x] Plan file created
-- [ ] `FrameworkRouter` initial onEnter support
-- [ ] `GameHost` selection + persistence
-- [ ] Module init with lifecycle events
-- [ ] Error boundary path
-- [ ] Manual back-to-menu (dev only)
-- [ ] LocalStorage integration
-- [ ] URL param integration
-- [ ] Initial phase event emission validated
+- [x] `FrameworkRouter` initial onEnter support
+- [x] `GameHost` selection + persistence
+- [x] Module init with lifecycle events
+- [x] Error boundary path
+- [x] Manual back-to-menu (dev only)
+- [x] LocalStorage integration
+- [x] URL param integration
+- [x] Initial phase event emission validated
 
 ## Implementation Notes
 Will keep legacy `<App />` temporarily behind a fallback conditional until NameBlame screens are verified through router. Once stable, a subsequent plan will remove `<App />` entirely.
@@ -66,4 +66,5 @@ Will keep legacy `<App />` temporarily behind a fallback conditional until NameB
 - No console errors for missing screens/controllers
 
 ---
-Progress updates will be appended below.
+Progress updates:
+2025-09-21: All technical steps implemented. Router initial onEnter now guards duplicate PHASE/ENTER. GameHost handles discovery, selection persistence, lifecycle INIT/READY, and error states. Checklist fully complete.

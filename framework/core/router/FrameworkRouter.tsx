@@ -76,13 +76,28 @@ export const FrameworkRouter: React.FC<FrameworkRouterProps> = ({
   const screenId = currentPhase?.screenId;
   const ScreenComponent = screenId ? screenRegistry[screenId] : null;
 
-  // Fire initial onEnter exactly once
+  // Fire initial onEnter exactly once (publish PHASE/ENTER if controller does not)
   useEffect(() => {
     const initialPhase = config.phases[0]?.id;
-    if (initialPhase) {
-      const ctrl = phaseControllers[initialPhase];
-      eventBus.publish({ type: 'PHASE/ENTER', phaseId: initialPhase });
+    if (!initialPhase) return;
+    const ctrl = phaseControllers[initialPhase];
+    let published = false;
+    const originalPublish = eventBus.publish;
+    // Wrap publish to detect if PHASE/ENTER already sent by onEnter
+    eventBus.publish = (evt => {
+      if (evt.type === 'PHASE/ENTER' && evt.phaseId === initialPhase) {
+        published = true;
+      }
+      originalPublish(evt);
+    }) as typeof eventBus.publish;
+    try {
       ctrl?.onEnter?.(moduleCtx);
+      if (!published) {
+        originalPublish({ type: 'PHASE/ENTER', phaseId: initialPhase });
+      }
+    } finally {
+      // restore publish
+      eventBus.publish = originalPublish;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -10,7 +10,8 @@ import { registerSW } from 'virtual:pwa-register';
 // Register service worker for PWA
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   // Only register service worker in production
-  const updateSW = registerSW({
+  // Prefix variable with underscore to acknowledge intentional unused unless future UI prompt is added
+  const _updateSW = registerSW({
     onNeedRefresh() {
       // Logic to prompt user to refresh for new content
       console.log('New content available, please refresh.');

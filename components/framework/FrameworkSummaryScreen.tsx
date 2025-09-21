@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
 import { GameAction } from '../../framework/core/actions';
 import { Button } from '../core/Button';
-import { RotateCcw, Trophy, Users, Star, Crown } from 'lucide-react';
+import { RotateCcw, Trophy, Users, Crown } from 'lucide-react';
 import useTranslation from '../../hooks/useTranslation';
 import GameShell from './GameShell';
 

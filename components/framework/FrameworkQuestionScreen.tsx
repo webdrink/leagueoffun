@@ -81,10 +81,15 @@ const FrameworkQuestionScreen: React.FC = () => {
               {t('question.progress', { current: progress.index + 1, total: progress.total })}
             </p>
             <div className="w-32 bg-gray-200 rounded-full h-2 mt-1">
-              <div 
-                className={`bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300`}
-                style={{ width: `${Math.round(((progress.index + 1) / progress.total) * 100)}%` }}
-              />
+              {(() => {
+                const percent = Math.round(((progress.index + 1) / progress.total) * 100);
+                // Use Tailwind arbitrary value syntax for width
+                return (
+                  <div
+                    className={`bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300 w-[${percent}%]`}
+                  />
+                );
+              })()}
             </div>
           </div>
           

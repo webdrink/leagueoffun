@@ -89,13 +89,15 @@ const GameSettingsPanel: React.FC<GameSettingsPanelProps> = ({
             
             <div className="space-y-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="categoriesPerGame" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   {t('settings.categories_per_game')} ({settings.categoriesPerGame})
                 </label>
                 <input
+                  id="categoriesPerGame"
                   type="range"
                   min="1"
                   max="20"
+                  aria-label={t('settings.categories_per_game')}
                   value={settings.categoriesPerGame}
                   onChange={(e) => updateSetting('categoriesPerGame', parseInt(e.target.value))}
                   className="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer dark:bg-purple-700 slider"
@@ -107,13 +109,15 @@ const GameSettingsPanel: React.FC<GameSettingsPanelProps> = ({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="questionsPerCategory" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   {t('settings.questions_per_category')} ({settings.questionsPerCategory})
                 </label>
                 <input
+                  id="questionsPerCategory"
                   type="range"
                   min="1"
                   max="50" 
+                  aria-label={t('settings.questions_per_category')}
                   value={settings.questionsPerCategory}
                   onChange={(e) => updateSetting('questionsPerCategory', parseInt(e.target.value))}
                   className="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer dark:bg-purple-700 slider"
@@ -125,13 +129,15 @@ const GameSettingsPanel: React.FC<GameSettingsPanelProps> = ({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="maxQuestionsTotal" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   {t('settings.max_questions_total')} ({settings.maxQuestionsTotal})
                 </label>
                 <input
+                  id="maxQuestionsTotal"
                   type="range"
                   min="1"
                   max="100"
+                  aria-label={t('settings.max_questions_total')}
                   value={settings.maxQuestionsTotal}
                   onChange={(e) => updateSetting('maxQuestionsTotal', parseInt(e.target.value))}
                   className="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer dark:bg-purple-700 slider"
