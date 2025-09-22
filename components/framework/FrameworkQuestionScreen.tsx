@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
 import { GameAction } from '../../framework/core/actions';
 import { Button } from '../core/Button';
-import { ArrowRight } from 'lucide-react';
 import useTranslation from '../../hooks/useTranslation';
 import { useProviderState } from '../../hooks/useProviderState';
 import { useGameSettings } from '../../hooks/useGameSettings';
@@ -76,49 +75,46 @@ const FrameworkQuestionScreen: React.FC = () => {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45 }}
-        className="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 w-full max-w-2xl flex flex-col"
+        className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 sm:p-8 w-full max-w-2xl h-full max-h-[90%] flex flex-col"
       >
         {/* Progress Only Header (no back arrow) */}
         <div className="flex flex-col items-center mb-4" data-testid="question-header">
-          <p className="text-sm text-gray-600" data-debug-progress data-testid="progress-fallback">
+          <p className="text-sm text-gray-600 dark:text-gray-400" data-debug-progress data-testid="progress-fallback">
             Frage {progress.index + 1} von {progress.total}
           </p>
-          <div className="w-40 bg-gray-200 rounded-full h-2 mt-2">
-            {(() => {
-              const percent = Math.round(((progress.index + 1) / progress.total) * 100);
-              return (
-                <div
-                  className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${percent}%` }}
-                />
-              );
-            })()}
+          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
+            <div
+              className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${Math.round(((progress.index + 1) / progress.total) * 100)}%` }}
+            />
           </div>
         </div>
 
-        {/* Question Content: emoji -> badge -> text */}
-        <div className="text-center mb-6 flex flex-col items-center" data-testid="question-container">
+        {/* Question Content: emoji -> badge -> text (flex-1 to fill available space) */}
+        <div className="text-center flex-1 flex flex-col items-center justify-center min-h-0" data-testid="question-container">
           {currentQuestion.categoryEmoji && (
-            <div className="mb-3 text-5xl sm:text-6xl select-none leading-none" aria-hidden="true" data-testid="question-emoji">
+            <div className="mb-3 text-4xl sm:text-5xl md:text-6xl select-none leading-none flex-shrink-0" aria-hidden="true" data-testid="question-emoji">
               {currentQuestion.categoryEmoji}
             </div>
           )}
           {(currentQuestion.categoryName || currentQuestion.categoryEmoji) && (
-            <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium mb-4" data-testid="category-badge">
+            <div className="inline-flex items-center gap-2 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-200 px-3 py-1 rounded-full text-sm font-medium mb-4 flex-shrink-0" data-testid="category-badge">
               {currentQuestion.categoryEmoji && <span>{currentQuestion.categoryEmoji}</span>}
               <span>{currentQuestion.categoryName}</span>
             </div>
           )}
-          <motion.h1
+          <motion.div
             key={currentQuestion.text}
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.35 }}
-            className="text-2xl md:text-3xl font-bold text-purple-800 mb-2 leading-snug" 
-            data-testid="question-text"
+            className="flex-1 flex items-center justify-center min-h-0 w-full"
           >
-            {currentQuestion.text}
-          </motion.h1>
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-purple-800 dark:text-purple-200 leading-tight text-center break-words hyphens-auto" 
+                data-testid="question-text">
+              {currentQuestion.text}
+            </h1>
+          </motion.div>
         </div>
 
         {/* Blame Reveal */}
@@ -127,29 +123,29 @@ const FrameworkQuestionScreen: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 mb-6 text-center border-2 border-purple-200"
+            className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-4 mb-4 text-center border-2 border-purple-200 dark:border-purple-700 flex-shrink-0"
           >
-            <h3 className="text-lg font-bold text-purple-800 mb-2">
+            <h3 className="text-base font-bold text-purple-800 dark:text-purple-200 mb-2">
               {t('question.blame_revealed')}
             </h3>
-            <p className="text-purple-600">
-              <span className="font-bold text-pink-600">{selectedPlayer}</span> {t('question.was_blamed')}
+            <p className="text-purple-600 dark:text-purple-300 text-sm">
+              <span className="font-bold text-pink-600 dark:text-pink-400">{selectedPlayer}</span> {t('question.was_blamed')}
             </p>
           </motion.div>
         )}
 
         {/* Player Selection - only in NameBlame mode */}
         {isNameBlameMode && !isRevealing && (
-          <div className="mb-6">
-            <h3 className="text-center text-lg font-medium text-gray-700 mb-4">
+          <div className="flex-shrink-0 mb-4">
+            <h3 className="text-center text-base font-medium text-gray-700 dark:text-gray-300 mb-3">
               {t('question.select_player') || 'Select Player'}
             </h3>
-            <div className="grid grid-cols-2 gap-3" data-testid="player-selection">
+            <div className="grid grid-cols-2 gap-2" data-testid="player-selection">
               {mockPlayers.map((player) => (
                 <Button
                   key={player.id}
                   onClick={() => handlePlayerSelect(player.name)}
-                  className="bg-gradient-to-r from-purple-100 to-pink-100 hover:from-purple-200 hover:to-pink-200 text-purple-800 border border-purple-200 py-3 px-4 rounded-xl transition-all duration-200 transform hover:scale-105"
+                  className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-800 dark:to-pink-800 hover:from-purple-200 hover:to-pink-200 dark:hover:from-purple-700 dark:hover:to-pink-700 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-purple-600 py-2 px-3 rounded-xl transition-all duration-200 transform hover:scale-105 text-sm"
                   data-testid={`player-btn-${player.name.toLowerCase()}`}
                 >
                   {player.name}
@@ -160,46 +156,46 @@ const FrameworkQuestionScreen: React.FC = () => {
         )}
 
         {/* Navigation / Advancement Controls */}
-        {isNameBlameMode ? (
-          // NameBlame: show NEXT only when revealing (after selection)
-          isRevealing && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-2">
+        <div className="flex-shrink-0 mt-4">
+          {isNameBlameMode ? (
+            // NameBlame: show NEXT only when revealing (after selection)
+            isRevealing && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <Button
+                  onClick={handleAdvance}
+                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg"
+                  data-testid="next-button"
+                >
+                  {progress.index + 1 < progress.total 
+                    ? (t('question.next_question') || 'Next') 
+                    : (t('question.view_results') || 'Results')}
+                </Button>
+              </motion.div>
+            )
+          ) : (
+            // Classic Mode: Always show next/back inline (back: 1/3, forward: 2/3 width)
+            <div className="flex items-stretch gap-4" data-testid="classic-controls">
+              <Button
+                onClick={handlePrevious}
+                variant="outline"
+                className="w-1/3 min-h-[48px] font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                disabled={progress.index === 0}
+                data-testid="classic-back"
+              >
+                {t('common.back') || 'Back'}
+              </Button>
               <Button
                 onClick={handleAdvance}
-                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg text-lg"
-                data-testid="next-button"
+                className="w-2/3 min-h-[48px] bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                data-testid="classic-next"
               >
                 {progress.index + 1 < progress.total 
                   ? (t('question.next_question') || 'Next') 
                   : (t('question.view_results') || 'Results')}
-                <ArrowRight size={20} className="ml-2" />
               </Button>
-            </motion.div>
-          )
-        ) : (
-          // Classic Mode: Always show next/back inline (simple browsing)
-          <div className="mt-2 flex items-center justify-between gap-4" data-testid="classic-controls">
-            <Button
-              onClick={handlePrevious}
-              variant="outline"
-              className="flex-1"
-              disabled={progress.index === 0}
-              data-testid="classic-back"
-            >
-              {t('common.back') || 'Back'}
-            </Button>
-            <Button
-              onClick={handleAdvance}
-              className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 px-4 rounded-xl transition-all duration-200 shadow-lg"
-              data-testid="classic-next"
-            >
-              {progress.index + 1 < progress.total 
-                ? (t('question.next_question') || 'Next') 
-                : (t('question.view_results') || 'Results')}
-              <ArrowRight size={18} className="ml-2" />
-            </Button>
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </motion.div>
     </div>
   );

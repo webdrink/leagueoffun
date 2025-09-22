@@ -1,0 +1,64 @@
+/**
+ * DarkModeToggle
+ * Accessible dark mode toggle component with proper ARIA support and visual feedback.
+ * Integrates with useDarkMode hook and persists preference.
+ */
+import React from 'react';
+import { Sun, Moon } from 'lucide-react';
+import { Button } from '../core/Button';
+import useDarkMode from '../../hooks/useDarkMode';
+
+interface DarkModeToggleProps {
+  className?: string;
+  size?: 'sm' | 'md' | 'lg';
+  variant?: 'minimal' | 'outlined' | 'filled';
+}
+
+const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ 
+  className = '', 
+  size = 'md',
+  variant = 'outlined'
+}) => {
+  const { isDark, toggle, preference } = useDarkMode();
+  
+  // Icon size based on component size
+  const iconSize = {
+    sm: 16,
+    md: 18,
+    lg: 20
+  }[size];
+  
+  // Button styling based on variant
+  const variantClasses = {
+    minimal: "text-white/90 dark:text-gray-200/90 hover:text-white dark:hover:text-gray-100 hover:bg-white/10 dark:hover:bg-gray-600/20 bg-transparent border-none p-2",
+    outlined: "text-white dark:text-gray-100 border-white/70 dark:border-gray-400/50 hover:bg-white/30 dark:hover:bg-gray-600/60 hover:border-white/90 dark:hover:border-gray-300/70 bg-black/30 dark:bg-gray-700/40 backdrop-blur-sm shadow-lg",
+    filled: "bg-white/20 dark:bg-gray-700/60 text-white dark:text-gray-100 hover:bg-white/30 dark:hover:bg-gray-600/70 border-white/30 dark:border-gray-400/30 backdrop-blur-sm shadow-lg"
+  }[variant];
+  
+  // Size-specific padding
+  const sizeClasses = {
+    sm: "p-2 min-w-[36px] min-h-[36px]",
+    md: "p-2.5 min-w-[44px] min-h-[44px]", 
+    lg: "p-3 min-w-[48px] min-h-[48px]"
+  }[size];
+
+  return (
+    <Button
+      variant={variant === 'filled' ? 'default' : 'outline'}
+      onClick={toggle}
+      className={`${variantClasses} ${sizeClasses} transition-all duration-200 rounded-xl ${className}`}
+      data-testid="dark-mode-toggle"
+      aria-pressed={isDark}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={`Current: ${preference === 'system' ? 'System' : (isDark ? 'Dark' : 'Light')} mode. Click to toggle.`}
+    >
+      {isDark ? (
+        <Sun size={iconSize} className="transition-transform duration-200 hover:rotate-12" />
+      ) : (
+        <Moon size={iconSize} className="transition-transform duration-200 hover:-rotate-12" />
+      )}
+    </Button>
+  );
+};
+
+export default DarkModeToggle;

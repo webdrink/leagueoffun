@@ -65,7 +65,7 @@ const FrameworkPreparingScreen: React.FC<FrameworkPreparingScreenProps> = ({ cla
   };
 
   return (
-    <div className={`flex flex-col items-center justify-center min-h-[60vh] p-4 ${className}`}>
+    <div className={`flex flex-col items-center justify-center h-full p-4 ${className}`}>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

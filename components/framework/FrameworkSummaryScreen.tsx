@@ -8,21 +8,23 @@ import { motion } from 'framer-motion';
 import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
 import { GameAction } from '../../framework/core/actions';
 import { Button } from '../core/Button';
-import { RotateCcw, Trophy, Users, Crown } from 'lucide-react';
+import { Trophy, Users, Crown } from 'lucide-react';
 import useTranslation from '../../hooks/useTranslation';
 import { useGameSettings } from '../../hooks/useGameSettings';
+import { useProviderState } from '../../hooks/useProviderState';
 
 const FrameworkSummaryScreen: React.FC = () => {
   const { dispatch, config } = useFrameworkRouter();
   const { t } = useTranslation();
   const { gameSettings } = useGameSettings();
+  const { progress } = useProviderState();
   
   // Check if we're in Classic Mode or NameBlame Mode
   const isClassicMode = gameSettings.gameMode === 'classic';
   
-  // Mock data for now - in a full implementation, this would come from the module store
+  // Get actual game progress data
   const mockResults = {
-    questionsAnswered: 10,
+    questionsAnswered: progress?.index + 1 || 40, // Use actual progress or fallback
     activePlayersCount: isClassicMode ? 1 : 4, // Classic mode shows single player
     blameLog: isClassicMode ? [] : [
       { from: 'Alice', to: 'Bob', question: 'Wer würde am ehesten...?' },
@@ -58,7 +60,8 @@ const FrameworkSummaryScreen: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-2xl"
+          className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-2xl"
+          style={{ boxShadow: 'rgba(0, 0, 0, 0.22) 0px 25px 50px -12px' }}
         >
           {/* Header */}
           <div className="text-center mb-6">
@@ -81,7 +84,7 @@ const FrameworkSummaryScreen: React.FC = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className={`text-3xl md:text-4xl font-bold text-${accentColor}-800 dark:text-${accentColor}-200 mb-2`}
+              className={`text-4xl md:text-5xl lg:text-6xl font-bold text-${accentColor}-800 dark:text-${accentColor}-200 mb-2`}
             >
               {t('summary.game_over')}
             </motion.h1>
@@ -244,7 +247,6 @@ const FrameworkSummaryScreen: React.FC = () => {
               onClick={handleRestart}
               className={`w-full bg-gradient-to-r from-${accentColor}-500 to-pink-500 hover:from-${accentColor}-600 hover:to-pink-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg text-lg border-0`}
             >
-              <RotateCcw size={20} className="mr-2" />
               {t('summary.play_again')}
             </Button>
           </motion.div>

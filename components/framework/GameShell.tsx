@@ -5,7 +5,7 @@
  */
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Settings, Info, Volume2, VolumeX, Sun, Moon } from 'lucide-react';
+import { Settings, Info, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '../core/Button';
 import SplitText from '../core/SplitText';
 import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
@@ -13,9 +13,11 @@ import { GameAction } from '../../framework/core/actions';
 import InfoModal from '../core/InfoModal';
 import LanguageSelector from '../settings/LanguageSelector';
 import GameSettingsPanel from './GameSettingsPanel';
+import DarkModeToggle from './DarkModeToggle';
 import useTranslation from '../../hooks/useTranslation';
 import useDarkMode from '../../hooks/useDarkMode';
 import { GameSettings } from '../../framework/config/game.schema';
+import { FOOTER_BUTTON_CLASSES } from '../../lib/constants/uiConstants';
 
 interface GameShellProps {
   children: React.ReactNode;
@@ -66,9 +68,9 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
     highlight: 'yellow-400'
   };
 
-  // Get gradient from theme config
+  // Get gradient from theme config with animation
   const primaryGradient = theme.primaryGradient || 'from-pink-400 via-purple-500 to-indigo-600';
-  const backgroundClasses = `min-h-screen bg-gradient-to-br ${primaryGradient} dark:from-gray-900 dark:via-gray-800 dark:to-gray-900`;
+  const backgroundClasses = `min-h-screen bg-gradient-to-br ${primaryGradient} dark:from-pink-900 dark:via-purple-900 dark:to-indigo-900 animate-gentle-shift bg-[length:400%_400%]`;
 
   return (
     <div className={`${backgroundClasses} ${className} overflow-hidden`}> 
@@ -77,10 +79,13 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
         {/* Main Viewport-Responsive Container (flex column, no internal scroll) */}
         <div className="flex flex-col min-h-screen max-w-md lg:max-w-lg xl:max-w-xl mx-auto w-full px-4 sm:px-6 overflow-hidden bg-transparent">
           
-          {/* Header with animated title card */}
+          {/* Top Padding: 1/20 = 5% */}
+          <div className="h-[5vh] min-h-[8px] flex-shrink-0"></div>
+          
+          {/* Header with animated title card: 3/20 = 15% */}
           {layout.showHeader && (
-            <header className={`flex-shrink-0 flex justify-center pt-6 pb-4 ${layout.headerStyle === 'compact' ? 'pt-3 pb-2' : 'pt-6 pb-4'}`}> 
-              <div className={`${theme.cardBackground || 'bg-white dark:bg-gray-800'} rounded-3xl shadow-2xl p-4 md:p-6 w-full backdrop-blur-sm bg-white/90 dark:bg-gray-800/90`}>
+            <header className="h-[15vh] min-h-[80px] flex-shrink-0 flex justify-center items-center"> 
+              <div className={`${theme.cardBackground || 'bg-white dark:bg-gray-800'} rounded-3xl shadow-2xl p-4 md:p-6 w-full backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 h-full max-h-full flex items-center justify-center`}>
                 <div className="text-center">
                   <div
                     className="cursor-pointer hover:scale-105 transition-transform duration-200"
@@ -100,7 +105,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                     <SplitText
                       text={branding.gameName || config.title}
                       tag="h1"
-                      className={`text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary} dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')} mb-2 break-words drop-shadow-sm`}
+                      className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary} dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')} mb-2 break-words drop-shadow-sm`}
                       stagger={0.08}
                       delay={0.2}
                       duration={0.6}
@@ -112,7 +117,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.4 }}
-                      className={`text-${accentColor}-600 dark:text-${accentColor}-400 font-medium text-sm md:text-base`}
+                      className={`text-${accentColor}-600 dark:text-${accentColor}-400 font-medium text-sm sm:text-base md:text-lg`}
                     >
                       {t(branding.tagline)}
                     </motion.p>
@@ -122,26 +127,30 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
             </header>
           )}
 
-          {/* Main Content Area - fills remaining space, no vertical scrolling */}
-          <main className="flex-1 flex flex-col min-h-0 overflow-hidden bg-transparent">
-            <div className="flex-1 flex items-center justify-center overflow-hidden bg-transparent">
+          {/* Padding after header: 1/20 = 5% */}
+          <div className="h-[5vh] min-h-[8px] flex-shrink-0"></div>
+
+          {/* Main Content Area: 9/20 = 45% */}
+          <main className="h-[45vh] min-h-[300px] flex-shrink-0 flex flex-col overflow-hidden bg-transparent">
+            <div className="h-full flex items-center justify-center overflow-hidden bg-transparent">
               {children}
             </div>
           </main>
 
-          {/* Fixed Footer at bottom */}
+          {/* Padding after main: 1/20 = 5% */}
+          <div className="h-[5vh] min-h-[8px] flex-shrink-0"></div>
+
+          {/* Fixed Footer: 4/20 = 20% */}
           {layout.showFooter && (
-            <footer className="flex-shrink-0 pb-6 pt-4 safe-area-inset-bottom" data-testid="game-shell-footer">
-              <div className="bg-black/20 dark:bg-black/40 backdrop-blur-md rounded-2xl p-3 mx-auto max-w-fit">
-                <div className="flex flex-wrap justify-center items-center gap-3 text-white dark:text-gray-200">
-                  {/* Test simple element */}
-                  <span data-testid="footer-test">Footer works</span>
-                  
+            <footer className="h-[20vh] min-h-[100px] flex-shrink-0 flex flex-col items-center justify-center" data-testid="game-shell-footer">
+              <div className="bg-black/20 dark:bg-black/40 backdrop-blur-md rounded-2xl p-4 mx-auto max-w-fit w-full max-w-2xl">
+                {/* Top Row: Main Controls */}
+                <div className="flex justify-center items-center gap-3 text-white dark:text-gray-200 mb-3">
                   {/* Main control buttons */}
                   {features.soundControl && (
                     <Button
                       variant="outline"
-                      className="text-white dark:text-gray-100 border-white/50 dark:border-gray-400/50 hover:bg-white/30 dark:hover:bg-gray-600/60 hover:border-white/70 dark:hover:border-gray-300/70 bg-black/20 dark:bg-gray-700/40 p-2.5 min-w-[44px] min-h-[44px] transition-all duration-200 rounded-xl backdrop-blur-sm shadow-lg"
+                      className={FOOTER_BUTTON_CLASSES}
                       onClick={() => setSoundEnabled(!soundEnabled)}
                       title={soundEnabled ? t('settings.sound_off') : t('settings.sound_on')}
                     >
@@ -151,7 +160,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                   {features.settingsPanel && (
                     <Button
                       variant="outline"
-                      className="text-white dark:text-gray-100 border-white/50 dark:border-gray-400/50 hover:bg-white/30 dark:hover:bg-gray-600/60 hover:border-white/70 dark:hover:border-gray-300/70 bg-black/20 dark:bg-gray-700/40 p-2.5 min-w-[44px] min-h-[44px] transition-all duration-200 rounded-xl backdrop-blur-sm shadow-lg"
+                      className={FOOTER_BUTTON_CLASSES}
                       onClick={() => setShowSettingsPanel(true)}
                       title={t('settings.title')}
                     >
@@ -161,7 +170,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                   {features.infoModal && (
                     <Button
                       variant="outline"
-                      className="text-white dark:text-gray-100 border-white/50 dark:border-gray-400/50 hover:bg-white/30 dark:hover:bg-gray-600/60 hover:border-white/70 dark:hover:border-gray-300/70 bg-black/20 dark:bg-gray-700/40 p-2.5 min-w-[44px] min-h-[44px] transition-all duration-200 rounded-xl backdrop-blur-sm shadow-lg"
+                      className={FOOTER_BUTTON_CLASSES}
                       onClick={() => setShowInfoModal(true)}
                       title={t('info.title')}
                     >
@@ -171,13 +180,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                   
                   {/* Dark Mode Toggle */}
                   {features.darkModeToggle && (
-                    <Button
-                      variant="outline"
-                      onClick={toggleDarkMode}
-                      data-testid="dark-mode-toggle"
-                    >
-                      🌙
-                    </Button>
+                    <DarkModeToggle variant="outlined" size="md" />
                   )}
                   
                   {/* Language Selector */}
@@ -194,9 +197,22 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                     </span>
                   )}
                 </div>
+                
+                {/* Bottom Row: Donation Notice */}
+                <div className="border-t border-white/20 dark:border-gray-400/20 pt-3">
+                  <p className="text-xs text-center text-white/90 dark:text-gray-200/90 font-medium">
+                    💜 {t('footer.support_message') || 'Support us to unlock more games!'} 
+                    <span className="block text-white/70 dark:text-gray-300/70 text-xs mt-1">
+                      {t('footer.donate_message') || 'Your donation helps us create better games.'}
+                    </span>
+                  </p>
+                </div>
               </div>
             </footer>
           )}
+
+          {/* Bottom Padding: 1/20 = 5% */}
+          <div className="h-[5vh] min-h-[8px] flex-shrink-0"></div>
           
         </div>
       </div>

@@ -3,6 +3,8 @@ import { useGameSettings } from '../../hooks/useGameSettings';
 import { SUPPORTED_LANGUAGES } from '../../hooks/utils/languageSupport';
 import { SupportedLanguage } from '../../types';
 import useTranslation from '../../hooks/useTranslation';
+import { GameAction } from '../../framework/core/actions';
+import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
 
 interface LanguageSelectorProps {
   className?: string;
@@ -25,11 +27,43 @@ interface LanguageSelectorProps {
  */
 const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className = '', compact = false }) => {
   const { gameSettings, updateGameSettings } = useGameSettings();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  // Try to get framework router dispatch (may not be available in all contexts)
+  let dispatch: ((action: GameAction) => void) | undefined;
+  try {
+    const router = useFrameworkRouter();
+    dispatch = router.dispatch;
+  } catch {
+    // Not in framework context, continue without dispatch
+    dispatch = undefined;
+  }
+  
+  const handleLanguageChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newLanguage = e.target.value as SupportedLanguage;
-    updateGameSettings({ language: newLanguage });
+    
+    try {
+      // Update game settings first
+      updateGameSettings({ language: newLanguage });
+      
+      // Change i18n language
+      await i18n.changeLanguage(newLanguage);
+      
+      console.log(`Language changed to: ${newLanguage}`);
+      
+      // If we're in framework context, restart to reload questions in new language
+      if (dispatch) {
+        console.log('Triggering framework restart for language change');
+        // Small delay to ensure settings are persisted
+        setTimeout(() => {
+          dispatch!(GameAction.RESTART);
+        }, 100);
+      } else {
+        console.log('Not in framework context, language change applied without restart');
+      }
+    } catch (error) {
+      console.error('Failed to change language:', error);
+    }
   };
   
   if (compact) {

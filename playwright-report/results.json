@@ -10,9 +10,7 @@
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
-    "metadata": {
-      "actualWorkers": 1
-    },
+    "metadata": {},
     "preserveOutput": "always",
     "reporter": [
       [
@@ -42,9 +40,7 @@
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
+        "metadata": {},
         "id": "foundation-tests",
         "name": "foundation-tests",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -58,9 +54,7 @@
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
+        "metadata": {},
         "id": "classic-mode-flows",
         "name": "classic-mode-flows",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -74,9 +68,7 @@
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
+        "metadata": {},
         "id": "nameblame-mode-flows",
         "name": "nameblame-mode-flows",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -90,9 +82,7 @@
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
+        "metadata": {},
         "id": "component-tests",
         "name": "component-tests",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -106,9 +96,7 @@
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
+        "metadata": {},
         "id": "edge-cases",
         "name": "edge-cases",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -122,9 +110,7 @@
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
+        "metadata": {},
         "id": "performance-tests",
         "name": "performance-tests",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -138,9 +124,7 @@
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
+        "metadata": {},
         "id": "cross-browser-firefox",
         "name": "cross-browser-firefox",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -154,9 +138,7 @@
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
+        "metadata": {},
         "id": "cross-browser-webkit",
         "name": "cross-browser-webkit",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -170,9 +152,7 @@
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
+        "metadata": {},
         "id": "mobile-chrome",
         "name": "mobile-chrome",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -186,9 +166,7 @@
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
+        "metadata": {},
         "id": "mobile-safari",
         "name": "mobile-safari",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -202,9 +180,7 @@
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
+        "metadata": {},
         "id": "accessibility-tests",
         "name": "accessibility-tests",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -227,146 +203,17 @@
       "timeout": 120000
     }
   },
-  "suites": [
+  "suites": [],
+  "errors": [
     {
-      "title": "foundation\\simple-debug-console.spec.ts",
-      "file": "foundation/simple-debug-console.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [
-        {
-          "title": "Debug console output",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 60000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "foundation-tests",
-              "projectName": "foundation-tests",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 7337,
-                  "errors": [],
-                  "stdout": [
-                    {
-                      "text": "CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}\n"
-                    },
-                    {
-                      "text": "Footer exists: \u001b[33mtrue\u001b[39m\n"
-                    },
-                    {
-                      "text": "Footer test element exists: \u001b[33mtrue\u001b[39m\n"
-                    },
-                    {
-                      "text": "Footer visible: \u001b[33mtrue\u001b[39m\n"
-                    },
-                    {
-                      "text": "Dark mode toggle exists: \u001b[33mfalse\u001b[39m visible: \u001b[33mfalse\u001b[39m\n"
-                    },
-                    {
-                      "text": "Language selector exists: \u001b[33mtrue\u001b[39m visible: \u001b[33mtrue\u001b[39m\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}\n"
-                    },
-                    {
-                      "text": "CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}\n"
-                    },
-                    {
-                      "text": "Footer after start exists: \u001b[33mtrue\u001b[39m\n"
-                    }
-                  ],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-09-22T14:29:05.147Z",
-                  "annotations": [],
-                  "attachments": []
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "2c71a3e411384709c9b1-4e9847ae74fa5c660410",
-          "file": "foundation/simple-debug-console.spec.ts",
-          "line": 6,
-          "column": 5
-        }
-      ]
+      "message": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments.",
+      "stack": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments."
     }
   ],
-  "errors": [],
   "stats": {
-    "startTime": "2025-09-22T14:29:04.051Z",
-    "duration": 9538.786,
-    "expected": 1,
+    "startTime": "2025-09-22T15:04:53.774Z",
+    "duration": 291.7840000000001,
+    "expected": 0,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

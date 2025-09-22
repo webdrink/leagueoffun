@@ -179,6 +179,10 @@ const en: Translations = {
   'category_pick.max_categories': 'Max {{count}} categories',
   'category_pick.selected_count': '{{count}} selected',
 
+  // Footer
+  'footer.support_message': 'Support us to unlock more games!',
+  'footer.donate_message': 'Your donation helps us create better games.',
+
   // Additional keys
   'startGame': 'Start Game',
   'error.loadQuestions': 'Error loading questions. Please check the question files and try again.',

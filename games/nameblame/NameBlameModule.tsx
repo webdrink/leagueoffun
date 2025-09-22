@@ -10,84 +10,77 @@ import FrameworkPlayerSetupScreen from '../../components/framework/FrameworkPlay
 import FrameworkQuestionScreen from '../../components/framework/FrameworkQuestionScreen';
 import FrameworkSummaryScreen from '../../components/framework/FrameworkSummaryScreen';
 import { StaticListProvider } from '../../providers/StaticListProvider';
-import { loadQuestionsFromJson, loadCategoriesFromJson } from '../../lib/utils/questionLoaders';
-
-// Questions will be loaded asynchronously
-let enrichedQuestions: Array<{
-  text: string;
-  categoryId: string;
-  categoryName: string;
-  categoryEmoji: string;
-  questionId: string;
-  id: string;
-}> = [];
+import { createQuestionProvider, type EnrichedQuestion } from '../../providers/factories/createQuestionProvider';
 
 // Module-level provider instance with enriched question data
-let provider: StaticListProvider<typeof enrichedQuestions[0]> | null = null;
+let provider: StaticListProvider<EnrichedQuestion> | null = null;
 
 const NameBlameModule: GameModule = {
   id: 'nameblame',
-  async init() {
+  async init(ctx) {
     console.log('🎮 NameBlameModule.init() called with provider:', provider ? 'exists' : 'null');
     if (!provider) {
-      // Load questions from JSON files
       try {
-        const categories = await loadCategoriesFromJson();
-        const loadedQuestions = await loadQuestionsFromJson('de', categories);
+        // Get filtering config from game config
+        const gameSettings = ctx.config.gameSettings || {};
         
-        // Convert to the format expected by StaticListProvider
-        enrichedQuestions = loadedQuestions.map((q, index) => ({
-          text: q.text || '',
-          categoryId: q.categoryId,
-          categoryName: q.categoryName,
-          categoryEmoji: q.categoryEmoji,
-          questionId: q.questionId || `question-${index}`,
-          id: q.questionId || `question-${index}`
-        }));
-        
-        console.log('🎮 Loaded', enrichedQuestions.length, 'questions from JSON files');
-        
-        provider = new StaticListProvider({
-          items: enrichedQuestions,
-          shuffle: true
+        // Create filtered provider using factory
+        provider = await createQuestionProvider({
+          categoriesPerGame: gameSettings.categoriesPerGame || 5,
+          questionsPerCategory: gameSettings.questionsPerCategory || 8,
+          maxQuestionsTotal: gameSettings.maxQuestionsTotal || 40,
+          selectedCategoryIds: [], // TODO: Get from user settings when manual selection is enabled
+          manualCategorySelection: false, // TODO: Get from user settings
+          shuffleQuestions: gameSettings.shuffleQuestions !== false,
+          shuffleCategories: gameSettings.shuffleCategories !== false,
+          language: 'de', // TODO: Get from user language settings
+          allowRepeatQuestions: gameSettings.allowRepeatQuestions || false
         });
         
-        console.log('🎮 Created new StaticListProvider with', enrichedQuestions.length, 'questions');
+        console.log('🎮 Created filtered question provider with', provider.progress().total, 'questions');
         
         // Initialize window globals for test compatibility
         if (typeof window !== 'undefined') {
           const windowObj = window as unknown as Record<string, unknown>;
-          windowObj.gameQuestions = enrichedQuestions;
-          windowObj.gameCategories = Array.from(new Set(enrichedQuestions.map(q => q.categoryId)))
+          const allQuestions: EnrichedQuestion[] = [];
+          
+          // Extract all questions from provider for test compatibility
+          const originalIndex = provider.progress().index;
+          // Reset to start
+          while (provider.progress().index > 0) {
+            provider.previous();
+          }
+          // Collect all questions
+          let current = provider.current();
+          while (current) {
+            allQuestions.push(current);
+            const next = provider.next();
+            if (!next) break;
+            current = next;
+          }
+          // Reset to original position
+          while (provider.progress().index > originalIndex) {
+            provider.previous();
+          }
+          
+          windowObj.gameQuestions = allQuestions;
+          windowObj.gameCategories = Array.from(new Set(allQuestions.map(q => q.categoryId)))
             .map(categoryId => {
-              const question = enrichedQuestions.find(q => q.categoryId === categoryId);
+              const question = allQuestions.find(q => q.categoryId === categoryId);
               return {
                 id: categoryId,
                 name: question?.categoryName || categoryId,
                 emoji: question?.categoryEmoji || '❓',
-                questions: enrichedQuestions.filter(q => q.categoryId === categoryId).map(q => q.text)
+                questions: allQuestions.filter(q => q.categoryId === categoryId).map(q => q.text)
               };
             });
-          console.log('🎮 Set window.gameQuestions to', (windowObj.gameQuestions as unknown[]).length, 'questions');
+          console.log('🎮 Set window.gameQuestions to', allQuestions.length, 'questions');
           console.log('🎮 Set window.gameCategories to', (windowObj.gameCategories as unknown[]).length, 'categories');
         }
       } catch (error) {
-        console.error('🎮 Failed to load questions from JSON files:', error);
-        // Fallback to minimal questions for testing
-        enrichedQuestions = [
-          {
-            text: 'Wer würde sich bei einem Vorstellungsgespräch versprechen?',
-            categoryId: 'at_work',
-            categoryName: 'Bei der Arbeit',
-            categoryEmoji: '💼',
-            questionId: 'fallback-1',
-            id: 'fallback-1'
-          }
-        ];
-        provider = new StaticListProvider({
-          items: enrichedQuestions,
-          shuffle: true
-        });
+        console.error('🎮 Failed to create filtered question provider:', error);
+        // Fallback will be created by the factory
+        provider = await createQuestionProvider(); // Uses defaults and fallback
       }
     }
   },

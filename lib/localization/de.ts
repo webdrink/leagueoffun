@@ -217,6 +217,10 @@ const de: Translations = {
   'debug.language': 'Sprache (Debug)',
   'debug.reset_data': 'Daten zurücksetzen (Debug)',
 
+  // Footer
+  'footer.support_message': 'Unterstütze uns für mehr Spiele!',
+  'footer.donate_message': 'Deine Spende hilft uns, bessere Spiele zu entwickeln.',
+
   // Additional keys
   'startGame': 'Spiel starten',
   'error.loadQuestions': 'Fehler beim Laden der Fragen. Bitte überprüfen Sie die Fragendateien und versuchen Sie es erneut.',

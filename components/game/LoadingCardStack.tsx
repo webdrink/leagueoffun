@@ -71,7 +71,13 @@ const LoadingCardStack: React.FC<LoadingCardStackProps> = ({
         {categoriesWithEmojis.map((category, i) => (
           <motion.div
             key={category.name + i}
-            className="category-card absolute bg-white p-3 rounded-lg shadow-xl w-36 h-48 sm:w-40 sm:h-52 flex flex-col items-center justify-center text-center"
+            className={`category-card absolute bg-white dark:bg-gray-800 p-3 rounded-lg w-36 h-48 sm:w-40 sm:h-52 flex flex-col items-center justify-center text-center ${
+              i === 0 ? 'shadow-lg' : 
+              i === 1 ? 'shadow-xl' : 
+              i === 2 ? 'shadow-2xl' : 
+              'shadow-2xl'
+            } dark:shadow-gray-900/50`}
+            style={{ zIndex: i + 1 }}
             initial={{ opacity: 0, y: settings.cardFallDistance, scale: 0.8 }}
             animate={{ opacity: 1, y: (categoriesWithEmojis.length - 1 - i) * settings.cardStackOffsetY, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.7 }}
@@ -81,22 +87,10 @@ const LoadingCardStack: React.FC<LoadingCardStackProps> = ({
               damping: 14,
               delay: i * settings.cardFallStaggerDelaySec,
             }}
-            style={{ zIndex: i + 1 }}
           >
             <div className="text-5xl sm:text-6xl mb-2">{category.emoji}</div>
             <div className="w-full overflow-hidden flex-grow flex items-center justify-center">
-              <p
-                className="text-base sm:text-lg font-semibold text-gray-700 leading-tight"
-                style={{
-                  display: '-webkit-box',
-                  WebkitLineClamp: 3,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  wordBreak: 'break-word',
-                  maxHeight: 'calc(1.2em * 3)',
-                }}
-              >
+              <p className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300 leading-tight line-clamp-3 break-words text-center">
                 {category.name}
               </p>
             </div>

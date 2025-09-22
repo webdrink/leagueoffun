@@ -138,7 +138,11 @@ const fr: Translations = {
   'debug.questions': 'Questions',
   'debug.animations': 'Animations',
   'debug.language': 'Langue',
-  'debug.reset_data': 'Réinitialiser les Données'
+  'debug.reset_data': 'Réinitialiser les Données',
+
+  // Footer
+  'footer.support_message': 'Soutenez-nous pour plus de jeux !',
+  'footer.donate_message': 'Votre don nous aide à créer de meilleurs jeux.'
 };
 
 export default fr;

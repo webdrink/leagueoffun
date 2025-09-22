@@ -137,7 +137,11 @@ const es: Translations = {
   'debug.questions': 'Preguntas',
   'debug.animations': 'Animaciones',
   'debug.language': 'Idioma',
-  'debug.reset_data': 'Restablecer Datos'
+  'debug.reset_data': 'Restablecer Datos',
+
+  // Footer
+  'footer.support_message': '¡Apóyanos para más juegos!',
+  'footer.donate_message': 'Tu donación nos ayuda a crear mejores juegos.'
 };
 
 export default es;
