@@ -79,8 +79,8 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
         {/* Main Viewport-Responsive Container (flex column, no internal scroll) */}
         <div className="flex flex-col min-h-screen max-w-md lg:max-w-lg xl:max-w-xl mx-auto w-full px-4 sm:px-6 overflow-hidden bg-transparent">
           
-          {/* Top Padding: 1/20 = 5% */}
-          <div className="h-[5vh] min-h-[8px] flex-shrink-0"></div>
+          {/* Top Padding: Reduced to 2.5% */}
+          <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
           
           {/* Header with animated title card: 3/20 = 15% */}
           {layout.showHeader && (
@@ -105,7 +105,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                     <SplitText
                       text={branding.gameName || config.title}
                       tag="h1"
-                      className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary} dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')} mb-2 break-words drop-shadow-sm`}
+                      className={`text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary} dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')} mb-1 break-words drop-shadow-sm leading-tight`}
                       stagger={0.08}
                       delay={0.2}
                       duration={0.6}
@@ -117,7 +117,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.4 }}
-                      className={`text-${accentColor}-600 dark:text-${accentColor}-400 font-medium text-sm sm:text-base md:text-lg`}
+                      className={`text-${accentColor}-600 dark:text-${accentColor}-400 font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl`}
                     >
                       {t(branding.tagline)}
                     </motion.p>
@@ -127,23 +127,23 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
             </header>
           )}
 
-          {/* Padding after header: 1/20 = 5% */}
-          <div className="h-[5vh] min-h-[8px] flex-shrink-0"></div>
+          {/* Padding after header: Reduced to 2.5% */}
+          <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
 
-          {/* Main Content Area: 9/20 = 45% */}
-          <main className="h-[45vh] min-h-[300px] flex-shrink-0 flex flex-col overflow-hidden bg-transparent">
+          {/* Main Content Area: Expanded to 50% */}
+          <main className="h-[50vh] min-h-[350px] flex-shrink-0 flex flex-col overflow-hidden bg-transparent">
             <div className="h-full flex items-center justify-center overflow-hidden bg-transparent">
               {children}
             </div>
           </main>
 
-          {/* Padding after main: 1/20 = 5% */}
-          <div className="h-[5vh] min-h-[8px] flex-shrink-0"></div>
+          {/* Padding after main: Reduced to 2.5% */}
+          <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
 
           {/* Fixed Footer: 4/20 = 20% */}
           {layout.showFooter && (
             <footer className="h-[20vh] min-h-[100px] flex-shrink-0 flex flex-col items-center justify-center" data-testid="game-shell-footer">
-              <div className="bg-black/20 dark:bg-black/40 backdrop-blur-md rounded-2xl p-4 mx-auto max-w-fit w-full max-w-2xl">
+              <div className="bg-black/60 backdrop-blur-xl rounded-2xl p-4 mx-auto w-full max-w-2xl border border-white/20 shadow-2xl">
                 {/* Top Row: Main Controls */}
                 <div className="flex justify-center items-center gap-3 text-white dark:text-gray-200 mb-3">
                   {/* Main control buttons */}
@@ -185,24 +185,24 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                   
                   {/* Language Selector */}
                   {features.languageSelector && (
-                    <div className="flex items-center bg-black/20 dark:bg-gray-700/40 rounded-xl px-1 py-1 backdrop-blur-sm border border-white/30 dark:border-gray-400/30 shadow-lg" data-testid="language-selector">
+                    <div className="flex items-center bg-black/50 rounded-xl px-1 py-1 backdrop-blur-md border-2 border-white/90 shadow-xl" data-testid="language-selector">
                       <LanguageSelector compact />
                     </div>
                   )}
                   
                   {/* Version Display */}
                   {features.versionDisplay && (
-                    <span className="text-xs text-white/90 dark:text-gray-200/90 px-3 py-1.5 bg-black/20 dark:bg-gray-700/40 rounded-lg backdrop-blur-sm border border-white/20 dark:border-gray-400/20 font-medium shadow-lg">
+                    <span className="text-xs text-white font-medium px-3 py-1.5 bg-black/50 rounded-lg backdrop-blur-md border-2 border-white/90 shadow-xl">
                       v{config.version}
                     </span>
                   )}
                 </div>
                 
                 {/* Bottom Row: Donation Notice */}
-                <div className="border-t border-white/20 dark:border-gray-400/20 pt-3">
-                  <p className="text-xs text-center text-white/90 dark:text-gray-200/90 font-medium">
+                <div className="border-t border-white/30 pt-3">
+                  <p className="text-sm text-center text-white font-medium">
                     💜 {t('footer.support_message') || 'Support us to unlock more games!'} 
-                    <span className="block text-white/70 dark:text-gray-300/70 text-xs mt-1">
+                    <span className="block text-white/90 text-xs mt-1">
                       {t('footer.donate_message') || 'Your donation helps us create better games.'}
                     </span>
                   </p>
@@ -211,8 +211,8 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
             </footer>
           )}
 
-          {/* Bottom Padding: 1/20 = 5% */}
-          <div className="h-[5vh] min-h-[8px] flex-shrink-0"></div>
+          {/* Bottom Padding: Reduced to 2.5% */}
+          <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
           
         </div>
       </div>

@@ -47,14 +47,16 @@ export const BUTTON_SIZES = {
   ICON_SMALL: "min-h-[36px] min-w-[36px] p-2 flex items-center justify-center"
 } as const;
 
-// Footer button styling (used in GameShell)
+// Footer button styling (used in GameShell) - improved visibility and contrast
 export const FOOTER_BUTTON_CLASSES = `
-  text-white dark:text-gray-100 
-  border-white/70 dark:border-gray-400/50 
-  hover:bg-white/30 dark:hover:bg-gray-600/60 
-  hover:border-white/90 dark:hover:border-gray-300/70 
-  bg-black/30 dark:bg-gray-700/40 
-  transition-all duration-200 rounded-xl backdrop-blur-sm shadow-lg
+  text-white 
+  border-2 border-white/90 
+  hover:bg-white/40 
+  hover:border-white 
+  hover:text-purple-800
+  bg-black/50 
+  transition-all duration-200 rounded-xl backdrop-blur-md shadow-xl
+  font-medium hover:shadow-2xl transform hover:scale-105
   ${BUTTON_SIZES.ICON}
 `.replace(/\s+/g, ' ').trim();
 

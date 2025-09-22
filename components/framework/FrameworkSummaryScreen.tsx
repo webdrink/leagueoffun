@@ -55,12 +55,12 @@ const FrameworkSummaryScreen: React.FC = () => {
   const accentColor = theme.accentColor || 'purple';
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] py-4">
+    <div className="flex flex-col items-center justify-center w-full h-full p-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-2xl"
+          className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-2xl h-[42vh] min-h-[300px] flex flex-col overflow-y-auto"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.22) 0px 25px 50px -12px' }}
         >
           {/* Header */}
