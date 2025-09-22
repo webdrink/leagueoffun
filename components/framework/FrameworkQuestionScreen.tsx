@@ -20,12 +20,18 @@ const FrameworkQuestionScreen: React.FC = () => {
   const isNameBlameMode = gameSettings.gameMode === 'nameBlame';
 
   // Get actual players from shared NameBlame setup hook
-  const { getActivePlayers } = useNameBlameSetup();
+  const { getActivePlayers, currentPlayerIndex, advancePlayer, recordNameBlame } = useNameBlameSetup();
   
   // Get active players (with non-empty names) for blame selection
   const players = useMemo(() => {
     return isNameBlameMode ? getActivePlayers() : [];
   }, [isNameBlameMode, getActivePlayers]);
+  
+  // Get current active player for self-blame prevention
+  const currentPlayer = useMemo(() => {
+    if (!isNameBlameMode || players.length === 0) return null;
+    return players[currentPlayerIndex % players.length] || null;
+  }, [isNameBlameMode, players, currentPlayerIndex]);
   
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
   const [isRevealing, setIsRevealing] = useState(false);
@@ -42,12 +48,36 @@ const FrameworkQuestionScreen: React.FC = () => {
   
   const handlePlayerSelect = (playerName: string) => {
     if (!isNameBlameMode) return; // Guard: only valid in NameBlame mode
+    
+    // Prevent self-blame
+    if (currentPlayer && playerName === currentPlayer.name) {
+      console.log('Player tried to blame themselves - blocked');
+      return;
+    }
+    
     setSelectedPlayer(playerName);
     dispatch(GameAction.SELECT_TARGET, { target: playerName });
+    
+    // Record the blame action
+    if (currentPlayer && currentQuestion) {
+      recordNameBlame(currentPlayer.name, playerName, currentQuestion.text);
+    }
+    
     setIsRevealing(true);
   };
 
   const handleAdvance = () => {
+    // In NameBlame mode, advance to the blamed player
+    if (isNameBlameMode && selectedPlayer) {
+      // Find the blamed player's index and set them as current
+      const blamedPlayerIndex = players.findIndex(p => p.name === selectedPlayer);
+      if (blamedPlayerIndex !== -1) {
+        // Update current player to the blamed player for next question
+        advancePlayer(); // This will rotate to next player
+        console.log(`Advanced to player: ${selectedPlayer}`);
+      }
+    }
+    
     dispatch(GameAction.ADVANCE);
     setSelectedPlayer(null);
     setIsRevealing(false);
@@ -86,9 +116,9 @@ const FrameworkQuestionScreen: React.FC = () => {
           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
             <div
               className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300"
-              style={{ 
-                // eslint-disable-next-line react/forbid-dom-props
-                width: `${Math.round(((progress.index + 1) / progress.total) * 100)}%` 
+              // eslint-disable-next-line react/forbid-dom-props
+              style={{
+                width: `${Math.round(((progress.index + 1) / progress.total) * 100)}%`
               }}
             />
           </div>
@@ -153,20 +183,40 @@ const FrameworkQuestionScreen: React.FC = () => {
         {isNameBlameMode ? (
           !isRevealing ? (
             <div className="flex-shrink-0 mb-3 h-28">
-              <h3 className="text-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                {t('question.select_player') || 'Select Player'}
-              </h3>
+              <div className="text-center mb-2">
+                <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {t('question.select_player') || 'Select Player'}
+                </h3>
+                {currentPlayer && (
+                  <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">
+                    👑 Current Player: <span className="font-semibold">{currentPlayer.name}</span>
+                  </p>
+                )}
+              </div>
               <div className="grid grid-cols-2 gap-2" data-testid="player-selection">
-                {players.map((player) => (
-                  <Button
-                    key={player.id}
-                    onClick={() => handlePlayerSelect(player.name)}
-                    className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-800 dark:to-pink-800 hover:from-purple-200 hover:to-pink-200 dark:hover:from-purple-700 dark:hover:to-pink-700 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-purple-600 py-1.5 px-2 rounded-lg transition-all duration-200 transform hover:scale-105 text-xs font-medium"
-                    data-testid={`player-btn-${player.name.toLowerCase()}`}
-                  >
-                    {player.name}
-                  </Button>
-                ))}
+                {players.map((player) => {
+                  const isCurrentPlayer = currentPlayer && player.name === currentPlayer.name;
+                  const isDisabled = !!isCurrentPlayer;
+                  
+                  return (
+                    <Button
+                      key={player.id}
+                      onClick={() => handlePlayerSelect(player.name)}
+                      disabled={isDisabled}
+                      className={`
+                        ${isCurrentPlayer 
+                          ? 'bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-700 dark:to-gray-800 text-gray-600 dark:text-gray-400 cursor-not-allowed opacity-60' 
+                          : 'bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-800 dark:to-pink-800 hover:from-purple-200 hover:to-pink-200 dark:hover:from-purple-700 dark:hover:to-pink-700 text-purple-800 dark:text-purple-200 hover:scale-105'
+                        }
+                        border border-purple-200 dark:border-purple-600 py-1.5 px-2 rounded-lg transition-all duration-200 transform text-xs font-medium
+                      `}
+                      data-testid={`player-btn-${player.name.toLowerCase()}`}
+                      title={isCurrentPlayer ? `${player.name} (Current Player - Cannot blame self)` : `Blame ${player.name}`}
+                    >
+                      {isCurrentPlayer ? `👑 ${player.name}` : player.name}
+                    </Button>
+                  );
+                })}
               </div>
             </div>
           ) : (

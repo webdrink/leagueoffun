@@ -6,8 +6,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Settings, Info, Volume2, VolumeX } from 'lucide-react';
-import { Button } from '../core/Button';
 import SplitText from '../core/SplitText';
+import FooterButton, { FOOTER_ICON_STYLE } from '../core/FooterButton';
 import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
 import { GameAction } from '../../framework/core/actions';
 import InfoModal from '../core/InfoModal';
@@ -17,7 +17,6 @@ import DarkModeToggle from './DarkModeToggle';
 import useTranslation from '../../hooks/useTranslation';
 import useDarkMode from '../../hooks/useDarkMode';
 import { GameSettings } from '../../framework/config/game.schema';
-import { FOOTER_BUTTON_CLASSES } from '../../lib/constants/uiConstants';
 
 interface GameShellProps {
   children: React.ReactNode;
@@ -105,7 +104,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                     <SplitText
                       text={branding.gameName || config.title}
                       tag="h1"
-                      className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary} dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')} mb-1 drop-shadow-sm leading-tight whitespace-nowrap overflow-hidden text-ellipsis w-full text-center max-w-full`}
+                      className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary} dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')} mb-1 drop-shadow-sm leading-tight text-center w-full max-w-full break-words hyphens-auto`}
                       stagger={0.08}
                       delay={0.2}
                       duration={0.6}
@@ -147,39 +146,35 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                 <div className="flex justify-center items-center gap-3 text-white dark:text-gray-200 mb-3">
                   {/* Main control buttons - all with consistent styling */}
                   {features.soundControl && (
-                    <Button
-                      variant="outline"
-                      className={FOOTER_BUTTON_CLASSES}
+                    <FooterButton
                       onClick={() => setSoundEnabled(!soundEnabled)}
                       title={soundEnabled ? t('settings.sound_off') : t('settings.sound_on')}
                     >
                       {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
-                    </Button>
+                    </FooterButton>
                   )}
                   {features.settingsPanel && (
-                    <Button
-                      variant="outline"
-                      className={FOOTER_BUTTON_CLASSES}
+                    <FooterButton
                       onClick={() => setShowSettingsPanel(true)}
                       title={t('settings.title')}
                     >
                       <Settings size={18} />
-                    </Button>
+                    </FooterButton>
                   )}
                   {features.infoModal && (
-                    <Button
-                      variant="outline"
-                      className={FOOTER_BUTTON_CLASSES}
+                    <FooterButton
                       onClick={() => setShowInfoModal(true)}
                       title={t('info.title')}
                     >
                       <Info size={18} />
-                    </Button>
+                    </FooterButton>
                   )}
                   
                   {/* Dark Mode Toggle - matching footer button style */}
                   {features.darkModeToggle && (
-                    <DarkModeToggle variant="outlined" size="md" className={FOOTER_BUTTON_CLASSES} />
+                    <div className={FOOTER_ICON_STYLE + ' cursor-pointer'}>
+                      <DarkModeToggle className="!bg-transparent !border-0 !shadow-none p-0" />
+                    </div>
                   )}
                   
                   {/* Language Selector - styled to match footer buttons */}
