@@ -129,7 +129,7 @@ const GameHost: React.FC = () => {
   // Render legacy App if in legacy mode
   if (isLegacyMode) {
     return (
-      <div data-framework-host className="min-h-screen">
+      <div data-framework-host className="min-h-screen bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         <div className="absolute top-2 right-2 z-50">
           <button
             className="text-xs px-2 py-1 bg-green-600 hover:bg-green-700 text-white rounded"
@@ -144,7 +144,13 @@ const GameHost: React.FC = () => {
   }
 
   return (
-    <div data-framework-host className="min-h-screen">
+    <div 
+      data-framework-host 
+      className={selectedGameId 
+        ? "min-h-screen" // Let GameShell handle background when game is running
+        : "min-h-screen bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" // Apply background only for menu
+      }
+    >
       {/* Only show header when no game is selected (menu view) */}
       {!selectedGameId && (
         <header className="p-2 text-xs text-gray-500 flex items-center gap-4">

@@ -40,9 +40,21 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
   
   // Dark mode support
   const { isDark, toggle: toggleDarkMode } = useDarkMode();
+  console.log('🔧 useDarkMode result:', { isDark, hasToggle: !!toggleDarkMode });
+
+  // Debug logging for features and dark mode
+  console.log('🔧 GameShell debug:', {
+    showFooter: layout.showFooter,
+    features: features,
+    darkModeToggle: features.darkModeToggle,
+    darkModeToggleType: typeof features.darkModeToggle,
+    darkModeToggleStrict: features.darkModeToggle === true,
+    languageSelector: features.languageSelector,
+    isDark: isDark,
+    toggleDarkMode: !!toggleDarkMode
+  });
 
   // Dynamic styling based on config
-  const gradientBg = `bg-gradient-to-br ${theme.primaryGradient || 'from-pink-400 via-purple-500 to-indigo-600'}`;
   const accentColor = theme.accentColor || 'purple';
   
   // New 5-color system support
@@ -54,12 +66,16 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
     highlight: 'yellow-400'
   };
 
+  // Get gradient from theme config
+  const primaryGradient = theme.primaryGradient || 'from-pink-400 via-purple-500 to-indigo-600';
+  const backgroundClasses = `min-h-screen bg-gradient-to-br ${primaryGradient} dark:from-gray-900 dark:via-gray-800 dark:to-gray-900`;
+
   return (
-    <div className={`min-h-screen ${gradientBg} dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 ${className}`}>
-      {/* Fixed Layout Container */}
-      <div className="min-h-screen flex flex-col">
-        {/* Main Viewport-Responsive Container */}
-        <div className="flex flex-col min-h-screen max-w-md lg:max-w-lg xl:max-w-xl mx-auto w-full px-4 sm:px-6">
+    <div className={`${backgroundClasses} ${className} overflow-hidden`}> 
+      {/* Fixed Layout Container (full viewport, no page scroll) */}
+      <div className="min-h-screen flex flex-col overflow-hidden bg-transparent">
+        {/* Main Viewport-Responsive Container (flex column, no internal scroll) */}
+        <div className="flex flex-col min-h-screen max-w-md lg:max-w-lg xl:max-w-xl mx-auto w-full px-4 sm:px-6 overflow-hidden bg-transparent">
           
           {/* Header with animated title card */}
           {layout.showHeader && (
@@ -106,18 +122,21 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
             </header>
           )}
 
-          {/* Main Content Area - scrollable */}
-          <main className="flex-1 flex flex-col min-h-0">
-            <div className="flex-1 overflow-y-auto overscroll-contain">
+          {/* Main Content Area - fills remaining space, no vertical scrolling */}
+          <main className="flex-1 flex flex-col min-h-0 overflow-hidden bg-transparent">
+            <div className="flex-1 flex items-center justify-center overflow-hidden bg-transparent">
               {children}
             </div>
           </main>
 
           {/* Fixed Footer at bottom */}
           {layout.showFooter && (
-            <footer className="flex-shrink-0 pb-6 pt-4 safe-area-inset-bottom">
+            <footer className="flex-shrink-0 pb-6 pt-4 safe-area-inset-bottom" data-testid="game-shell-footer">
               <div className="bg-black/20 dark:bg-black/40 backdrop-blur-md rounded-2xl p-3 mx-auto max-w-fit">
                 <div className="flex flex-wrap justify-center items-center gap-3 text-white dark:text-gray-200">
+                  {/* Test simple element */}
+                  <span data-testid="footer-test">Footer works</span>
+                  
                   {/* Main control buttons */}
                   {features.soundControl && (
                     <Button
@@ -154,21 +173,16 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                   {features.darkModeToggle && (
                     <Button
                       variant="outline"
-                      className="text-white dark:text-gray-100 border-white/50 dark:border-gray-400/50 hover:bg-white/30 dark:hover:bg-gray-600/60 hover:border-white/70 dark:hover:border-gray-300/70 bg-black/20 dark:bg-gray-700/40 p-2.5 min-w-[44px] min-h-[44px] transition-all duration-200 rounded-xl backdrop-blur-sm shadow-lg"
                       onClick={toggleDarkMode}
-                      title={isDark ? t('settings.light_mode') : t('settings.dark_mode')}
+                      data-testid="dark-mode-toggle"
                     >
-                      {isDark ? (
-                        <Sun size={18} />
-                      ) : (
-                        <Moon size={18} />
-                      )}
+                      🌙
                     </Button>
                   )}
                   
                   {/* Language Selector */}
                   {features.languageSelector && (
-                    <div className="flex items-center bg-black/20 dark:bg-gray-700/40 rounded-xl px-1 py-1 backdrop-blur-sm border border-white/30 dark:border-gray-400/30 shadow-lg">
+                    <div className="flex items-center bg-black/20 dark:bg-gray-700/40 rounded-xl px-1 py-1 backdrop-blur-sm border border-white/30 dark:border-gray-400/30 shadow-lg" data-testid="language-selector">
                       <LanguageSelector compact />
                     </div>
                   )}

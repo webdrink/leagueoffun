@@ -106,7 +106,7 @@ export const FrameworkRouter: React.FC<FrameworkRouterProps> = ({
   return (
     <RouterContext.Provider value={contextValue}>
       <GameShell>
-        <div data-framework-router className="flex flex-col min-h-0 flex-1">
+        <div data-framework-router className="flex flex-col min-h-0 flex-1 bg-transparent">
           {ScreenComponent ? (
             <ScreenComponent />
           ) : (

@@ -78,10 +78,6 @@ Restart & State Integrity
 - [x] Provider reset logic in intro phase
 - [~] Add Playwright restart assertion (implemented in new flow tests, pending execution)  <!-- ~ denotes pending validation -->
 
-Animation Parity
-- [ ] Reintroduce legacy slide/card animation (direction-based) with Framer Motion
-- [ ] Add animation regression test (optional screenshot diff or DOM attribute timing checks)
-
 Testing Coverage
 - [x] Debug advancement test (passes)
 - [~] Full NameBlame flow test spec added (execution pending)
@@ -143,6 +139,24 @@ Plan considered complete when:
 ### Session Handoff Snapshot
 Advancement stable. Full-flow Classic & NameBlame test specs authored (not yet run). Restart assertion embedded in both. Next actions: run new tests, adjust components for deterministic selectors (data-testid) & NameBlame gating, then implement animations once green.
 
+### Restoration Update (Question Screen Regression Recovery)
+- Identified that previous commit (891ce74) had simpler snapshot-based provider usage; current reactive version lost:
+	- Mode-aware UI (classic vs nameblame gating for player selection)
+	- Centered category emoji above question
+	- Conditional Next button visibility (only after selection in NameBlame reveal phase)
+- Translation keys `question.progress`, `question.select_player`, `question.next_question`, `question.view_results`, `common.back` are currently missing in JSON resources (grep returned no matches). Temporary fallbacks added in component (`|| 'Next'` etc.).
+- Restored in `FrameworkQuestionScreen.tsx`:
+	- Mode detection via `useGameSettings()`
+	- Player selection hidden in classic mode; classic shows inline Back/Next controls
+	- Reintroduced emoji crown position (`data-testid="question-emoji"`)
+	- Next button gating in NameBlame: appears only during reveal (after player selected)
+	- Added robust test ids for classic controls
+	- Removed noisy debug ADVANCE post-dispatch log (kept minimal dispatch call)
+- Outstanding follow-ups:
+	- Replace mock players with actual stored players (requires player store integration in framework phase) – new task to be added later.
+	- Add missing translation keys and remove string fallbacks once i18n resources updated.
+	- Ensure reveal phase event sequencing (SELECT_TARGET → REVEAL) is implemented; currently simplified immediate reveal.
+
 ### Suggested Follow-Up Prompt (For Next Chat Session)
 Copy & paste this into a new chat to continue seamlessly:
 ```
@@ -154,4 +168,46 @@ Provide updated plan checklist status after each step.
 ```
 
 ---
-End of plan file.
+### Root Cause Analysis (Added 2025-09-22)
+
+| Symptom | Root Cause | Evidence | Impact |
+|---------|------------|----------|--------|
+| Next button sometimes appeared to do nothing then jumped to summary | UI took a one-time snapshot of provider data; no reactive subscription so intermediate questions never re-rendered | `FrameworkQuestionScreen` accessed `provider.current()` directly without state hook; console logs showed provider index incrementing while DOM stagnant | Players perceived broken advancement & lost immersion |
+| Restart showed late question (e.g. Frage 5 von 5) | Provider index not reset on restart path before intro rendered | Phase transition back to `intro` omitted explicit reset; provider retained internal `index` | Immediate confusion; inability to replay full round |
+| Occasional double-skip after multiple rapid clicks | Race between multiple dispatches and stale UI causing user to over-click | EventBus emitted sequential ADVANCE; user clicked repeatedly due to lack of feedback | Perceived instability / fairness issues |
+| Missing differentiation Classic vs NameBlame gating | Lost conditional reveal logic during migration refactor | Removed gating branch; Next always visible | Loss of intended NameBlame suspense phase |
+| Translations not always present early leading to test fragility | i18n hydration timing vs Playwright assertions | Tests failing intermittently on progress selector | Reduced confidence in CI reliability |
+
+### Countermeasures Implemented
+
+| Issue | Countermeasure | Implementation Detail | Status |
+|-------|----------------|------------------------|--------|
+| Non-reactive provider snapshot | Introduced `useProviderState` hook subscribing to `CONTENT/NEXT` & ADVANCE fallback | `hooks/useProviderState.ts` updates internal state via setState | DONE |
+| Provider not reset on restart | Intro phase `onEnter` loop calling `previous()` until index 0 | Guarded to avoid negative underflow | DONE |
+| Over-click / no feedback | Immediate DOM update after event via hook; future debouncing planned | Reactive progress + question text updates in same frame | PARTIAL (debounce TBD) |
+| Missing mode gating | Reintroduced mode detection + conditional UI (documented in Restoration Update) | `FrameworkQuestionScreen` uses `isClassicMode` vs NameBlame flags | DONE |
+| Translation timing race | Added deterministic fallback progress line (`Frage X von Y`) | Will remove once translation test improved | TEMP ACTIVE |
+| Potential missed events | Fallback listener on `ACTION/DISPATCH` ADVANCE triggers state sync | Avoids silent drift if `CONTENT/NEXT` skipped | DONE |
+
+### Pending / Planned Countermeasures
+
+1. Replace always-visible Next with phase/selection gating reintroducing reveal suspense (post animation restoration).
+2. Add ADVANCE click throttling (e.g., 250ms) to prevent multi-fire on low-end devices.
+3. Migrate fallback progress to pure translation once a deterministic i18n readiness signal is testable.
+4. Add provider reset integration test asserting index=0 on restart across both modes.
+
+### Verification Strategy
+
+- Unit: (Planned) Add tests around `useProviderState` ensuring state reflects synthetic EventBus events.
+- E2E: Existing advancement debug spec (green) + upcoming full-flow specs (Classic & NameBlame) to assert sequential question text changes & restart correctness.
+- Logging: Temporary console diagnostics (will be gated behind `if (import.meta.env.DEV)`).
+
+### Residual Risks
+
+| Risk | Likelihood | Mitigation | Trigger to Revisit |
+|------|------------|------------|--------------------|
+| Future provider types (non-list) break hook assumptions | Medium | Abstract minimal interface contract in hook generics | When second provider implemented |
+| Animation reintroduction causing stale DOM race | Low-Med | Key motion wrappers by question id; rely on hook state | On first animation regression test failure |
+| Translation fallback left in production | Medium | Add lint rule/TODO comment referencing removal issue | Before release candidate cut |
+
+---

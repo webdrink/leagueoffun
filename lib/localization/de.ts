@@ -13,6 +13,10 @@ const de: Translations = {
   'app.cancel': 'Abbrechen',
   'app.loading': 'Wird geladen...',
   
+  // Common keys
+  'common.back': 'Zurück',
+  'common.next': 'Weiter',
+  
   // Intro screen
   'intro.start_game': 'Spiel starten',
   'intro.player_setup': 'Spieler einrichten',
@@ -130,18 +134,21 @@ const de: Translations = {
   'game.play_again': 'Nochmal spielen',
 
   // Questions (Added missing keys with German placeholders)
-  'questions.player_turn': 'Dein Zug',
-  'questions.counter': 'Frage {{current}} von {{total}}',
-  'questions.who_blame': 'Wen beschuldigst du?',
-  'questions.cannot_blame_self': 'Du kannst dich nicht selbst beschuldigen',
-  'questions.blame_player': 'Beschuldige {{name}}',
-  'questions.blamed_you_for': '{{name}} hat dich beschuldigt für',
-  'questions.next_blame': 'Weiter',
-  'questions.previous_question': 'Vorherige Frage',
-  'questions.next_question': 'Nächste Frage',
-  'questions.summary': 'Zusammenfassung',
-  'questions.next': 'Weiter',
-  'questions.show_summary': 'Zusammenfassung anzeigen',
+  'question.player_turn': 'Dein Zug',
+  'question.counter': 'Frage {{current}} von {{total}}',
+  'question.who_blame': 'Wen beschuldigst du?',
+  'question.cannot_blame_self': 'Du kannst dich nicht selbst beschuldigen',
+  'question.blame_player': 'Beschuldige {{name}}',
+  'question.blamed_you_for': '{{name}} hat dich beschuldigt für',
+  'question.next_blame': 'Weiter',
+  'question.previous_question': 'Zurück',
+  'question.next_question': 'Weiter',
+  'question.summary': 'Zusammenfassung',
+  'question.next': 'Weiter',
+  'question.show_summary': 'Zusammenfassung anzeigen',
+  'question.select_player': 'Wähle einen Spieler',
+  'question.progress': 'Frage {{current}} von {{total}}',
+  'question.view_results': 'Ergebnisse anzeigen',
   
   // Summary
   'summary.title': 'Danke fürs Spielen!',

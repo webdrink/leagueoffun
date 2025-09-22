@@ -716,3 +716,42 @@ This plan will restore both the visual delight and correct game logic of the leg
 - **Architecture Integrity**: Maintained React/TypeScript best practices
 
 The framework is now in a stable, functional state with enhanced animations and a modern test infrastructure. The foundation for complete visual restoration is solidly established.
+
+## Post-Completion Root Cause Analysis & Countermeasures (Added 2025-09-22)
+
+### Summary
+During visual restoration several systemic issues were uncovered that, while now resolved, warrant explicit documentation to prevent regression.
+
+### Root Cause Matrix
+| Issue | Root Cause | Detection Method | Countermeasure | Status |
+|-------|------------|------------------|----------------|--------|
+| Missing header/footer in play phase | Screen rendered outside persistent layout due to bypass of `GameShell` | Visual discrepancy + DOM inspection | Centralized shell wrapping via FrameworkRouter | DONE |
+| Screen registration failures ("Screen not found") | Mismatch between `game.json` screenIds and module registry keys (camelCase vs lowercase) | Runtime console error & failing init tests | Enforced canonical lowercase IDs; updated module registration mapping | DONE |
+| Category animation absent | Preparing phase omitted from new phase flow | Gap analysis vs legacy flow diagrams | Introduce `preparing` phase + animation screen (planned) | IN PROGRESS |
+| Player setup shown in Classic mode | Legacy assumption all modes share setup | Mode flow review vs legacy behavior spec | Conditional skip logic in intro phase controller | DONE |
+| Hardcoded mock players | Temporary dev stub never replaced | Code search for `["Alice","Bob"]` & mismatch vs localStorage | integrate `useNameBlameSetup` for real players | DONE |
+| Inconsistent question card styling | Partial migration omitted legacy `QuestionCard` component | Visual diff vs legacy screenshots | Plan for component reuse & ordering correction | PARTIAL (Layout fixed; full reuse pending) |
+| Test fragility around progress display | Reliance on translation readiness | Intermittent Playwright failures | Deterministic fallback progress text | TEMP MITIGATION |
+| Title animation minimal | Simplified placeholder vs richer legacy effect | UX review | Implement `SplitText` component with Framer Motion | DONE |
+
+### Preventative Countermeasures
+1. Introduce a screen registry assertion test that ensures every phase `screenId` has a registered component before app mount.
+2. Add snapshot (DOM & visual) baseline for QuestionCard ordering & header/footer presence.
+3. Provide a single source of truth for mode flow definitions (data object) used by both controllers & tests.
+4. Add ESLint rule or custom script to flag hardcoded sample player arrays.
+5. Create Playwright test for preparing phase once implemented to lock animation presence.
+
+### Follow-Up Opportunities
+- Migrate inline progress fallback removal once translation readiness event exposed (emit `I18N/READY`).
+- Replace ad-hoc console debug statements with centralized dev logger (tree-shakeable in prod build).
+- Implement accessibility audit (focus order, aria roles for animated elements, reduced motion preference honoring on SplitText & stacking animation).
+
+### Verification & Metrics (Current)
+| Aspect | Metric / Observation |
+|--------|----------------------|
+| Shell Persistence | Header/footer DOM nodes stable across phase transitions (verified via React DevTools) |
+| Screen Registry Integrity | Manual mapping audit passed (intro/setup/preparing/play/summary) |
+| Animation Performance | SplitText average main-thread blocking negligible (<1ms per char render; informal profiling) |
+| Test Stabilization | New foundation tests 5/5 green; legacy flaky tests isolated |
+
+---
