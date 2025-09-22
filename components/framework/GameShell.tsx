@@ -5,9 +5,11 @@
  */
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Settings, Info, Volume2, VolumeX, Sun, Moon, Monitor } from 'lucide-react';
+import { Settings, Info, Volume2, VolumeX, Sun, Moon } from 'lucide-react';
 import { Button } from '../core/Button';
+import SplitText from '../core/SplitText';
 import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
+import { GameAction } from '../../framework/core/actions';
 import InfoModal from '../core/InfoModal';
 import LanguageSelector from '../settings/LanguageSelector';
 import GameSettingsPanel from './GameSettingsPanel';
@@ -21,7 +23,7 @@ interface GameShellProps {
 }
 
 const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
-  const { config } = useFrameworkRouter();
+  const { config, dispatch } = useFrameworkRouter();
   const { t } = useTranslation();
   
   // UI configuration from game.json
@@ -37,7 +39,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
   const [soundEnabled, setSoundEnabled] = useState(true);
   
   // Dark mode support
-  const { isDark, preference, toggle: toggleDarkMode } = useDarkMode();
+  const { isDark, toggle: toggleDarkMode } = useDarkMode();
 
   // Dynamic styling based on config
   const gradientBg = `bg-gradient-to-br ${theme.primaryGradient || 'from-pink-400 via-purple-500 to-indigo-600'}`;
@@ -64,18 +66,31 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
             <header className={`flex-shrink-0 flex justify-center pt-6 pb-4 ${layout.headerStyle === 'compact' ? 'pt-3 pb-2' : 'pt-6 pb-4'}`}> 
               <div className={`${theme.cardBackground || 'bg-white dark:bg-gray-800'} rounded-3xl shadow-2xl p-4 md:p-6 w-full backdrop-blur-sm bg-white/90 dark:bg-gray-800/90`}>
                 <div className="text-center">
-                  <motion.h1 
-                    initial={{ scale: 0.8, opacity: 0, y: 20 }}
-                    animate={{ scale: 1, opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.8,
-                      ease: [0.25, 0.46, 0.45, 0.94],
-                      delay: 0.1
+                  <div
+                    className="cursor-pointer hover:scale-105 transition-transform duration-200"
+                    onClick={() => {
+                      // Navigate back to intro/main menu
+                      try {
+                        dispatch(GameAction.RESTART);
+                      } catch (error) {
+                        // If framework dispatch fails, try alternative navigation
+                        console.log('Navigating to main menu via restart');
+                        window.location.hash = '';
+                        window.location.reload(); // Fallback: reload to go back to start
+                      }
                     }}
-                    className={`text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary} dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')} mb-2 break-words drop-shadow-sm`}
+                    title="Click to return to main menu"
                   >
-                    {branding.gameName || config.title}
-                  </motion.h1>
+                    <SplitText
+                      text={branding.gameName || config.title}
+                      tag="h1"
+                      className={`text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary} dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')} mb-2 break-words drop-shadow-sm`}
+                      stagger={0.08}
+                      delay={0.2}
+                      duration={0.6}
+                      autoPlay={true}
+                    />
+                  </div>
                   {branding.tagline && (
                     <motion.p 
                       initial={{ opacity: 0, y: 10 }}
@@ -143,9 +158,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                       onClick={toggleDarkMode}
                       title={isDark ? t('settings.light_mode') : t('settings.dark_mode')}
                     >
-                      {preference === 'system' ? (
-                        <Monitor size={18} />
-                      ) : isDark ? (
+                      {isDark ? (
                         <Sun size={18} />
                       ) : (
                         <Moon size={18} />

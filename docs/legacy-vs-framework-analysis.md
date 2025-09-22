@@ -2,22 +2,80 @@
 
 ## Current Issues Identified
 
-### 1. **Game Mode State Management**
-**Problem**: The framework intro screen manages game mode (classic vs NameBlame) in local state, but phase controllers don't have access to this information.
+### 1. **Missing Header/Footer During Game** ⚠️ CRITICAL
+**Problem**: The framework question screen bypasses GameShell layout, so header and footer disappear during gameplay.
 
 **Legacy Behavior**: 
-- Classic mode: Start Game → Questions (no player setup required)
-- NameBlame mode: Start Game → Player Setup → Questions
+- Header with game title and settings consistently visible
+- Footer with controls and progress always accessible
 
 **Current Framework Behavior**: 
-- Always goes: Start Game → Player Setup → Questions (regardless of mode)
+- FrameworkQuestionScreen uses full-screen layout bypassing GameShell
+- No persistent header/footer during questions
 
 **Solution Needed**: 
-- Add game mode to module context or game state
-- Update phase controllers to conditionally skip player setup for classic mode
-- Consider using EventBus to communicate mode changes
+- Update FrameworkQuestionScreen to use GameShell layout
+- Ensure all framework screens consistently use GameShell wrapper
 
-### 2. **Visual Differences from Legacy**
+### 2. **Missing Category Stacking Animation** ⚠️ HIGH PRIORITY
+**Problem**: The legacy version had a beautiful category selection animation with stacking cards that's completely missing.
+
+**Legacy Behavior**: 
+- LoadingCardStack animation with categories falling and stacking
+- LoadingContainer with rotating quotes during setup
+- Visual category cards with emojis and smooth animations
+
+**Current Framework Behavior**: 
+- Direct jump from intro to questions with no transition
+- No category preparation/selection phase
+
+**Solution Needed**: 
+- Reintegrate LoadingContainer and LoadingCardStack components
+- Add category preparation phase between intro→setup or setup→play
+- Maintain the visual delight of category stacking
+
+### 3. **Question Card Visual Design Regression** ⚠️ HIGH PRIORITY
+**Problem**: Current question cards lack the category emoji and polished design of legacy QuestionCard.
+
+**Legacy QuestionCard Features**:
+- Large category emoji display (clamp(2rem, 7vw, 5rem))
+- Category name badge with pink styling
+- Responsive text sizing with proper line-height
+- Pink-themed card borders and styling
+- Centered layout with proper spacing
+
+**Current Framework Question Display**:
+- Basic white card with no category emoji
+- Missing visual hierarchy and brand personality
+- Generic styling instead of game-specific theming
+
+**Solution Needed**: 
+- Replace basic question display with legacy QuestionCard component
+- Integrate category emoji data from content provider
+- Maintain responsive design and accessibility
+
+### 4. **Classic Mode vs NameBlame Mode Logic** ⚠️ CRITICAL UNDERSTANDING
+**Corrected Understanding**: Classic mode should NOT have player setup - it's a simple card browsing mode.
+
+**Correct Legacy Behavior Analysis**:
+- **Classic Mode**: NO player setup → Questions with simple next/back navigation only
+- **NameBlame Mode**: Player setup → Questions with actual player names for blame selection
+
+**Framework Current Issues**:
+- **Classic Mode**: ✅ Correctly skips player setup, ❌ BUT uses hardcoded mock players instead of no players
+- **NameBlame Mode**: ❌ Should use actual player names from localStorage, not mock players
+
+**Specific Problems to Fix**:
+1. **Remove Hardcoded Mock Players**: Framework question screen uses ["Alice", "Bob", "Charlie", "Diana"] instead of actual stored players
+2. **Classic Mode UI**: Should show only next/back buttons (for the next question), no player blame selection at all
+3. **NameBlame Mode UI**: Should show blame selection using actual localStorage player names
+4. **Settings Persistence**: User settings not being properly saved/loaded from localStorage
+
+**Solution Needed**:
+- Classic mode: Remove player buttons entirely, show only next/back navigation
+- NameBlame mode: Use actual localStorage player data for blame selection
+- Remove all hardcoded mock players
+- Fix settings persistence in framework storage system
 
 #### Missing Animations
 - **Card flip animations** for question transitions
@@ -68,24 +126,29 @@
 - [x] Fix translation keys
 - [x] Disable sound controls for BlameGame
 
-### Phase 2 - Game Mode Logic (IN PROGRESS)
-- [ ] Add game mode to framework context
-- [ ] Update phase controllers to conditionally skip player setup
-- [ ] Test classic mode flow
-- [ ] Add game mode persistence
+### Phase 2 - Critical Game Flow & Data Restoration (CURRENT PRIORITY)
+- [ ] **Fix Classic Mode UI**: Remove player buttons entirely, show only next/back navigation
+- [ ] **Remove Hardcoded Mock Players**: Replace with actual localStorage player data for NameBlame mode
+- [ ] **Fix Settings Persistence**: Ensure user settings are properly saved/loaded from localStorage
+- [ ] **Update Question Screen Logic**: Different UI for classic (next/back only) vs NameBlame (player blame)
+- [ ] **Fix Header/Footer Visibility**: Update FrameworkQuestionScreen to use GameShell
+- [ ] **Restore Category Stacking Animation**: Integrate LoadingContainer/LoadingCardStack
 
-### Phase 3 - Visual Restoration (PLANNED)
-- [ ] Restore card flip animations for questions
+### Phase 3 - Legacy Component Integration (NEXT)
+- [ ] **QuestionCard Integration**: Replace basic question display with legacy component
+- [ ] **Category Emoji Data**: Ensure content provider includes categoryEmoji/categoryName
+- [ ] **Loading Animation Flow**: Add smooth transition from category stacking to questions
+- [ ] **Theme Consistency**: Apply pink/purple theming to match legacy design
+- [ ] **Responsive Design**: Maintain accessibility and mobile responsiveness
+
+### Phase 4 - Enhanced Animations & Polish (PLANNED)
+- [ ] Restore card flip animations for question transitions
 - [ ] Add button press feedback (scale/shake effects)
-- [ ] Implement question transition animations
+- [ ] Implement question transition animations with spring physics
 - [ ] Add celebration effects for game completion
 - [ ] Restore the "fun" feeling with micro-animations
-
-### Phase 4 - Polish & Enhancement (PLANNED)
 - [ ] Add sound system integration (for other games)
 - [ ] Implement haptic-style visual feedback
-- [ ] Add category selection persistence
-- [ ] Optimize performance of animations
 
 ## Technical Architecture Notes
 

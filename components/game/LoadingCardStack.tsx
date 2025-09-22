@@ -73,7 +73,7 @@ const LoadingCardStack: React.FC<LoadingCardStackProps> = ({
             key={category.name + i}
             className="category-card absolute bg-white p-3 rounded-lg shadow-xl w-36 h-48 sm:w-40 sm:h-52 flex flex-col items-center justify-center text-center"
             initial={{ opacity: 0, y: settings.cardFallDistance, scale: 0.8 }}
-            animate={{ opacity: 1, y: i * settings.cardStackOffsetY, scale: 1 }}
+            animate={{ opacity: 1, y: (categoriesWithEmojis.length - 1 - i) * settings.cardStackOffsetY, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.7 }}
             transition={{
               type: 'spring',
@@ -81,7 +81,7 @@ const LoadingCardStack: React.FC<LoadingCardStackProps> = ({
               damping: 14,
               delay: i * settings.cardFallStaggerDelaySec,
             }}
-            style={{ zIndex: categoriesWithEmojis.length - i }}
+            style={{ zIndex: i + 1 }}
           >
             <div className="text-5xl sm:text-6xl mb-2">{category.emoji}</div>
             <div className="w-full overflow-hidden flex-grow flex items-center justify-center">

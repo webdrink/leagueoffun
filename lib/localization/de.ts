@@ -92,6 +92,32 @@ const de: Translations = {
   // Loading screen
   'loading.defaultQuote': 'Wird geladen...',
   'loading.preparing': 'Vorbereitung läuft...',
+  'loading.preparing_game': 'Spiel wird vorbereitet...',
+
+  // Categories
+  'categories.Beim Feiern': 'Beim Feiern',
+  'categories.In Beziehungen': 'In Beziehungen',
+  'categories.Bei der Arbeit': 'Bei der Arbeit',
+  'categories.In der Schule': 'In der Schule',
+  'categories.In peinlichen Momenten': 'In peinlichen Momenten',
+  'categories.Im Urlaub': 'Im Urlaub',
+  'categories.Beim Sport': 'Beim Sport',
+  'categories.In der Freundschaft': 'In der Freundschaft',
+  'categories.Im Alltag': 'Im Alltag',
+  'categories.In der Familie': 'In der Familie',
+  'categories.In der Zukunft': 'In der Zukunft',
+  'categories.Beim Essen': 'Beim Essen',
+  'categories.Im Bad': 'Im Bad',
+  'categories.Im Internet': 'Im Internet',
+  'categories.Im Straßenverkehr': 'Im Straßenverkehr',
+  'categories.Bei Filmen & Serien': 'Bei Filmen & Serien',
+  'categories.In der WG': 'In der WG',
+  'categories.Beim Flirten': 'Beim Flirten',
+  'categories.Auf Partys mit Fremden': 'Auf Partys mit Fremden',
+  'categories.Beim Weltuntergang': 'Beim Weltuntergang',
+  'categories.Im Paralleluniversum': 'Im Paralleluniversum',
+  'categories.Im Land der schlechten Entscheidungen': 'Im Land der schlechten Entscheidungen',
+  'categories.Im inneren Monolog': 'Im inneren Monolog',
   
   // Game
   'game.question': 'Frage',

@@ -1,6 +1,7 @@
 /**
  * FrameworkPlayerSetupScreen
- * Framework-compatible version of PlayerSetupScreen for NameBlame mode.
+ * Framework-compatible version of Pla  return (
+    <div className="flex flex-col items-center justify-center min-h-[60vh] py-4">SetupScreen for NameBlame mode.
  */
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -9,7 +10,6 @@ import { GameAction } from '../../framework/core/actions';
 import { Button } from '../core/Button';
 import { ArrowLeft, Plus, X } from 'lucide-react';
 import useTranslation from '../../hooks/useTranslation';
-import GameShell from './GameShell';
 
 interface Player {
   id: string;
@@ -73,8 +73,7 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
   };
 
   return (
-    <GameShell>
-      <div className="flex flex-col items-center justify-start py-4 px-1">
+    <div className="flex flex-col items-center justify-center min-h-[60vh] py-4 px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -186,7 +185,6 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
           </Button>
         </motion.div>
       </div>
-    </GameShell>
   );
 };
 

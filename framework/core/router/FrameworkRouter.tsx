@@ -10,6 +10,7 @@ import { EventBus } from '../events/eventBus';
 import { GameConfig } from '../../config/game.schema';
 import { ScreenRegistry } from '../modules';
 import { createDispatcher } from '../dispatcher';
+import GameShell from '../../../components/framework/GameShell';
 
 interface FrameworkRouterContext {
   currentPhaseId: string;
@@ -104,16 +105,20 @@ export const FrameworkRouter: React.FC<FrameworkRouterProps> = ({
 
   return (
     <RouterContext.Provider value={contextValue}>
-      <div data-framework-router className="min-h-screen">
-        {ScreenComponent ? (
-          <ScreenComponent />
-        ) : (
-          <div className="p-4 text-red-500">
-            Screen not found: {screenId} for phase {currentPhaseId}
-          </div>
-        )}
-        {children}
-      </div>
+      <GameShell>
+        <div data-framework-router className="flex flex-col min-h-0 flex-1">
+          {ScreenComponent ? (
+            <ScreenComponent />
+          ) : (
+            <div className="flex items-center justify-center min-h-[60vh] p-4">
+              <div className="text-red-500 bg-white/90 rounded-lg p-4 shadow-lg">
+                Screen not found: {screenId} for phase {currentPhaseId}
+              </div>
+            </div>
+          )}
+          {children}
+        </div>
+      </GameShell>
     </RouterContext.Provider>
   );
 };

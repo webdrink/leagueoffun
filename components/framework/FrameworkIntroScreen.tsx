@@ -10,7 +10,6 @@ import { GameAction } from '../../framework/core/actions';
 import { Button } from '../core/Button';
 import { Label } from '../core/Label';
 import { Switch } from '../core/Switch';
-import GameShell from './GameShell';
 import useTranslation from '../../hooks/useTranslation';
 import { useGameSettings } from '../../hooks/useGameSettings';
 import { GameSettings } from '../../types';
@@ -39,7 +38,7 @@ const FrameworkIntroScreen: React.FC = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNameBlame]);
-  const [selectCategories, setSelectCategories] = useState(false);
+  const [selectCategories, setSelectCategories] = useState(gameSettings?.selectCategories || false);
 
   const handleStartGame = () => {
     dispatch(GameAction.ADVANCE);
@@ -51,6 +50,14 @@ const FrameworkIntroScreen: React.FC = () => {
     // Persist to store synchronously so phase transition can read it
     updateGameSettings({ gameMode: checked ? 'nameBlame' : 'classic' } as Partial<GameSettings>);
     console.log('Game mode changed to:', checked ? 'nameBlame' : 'classic');
+  };
+
+  const handleToggleCategorySelection = (checked: boolean) => {
+    // Update local for instant UI response
+    setSelectCategories(checked);
+    // Persist to store synchronously so phase transition can read it
+    updateGameSettings({ selectCategories: checked } as Partial<GameSettings>);
+    console.log('Category selection changed to:', checked);
   };
 
   // Dynamic styling based on config
@@ -68,9 +75,7 @@ const FrameworkIntroScreen: React.FC = () => {
 
 
   return (
-    <GameShell>
-      {/* Main Content - GameShell already provides the container structure */}
-      <div className="flex flex-col items-center justify-center h-full py-4">
+    <div className="flex flex-col items-center justify-center min-h-[60vh] py-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ 
@@ -143,7 +148,7 @@ const FrameworkIntroScreen: React.FC = () => {
               >
                 <Button
                   variant="outline"
-                  onClick={() => setSelectCategories(!selectCategories)}
+                  onClick={() => handleToggleCategorySelection(!selectCategories)}
                   className={`w-full p-4 rounded-xl border-2 transition-all duration-200 shadow-sm ${
                     selectCategories 
                       ? `bg-${accentColor}-50 dark:bg-${accentColor}-900/30 border-${accentColor}-300 dark:border-${accentColor}-600 text-${accentColor}-800 dark:text-${accentColor}-200 ring-2 ring-${colors.primary}/20` 
@@ -199,7 +204,6 @@ const FrameworkIntroScreen: React.FC = () => {
 
         </motion.div>
       </div>
-    </GameShell>
   );
 };
 

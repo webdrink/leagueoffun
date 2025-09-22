@@ -1,0 +1,47 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e8]:
+  - banner [ref=e9]:
+    - generic [ref=e11]:
+      - heading "B l a m e G a m e" [level=1] [ref=e13] [cursor=pointer]:
+        - generic [ref=e14] [cursor=pointer]: B
+        - generic [ref=e15] [cursor=pointer]: l
+        - generic [ref=e16] [cursor=pointer]: a
+        - generic [ref=e17] [cursor=pointer]: m
+        - generic [ref=e18] [cursor=pointer]: e
+        - generic [ref=e19] [cursor=pointer]: G
+        - generic [ref=e20] [cursor=pointer]: a
+        - generic [ref=e21] [cursor=pointer]: m
+        - generic [ref=e22] [cursor=pointer]: e
+      - paragraph [ref=e23]: Wem traust du was zu?
+  - main [ref=e24]:
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - heading "Wer würde am ehesten..." [level=2] [ref=e30]
+        - paragraph [ref=e31]: Was denkst du? Kennst du deine Freunde?
+      - button "Spiel starten" [ref=e33] [cursor=pointer]:
+        - generic [ref=e35] [cursor=pointer]: Spiel starten
+      - button "Manuelle Kategorieauswahl" [ref=e38] [cursor=pointer]:
+        - generic [ref=e39] [cursor=pointer]: Manuelle Kategorieauswahl
+      - generic [ref=e42] [cursor=pointer]:
+        - switch "NameBlame Modus" [ref=e43] [cursor=pointer]
+        - generic [ref=e44] [cursor=pointer]: NameBlame Modus
+  - contentinfo [ref=e45]:
+    - generic [ref=e47]:
+      - button "Einstellungen" [ref=e48] [cursor=pointer]:
+        - img [ref=e49] [cursor=pointer]
+      - button "Information" [ref=e52] [cursor=pointer]:
+        - img [ref=e53] [cursor=pointer]
+      - button "Zum Dunklen Modus wechseln" [ref=e55] [cursor=pointer]:
+        - img [ref=e56] [cursor=pointer]
+      - generic [ref=e59]:
+        - combobox "Language Selection" [ref=e60] [cursor=pointer]:
+          - option "Deutsch" [selected]
+          - option "English"
+          - option "Español"
+          - option "Français"
+        - generic:
+          - img
+      - generic [ref=e61]: v1.0.0
+```

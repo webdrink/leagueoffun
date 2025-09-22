@@ -49,6 +49,7 @@ docs/DATA_FLOW_AND_COMPONENTS.md
 docs/DEBUG_FEATURES.md
 docs/plan-new-question-loading.md
 docs/MULTILINGUAL_STRATEGY.md
+docs/framework-integration-decisions.md
 node_modules/.pnpm/prop-types@15.8.1/node_modules/prop-types/README.md
 node_modules/.pnpm/is-number-object@1.1.1/node_modules/is-number-object/README.md
 node_modules/.pnpm/is-number-object@1.1.1/node_modules/is-number-object/CHANGELOG.md

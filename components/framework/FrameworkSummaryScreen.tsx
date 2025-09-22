@@ -10,23 +10,27 @@ import { GameAction } from '../../framework/core/actions';
 import { Button } from '../core/Button';
 import { RotateCcw, Trophy, Users, Crown } from 'lucide-react';
 import useTranslation from '../../hooks/useTranslation';
-import GameShell from './GameShell';
+import { useGameSettings } from '../../hooks/useGameSettings';
 
 const FrameworkSummaryScreen: React.FC = () => {
   const { dispatch, config } = useFrameworkRouter();
   const { t } = useTranslation();
+  const { gameSettings } = useGameSettings();
+  
+  // Check if we're in Classic Mode or NameBlame Mode
+  const isClassicMode = gameSettings.gameMode === 'classic';
   
   // Mock data for now - in a full implementation, this would come from the module store
   const mockResults = {
     questionsAnswered: 10,
-    activePlayersCount: 4,
-    blameLog: [
+    activePlayersCount: isClassicMode ? 1 : 4, // Classic mode shows single player
+    blameLog: isClassicMode ? [] : [
       { from: 'Alice', to: 'Bob', question: 'Wer würde am ehesten...?' },
       { from: 'Bob', to: 'Charlie', question: 'Wer würde niemals...?' },
       { from: 'Charlie', to: 'Diana', question: 'Wer würde als erstes...?' },
       // More entries...
     ],
-    blameStats: {
+    blameStats: isClassicMode ? {} : {
       'Bob': 3,
       'Charlie': 2,
       'Diana': 2,
@@ -49,8 +53,7 @@ const FrameworkSummaryScreen: React.FC = () => {
   const accentColor = theme.accentColor || 'purple';
 
   return (
-    <GameShell>
-      <div className="flex flex-col items-center justify-center py-4">
+    <div className="flex flex-col items-center justify-center min-h-[60vh] py-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -97,32 +100,38 @@ const FrameworkSummaryScreen: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="grid grid-cols-2 gap-4 mb-6"
+            className={`${isClassicMode ? 'flex justify-center' : 'grid grid-cols-2 gap-4'} mb-6`}
           >
-            <div className={`bg-${accentColor}-50 dark:bg-${accentColor}-900/30 rounded-xl p-4 text-center border border-${accentColor}-100 dark:border-${accentColor}-800`}>
+            <div className={`bg-${accentColor}-50 dark:bg-${accentColor}-900/30 rounded-xl p-4 text-center border border-${accentColor}-100 dark:border-${accentColor}-800 ${isClassicMode ? 'w-48' : ''}`}>
               <div className={`text-2xl md:text-3xl font-bold text-${accentColor}-600 dark:text-${accentColor}-400 mb-1`}>
                 {mockResults.questionsAnswered}
               </div>
               <div className={`text-xs md:text-sm text-${accentColor}-700 dark:text-${accentColor}-300 font-medium`}>
-                {t('questions.counter', { current: mockResults.questionsAnswered, total: mockResults.questionsAnswered })}
+                {isClassicMode 
+                  ? `${mockResults.questionsAnswered} Fragen angeschaut`
+                  : t('questions.counter', { current: mockResults.questionsAnswered, total: mockResults.questionsAnswered })
+                }
               </div>
             </div>
             
-            <div className="bg-pink-50 dark:bg-pink-900/30 rounded-xl p-4 text-center border border-pink-100 dark:border-pink-800">
-              <div className="flex items-center justify-center mb-1">
-                <Users size={20} className="text-pink-600 dark:text-pink-400 mr-1" />
-                <span className="text-2xl md:text-3xl font-bold text-pink-600 dark:text-pink-400">
-                  {mockResults.activePlayersCount}
-                </span>
+            {/* Only show player count in NameBlame mode */}
+            {!isClassicMode && (
+              <div className="bg-pink-50 dark:bg-pink-900/30 rounded-xl p-4 text-center border border-pink-100 dark:border-pink-800">
+                <div className="flex items-center justify-center mb-1">
+                  <Users size={20} className="text-pink-600 dark:text-pink-400 mr-1" />
+                  <span className="text-2xl md:text-3xl font-bold text-pink-600 dark:text-pink-400">
+                    {mockResults.activePlayersCount}
+                  </span>
+                </div>
+                <div className="text-xs md:text-sm text-pink-700 dark:text-pink-300 font-medium">
+                  {t('summary.team_message', { activePlayersCount: mockResults.activePlayersCount })}
+                </div>
               </div>
-              <div className="text-xs md:text-sm text-pink-700 dark:text-pink-300 font-medium">
-                {t('summary.team_message', { activePlayersCount: mockResults.activePlayersCount })}
-              </div>
-            </div>
+            )}
           </motion.div>
 
-          {/* Most Blamed Player */}
-          {mostBlamed && (
+          {/* Most Blamed Player - Only in NameBlame Mode */}
+          {!isClassicMode && mostBlamed && (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -144,45 +153,47 @@ const FrameworkSummaryScreen: React.FC = () => {
             </motion.div>
           )}
 
-          {/* Blame Statistics */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mb-6"
-          >
-            <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4 text-center">
-              {t('summary.blame_stats')}
-            </h3>
-            <div className="space-y-3">
-              {Object.entries(mockResults.blameStats)
-                .sort(([,a], [,b]) => b - a)
-                .map(([player, count], index) => (
-                  <motion.div
-                    key={player}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.1 * index + 0.6 }}
-                    className="flex items-center justify-between bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 shadow-sm"
-                  >
-                    <div className="flex items-center">
-                      <div className={`w-10 h-10 ${index === 0 ? 'bg-yellow-500' : index === 1 ? 'bg-gray-400' : index === 2 ? 'bg-orange-600' : `bg-${accentColor}-500`} text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 shadow-md`}>
-                        {index === 0 ? '👑' : index + 1}
+          {/* Blame Statistics - Only in NameBlame Mode */}
+          {!isClassicMode && Object.keys(mockResults.blameStats).length > 0 && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mb-6"
+            >
+              <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4 text-center">
+                {t('summary.blame_stats')}
+              </h3>
+              <div className="space-y-3">
+                {Object.entries(mockResults.blameStats)
+                  .sort(([,a], [,b]) => b - a)
+                  .map(([player, count], index) => (
+                    <motion.div
+                      key={player}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: 0.1 * index + 0.6 }}
+                      className="flex items-center justify-between bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 shadow-sm"
+                    >
+                      <div className="flex items-center">
+                        <div className={`w-10 h-10 ${index === 0 ? 'bg-yellow-500' : index === 1 ? 'bg-gray-400' : index === 2 ? 'bg-orange-600' : `bg-${accentColor}-500`} text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 shadow-md`}>
+                          {index === 0 ? '👑' : index + 1}
+                        </div>
+                        <span className="font-semibold text-gray-800 dark:text-gray-200 text-lg">{player}</span>
                       </div>
-                      <span className="font-semibold text-gray-800 dark:text-gray-200 text-lg">{player}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <div className={`bg-${accentColor}-100 dark:bg-${accentColor}-900/40 text-${accentColor}-700 dark:text-${accentColor}-300 px-4 py-2 rounded-full text-sm font-bold shadow-sm`}>
-                        {count}
+                      <div className="flex items-center">
+                        <div className={`bg-${accentColor}-100 dark:bg-${accentColor}-900/40 text-${accentColor}-700 dark:text-${accentColor}-300 px-4 py-2 rounded-full text-sm font-bold shadow-sm`}>
+                          {count}
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
-            </div>
-          </motion.div>
+                    </motion.div>
+                  ))}
+              </div>
+            </motion.div>
+          )}
 
-          {/* Recent Blame Log Preview */}
-          {mockResults.blameLog.length > 0 && (
+          {/* Recent Blame Log Preview - Only in NameBlame Mode */}
+          {!isClassicMode && mockResults.blameLog.length > 0 && (
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -204,6 +215,25 @@ const FrameworkSummaryScreen: React.FC = () => {
             </motion.div>
           )}
 
+          {/* Classic Mode Message */}
+          {isClassicMode && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mb-8"
+            >
+              <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-700 rounded-xl p-6 text-center">
+                <p className="text-lg font-medium text-blue-800 dark:text-blue-200 mb-2">
+                  🎯 Classic Mode Abgeschlossen!
+                </p>
+                <p className="text-sm text-blue-600 dark:text-blue-300">
+                  Du hast {mockResults.questionsAnswered} interessante Fragen durchgeschaut. Möchtest du das NameBlame-Modus mit Freunden ausprobieren?
+                </p>
+              </div>
+            </motion.div>
+          )}
+
           {/* Play Again Button */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -220,7 +250,6 @@ const FrameworkSummaryScreen: React.FC = () => {
           </motion.div>
         </motion.div>
       </div>
-    </GameShell>
   );
 };
 
