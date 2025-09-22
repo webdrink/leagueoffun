@@ -60,11 +60,11 @@ const FrameworkSummaryScreen: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-2xl h-[42vh] min-h-[300px] flex flex-col overflow-y-auto"
+          className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-2xl max-h-[42vh] min-h-[300px] flex flex-col justify-between"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.22) 0px 25px 50px -12px' }}
         >
-          {/* Header */}
-          <div className="text-center mb-6">
+          {/* Header - Compact */}
+          <div className="text-center mb-4 flex-shrink-0">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -75,16 +75,16 @@ const FrameworkSummaryScreen: React.FC = () => {
                 stiffness: 200,
                 damping: 15
               }}
-              className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-${accentColor}-500 to-pink-500 rounded-full mb-4 shadow-lg`}
+              className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-${accentColor}-500 to-pink-500 rounded-full mb-3 shadow-lg`}
             >
-              <Trophy size={36} className="text-white drop-shadow-sm" />
+              <Trophy size={30} className="text-white drop-shadow-sm" />
             </motion.div>
             
             <motion.h1 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className={`text-4xl md:text-5xl lg:text-6xl font-bold text-${accentColor}-800 dark:text-${accentColor}-200 mb-2`}
+              className={`text-3xl md:text-4xl lg:text-5xl font-bold text-${accentColor}-800 dark:text-${accentColor}-200 mb-1`}
             >
               {t('summary.game_over')}
             </motion.h1>
@@ -92,24 +92,24 @@ const FrameworkSummaryScreen: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="text-gray-600 dark:text-gray-300 text-lg"
+              className="text-gray-600 dark:text-gray-300 text-base"
             >
               {t('summary.title')}
             </motion.p>
           </div>
 
-          {/* Game Stats */}
+          {/* Game Stats - Compact */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className={`${isClassicMode ? 'flex justify-center' : 'grid grid-cols-2 gap-4'} mb-6`}
+            className={`${isClassicMode ? 'flex justify-center' : 'grid grid-cols-2 gap-3'} mb-4 flex-shrink-0`}
           >
-            <div className={`bg-${accentColor}-50 dark:bg-${accentColor}-900/30 rounded-xl p-4 text-center border border-${accentColor}-100 dark:border-${accentColor}-800 ${isClassicMode ? 'w-48' : ''}`}>
-              <div className={`text-2xl md:text-3xl font-bold text-${accentColor}-600 dark:text-${accentColor}-400 mb-1`}>
+            <div className={`bg-${accentColor}-50 dark:bg-${accentColor}-900/30 rounded-xl p-3 text-center border border-${accentColor}-100 dark:border-${accentColor}-800 ${isClassicMode ? 'w-40' : ''}`}>
+              <div className={`text-xl md:text-2xl font-bold text-${accentColor}-600 dark:text-${accentColor}-400 mb-1`}>
                 {mockResults.questionsAnswered}
               </div>
-              <div className={`text-xs md:text-sm text-${accentColor}-700 dark:text-${accentColor}-300 font-medium`}>
+              <div className={`text-xs text-${accentColor}-700 dark:text-${accentColor}-300 font-medium`}>
                 {isClassicMode 
                   ? `${mockResults.questionsAnswered} Fragen angeschaut`
                   : t('questions.counter', { current: mockResults.questionsAnswered, total: mockResults.questionsAnswered })
@@ -119,73 +119,74 @@ const FrameworkSummaryScreen: React.FC = () => {
             
             {/* Only show player count in NameBlame mode */}
             {!isClassicMode && (
-              <div className="bg-pink-50 dark:bg-pink-900/30 rounded-xl p-4 text-center border border-pink-100 dark:border-pink-800">
+              <div className="bg-pink-50 dark:bg-pink-900/30 rounded-xl p-3 text-center border border-pink-100 dark:border-pink-800">
                 <div className="flex items-center justify-center mb-1">
-                  <Users size={20} className="text-pink-600 dark:text-pink-400 mr-1" />
-                  <span className="text-2xl md:text-3xl font-bold text-pink-600 dark:text-pink-400">
+                  <Users size={16} className="text-pink-600 dark:text-pink-400 mr-1" />
+                  <span className="text-xl md:text-2xl font-bold text-pink-600 dark:text-pink-400">
                     {mockResults.activePlayersCount}
                   </span>
                 </div>
-                <div className="text-xs md:text-sm text-pink-700 dark:text-pink-300 font-medium">
+                <div className="text-xs text-pink-700 dark:text-pink-300 font-medium">
                   {t('summary.team_message', { activePlayersCount: mockResults.activePlayersCount })}
                 </div>
               </div>
             )}
           </motion.div>
 
-          {/* Most Blamed Player - Only in NameBlame Mode */}
+          {/* Most Blamed Player - Only in NameBlame Mode - Compact */}
           {!isClassicMode && mostBlamed && (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: 0.5 }}
-              className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border-2 border-yellow-200 dark:border-yellow-700 rounded-xl p-6 mb-6 text-center shadow-md"
+              className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border border-yellow-200 dark:border-yellow-700 rounded-xl p-3 mb-3 text-center shadow-sm flex-shrink-0"
             >
-              <div className="flex items-center justify-center mb-2">
-                <Crown size={24} className="text-yellow-600 dark:text-yellow-400 mr-2" />
-                <h3 className="text-lg font-bold text-yellow-800 dark:text-yellow-200">
+              <div className="flex items-center justify-center mb-1">
+                <Crown size={18} className="text-yellow-600 dark:text-yellow-400 mr-1" />
+                <h3 className="text-base font-bold text-yellow-800 dark:text-yellow-200">
                   {t('summary.most_blamed')}
                 </h3>
               </div>
-              <p className="text-2xl md:text-3xl font-bold text-orange-600 dark:text-orange-400 mb-1">
+              <p className="text-lg md:text-xl font-bold text-orange-600 dark:text-orange-400 mb-1">
                 {mostBlamed[0]}
               </p>
-              <p className="text-sm text-yellow-700 dark:text-yellow-300">
+              <p className="text-xs text-yellow-700 dark:text-yellow-300">
                 {t('summary.blame_count', { count: mostBlamed[1], s: mostBlamed[1] !== 1 ? t('summary.plural_suffix') : '' })}
               </p>
             </motion.div>
           )}
 
-          {/* Blame Statistics - Only in NameBlame Mode */}
+          {/* Blame Statistics - Only in NameBlame Mode - Compact */}
           {!isClassicMode && Object.keys(mockResults.blameStats).length > 0 && (
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="mb-6"
+              className="mb-3 flex-shrink-0"
             >
-              <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4 text-center">
+              <h3 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-2 text-center">
                 {t('summary.blame_stats')}
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-2 max-h-24 overflow-y-auto">
                 {Object.entries(mockResults.blameStats)
                   .sort(([,a], [,b]) => b - a)
+                  .slice(0, 3) // Show only top 3 to save space
                   .map(([player, count], index) => (
                     <motion.div
                       key={player}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: 0.1 * index + 0.6 }}
-                      className="flex items-center justify-between bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 shadow-sm"
+                      className="flex items-center justify-between bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 shadow-sm"
                     >
                       <div className="flex items-center">
-                        <div className={`w-10 h-10 ${index === 0 ? 'bg-yellow-500' : index === 1 ? 'bg-gray-400' : index === 2 ? 'bg-orange-600' : `bg-${accentColor}-500`} text-white rounded-full flex items-center justify-center text-sm font-bold mr-3 shadow-md`}>
+                        <div className={`w-6 h-6 ${index === 0 ? 'bg-yellow-500' : index === 1 ? 'bg-gray-400' : 'bg-orange-600'} text-white rounded-full flex items-center justify-center text-xs font-bold mr-2 shadow-sm`}>
                           {index === 0 ? '👑' : index + 1}
                         </div>
-                        <span className="font-semibold text-gray-800 dark:text-gray-200 text-lg">{player}</span>
+                        <span className="font-semibold text-gray-800 dark:text-gray-200 text-sm">{player}</span>
                       </div>
                       <div className="flex items-center">
-                        <div className={`bg-${accentColor}-100 dark:bg-${accentColor}-900/40 text-${accentColor}-700 dark:text-${accentColor}-300 px-4 py-2 rounded-full text-sm font-bold shadow-sm`}>
+                        <div className={`bg-${accentColor}-100 dark:bg-${accentColor}-900/40 text-${accentColor}-700 dark:text-${accentColor}-300 px-2 py-1 rounded-full text-xs font-bold`}>
                           {count}
                         </div>
                       </div>
@@ -195,61 +196,41 @@ const FrameworkSummaryScreen: React.FC = () => {
             </motion.div>
           )}
 
-          {/* Recent Blame Log Preview - Only in NameBlame Mode */}
-          {!isClassicMode && mockResults.blameLog.length > 0 && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="mb-8"
-            >
-              <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4 text-center">
-                Recent Activity
-              </h3>
-              <div className="space-y-2 max-h-32 overflow-y-auto">
-                {mockResults.blameLog.slice(-3).map((entry, index) => (
-                  <div key={index} className="text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3 shadow-sm">
-                    <span className={`font-semibold text-${accentColor}-600 dark:text-${accentColor}-400`}>{entry.from}</span>
-                    <span className="mx-2">→</span>
-                    <span className="font-semibold text-pink-600 dark:text-pink-400">{entry.to}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
 
-          {/* Classic Mode Message */}
-          {isClassicMode && (
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="mb-8"
-            >
-              <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-700 rounded-xl p-6 text-center">
-                <p className="text-lg font-medium text-blue-800 dark:text-blue-200 mb-2">
-                  🎯 Classic Mode Abgeschlossen!
-                </p>
-                <p className="text-sm text-blue-600 dark:text-blue-300">
-                  Du hast {mockResults.questionsAnswered} interessante Fragen durchgeschaut. Möchtest du das NameBlame-Modus mit Freunden ausprobieren?
-                </p>
-              </div>
-            </motion.div>
-          )}
 
-          {/* Play Again Button */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
-          >
-            <Button
-              onClick={handleRestart}
-              className={`w-full bg-gradient-to-r from-${accentColor}-500 to-pink-500 hover:from-${accentColor}-600 hover:to-pink-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg text-lg border-0`}
+          {/* Bottom Section - Classic Mode Message and Button */}
+          <div className="flex-grow flex flex-col justify-end space-y-4">
+            {isClassicMode && (
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-700 rounded-xl p-4 text-center">
+                  <p className="text-base font-medium text-blue-800 dark:text-blue-200 mb-1">
+                    🎯 Classic Mode Abgeschlossen!
+                  </p>
+                  <p className="text-sm text-blue-600 dark:text-blue-300">
+                    Du hast {mockResults.questionsAnswered} interessante Fragen durchgeschaut. Möchtest du das NameBlame-Modus mit Freunden ausprobieren?
+                  </p>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Play Again Button */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
             >
-              {t('summary.play_again')}
-            </Button>
-          </motion.div>
+              <Button
+                onClick={handleRestart}
+                className={`w-full bg-gradient-to-r from-${accentColor}-500 to-pink-500 hover:from-${accentColor}-600 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg text-base border-0`}
+              >
+                {t('summary.play_again')}
+              </Button>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
   );

@@ -68,24 +68,28 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className = '', com
   
   if (compact) {
     return (
-      <div className="relative">
+      <div className="relative flex items-center">
         <select
           id="language-select-compact"
           value={gameSettings.language}
           onChange={handleLanguageChange}
-          className={`bg-transparent border-none rounded-lg px-3 py-1.5 text-white dark:text-gray-100 text-sm font-medium cursor-pointer hover:bg-white/10 dark:hover:bg-gray-600/20 focus:outline-none focus:bg-white/10 dark:focus:bg-gray-600/20 transition-all duration-200 appearance-none pr-8 ${className}`}
+          className={`bg-transparent border-none rounded-lg px-2 py-1 text-white dark:text-white text-sm font-medium cursor-pointer hover:bg-transparent focus:outline-none focus:bg-transparent transition-all duration-200 appearance-none pr-6 min-w-[80px] ${className}`}
           title={t('settings.language')}
           aria-label="Language Selection"
         >
           {Object.entries(SUPPORTED_LANGUAGES).map(([code, name]) => (
-            <option key={code} value={code} className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 py-2">
+            <option 
+              key={code} 
+              value={code} 
+              className="bg-purple-600 dark:bg-purple-700 text-white dark:text-white py-2 px-3 hover:bg-purple-500 dark:hover:bg-purple-600"
+            >
               {name}
             </option>
           ))}
         </select>
         {/* Custom dropdown arrow */}
         <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-          <svg className="w-4 h-4 text-white/90 dark:text-gray-200/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 text-white/90 dark:text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </div>

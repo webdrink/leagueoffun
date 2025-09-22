@@ -142,11 +142,11 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
 
           {/* Fixed Footer: 4/20 = 20% */}
           {layout.showFooter && (
-            <footer className="h-[20vh] min-h-[100px] flex-shrink-0 flex flex-col items-center justify-center" data-testid="game-shell-footer">
+            <footer className="h-[20vh] min-h-[100px] flex-shrink-0 flex flex-col items-center justify-start pt-4" data-testid="game-shell-footer">
               <div className="bg-black/60 backdrop-blur-xl rounded-2xl p-4 mx-auto w-full max-w-2xl border border-white/20 shadow-2xl">
                 {/* Top Row: Main Controls */}
                 <div className="flex justify-center items-center gap-3 text-white dark:text-gray-200 mb-3">
-                  {/* Main control buttons */}
+                  {/* Main control buttons - all with consistent styling */}
                   {features.soundControl && (
                     <Button
                       variant="outline"
@@ -178,23 +178,16 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                     </Button>
                   )}
                   
-                  {/* Dark Mode Toggle */}
+                  {/* Dark Mode Toggle - matching footer button style */}
                   {features.darkModeToggle && (
-                    <DarkModeToggle variant="outlined" size="md" />
+                    <DarkModeToggle variant="outlined" size="md" className={FOOTER_BUTTON_CLASSES} />
                   )}
                   
-                  {/* Language Selector */}
+                  {/* Language Selector - styled to match footer buttons */}
                   {features.languageSelector && (
-                    <div className="flex items-center bg-black/50 rounded-xl px-1 py-1 backdrop-blur-md border-2 border-white/90 shadow-xl" data-testid="language-selector">
+                    <div className={`flex items-center bg-purple-600/60 rounded-xl px-3 py-1.5 backdrop-blur-md border-2 border-purple-500/80 shadow-xl hover:bg-purple-500/20 hover:border-purple-400 transition-all duration-200 transform hover:scale-105 min-h-[44px]`} data-testid="language-selector">
                       <LanguageSelector compact />
                     </div>
-                  )}
-                  
-                  {/* Version Display */}
-                  {features.versionDisplay && (
-                    <span className="text-xs text-white font-medium px-3 py-1.5 bg-black/50 rounded-lg backdrop-blur-md border-2 border-white/90 shadow-xl">
-                      v{config.version}
-                    </span>
                   )}
                 </div>
                 

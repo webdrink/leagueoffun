@@ -133,70 +133,103 @@ const FrameworkIntroScreen: React.FC = () => {
             </Button>
           </motion.div>
 
-          {/* Game-specific Options - Only category selection stays here */}
+          {/* Game-specific Options - Category Selection Toggle */}
           {features.categorySelection && (
             <motion.div 
-              className="mb-6"
+              className={`bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 mb-6 border-2 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 shadow-sm`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.4 }}
-            >
-              <motion.div
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <Button
-                  variant="outline"
-                  onClick={() => handleToggleCategorySelection(!selectCategories)}
-                  className={`w-full p-4 rounded-xl border-2 transition-all duration-200 shadow-sm ${
-                    selectCategories 
-                      ? `bg-${accentColor}-50 dark:bg-${accentColor}-900/30 border-${accentColor}-300 dark:border-${accentColor}-600 text-${accentColor}-800 dark:text-${accentColor}-200 ring-2 ring-${colors.primary}/20` 
-                      : `border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:border-${accentColor}-300 dark:hover:border-${accentColor}-500 hover:bg-${accentColor}-50 dark:hover:bg-${accentColor}-900/20`
-                  }`}
-                >
-                  <motion.span 
-                    className="text-sm font-medium"
-                    animate={selectCategories ? { scale: [1, 1.05, 1] } : {}}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {t('intro.select_categories')}
-                  </motion.span>
-                </Button>
-              </motion.div>
-            </motion.div>
-          )}
-
-          {/* Game Mode Toggle - detailed option */}
-          {features.gameMode && (
-            <motion.div 
-              className={`bg-${accentColor}-50 dark:bg-${accentColor}-900/30 rounded-xl p-4 mb-4 border-2 border-${accentColor}-100 dark:border-${accentColor}-800 hover:border-${colors.primary}/30 dark:hover:border-${colors.primary}/50 transition-all duration-200 shadow-sm`}
               whileHover={{ scale: 1.01 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              <div className="flex items-center justify-between mb-2">
-                <Label htmlFor="gameModeToggle" className="flex items-center cursor-pointer select-none">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="categorySelectionToggle" className="flex items-center cursor-pointer select-none">
                   <Switch
-                    id="gameModeToggle"
-                    checked={gameMode}
-                    onCheckedChange={handleToggleGameMode}
-                    className={`data-[state=checked]:bg-${accentColor}-500`}
+                    id="categorySelectionToggle"
+                    checked={selectCategories}
+                    onCheckedChange={handleToggleCategorySelection}
+                    className="data-[state=checked]:bg-purple-500 data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600"
                   />
-                  <span className={`ml-3 font-medium text-${accentColor}-800 dark:text-${accentColor}-200`}>
-                    {t('intro.name_blame_mode')}
+                  <span className="ml-3 font-medium text-gray-800 dark:text-gray-200">
+                    {t('intro.select_categories')}
                   </span>
                 </Label>
               </div>
-              {gameMode && (
+              {selectCategories && (
                 <motion.p 
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className={`text-xs text-${accentColor}-700 dark:text-${accentColor}-300 leading-relaxed`}
+                  className="text-xs text-gray-600 dark:text-gray-400 mt-2 leading-relaxed"
                 >
-                  {t('intro.name_blame_explanation')}
+                  Du kannst spezifische Kategorien für das Spiel auswählen.
                 </motion.p>
+              )}
+            </motion.div>
+          )}
+
+          {/* Game Mode Toggle - Enhanced NameBlame option */}
+          {features.gameMode && (
+            <motion.div 
+              className={`relative overflow-hidden rounded-xl p-4 mb-4 border-2 transition-all duration-300 shadow-lg ${
+                gameMode 
+                  ? `bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/40 dark:to-pink-900/40 border-purple-300 dark:border-purple-600 ring-2 ring-purple-200 dark:ring-purple-700/50` 
+                  : `bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-600`
+              }`}
+              whileHover={{ scale: 1.01 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              {gameMode && (
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10"
+                  initial={{ x: '-100%' }}
+                  animate={{ x: '100%' }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                />
+              )}
+              <div className="relative flex items-center justify-between">
+                <Label htmlFor="gameModeToggle" className="flex items-center cursor-pointer select-none flex-grow">
+                  <Switch
+                    id="gameModeToggle"
+                    checked={gameMode}
+                    onCheckedChange={handleToggleGameMode}
+                    className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-purple-500 data-[state=checked]:to-pink-500 data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600 shadow-lg"
+                  />
+                  <div className="ml-3 flex-grow">
+                    <span className={`font-semibold text-base ${
+                      gameMode 
+                        ? 'text-purple-800 dark:text-purple-200' 
+                        : 'text-gray-800 dark:text-gray-200'
+                    }`}>
+                      {t('intro.name_blame_mode')}
+                    </span>
+                    {gameMode && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="flex items-center mt-1"
+                      >
+                        <span className="text-xs bg-purple-500 text-white px-2 py-0.5 rounded-full font-medium">
+                          AKTIV
+                        </span>
+                      </motion.div>
+                    )}
+                  </div>
+                </Label>
+              </div>
+              {gameMode && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                  className="mt-3 pt-3 border-t border-purple-200 dark:border-purple-700"
+                >
+                  <p className="text-sm text-purple-700 dark:text-purple-300 leading-relaxed">
+                    {t('intro.name_blame_explanation')}
+                  </p>
+                </motion.div>
               )}
             </motion.div>
           )}

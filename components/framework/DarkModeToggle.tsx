@@ -46,7 +46,7 @@ const DarkModeToggle: React.FC<DarkModeToggleProps> = ({
     <Button
       variant={variant === 'filled' ? 'default' : 'outline'}
       onClick={toggle}
-      className={`${variantClasses} ${sizeClasses} transition-all duration-200 rounded-xl ${className}`}
+      className={`${className || variantClasses} ${!className ? sizeClasses : ''} ${!className ? 'transition-all duration-200 rounded-xl' : ''}`}
       data-testid="dark-mode-toggle"
       aria-pressed={isDark}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
