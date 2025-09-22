@@ -2,7 +2,7 @@
  * FrameworkQuestionScreen
  * Framework-compatible version of QuestionScreen for the play phase.
  */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
 import { GameAction } from '../../framework/core/actions';
@@ -13,6 +13,23 @@ import { useGameSettings } from '../../hooks/useGameSettings';
 import useNameBlameSetup from '../../hooks/useNameBlameSetup';
 
 const FrameworkQuestionScreen: React.FC = () => {
+  // ProgressBar subcomponent to avoid inline style width lint violation
+  const ProgressBar: React.FC<{ percent: number }> = ({ percent }) => {
+    const fillRef = useRef<HTMLDivElement | null>(null);
+    useEffect(() => {
+      if (fillRef.current) {
+        fillRef.current.style.width = `${Math.min(100, Math.max(0, Math.round(percent)))}%`;
+      }
+    }, [percent]);
+    return (
+      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2 overflow-hidden" aria-hidden="true">
+        <div
+          ref={fillRef}
+          className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300"
+        />
+      </div>
+    );
+  };
   const { dispatch } = useFrameworkRouter();
   const { t } = useTranslation();
   
@@ -113,15 +130,7 @@ const FrameworkQuestionScreen: React.FC = () => {
           <p className="text-sm text-gray-600 dark:text-gray-400" data-debug-progress data-testid="progress-fallback">
             Frage {progress.index + 1} von {progress.total}
           </p>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
-            <div
-              className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300"
-              // eslint-disable-next-line react/forbid-dom-props
-              style={{
-                width: `${Math.round(((progress.index + 1) / progress.total) * 100)}%`
-              }}
-            />
-          </div>
+          <ProgressBar percent={((progress.index + 1) / progress.total) * 100} />
         </div>
 
         {/* Question Content: emoji -> badge -> text (flex-1 to fill available space) */}

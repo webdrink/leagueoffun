@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Settings, Info, Volume2, VolumeX } from 'lucide-react';
 import SplitText from '../core/SplitText';
-import FooterButton, { FOOTER_ICON_STYLE } from '../core/FooterButton';
+import FooterButton from '../core/FooterButton';
 import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
 import { GameAction } from '../../framework/core/actions';
 import InfoModal from '../core/InfoModal';
@@ -172,9 +172,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                   
                   {/* Dark Mode Toggle - matching footer button style */}
                   {features.darkModeToggle && (
-                    <div className={FOOTER_ICON_STYLE + ' cursor-pointer'}>
-                      <DarkModeToggle className="!bg-transparent !border-0 !shadow-none p-0" />
-                    </div>
+                    <DarkModeToggle variant="footer" />
                   )}
                   
                   {/* Language Selector - styled to match footer buttons */}
