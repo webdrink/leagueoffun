@@ -258,32 +258,45 @@ function App() {
     }
   }, [quoteIndex, activeLoadingQuotes]);
   const handleStartGameFlow = async () => {
-    // Check first if we're in "nameBlame" mode but don't have enough players
-    if (gameSettings.gameMode === 'nameBlame' && players.filter(p => p.name.trim() !== '').length < 3) {
-      setGameStep('playerSetup');
-      return;
+    console.log(`🎯 handleStartGameFlow called - GameMode: ${gameSettings.gameMode}, Players: ${players.filter(p => p.name.trim() !== '').length}, GameStep: ${gameStep}`);
+    
+    // Clear any previous errors first
+    setErrorLoadingQuestions(null);
+    
+    // CRITICAL: Check for NameBlame mode with insufficient players FIRST
+    // This must happen before ANY other state changes to prevent loading screen flash
+    if (gameSettings.gameMode === 'nameBlame') {
+      const activePlayersCount = players.filter(p => p.name.trim() !== '').length;
+      if (activePlayersCount < 3) {
+        console.log(`🎯 NameBlame mode with insufficient players (${activePlayersCount}/3) - Going DIRECTLY to playerSetup`);
+        setGameStep('playerSetup');
+        return; // Exit immediately - no loading screen
+      }
+      console.log(`🎯 NameBlame mode with sufficient players (${activePlayersCount}/3) - Proceeding to loading`);
     }
     
     // Check if we should go to the category selection screen
     if (gameSettings.selectCategories && gameStep === 'intro') {
+      console.log(`🎯 Category selection enabled - Going to categoryPick`);
       setGameStep('categoryPick');
       return;
     }
     
     // Check for ongoing data loading
     if (isLoadingQuestions) {
+      console.log(`🎯 Questions still loading - Showing error`);
       setErrorLoadingQuestions(t('error.questionsStillLoading'));
       return; // Don't proceed if initial questions are still loading
     }
     
     // If we have no questions available at all (even after loading completed)
     if (!isLoadingQuestions && allQuestions.length === 0) {
+      console.log(`🎯 No questions available - Showing error`);
       setErrorLoadingQuestions(t('error.noQuestionsAvailable'));
       return;
     }
     
-    setErrorLoadingQuestions(null); // Clear any previous errors
-    
+    console.log(`🎯 All checks passed - Starting loading animation`);
     // Start loading animation immediately to provide visual feedback
     setGameStep('loading');
     

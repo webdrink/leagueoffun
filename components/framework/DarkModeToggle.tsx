@@ -52,7 +52,7 @@ const DarkModeToggle: React.FC<DarkModeToggleProps> = ({
         onClick={toggle}
         className={`${variantClasses} ${sizeClasses} ${className}`.trim()}
         data-testid="dark-mode-toggle"
-        aria-pressed={isDark ? 'true' : 'false'}
+        aria-pressed={Boolean(isDark)}
         aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
         title={`Current: ${preference === 'system' ? 'System' : (isDark ? 'Dark' : 'Light')} mode. Click to toggle.`}
       >
@@ -71,7 +71,7 @@ const DarkModeToggle: React.FC<DarkModeToggleProps> = ({
       onClick={toggle}
       className={`${className || variantClasses} ${!className ? sizeClasses : ''} ${!className ? 'transition-all duration-200 rounded-xl' : ''}`}
       data-testid="dark-mode-toggle"
-      aria-pressed={isDark}
+      aria-pressed={Boolean(isDark)}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={`Current: ${preference === 'system' ? 'System' : (isDark ? 'Dark' : 'Light')} mode. Click to toggle.`}
     >
