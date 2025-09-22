@@ -80,6 +80,14 @@ const es: Translations = {
   'questions.summary': 'Resumen', // Placeholder
   'questions.next': 'Siguiente', // Placeholder (can be same as app.next)
   'questions.show_summary': 'Mostrar resumen', // Placeholder
+
+  // NameBlame specific
+  'question.blame_revealed': '¡Culpa Revelada!',
+  'question.was_blamed': 'fue culpado',
+  'question.select_player': 'Selecciona un jugador',
+  'question.progress': 'Pregunta {{current}} de {{total}}',
+  'question.view_results': 'Ver Resultados',
+  'question.next_question': 'Siguiente Pregunta',
   
   // Summary
   'summary.title': '¡Juego terminado!',

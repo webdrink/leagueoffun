@@ -2,7 +2,7 @@
  * FrameworkQuestionScreen
  * Framework-compatible version of QuestionScreen for the play phase.
  */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
 import { GameAction } from '../../framework/core/actions';
@@ -10,6 +10,7 @@ import { Button } from '../core/Button';
 import useTranslation from '../../hooks/useTranslation';
 import { useProviderState } from '../../hooks/useProviderState';
 import { useGameSettings } from '../../hooks/useGameSettings';
+import useNameBlameSetup from '../../hooks/useNameBlameSetup';
 
 const FrameworkQuestionScreen: React.FC = () => {
   const { dispatch } = useFrameworkRouter();
@@ -18,15 +19,13 @@ const FrameworkQuestionScreen: React.FC = () => {
   const { gameSettings } = useGameSettings();
   const isNameBlameMode = gameSettings.gameMode === 'nameBlame';
 
-  // TODO: Replace mock players with actual stored players via a future player store integration
-  const [mockPlayers] = useState(
-    () => [
-      { id: '1', name: 'Alice' },
-      { id: '2', name: 'Bob' },
-      { id: '3', name: 'Charlie' },
-      { id: '4', name: 'Diana' }
-    ]
-  );
+  // Get actual players from shared NameBlame setup hook
+  const { getActivePlayers } = useNameBlameSetup();
+  
+  // Get active players (with non-empty names) for blame selection
+  const players = useMemo(() => {
+    return isNameBlameMode ? getActivePlayers() : [];
+  }, [isNameBlameMode, getActivePlayers]);
   
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
   const [isRevealing, setIsRevealing] = useState(false);
@@ -75,17 +74,22 @@ const FrameworkQuestionScreen: React.FC = () => {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45 }}
-        className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 sm:p-8 w-full max-w-2xl h-[42vh] min-h-[300px] flex flex-col"
+        className={`bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-4 sm:p-6 w-full max-w-2xl flex flex-col ${
+          isNameBlameMode ? 'h-[55vh] min-h-[420px]' : 'h-[42vh] min-h-[300px]'
+        }`}
       >
         {/* Progress Only Header (no back arrow) - Fixed height */}
-        <div className="flex flex-col items-center mb-4 flex-shrink-0 h-16" data-testid="question-header">
+        <div className="flex flex-col items-center mb-3 flex-shrink-0 h-14" data-testid="question-header">
           <p className="text-sm text-gray-600 dark:text-gray-400" data-debug-progress data-testid="progress-fallback">
             Frage {progress.index + 1} von {progress.total}
           </p>
           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
             <div
               className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${Math.round(((progress.index + 1) / progress.total) * 100)}%` }}
+              style={{ 
+                // eslint-disable-next-line react/forbid-dom-props
+                width: `${Math.round(((progress.index + 1) / progress.total) * 100)}%` 
+              }}
             />
           </div>
         </div>
@@ -98,7 +102,7 @@ const FrameworkQuestionScreen: React.FC = () => {
             </div>
           )}
           {(currentQuestion.categoryName || currentQuestion.categoryEmoji) && (
-            <div className="inline-flex items-center gap-2 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-200 px-3 py-1 rounded-full text-sm font-medium mb-4 flex-shrink-0" data-testid="category-badge">
+            <div className="inline-flex items-center gap-2 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-200 px-3 py-1 rounded-full text-xs font-medium mb-2 flex-shrink-0" data-testid="category-badge">
               {currentQuestion.categoryEmoji && <span>{currentQuestion.categoryEmoji}</span>}
               <span>{currentQuestion.categoryName}</span>
             </div>
@@ -130,34 +134,34 @@ const FrameworkQuestionScreen: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-4 mb-4 text-center border-2 border-purple-200 dark:border-purple-700 flex-shrink-0 h-24 flex flex-col justify-center"
+              className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-3 mb-3 text-center border-2 border-purple-200 dark:border-purple-700 flex-shrink-0 h-20 flex flex-col justify-center"
             >
-              <h3 className="text-base font-bold text-purple-800 dark:text-purple-200 mb-2">
+              <h3 className="text-sm font-bold text-purple-800 dark:text-purple-200 mb-1">
                 {t('question.blame_revealed')}
               </h3>
-              <p className="text-purple-600 dark:text-purple-300 text-sm">
+              <p className="text-purple-600 dark:text-purple-300 text-xs">
                 <span className="font-bold text-pink-600 dark:text-pink-400">{selectedPlayer}</span> {t('question.was_blamed')}
               </p>
             </motion.div>
           ) : (
             // Empty placeholder to maintain consistent height
-            <div className="flex-shrink-0 mb-4 h-24"></div>
+            <div className="flex-shrink-0 mb-3 h-20"></div>
           )
         ) : null}
 
         {/* Player Selection - only in NameBlame mode - Fixed height */}
         {isNameBlameMode ? (
           !isRevealing ? (
-            <div className="flex-shrink-0 mb-4 h-32">
-              <h3 className="text-center text-base font-medium text-gray-700 dark:text-gray-300 mb-3">
+            <div className="flex-shrink-0 mb-3 h-28">
+              <h3 className="text-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t('question.select_player') || 'Select Player'}
               </h3>
               <div className="grid grid-cols-2 gap-2" data-testid="player-selection">
-                {mockPlayers.map((player) => (
+                {players.map((player) => (
                   <Button
                     key={player.id}
                     onClick={() => handlePlayerSelect(player.name)}
-                    className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-800 dark:to-pink-800 hover:from-purple-200 hover:to-pink-200 dark:hover:from-purple-700 dark:hover:to-pink-700 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-purple-600 py-2 px-3 rounded-xl transition-all duration-200 transform hover:scale-105 text-sm"
+                    className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-800 dark:to-pink-800 hover:from-purple-200 hover:to-pink-200 dark:hover:from-purple-700 dark:hover:to-pink-700 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-purple-600 py-1.5 px-2 rounded-lg transition-all duration-200 transform hover:scale-105 text-xs font-medium"
                     data-testid={`player-btn-${player.name.toLowerCase()}`}
                   >
                     {player.name}
@@ -167,7 +171,7 @@ const FrameworkQuestionScreen: React.FC = () => {
             </div>
           ) : (
             // Empty placeholder to maintain consistent height when revealing in NameBlame mode
-            <div className="flex-shrink-0 mb-4 h-32"></div>
+            <div className="flex-shrink-0 mb-3 h-28"></div>
           )
         ) : null}
 

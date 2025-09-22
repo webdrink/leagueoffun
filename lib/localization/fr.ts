@@ -80,6 +80,14 @@ const fr: Translations = {
   'questions.summary': 'Résumé',
   'questions.next': 'Suivant',
   'questions.show_summary': 'Afficher le résumé',
+
+  // NameBlame specific
+  'question.blame_revealed': 'Blâme Révélé!',
+  'question.was_blamed': 'a été blâmé',
+  'question.select_player': 'Sélectionner un joueur',
+  'question.progress': 'Question {{current}} de {{total}}',
+  'question.view_results': 'Voir les Résultats',
+  'question.next_question': 'Question Suivante',
   
   // Summary
   'summary.title': 'Partie terminée!',

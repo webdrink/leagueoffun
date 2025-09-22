@@ -76,10 +76,10 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
     <div className={`${backgroundClasses} ${className} overflow-hidden`}> 
       {/* Fixed Layout Container (full viewport, no page scroll) */}
       <div className="min-h-screen flex flex-col overflow-hidden bg-transparent">
-        {/* Main Viewport-Responsive Container (flex column, no internal scroll) */}
-        <div className="flex flex-col min-h-screen max-w-md lg:max-w-lg xl:max-w-xl mx-auto w-full px-4 sm:px-6 overflow-hidden bg-transparent">
+        {/* Main Viewport-Responsive Container (flex column, full height) */}
+        <div className="flex flex-col h-screen max-w-md lg:max-w-lg xl:max-w-xl mx-auto w-full px-4 sm:px-6 overflow-hidden bg-transparent">
           
-          {/* Top Padding: Reduced to 2.5% */}
+          {/* Top Padding: Consistent spacing */}
           <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
           
           {/* Header with animated title card: 3/20 = 15% */}
@@ -105,7 +105,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                     <SplitText
                       text={branding.gameName || config.title}
                       tag="h1"
-                      className={`text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary} dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')} mb-1 break-words drop-shadow-sm leading-tight`}
+                      className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary} dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')} mb-1 drop-shadow-sm leading-tight whitespace-nowrap overflow-hidden text-ellipsis w-full text-center max-w-full`}
                       stagger={0.08}
                       delay={0.2}
                       duration={0.6}
@@ -130,19 +130,18 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
           {/* Padding after header: Reduced to 2.5% */}
           <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
 
-          {/* Main Content Area: Expanded to 50% */}
-          <main className="h-[50vh] min-h-[350px] flex-shrink-0 flex flex-col overflow-hidden bg-transparent">
+          {/* Main Content Area: Flexible grow to fill available space */}
+          <main className="flex-1 flex flex-col overflow-hidden bg-transparent min-h-0">
             <div className="h-full flex items-center justify-center overflow-hidden bg-transparent">
               {children}
             </div>
           </main>
 
-          {/* Padding after main: Reduced to 2.5% */}
-          <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
-
-          {/* Fixed Footer: 4/20 = 20% */}
+          {/* Footer: Always at bottom with consistent padding above */}
           {layout.showFooter && (
-            <footer className="h-[20vh] min-h-[100px] flex-shrink-0 flex flex-col items-center justify-start pt-4" data-testid="game-shell-footer">
+            <>
+              <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
+              <footer className="flex-shrink-0 flex flex-col items-center justify-center pb-4" data-testid="game-shell-footer">
               <div className="bg-black/60 backdrop-blur-xl rounded-2xl p-4 mx-auto w-full max-w-2xl border border-white/20 shadow-2xl">
                 {/* Top Row: Main Controls */}
                 <div className="flex justify-center items-center gap-3 text-white dark:text-gray-200 mb-3">
@@ -202,9 +201,10 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                 </div>
               </div>
             </footer>
+            </>
           )}
 
-          {/* Bottom Padding: Reduced to 2.5% */}
+          {/* Bottom Padding: Match top padding */}
           <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
           
         </div>

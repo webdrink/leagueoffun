@@ -1,63 +1,41 @@
 /**
- * FrameworkPlayerSetupScreen
- * Framework-compatible version of Pla  return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] py-4">SetupScreen for NameBlame mode.
+ * FrameworkPlayerSetupScreen  
+ * Framework-compatible version of PlayerSetupScreen for NameBlame mode.
  */
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
 import { GameAction } from '../../framework/core/actions';
 import { Button } from '../core/Button';
 import { ArrowLeft, Plus, X } from 'lucide-react';
 import useTranslation from '../../hooks/useTranslation';
-
-interface Player {
-  id: string;
-  name: string;
-}
+import useNameBlameSetup from '../../hooks/useNameBlameSetup';
 
 const FrameworkPlayerSetupScreen: React.FC = () => {
   const { dispatch } = useFrameworkRouter();
   const { t } = useTranslation();
   
-  const [players, setPlayers] = useState<Player[]>([]);
-  const [tempPlayerName, setTempPlayerName] = useState('');
-  const [nameInputError, setNameInputError] = useState('');
+  // Use shared NameBlame hook for player data management with localStorage persistence
+  const {
+    players,
+    tempPlayerName,
+    nameInputError,
+    setTempPlayerName,
+    addPlayer,
+    removePlayer
+  } = useNameBlameSetup();
 
   const handleAddPlayer = () => {
-    if (!tempPlayerName.trim()) {
-      setNameInputError(t('playerSetup.name_required'));
-      return;
-    }
-    
-    if (players.some(p => p.name.toLowerCase() === tempPlayerName.toLowerCase())) {
-      setNameInputError(t('playerSetup.name_duplicate'));
-      return;
-    }
-    
-    if (players.length >= 12) {
-      setNameInputError(t('playerSetup.max_players'));
-      return;
-    }
-
-    const newPlayer: Player = {
-      id: `player-${Date.now()}-${Math.random()}`,
-      name: tempPlayerName.trim()
-    };
-    
-    setPlayers([...players, newPlayer]);
-    setTempPlayerName('');
-    setNameInputError('');
+    addPlayer();
   };
 
   const handleRemovePlayer = (playerId: string) => {
-    setPlayers(players.filter(p => p.id !== playerId));
+    removePlayer(playerId);
   };
 
   const handleStartGame = () => {
     if (players.length < 3) {
-      setNameInputError(t('playerSetup.min_players_nameblame'));
-      return;
+      return; // Error already handled by hook
     }
     dispatch(GameAction.ADVANCE);
   };
@@ -90,13 +68,13 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
               <ArrowLeft size={20} />
             </Button>
             <h1 className="text-2xl font-bold text-purple-800 dark:text-purple-200">
-              {t('playerSetup.title')}
+              {t('players.setup_title')}
             </h1>
           </div>
 
           {/* Description */}
             <p className="text-gray-600 dark:text-gray-300 text-sm mb-6 text-center">
-              {t('playerSetup.nameblame_description')}
+              {t('players.min_players_nameblame_hint')}
             </p>
 
           {/* Add Player Input */}
@@ -107,10 +85,10 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
                 value={tempPlayerName}
                 onChange={(e) => {
                   setTempPlayerName(e.target.value);
-                  if (nameInputError) setNameInputError('');
+                  // Error clearing is handled by the hook
                 }}
                 onKeyPress={handleKeyPress}
-                placeholder={t('playerSetup.enter_name')}
+                placeholder={t('players.player_name_input')}
                 className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100"
                 maxLength={20}
               />
@@ -130,7 +108,7 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
           {/* Players List */}
           <div className="mb-6">
             <h3 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
-              {t('playerSetup.players')} ({players.length}/12)
+              {t('players.player_name')} ({players.length}/12)
             </h3>
             <div className="space-y-2 max-h-48 overflow-y-auto pr-1 custom-scrollbar">
               {players.map((player, index) => (
@@ -161,7 +139,7 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
             
             {players.length === 0 && (
               <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-                <p className="text-sm">{t('playerSetup.no_players')}</p>
+                <p className="text-sm">{t('players.add_players_to_start')}</p>
               </div>
             )}
           </div>
@@ -170,7 +148,7 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
           {players.length > 0 && players.length < 3 && (
             <div className="bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-600/40 rounded-lg p-3 mb-6">
               <p className="text-yellow-800 dark:text-yellow-300 text-sm">
-                {t('playerSetup.need_more_players', { count: 3 - players.length })}
+                {t('players.min_players')}
               </p>
             </div>
           )}
@@ -181,7 +159,7 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
             className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg text-lg"
             disabled={players.length < 3}
           >
-            {players.length >= 3 ? t('playerSetup.start_game') : t('playerSetup.add_players')}
+            {players.length >= 3 ? t('players.start_game') : t('players.add_player')}
           </Button>
         </motion.div>
       </div>

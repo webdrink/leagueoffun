@@ -47,7 +47,7 @@ export const BUTTON_SIZES = {
   ICON_SMALL: "min-h-[36px] min-w-[36px] p-2 flex items-center justify-center"
 } as const;
 
-// Footer button styling (used in GameShell) - improved visibility with primary colors
+// Footer button styling (used in GameShell) - improved visibility matching language selector
 export const FOOTER_BUTTON_CLASSES = `
   text-white dark:text-white
   border-2 border-purple-500/80 dark:border-purple-400/80

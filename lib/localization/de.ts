@@ -149,6 +149,8 @@ const de: Translations = {
   'question.select_player': 'Wähle einen Spieler',
   'question.progress': 'Frage {{current}} von {{total}}',
   'question.view_results': 'Ergebnisse anzeigen',
+  'question.blame_revealed': 'Schuld enthüllt!',
+  'question.was_blamed': 'wurde beschuldigt',
   
   // Summary
   'summary.title': 'Danke fürs Spielen!',

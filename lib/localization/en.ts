@@ -105,6 +105,14 @@ const en: Translations = {
   'questions.next': 'Next',
   'questions.show_summary': 'Show Summary',
 
+  // NameBlame specific
+  'question.blame_revealed': 'Blame Revealed!',
+  'question.was_blamed': 'was blamed',
+  'question.select_player': 'Select a player',
+  'question.progress': 'Question {{current}} of {{total}}',
+  'question.view_results': 'View Results',
+  'question.next_question': 'Next Question',
+
   // Summary
   'summary.title': 'Thanks for playing!',
   'summary.game_over': 'Game Complete!',
