@@ -88,9 +88,13 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
   const { t } = useTranslation();
   
   const handleNameBlameModeToggle = (checked: boolean) => {
+    console.log(`🎯 IntroScreen: handleNameBlameModeToggle called with checked=${checked}`);
     onToggleNameBlame(checked);
     if (onNameBlameModeChange) {
+      console.log(`🎯 IntroScreen: Calling onNameBlameModeChange with enabled=${checked}`);
       onNameBlameModeChange(checked);
+    } else {
+      console.log(`🎯 IntroScreen: onNameBlameModeChange callback not provided`);
     }
   };
   return (
@@ -116,7 +120,10 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
 
       <div className="mt-6 flex flex-col space-y-4">
         <Button
-          onClick={onStartGame}
+          onClick={() => {
+            console.log(`🎯 IntroScreen: Start button clicked - NameBlame: ${nameBlameMode}`);
+            onStartGame();
+          }}
           disabled={isLoading}
           className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg rounded-lg shadow-md transition-transform hover:scale-105 duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
         >

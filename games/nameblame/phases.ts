@@ -27,16 +27,20 @@ export const nameBlamePhaseControllers: Record<string, PhaseController> = {
     },
     transition(action) {
       if (action === GameAction.ADVANCE) {
-        // Read current game mode and settings from store
+        // Determine flow based on game mode
         const { gameSettings } = useGameStore.getState();
+        const mode = (gameSettings?.gameMode || 'classic').toLowerCase();
         const selectCategories = gameSettings?.selectCategories || false;
-        
-        // If manual category selection is enabled, go to category selection
+
+        if (mode === 'nameblame' || mode === 'nameblame'.toLowerCase()) {
+          // NameBlame: Intro -> Setup first
+          return { type: 'GOTO', phaseId: 'setup' };
+        }
+
+        // Classic: optional category pick then preparing
         if (selectCategories) {
           return { type: 'GOTO', phaseId: 'categoryPick' };
         }
-        
-        // Otherwise go directly to preparing phase for loading animation
         return { type: 'GOTO', phaseId: 'preparing' };
       }
       if (action === GameAction.RESTART) return { type: 'STAY' }; // Already at intro
@@ -44,8 +48,17 @@ export const nameBlamePhaseControllers: Record<string, PhaseController> = {
     }
   },
   categoryPick: {
+    onEnter(ctx) {
+      ctx.eventBus.publish({ type: 'PHASE/ENTER', phaseId: 'categoryPick' });
+    },
     transition(action) {
-      if (action === GameAction.BACK) return { type: 'GOTO', phaseId: 'intro' };
+      const { gameSettings } = useGameStore.getState();
+      const mode = (gameSettings?.gameMode || 'classic').toLowerCase();
+
+      if (action === GameAction.BACK) {
+        // NameBlame goes back to setup, Classic goes to intro
+        return { type: 'GOTO', phaseId: mode === 'nameblame' ? 'setup' : 'intro' };
+      }
       if (action === GameAction.ADVANCE) {
         // After category selection, go to preparing/loading phase
         return { type: 'GOTO', phaseId: 'preparing' };
@@ -55,28 +68,31 @@ export const nameBlamePhaseControllers: Record<string, PhaseController> = {
     }
   },
   preparing: {
+    onEnter(ctx) {
+      ctx.eventBus.publish({ type: 'PHASE/ENTER', phaseId: 'preparing' });
+    },
     transition(action) {
       if (action === GameAction.ADVANCE) {
-        // After loading animation, check game mode
-        const { gameSettings } = useGameStore.getState();
-        const gameMode = (gameSettings?.gameMode || 'classic').toLowerCase();
-        
-        if (gameMode === 'nameblame') {
-          // NameBlame mode always goes to player setup after loading
-          return { type: 'GOTO', phaseId: 'setup' };
-        } else {
-          // Classic mode skips setup and goes directly to play
-          return { type: 'GOTO', phaseId: 'play' };
-        }
+        // After loading animation, always go to play
+        return { type: 'GOTO', phaseId: 'play' };
       }
       if (action === GameAction.RESTART) return { type: 'GOTO', phaseId: 'intro' };
       return { type: 'STAY' };
     }
   },
   setup: {
+    onEnter(ctx) {
+      ctx.eventBus.publish({ type: 'PHASE/ENTER', phaseId: 'setup' });
+    },
     transition(action) {
+      const { gameSettings } = useGameStore.getState();
+      const selectCategories = gameSettings?.selectCategories || false;
+
       if (action === GameAction.BACK) return { type: 'GOTO', phaseId: 'intro' };
-      if (action === GameAction.ADVANCE) return { type: 'GOTO', phaseId: 'play' };
+      if (action === GameAction.ADVANCE) {
+        // NameBlame setup goes to category pick if enabled, else preparing
+        return { type: 'GOTO', phaseId: selectCategories ? 'categoryPick' : 'preparing' };
+      }
       if (action === GameAction.RESTART) return { type: 'GOTO', phaseId: 'intro' };
       return { type: 'STAY' };
     }
@@ -117,6 +133,8 @@ export const nameBlamePhaseControllers: Record<string, PhaseController> = {
               return { type: 'GOTO', phaseId: 'summary' };
             }
           }
+          // If provider not ready, stay on play or route to preparing as a safe fallback
+          console.warn('[phases:play] Provider not ready on ADVANCE. Staying.');
           return { type: 'STAY' };
         case GameAction.BACK:
           // Go to previous question or back to intro if first question
@@ -144,6 +162,9 @@ export const nameBlamePhaseControllers: Record<string, PhaseController> = {
     }
   },
   summary: {
+    onEnter(ctx) {
+      ctx.eventBus.publish({ type: 'PHASE/ENTER', phaseId: 'summary' });
+    },
     transition(action) {
       if (action === GameAction.RESTART) return { type: 'GOTO', phaseId: 'intro' };
       return { type: 'STAY' };

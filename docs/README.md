@@ -1,109 +1,223 @@
-# BlameGame Documentation
+# React Party Game Framework
 
-## 🎉 **Framework Migration Complete** (September 2025)
+> **A modern, extensible framework for building interactive party games with React, TypeScript, and comprehensive internationalization support.**
+> 
+> *"We've been through hell so you don't have to."* - The Development Team
 
-Welcome to the BlameGame documentation. The project has successfully completed its migration to a modern, modular framework architecture with enhanced features and stable UI. This guide provides a comprehensive overview of the completed project's structure, components, and features.
+## 🎯 What is this Framework?
 
-## ✅ **Project Status: COMPLETE**
-- **Modular Framework**: Fully implemented with EventBus, modules, and routing
-- **Stable UI Architecture**: Persistent header/footer with no reloading on navigation
-- **Visual Restoration**: All animations and translations working perfectly
-- **Game Flow Logic**: Both Classic and NameBlame modes with manual category selection
-- **Production Ready**: TypeScript strict mode, optimized build, comprehensive testing
+After months of fighting with React state management, wrestling with TypeScript generics, and discovering that "it works on my machine" is not a deployment strategy, we've somehow managed to create a framework that actually works. 
 
-## 📚 Documentation Structure
+This battle-tested foundation provides everything you need for building party games like BlameGame, complete with all the features we wish we had when we started this journey:
 
-### Current Status & Completion
+- **🎮 Multiple Game Types**: Modular architecture that actually makes sense (unlike our first 3 attempts)
+- **🌍 Internationalization**: Full i18n support with automatic translation tools *(because manually translating 500+ questions in 4 languages is not fun)*
+- **📱 Progressive Web App**: Offline support and app-like experience *(because sometimes the internet is as reliable as our initial estimates)*
+- **🎨 Modern UI**: Framer Motion animations and Tailwind CSS styling *(after we gave up on making CSS Grid work like we wanted)*
+- **🧪 Testing Ready**: Comprehensive Playwright test infrastructure *(learned the hard way that "it works" ≠ "it works reliably")*
+- **⚡ Fast Development**: Vite build system with hot module replacement *(because life's too short to wait for webpack)*
 
-- [**Current Status**](CURRENT_STATUS.md) - **📋 START HERE** - Complete project overview and achievements
-- [**Progress Summary**](progress-summary.md) - Detailed progress and technical accomplishments
-- [**Implementation Status**](plan-implementation-status.md) - Framework migration completion details
-- [**Visual Restoration Plan**](plan-visual-restoration.md) - UI improvements and fixes completed
+## 🚀 Quick Start
 
-### Framework Architecture
+### Prerequisites
 
-- [**Framework Integration Decisions**](framework-integration-decisions.md) - Technical decisions and architecture
-- [**Data Structure Overview**](DATA_STRUCTURE_OVERVIEW.md) - Core data structures and state management
-- [**Component Structure**](COMPONENT_STRUCTURE.md) - UI component organization and modular architecture
-- [**Multilingual Strategy**](MULTILINGUAL_STRATEGY.md) - Complete translation system implementation
+- Node.js 18+ and pnpm (or npm/yarn)
+- Basic knowledge of React and TypeScript
 
-### Development & Technical Guides
+### Create Your First Game
 
-- [**Testing Strategy**](TESTING_STRATEGY.md) - Comprehensive testing procedures and framework tests
-- [**Translation System**](TRANSLATION_SYSTEM.md) - Complete German localization implementation
-- [**Debug Features**](DEBUG_FEATURES.md) - EventBus debugging and development tools
-- [**Dependency Management**](DEPENDENCY_MANAGEMENT.md) - Required dependencies and installation
+```bash
+# Clone the framework (this part usually works)
+git clone <repository-url>
+cd <framework-directory>
 
-### Legacy References (Historical)
+# Install dependencies (pray to the npm gods)
+pnpm install
 
-- [**Legacy vs Framework Analysis**](legacy-vs-framework-analysis.md) - Migration comparison and improvements
-- [**Questions & Categories**](QUESTIONS_CATEGORIES.md) - Question data organization (now provider-based)
-- [**Archive Directory**](archive/) - Historical documentation and superseded files
+# Start development server (fingers crossed)
+pnpm dev
+```
 
-## 🔍 Getting Started
+Your game will be available at `http://localhost:5173` *(assuming you don't have anything else running on that port)*
 
-### Project Setup
+**✨ In 5 minutes, you'll have a working party game!**  
+*(\*Results may vary. "Working" is subjective. Your definition of 5 minutes may differ from ours.)*
 
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
-3. Start the development server:
-   ```bash
-   pnpm dev
-   ```
+➡️ **[Complete Setup Guide](getting-started/installation.md)**
+➡️ **[First Game Tutorial](getting-started/first-game.md)**
 
-### Key Files and Directories
+## 🏗️ Framework Architecture
 
-- `/components` - React components organized by type
-- `/hooks` - Custom React hooks for state and logic
-- `/lib` - Utility functions and constants
-- `/assets` - Static assets (sounds, images)
-- `/public/questions` - Question and category data
-- `/docs` - Project documentation
+### Core Concepts
 
-## 🧩 Project Architecture (Completed Framework)
+```
+🎮 Game Module System
+├── Phase Controllers    # Game state management
+├── Screen Components    # UI screens for each phase
+├── Data Providers      # Question/content management
+└── Framework Components # Reusable game UI
 
-BlameGame now uses a modern modular framework architecture:
+🔧 Supporting Systems
+├── Internationalization # Multi-language support
+├── State Management    # Zustand stores
+├── Animation System    # Framer Motion integration
+└── Testing Framework   # Playwright E2E tests
+```
 
-1. **Framework Core** - EventBus, modules, routing, and phase controllers
-2. **Stable UI System** - Persistent GameShell with header/footer that never reload
-3. **Game Modules** - Pluggable games (NameBlame fully implemented)
-4. **Content Providers** - Abstracted content delivery with StaticListProvider
-5. **Config-Driven UI** - All features controlled by game.json configuration
-6. **Complete Translation** - German localization with proper category names
-7. **Enhanced Game Flows** - Classic and NameBlame modes with manual category selection
+### Game Flow Example
 
-## 🌐 Multilingual Support (Complete Implementation)
+```typescript
+// Define your game phases
+const gamePhases = [
+  { id: 'intro', screen: 'intro' },
+  { id: 'setup', screen: 'setup' },
+  { id: 'play', screen: 'play' },
+  { id: 'summary', screen: 'summary' }
+];
 
-The application has complete multilingual support with:
-- **German (de)** - Full implementation with category translations
-- **English (en)** - Complete UI translation
-- **Spanish (es)** - UI translation support
-- **French (fr)** - UI translation support
+// Create a game module
+const MyGameModule: GameModule = {
+  id: 'mygame',
+  async init(ctx) {
+    // Initialize game data
+  },
+  registerScreens() {
+    return {
+      intro: MyIntroScreen,
+      setup: MySetupScreen,
+      play: MyGameScreen,
+      summary: MySummaryScreen
+    };
+  }
+};
+```
 
-**✅ Translation Features:**
-- Category names properly translated and displayed
-- All UI elements localized
-- Settings and preferences persist language choice
-- Framework supports easy addition of new languages
+➡️ **[Architecture Deep Dive](architecture/README.md)**
 
-## 🧪 Testing (Framework Complete)
+## � Documentation Overview
 
-**✅ All Testing Complete:**
-- TypeScript strict mode compliance
-- Production build success
-- Framework component tests created
-- Runtime testing verified
-- Cross-browser compatibility confirmed
+### 🎯 Getting Started
+- **[Installation Guide](getting-started/installation.md)** - Set up your development environment
+- **[First Game Tutorial](getting-started/first-game.md)** - Build a complete game step-by-step
+- **[Code Examples](getting-started/examples/)** - Working code snippets and templates
 
-Framework-specific tests cover EventBus, modules, providers, storage, and phase controllers.
+### 🏗️ Architecture
+- **[Framework Core](architecture/framework-core.md)** - Core concepts and patterns
+- **[Game Modules](architecture/game-modules.md)** - Creating and organizing game logic
+- **[Component System](architecture/component-system.md)** - UI component architecture
+- **[State Management](architecture/state-management.md)** - Data flow and state patterns
+- **[Phase System](architecture/phase-system.md)** - Game progression and routing
 
-## 🎯 **Project Complete**
+### 📖 Developer Guides
+- **[Creating Components](guides/creating-components.md)** - Component development patterns
+- **[Internationalization](guides/internationalization.md)** - Multi-language support
+- **[Testing](guides/testing.md)** - Testing strategies and tools
+- **[Animations](guides/animations.md)** - Using Framer Motion effectively
+- **[Theming](guides/theming.md)** - Customizing appearance
+- **[PWA Setup](guides/pwa-setup.md)** - Progressive Web App features
+- **[Deployment](guides/deployment.md)** - Building and deploying games
 
-**Status**: All major objectives achieved with enhanced features delivered beyond original scope. The BlameGame framework migration is **100% complete** and ready for production.
+### 🔧 API Reference
+- **[Hooks](api-reference/hooks/)** - Custom React hooks
+- **[Components](api-reference/components/)** - Framework and core components
+- **[Framework APIs](api-reference/framework/)** - Core framework interfaces
+- **[Utilities](api-reference/utilities/)** - Helper functions and tools
 
-## 📄 Documentation Note
+### 💡 Examples
+- **[NameBlame Game](examples/nameblame-game/)** - Complete implementation reference
+- **[Simple Game](examples/simple-game/)** - Minimal game example
+- **[Custom Components](examples/custom-components/)** - Component examples
 
-Some older documentation has been moved to the [archive](archive/) directory. These files are kept for historical reference but have been superseded by newer documents.
+## 🎮 Built-in Game: NameBlame
+
+The framework includes a complete party game implementation that demonstrates all framework capabilities:
+
+### Game Features
+- **👥 3+ Player Support**: Dynamic player management
+- **❓ Question Categories**: Humorous blame scenarios
+- **🌍 4+ Languages**: English, German, Spanish, French
+- **📱 Mobile Optimized**: Touch-friendly interface
+- **🎨 Smooth Animations**: Engaging visual feedback
+
+### NameBlame Flow
+```
+Intro → Player Setup → Question Play → Blame Selection → Summary
+```
+
+Each phase demonstrates different framework capabilities:
+- **Intro**: Settings and configuration
+- **Setup**: Dynamic UI based on game mode
+- **Play**: Content loading and user interaction
+- **Summary**: Data aggregation and presentation
+
+## 🛠️ Key Technologies
+
+| Technology | Purpose | Version |
+|------------|---------|---------|
+| **React** | UI Framework | 19.x |
+| **TypeScript** | Type Safety | 5.x |
+| **Vite** | Build System | 5.x |
+| **Tailwind CSS** | Styling | 3.x |
+| **Framer Motion** | Animations | 11.x |
+| **Zustand** | State Management | 5.x |
+| **i18next** | Internationalization | 23.x |
+| **Playwright** | Testing | 1.x |
+
+## 🎯 Framework Benefits
+
+### For Game Developers
+- **⚡ Rapid Development**: Pre-built components and patterns *(no more reinventing the wheel for the 47th time)*
+- **🔧 Flexible Architecture**: Easy to customize and extend *(because we learned from our rigid, unmaintainable first attempt)*
+- **🌍 Global Ready**: Built-in internationalization *(so you don't have to hardcode strings and regret it later)*
+- **📱 Modern UX**: Animations and responsive design *(that actually work across different screen sizes)*
+- **🧪 Quality Assurance**: Comprehensive testing tools *(because "QA will catch it" is not a strategy)*
+
+### For Teams
+- **📚 Great Documentation**: Comprehensive guides and examples *(that we actually keep updated, unlike our first version)*
+- **🔄 Consistent Patterns**: Standardized development approaches *(learned after creating 5 different button components)*
+- **🛠️ Developer Tools**: Debug panels and development aids *(because `console.log` debugging gets old fast)*
+- **📊 Performance**: Optimized build and runtime performance *(after we fixed all the memory leaks)*
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how to get started:
+
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Follow our coding standards** (see [guides/](guides/))
+4. **Add tests** for new functionality
+5. **Submit a pull request**
+
+### Development Workflow
+```bash
+# Set up development environment (hope it works on your machine too)
+pnpm install
+
+# Run tests (and watch some of them fail for mysterious reasons)
+pnpm test
+
+# Run specific test suites (when you need to debug just one thing)
+pnpm test:nameblame
+pnpm test:framework
+
+# Build for production (cross your fingers)
+pnpm build
+
+# Preview production build (because prod is always different)
+pnpm preview
+```
+
+## 📄 License
+
+This framework is available under the [MIT License](../LICENSE).
+
+## � Getting Help
+
+- **📖 Documentation**: Check the guides in this repository
+- **💡 Examples**: Look at working implementations in `examples/`
+- **🐛 Issues**: Report bugs via GitHub Issues
+- **� Discussions**: Ask questions in GitHub Discussions
+
+---
+
+**Ready to build your party game?** Start with our **[First Game Tutorial](getting-started/first-game.md)** and have a working game in under 30 minutes!

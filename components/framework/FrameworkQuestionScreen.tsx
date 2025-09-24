@@ -166,55 +166,49 @@ const FrameworkQuestionScreen: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Blame Reveal - Fixed height, always allocated in NameBlame mode */}
-        {isNameBlameMode ? (
-          isRevealing && selectedPlayer ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-3 mb-3 text-center border-2 border-purple-200 dark:border-purple-700 flex-shrink-0 h-20 flex flex-col justify-center"
-            >
-              <h3 className="text-sm font-bold text-purple-800 dark:text-purple-200 mb-1">
-                {t('question.blame_revealed')}
-              </h3>
-              <p className="text-purple-600 dark:text-purple-300 text-xs">
-                <span className="font-bold text-pink-600 dark:text-pink-400">{selectedPlayer}</span> {t('question.was_blamed')}
-              </p>
-            </motion.div>
-          ) : (
-            // Empty placeholder to maintain consistent height
-            <div className="flex-shrink-0 mb-3 h-20"></div>
-          )
-        ) : null}
+        {/* Bottom stack: pin to bottom to maximize space for the question */}
+        <div className="mt-auto w-full">
+          {/* Blame Reveal */}
+          {isNameBlameMode && (
+            isRevealing && selectedPlayer ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-3 mb-3 text-center border-2 border-purple-200 dark:border-purple-700"
+              >
+                <h3 className="text-sm font-bold text-purple-800 dark:text-purple-200 mb-1">
+                  {t('question.blame_revealed')}
+                </h3>
+                <p className="text-purple-600 dark:text-purple-300 text-xs">
+                  <span className="font-bold text-pink-600 dark:text-pink-400">{selectedPlayer}</span> {t('question.was_blamed')}
+                </p>
+              </motion.div>
+            ) : null
+          )}
 
-        {/* Player Selection - only in NameBlame mode - Fixed height */}
-        {isNameBlameMode ? (
-          !isRevealing ? (
-            <div className="flex-shrink-0 mb-3 h-28">
+          {/* Player Selection - only in NameBlame mode */}
+          {isNameBlameMode && !isRevealing && (
+            <div className="mb-3">
               <div className="text-center mb-2">
                 <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   {t('question.select_player') || 'Select Player'}
                 </h3>
-                {currentPlayer && (
-                  <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">
-                    👑 Current Player: <span className="font-semibold">{currentPlayer.name}</span>
-                  </p>
-                )}
+                {/* Removed textual current player label; the crown on the disabled button is the indicator */}
               </div>
               <div className="grid grid-cols-2 gap-2" data-testid="player-selection">
                 {players.map((player) => {
                   const isCurrentPlayer = currentPlayer && player.name === currentPlayer.name;
                   const isDisabled = !!isCurrentPlayer;
-                  
+
                   return (
                     <Button
                       key={player.id}
                       onClick={() => handlePlayerSelect(player.name)}
                       disabled={isDisabled}
                       className={`
-                        ${isCurrentPlayer 
-                          ? 'bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-700 dark:to-gray-800 text-gray-600 dark:text-gray-400 cursor-not-allowed opacity-60' 
+                        ${isCurrentPlayer
+                          ? 'bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-700 dark:to-gray-800 text-gray-600 dark:text-gray-400 cursor-not-allowed opacity-60'
                           : 'bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-800 dark:to-pink-800 hover:from-purple-200 hover:to-pink-200 dark:hover:from-purple-700 dark:hover:to-pink-700 text-purple-800 dark:text-purple-200 hover:scale-105'
                         }
                         border border-purple-200 dark:border-purple-600 py-1.5 px-2 rounded-lg transition-all duration-200 transform text-xs font-medium
@@ -228,55 +222,49 @@ const FrameworkQuestionScreen: React.FC = () => {
                 })}
               </div>
             </div>
-          ) : (
-            // Empty placeholder to maintain consistent height when revealing in NameBlame mode
-            <div className="flex-shrink-0 mb-3 h-28"></div>
-          )
-        ) : null}
+          )}
 
-        {/* Navigation / Advancement Controls - Fixed height */}
-        <div className="flex-shrink-0 mt-4 h-12 flex items-center">
-          {isNameBlameMode ? (
-            // NameBlame: show NEXT only when revealing (after selection), or empty space to maintain height
-            isRevealing ? (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full">
+          {/* Navigation / Advancement Controls */}
+          <div className="h-12 flex items-center">
+            {isNameBlameMode ? (
+              isRevealing ? (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full">
+                  <Button
+                    onClick={handleAdvance}
+                    className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg h-12"
+                    data-testid="next-button"
+                  >
+                    {progress.index + 1 < progress.total
+                      ? (t('question.next_question') || 'Next')
+                      : (t('question.view_results') || 'Results')}
+                  </Button>
+                </motion.div>
+              ) : (
+                <div className="w-full h-12" />
+              )
+            ) : (
+              <div className="flex items-stretch gap-4 w-full" data-testid="classic-controls">
+                <Button
+                  onClick={handlePrevious}
+                  variant="outline"
+                  className="w-1/3 h-12 font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                  disabled={progress.index === 0}
+                  data-testid="classic-back"
+                >
+                  {t('common.back') || 'Back'}
+                </Button>
                 <Button
                   onClick={handleAdvance}
-                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg h-12"
-                  data-testid="next-button"
+                  className="w-2/3 h-12 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                  data-testid="classic-next"
                 >
-                  {progress.index + 1 < progress.total 
-                    ? (t('question.next_question') || 'Next') 
+                  {progress.index + 1 < progress.total
+                    ? (t('question.next_question') || 'Next')
                     : (t('question.view_results') || 'Results')}
                 </Button>
-              </motion.div>
-            ) : (
-              // Empty placeholder to maintain consistent height
-              <div className="w-full h-12"></div>
-            )
-          ) : (
-            // Classic Mode: Always show next/back inline (back: 1/3, forward: 2/3 width)
-            <div className="flex items-stretch gap-4 w-full" data-testid="classic-controls">
-              <Button
-                onClick={handlePrevious}
-                variant="outline"
-                className="w-1/3 h-12 font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-                disabled={progress.index === 0}
-                data-testid="classic-back"
-              >
-                {t('common.back') || 'Back'}
-              </Button>
-              <Button
-                onClick={handleAdvance}
-                className="w-2/3 h-12 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-                data-testid="classic-next"
-              >
-                {progress.index + 1 < progress.total 
-                  ? (t('question.next_question') || 'Next') 
-                  : (t('question.view_results') || 'Results')}
-              </Button>
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </motion.div>
     </div>

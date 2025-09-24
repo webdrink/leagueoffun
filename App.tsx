@@ -257,103 +257,117 @@ function App() {
       setCurrentLoadingQuote(''); // Or some default if no quotes are active
     }
   }, [quoteIndex, activeLoadingQuotes]);
-  const handleStartGameFlow = async () => {
-    console.log(`🎯 handleStartGameFlow called - GameMode: ${gameSettings.gameMode}, Players: ${players.filter(p => p.name.trim() !== '').length}, GameStep: ${gameStep}`);
-    
-    // Clear any previous errors first
-    setErrorLoadingQuestions(null);
-    
-    // CRITICAL: Check for NameBlame mode with insufficient players FIRST
-    // This must happen before ANY other state changes to prevent loading screen flash
+  // Shared procedure to go into loading, prepare round, then enter game
+  const proceedToLoadingAndPrepare = useCallback(async () => {
+    console.log(`🎯 FLOW: Proceeding to loading - Mode: ${gameSettings.gameMode}, Players: ${players.filter(p => p.name.trim() !== '').length}, GameStep: ${gameStep}`);
+    // Safety guard: In NameBlame mode we must have ≥3 players before any loading
     if (gameSettings.gameMode === 'nameBlame') {
       const activePlayersCount = players.filter(p => p.name.trim() !== '').length;
       if (activePlayersCount < 3) {
-        console.log(`🎯 NameBlame mode with insufficient players (${activePlayersCount}/3) - Going DIRECTLY to playerSetup`);
+        console.log(`🎯 SAFEGUARD: NameBlame with insufficient players (${activePlayersCount}/3) → playerSetup`);
         setGameStep('playerSetup');
-        return; // Exit immediately - no loading screen
+        return;
+      } else {
+        console.log(`🎯 SAFEGUARD: NameBlame with sufficient players (${activePlayersCount}/3) - Continuing to loading`);
       }
-      console.log(`🎯 NameBlame mode with sufficient players (${activePlayersCount}/3) - Proceeding to loading`);
     }
-    
-    // Check if we should go to the category selection screen
-    if (gameSettings.selectCategories && gameStep === 'intro') {
-      console.log(`🎯 Category selection enabled - Going to categoryPick`);
-      setGameStep('categoryPick');
-      return;
-    }
-    
     // Check for ongoing data loading
     if (isLoadingQuestions) {
-      console.log(`🎯 Questions still loading - Showing error`);
+      console.log('🎯 Questions still loading - Showing error');
       setErrorLoadingQuestions(t('error.questionsStillLoading'));
-      return; // Don't proceed if initial questions are still loading
+      return;
     }
-    
+
     // If we have no questions available at all (even after loading completed)
     if (!isLoadingQuestions && allQuestions.length === 0) {
-      console.log(`🎯 No questions available - Showing error`);
+      console.log('🎯 No questions available - Showing error');
       setErrorLoadingQuestions(t('error.noQuestionsAvailable'));
       return;
     }
-    
-    console.log(`🎯 All checks passed - Starting loading animation`);
-    // Start loading animation immediately to provide visual feedback
+
+    console.log('🎯 All checks passed - Starting loading animation');
     setGameStep('loading');
-    
-    // Use the predefined loading quotes from constants
     setActiveLoadingQuotes(LOADING_QUOTES);
     setQuoteIndex(0);
-    
-    // Set up the cycling of quotes during loading
+
     const quoteTimer = setInterval(() => {
-      // Interval will now use activeLoadingQuotes via the useEffect dependency
       setQuoteIndex(prev => prev + 1);
     }, gameSettings.loadingQuoteIntervalMs || 2000);
-    
+
     try {
-      // Prepare questions for the round - this might take a moment
       console.log('Preparing round questions...');
       const success = await prepareRoundQuestions(gameSettings);
-      
-      // Handle the case where prepareRoundQuestions fails
-      if (!success) { // Rely solely on the success flag
+      if (!success) {
         clearInterval(quoteTimer);
         setGameStep('intro');
         setErrorLoadingQuestions(t('error.noQuestionsForRound'));
         return;
       }
 
-      // Ensure we show the loading animation for at least the minimum time
       const minLoadingDuration = gameSettings.rouletteDurationMs || 3000;
       setTimeout(() => {
         clearInterval(quoteTimer);
-        setGameStep('game'); // This will trigger the useEffect to set stablePlayerOrderForRound
-        setCurrentPlayerIndex(0); // Initialize for the new round
-        
-        // Initialize blame round for NameBlame mode
+        setGameStep('game');
+        setCurrentPlayerIndex(0);
         if (gameSettings.gameMode === 'nameBlame') {
-          // Will be set up in the useEffect when stablePlayerOrderForRound is set
           console.log('🎯 NameBlame mode: Blame round will be initialized after player order is set');
         }
-        
         playSound('game_start');
       }, minLoadingDuration);
     } catch (error) {
       console.error('Error preparing round:', error);
-      clearInterval(quoteTimer);
       setGameStep('intro');
       setErrorLoadingQuestions(t('error.failedToLoadQuestions'));
     }
-  };
-  
-  const handlePlayerSetupComplete = async () => {
-    const activePlayers = players.filter(p => p.name.trim() !== '');
-    const minPlayersNeeded = gameSettings.gameMode === 'nameBlame' ? 3 : 2;
-    
-    if (activePlayers.length < minPlayersNeeded) {
+  }, [
+    allQuestions.length,
+    gameSettings,
+    gameStep,
+    isLoadingQuestions,
+    players,
+    prepareRoundQuestions,
+    t,
+    playSound
+  ]);
+
+  // Start flow from Intro screen
+  const handleStartFromIntro = useCallback(async () => {
+    console.log(`🎯 handleStartFromIntro - Mode: ${gameSettings.gameMode}, GameStep: ${gameStep}, SelectCategories: ${gameSettings.selectCategories}`);
+    setErrorLoadingQuestions(null);
+
+    // NameBlame must go to setup first – no loading before setup
+    if (gameSettings.gameMode === 'nameBlame') {
+      console.log('🎯 NameBlame from Intro → playerSetup (DIRECT)');
+      setGameStep('playerSetup');
       return;
     }
-    handleStartGameFlow();
+
+    // Optional category selection only from Intro
+    if (gameSettings.selectCategories) {
+      console.log('🎯 Category selection enabled - Going to categoryPick');
+      setGameStep('categoryPick');
+      return;
+    }
+
+    console.log('🎯 Classic mode - Going to loading via proceedToLoadingAndPrepare');
+    await proceedToLoadingAndPrepare();
+  }, [gameSettings, gameStep, proceedToLoadingAndPrepare]);
+
+  // Start flow after Player Setup
+  const handleStartAfterSetup = useCallback(async () => {
+    console.log('🎯 handleStartAfterSetup called');
+    const activePlayers = players.filter(p => p.name.trim() !== '');
+    const minPlayersNeeded = gameSettings.gameMode === 'nameBlame' ? 3 : 2;
+    if (activePlayers.length < minPlayersNeeded) {
+      console.log(`❌ Not enough players (${activePlayers.length}/${minPlayersNeeded})`);
+      return;
+    }
+    await proceedToLoadingAndPrepare();
+  }, [players, gameSettings.gameMode, proceedToLoadingAndPrepare]);
+  
+  // Backward compatibility if needed
+  const handlePlayerSetupComplete = async () => {
+    await handleStartAfterSetup();
   };
   const handleNextQuestion = () => {
     console.log(`🎯 USER ACTION: Next question clicked - Current question: ${currentQuestionIndexFromHook + 1}/${currentRoundQuestions.length}, Mode: ${gameSettings.gameMode}`);
@@ -614,8 +628,16 @@ function App() {
             isLoading={isLoadingQuestions}
             nameBlameMode={gameSettings.gameMode === 'nameBlame'}
             soundEnabled={soundEnabled}
-            onStartGame={handleStartGameFlow}
-            onToggleNameBlame={(checked) => updateGameSettings({ gameMode: checked ? 'nameBlame' : 'classic' })}
+            onStartGame={handleStartFromIntro}
+            onToggleNameBlame={(checked) => {
+              console.log(`🎯 App: onToggleNameBlame called with checked=${checked}`);
+              updateGameSettings({ gameMode: checked ? 'nameBlame' : 'classic' });
+              // Also handle navigation here since onNameBlameModeChange is not working
+              if (checked) {
+                console.log(`🎯 App: NameBlame enabled, navigating to playerSetup`);
+                setGameStep('playerSetup');
+              }
+            }}
             onToggleSound={toggleSound}
             onVolumeChange={setVolume}
             volume={volume}
@@ -630,8 +652,10 @@ function App() {
             showCategorySelectToggle={true}
             onToggleCategorySelect={(checked) => updateGameSettings({ selectCategories: checked })}
             onNameBlameModeChange={(enabled) => {
+              console.log(`🎯 App: onNameBlameModeChange called with enabled=${enabled}`);
               if (enabled) {
                 // Force navigation to setup screen when NameBlame is enabled
+                console.log(`🎯 App: Setting gameStep to 'playerSetup'`);
                 setGameStep('playerSetup');
               }
             }}
@@ -697,7 +721,14 @@ function App() {
             onConfirm={() => {
               if (selectedCategories.length > 0) {
                 updateGameSettings({ selectedCategoryIds: selectedCategories });
-                handleStartGameFlow();
+                // After category selection, check NameBlame mode and route accordingly
+                if (gameSettings.gameMode === 'nameBlame') {
+                  console.log('🎯 Category selection confirmed - NameBlame mode → playerSetup');
+                  setGameStep('playerSetup');
+                } else {
+                  console.log('🎯 Category selection confirmed - Classic mode → loading');
+                  proceedToLoadingAndPrepare();
+                }
               }
             }}
             maxSelectable={gameSettings.categoryCount}
@@ -763,7 +794,8 @@ function App() {
           questionStats={{
             totalQuestions: allQuestions.length,
             playedQuestions: 0, // Add this if tracking played questions
-            availableQuestions: currentRoundQuestions.length,            categories: questionStats.categories
+            availableQuestions: currentRoundQuestions.length,
+            categories: questionStats.categories
           }}
           eventBus={frameworkEventBus || undefined}
         />

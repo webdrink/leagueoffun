@@ -19,8 +19,8 @@
   "phases": [
     { "id": "intro", "screenId": "intro", "allowedActions": ["ADVANCE"] },
     { "id": "categoryPick", "screenId": "categoryPick", "allowedActions": ["ADVANCE", "BACK"] },
-    { "id": "preparing", "screenId": "preparing", "allowedActions": ["ADVANCE"] },
     { "id": "setup", "screenId": "setup", "allowedActions": ["ADVANCE", "BACK"] },
+    { "id": "preparing", "screenId": "preparing", "allowedActions": ["ADVANCE"] },
     { "id": "play", "screenId": "play", "allowedActions": ["ADVANCE", "SELECT_TARGET", "REVEAL"] },
     { "id": "summary", "screenId": "summary", "allowedActions": ["RESTART"] }
   ],
