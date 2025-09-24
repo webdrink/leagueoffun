@@ -49,7 +49,7 @@ jobs:
           # Try frozen lockfile first, fallback to updating if needed
           if ! pnpm install --frozen-lockfile; then
             echo "⚠️ Lockfile mismatch detected, updating dependencies..."
-            pnpm install
+            pnpm install --no-frozen-lockfile
             echo "✅ Dependencies updated successfully"
           else
             echo "✅ Dependencies installed from frozen lockfile"
@@ -97,7 +97,7 @@ jobs:
           # Try frozen lockfile first, fallback to updating if needed
           if ! pnpm install --frozen-lockfile; then
             echo "⚠️ Lockfile mismatch detected, updating dependencies..."
-            pnpm install
+            pnpm install --no-frozen-lockfile
             echo "✅ Dependencies updated successfully"
           else
             echo "✅ Dependencies installed from frozen lockfile"
