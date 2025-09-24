@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent } from '../core/Card'; // Adjusted path
 import { Question } from '../../types'; // Path should be correct if types is in blamegame/
+import styles from './QuestionCard.module.css';
 
 interface QuestionCardProps {
   question: Question;
@@ -22,13 +23,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question }) => {
     <Card className="w-full h-full shadow-xl border-2 border-pink-100 bg-white rounded-2xl flex items-center justify-center p-1">
       <CardContent className="p-3 sm:p-6 flex flex-col items-center text-center justify-center h-full w-full">
         {categoryEmoji && (
-          <div
-            className="mb-2 sm:mb-3"
-            style={{
-              fontSize: 'clamp(2rem, 7vw, 5rem)', // Slightly smaller max for emoji
-              lineHeight: 1,
-            }}
-          >
+          <div className={`mb-2 sm:mb-3 ${styles['question-card-emoji']}`}>
             {categoryEmoji}
           </div>
         )}
@@ -39,14 +34,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question }) => {
             {categoryName}
           </span>
         )}
-        <h2
-          className="font-semibold text-gray-800 leading-tight sm:leading-snug"
-          style={{
-            fontSize: 'clamp(1.1rem, 3.5vw, 2rem)', // Adjusted font size for readability
-            lineHeight: '1.35',
-            wordBreak: 'break-word',
-          }}
-        >
+        <h2 className={`font-semibold text-gray-800 break-words ${styles['question-card-text']}`}>
           {question.text}
         </h2>
       </CardContent>

@@ -1,0 +1,17 @@
+/* QuestionCard specific styles */
+.question-card-emoji {
+  font-size: clamp(2rem, 7vw, 5rem);
+  line-height: 1;
+}
+
+.question-card-text {
+  font-size: clamp(1.1rem, 3.5vw, 2rem);
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+@media (min-width: 640px) {
+  .question-card-text {
+    line-height: 1.3;
+  }
+}

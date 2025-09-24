@@ -11,7 +11,7 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 7
+      "actualWorkers": 1
     },
     "preserveOutput": "always",
     "reporter": [
@@ -43,7 +43,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 1
         },
         "id": "foundation-tests",
         "name": "foundation-tests",
@@ -52,14 +52,14 @@
         "testMatch": [
           "/foundation\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 1
         },
         "id": "classic-mode-flows",
         "name": "classic-mode-flows",
@@ -68,14 +68,14 @@
         "testMatch": [
           "/flows\\/classic-mode\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 1
         },
         "id": "nameblame-mode-flows",
         "name": "nameblame-mode-flows",
@@ -84,14 +84,14 @@
         "testMatch": [
           "/flows\\/nameblame-mode\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 1
         },
         "id": "component-tests",
         "name": "component-tests",
@@ -100,14 +100,14 @@
         "testMatch": [
           "/components\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 1
         },
         "id": "edge-cases",
         "name": "edge-cases",
@@ -116,14 +116,14 @@
         "testMatch": [
           "/edge-cases\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 1
         },
         "id": "performance-tests",
         "name": "performance-tests",
@@ -132,14 +132,14 @@
         "testMatch": [
           "/performance\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 1
         },
         "id": "cross-browser-firefox",
         "name": "cross-browser-firefox",
@@ -148,14 +148,14 @@
         "testMatch": [
           "/flows\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 1
         },
         "id": "cross-browser-webkit",
         "name": "cross-browser-webkit",
@@ -164,14 +164,14 @@
         "testMatch": [
           "/flows\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 1
         },
         "id": "mobile-chrome",
         "name": "mobile-chrome",
@@ -180,14 +180,14 @@
         "testMatch": [
           "/flows\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 1
         },
         "id": "mobile-safari",
         "name": "mobile-safari",
@@ -196,14 +196,14 @@
         "testMatch": [
           "/flows\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 1
         },
         "id": "accessibility-tests",
         "name": "accessibility-tests",
@@ -212,14 +212,14 @@
         "testMatch": [
           "/accessibility\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 7
+          "actualWorkers": 1
         },
         "id": "fixes-tests",
         "name": "fixes-tests",
@@ -228,7 +228,7 @@
         "testMatch": [
           "/fixes\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       }
     ],
     "shard": null,
@@ -258,12 +258,12 @@
           "column": 6,
           "specs": [
             {
-              "title": "should initialize app and load core data successfully",
-              "ok": false,
+              "title": "should display intro screen with start button",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
+                  "timeout": 30000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "foundation-tests",
@@ -272,128 +272,8 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 3413,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:47:33",
-                        "location": {
-                          "file": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts",
-                          "column": 33,
-                          "line": 47
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 45 |\u001b[39m     \u001b[90m// Verify translation system\u001b[39m\n \u001b[90m 46 |\u001b[39m     \u001b[36mconst\u001b[39m translationsWorking \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m verifyTranslationSystem(page\u001b[33m,\u001b[39m tracker)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 47 |\u001b[39m     expect(translationsWorking)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 48 |\u001b[39m     \n \u001b[90m 49 |\u001b[39m     \u001b[90m// Check for any console errors\u001b[39m\n \u001b[90m 50 |\u001b[39m     \u001b[36mconst\u001b[39m report \u001b[33m=\u001b[39m tracker\u001b[33m.\u001b[39mgenerateReport()\u001b[33m;\u001b[39m\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts",
-                            "column": 33,
-                            "line": 47
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 45 |\u001b[39m     \u001b[90m// Verify translation system\u001b[39m\n \u001b[90m 46 |\u001b[39m     \u001b[36mconst\u001b[39m translationsWorking \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m verifyTranslationSystem(page\u001b[33m,\u001b[39m tracker)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 47 |\u001b[39m     expect(translationsWorking)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 48 |\u001b[39m     \n \u001b[90m 49 |\u001b[39m     \u001b[90m// Check for any console errors\u001b[39m\n \u001b[90m 50 |\u001b[39m     \u001b[36mconst\u001b[39m report \u001b[33m=\u001b[39m tracker\u001b[33m.\u001b[39mgenerateReport()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:47:33\u001b[22m"
-                        }
-                      ],
-                      "stdout": [
-                        {
-                          "text": "🎯 USER ACTION: Navigate to app\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state\n"
-                        },
-                        {
-                          "text": "⚡ PERFORMANCE: loadTime = 1332ms\n"
-                        },
-                        {
-                          "text": "🎯 USER ACTION: Verify app title\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: App container rendered\n"
-                        },
-                        {
-                          "text": "📸 SCREENSHOT: app-initialization-basic-initial-load-1758715931814.png\n"
-                        },
-                        {
-                          "text": "🌐 DATA FLOW: Questions loaded\n"
-                        },
-                        {
-                          "text": "   Data: Questions available in window.gameQuestions\n"
-                        },
-                        {
-                          "text": "🌐 DATA FLOW: Translation system check\n"
-                        },
-                        {
-                          "text": "   Data: { translationsLoaded: \u001b[33mfalse\u001b[39m }\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-09-24T12:12:07.821Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\test-results\\foundation-app-initializat-325fb-load-core-data-successfully-foundation-tests\\test-failed-1.png"
-                        },
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\test-results\\foundation-app-initializat-325fb-load-core-data-successfully-foundation-tests\\video.webm"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\test-results\\foundation-app-initializat-325fb-load-core-data-successfully-foundation-tests\\error-context.md"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts",
-                        "column": 33,
-                        "line": 47
-                      }
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "1f12a2e4de13a414e3ad-d1077f8ed81b9c415922",
-              "file": "foundation/app-initialization.spec.ts",
-              "line": 19,
-              "column": 7
-            },
-            {
-              "title": "should load all required question categories",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "foundation-tests",
-                  "projectName": "foundation-tests",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 3080,
+                      "duration": 1834,
                       "errors": [],
                       "stdout": [
                         {
@@ -415,415 +295,7 @@
                           "text": "🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state\n"
                         },
                         {
-                          "text": "⚡ PERFORMANCE: loadTime = 1043ms\n"
-                        },
-                        {
-                          "text": "🌐 DATA FLOW: Waiting for categories to load\n"
-                        },
-                        {
-                          "text": "🌐 DATA FLOW: Categories loaded\n"
-                        },
-                        {
-                          "text": "   Data: { count: \u001b[33m33\u001b[39m }\n"
-                        },
-                        {
-                          "text": "🌐 DATA FLOW: Category structure validation passed\n"
-                        },
-                        {
-                          "text": "📊 TEST REPORT: app-initialization-categories\n"
-                        },
-                        {
-                          "text": "   Duration: 2072ms\n"
-                        },
-                        {
-                          "text": "   User Actions: 0\n"
-                        },
-                        {
-                          "text": "   State Changes: 0\n"
-                        },
-                        {
-                          "text": "   Errors: 0\n"
-                        },
-                        {
-                          "text": "   Screenshots: 0\n"
-                        },
-                        {
-                          "text": "   Avg Interaction Time: 0ms\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-09-24T12:12:07.808Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1f12a2e4de13a414e3ad-d36d945d0e6503abfb05",
-              "file": "foundation/app-initialization.spec.ts",
-              "line": 54,
-              "column": 7
-            },
-            {
-              "title": "should load sufficient questions for gameplay",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "foundation-tests",
-                  "projectName": "foundation-tests",
-                  "results": [
-                    {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
-                      "status": "passed",
-                      "duration": 2961,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state\n"
-                        },
-                        {
-                          "text": "⚡ PERFORMANCE: loadTime = 1311ms\n"
-                        },
-                        {
-                          "text": "🌐 DATA FLOW: Questions loaded\n"
-                        },
-                        {
-                          "text": "   Data: Questions available in window.gameQuestions\n"
-                        },
-                        {
-                          "text": "🌐 DATA FLOW: Total questions loaded\n"
-                        },
-                        {
-                          "text": "   Data: { count: \u001b[33m1029\u001b[39m }\n"
-                        },
-                        {
-                          "text": "🌐 DATA FLOW: Question structure validation passed\n"
-                        },
-                        {
-                          "text": "📊 TEST REPORT: app-initialization-questions\n"
-                        },
-                        {
-                          "text": "   Duration: 1899ms\n"
-                        },
-                        {
-                          "text": "   User Actions: 0\n"
-                        },
-                        {
-                          "text": "   State Changes: 0\n"
-                        },
-                        {
-                          "text": "   Errors: 0\n"
-                        },
-                        {
-                          "text": "   Screenshots: 0\n"
-                        },
-                        {
-                          "text": "   Avg Interaction Time: 0ms\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-09-24T12:12:07.882Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1f12a2e4de13a414e3ad-83631360502cbd789adb",
-              "file": "foundation/app-initialization.spec.ts",
-              "line": 92,
-              "column": 7
-            },
-            {
-              "title": "should handle network failures gracefully",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "foundation-tests",
-                  "projectName": "foundation-tests",
-                  "results": [
-                    {
-                      "workerIndex": 3,
-                      "parallelIndex": 3,
-                      "status": "failed",
-                      "duration": 728,
-                      "error": {
-                        "message": "Error: page.goto: net::ERR_INTERNET_DISCONNECTED at http://localhost:5173/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/\", waiting until \"load\"\u001b[22m\n",
-                        "stack": "Error: page.goto: net::ERR_INTERNET_DISCONNECTED at http://localhost:5173/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/\", waiting until \"load\"\u001b[22m\n\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:139:16",
-                        "location": {
-                          "file": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts",
-                          "column": 16,
-                          "line": 139
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 137 |\u001b[39m     tracker\u001b[33m.\u001b[39mlogDataFlow(\u001b[32m'Network set to offline'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 138 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 139 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 140 |\u001b[39m     \n \u001b[90m 141 |\u001b[39m     \u001b[90m// App should still load basic structure even offline\u001b[39m\n \u001b[90m 142 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'body'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts",
-                            "column": 16,
-                            "line": 139
-                          },
-                          "message": "Error: page.goto: net::ERR_INTERNET_DISCONNECTED at http://localhost:5173/\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/\", waiting until \"load\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 137 |\u001b[39m     tracker\u001b[33m.\u001b[39mlogDataFlow(\u001b[32m'Network set to offline'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 138 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 139 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 140 |\u001b[39m     \n \u001b[90m 141 |\u001b[39m     \u001b[90m// App should still load basic structure even offline\u001b[39m\n \u001b[90m 142 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'body'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:139:16\u001b[22m"
-                        }
-                      ],
-                      "stdout": [
-                        {
-                          "text": "🌐 DATA FLOW: Network set to offline\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-09-24T12:12:07.868Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\test-results\\foundation-app-initializat-6eb0b-network-failures-gracefully-foundation-tests\\test-failed-1.png"
-                        },
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\test-results\\foundation-app-initializat-6eb0b-network-failures-gracefully-foundation-tests\\video.webm"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts",
-                        "column": 16,
-                        "line": 139
-                      }
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "1f12a2e4de13a414e3ad-e104aab053ff0550bebe",
-              "file": "foundation/app-initialization.spec.ts",
-              "line": 132,
-              "column": 7
-            },
-            {
-              "title": "should initialize with correct default settings",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "foundation-tests",
-                  "projectName": "foundation-tests",
-                  "results": [
-                    {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
-                      "status": "passed",
-                      "duration": 3038,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state\n"
-                        },
-                        {
-                          "text": "⚡ PERFORMANCE: loadTime = 1030ms\n"
-                        },
-                        {
-                          "text": "💾 PERSISTENCE: localStorage read (gameSettings)\n"
-                        },
-                        {
-                          "text": "💾 PERSISTENCE: Default settings loaded (gameSettings)\n"
-                        },
-                        {
-                          "text": "💾 PERSISTENCE: localStorage read (soundSettings)\n"
-                        },
-                        {
-                          "text": "📊 TEST REPORT: app-initialization-default-settings\n"
-                        },
-                        {
-                          "text": "   Duration: 2045ms\n"
-                        },
-                        {
-                          "text": "   User Actions: 0\n"
-                        },
-                        {
-                          "text": "   State Changes: 0\n"
-                        },
-                        {
-                          "text": "   Errors: 0\n"
-                        },
-                        {
-                          "text": "   Screenshots: 0\n"
-                        },
-                        {
-                          "text": "   Avg Interaction Time: 0ms\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-09-24T12:12:07.883Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1f12a2e4de13a414e3ad-e90e4ceee545744118e1",
-              "file": "foundation/app-initialization.spec.ts",
-              "line": 167,
-              "column": 7
-            },
-            {
-              "title": "should recover from corrupted localStorage",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "foundation-tests",
-                  "projectName": "foundation-tests",
-                  "results": [
-                    {
-                      "workerIndex": 5,
-                      "parallelIndex": 5,
-                      "status": "failed",
-                      "duration": 756,
-                      "error": {
-                        "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
-                        "stack": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:200:16",
-                        "location": {
-                          "file": "<anonymous>",
-                          "column": 16,
-                          "line": 293
-                        }
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "<anonymous>",
-                            "column": 16,
-                            "line": 293
-                          },
-                          "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n\u001b[2m    at UtilityScript.evaluate (<anonymous>:293:16)\u001b[22m\n\u001b[2m    at UtilityScript.<anonymous> (<anonymous>:1:44)\u001b[22m\n\u001b[2m    at UtilityScript.evaluate (<anonymous>:293:16)\u001b[22m\n\u001b[2m    at UtilityScript.<anonymous> (<anonymous>:1:44)\u001b[22m\n\u001b[2m    at C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\tests\\foundation\\app-initialization.spec.ts:200:16\u001b[22m"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-09-24T12:12:07.888Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\test-results\\foundation-app-initializat-f0ecd-from-corrupted-localStorage-foundation-tests\\test-failed-1.png"
-                        },
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\Users\\pbziu\\OneDrive\\Dokumente\\Development\\blamegame\\test-results\\foundation-app-initializat-f0ecd-from-corrupted-localStorage-foundation-tests\\video.webm"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "<anonymous>",
-                        "column": 16,
-                        "line": 293
-                      }
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "1f12a2e4de13a414e3ad-f75994f326feb444c99c",
-              "file": "foundation/app-initialization.spec.ts",
-              "line": 196,
-              "column": 7
-            },
-            {
-              "title": "should display intro screen with start button",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "foundation-tests",
-                  "projectName": "foundation-tests",
-                  "results": [
-                    {
-                      "workerIndex": 6,
-                      "parallelIndex": 6,
-                      "status": "passed",
-                      "duration": 3474,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state\n"
-                        },
-                        {
-                          "text": "🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state\n"
-                        },
-                        {
-                          "text": "⚡ PERFORMANCE: loadTime = 1025ms\n"
+                          "text": "⚡ PERFORMANCE: loadTime = 775ms\n"
                         },
                         {
                           "text": "🎯 USER ACTION: Game title visible\n"
@@ -835,13 +307,13 @@
                           "text": "🎯 USER ACTION: Settings button visible\n"
                         },
                         {
-                          "text": "📸 SCREENSHOT: app-initialization-intro-screen-intro-screen-1758715931998.png\n"
+                          "text": "📸 SCREENSHOT: app-initialization-intro-screen-intro-screen-1758716604950.png\n"
                         },
                         {
                           "text": "📊 TEST REPORT: app-initialization-intro-screen\n"
                         },
                         {
-                          "text": "   Duration: 2571ms\n"
+                          "text": "   Duration: 1386ms\n"
                         },
                         {
                           "text": "   User Actions: 3\n"
@@ -861,7 +333,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-09-24T12:12:07.863Z",
+                      "startTime": "2025-09-24T12:23:23.599Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -881,11 +353,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-09-24T12:12:06.136Z",
-    "duration": 6843.870000000001,
-    "expected": 4,
+    "startTime": "2025-09-24T12:23:22.250Z",
+    "duration": 3410.049,
+    "expected": 1,
     "skipped": 0,
-    "unexpected": 3,
+    "unexpected": 0,
     "flaky": 0
   }
 }
