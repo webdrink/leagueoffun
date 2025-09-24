@@ -3,7 +3,7 @@
  * Configurable layout wrapper that provides header/main/footer structure
  * based on game.json UI configuration. Handles persistent UI elements.
  */
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Settings, Info, Volume2, VolumeX } from 'lucide-react';
 import SplitText from '../core/SplitText';
@@ -16,7 +16,8 @@ import GameSettingsPanel from './GameSettingsPanel';
 import DarkModeToggle from './DarkModeToggle';
 import useTranslation from '../../hooks/useTranslation';
 import useDarkMode from '../../hooks/useDarkMode';
-import { GameSettings } from '../../framework/config/game.schema';
+import { GameSettings, UISettingsField } from '../../framework/config/game.schema';
+import { storageGet, storageSet } from '../../framework/persistence/storage';
 
 interface GameShellProps {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ interface GameShellProps {
 }
 
 const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
-  const { config, dispatch } = useFrameworkRouter();
+  const { config, dispatch, eventBus } = useFrameworkRouter();
   const { t } = useTranslation();
   
   // UI configuration from game.json
@@ -38,6 +39,36 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showSettingsPanel, setShowSettingsPanel] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  // Persisted game settings per game id
+  const storageKey = useMemo(() => `game.settings.${config.id}`, [config.id]);
+  const defaultGameSettings: GameSettings = {
+    categoriesPerGame: 5,
+    questionsPerCategory: 8,
+    maxQuestionsTotal: 40,
+    allowRepeatQuestions: false,
+    shuffleQuestions: true,
+    shuffleCategories: true,
+    gameTimeLimit: 0,
+    autoAdvanceTime: 0,
+    allowSkipQuestions: true,
+    showProgress: true,
+    enableSounds: true,
+    enableAnimations: true
+  };
+  const initialSettings: GameSettings = { ...defaultGameSettings, ...(config.gameSettings || {}) };
+  const [persistedSettings, setPersistedSettings] = useState<GameSettings>(() => {
+    const stored = storageGet<GameSettings>(storageKey);
+    return stored ? { ...initialSettings, ...stored } : initialSettings;
+  });
+
+  // Keep local storage in sync when config defaults change (unlikely) or game switches
+  useEffect(() => {
+    const stored = storageGet<GameSettings>(storageKey);
+    if (!stored) {
+      storageSet(storageKey, persistedSettings);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [storageKey]);
   
   // Dark mode support
   const { isDark, toggle: toggleDarkMode } = useDarkMode();
@@ -220,27 +251,21 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
         <GameSettingsPanel
           isOpen={showSettingsPanel}
           onClose={() => setShowSettingsPanel(false)}
-          gameSettings={config.gameSettings || {
-            categoriesPerGame: 5,
-            questionsPerCategory: 8,
-            maxQuestionsTotal: 40,
-            allowRepeatQuestions: false,
-            shuffleQuestions: true,
-            shuffleCategories: true,
-            gameTimeLimit: 0,
-            autoAdvanceTime: 0,
-            allowSkipQuestions: true,
-            showProgress: true,
-            enableSounds: true,
-            enableAnimations: true
-          }}
+          gameSettings={persistedSettings}
+          fields={Array.isArray((config.ui?.settings as { fields?: UISettingsField[] } | undefined)?.fields)
+            ? ((config.ui?.settings as { fields?: UISettingsField[] })?.fields as UISettingsField[])
+            : []}
           onSave={(settings: GameSettings) => {
-            // TODO: Implement settings persistence via EventBus or local storage
-            console.log('Game settings updated:', settings);
-            // For now, just log the settings
+            // Persist and publish settings update
+            setPersistedSettings(settings);
+            storageSet(storageKey, settings);
+            eventBus.publish({ type: 'SETTINGS/UPDATED', gameId: config.id, settings });
           }}
           onReset={() => {
-            console.log('Game settings reset to defaults');
+            const reset = { ...initialSettings };
+            setPersistedSettings(reset);
+            storageSet(storageKey, reset);
+            eventBus.publish({ type: 'SETTINGS/UPDATED', gameId: config.id, settings: reset });
           }}
         />
       )}

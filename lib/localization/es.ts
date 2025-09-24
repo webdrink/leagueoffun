@@ -39,6 +39,12 @@ const es: Translations = {
   'settings.volume': 'Volumen',
   'settings.animations': 'Animaciones',
   'settings.reset_data': 'Restablecer datos',
+  // Dynamic UI groups
+  'settings.group.content': 'Contenido',
+  'settings.group.behavior': 'Comportamiento',
+  'settings.group.experience': 'Experiencia',
+  'settings.group.general': 'General',
+  'settings.no_dynamic_fields': 'No hay configuraciones dinámicas definidas. Usando valores predeterminados.',
   
   // Player setup
   'players.setup_title': 'Configurar jugadores',
@@ -69,7 +75,7 @@ const es: Translations = {
 
   // Questions (Added, to be translated)
   'questions.player_turn': 'Tu turno', // Placeholder
-  'questions.counter': 'Pregunta {{current}} de {{total}}', // Placeholder
+  'questions.counter': 'Pregunta {{current}} de {{total}}',
   'questions.who_blame': '¿A quién culparías?', // Placeholder
   'questions.cannot_blame_self': 'No puedes culparte a ti mismo', // Placeholder
   'questions.blame_player': 'Culpar a {{name}}', // Placeholder
@@ -97,11 +103,11 @@ const es: Translations = {
   'summary.most_blamed': 'El más culpado',
   'summary.most_blamed_singular': 'El más culpado',
   'summary.most_blamed_plural': 'Los más culpados',
-  'summary.blame_count': '{count} culpa{s}',
+  'summary.blame_count': '{{count}} culpa{{s}}',
   'summary.plural_suffix': 's',
   'summary.no_blames_given': '¡No se distribuyeron acusaciones!',
   'summary.team_round': 'Ronda en equipo',
-  'summary.team_message': '¡Bien hecho, equipo! {activePlayersCount} jugadores participaron.',
+  'summary.team_message': '¡Bien hecho, equipo! {{activePlayersCount}} jugadores participaron.',
   'summary.new_game': 'Nuevo juego',
   'summary.play_again': 'Jugar de nuevo',
   'summary.back_to_start': 'Volver al inicio',

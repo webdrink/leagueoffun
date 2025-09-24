@@ -12,6 +12,8 @@ import { Trophy, Users, Crown } from 'lucide-react';
 import useTranslation from '../../hooks/useTranslation';
 import { useGameSettings } from '../../hooks/useGameSettings';
 import { useProviderState } from '../../hooks/useProviderState';
+import useNameBlameSetup from '../../hooks/useNameBlameSetup';
+import { useBlameGameStore } from '../../store/BlameGameStore';
 
 const FrameworkSummaryScreen: React.FC = () => {
   const { dispatch, config } = useFrameworkRouter();
@@ -22,35 +24,27 @@ const FrameworkSummaryScreen: React.FC = () => {
   // Check if we're in Classic Mode or NameBlame Mode
   const isClassicMode = gameSettings.gameMode === 'classic';
   
+  // Get real player and blame data
+  const { getActivePlayers, nameBlameLog } = useNameBlameSetup();
+  const { blameStats, getMostBlamedPlayer } = useBlameGameStore();
+  
   // Get actual game progress data
-  const mockResults = {
-    questionsAnswered: progress?.index + 1 || 40, // Use actual progress or fallback
-    activePlayersCount: isClassicMode ? 1 : 4, // Classic mode shows single player
-    blameLog: isClassicMode ? [] : [
-      { from: 'Alice', to: 'Bob', question: 'Wer würde am ehesten...?' },
-      { from: 'Bob', to: 'Charlie', question: 'Wer würde niemals...?' },
-      { from: 'Charlie', to: 'Diana', question: 'Wer würde als erstes...?' },
-      // More entries...
-    ],
-    blameStats: isClassicMode ? {} : {
-      'Bob': 3,
-      'Charlie': 2,
-      'Diana': 2,
-      'Alice': 1
-    }
+  const activePlayers = getActivePlayers();
+  const gameResults = {
+    questionsAnswered: progress?.index + 1 || 5, // Use actual progress or fallback
+    activePlayersCount: isClassicMode ? 1 : activePlayers.length,
+    blameLog: isClassicMode ? [] : nameBlameLog,
+    blameStats: isClassicMode ? {} : blameStats
   };
 
   const handleRestart = () => {
     dispatch(GameAction.RESTART);
   };
 
-  const getMostBlamedPlayer = () => {
-    const entries = Object.entries(mockResults.blameStats);
-    if (!entries.length) return null;
-    return entries.reduce((max, current) => current[1] > max[1] ? current : max);
-  };
-
-  const mostBlamed = getMostBlamedPlayer();
+  // Get most blamed player from the blame store
+  const mostBlamedPlayerData = getMostBlamedPlayer();
+  const mostBlamed = mostBlamedPlayerData ? [mostBlamedPlayerData.name, mostBlamedPlayerData.count] : null;
+  
   const theme = config.ui?.theme || {};
   const accentColor = theme.accentColor || 'purple';
 
@@ -60,7 +54,7 @@ const FrameworkSummaryScreen: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-2xl max-h-[42vh] min-h-[300px] flex flex-col justify-between"
+          className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-2xl min-h-[400px] max-h-[75vh] flex flex-col overflow-y-auto"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.22) 0px 25px 50px -12px' }}
         >
           {/* Header - Compact */}
@@ -107,12 +101,12 @@ const FrameworkSummaryScreen: React.FC = () => {
           >
             <div className={`bg-${accentColor}-50 dark:bg-${accentColor}-900/30 rounded-xl p-3 text-center border border-${accentColor}-100 dark:border-${accentColor}-800 ${isClassicMode ? 'w-40' : ''}`}>
               <div className={`text-xl md:text-2xl font-bold text-${accentColor}-600 dark:text-${accentColor}-400 mb-1`}>
-                {mockResults.questionsAnswered}
+                {gameResults.questionsAnswered}
               </div>
               <div className={`text-xs text-${accentColor}-700 dark:text-${accentColor}-300 font-medium`}>
                 {isClassicMode 
-                  ? `${mockResults.questionsAnswered} Fragen angeschaut`
-                  : t('questions.counter', { current: mockResults.questionsAnswered, total: mockResults.questionsAnswered })
+                  ? `${gameResults.questionsAnswered} Fragen angeschaut`
+                  : t('questions.counter', { current: gameResults.questionsAnswered, total: gameResults.questionsAnswered })
                 }
               </div>
             </div>
@@ -123,11 +117,11 @@ const FrameworkSummaryScreen: React.FC = () => {
                 <div className="flex items-center justify-center mb-1">
                   <Users size={16} className="text-pink-600 dark:text-pink-400 mr-1" />
                   <span className="text-xl md:text-2xl font-bold text-pink-600 dark:text-pink-400">
-                    {mockResults.activePlayersCount}
+                    {gameResults.activePlayersCount}
                   </span>
                 </div>
                 <div className="text-xs text-pink-700 dark:text-pink-300 font-medium">
-                  {t('summary.team_message', { activePlayersCount: mockResults.activePlayersCount })}
+                  {t('summary.team_message', { activePlayersCount: gameResults.activePlayersCount })}
                 </div>
               </div>
             )}
@@ -157,7 +151,7 @@ const FrameworkSummaryScreen: React.FC = () => {
           )}
 
           {/* Blame Statistics - Only in NameBlame Mode - Compact */}
-          {!isClassicMode && Object.keys(mockResults.blameStats).length > 0 && (
+          {!isClassicMode && Object.keys(gameResults.blameStats).length > 0 && (
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -168,8 +162,8 @@ const FrameworkSummaryScreen: React.FC = () => {
                 {t('summary.blame_stats')}
               </h3>
               <div className="space-y-2 max-h-24 overflow-y-auto">
-                {Object.entries(mockResults.blameStats)
-                  .sort(([,a], [,b]) => b - a)
+                {Object.entries(gameResults.blameStats)
+                  .sort(([,a], [,b]) => (b as number) - (a as number))
                   .slice(0, 3) // Show only top 3 to save space
                   .map(([player, count], index) => (
                     <motion.div
@@ -187,7 +181,7 @@ const FrameworkSummaryScreen: React.FC = () => {
                       </div>
                       <div className="flex items-center">
                         <div className={`bg-${accentColor}-100 dark:bg-${accentColor}-900/40 text-${accentColor}-700 dark:text-${accentColor}-300 px-2 py-1 rounded-full text-xs font-bold`}>
-                          {count}
+                          {count as number}
                         </div>
                       </div>
                     </motion.div>
@@ -211,7 +205,7 @@ const FrameworkSummaryScreen: React.FC = () => {
                     🎯 Classic Mode Abgeschlossen!
                   </p>
                   <p className="text-sm text-blue-600 dark:text-blue-300">
-                    Du hast {mockResults.questionsAnswered} interessante Fragen durchgeschaut. Möchtest du das NameBlame-Modus mit Freunden ausprobieren?
+                    Du hast {gameResults.questionsAnswered} interessante Fragen durchgeschaut. Möchtest du das NameBlame-Modus mit Freunden ausprobieren?
                   </p>
                 </div>
               </motion.div>

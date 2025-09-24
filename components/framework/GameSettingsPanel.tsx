@@ -3,12 +3,12 @@
  * Configurable game settings component that uses config from game.json
  * Shows available settings like categories per game, questions per category, etc.
  */
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Settings, X, Save, RotateCcw } from 'lucide-react';
 import { Button } from '../core/Button';
 import useTranslation from '../../hooks/useTranslation';
-import { GameSettings } from '../../framework/config/game.schema';
+import { GameSettings, UISettingsField } from '../../framework/config/game.schema';
 
 interface GameSettingsPanelProps {
   isOpen: boolean;
@@ -16,6 +16,7 @@ interface GameSettingsPanelProps {
   gameSettings: GameSettings;
   onSave: (settings: GameSettings) => void;
   onReset?: () => void;
+  fields?: UISettingsField[]; // optional config-driven fields
 }
 
 const GameSettingsPanel: React.FC<GameSettingsPanelProps> = ({
@@ -23,10 +24,23 @@ const GameSettingsPanel: React.FC<GameSettingsPanelProps> = ({
   onClose,
   gameSettings,
   onSave,
-  onReset
+  onReset,
+  fields
 }) => {
   const { t } = useTranslation();
   const [settings, setSettings] = useState<GameSettings>(gameSettings);
+
+  // Group fields for layout (content, behavior, experience)
+  const grouped = useMemo(() => {
+    const list = (fields || []).slice().sort((a, b) => (a.order || 0) - (b.order || 0));
+    const groups = new Map<string, UISettingsField[]>();
+    list.forEach(f => {
+      const g = f.group || 'general';
+      if (!groups.has(g)) groups.set(g, []);
+      groups.get(g)!.push(f);
+    });
+    return groups; // Map of group -> fields
+  }, [fields]);
 
   const handleSave = () => {
     onSave(settings);
@@ -81,176 +95,71 @@ const GameSettingsPanel: React.FC<GameSettingsPanelProps> = ({
 
         {/* Settings Content */}
         <div className="p-6 space-y-6">
-          {/* Questions & Categories */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
-              {t('settings.content_settings')}
-            </h3>
-            
-            <div className="space-y-3">
-              <div>
-                <label htmlFor="categoriesPerGame" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('settings.categories_per_game')} ({settings.categoriesPerGame})
-                </label>
-                <input
-                  id="categoriesPerGame"
-                  type="range"
-                  min="1"
-                  max="20"
-                  aria-label={t('settings.categories_per_game')}
-                  value={settings.categoriesPerGame}
-                  onChange={(e) => updateSetting('categoriesPerGame', parseInt(e.target.value))}
-                  className="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer dark:bg-purple-700 slider"
-                />
-                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  <span>1</span>
-                  <span>20</span>
+          {fields && fields.length > 0 ? (
+            Array.from(grouped.entries()).map(([group, fs]) => (
+              <div className="space-y-4" key={group}>
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                  {t(`settings.group.${group}`) || group}
+                </h3>
+                <div className="space-y-3">
+                  {fs.map(field => {
+                    const key = field.key as keyof GameSettings;
+                    const label = t(field.label) || field.label;
+                    if (field.type === 'number') {
+                      const min = field.min ?? 0;
+                      const max = field.max ?? 100;
+                      const step = field.step ?? 1;
+                      const value = Number(settings[key] as unknown as number);
+                      return (
+                        <div key={field.key}>
+                          <label htmlFor={field.key} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            {label} ({value})
+                          </label>
+                          <input
+                            id={field.key}
+                            type="range"
+                            min={min}
+                            max={max}
+                            step={step}
+                            aria-label={label}
+                            value={value}
+                            onChange={(e) => updateSetting(key, Number.parseInt(e.target.value, 10) as unknown as GameSettings[typeof key])}
+                            className="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer dark:bg-purple-700 slider"
+                          />
+                          <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+                            <span>{min}</span>
+                            <span>{max}</span>
+                          </div>
+                        </div>
+                      );
+                    }
+                    if (field.type === 'boolean') {
+                      const checked = Boolean(settings[key] as unknown as boolean);
+                      return (
+                        <label key={field.key} className="flex items-center justify-between">
+                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            {label}
+                          </span>
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={(e) => updateSetting(key, e.target.checked as unknown as GameSettings[typeof key])}
+                            className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                          />
+                        </label>
+                      );
+                    }
+                    return null;
+                  })}
                 </div>
               </div>
-
-              <div>
-                <label htmlFor="questionsPerCategory" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('settings.questions_per_category')} ({settings.questionsPerCategory})
-                </label>
-                <input
-                  id="questionsPerCategory"
-                  type="range"
-                  min="1"
-                  max="50" 
-                  aria-label={t('settings.questions_per_category')}
-                  value={settings.questionsPerCategory}
-                  onChange={(e) => updateSetting('questionsPerCategory', parseInt(e.target.value))}
-                  className="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer dark:bg-purple-700 slider"
-                />
-                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  <span>1</span>
-                  <span>50</span>
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="maxQuestionsTotal" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {t('settings.max_questions_total')} ({settings.maxQuestionsTotal})
-                </label>
-                <input
-                  id="maxQuestionsTotal"
-                  type="range"
-                  min="1"
-                  max="100"
-                  aria-label={t('settings.max_questions_total')}
-                  value={settings.maxQuestionsTotal}
-                  onChange={(e) => updateSetting('maxQuestionsTotal', parseInt(e.target.value))}
-                  className="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer dark:bg-purple-700 slider"
-                />
-                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  <span>1</span>
-                  <span>100</span>
-                </div>
-              </div>
+            ))
+          ) : (
+            // Backwards-compatibility fallback (static layout)
+            <div className="text-sm text-gray-600 dark:text-gray-300">
+              {t('settings.no_dynamic_fields') || 'No dynamic settings defined. Using defaults.'}
             </div>
-          </div>
-
-          {/* Game Behavior */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
-              {t('settings.game_behavior')}
-            </h3>
-            
-            <div className="space-y-3">
-              <label className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('settings.allow_repeat_questions')}
-                </span>
-                <input
-                  type="checkbox"
-                  checked={settings.allowRepeatQuestions}
-                  onChange={(e) => updateSetting('allowRepeatQuestions', e.target.checked)}
-                  className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-              </label>
-
-              <label className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('settings.shuffle_questions')}
-                </span>
-                <input
-                  type="checkbox"
-                  checked={settings.shuffleQuestions}
-                  onChange={(e) => updateSetting('shuffleQuestions', e.target.checked)}
-                  className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-              </label>
-
-              <label className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('settings.shuffle_categories')}
-                </span>
-                <input
-                  type="checkbox"
-                  checked={settings.shuffleCategories}
-                  onChange={(e) => updateSetting('shuffleCategories', e.target.checked)}
-                  className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-              </label>
-
-              <label className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('settings.allow_skip_questions')}
-                </span>
-                <input
-                  type="checkbox"
-                  checked={settings.allowSkipQuestions}
-                  onChange={(e) => updateSetting('allowSkipQuestions', e.target.checked)}
-                  className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-              </label>
-
-              <label className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('settings.show_progress')}
-                </span>
-                <input
-                  type="checkbox"
-                  checked={settings.showProgress}
-                  onChange={(e) => updateSetting('showProgress', e.target.checked)}
-                  className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-              </label>
-            </div>
-          </div>
-
-          {/* Experience Settings */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
-              {t('settings.experience')}
-            </h3>
-            
-            <div className="space-y-3">
-              <label className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('settings.enable_sounds')}
-                </span>
-                <input
-                  type="checkbox"
-                  checked={settings.enableSounds}
-                  onChange={(e) => updateSetting('enableSounds', e.target.checked)}
-                  className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-              </label>
-
-              <label className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t('settings.enable_animations')}
-                </span>
-                <input
-                  type="checkbox"
-                  checked={settings.enableAnimations}
-                  onChange={(e) => updateSetting('enableAnimations', e.target.checked)}
-                  className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-              </label>
-            </div>
-          </div>
+          )}
         </div>
 
         {/* Footer Actions */}

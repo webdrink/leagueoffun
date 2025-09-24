@@ -89,11 +89,28 @@ const UIThemeConfigSchema = z.object({
   })
 }).default({});
 
+// UI Settings (config-driven settings form)
+const UISettingsFieldSchema = z.object({
+  key: z.string(),                    // matches GameSettings key
+  type: z.enum(['number','boolean']), // supported control types
+  label: z.string(),                  // i18n key for label
+  group: z.string().default('general'),
+  min: z.number().optional(),
+  max: z.number().optional(),
+  step: z.number().optional(),
+  order: z.number().optional()
+});
+
+const UISettingsConfigSchema = z.object({
+  fields: z.array(UISettingsFieldSchema).default([])
+}).default({ fields: [] });
+
 const UIConfigSchema = z.object({
   layout: UILayoutConfigSchema,
   features: UIFeaturesConfigSchema,
   branding: UIBrandingConfigSchema,
-  theme: UIThemeConfigSchema
+  theme: UIThemeConfigSchema,
+  settings: UISettingsConfigSchema
 }).default({});
 
 export const GameConfigSchema = z.object({
@@ -118,3 +135,5 @@ export const GameConfigSchema = z.object({
 export type GameConfig = z.infer<typeof GameConfigSchema>;
 export type GamePhase = z.infer<typeof GamePhaseSchema>;
 export type GameSettings = z.infer<typeof GameSettingsSchema>;
+export type UISettingsConfig = z.infer<typeof UISettingsConfigSchema>;
+export type UISettingsField = z.infer<typeof UISettingsFieldSchema>;

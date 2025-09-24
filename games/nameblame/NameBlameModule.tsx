@@ -11,9 +11,13 @@ import FrameworkQuestionScreen from '../../components/framework/FrameworkQuestio
 import FrameworkSummaryScreen from '../../components/framework/FrameworkSummaryScreen';
 import { StaticListProvider } from '../../providers/StaticListProvider';
 import { createQuestionProvider, type EnrichedQuestion } from '../../providers/factories/createQuestionProvider';
+import { loadCategoriesFromJson, loadQuestionsFromJson } from '../../lib/utils/questionLoaders';
+import { storageGet } from '../../framework/persistence/storage';
+import type { GameSettings } from '../../framework/config/game.schema';
 
 // Module-level provider instance with enriched question data
 let provider: StaticListProvider<EnrichedQuestion> | null = null;
+let unsubscribeSettings: (() => void) | null = null;
 
 const NameBlameModule: GameModule = {
   id: 'nameblame',
@@ -21,67 +25,98 @@ const NameBlameModule: GameModule = {
     console.log('🎮 NameBlameModule.init() called with provider:', provider ? 'exists' : 'null');
     if (!provider) {
       try {
-        // Get filtering config from game config
-        const gameSettings = ctx.config.gameSettings || {};
-        
+        // Merge persisted settings with config defaults (per game id)
+        const persisted = storageGet<GameSettings>(`game.settings.${ctx.config.id}`) || {} as GameSettings;
+        const gameSettings: Partial<GameSettings & { selectCategories?: boolean; selectedCategoryIds?: string[] }> = { ...(ctx.config.gameSettings || {}), ...persisted };
+        // Detect language from global i18n if available
+        const language = ((): string => {
+          if (typeof window === 'undefined') return 'de';
+          const w = window as unknown as { i18next?: { language?: string } };
+          return w.i18next?.language || 'de';
+        })();
         // Create filtered provider using factory
         provider = await createQuestionProvider({
-          categoriesPerGame: gameSettings.categoriesPerGame || 5,
-          questionsPerCategory: gameSettings.questionsPerCategory || 8,
-          maxQuestionsTotal: gameSettings.maxQuestionsTotal || 40,
-          selectedCategoryIds: [], // TODO: Get from user settings when manual selection is enabled
-          manualCategorySelection: false, // TODO: Get from user settings
+          categoriesPerGame: gameSettings.categoriesPerGame ?? 5,
+          questionsPerCategory: gameSettings.questionsPerCategory ?? 8,
+          maxQuestionsTotal: gameSettings.maxQuestionsTotal ?? 40,
+          selectedCategoryIds: gameSettings.selectedCategoryIds ?? [],
+          manualCategorySelection: !!gameSettings.selectCategories,
           shuffleQuestions: gameSettings.shuffleQuestions !== false,
           shuffleCategories: gameSettings.shuffleCategories !== false,
-          language: 'de', // TODO: Get from user language settings
-          allowRepeatQuestions: gameSettings.allowRepeatQuestions || false
+          language,
+          allowRepeatQuestions: !!gameSettings.allowRepeatQuestions
         });
         
         console.log('🎮 Created filtered question provider with', provider.progress().total, 'questions');
-        
-        // Initialize window globals for test compatibility
+
+        // Initialize window globals for test compatibility (use full raw dataset, not filtered)
         if (typeof window !== 'undefined') {
           const windowObj = window as unknown as Record<string, unknown>;
-          const allQuestions: EnrichedQuestion[] = [];
-          
-          // Extract all questions from provider for test compatibility
-          const originalIndex = provider.progress().index;
-          // Reset to start
-          while (provider.progress().index > 0) {
-            provider.previous();
+          try {
+            const categories = await loadCategoriesFromJson();
+            const loaded = await loadQuestionsFromJson(language, categories);
+            const enriched: EnrichedQuestion[] = loaded.map((q, index) => ({
+              text: q.text || '',
+              categoryId: q.categoryId,
+              categoryName: q.categoryName,
+              categoryEmoji: q.categoryEmoji,
+              questionId: q.questionId || `question-${index}`,
+              id: q.questionId || `question-${index}`
+            }));
+            windowObj.gameQuestions = enriched;
+            windowObj.gameCategories = Array.from(new Set(enriched.map(q => q.categoryId)))
+              .map(categoryId => {
+                const question = enriched.find(q => q.categoryId === categoryId);
+                return {
+                  id: categoryId,
+                  name: question?.categoryName || categoryId,
+                  emoji: question?.categoryEmoji || '❓',
+                  questions: enriched.filter(q => q.categoryId === categoryId).map(q => q.text)
+                };
+              });
+            console.log('🎮 Set window.gameQuestions to', enriched.length, 'questions');
+            console.log('🎮 Set window.gameCategories to', (windowObj.gameCategories as unknown[]).length, 'categories');
+          } catch (e) {
+            console.warn('🎮 Failed to load raw questions for debug window globals:', e);
           }
-          // Collect all questions
-          let current = provider.current();
-          while (current) {
-            allQuestions.push(current);
-            const next = provider.next();
-            if (!next) break;
-            current = next;
-          }
-          // Reset to original position
-          while (provider.progress().index > originalIndex) {
-            provider.previous();
-          }
-          
-          windowObj.gameQuestions = allQuestions;
-          windowObj.gameCategories = Array.from(new Set(allQuestions.map(q => q.categoryId)))
-            .map(categoryId => {
-              const question = allQuestions.find(q => q.categoryId === categoryId);
-              return {
-                id: categoryId,
-                name: question?.categoryName || categoryId,
-                emoji: question?.categoryEmoji || '❓',
-                questions: allQuestions.filter(q => q.categoryId === categoryId).map(q => q.text)
-              };
-            });
-          console.log('🎮 Set window.gameQuestions to', allQuestions.length, 'questions');
-          console.log('🎮 Set window.gameCategories to', (windowObj.gameCategories as unknown[]).length, 'categories');
         }
       } catch (error) {
         console.error('🎮 Failed to create filtered question provider:', error);
         // Fallback will be created by the factory
         provider = await createQuestionProvider(); // Uses defaults and fallback
       }
+    }
+
+    // Subscribe to settings updates to rebuild provider on-the-fly
+    if (!unsubscribeSettings) {
+      unsubscribeSettings = ctx.eventBus.subscribe(async (evt) => {
+        if (evt.type === 'SETTINGS/UPDATED' && evt.gameId === ctx.config.id) {
+          try {
+            const newSettings = evt.settings as GameSettings & { selectCategories?: boolean; selectedCategoryIds?: string[] };
+            const language = ((): string => {
+              if (typeof window === 'undefined') return 'de';
+              const w = window as unknown as { i18next?: { language?: string } };
+              return w.i18next?.language || 'de';
+            })();
+            provider = await createQuestionProvider({
+              categoriesPerGame: newSettings.categoriesPerGame ?? ctx.config.gameSettings?.categoriesPerGame ?? 5,
+              questionsPerCategory: newSettings.questionsPerCategory ?? ctx.config.gameSettings?.questionsPerCategory ?? 8,
+              maxQuestionsTotal: newSettings.maxQuestionsTotal ?? ctx.config.gameSettings?.maxQuestionsTotal ?? 40,
+              selectedCategoryIds: newSettings.selectedCategoryIds ?? [],
+              manualCategorySelection: !!newSettings.selectCategories,
+              shuffleQuestions: newSettings.shuffleQuestions !== false,
+              shuffleCategories: newSettings.shuffleCategories !== false,
+              language,
+              allowRepeatQuestions: !!newSettings.allowRepeatQuestions
+            });
+            // Notify content advanced so UI refreshes indexes
+            const total = provider.progress().total;
+            ctx.eventBus.publish({ type: 'CONTENT/NEXT', index: Math.min(provider.progress().index, total - 1) });
+          } catch (err) {
+            console.error('🎮 Failed to rebuild provider after settings update:', err);
+          }
+        }
+      });
     }
   },
   registerScreens() {

@@ -49,6 +49,22 @@
       "versionDisplay": true,
       "darkModeToggle": true
     },
+    "settings": {
+      "fields": [
+        { "key": "categoriesPerGame", "type": "number", "label": "settings.categories_per_game", "group": "content", "min": 1, "max": 20, "step": 1, "order": 1 },
+        { "key": "questionsPerCategory", "type": "number", "label": "settings.questions_per_category", "group": "content", "min": 1, "max": 50, "step": 1, "order": 2 },
+        { "key": "maxQuestionsTotal", "type": "number", "label": "settings.max_questions_total", "group": "content", "min": 1, "max": 100, "step": 1, "order": 3 },
+
+        { "key": "allowRepeatQuestions", "type": "boolean", "label": "settings.allow_repeat_questions", "group": "behavior", "order": 1 },
+        { "key": "shuffleQuestions", "type": "boolean", "label": "settings.shuffle_questions", "group": "behavior", "order": 2 },
+        { "key": "shuffleCategories", "type": "boolean", "label": "settings.shuffle_categories", "group": "behavior", "order": 3 },
+        { "key": "allowSkipQuestions", "type": "boolean", "label": "settings.allow_skip_questions", "group": "behavior", "order": 4 },
+        { "key": "showProgress", "type": "boolean", "label": "settings.show_progress", "group": "behavior", "order": 5 },
+
+        { "key": "enableSounds", "type": "boolean", "label": "settings.enable_sounds", "group": "experience", "order": 1 },
+        { "key": "enableAnimations", "type": "boolean", "label": "settings.enable_animations", "group": "experience", "order": 2 }
+      ]
+    },
     "branding": {
       "showFrameworkBadge": true,
       "gameName": "BlameGame",

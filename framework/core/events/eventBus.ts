@@ -10,6 +10,7 @@ export type GameEvent =
   | { type: 'PHASE/EXIT'; phaseId: string }
   | { type: 'ACTION/DISPATCH'; action: string; payload?: unknown }
   | { type: 'CONTENT/NEXT'; index: number }
+  | { type: 'SETTINGS/UPDATED'; gameId: string; settings: unknown }
   | { type: 'GAME/COMPLETE'; summary?: unknown }
   | { type: 'ERROR'; error: string; meta?: Record<string, unknown> };
 

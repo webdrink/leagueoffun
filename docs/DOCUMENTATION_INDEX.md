@@ -67,6 +67,7 @@ Architecture Overview → Framework Core → Game Modules → Component System
 
 ### Essential Guides
 - **[Creating Components](guides/creating-components.md)** - Component development patterns
+- **[Config-Driven Settings](guides/config-driven-settings.md)** - Build Settings UI from game.json
 - **[Internationalization](guides/internationalization.md)** - Multi-language support ✨
 - **[Testing](guides/testing.md)** - Testing strategies and tools ✨
 - **[Animations](guides/animations.md)** - Using Framer Motion effectively
