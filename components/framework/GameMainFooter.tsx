@@ -27,6 +27,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../core/Button';
+import FooterButton from '../core/FooterButton';
 import { useGameStateStore, useBlameGameStore, selectCurrentPlayer, selectIsInBlamedPhase } from '../../store';
 import useTranslation from '../../hooks/useTranslation';
 
@@ -110,14 +111,13 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
     <div className="flex justify-between items-center space-x-4 w-full max-w-md mx-auto">
       {secondaryAction && (
         <motion.div variants={itemVariants}>
-          <Button
+          <FooterButton
             onClick={secondaryAction.onClick}
             disabled={secondaryAction.disabled || loading}
-            variant={secondaryAction.variant || 'outline'}
             className={`${secondaryAction.className || ''} px-4 py-2`}
           >
             {secondaryAction.label}
-          </Button>
+          </FooterButton>
         </motion.div>
       )}
       
@@ -127,7 +127,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
             onClick={primaryAction.onClick}
             disabled={primaryAction.disabled || loading}
             variant={primaryAction.variant || 'default'}
-            className={`${primaryAction.className || ''} w-full px-6 py-3`}
+            className={`${primaryAction.className || ''} w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl`}
           >
             {primaryAction.label}
           </Button>
@@ -147,19 +147,13 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
               variants={itemVariants}
               transition={{ delay: index * 0.05 }}
             >
-              <Button
+              <FooterButton
                 onClick={option.onClick}
                 disabled={option.disabled || loading}
-                className={`
-                  ${option.className || ''} 
-                  w-full py-3 text-sm
-                  bg-white/90 hover:bg-white text-purple-700
-                  border border-purple-200 hover:border-purple-300
-                  transition-all hover:scale-105
-                `}
+                className={`${option.className || ''} w-full py-3 text-sm`}
               >
                 {option.label}
-              </Button>
+              </FooterButton>
             </motion.div>
           ))}
         </div>
@@ -193,7 +187,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
             onClick={nextBlameAction.onClick}
             disabled={nextBlameAction.disabled || loading}
             variant="default"
-            className={`${nextBlameAction.className || ''} px-8 py-3 bg-purple-600 hover:bg-purple-700`}
+            className={`${nextBlameAction.className || ''} px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl`}
           >
             {nextBlameAction.label}
           </Button>
@@ -220,20 +214,18 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
                   variants={itemVariants}
                   transition={{ delay: index * 0.05 }}
                 >
-                  <Button
+                  <FooterButton
                     onClick={option.onClick}
                     disabled={option.disabled || isSelf || loading}
                     className={`
                       ${option.className || ''} 
                       w-full py-3 text-sm font-semibold
-                      bg-pink-400 hover:bg-pink-200 text-purple-700
-                      transition-all hover:scale-105
-                      ${isSelf ? 'opacity-60 cursor-not-allowed !bg-gray-300 !text-gray-500' : ''}
+                      ${isSelf ? 'opacity-60 cursor-not-allowed !bg-gray-700/60 !text-gray-400 !border-gray-600/80' : ''}
                     `}
                     title={isSelf ? t('questions.cannot_blame_self') : t('questions.blame_player', { name: option.label })}
                   >
                     {option.label}
-                  </Button>
+                  </FooterButton>
                 </motion.div>
               );
             })}
@@ -253,7 +245,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
             onClick={primaryAction.onClick}
             disabled={primaryAction.disabled || loading}
             variant={primaryAction.variant || 'default'}
-            className={`${primaryAction.className || ''} w-full py-3`}
+            className={`${primaryAction.className || ''} w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl`}
           >
             {primaryAction.label}
           </Button>

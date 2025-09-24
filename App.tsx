@@ -49,6 +49,8 @@ import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
 import { LOADING_QUOTES, initialGameSettings } from './constants';
 import { getCategoriesWithCounts } from './lib/utils/arrayUtils';
 import { useBlameGameStore } from './store/BlameGameStore';
+import { useFrameworkEventBus } from './hooks/useFrameworkEventBus';
+import { dispatchAdvance, dispatchSelectTarget, createDispatchContext } from './lib/utils/frameworkActions';
 
 function App() {
   const { soundEnabled, toggleSound, playSound, volume, setVolume } = useSound();
@@ -105,6 +107,12 @@ function App() {
 
   // State for debug panel
   const [showDebug, setShowDebug] = useState(false);
+  
+  // Access framework EventBus for debug integration
+  const frameworkEventBus = useFrameworkEventBus();
+  
+  // Create dispatch context for framework actions
+  const dispatchContext = createDispatchContext(frameworkEventBus);
 
   const getEmoji = useCallback((categoryName: string): string => {
     // Find in current round first, then all questions as fallback
@@ -249,121 +257,160 @@ function App() {
       setCurrentLoadingQuote(''); // Or some default if no quotes are active
     }
   }, [quoteIndex, activeLoadingQuotes]);
-  const handleStartGameFlow = async () => {
-    // Check first if we're in "nameBlame" mode but don't have enough players
-    if (gameSettings.gameMode === 'nameBlame' && players.filter(p => p.name.trim() !== '').length < 3) {
-      setGameStep('playerSetup');
-      return;
+  // Shared procedure to go into loading, prepare round, then enter game
+  const proceedToLoadingAndPrepare = useCallback(async () => {
+    console.log(`🎯 FLOW: Proceeding to loading - Mode: ${gameSettings.gameMode}, Players: ${players.filter(p => p.name.trim() !== '').length}, GameStep: ${gameStep}`);
+    // Safety guard: In NameBlame mode we must have ≥3 players before any loading
+    if (gameSettings.gameMode === 'nameBlame') {
+      const activePlayersCount = players.filter(p => p.name.trim() !== '').length;
+      if (activePlayersCount < 3) {
+        console.log(`🎯 SAFEGUARD: NameBlame with insufficient players (${activePlayersCount}/3) → playerSetup`);
+        setGameStep('playerSetup');
+        return;
+      } else {
+        console.log(`🎯 SAFEGUARD: NameBlame with sufficient players (${activePlayersCount}/3) - Continuing to loading`);
+      }
     }
-    
-    // Check if we should go to the category selection screen
-    if (gameSettings.selectCategories && gameStep === 'intro') {
-      setGameStep('categoryPick');
-      return;
-    }
-    
     // Check for ongoing data loading
     if (isLoadingQuestions) {
+      console.log('🎯 Questions still loading - Showing error');
       setErrorLoadingQuestions(t('error.questionsStillLoading'));
-      return; // Don't proceed if initial questions are still loading
+      return;
     }
-    
+
     // If we have no questions available at all (even after loading completed)
     if (!isLoadingQuestions && allQuestions.length === 0) {
+      console.log('🎯 No questions available - Showing error');
       setErrorLoadingQuestions(t('error.noQuestionsAvailable'));
       return;
     }
-    
-    setErrorLoadingQuestions(null); // Clear any previous errors
-    
-    // Start loading animation immediately to provide visual feedback
+
+    console.log('🎯 All checks passed - Starting loading animation');
     setGameStep('loading');
-    
-    // Use the predefined loading quotes from constants
     setActiveLoadingQuotes(LOADING_QUOTES);
     setQuoteIndex(0);
-    
-    // Set up the cycling of quotes during loading
+
     const quoteTimer = setInterval(() => {
-      // Interval will now use activeLoadingQuotes via the useEffect dependency
       setQuoteIndex(prev => prev + 1);
     }, gameSettings.loadingQuoteIntervalMs || 2000);
-    
+
     try {
-      // Prepare questions for the round - this might take a moment
       console.log('Preparing round questions...');
       const success = await prepareRoundQuestions(gameSettings);
-      
-      // Handle the case where prepareRoundQuestions fails
-      if (!success) { // Rely solely on the success flag
+      if (!success) {
         clearInterval(quoteTimer);
         setGameStep('intro');
         setErrorLoadingQuestions(t('error.noQuestionsForRound'));
         return;
       }
 
-      // Ensure we show the loading animation for at least the minimum time
       const minLoadingDuration = gameSettings.rouletteDurationMs || 3000;
       setTimeout(() => {
         clearInterval(quoteTimer);
-        setGameStep('game'); // This will trigger the useEffect to set stablePlayerOrderForRound
-        setCurrentPlayerIndex(0); // Initialize for the new round
-        
-        // Initialize blame round for NameBlame mode
+        setGameStep('game');
+        setCurrentPlayerIndex(0);
         if (gameSettings.gameMode === 'nameBlame') {
-          // Will be set up in the useEffect when stablePlayerOrderForRound is set
           console.log('🎯 NameBlame mode: Blame round will be initialized after player order is set');
         }
-        
         playSound('game_start');
       }, minLoadingDuration);
     } catch (error) {
       console.error('Error preparing round:', error);
-      clearInterval(quoteTimer);
       setGameStep('intro');
       setErrorLoadingQuestions(t('error.failedToLoadQuestions'));
     }
-  };
-  
-  const handlePlayerSetupComplete = async () => {
-    const activePlayers = players.filter(p => p.name.trim() !== '');
-    const minPlayersNeeded = gameSettings.gameMode === 'nameBlame' ? 3 : 2;
-    
-    if (activePlayers.length < minPlayersNeeded) {
+  }, [
+    allQuestions.length,
+    gameSettings,
+    gameStep,
+    isLoadingQuestions,
+    players,
+    prepareRoundQuestions,
+    t,
+    playSound
+  ]);
+
+  // Start flow from Intro screen
+  const handleStartFromIntro = useCallback(async () => {
+    console.log(`🎯 handleStartFromIntro - Mode: ${gameSettings.gameMode}, GameStep: ${gameStep}, SelectCategories: ${gameSettings.selectCategories}`);
+    setErrorLoadingQuestions(null);
+
+    // NameBlame must go to setup first – no loading before setup
+    if (gameSettings.gameMode === 'nameBlame') {
+      console.log('🎯 NameBlame from Intro → playerSetup (DIRECT)');
+      setGameStep('playerSetup');
       return;
     }
-    handleStartGameFlow();
+
+    // Optional category selection only from Intro
+    if (gameSettings.selectCategories) {
+      console.log('🎯 Category selection enabled - Going to categoryPick');
+      setGameStep('categoryPick');
+      return;
+    }
+
+    console.log('🎯 Classic mode - Going to loading via proceedToLoadingAndPrepare');
+    await proceedToLoadingAndPrepare();
+  }, [gameSettings, gameStep, proceedToLoadingAndPrepare]);
+
+  // Start flow after Player Setup
+  const handleStartAfterSetup = useCallback(async () => {
+    console.log('🎯 handleStartAfterSetup called');
+    const activePlayers = players.filter(p => p.name.trim() !== '');
+    const minPlayersNeeded = gameSettings.gameMode === 'nameBlame' ? 3 : 2;
+    if (activePlayers.length < minPlayersNeeded) {
+      console.log(`❌ Not enough players (${activePlayers.length}/${minPlayersNeeded})`);
+      return;
+    }
+    await proceedToLoadingAndPrepare();
+  }, [players, gameSettings.gameMode, proceedToLoadingAndPrepare]);
+  
+  // Backward compatibility if needed
+  const handlePlayerSetupComplete = async () => {
+    await handleStartAfterSetup();
   };
   const handleNextQuestion = () => {
     console.log(`🎯 USER ACTION: Next question clicked - Current question: ${currentQuestionIndexFromHook + 1}/${currentRoundQuestions.length}, Mode: ${gameSettings.gameMode}`);
     
-    if (currentQuestionIndexFromHook < currentRoundQuestions.length - 1) {
-      advanceToNextQuestion();
-      if (gameSettings.gameMode === 'nameBlame') {
-        if (stablePlayerOrderForRound.length > 0) {
-          const previousPlayerIndex = currentPlayerIndex;
-          const nextPlayerIndex = (currentPlayerIndex + 1) % stablePlayerOrderForRound.length;
-          setCurrentPlayerIndex(nextPlayerIndex);
-          console.log(`🔄 PLAYER TURN SWITCH (NameBlame): ${stablePlayerOrderForRound[previousPlayerIndex]?.name} → ${stablePlayerOrderForRound[nextPlayerIndex]?.name} (index ${previousPlayerIndex} → ${nextPlayerIndex})`);
-          console.log(`📊 Active players order:`, stablePlayerOrderForRound.map((p, i) => `${i}: ${p.name}`));
+    // Create legacy handler for fallback
+    const legacyAdvanceHandler = () => {
+      if (currentQuestionIndexFromHook < currentRoundQuestions.length - 1) {
+        advanceToNextQuestion();
+        if (gameSettings.gameMode === 'nameBlame') {
+          if (stablePlayerOrderForRound.length > 0) {
+            const previousPlayerIndex = currentPlayerIndex;
+            const nextPlayerIndex = (currentPlayerIndex + 1) % stablePlayerOrderForRound.length;
+            setCurrentPlayerIndex(nextPlayerIndex);
+            console.log(`🔄 PLAYER TURN SWITCH (NameBlame): ${stablePlayerOrderForRound[previousPlayerIndex]?.name} → ${stablePlayerOrderForRound[nextPlayerIndex]?.name} (index ${previousPlayerIndex} → ${nextPlayerIndex})`);
+            console.log(`📊 Active players order:`, stablePlayerOrderForRound.map((p, i) => `${i}: ${p.name}`));
+          } else {
+            console.error("❌ ERROR: stablePlayerOrderForRound is empty in handleNextQuestion (NameBlame). Turn cannot advance correctly.");
+            console.error("🔍 DEBUG INFO:", { 
+              gameStep, 
+              gameMode: gameSettings.gameMode, 
+              playersCount: players.length, 
+              currentPlayerIndex 
+            });
+          }
         } else {
-          console.error("❌ ERROR: stablePlayerOrderForRound is empty in handleNextQuestion (NameBlame). Turn cannot advance correctly.");
-          console.error("🔍 DEBUG INFO:", { 
-            gameStep, 
-            gameMode: gameSettings.gameMode, 
-            playersCount: players.length, 
-            currentPlayerIndex 
-          });
+          console.log(`➡️ CLASSIC MODE: Advanced to question ${currentQuestionIndexFromHook + 2}/${currentRoundQuestions.length}`);
         }
+        playSound('new_question');
       } else {
-        console.log(`➡️ CLASSIC MODE: Advanced to question ${currentQuestionIndexFromHook + 2}/${currentRoundQuestions.length}`);
+        console.log(`🏁 GAME END: Reached final question, showing summary`);
+        setGameStep('summary'); 
+        playSound('summary_fun');
       }
-      playSound('new_question');
-    } else {
-      console.log(`🏁 GAME END: Reached final question, showing summary`);
-      setGameStep('summary'); 
-      playSound('summary_fun');
-    }
+    };
+
+    // Use framework dispatcher if available, otherwise fall back to legacy handler
+    dispatchAdvance(dispatchContext, legacyAdvanceHandler, {
+      currentIndex: currentQuestionIndexFromHook,
+      totalQuestions: currentRoundQuestions.length,
+      gameMode: gameSettings.gameMode,
+      currentPlayerIndex,
+      playersCount: stablePlayerOrderForRound.length
+    });
   };
 
   const handlePreviousQuestion = () => {
@@ -390,83 +437,89 @@ function App() {
     const currentQuestionText = currentQuestion?.text || 'Unknown question';
     console.log(`🎯 USER ACTION: Blame selected - Player blamed: "${blamedPlayerName}" for question: "${currentQuestionText}"`);
     
-    // Edge case: Ensure game state is valid
-    if (stablePlayerOrderForRound.length === 0) {
-      console.error("❌ ERROR: stablePlayerOrderForRound is empty in handleBlame. This indicates a problem with game state setup. Reverting to intro.");
-      console.error("🔍 DEBUG INFO:", { 
-        gameStep, 
-        gameMode: gameSettings.gameMode, 
-        playersCount: players.length, 
-        currentPlayerIndex 
-      });
-      setGameStep('intro'); 
-      return;
-    }
-
-    // Edge case: Ensure sufficient players for NameBlame mode
-    if (gameSettings.gameMode === 'nameBlame' && stablePlayerOrderForRound.length < 3) {
-      console.error("❌ EDGE CASE: Insufficient players for NameBlame mode in handleBlame");
-      setGameStep('playerSetup');
-      return;
-    }
-
-    // Ensure currentPlayerIndex is valid for stablePlayerOrderForRound.
-    const safeCurrentPlayerIndex = currentPlayerIndex % stablePlayerOrderForRound.length;
-    const blamingPlayer = stablePlayerOrderForRound[safeCurrentPlayerIndex];
-
-    // Edge case: Ensure blaming player exists
-    if (!blamingPlayer) {
-      console.error("❌ EDGE CASE: Could not identify blaming player in handleBlame");
-      setGameStep('intro');
-      return;
-    }
-
-    console.log(`👤 BLAME DETAILS: ${blamingPlayer?.name} (index ${safeCurrentPlayerIndex}) blamed ${blamedPlayerName}`);
-    console.log(`📊 Current player order:`, stablePlayerOrderForRound.map((p, i) => `${i}${i === safeCurrentPlayerIndex ? '*' : ''}: ${p.name}`));
-
-    if (blamingPlayer && currentQuestion) {
-      // Record blame in both stores
-      recordNameBlame(blamingPlayer.name, blamedPlayerName, currentQuestion.text);
-      recordBlameInStore(blamingPlayer.name, blamedPlayerName, currentQuestion.text);
-      
-      console.log(`📝 BLAME RECORDED: ${blamingPlayer.name} → ${blamedPlayerName} for "${currentQuestion.text}"`);
-      console.log(`🔍 DEBUG: nameBlameMode = ${nameBlameMode}, gameSettings.gameMode = ${gameSettings.gameMode}`);
-      
-      // Enhanced NameBlame flow - show notification and transition to 'reveal' phase
-      if (gameSettings.gameMode === 'nameBlame') {
-        // Only start a blame round once per question; detect by empty playersWhoBlamedThisQuestion and matching questionId
-        const questionId = `q${currentQuestionIndexFromHook}-${currentQuestion.text.slice(0, 10)}`;
-        const activePlayerNames = stablePlayerOrderForRound.map(p => p.name);
-        const existingRoundQuestionId = useBlameGameStore.getState().currentQuestionId;
-        if (!existingRoundQuestionId || existingRoundQuestionId !== questionId) {
-          startBlameRound(questionId, activePlayerNames);
-        }
-
-        updateBlameState({
-          phase: 'reveal',
-          currentBlamer: blamingPlayer.name,
-          currentBlamed: blamedPlayerName,
-          currentQuestion: currentQuestion.text
+    // Create legacy handler for fallback
+    const legacyBlameHandler = (target: string) => {
+      // Edge case: Ensure game state is valid
+      if (stablePlayerOrderForRound.length === 0) {
+        console.error("❌ ERROR: stablePlayerOrderForRound is empty in handleBlame. This indicates a problem with game state setup. Reverting to intro.");
+        console.error("🔍 DEBUG INFO:", { 
+          gameStep, 
+          gameMode: gameSettings.gameMode, 
+          playersCount: players.length, 
+          currentPlayerIndex 
         });
-        console.log(`🎯 NAMEBLAME: Transitioning to 'reveal' phase - ${blamedPlayerName} was blamed by ${blamingPlayer.name}`);
-        console.log(`🔍 DEBUG: Updated blame state to 'reveal' phase`);
-        return; // Stay on the current question to show blame context
-      } else {
-        console.log(`❌ DEBUG: nameBlameMode is false, not transitioning to reveal phase`);
+        setGameStep('intro'); 
+        return;
       }
-    } else {
-      console.error("❌ ERROR: Could not identify blaming player or current question in handleBlame.");
-      console.error("🔍 DEBUG INFO:", { 
-        blamingPlayer: blamingPlayer?.name, 
-        currentQuestion: currentQuestion?.text, 
-        safeCurrentPlayerIndex 
-      });
-    }
-    
-    // Classic mode behavior - only advance in classic mode
-    if (gameSettings.gameMode === 'classic') {
-      advanceToNextPlayer();
-    }
+
+      // Edge case: Ensure sufficient players for NameBlame mode
+      if (gameSettings.gameMode === 'nameBlame' && stablePlayerOrderForRound.length < 3) {
+        console.error("❌ EDGE CASE: Insufficient players for NameBlame mode in handleBlame");
+        setGameStep('playerSetup');
+        return;
+      }
+
+      // Ensure currentPlayerIndex is valid for stablePlayerOrderForRound.
+      const safeCurrentPlayerIndex = currentPlayerIndex % stablePlayerOrderForRound.length;
+      const blamingPlayer = stablePlayerOrderForRound[safeCurrentPlayerIndex];
+
+      // Edge case: Ensure blaming player exists
+      if (!blamingPlayer) {
+        console.error("❌ EDGE CASE: Could not identify blaming player in handleBlame");
+        setGameStep('intro');
+        return;
+      }
+
+      console.log(`👤 BLAME DETAILS: ${blamingPlayer?.name} (index ${safeCurrentPlayerIndex}) blamed ${target}`);
+      console.log(`📊 Current player order:`, stablePlayerOrderForRound.map((p, i) => `${i}${i === safeCurrentPlayerIndex ? '*' : ''}: ${p.name}`));
+
+      if (blamingPlayer && currentQuestion) {
+        // Record blame in both stores
+        recordNameBlame(blamingPlayer.name, target, currentQuestion.text);
+        recordBlameInStore(blamingPlayer.name, target, currentQuestion.text);
+        
+        console.log(`📝 BLAME RECORDED: ${blamingPlayer.name} → ${target} for "${currentQuestion.text}"`);
+        console.log(`🔍 DEBUG: nameBlameMode = ${nameBlameMode}, gameSettings.gameMode = ${gameSettings.gameMode}`);
+        
+        // Enhanced NameBlame flow - show notification and transition to 'reveal' phase
+        if (gameSettings.gameMode === 'nameBlame') {
+          // Only start a blame round once per question; detect by empty playersWhoBlamedThisQuestion and matching questionId
+          const questionId = `q${currentQuestionIndexFromHook}-${currentQuestion.text.slice(0, 10)}`;
+          const activePlayerNames = stablePlayerOrderForRound.map(p => p.name);
+          const existingRoundQuestionId = useBlameGameStore.getState().currentQuestionId;
+          if (!existingRoundQuestionId || existingRoundQuestionId !== questionId) {
+            startBlameRound(questionId, activePlayerNames);
+          }
+
+          updateBlameState({
+            phase: 'reveal',
+            currentBlamer: blamingPlayer.name,
+            currentBlamed: target,
+            currentQuestion: currentQuestion.text
+          });
+          console.log(`🎯 NAMEBLAME: Transitioning to 'reveal' phase - ${target} was blamed by ${blamingPlayer.name}`);
+          console.log(`🔍 DEBUG: Updated blame state to 'reveal' phase`);
+          return; // Stay on the current question to show blame context
+        } else {
+          console.log(`❌ DEBUG: nameBlameMode is false, not transitioning to reveal phase`);
+        }
+      } else {
+        console.error("❌ ERROR: Could not identify blaming player or current question in handleBlame.");
+        console.error("🔍 DEBUG INFO:", { 
+          blamingPlayer: blamingPlayer?.name, 
+          currentQuestion: currentQuestion?.text, 
+          safeCurrentPlayerIndex 
+        });
+      }
+      
+      // Classic mode behavior - only advance in classic mode
+      if (gameSettings.gameMode === 'classic') {
+        advanceToNextPlayer();
+      }
+    };
+
+    // Use framework dispatcher if available, otherwise fall back to legacy handler
+    dispatchSelectTarget(dispatchContext, legacyBlameHandler, blamedPlayerName);
   };
   
   // New function to handle "Next Blame" button in NameBlame mode
@@ -575,8 +628,16 @@ function App() {
             isLoading={isLoadingQuestions}
             nameBlameMode={gameSettings.gameMode === 'nameBlame'}
             soundEnabled={soundEnabled}
-            onStartGame={handleStartGameFlow}
-            onToggleNameBlame={(checked) => updateGameSettings({ gameMode: checked ? 'nameBlame' : 'classic' })}
+            onStartGame={handleStartFromIntro}
+            onToggleNameBlame={(checked) => {
+              console.log(`🎯 App: onToggleNameBlame called with checked=${checked}`);
+              updateGameSettings({ gameMode: checked ? 'nameBlame' : 'classic' });
+              // Also handle navigation here since onNameBlameModeChange is not working
+              if (checked) {
+                console.log(`🎯 App: NameBlame enabled, navigating to playerSetup`);
+                setGameStep('playerSetup');
+              }
+            }}
             onToggleSound={toggleSound}
             onVolumeChange={setVolume}
             volume={volume}
@@ -591,8 +652,10 @@ function App() {
             showCategorySelectToggle={true}
             onToggleCategorySelect={(checked) => updateGameSettings({ selectCategories: checked })}
             onNameBlameModeChange={(enabled) => {
+              console.log(`🎯 App: onNameBlameModeChange called with enabled=${enabled}`);
               if (enabled) {
                 // Force navigation to setup screen when NameBlame is enabled
+                console.log(`🎯 App: Setting gameStep to 'playerSetup'`);
                 setGameStep('playerSetup');
               }
             }}
@@ -658,7 +721,14 @@ function App() {
             onConfirm={() => {
               if (selectedCategories.length > 0) {
                 updateGameSettings({ selectedCategoryIds: selectedCategories });
-                handleStartGameFlow();
+                // After category selection, check NameBlame mode and route accordingly
+                if (gameSettings.gameMode === 'nameBlame') {
+                  console.log('🎯 Category selection confirmed - NameBlame mode → playerSetup');
+                  setGameStep('playerSetup');
+                } else {
+                  console.log('🎯 Category selection confirmed - Classic mode → loading');
+                  proceedToLoadingAndPrepare();
+                }
               }
             }}
             maxSelectable={gameSettings.categoryCount}
@@ -724,8 +794,10 @@ function App() {
           questionStats={{
             totalQuestions: allQuestions.length,
             playedQuestions: 0, // Add this if tracking played questions
-            availableQuestions: currentRoundQuestions.length,            categories: questionStats.categories
+            availableQuestions: currentRoundQuestions.length,
+            categories: questionStats.categories
           }}
+          eventBus={frameworkEventBus || undefined}
         />
       )}
       

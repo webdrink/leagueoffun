@@ -34,7 +34,11 @@ export {
   selectBlameStats,
   selectIsInBlamedPhase,
   selectIsInSelectingPhase,
-  type BlameState,
-  type BlameActions,
-  type BlameGameStore,
 } from './BlameGameStore';
+
+// Backward compatibility stub types (will be deprecated):
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface BlameState {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface BlameActions {}
+export type BlameGameStore = unknown;

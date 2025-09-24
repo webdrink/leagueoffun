@@ -11,12 +11,13 @@
  */
 
 import { test, expect } from '@playwright/test';
-import type { BlameGameStore } from '../../store/BlameGameStore';
+// Updated: legacy BlameGameStore type removed during modular migration.
+// import type { BlameGameStore } from '../../store/BlameGameStore';
 
 // Provide typing for the injected store reference placed on window by the app runtime
-interface BlameGameStoreHandle {
-  getState: () => BlameGameStore;
-}
+// Temporary generic store typing; will be replaced with module slice type after full migration.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+interface BlameGameStoreHandle { getState: () => any; }
 
 declare global {
   interface Window {

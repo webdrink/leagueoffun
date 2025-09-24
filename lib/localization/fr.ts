@@ -39,6 +39,12 @@ const fr: Translations = {
   'settings.volume': 'Volume',
   'settings.animations': 'Animations',
   'settings.reset_data': 'Réinitialiser les données',
+  // Dynamic UI groups
+  'settings.group.content': 'Contenu',
+  'settings.group.behavior': 'Comportement',
+  'settings.group.experience': 'Expérience',
+  'settings.group.general': 'Général',
+  'settings.no_dynamic_fields': 'Aucun paramètre dynamique défini. Utilisation des valeurs par défaut.',
   
   // Player setup
   'players.setup_title': 'Configuration des joueurs',
@@ -80,6 +86,14 @@ const fr: Translations = {
   'questions.summary': 'Résumé',
   'questions.next': 'Suivant',
   'questions.show_summary': 'Afficher le résumé',
+
+  // NameBlame specific
+  'question.blame_revealed': 'Blâme Révélé!',
+  'question.was_blamed': 'a été blâmé',
+  'question.select_player': 'Sélectionner un joueur',
+  'question.progress': 'Question {{current}} de {{total}}',
+  'question.view_results': 'Voir les Résultats',
+  'question.next_question': 'Question Suivante',
   
   // Summary
   'summary.title': 'Partie terminée!',
@@ -89,11 +103,11 @@ const fr: Translations = {
   'summary.most_blamed': 'Le plus blâmé',
   'summary.most_blamed_singular': 'Le plus blâmé',
   'summary.most_blamed_plural': 'Les plus blâmés',
-  'summary.blame_count': '{count} blâme{s}',
+  'summary.blame_count': '{{count}} blâme{{s}}',
   'summary.plural_suffix': 's',
   'summary.no_blames_given': 'Aucune accusation distribuée!',
   'summary.team_round': 'Tour d\'équipe',
-  'summary.team_message': 'Bon travail, équipe! {activePlayersCount} joueurs ont participé.',
+  'summary.team_message': 'Bon travail, équipe! {{activePlayersCount}} joueurs ont participé.',
   'summary.new_game': 'Nouveau jeu',
   'summary.play_again': 'Rejouer',
   'summary.back_to_start': 'Retour au début',
@@ -138,7 +152,11 @@ const fr: Translations = {
   'debug.questions': 'Questions',
   'debug.animations': 'Animations',
   'debug.language': 'Langue',
-  'debug.reset_data': 'Réinitialiser les Données'
+  'debug.reset_data': 'Réinitialiser les Données',
+
+  // Footer
+  'footer.support_message': 'Soutenez-nous pour plus de jeux !',
+  'footer.donate_message': 'Votre don nous aide à créer de meilleurs jeux.'
 };
 
 export default fr;

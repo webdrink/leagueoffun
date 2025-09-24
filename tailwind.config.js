@@ -6,6 +6,7 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx}", // Include all TS/JS files in components folder
     "./hooks/**/*.{js,ts,jsx,tsx}", // Added hooks directory
   ],
+  darkMode: 'class', // Enable dark mode based on class toggle (was 'media')
   theme: {
     extend: {
       keyframes: {

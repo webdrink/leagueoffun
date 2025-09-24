@@ -10,7 +10,9 @@
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
-    "metadata": {},
+    "metadata": {
+      "actualWorkers": 1
+    },
     "preserveOutput": "always",
     "reporter": [
       [
@@ -40,7 +42,9 @@
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "foundation-tests",
         "name": "foundation-tests",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -48,13 +52,15 @@
         "testMatch": [
           "/foundation\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "classic-mode-flows",
         "name": "classic-mode-flows",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -62,13 +68,15 @@
         "testMatch": [
           "/flows\\/classic-mode\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "nameblame-mode-flows",
         "name": "nameblame-mode-flows",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -76,13 +84,15 @@
         "testMatch": [
           "/flows\\/nameblame-mode\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "component-tests",
         "name": "component-tests",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -90,13 +100,15 @@
         "testMatch": [
           "/components\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "edge-cases",
         "name": "edge-cases",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -104,13 +116,15 @@
         "testMatch": [
           "/edge-cases\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "performance-tests",
         "name": "performance-tests",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -118,13 +132,15 @@
         "testMatch": [
           "/performance\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "cross-browser-firefox",
         "name": "cross-browser-firefox",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -132,13 +148,15 @@
         "testMatch": [
           "/flows\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "cross-browser-webkit",
         "name": "cross-browser-webkit",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -146,13 +164,15 @@
         "testMatch": [
           "/flows\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "mobile-chrome",
         "name": "mobile-chrome",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -160,13 +180,15 @@
         "testMatch": [
           "/flows\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "mobile-safari",
         "name": "mobile-safari",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -174,13 +196,15 @@
         "testMatch": [
           "/flows\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
       },
       {
         "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "accessibility-tests",
         "name": "accessibility-tests",
         "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
@@ -188,7 +212,23 @@
         "testMatch": [
           "/accessibility\\/.*\\.spec\\.ts/"
         ],
-        "timeout": 60000
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "fixes-tests",
+        "name": "fixes-tests",
+        "testDir": "C:/Users/pbziu/OneDrive/Dokumente/Development/blamegame/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/fixes\\/.*\\.spec\\.ts/"
+        ],
+        "timeout": 30000
       }
     ],
     "shard": null,
@@ -203,17 +243,119 @@
       "timeout": 120000
     }
   },
-  "suites": [],
-  "errors": [
+  "suites": [
     {
-      "message": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments.",
-      "stack": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments."
+      "title": "foundation\\app-initialization.spec.ts",
+      "file": "foundation/app-initialization.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Foundation: App Initialization",
+          "file": "foundation/app-initialization.spec.ts",
+          "line": 18,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should display intro screen with start button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "foundation-tests",
+                  "projectName": "foundation-tests",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1834,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null\n"
+                        },
+                        {
+                          "text": "🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions\n"
+                        },
+                        {
+                          "text": "🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions\n"
+                        },
+                        {
+                          "text": "🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories\n"
+                        },
+                        {
+                          "text": "🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state\n"
+                        },
+                        {
+                          "text": "🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state\n"
+                        },
+                        {
+                          "text": "⚡ PERFORMANCE: loadTime = 775ms\n"
+                        },
+                        {
+                          "text": "🎯 USER ACTION: Game title visible\n"
+                        },
+                        {
+                          "text": "🎯 USER ACTION: Start button visible\n"
+                        },
+                        {
+                          "text": "🎯 USER ACTION: Settings button visible\n"
+                        },
+                        {
+                          "text": "📸 SCREENSHOT: app-initialization-intro-screen-intro-screen-1758716604950.png\n"
+                        },
+                        {
+                          "text": "📊 TEST REPORT: app-initialization-intro-screen\n"
+                        },
+                        {
+                          "text": "   Duration: 1386ms\n"
+                        },
+                        {
+                          "text": "   User Actions: 3\n"
+                        },
+                        {
+                          "text": "   State Changes: 0\n"
+                        },
+                        {
+                          "text": "   Errors: 0\n"
+                        },
+                        {
+                          "text": "   Screenshots: 1\n"
+                        },
+                        {
+                          "text": "   Avg Interaction Time: 0ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-24T12:23:23.599Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1f12a2e4de13a414e3ad-68b27464c961b426cb69",
+              "file": "foundation/app-initialization.spec.ts",
+              "line": 226,
+              "column": 7
+            }
+          ]
+        }
+      ]
     }
   ],
+  "errors": [],
   "stats": {
-    "startTime": "2025-09-08T09:08:59.135Z",
-    "duration": 3795.114,
-    "expected": 0,
+    "startTime": "2025-09-24T12:23:22.250Z",
+    "duration": 3410.049,
+    "expected": 1,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

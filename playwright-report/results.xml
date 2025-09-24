@@ -1,2 +1,27 @@
-<testsuites id="" name="" tests="0" failures="0" skipped="0" errors="0" time="3.795114">
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="3.410049">
+<testsuite name="foundation\app-initialization.spec.ts" timestamp="2025-09-24T12:23:22.416Z" hostname="foundation-tests" tests="1" failures="0" skipped="0" time="1.834" errors="0">
+<testcase name="Foundation: App Initialization › should display intro screen with start button" classname="foundation\app-initialization.spec.ts" time="1.834">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 775ms
+🎯 USER ACTION: Game title visible
+🎯 USER ACTION: Start button visible
+🎯 USER ACTION: Settings button visible
+📸 SCREENSHOT: app-initialization-intro-screen-intro-screen-1758716604950.png
+📊 TEST REPORT: app-initialization-intro-screen
+   Duration: 1386ms
+   User Actions: 3
+   State Changes: 0
+   Errors: 0
+   Screenshots: 1
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+</testsuite>
 </testsuites>

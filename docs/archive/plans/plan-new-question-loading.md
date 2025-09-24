@@ -1,109 +1,96 @@
-# Plan: New Question and Category Loading Strategy
+# Plan: New Question Loading Strategy
 
-This document outlines the strategy for implementing the new system for loading categories and questions in the BlameGame application. This approach aims to improve flexibility, maintainability, and multilingual support.
+**Date:** May 9, 2025
 
-## 1. Objectives
+**Goal:** Document and implement the refined question loading strategy centered around `useQuestions.ts` and `lib/utils/questionLoaders.ts`.
 
--   Dynamically load categories and their translations from a central `categories.json` file.
--   Randomly select a subset of available categories for each game session.
--   Load questions for the selected categories based on the user's current language setting.
--   Implement a robust fallback mechanism for missing language-specific question files.
--   Update game statistics (`questionStats`) to reflect the newly loaded questions.
+**Expected Behavior:**
+- All question and category data fetching is consolidated within `lib/utils/questionLoaders.ts`.
+- `getAssetsPath` is used for all fetches to `public/questions/*` for correct URL construction.
+- The `useQuestions` hook manages the state for all loaded questions (`allQuestions`), questions for the current round (`currentRoundQuestions`), loading status, and errors.
+- Game rounds are prepared by selecting a configurable number of categories (e.g., 10 by default from `gameSettings.categoryCount`) and a configurable number of questions per category (e.g., 10 by default from `gameSettings.questionsPerCategory`).
+- The total set of questions for a round (e.g., up to 100) is then shuffled.
+- `App.tsx` utilizes the `useQuestions` hook for all question-related data and logic, simplifying its own state management.
+- `questionStats` in `App.tsx` are derived from the questions provided by the `useQuestions` hook.
 
-## 2. Data Source Structure
+## Technical Steps
 
-Refer to `docs/question-category-structure.md` for the detailed file and directory structure. Key files involved:
--   `public/questions/categories.json`: Contains all category definitions and their translations.
--   `public/questions/{lang}/{category_id}.json`: Contains questions for a specific category in a specific language.
+1.  **`lib/utils/questionLoaders.ts` (Already Refactored):**
+    *   `loadCategoriesFromJson()`: Fetches `public/questions/categories.json`.
+    *   `loadQuestionsForCategory(categoryId, language)`: Fetches `public/questions/{lang}/{categoryId}.json`.
+    *   `loadQuestionsFromJson(language)`:
+        *   Loads all categories from `categories.json`.
+        *   For each category, attempts to load its language-specific question file.
+        *   Combines successfully loaded questions, enriching them with category name (translated) and emoji from the central `categories.json`.
+        *   Returns a flat array of `LoadedQuestion` objects.
+    *   `getFallbackQuestions()`: Provides a default set of questions if loading fails.
+    *   Ensures `getAssetsPath` (from `lib/utils/assetUtils.ts`) is used for constructing fetch URLs.
 
-## 3. Implementation Steps
+2.  **`hooks/useQuestions.ts` (Already Refactored):**
+    *   **State:**
+        *   `allQuestions: Question[]`: Stores all questions successfully loaded by `loadQuestionsFromJson` for the current language.
+        *   `currentRoundQuestions: Question[]`: Stores questions selected and shuffled for the current game round.
+        *   `currentQuestion: Question | undefined`: The currently active question.
+        *   `isLoading: boolean`: True while `loadQuestionsFromJson` is running.
+        *   `playedQuestions: string[]`: IDs of questions already played in the current session (persisted in localStorage).
+        *   `selectedCategories: string[]`: IDs of categories chosen for the current round.
+        *   `index: number`: Index of the `currentQuestion` within `currentRoundQuestions`.
+    *   **`loadQuestions` (callback, internally called on mount and language change):**
+        *   Calls `loadQuestionsFromJson` from `lib/utils/questionLoaders.ts`.
+        *   Populates `allQuestions` with the result, mapping `LoadedQuestion` to the app's `Question` type.
+        *   Handles errors and uses fallback questions if necessary.
+    *   **`prepareRoundQuestions(gameSettings: GameSettings)` (callback):**
+        *   Takes `categoryCount` and `questionsPerCategory` from `gameSettings`.
+        *   Randomly selects `categoryCount` category IDs from unique categories present in `allQuestions`.
+        *   For each selected category, filters questions from `allQuestions`, excluding already `playedQuestions`.
+        *   Shuffles and takes up to `questionsPerCategory` from each category's available pool.
+        *   Combines these into a single list, shuffles it, and sets `currentRoundQuestions`.
+        *   Resets `index` to 0.
+        *   Returns `true` if round preparation was successful (questions are available), `false` otherwise.
+    *   **Navigation functions:** `advanceToNextQuestion`, `goToPreviousQuestion`.
+    *   **Reset functions:** `resetQuestions`.
+    *   `useEffect` to call `loadQuestions` when `currentLanguage` (from `gameSettings`) changes.
 
-The core logic will reside primarily within the `useQuestions` hook, with potential modifications to `App.tsx` for state management and `lib/questionUtils.ts` for helper functions.
+3.  **`App.tsx` Integration (Partially Done, to be finalized):**
+    *   Instantiate `useQuestions(gameSettings)`.
+    *   Remove local state related to question loading, categories, and question lists.
+    *   Use `isLoading` from `useQuestions` for loading indicators.
+    *   Use `currentQuestion`, `currentRoundQuestions`, `index` from `useQuestions` to drive the `QuestionScreen`.
+    *   Call `prepareRoundQuestions` when starting a new game.
+    *   Update `questionStats` based on `currentRoundQuestions`.
+    *   Handle potential errors surfaced by `useQuestions` (e.g., if `prepareRoundQuestions` fails or initial load yields no questions).
 
-### Step 1: Load Categories (`useQuestions` hook)
+4.  **Game Flow for New Round:**
+    *   User initiates a new game.
+    *   `App.tsx` calls `await prepareRoundQuestions(gameSettings)` from the `useQuestions` hook.
+    *   If successful, `gameStep` transitions to `'game'`, and `QuestionScreen` displays `currentQuestion`.
+    *   If not, an error is shown, or the user is guided appropriately.
 
-1.  **Fetch `categories.json`**:
-    *   On initial load or when the hook is invoked, fetch `public/questions/categories.json`.
-    *   Store the parsed array of category objects in a state variable within the hook (e.g., `allCategories`).
-    *   Handle potential fetch errors (e.g., file not found).
+5.  **Configuration:**
+    *   Default `categoryCount` and `questionsPerCategory` are set to 10 in `constants.ts` (`initialGameSettings`). These values are used by `useQuestions` via the `gameSettings` prop.
 
-### Step 2: Select and Translate Categories for Game Session (`useQuestions` hook)
+## Impact on Existing Files
 
-1.  **Randomly Select 10 Categories**:
-    *   Once `allCategories` is populated, if there are more than 10 categories, randomly select 10 unique category `id`s. If 10 or fewer categories exist, select all of them.
-    *   Store these selected category `id`s (e.g., `selectedCategoryIds`).
-2.  **Fetch Translated Category Names**:
-    *   Based on the `gameSettings.language` and the `selectedCategoryIds`, extract the translated names from the `allCategories` data.
-    *   Store an array of objects, each containing the category `id`, its translated `name` for the current language, and its `emoji` (e.g., `currentCategories`). This will be used for display purposes.
+-   **`lib/utils/questionLoaders.ts`**: Centralized logic for data fetching. (Already done)
+-   **`hooks/useQuestions.ts`**: Core hook for question management and round preparation. (Already done)
+-   **`App.tsx`**: Simplified by delegating question logic to `useQuestions`. (Ongoing)
+-   **`constants.ts`**: `initialGameSettings` provides default counts for categories/questions per round. (Already configured)
+-   **`vite.config.ts`**: Ensure `questions/**` is in `includeAssets` for PWA. (Already done)
 
-### Step 3: Load Questions for Selected Categories (`useQuestions` hook)
+## Checklist
 
-This step will likely involve an asynchronous process, potentially using `Promise.all` to fetch multiple question files.
+-   [x] `lib/utils/questionLoaders.ts` fetches all raw data.
+-   [x] `lib/utils/questionLoaders.ts` uses `getAssetsPath`.
+-   [x] `hooks/useQuestions.ts` manages all question-related states.
+-   [x] `hooks/useQuestions.ts` implements `prepareRoundQuestions` with 10x10 logic (configurable via `gameSettings`).
+-   [x] `App.tsx` uses `useQuestions` for data and game logic.
+-   [x] `questionStats` in `App.tsx` is derived correctly.
+-   [x] Player setup and loading screen are integrated with the new flow in `App.tsx`.
+  - [x] `handleStartGameFlow` calls `prepareRoundQuestions` before `setGameStep('loading')`.
+  - [x] `LoadingContainer` receives categories from `currentRoundQuestions` and `getEmoji` from `App.tsx`.
+  - [x] `LoadingContainer` uses `currentQuote` from `App.tsx`, internal quote cycling removed.
+  - [x] `LoadingContainer` props updated to reflect changes (removed `loadingQuotes`).
+-   [x] Documentation (`QUESTIONS_CATEGORIES.md`, `DATA_STRUCTURE_OVERVIEW.md`, `MULTILINGUAL_STRATEGY.md`) updated.
+-   [x] This plan file (`plan-new-question-loading.md`) created.
 
-1.  **Iterate Through `selectedCategoryIds`**:
-    *   For each selected category `id`:
-        *   Construct the primary path to the question file: `public/questions/${gameSettings.language}/${category_id}.json`.
-        *   Attempt to fetch this file.
-2.  **Implement Fallback Logic**:
-    *   **If primary fetch fails (e.g., 404 error)**:
-        1.  Attempt to fetch the English version: `public/questions/en/${category_id}.json`.
-        2.  If English version fails, attempt to fetch the German version: `public/questions/de/${category_id}.json`.
-        3.  If all fallbacks fail, this category will have no questions for the current session. Log this event for debugging.
-    *   **If fetch is successful (primary or fallback)**:
-        *   Parse the JSON content (an array of question objects).
-        *   Add these questions to a temporary collection.
-3.  **Consolidate Loaded Questions**:
-    *   After attempting to load questions for all selected categories, consolidate all successfully fetched questions into a single array (e.g., `loadedQuestions`).
-    *   Store `loadedQuestions` in a state variable within the `useQuestions` hook. This will be the pool of questions for the game.
-
-### Step 4: Update Question Statistics (`App.tsx` or `useQuestions` hook)
-
-1.  **Calculate `questionStats`**:
-    *   Once `loadedQuestions` is populated, calculate the necessary statistics:
-        *   `totalQuestions`: Total number of questions in `loadedQuestions`.
-        *   `playedQuestionsCount`: Number of questions already played in the current session (from `localStorage` or game state).
-        *   `availableQuestions`: `totalQuestions - playedQuestionsCount`.
-        *   Potentially, a breakdown by category if needed for the debug panel.
-2.  **Update State**:
-    *   Update the `questionStats` state in `App.tsx` or expose it from the `useQuestions` hook.
-
-### Step 5: Handle Language Changes
-
-1.  **Re-trigger Loading**:
-    *   The `useQuestions` hook must re-execute the category selection, translation, and question loading process (Steps 2-4) whenever `gameSettings.language` changes.
-    *   This can be achieved by including `gameSettings.language` in the dependency array of a `useEffect` hook that orchestrates the loading.
-
-## 4. Error Handling
-
--   **`categories.json` not found**: Display a critical error to the user; the game cannot proceed.
--   **Question file not found (after fallbacks)**: Log the missing file. The game can proceed with fewer questions/categories. The UI should gracefully handle categories with no questions if necessary.
--   **Invalid JSON format**: Log the error and treat the file as missing.
-
-## 5. State Management
-
--   **`useQuestions` Hook**:
-    *   `allCategories: Category[]`
-    *   `selectedCategoryObjects: { id: string; name: string; emoji: string }[]` (translated for current language)
-    *   `loadedQuestions: Question[]`
-    *   `isLoading: boolean`
-    *   `error: string | null`
--   **`App.tsx`**:
-    *   `gameSettings: GameSettings` (includes `language`)
-    *   `questionStats: QuestionStats`
-
-## 6. Helper Functions (`lib/questionUtils.ts`)
-
--   Consider creating helper functions for:
-    *   Shuffling and selecting random categories.
-    *   Constructing file paths.
-    *   Fetching and parsing JSON with error handling.
-
-## 7. Testing Considerations
-
--   Test with various language settings.
--   Test fallback logic by temporarily renaming/removing question files.
--   Test behavior when `categories.json` is missing or malformed.
--   Verify `questionStats` are updated correctly.
--   Ensure UI updates correctly upon language change.
-
-This plan provides a roadmap for implementing the new question and category loading mechanism. Adjustments may be necessary as development progresses.
+**Plan Status:** In Progress (Verifying loading animation and final game flow testing)

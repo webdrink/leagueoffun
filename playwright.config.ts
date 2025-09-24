@@ -123,6 +123,13 @@ export default defineConfig({
       dependencies: ['foundation-tests'],
     },
 
+    {
+      name: 'fixes-tests',
+      testMatch: /fixes\/.*\.spec\.ts/,
+      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['foundation-tests'],
+    },
+
     /* Legacy browser support (optional) */
     // {
     //   name: 'Microsoft Edge',

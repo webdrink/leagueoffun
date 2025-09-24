@@ -5,10 +5,10 @@ import { SupportedLanguage } from '../../types';
 import { useGameSettings } from '../../hooks/useGameSettings';
 
 const LanguageTester: React.FC = () => {
-  const { gameSettings, updateGameSettings } = useGameSettings();
+  const { gameSettings: _gameSettings, updateGameSettings } = useGameSettings();
   const { t, currentLanguage } = useTranslation();
   const [testCount, setTestCount] = useState(5);
-  const [categoryData, setCategoryData] = useState<any[]>([]);
+  const [categoryData, setCategoryData] = useState<Array<{ id: string; name: string; emoji?: string }>>([]);
   const [isLoading, setIsLoading] = useState(false);
   
   // Change language handler
@@ -102,13 +102,18 @@ const LanguageTester: React.FC = () => {
               <p>
                 {t('summary.questions_completed', { count: testCount })}
               </p>
+              <label htmlFor="test-count-slider" className="sr-only">
+                Test count for questions completed
+              </label>
               <input
+                id="test-count-slider"
                 type="range"
                 min="0"
                 max="20"
                 value={testCount}
                 onChange={(e) => setTestCount(parseInt(e.target.value))}
                 className="w-full mt-2"
+                aria-label="Test count for questions completed"
               />
             </div>
             
