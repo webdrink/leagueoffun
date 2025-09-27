@@ -121,6 +121,11 @@ All Guides + PWA Setup + Deployment + Prayer + Sacrifice to Demo Gods
 - **[Simple Game](examples/simple-game/)** - Minimal game example for learning
 - **[Custom Components](examples/custom-components/)** - Component implementation examples
 
+### Implementation Reports
+- **[Tablet Landscape Optimization](implementation-reports/tablet-landscape-optimization-report.md)** - Comprehensive tablet UI optimization report
+- **[Tablet UI Changelog](CHANGELOG-tablet-optimization.md)** - Technical changelog for tablet improvements
+- **[Color System Migration](design-system/color-system-migration.md)** - Purple/pink button color system guide
+
 ### Legacy and Migration
 - **[Migration Guides](migration/)** - Upgrading from previous versions
 - **[Version History](migration/version-history.md)** - Framework evolution and changes

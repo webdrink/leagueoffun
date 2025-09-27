@@ -68,7 +68,7 @@ const PlayerSetupScreen: React.FC<PlayerSetupScreenProps> = ({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.3 }}
-      className="w-full max-w-md p-6 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl border-2 border-pink-100"
+  className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl p-6 bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl border-2 border-pink-100"
     >
       <div className="flex justify-between items-center mb-6">        <Button onClick={onBackToIntro} className="text-purple-600 hover:text-purple-800 bg-transparent hover:bg-purple-50 p-2">
           <ArrowLeft size={24} />

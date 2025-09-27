@@ -54,19 +54,19 @@ const FrameworkCategoryPickScreen: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] p-4">
+    <div className="flex flex-col items-center justify-center w-full h-full min-h-0 py-3 sm:py-4 px-0">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.3 }}
-          className="w-full max-w-2xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-2xl rounded-3xl p-6 sm:p-8 border-2 border-purple-100 dark:border-purple-800"
+          className="category-container w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl h-full max-h-full bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-2xl rounded-3xl p-4 sm:p-6 lg:p-8 border-2 border-purple-100 dark:border-purple-800 flex flex-col min-h-0"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-purple-700 dark:text-purple-300 text-center mb-6">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-700 dark:text-purple-300 text-center mb-4 sm:mb-6 flex-shrink-0">
             {t('category_pick.title')}
           </h2>
 
-          <div className="text-center mb-4">
+          <div className="text-center mb-3 sm:mb-4 flex-shrink-0">
             <p className="text-sm text-gray-600 dark:text-gray-400">
               {t('category_pick.max_categories', { count: maxSelectable })} • {' '}
               <span className="font-medium text-purple-600 dark:text-purple-400">
@@ -75,11 +75,11 @@ const FrameworkCategoryPickScreen: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6 max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
+          <div className="category-grid grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6 overflow-y-auto custom-scrollbar pr-2 flex-1 min-h-0">
             {allCategories.map((cat) => (
               <motion.label
                 key={cat.id}
-                className={`flex flex-col items-center justify-center p-4 border rounded-xl shadow-sm cursor-pointer transition-all duration-200 select-none
+                className={`flex flex-col items-center justify-center p-3 sm:p-3 lg:p-4 border rounded-xl shadow-sm cursor-pointer transition-all duration-200 select-none min-h-[88px] sm:min-h-[100px] lg:min-h-[120px]
                 ${selectedCategories.includes(cat.id) 
                   ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/30 dark:border-purple-400' 
                   : 'border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700/50'
@@ -95,16 +95,17 @@ const FrameworkCategoryPickScreen: React.FC = () => {
                 <div className="text-xs text-gray-600 dark:text-gray-400 mb-3">
                   {t('category_pick.questions_available', { count: cat.questionCount })}
                 </div>
-                <Checkbox
-                  checked={selectedCategories.includes(cat.id)}
-                  onCheckedChange={() => toggleCategory(cat.id)}
-                  aria-label={cat.name}
-                />
+                <div onClick={(e) => e.stopPropagation()}>
+                  <Checkbox
+                    checked={selectedCategories.includes(cat.id)}
+                    aria-label={cat.name}
+                  />
+                </div>
               </motion.label>
             ))}
           </div>
 
-          <div className="flex justify-between items-center gap-4">
+          <div className="flex justify-between items-center gap-3 sm:gap-4 flex-shrink-0 mt-auto pt-3 sm:pt-4">
             <Button
               onClick={handleBack}
               variant="outline"

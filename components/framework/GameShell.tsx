@@ -104,19 +104,24 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
 
   return (
     <div className={`${backgroundClasses} ${className} overflow-hidden`}> 
-      {/* Fixed Layout Container (full viewport, no page scroll) */}
-      <div className="min-h-screen flex flex-col overflow-hidden bg-transparent">
-        {/* Main Viewport-Responsive Container (flex column, full height) */}
-        <div className="flex flex-col h-screen max-w-md lg:max-w-lg xl:max-w-xl mx-auto w-full px-4 sm:px-6 overflow-hidden bg-transparent">
+      {/* Fixed Layout Container (full viewport, NO scrolling) */}
+      <div className="h-screen flex flex-col bg-transparent overflow-hidden">
+        {/* Main Viewport-Responsive Container (flex column, responsive width) */}
+        <div className="flex flex-col h-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto w-full px-3 sm:px-4 lg:px-6 bg-transparent">
           
-          {/* Top Padding: Consistent spacing */}
-          <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
+          {/* Top Padding: Responsive spacing */}
+          <div className="h-4 sm:h-6 flex-shrink-0"></div>
           
-          {/* Header with animated title card: 3/20 = 15% */}
+          {/* Header with animated title card: Responsive height */}
           {layout.showHeader && (
-            <header className="h-[15vh] min-h-[80px] flex-shrink-0 flex justify-center items-center"> 
-              <div className={`${theme.cardBackground || 'bg-white dark:bg-gray-800'} rounded-3xl shadow-2xl p-4 md:p-6 w-full backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 h-full max-h-full flex items-center justify-center`}>
-                <div className="text-center">
+            <header
+              className="py-3 sm:py-4 flex-shrink-0 flex justify-center items-center"
+              data-testid="game-header"
+            >
+              <div
+                className={`${theme.cardBackground || 'bg-white dark:bg-gray-800'} rounded-3xl shadow-2xl px-4 sm:px-5 md:px-6 py-3 sm:py-4 w-full backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 flex items-center justify-center min-h-[64px]`}
+              >
+                <div className="text-center w-full max-w-full">
                   <div
                     className="cursor-pointer hover:scale-105 transition-transform duration-200"
                     onClick={() => {
@@ -135,7 +140,13 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                     <SplitText
                       text={branding.gameName || config.title}
                       tag="h1"
-                      className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary} dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')} mb-1 drop-shadow-sm leading-tight text-center w-full max-w-full break-words hyphens-auto`}
+                      className={`
+                        font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary}
+                        dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')}
+                        drop-shadow-sm leading-tight text-center w-full max-w-full break-words hyphens-auto
+                        text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-[3.5rem]
+                        line-clamp-2
+                      `}
                       stagger={0.08}
                       delay={0.2}
                       duration={0.6}
@@ -147,7 +158,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.4 }}
-                      className={`text-${accentColor}-600 dark:text-${accentColor}-400 font-medium text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl`}
+                      className={`text-${accentColor}-600 dark:text-${accentColor}-400 font-medium text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl line-clamp-1`}
                     >
                       {t(branding.tagline)}
                     </motion.p>
@@ -157,21 +168,23 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
             </header>
           )}
 
-          {/* Padding after header: Reduced to 2.5% */}
-          <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
+          {/* Padding after header: Responsive spacing */}
+          <div className="h-3 sm:h-4 flex-shrink-0"></div>
 
-          {/* Main Content Area: Flexible grow to fill available space */}
-          <main className="flex-1 flex flex-col overflow-hidden bg-transparent min-h-0">
-            <div className="h-full flex items-center justify-center overflow-hidden bg-transparent">
-              {children}
+          {/* Main Content Area: Constrained to remaining viewport space */}
+          <main className="flex-1 flex flex-col bg-transparent min-h-0 overflow-hidden">
+            <div className="flex-1 flex items-center justify-center bg-transparent py-2 sm:py-4 px-0 min-h-0">
+              <div className="w-full max-w-full flex flex-col min-h-0 h-full">
+                {children}
+              </div>
             </div>
           </main>
 
-          {/* Footer: Always at bottom with consistent padding above */}
+          {/* Footer: Always at bottom with responsive padding above */}
           {layout.showFooter && (
             <>
-              <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
-              <footer className="flex-shrink-0 flex flex-col items-center justify-center pb-4" data-testid="game-shell-footer">
+              <div className="h-3 sm:h-4 flex-shrink-0"></div>
+              <footer className="flex-shrink-0 flex flex-col items-center justify-center pb-3 sm:pb-4" data-testid="game-shell-footer">
               <div className="bg-black/60 backdrop-blur-xl rounded-2xl p-4 mx-auto w-full max-w-2xl border border-white/20 shadow-2xl">
                 {/* Top Row: Main Controls */}
                 <div className="flex justify-center items-center gap-3 text-white dark:text-gray-200 mb-3">
@@ -228,8 +241,8 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
             </>
           )}
 
-          {/* Bottom Padding: Match top padding */}
-          <div className="h-[2.5vh] min-h-[4px] flex-shrink-0"></div>
+          {/* Bottom Padding: Responsive spacing to match top */}
+          <div className="h-4 sm:h-6 flex-shrink-0"></div>
           
         </div>
       </div>

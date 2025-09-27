@@ -54,7 +54,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="w-full max-w-md p-6 bg-white rounded-xl shadow-xl"
+  className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl p-6 bg-white rounded-xl shadow-xl"
     >
       <div className="flex items-center mb-6">
         <Button 

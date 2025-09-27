@@ -200,11 +200,11 @@ const FrameworkSummaryScreen: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-700 rounded-xl p-4 text-center">
-                  <p className="text-base font-medium text-blue-800 dark:text-blue-200 mb-1">
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200 dark:border-purple-700 rounded-xl p-4 text-center">
+                  <p className="text-base font-medium text-purple-800 dark:text-purple-200 mb-1">
                     🎯 Classic Mode Abgeschlossen!
                   </p>
-                  <p className="text-sm text-blue-600 dark:text-blue-300">
+                  <p className="text-sm text-purple-600 dark:text-purple-300">
                     Du hast {gameResults.questionsAnswered} interessante Fragen durchgeschaut. Möchtest du das NameBlame-Modus mit Freunden ausprobieren?
                   </p>
                 </div>

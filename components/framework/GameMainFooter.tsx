@@ -108,7 +108,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
   
   // Render navigation interface (classic mode)
   const renderNavigation = () => (
-    <div className="flex justify-between items-center space-x-4 w-full max-w-md mx-auto">
+  <div className="flex justify-between items-center space-x-4 w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto">
       {secondaryAction && (
         <motion.div variants={itemVariants}>
           <FooterButton
@@ -138,7 +138,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
   
   // Render selection interface (for setup screens)
   const renderSelection = () => (
-    <div className="w-full max-w-md mx-auto space-y-4">
+  <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto space-y-4">
       {selectionOptions.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {selectionOptions.map((option, index) => (
@@ -176,7 +176,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
   
   // Render blame interface (NameBlame mode)
   const renderBlame = () => (
-    <div className="w-full max-w-md mx-auto space-y-4">
+  <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto space-y-4">
       {/* Blame context display when in blamed phase */}
       {isInBlamedPhase && nextBlameAction && (
         <motion.div 
@@ -237,7 +237,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
   
   // Render custom interface
   const renderCustom = () => (
-    <div className="w-full max-w-md mx-auto">
+  <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto">
       {/* Custom content can be passed via children or action configs */}
       {primaryAction && (
         <motion.div variants={itemVariants}>

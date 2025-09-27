@@ -100,7 +100,7 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
   return (
     <div className="w-full h-full flex flex-col items-center justify-between py-4">
       {/* Top area for player turn info and new QuestionProgress component */}
-      <div className="w-full max-w-md">
+  <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
         {nameBlameMode && currentPlayer && (
           <p className="text-center text-lg text-white mb-1 sm:mb-2 px-4">
             <span className="font-semibold">{currentPlayer.name}</span> {t('questions.player_turn')}
@@ -120,7 +120,7 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: direction > 0 ? -200 : 200 }}
             transition={{ duration: 0.35, ease: 'easeInOut' }}
-            className="w-full h-[45vh] sm:h-[50vh] max-h-[500px] max-w-md flex items-center justify-center"
+            className="w-full h-[45vh] sm:h-[50vh] max-h-[500px] max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl flex items-center justify-center"
           >
             <QuestionCard question={question} />
           </motion.div>
@@ -128,7 +128,7 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
       </div>
 
       {/* Controls Area */}
-      <div className="w-full max-w-md px-4">
+  <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl px-4">
         {nameBlameMode && activePlayers.length > 0 && (
           <div className="mt-2 sm:mt-4">
             {/* Show blame context when in 'blamed' phase */}

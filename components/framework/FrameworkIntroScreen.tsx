@@ -75,7 +75,7 @@ const FrameworkIntroScreen: React.FC = () => {
 
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] py-4">
+  <div className="flex flex-col items-center justify-center min-h-[60vh] py-4 w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ 
@@ -96,7 +96,7 @@ const FrameworkIntroScreen: React.FC = () => {
               ease: "easeInOut"
             }
           }}
-          className={`${theme.cardBackground || 'bg-white dark:bg-gray-800'} rounded-3xl shadow-2xl p-6 md:p-8 w-full backdrop-blur-sm bg-white/95 dark:bg-gray-800/95`}
+          className={`${theme.cardBackground || 'bg-white dark:bg-gray-800'} rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl backdrop-blur-sm bg-white/95 dark:bg-gray-800/95`}
         >
 
           {/* Main Question */}
@@ -106,7 +106,16 @@ const FrameworkIntroScreen: React.FC = () => {
                 {t(branding.mainQuestion)}
               </h2>
               {branding.subtitle && (
-                <p className="text-gray-700 dark:text-gray-200 text-sm lg:text-base">
+                <p className="
+                  text-gray-700 dark:text-gray-200 
+                  text-sm sm:text-base lg:text-lg
+                  w-full max-w-full
+                  break-words hyphens-auto
+                  overflow-hidden
+                  line-clamp-3
+                  leading-relaxed
+                  px-2
+                ">
                   {t(branding.subtitle)}
                 </p>
               )}

@@ -1,0 +1,51 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e8]:
+  - banner [ref=e10]:
+    - generic [ref=e12]:
+      - heading "B l a m e G a m e" [level=1] [ref=e14] [cursor=pointer]:
+        - generic [ref=e15] [cursor=pointer]: B
+        - generic [ref=e16] [cursor=pointer]: l
+        - generic [ref=e17] [cursor=pointer]: a
+        - generic [ref=e18] [cursor=pointer]: m
+        - generic [ref=e19] [cursor=pointer]: e
+        - generic [ref=e20] [cursor=pointer]: G
+        - generic [ref=e21] [cursor=pointer]: a
+        - generic [ref=e22] [cursor=pointer]: m
+        - generic [ref=e23] [cursor=pointer]: e
+      - paragraph [ref=e24]: Wem traust du was zu?
+  - main [ref=e26]:
+    - generic [ref=e31]:
+      - generic [ref=e32]:
+        - heading "Wer würde am ehesten..." [level=2] [ref=e33]
+        - paragraph [ref=e34]: Was denkst du? Kennst du deine Freunde?
+      - button "Spiel starten" [ref=e36] [cursor=pointer]:
+        - generic [ref=e38] [cursor=pointer]: Spiel starten
+      - generic [ref=e41] [cursor=pointer]:
+        - switch "Manuelle Kategorieauswahl" [ref=e42] [cursor=pointer]
+        - generic [ref=e43] [cursor=pointer]: Manuelle Kategorieauswahl
+      - generic [ref=e46] [cursor=pointer]:
+        - switch "NameBlame Modus" [ref=e47] [cursor=pointer]
+        - generic [ref=e49] [cursor=pointer]: NameBlame Modus
+  - contentinfo [ref=e51]:
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - button "Einstellungen" [ref=e54] [cursor=pointer]:
+          - img [ref=e55] [cursor=pointer]
+        - button "Information" [ref=e58] [cursor=pointer]:
+          - img [ref=e59] [cursor=pointer]
+        - button "Switch to dark mode" [ref=e61] [cursor=pointer]:
+          - img [ref=e62] [cursor=pointer]
+        - generic [ref=e65]:
+          - combobox "Language Selection" [ref=e66] [cursor=pointer]:
+            - option "Deutsch" [selected]
+            - option "English"
+            - option "Español"
+            - option "Français"
+          - generic:
+            - img
+      - paragraph [ref=e68]:
+        - text: 💜 Unterstütze uns für mehr Spiele!
+        - generic [ref=e69]: Deine Spende hilft uns, bessere Spiele zu entwickeln.
+```

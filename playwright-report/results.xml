@@ -1,6 +1,60 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="3.410049">
-<testsuite name="foundation\app-initialization.spec.ts" timestamp="2025-09-24T12:23:22.416Z" hostname="foundation-tests" tests="1" failures="0" skipped="0" time="1.834" errors="0">
-<testcase name="Foundation: App Initialization › should display intro screen with start button" classname="foundation\app-initialization.spec.ts" time="1.834">
+<testsuites id="" name="" tests="91" failures="11" skipped="43" errors="0" time="47.444592">
+<testsuite name="foundation\app-initialization.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="7" failures="3" skipped="0" time="34.951" errors="0">
+<testcase name="Foundation: App Initialization › should initialize app and load core data successfully" classname="foundation\app-initialization.spec.ts" time="5.933">
+<failure message="app-initialization.spec.ts:19:7 should initialize app and load core data successfully" type="FAILURE">
+<![CDATA[  [foundation-tests] › foundation\app-initialization.spec.ts:19:7 › Foundation: App Initialization › should initialize app and load core data successfully 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      45 |     // Verify translation system
+      46 |     const translationsWorking = await verifyTranslationSystem(page, tracker);
+    > 47 |     expect(translationsWorking).toBe(true);
+         |                                 ^
+      48 |     
+      49 |     // Check for any console errors
+      50 |     const report = tracker.generateReport();
+        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\app-initialization.spec.ts:47:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\foundation-app-initializat-325fb-load-core-data-successfully-foundation-tests\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\foundation-app-initializat-325fb-load-core-data-successfully-foundation-tests\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\foundation-app-initializat-325fb-load-core-data-successfully-foundation-tests\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[🎯 USER ACTION: Navigate to app
+🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1173ms
+🎯 USER ACTION: Verify app title
+🎮 GAME LOGIC: App container rendered
+📸 SCREENSHOT: app-initialization-basic-initial-load-1758957443025.png
+🌐 DATA FLOW: Questions loaded
+   Data: Questions available in window.gameQuestions
+🌐 DATA FLOW: Translation system check
+   Data: { translationsLoaded: [33mfalse[39m }
+
+[[ATTACHMENT|..\test-results\foundation-app-initializat-325fb-load-core-data-successfully-foundation-tests\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\foundation-app-initializat-325fb-load-core-data-successfully-foundation-tests\video.webm]]
+
+[[ATTACHMENT|..\test-results\foundation-app-initializat-325fb-load-core-data-successfully-foundation-tests\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: App Initialization › should load all required question categories" classname="foundation\app-initialization.spec.ts" time="5.453">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -8,13 +62,146 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 775ms
+⚡ PERFORMANCE: loadTime = 1141ms
+🌐 DATA FLOW: Waiting for categories to load
+🌐 DATA FLOW: Categories loaded
+   Data: { count: [33m33[39m }
+🌐 DATA FLOW: Category structure validation passed
+📊 TEST REPORT: app-initialization-categories
+   Duration: 1952ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: App Initialization › should load sufficient questions for gameplay" classname="foundation\app-initialization.spec.ts" time="5.617">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1135ms
+🌐 DATA FLOW: Questions loaded
+   Data: Questions available in window.gameQuestions
+🌐 DATA FLOW: Total questions loaded
+   Data: { count: [33m1029[39m }
+🌐 DATA FLOW: Question structure validation passed
+📊 TEST REPORT: app-initialization-questions
+   Duration: 2018ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: App Initialization › should handle network failures gracefully" classname="foundation\app-initialization.spec.ts" time="3.309">
+<failure message="app-initialization.spec.ts:132:7 should handle network failures gracefully" type="FAILURE">
+<![CDATA[  [foundation-tests] › foundation\app-initialization.spec.ts:132:7 › Foundation: App Initialization › should handle network failures gracefully 
+
+    Error: page.goto: net::ERR_INTERNET_DISCONNECTED at http://localhost:5173/
+    Call log:
+      - navigating to "http://localhost:5173/", waiting until "load"
+
+
+      137 |     tracker.logDataFlow('Network set to offline');
+      138 |     
+    > 139 |     await page.goto('/');
+          |                ^
+      140 |     
+      141 |     // App should still load basic structure even offline
+      142 |     await expect(page.locator('body')).toBeVisible();
+        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\app-initialization.spec.ts:139:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\foundation-app-initializat-6eb0b-network-failures-gracefully-foundation-tests\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\foundation-app-initializat-6eb0b-network-failures-gracefully-foundation-tests\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[🌐 DATA FLOW: Network set to offline
+
+[[ATTACHMENT|..\test-results\foundation-app-initializat-6eb0b-network-failures-gracefully-foundation-tests\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\foundation-app-initializat-6eb0b-network-failures-gracefully-foundation-tests\video.webm]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: App Initialization › should initialize with correct default settings" classname="foundation\app-initialization.spec.ts" time="5.566">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1144ms
+💾 PERSISTENCE: localStorage read (gameSettings)
+💾 PERSISTENCE: Default settings loaded (gameSettings)
+💾 PERSISTENCE: localStorage read (soundSettings)
+📊 TEST REPORT: app-initialization-default-settings
+   Duration: 1917ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: App Initialization › should recover from corrupted localStorage" classname="foundation\app-initialization.spec.ts" time="3.176">
+<failure message="app-initialization.spec.ts:196:7 should recover from corrupted localStorage" type="FAILURE">
+<![CDATA[  [foundation-tests] › foundation\app-initialization.spec.ts:196:7 › Foundation: App Initialization › should recover from corrupted localStorage 
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:293:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:293:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\app-initialization.spec.ts:200:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\foundation-app-initializat-f0ecd-from-corrupted-localStorage-foundation-tests\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\foundation-app-initializat-f0ecd-from-corrupted-localStorage-foundation-tests\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\foundation-app-initializat-f0ecd-from-corrupted-localStorage-foundation-tests\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\foundation-app-initializat-f0ecd-from-corrupted-localStorage-foundation-tests\video.webm]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: App Initialization › should display intro screen with start button" classname="foundation\app-initialization.spec.ts" time="5.897">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1144ms
 🎯 USER ACTION: Game title visible
 🎯 USER ACTION: Start button visible
 🎯 USER ACTION: Settings button visible
-📸 SCREENSHOT: app-initialization-intro-screen-intro-screen-1758716604950.png
+📸 SCREENSHOT: app-initialization-intro-screen-intro-screen-1758957442990.png
 📊 TEST REPORT: app-initialization-intro-screen
-   Duration: 1386ms
+   Duration: 2460ms
    User Actions: 3
    State Changes: 0
    Errors: 0
@@ -22,6 +209,1319 @@
    Avg Interaction Time: 0ms
 ]]>
 </system-out>
+</testcase>
+</testsuite>
+<testsuite name="foundation\audio-system.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="5" failures="0" skipped="0" time="27.317" errors="0">
+<testcase name="Foundation: Audio System › should initialize audio system correctly" classname="foundation\audio-system.spec.ts" time="5.515">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1127ms
+🎵 AUDIO: Audio system check
+   Details: { audioEnabled: [33mfalse[39m }
+🎵 AUDIO: Audio system availability check
+   Details: { available: [33mfalse[39m }
+🎵 AUDIO: Audio system not available in test environment
+📊 TEST REPORT: audio-system-initialization
+   Duration: 1896ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Audio System › should handle audio settings correctly" classname="foundation\audio-system.spec.ts" time="6.633">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1128ms
+💾 PERSISTENCE: localStorage write (audioSettings)
+   Value: { enabled: [33mtrue[39m, volume: [33m0.7[39m, effectsEnabled: [33mtrue[39m }
+🎵 AUDIO: Audio settings saved
+   Details: { enabled: [33mtrue[39m, volume: [33m0.7[39m, effectsEnabled: [33mtrue[39m }
+🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 910ms
+💾 PERSISTENCE: localStorage read (audioSettings)
+   Value: {"enabled":true,"volume":0.7,"effectsEnabled":true}
+🎵 AUDIO: Audio settings restored
+   Details: { restored: [32m'success'[39m }
+📊 TEST REPORT: audio-system-settings
+   Duration: 3222ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Audio System › should handle audio loading failures gracefully" classname="foundation\audio-system.spec.ts" time="5.554">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1133ms
+🎵 AUDIO: Audio loading test completed
+   Details: { testCompleted: [33mtrue[39m }
+📊 TEST REPORT: audio-system-loading-failures
+   Duration: 2050ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Audio System › should respect volume controls" classname="foundation\audio-system.spec.ts" time="3.1">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 917ms
+🎵 AUDIO: Volume controls detection
+   Details: { hasControls: [33mfalse[39m }
+📊 TEST REPORT: audio-system-volume-controls
+   Duration: 1513ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Audio System › should maintain audio state during gameplay" classname="foundation\audio-system.spec.ts" time="6.515">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 912ms
+💾 PERSISTENCE: localStorage write (audioSettings)
+   Value: { enabled: [33mtrue[39m, volume: [33m0.8[39m }
+🎯 USER ACTION: Started game to test audio state
+💾 PERSISTENCE: localStorage read (audioSettings)
+   Value: {"enabled":true,"volume":0.8}
+🎵 AUDIO: Audio settings during gameplay
+   Details: { settingsFound: [32m'yes'[39m }
+📊 TEST REPORT: audio-system-gameplay-state
+   Duration: 4828ms
+   User Actions: 1
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="foundation\debug-framework-content.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="1" failures="0" skipped="0" time="5.471" errors="0">
+<testcase name="Debug Framework Content › should show what is actually rendered" classname="foundation\debug-framework-content.spec.ts" time="5.471">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1047ms
+ACTUAL PAGE CONTENT: {
+  "title": "The Blame Game",
+  "bodyText": "\n    BlameGameWem traust du was zu?Wer würde am ehesten...Was denkst du? Kennst du deine Freunde?Spiel startenManuelle KategorieauswahlNameBlame ModusDeutschEnglishEspañolFrançais💜 Unterstütze uns für mehr Spiele!Deine Spende hilft uns, bessere Spiele zu entwickeln.\n    \n  \n\n",
+  "headings": [
+    "BlameGame",
+    "Wer würde am ehesten..."
+  ],
+  "buttons": [
+    "Spiel starten",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "hasGameMain": false,
+  "hasSplitText": true,
+  "allClasses": [],
+  "bodyInnerHTML": "\n    <div id=\"root\"><div data-framework-host=\"true\" class=\"min-h-screen\"><div class=\"min-h-screen\"><div class=\"relative\"><div class=\"min-h-screen bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600 dark:from-pink-900 dark:via-purple-900 dark:to-indigo-900 animate-gentle-shift bg-[length:400%_400%]  overflow-hidden\"><div class=\"h-screen flex flex-col bg-transparent overflow-hidden\"><div class=\"flex flex-col h-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto w-full px-3 sm:px-4 lg:px-6 bg-transparent\"><div class=\"h-4 sm:h-6 flex-shrink-0\"></div><header class=\"py-3 sm:py-4 flex-shrink-0 flex justify-center items-center\" data-testid=\"game-header\"><div class=\"bg-white rounded-3xl shadow-2xl px-4 sm:px-5 md:px-6 py-3 sm:py-4 w-full backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 flex items-center justify-center min-h-[64px]\"><div class=\"text-center w-full max-w-full\"><div class=\"cursor-pointer hover:scale-105 transition-transform duration-200\" title=\"Click to"
+}
+🎮 GAME LOGIC: Actual page content
+   Data: {
+  title: [32m'The Blame Game'[39m,
+  bodyText: [32m'\n'[39m +
+    [32m'    BlameGameWem traust du was zu?Wer würde am ehesten...Was denkst du? Kennst du deine Freunde?Spiel startenManuelle KategorieauswahlNameBlame ModusDeutschEnglishEspañolFrançais💜 Unterstütze uns für mehr Spiele!Deine Spende hilft uns, bessere Spiele zu entwickeln.\n'[39m +
+    [32m'    \n'[39m +
+    [32m'  \n'[39m +
+    [32m'\n'[39m,
+  headings: [ [32m'BlameGame'[39m, [32m'Wer würde am ehesten...'[39m ],
+  buttons: [ [32m'Spiel starten'[39m, [32m''[39m, [32m''[39m, [32m''[39m, [32m''[39m, [32m''[39m ],
+  hasGameMain: [33mfalse[39m,
+  hasSplitText: [33mtrue[39m,
+  allClasses: [],
+  bodyInnerHTML: [32m'\n'[39m +
+    [32m'    <div id="root"><div data-framework-host="true" class="min-h-screen"><div class="min-h-screen"><div class="relative"><div class="min-h-screen bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600 dark:from-pink-900 dark:via-purple-900 dark:to-indigo-900 animate-gentle-shift bg-[length:400%_400%]  overflow-hidden"><div class="h-screen flex flex-col bg-transparent overflow-hidden"><div class="flex flex-col h-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto w-full px-3 sm:px-4 lg:px-6 bg-transparent"><div class="h-4 sm:h-6 flex-shrink-0"></div><header class="py-3 sm:py-4 flex-shrink-0 flex justify-center items-center" data-testid="game-header"><div class="bg-white rounded-3xl shadow-2xl px-4 sm:px-5 md:px-6 py-3 sm:py-4 w-full backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 flex items-center justify-center min-h-[64px]"><div class="text-center w-full max-w-full"><div class="cursor-pointer hover:scale-105 transition-transform duration-200" title="Click to'[39m
+}
+📸 SCREENSHOT: debug-actual-content-actual-page-content-1758957448889.png
+🎮 GAME LOGIC: Error check
+   Data: { hasError: [33mfalse[39m }
+📊 TEST REPORT: debug-actual-content
+   Duration: 4946ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 1
+   Avg Interaction Time: 0ms
+DEBUG REPORT: {
+  "testName": "debug-actual-content",
+  "duration": 4946,
+  "userActions": [],
+  "stateChanges": [],
+  "errors": [],
+  "performance": {
+    "loadTime": 1047,
+    "interactionTimes": [],
+    "renderTimes": []
+  },
+  "screenshots": [
+    "debug-actual-content-actual-page-content-1758957448889.png"
+  ]
+}
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="foundation\footer-positioning.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="4" failures="0" skipped="0" time="13.349" errors="0">
+<testcase name="Footer Positioning Tests › footer should remain visible and positioned correctly across different screens" classname="foundation\footer-positioning.spec.ts" time="3.287">
+</testcase>
+<testcase name="Footer Positioning Tests › footer should remain visible on narrow mobile viewports" classname="foundation\footer-positioning.spec.ts" time="2.988">
+</testcase>
+<testcase name="Footer Positioning Tests › footer should remain visible on very tall desktop viewports" classname="foundation\footer-positioning.spec.ts" time="3.55">
+</testcase>
+<testcase name="Footer Positioning Tests › page should not scroll vertically" classname="foundation\footer-positioning.spec.ts" time="3.524">
+</testcase>
+</testsuite>
+<testsuite name="foundation\framework-foundation.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="5" failures="0" skipped="0" time="19.896" errors="0">
+<testcase name="Framework Foundation Tests › should initialize framework and display title" classname="foundation\framework-foundation.spec.ts" time="2.723">
+<system-out>
+<![CDATA[🎯 USER ACTION: Navigate to framework app
+🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1014ms
+🌐 DATA FLOW: Framework initialized
+   Data: Framework components detected
+🎮 GAME LOGIC: Framework initialized successfully
+🎮 GAME LOGIC: Framework title detected
+   Data: { title: [32m'BlameGame'[39m }
+📸 SCREENSHOT: framework-basic-initialization-framework-initialized-1758957446000.png
+📊 TEST REPORT: framework-basic-initialization
+   Duration: 2050ms
+   User Actions: 1
+   State Changes: 0
+   Errors: 0
+   Screenshots: 1
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Framework Foundation Tests › should have working start button" classname="foundation\framework-foundation.spec.ts" time="4.137">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1001ms
+🌐 DATA FLOW: Framework initialized
+   Data: Framework components detected
+🎯 USER ACTION: Start button found
+🎯 USER ACTION: Start button clicked successfully
+📊 TEST REPORT: framework-start-button
+   Duration: 3418ms
+   User Actions: 2
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Framework Foundation Tests › should have working translation system" classname="foundation\framework-foundation.spec.ts" time="3.04">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1026ms
+🌐 DATA FLOW: Framework initialized
+   Data: Framework components detected
+🌐 DATA FLOW: Framework translation system check
+   Data: { translationsWorking: [33mtrue[39m }
+🎮 GAME LOGIC: Current language detected
+   Data: { language: [32m'de'[39m }
+📊 TEST REPORT: framework-translations
+   Duration: 1530ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Framework Foundation Tests › should handle framework content loading" classname="foundation\framework-foundation.spec.ts" time="3.678">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1066ms
+🌐 DATA FLOW: Framework initialized
+   Data: Framework components detected
+🌐 DATA FLOW: Framework content check
+   Data: { contentAvailable: [33mfalse[39m }
+🎮 GAME LOGIC: Framework content check completed
+   Data: { available: [33mfalse[39m }
+📊 TEST REPORT: framework-content-loading
+   Duration: 1636ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Framework Foundation Tests › should maintain responsive layout" classname="foundation\framework-foundation.spec.ts" time="6.318">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1295ms
+🌐 DATA FLOW: Framework initialized
+   Data: Framework components detected
+🎯 USER ACTION: Testing desktop viewport
+🎮 GAME LOGIC: desktop layout working
+📸 SCREENSHOT: framework-responsive-layout-framework-desktop-1758957450522.png
+🎯 USER ACTION: Testing tablet viewport
+🎮 GAME LOGIC: tablet layout working
+📸 SCREENSHOT: framework-responsive-layout-framework-tablet-1758957451713.png
+🎯 USER ACTION: Testing mobile viewport
+🎮 GAME LOGIC: mobile layout working
+📸 SCREENSHOT: framework-responsive-layout-framework-mobile-1758957452570.png
+📊 TEST REPORT: framework-responsive-layout
+   Duration: 4500ms
+   User Actions: 3
+   State Changes: 0
+   Errors: 0
+   Screenshots: 3
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="foundation\local-storage.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="8" failures="2" skipped="0" time="25.435" errors="0">
+<testcase name="Foundation: Local Storage › should save and retrieve game settings" classname="foundation\local-storage.spec.ts" time="3.067">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1114ms
+💾 PERSISTENCE: localStorage write (gameSettings)
+   Value: { language: [32m'de'[39m, soundEnabled: [33mtrue[39m, volume: [33m0.8[39m, theme: [32m'dark'[39m }
+💾 PERSISTENCE: Game settings saved (gameSettings)
+   Value: { language: [32m'de'[39m, soundEnabled: [33mtrue[39m, volume: [33m0.8[39m, theme: [32m'dark'[39m }
+💾 PERSISTENCE: localStorage read (gameSettings)
+   Value: {"language":"de","soundEnabled":true,"volume":0.8,"theme":"dark"}
+💾 PERSISTENCE: Game settings retrieved and verified
+📊 TEST REPORT: local-storage-settings
+   Duration: 1623ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Local Storage › should persist data across page reloads" classname="foundation\local-storage.spec.ts" time="3.781">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1092ms
+💾 PERSISTENCE: localStorage write (gameState)
+   Value: {
+  currentQuestion: [33m5[39m,
+  totalQuestions: [33m100[39m,
+  score: [33m42[39m,
+  gameMode: [32m'classic'[39m
+}
+💾 PERSISTENCE: Game state saved before reload
+🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 837ms
+🎯 USER ACTION: Page reloaded
+💾 PERSISTENCE: localStorage read (gameState)
+   Value: {"currentQuestion":5,"totalQuestions":100,"score":42,"gameMode":"classic"}
+💾 PERSISTENCE: Game state restored after reload
+📊 TEST REPORT: local-storage-persistence
+   Duration: 2615ms
+   User Actions: 1
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Local Storage › should handle localStorage quota limits gracefully" classname="foundation\local-storage.spec.ts" time="2.221">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1222ms
+💾 PERSISTENCE: Quota test completed (quotaTest)
+   Value: {
+  beforeSize: [33m1291[39m,
+  afterSize: [33m4195595[39m,
+  quotaReached: [33mtrue[39m,
+  errorOccurred: [33mtrue[39m
+}
+📊 TEST REPORT: local-storage-quota-limits
+   Duration: 1621ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Local Storage › should recover from corrupted localStorage data" classname="foundation\local-storage.spec.ts" time="0.424">
+<failure message="local-storage.spec.ts:143:7 should recover from corrupted localStorage data" type="FAILURE">
+<![CDATA[  [foundation-tests] › foundation\local-storage.spec.ts:143:7 › Foundation: Local Storage › should recover from corrupted localStorage data 
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:293:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:293:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\local-storage.spec.ts:147:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\foundation-local-storage-F-0e452-corrupted-localStorage-data-foundation-tests\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\foundation-local-storage-F-0e452-corrupted-localStorage-data-foundation-tests\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\foundation-local-storage-F-0e452-corrupted-localStorage-data-foundation-tests\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\foundation-local-storage-F-0e452-corrupted-localStorage-data-foundation-tests\video.webm]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Local Storage › should maintain NameBlame player data" classname="foundation\local-storage.spec.ts" time="3.516">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1114ms
+💾 PERSISTENCE: localStorage write (nameBlamePlayers)
+   Value: {
+  players: [
+    { name: [32m'Alice'[39m, blameCount: [33m3[39m },
+    { name: [32m'Bob'[39m, blameCount: [33m1[39m },
+    { name: [32m'Charlie'[39m, blameCount: [33m5[39m }
+  ],
+  currentPlayerIndex: [33m1[39m,
+  round: [33m2[39m
+}
+💾 PERSISTENCE: NameBlame player data saved
+💾 PERSISTENCE: localStorage read (nameBlamePlayers)
+   Value: {"players":[{"name":"Alice","blameCount":3},{"name":"Bob","blameCount":1},{"name":"Charlie","blameCount":5}],"currentPlayerIndex":1,"round":2}
+💾 PERSISTENCE: NameBlame player data verified
+💾 PERSISTENCE: localStorage write (nameBlamePlayers)
+   Value: {
+  players: [
+    { name: [32m'Alice'[39m, blameCount: [33m4[39m },
+    { name: [32m'Bob'[39m, blameCount: [33m1[39m },
+    { name: [32m'Charlie'[39m, blameCount: [33m5[39m }
+  ],
+  currentPlayerIndex: [33m1[39m,
+  round: [33m2[39m
+}
+💾 PERSISTENCE: Player data updated
+💾 PERSISTENCE: localStorage read (nameBlamePlayers)
+   Value: {"players":[{"name":"Alice","blameCount":4},{"name":"Bob","blameCount":1},{"name":"Charlie","blameCount":5}],"currentPlayerIndex":1,"round":2}
+📊 TEST REPORT: local-storage-nameblame-data
+   Duration: 1473ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Local Storage › should handle concurrent localStorage operations" classname="foundation\local-storage.spec.ts" time="3.397">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1125ms
+💾 PERSISTENCE: Concurrent operations completed (concurrent)
+   Value: { total: [33m20[39m, successful: [33m20[39m }
+📊 TEST REPORT: local-storage-concurrent-operations
+   Duration: 1651ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Local Storage › should preserve language preferences correctly" classname="foundation\local-storage.spec.ts" time="5.583">
+<failure message="local-storage.spec.ts:288:7 should preserve language preferences correctly" type="FAILURE">
+<![CDATA[  [foundation-tests] › foundation\local-storage.spec.ts:288:7 › Foundation: Local Storage › should preserve language preferences correctly 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "en"
+    Received: "de"
+
+      306 |       // Check if language was restored
+      307 |       const restoredLang = await tracker.checkLocalStorage('i18nextLng');
+    > 308 |       expect(restoredLang).toBe(lang);
+          |                            ^
+      309 |       tracker.logPersistence(`Language ${lang} restored correctly`);
+      310 |     }
+      311 |     
+        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\local-storage.spec.ts:308:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\foundation-local-storage-F-58e1e-guage-preferences-correctly-foundation-tests\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\foundation-local-storage-F-58e1e-guage-preferences-correctly-foundation-tests\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\foundation-local-storage-F-58e1e-guage-preferences-correctly-foundation-tests\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1142ms
+💾 PERSISTENCE: localStorage write (i18nextLng)
+   Value: de
+💾 PERSISTENCE: Language preference set to de
+🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1172ms
+💾 PERSISTENCE: localStorage read (i18nextLng)
+   Value: de
+💾 PERSISTENCE: Language de restored correctly
+💾 PERSISTENCE: localStorage write (i18nextLng)
+   Value: en
+💾 PERSISTENCE: Language preference set to en
+🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 842ms
+💾 PERSISTENCE: localStorage read (i18nextLng)
+   Value: de
+
+[[ATTACHMENT|..\test-results\foundation-local-storage-F-58e1e-guage-preferences-correctly-foundation-tests\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\foundation-local-storage-F-58e1e-guage-preferences-correctly-foundation-tests\video.webm]]
+
+[[ATTACHMENT|..\test-results\foundation-local-storage-F-58e1e-guage-preferences-correctly-foundation-tests\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Local Storage › should handle storage cleanup and optimization" classname="foundation\local-storage.spec.ts" time="3.446">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1262ms
+💾 PERSISTENCE: localStorage write (gameSettings)
+   Value: { theme: [32m'dark'[39m }
+💾 PERSISTENCE: localStorage write (oldGameState)
+   Value: { obsolete: [33mtrue[39m }
+💾 PERSISTENCE: localStorage write (soundSettings)
+   Value: { volume: [33m0.5[39m }
+💾 PERSISTENCE: localStorage write (tempData)
+   Value: { temporary: [33mtrue[39m }
+💾 PERSISTENCE: localStorage write (userPrefs)
+   Value: { lastPlayed: [33m1758957453535[39m }
+💾 PERSISTENCE: Test data stored for cleanup test
+💾 PERSISTENCE: Cleanup completed (cleanup)
+   Value: { beforeCount: [33m9[39m, afterCount: [33m8[39m, removed: [33m1[39m }
+💾 PERSISTENCE: localStorage read (gameSettings)
+   Value: {"theme":"dark"}
+💾 PERSISTENCE: localStorage read (soundSettings)
+   Value: {"volume":0.5}
+💾 PERSISTENCE: localStorage read (tempData)
+📊 TEST REPORT: local-storage-cleanup
+   Duration: 1748ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="foundation\question-advancement-debug.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="1" failures="0" skipped="0" time="29.902" errors="0">
+<testcase name="Question Advancement - Debug Test › should advance through questions when clicking next button" classname="foundation\question-advancement-debug.spec.ts" time="29.902">
+<system-out>
+<![CDATA[🧪 Testing question advancement...
+✅ Clicked start button
+🔄 In preparing phase, waiting for questions to load...
+✅ Question screen detected
+📊 Initial progress: 1/40
+🔄 Advancement attempt 1...
+📝 Before click 1: Frage 1 von 40
+🖱️ Clicked next button (attempt 1)
+📝 After click 1: Frage 2 von 40
+✅ SUCCESS: Question advanced from 1 to 2
+📊 Question advancement test completed. Working: true
+🔄 Testing new game after completion...
+📊 Full test completed successfully
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="foundation\simple-debug-console.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="1" failures="0" skipped="0" time="6.247" errors="0">
+<testcase name="Debug console output" classname="foundation\simple-debug-console.spec.ts" time="6.247">
+<system-out>
+<![CDATA[CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
+CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
+CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
+CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
+CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
+CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
+CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
+CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
+Footer exists: [33mtrue[39m
+Footer test element exists: [33mfalse[39m
+Footer visible: [33mtrue[39m
+Dark mode toggle exists: [33mtrue[39m visible: [33mtrue[39m
+Language selector exists: [33mtrue[39m visible: [33mtrue[39m
+CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
+CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
+CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
+CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
+CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
+CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
+CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
+CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
+CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
+CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
+CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
+CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
+CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
+CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
+CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
+CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
+Footer after start exists: [33mtrue[39m
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="foundation\tablet-landscape-optimization.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="4" failures="0" skipped="0" time="19.713" errors="0">
+<testcase name="Tablet Landscape Optimization Tests › should display optimized layout for iPad landscape" classname="foundation\tablet-landscape-optimization.spec.ts" time="4.713">
+</testcase>
+<testcase name="Tablet Landscape Optimization Tests › should handle different tablet orientations gracefully" classname="foundation\tablet-landscape-optimization.spec.ts" time="5.823">
+<system-out>
+<![CDATA[✅ landscape orientation (1180x820) working correctly
+✅ portrait orientation (820x1180) working correctly
+]]>
+</system-out>
+</testcase>
+<testcase name="Tablet Landscape Optimization Tests › should use improved button colors for better readability" classname="foundation\tablet-landscape-optimization.spec.ts" time="1.012">
+</testcase>
+<testcase name="Tablet Landscape Optimization Tests › should properly scale player selection grid on tablets" classname="foundation\tablet-landscape-optimization.spec.ts" time="8.165">
+</testcase>
+</testsuite>
+<testsuite name="foundation\translation-system.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="7" failures="4" skipped="0" time="24.367" errors="0">
+<testcase name="Foundation: Translation System › should initialize translation system on app load" classname="foundation\translation-system.spec.ts" time="2.046">
+<failure message="translation-system.spec.ts:19:7 should initialize translation system on app load" type="FAILURE">
+<![CDATA[  [foundation-tests] › foundation\translation-system.spec.ts:19:7 › Foundation: Translation System › should initialize translation system on app load 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      25 |     // Verify translation system is initialized
+      26 |     const translationsWorking = await verifyTranslationSystem(page, tracker);
+    > 27 |     expect(translationsWorking).toBe(true);
+         |                                 ^
+      28 |     
+      29 |     // Check that i18n namespace is available
+      30 |     const i18nAvailable = await page.evaluate(() => {
+        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\translation-system.spec.ts:27:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\foundation-translation-sys-a4d27-nslation-system-on-app-load-foundation-tests\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\foundation-translation-sys-a4d27-nslation-system-on-app-load-foundation-tests\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\foundation-translation-sys-a4d27-nslation-system-on-app-load-foundation-tests\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1021ms
+🌐 DATA FLOW: Translation system check
+   Data: { translationsLoaded: [33mfalse[39m }
+
+[[ATTACHMENT|..\test-results\foundation-translation-sys-a4d27-nslation-system-on-app-load-foundation-tests\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\foundation-translation-sys-a4d27-nslation-system-on-app-load-foundation-tests\video.webm]]
+
+[[ATTACHMENT|..\test-results\foundation-translation-sys-a4d27-nslation-system-on-app-load-foundation-tests\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Translation System › should load translations for all supported languages" classname="foundation\translation-system.spec.ts" time="4.16">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1025ms
+🎯 USER ACTION: Testing language on de
+🌐 DATA FLOW: Language change not available
+   Data: { language: [32m'de'[39m }
+🎯 USER ACTION: Testing language on en
+🌐 DATA FLOW: Language change not available
+   Data: { language: [32m'en'[39m }
+🎯 USER ACTION: Testing language on es
+🌐 DATA FLOW: Language change not available
+   Data: { language: [32m'es'[39m }
+🎯 USER ACTION: Testing language on fr
+🌐 DATA FLOW: Language change not available
+   Data: { language: [32m'fr'[39m }
+📊 TEST REPORT: translation-system-languages
+   Duration: 1413ms
+   User Actions: 4
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Translation System › should translate UI elements correctly" classname="foundation\translation-system.spec.ts" time="4.987">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 956ms
+🌐 DATA FLOW: German translation found
+   Data: { key: [32m'start'[39m, expectedGerman: [32m'Spiel'[39m }
+🌐 DATA FLOW: English translation found
+   Data: { key: [32m'start'[39m, expectedGerman: [32m'Spiel'[39m }
+🌐 DATA FLOW: German translation not found
+   Data: { key: [32m'settings'[39m, expectedGerman: [32m'Einstellungen'[39m }
+🌐 DATA FLOW: English translation not found
+   Data: { key: [32m'settings'[39m, expectedGerman: [32m'Einstellungen'[39m }
+🌐 DATA FLOW: German translation not found
+   Data: { key: [32m'question'[39m, expectedGerman: [32m'Frage'[39m }
+🌐 DATA FLOW: English translation not found
+   Data: { key: [32m'question'[39m, expectedGerman: [32m'Frage'[39m }
+📊 TEST REPORT: translation-system-ui
+   Duration: 4399ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Translation System › should handle missing translations gracefully" classname="foundation\translation-system.spec.ts" time="3.016">
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 1049ms
+🌐 DATA FLOW: Fallback behavior test
+   Data: { available: [33mfalse[39m }
+📊 TEST REPORT: translation-system-fallback
+   Duration: 1437ms
+   User Actions: 0
+   State Changes: 0
+   Errors: 0
+   Screenshots: 0
+   Avg Interaction Time: 0ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Translation System › should maintain language preference in localStorage" classname="foundation\translation-system.spec.ts" time="3.952">
+<failure message="translation-system.spec.ts:177:7 should maintain language preference in localStorage" type="FAILURE">
+<![CDATA[  [foundation-tests] › foundation\translation-system.spec.ts:177:7 › Foundation: Translation System › should maintain language preference in localStorage 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected value: "unknown"
+    Received array: ["es", "de", "en", "fr"]
+
+      208 |     
+      209 |     // Language should be maintained or fall back to browser default
+    > 210 |     expect(['es', 'de', 'en', 'fr']).toContain(restoredLanguage);
+          |                                      ^
+      211 |     
+      212 |     const report = tracker.generateReport();
+      213 |     expect(report.errors.length).toBeLessThan(3);
+        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\translation-system.spec.ts:210:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\foundation-translation-sys-89fb2--preference-in-localStorage-foundation-tests\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\foundation-translation-sys-89fb2--preference-in-localStorage-foundation-tests\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\foundation-translation-sys-89fb2--preference-in-localStorage-foundation-tests\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 925ms
+🎯 USER ACTION: Changed language to Spanish
+💾 PERSISTENCE: localStorage read (i18nextLng)
+   Value: de
+💾 PERSISTENCE: Language preference stored (i18nextLng)
+   Value: de
+🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 856ms
+🎯 USER ACTION: Page reloaded
+🌐 DATA FLOW: Language restored after reload
+   Data: { language: [32m'unknown'[39m }
+
+[[ATTACHMENT|..\test-results\foundation-translation-sys-89fb2--preference-in-localStorage-foundation-tests\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\foundation-translation-sys-89fb2--preference-in-localStorage-foundation-tests\video.webm]]
+
+[[ATTACHMENT|..\test-results\foundation-translation-sys-89fb2--preference-in-localStorage-foundation-tests\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Translation System › should detect browser language correctly" classname="foundation\translation-system.spec.ts" time="2.207">
+<failure message="translation-system.spec.ts:216:7 should detect browser language correctly" type="FAILURE">
+<![CDATA[  [foundation-tests] › foundation\translation-system.spec.ts:216:7 › Foundation: Translation System › should detect browser language correctly 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected value: "unknown"
+    Received array: ["de", "en", "es", "fr"]
+
+      238 |     
+      239 |     // Should detect German or fall back to supported language
+    > 240 |     expect(['de', 'en', 'es', 'fr']).toContain(detectedLanguage);
+          |                                      ^
+      241 |     
+      242 |     const report = tracker.generateReport();
+      243 |     expect(report.errors.length).toBeLessThan(3);
+        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\translation-system.spec.ts:240:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\foundation-translation-sys-0a106--browser-language-correctly-foundation-tests\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\foundation-translation-sys-0a106--browser-language-correctly-foundation-tests\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\foundation-translation-sys-0a106--browser-language-correctly-foundation-tests\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 871ms
+🌐 DATA FLOW: Browser language detection
+   Data: { detected: [32m'unknown'[39m }
+
+[[ATTACHMENT|..\test-results\foundation-translation-sys-0a106--browser-language-correctly-foundation-tests\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\foundation-translation-sys-0a106--browser-language-correctly-foundation-tests\video.webm]]
+
+[[ATTACHMENT|..\test-results\foundation-translation-sys-0a106--browser-language-correctly-foundation-tests\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Foundation: Translation System › should handle rapid language switching" classname="foundation\translation-system.spec.ts" time="3.999">
+<failure message="translation-system.spec.ts:246:7 should handle rapid language switching" type="FAILURE">
+<![CDATA[  [foundation-tests] › foundation\translation-system.spec.ts:246:7 › Foundation: Translation System › should handle rapid language switching 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected value: "unknown"
+    Received array: ["de", "en", "es", "fr"]
+
+      276 |     
+      277 |     tracker.logDataFlow('Final language after rapid switching', { language: finalLanguage });
+    > 278 |     expect(['de', 'en', 'es', 'fr']).toContain(finalLanguage);
+          |                                      ^
+      279 |     
+      280 |     // Check that app is still functional
+      281 |     const appStillWorks = await page.locator('body').isVisible();
+        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\translation-system.spec.ts:278:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\foundation-translation-sys-94f8a-le-rapid-language-switching-foundation-tests\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\foundation-translation-sys-94f8a-le-rapid-language-switching-foundation-tests\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\foundation-translation-sys-94f8a-le-rapid-language-switching-foundation-tests\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
+🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
+🎮 GAME LOGIC: 🎮 Set window.gameQuestions to 1029 questions
+🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
+⚡ PERFORMANCE: loadTime = 867ms
+🎯 USER ACTION: Rapid language switch on de
+   Details: { iteration: [33m0[39m }
+🎯 USER ACTION: Rapid language switch on en
+   Details: { iteration: [33m1[39m }
+🎯 USER ACTION: Rapid language switch on es
+   Details: { iteration: [33m2[39m }
+🎯 USER ACTION: Rapid language switch on fr
+   Details: { iteration: [33m3[39m }
+🎯 USER ACTION: Rapid language switch on de
+   Details: { iteration: [33m4[39m }
+🎯 USER ACTION: Rapid language switch on en
+   Details: { iteration: [33m5[39m }
+🎯 USER ACTION: Rapid language switch on es
+   Details: { iteration: [33m6[39m }
+🎯 USER ACTION: Rapid language switch on fr
+   Details: { iteration: [33m7[39m }
+🎯 USER ACTION: Rapid language switch on de
+   Details: { iteration: [33m8[39m }
+🎯 USER ACTION: Rapid language switch on en
+   Details: { iteration: [33m9[39m }
+🌐 DATA FLOW: Final language after rapid switching
+   Data: { language: [32m'unknown'[39m }
+
+[[ATTACHMENT|..\test-results\foundation-translation-sys-94f8a-le-rapid-language-switching-foundation-tests\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\foundation-translation-sys-94f8a-le-rapid-language-switching-foundation-tests\video.webm]]
+
+[[ATTACHMENT|..\test-results\foundation-translation-sys-94f8a-le-rapid-language-switching-foundation-tests\error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="foundation\ui-functionality.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="5" failures="2" skipped="0" time="6.305" errors="0">
+<testcase name="UI Functionality Tests › should display background gradient correctly" classname="foundation\ui-functionality.spec.ts" time="0.747">
+<failure message="ui-functionality.spec.ts:13:7 should display background gradient correctly" type="FAILURE">
+<![CDATA[  [foundation-tests] › foundation\ui-functionality.spec.ts:13:7 › UI Functionality Tests › should display background gradient correctly 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      39 |                        backgroundStyle.backgroundColor !== 'rgba(0, 0, 0, 0)';
+      40 |     
+    > 41 |     expect(hasGradient).toBeTruthy();
+         |                         ^
+      42 |     
+      43 |     // Take a screenshot to verify visually
+      44 |     await page.screenshot({ path: 'tests/screenshots/background-gradient.png' });
+        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\ui-functionality.spec.ts:41:25
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\foundation-ui-functionalit-68601-ckground-gradient-correctly-foundation-tests\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\foundation-ui-functionalit-68601-ckground-gradient-correctly-foundation-tests\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\foundation-ui-functionalit-68601-ckground-gradient-correctly-foundation-tests\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[Background styles: { backgroundColor: [32m'rgba(0, 0, 0, 0)'[39m, backgroundImage: [32m'none'[39m }
+
+[[ATTACHMENT|..\test-results\foundation-ui-functionalit-68601-ckground-gradient-correctly-foundation-tests\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\foundation-ui-functionalit-68601-ckground-gradient-correctly-foundation-tests\video.webm]]
+
+[[ATTACHMENT|..\test-results\foundation-ui-functionalit-68601-ckground-gradient-correctly-foundation-tests\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="UI Functionality Tests › should toggle dark/light mode correctly" classname="foundation\ui-functionality.spec.ts" time="3.027">
+<failure message="ui-functionality.spec.ts:47:7 should toggle dark/light mode correctly" type="FAILURE">
+<![CDATA[  [foundation-tests] › foundation\ui-functionality.spec.ts:47:7 › UI Functionality Tests › should toggle dark/light mode correctly 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: null
+    Received: ""
+
+      85 |     
+      86 |     // Should be back to original state
+    > 87 |     expect(finalHtml).toBe(initialHtml);
+         |                       ^
+      88 |   });
+      89 |
+      90 |   test('should change language and reload app', async ({ page }) => {
+        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\ui-functionality.spec.ts:87:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\test-results\foundation-ui-functionalit-6ad55-e-dark-light-mode-correctly-foundation-tests\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\test-results\foundation-ui-functionalit-6ad55-e-dark-light-mode-correctly-foundation-tests\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\test-results\foundation-ui-functionalit-6ad55-e-dark-light-mode-correctly-foundation-tests\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[Initial HTML classes: [1mnull[22m
+After toggle HTML classes: dark
+
+[[ATTACHMENT|..\test-results\foundation-ui-functionalit-6ad55-e-dark-light-mode-correctly-foundation-tests\test-failed-1.png]]
+
+[[ATTACHMENT|..\test-results\foundation-ui-functionalit-6ad55-e-dark-light-mode-correctly-foundation-tests\video.webm]]
+
+[[ATTACHMENT|..\test-results\foundation-ui-functionalit-6ad55-e-dark-light-mode-correctly-foundation-tests\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="UI Functionality Tests › should change language and reload app" classname="foundation\ui-functionality.spec.ts" time="0.689">
+<system-out>
+<![CDATA[Language selector not found, skipping language test
+]]>
+</system-out>
+</testcase>
+<testcase name="UI Functionality Tests › should have consistent button sizes on question cards" classname="foundation\ui-functionality.spec.ts" time="0.993">
+</testcase>
+<testcase name="UI Functionality Tests › should show loading card stack animation with shadows" classname="foundation\ui-functionality.spec.ts" time="0.849">
+<system-out>
+<![CDATA[Loading cards not found, might need to trigger loading state
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\blame-progression.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="NameBlame Chain Progression Flow › should follow blame chain: blame → reveal → next question with blamed player active" classname="flows\nameblame-mode\blame-progression.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Chain Progression Flow › should display proper blame context in reveal phase" classname="flows\nameblame-mode\blame-progression.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-category-selection.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Category Selection › should handle random category selection flow in NameBlame mode" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should handle manual category selection with multiple categories" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should validate category selection requirements and loading states" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should integrate category selection with NameBlame game flow" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should handle category selection with different question counts" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle insufficient players gracefully across different scenarios" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should prevent duplicate blames and handle edge cases in blame logic" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle page reload and state recovery scenarios" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle corrupted state and provide graceful recovery" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle extreme input scenarios and boundary conditions" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Full Round Progression › should complete a full round with all players blaming on same question" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should handle multiple rounds with proper question advancement" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should show appropriate notifications and progress indicators" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should handle blame round completion and game ending scenarios" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should maintain consistent player order and rotation" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-player-setup.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Comprehensive Player Setup › should enforce 3-player minimum with proper validation and hints" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should handle dynamic player addition/removal correctly" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should validate player names with proper error handling" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should handle maximum player limits gracefully" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should maintain setup state consistency during player management" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame UI Feedback &amp; States › should show correct button states throughout blame flow" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should provide proper visual feedback for user interactions" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should handle error states and provide recovery options" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should maintain responsive design across different screen sizes" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should provide accessible UI elements and keyboard navigation" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\critical-fixes.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Critical Flow Tests › should enforce 3-player minimum requirement for NameBlame mode" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should prevent auto-advance bug in blame acknowledgement" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should maintain proper player rotation integrity" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should handle blame acknowledgement workflow correctly" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should validate forced setup screen navigation for NameBlame mode" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\flow-verification.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="NameBlame Flow - Automated Verification › should follow correct flow: IntroScreen → PlayerSetup → LoadingScreen → Game" classname="flows\nameblame-mode\flow-verification.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Flow - Automated Verification › should handle Classic mode flow correctly" classname="flows\nameblame-mode\flow-verification.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\framework-integration.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testcase name="Framework Integration Tests › should validate translation keys for NameBlame mode" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should validate Zustand store state management" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should validate framework component integration" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should handle framework error boundaries and loading states" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\full-nameblame-flow.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="NameBlame Mode: Full Game Flow › should complete full flow and restart cleanly" classname="flows\nameblame-mode\full-nameblame-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\nameblame-round-complete.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="NameBlame Mode - Single Round Full Progression › completes a full blame cycle on first question before advancing" classname="flows\nameblame-mode\nameblame-round-complete.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\player-setup.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="NameBlame Mode: Player Setup Flow › should set up players and start NameBlame game" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Mode: Player Setup Flow › should handle player name validation" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Mode: Player Setup Flow › should handle minimum and maximum player limits" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
 </testsuites>

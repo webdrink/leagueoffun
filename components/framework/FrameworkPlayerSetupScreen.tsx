@@ -51,12 +51,12 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] py-4 px-4">
+    <div className="flex flex-col items-center justify-center min-h-[60vh] py-4 w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="rounded-3xl shadow-2xl p-6 md:p-8 w-full backdrop-blur-sm bg-white/95 dark:bg-gray-800/95"
+          className="rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl backdrop-blur-sm bg-white/95 dark:bg-gray-800/95"
         >
           {/* Header Row (secondary inside card) */}
           <div className="flex items-center mb-6">

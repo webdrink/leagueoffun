@@ -714,6 +714,7 @@ function App() {
             allCategories={allCategoriesInfo}
             selectedCategories={selectedCategories}
             onSelectCategory={(categoryIds) => {
+              console.log('🔍 CategoryPickScreen: Selected categories changed to:', categoryIds);
               setSelectedCategories(categoryIds);
               updateGameSettings({ selectedCategoryIds: categoryIds });
             }}
