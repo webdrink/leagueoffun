@@ -12,7 +12,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../core/Button';
-import { Checkbox } from '../core/Checkbox';
 import useTranslation from '../../hooks/useTranslation';
 
 interface CategoryInfo {
@@ -71,26 +70,30 @@ const CategoryPickScreen: React.FC<CategoryPickScreenProps> = ({
       </h2>
 
       <div className="category-grid grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6 overflow-y-auto custom-scrollbar pr-1 flex-1 min-h-0">
-        {allCategories.map((cat) => (
+        {allCategories
+          .filter(cat => cat.questionCount > 0)
+          .map((cat) => (
           <label
             key={cat.id}
             className={`flex flex-col items-center justify-center p-3 sm:p-3 border rounded-xl shadow-sm cursor-pointer transition-all duration-150 select-none min-h-[88px] sm:min-h-[100px] lg:min-h-[120px]
             ${selectedCategories.includes(cat.id) ? 'border-purple-500 bg-purple-50' : 'border-gray-300 hover:bg-gray-50'}`}
+            role="button"
+            aria-label={cat.name}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleCategory(cat.id);
+              }
+            }}
             onClick={() => toggleCategory(cat.id)}
           >
             <div className="text-3xl sm:text-4xl mb-1">{cat.emoji}</div>
-            <div className="text-xs sm:text-sm font-semibold text-center text-purple-800 line-clamp-2 px-1">
+            <div className="text-xs sm:text-sm font-semibold text-center text-purple-800 line-clamp-2 px-1 break-words">
               {cat.name}
             </div>
             <div className="text-xs text-gray-600">
               {t('category_pick.questions_available', { count: cat.questionCount })}
-            </div>
-            <div onClick={(e) => e.stopPropagation()}>
-              <Checkbox
-                checked={selectedCategories.includes(cat.id)}
-                className="mt-2"
-                aria-label={cat.name}
-              />
             </div>
           </label>
         ))}

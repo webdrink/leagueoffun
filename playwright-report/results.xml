@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="91" failures="11" skipped="43" errors="0" time="47.444592">
-<testsuite name="foundation\app-initialization.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="7" failures="3" skipped="0" time="34.951" errors="0">
-<testcase name="Foundation: App Initialization › should initialize app and load core data successfully" classname="foundation\app-initialization.spec.ts" time="5.933">
+<testsuites id="" name="" tests="316" failures="11" skipped="268" errors="0" time="46.89375">
+<testsuite name="foundation\app-initialization.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="foundation-tests" tests="7" failures="3" skipped="0" time="26.379" errors="0">
+<testcase name="Foundation: App Initialization › should initialize app and load core data successfully" classname="foundation\app-initialization.spec.ts" time="4.644">
 <failure message="app-initialization.spec.ts:19:7 should initialize app and load core data successfully" type="FAILURE">
 <![CDATA[  [foundation-tests] › foundation\app-initialization.spec.ts:19:7 › Foundation: App Initialization › should initialize app and load core data successfully 
 
@@ -37,10 +37,10 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1173ms
+⚡ PERFORMANCE: loadTime = 1145ms
 🎯 USER ACTION: Verify app title
 🎮 GAME LOGIC: App container rendered
-📸 SCREENSHOT: app-initialization-basic-initial-load-1758957443025.png
+📸 SCREENSHOT: app-initialization-basic-initial-load-1758964940765.png
 🌐 DATA FLOW: Questions loaded
    Data: Questions available in window.gameQuestions
 🌐 DATA FLOW: Translation system check
@@ -54,7 +54,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: App Initialization › should load all required question categories" classname="foundation\app-initialization.spec.ts" time="5.453">
+<testcase name="Foundation: App Initialization › should load all required question categories" classname="foundation\app-initialization.spec.ts" time="4.461">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -62,13 +62,13 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1141ms
+⚡ PERFORMANCE: loadTime = 1176ms
 🌐 DATA FLOW: Waiting for categories to load
 🌐 DATA FLOW: Categories loaded
    Data: { count: [33m33[39m }
 🌐 DATA FLOW: Category structure validation passed
 📊 TEST REPORT: app-initialization-categories
-   Duration: 1952ms
+   Duration: 2156ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -77,7 +77,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: App Initialization › should load sufficient questions for gameplay" classname="foundation\app-initialization.spec.ts" time="5.617">
+<testcase name="Foundation: App Initialization › should load sufficient questions for gameplay" classname="foundation\app-initialization.spec.ts" time="4.267">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -85,14 +85,14 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1135ms
+⚡ PERFORMANCE: loadTime = 1133ms
 🌐 DATA FLOW: Questions loaded
    Data: Questions available in window.gameQuestions
 🌐 DATA FLOW: Total questions loaded
    Data: { count: [33m1029[39m }
 🌐 DATA FLOW: Question structure validation passed
 📊 TEST REPORT: app-initialization-questions
-   Duration: 2018ms
+   Duration: 1992ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -101,7 +101,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: App Initialization › should handle network failures gracefully" classname="foundation\app-initialization.spec.ts" time="3.309">
+<testcase name="Foundation: App Initialization › should handle network failures gracefully" classname="foundation\app-initialization.spec.ts" time="1.982">
 <failure message="app-initialization.spec.ts:132:7 should handle network failures gracefully" type="FAILURE">
 <![CDATA[  [foundation-tests] › foundation\app-initialization.spec.ts:132:7 › Foundation: App Initialization › should handle network failures gracefully 
 
@@ -137,7 +137,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: App Initialization › should initialize with correct default settings" classname="foundation\app-initialization.spec.ts" time="5.566">
+<testcase name="Foundation: App Initialization › should initialize with correct default settings" classname="foundation\app-initialization.spec.ts" time="4.482">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -145,12 +145,12 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1144ms
+⚡ PERFORMANCE: loadTime = 1076ms
 💾 PERSISTENCE: localStorage read (gameSettings)
 💾 PERSISTENCE: Default settings loaded (gameSettings)
 💾 PERSISTENCE: localStorage read (soundSettings)
 📊 TEST REPORT: app-initialization-default-settings
-   Duration: 1917ms
+   Duration: 2025ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -159,7 +159,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: App Initialization › should recover from corrupted localStorage" classname="foundation\app-initialization.spec.ts" time="3.176">
+<testcase name="Foundation: App Initialization › should recover from corrupted localStorage" classname="foundation\app-initialization.spec.ts" time="1.918">
 <failure message="app-initialization.spec.ts:196:7 should recover from corrupted localStorage" type="FAILURE">
 <![CDATA[  [foundation-tests] › foundation\app-initialization.spec.ts:196:7 › Foundation: App Initialization › should recover from corrupted localStorage 
 
@@ -187,7 +187,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: App Initialization › should display intro screen with start button" classname="foundation\app-initialization.spec.ts" time="5.897">
+<testcase name="Foundation: App Initialization › should display intro screen with start button" classname="foundation\app-initialization.spec.ts" time="4.625">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -195,13 +195,13 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1144ms
+⚡ PERFORMANCE: loadTime = 1184ms
 🎯 USER ACTION: Game title visible
 🎯 USER ACTION: Start button visible
 🎯 USER ACTION: Settings button visible
-📸 SCREENSHOT: app-initialization-intro-screen-intro-screen-1758957442990.png
+📸 SCREENSHOT: app-initialization-intro-screen-intro-screen-1758964940820.png
 📊 TEST REPORT: app-initialization-intro-screen
-   Duration: 2460ms
+   Duration: 2568ms
    User Actions: 3
    State Changes: 0
    Errors: 0
@@ -211,8 +211,8 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="foundation\audio-system.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="5" failures="0" skipped="0" time="27.317" errors="0">
-<testcase name="Foundation: Audio System › should initialize audio system correctly" classname="foundation\audio-system.spec.ts" time="5.515">
+<testsuite name="foundation\audio-system.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="foundation-tests" tests="5" failures="0" skipped="0" time="23.116" errors="0">
+<testcase name="Foundation: Audio System › should initialize audio system correctly" classname="foundation\audio-system.spec.ts" time="4.269">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -220,14 +220,14 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1127ms
+⚡ PERFORMANCE: loadTime = 1142ms
 🎵 AUDIO: Audio system check
    Details: { audioEnabled: [33mfalse[39m }
 🎵 AUDIO: Audio system availability check
    Details: { available: [33mfalse[39m }
 🎵 AUDIO: Audio system not available in test environment
 📊 TEST REPORT: audio-system-initialization
-   Duration: 1896ms
+   Duration: 1925ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -236,7 +236,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Audio System › should handle audio settings correctly" classname="foundation\audio-system.spec.ts" time="6.633">
+<testcase name="Foundation: Audio System › should handle audio settings correctly" classname="foundation\audio-system.spec.ts" time="5.428">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -244,7 +244,7 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1128ms
+⚡ PERFORMANCE: loadTime = 1077ms
 💾 PERSISTENCE: localStorage write (audioSettings)
    Value: { enabled: [33mtrue[39m, volume: [33m0.7[39m, effectsEnabled: [33mtrue[39m }
 🎵 AUDIO: Audio settings saved
@@ -255,13 +255,13 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 910ms
+⚡ PERFORMANCE: loadTime = 1004ms
 💾 PERSISTENCE: localStorage read (audioSettings)
    Value: {"enabled":true,"volume":0.7,"effectsEnabled":true}
 🎵 AUDIO: Audio settings restored
    Details: { restored: [32m'success'[39m }
 📊 TEST REPORT: audio-system-settings
-   Duration: 3222ms
+   Duration: 3315ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -270,7 +270,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Audio System › should handle audio loading failures gracefully" classname="foundation\audio-system.spec.ts" time="5.554">
+<testcase name="Foundation: Audio System › should handle audio loading failures gracefully" classname="foundation\audio-system.spec.ts" time="4.325">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -278,11 +278,11 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1133ms
+⚡ PERFORMANCE: loadTime = 1167ms
 🎵 AUDIO: Audio loading test completed
    Details: { testCompleted: [33mtrue[39m }
 📊 TEST REPORT: audio-system-loading-failures
-   Duration: 2050ms
+   Duration: 2130ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -291,7 +291,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Audio System › should respect volume controls" classname="foundation\audio-system.spec.ts" time="3.1">
+<testcase name="Foundation: Audio System › should respect volume controls" classname="foundation\audio-system.spec.ts" time="3.207">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -299,11 +299,11 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 917ms
+⚡ PERFORMANCE: loadTime = 1075ms
 🎵 AUDIO: Volume controls detection
    Details: { hasControls: [33mfalse[39m }
 📊 TEST REPORT: audio-system-volume-controls
-   Duration: 1513ms
+   Duration: 1811ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -312,7 +312,7 @@
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Audio System › should maintain audio state during gameplay" classname="foundation\audio-system.spec.ts" time="6.515">
+<testcase name="Foundation: Audio System › should maintain audio state during gameplay" classname="foundation\audio-system.spec.ts" time="5.887">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -320,7 +320,7 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 912ms
+⚡ PERFORMANCE: loadTime = 1090ms
 💾 PERSISTENCE: localStorage write (audioSettings)
    Value: { enabled: [33mtrue[39m, volume: [33m0.8[39m }
 🎯 USER ACTION: Started game to test audio state
@@ -329,7 +329,7 @@
 🎵 AUDIO: Audio settings during gameplay
    Details: { settingsFound: [32m'yes'[39m }
 📊 TEST REPORT: audio-system-gameplay-state
-   Duration: 4828ms
+   Duration: 5211ms
    User Actions: 1
    State Changes: 0
    Errors: 0
@@ -339,8 +339,8 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="foundation\debug-framework-content.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="1" failures="0" skipped="0" time="5.471" errors="0">
-<testcase name="Debug Framework Content › should show what is actually rendered" classname="foundation\debug-framework-content.spec.ts" time="5.471">
+<testsuite name="foundation\debug-framework-content.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="foundation-tests" tests="1" failures="0" skipped="0" time="5.776" errors="0">
+<testcase name="Debug Framework Content › should show what is actually rendered" classname="foundation\debug-framework-content.spec.ts" time="5.776">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -348,7 +348,7 @@
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1047ms
+⚡ PERFORMANCE: loadTime = 1236ms
 ACTUAL PAGE CONTENT: {
   "title": "The Blame Game",
   "bodyText": "\n    BlameGameWem traust du was zu?Wer würde am ehesten...Was denkst du? Kennst du deine Freunde?Spiel startenManuelle KategorieauswahlNameBlame ModusDeutschEnglishEspañolFrançais💜 Unterstütze uns für mehr Spiele!Deine Spende hilft uns, bessere Spiele zu entwickeln.\n    \n  \n\n",
@@ -385,11 +385,11 @@ ACTUAL PAGE CONTENT: {
   bodyInnerHTML: [32m'\n'[39m +
     [32m'    <div id="root"><div data-framework-host="true" class="min-h-screen"><div class="min-h-screen"><div class="relative"><div class="min-h-screen bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600 dark:from-pink-900 dark:via-purple-900 dark:to-indigo-900 animate-gentle-shift bg-[length:400%_400%]  overflow-hidden"><div class="h-screen flex flex-col bg-transparent overflow-hidden"><div class="flex flex-col h-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto w-full px-3 sm:px-4 lg:px-6 bg-transparent"><div class="h-4 sm:h-6 flex-shrink-0"></div><header class="py-3 sm:py-4 flex-shrink-0 flex justify-center items-center" data-testid="game-header"><div class="bg-white rounded-3xl shadow-2xl px-4 sm:px-5 md:px-6 py-3 sm:py-4 w-full backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 flex items-center justify-center min-h-[64px]"><div class="text-center w-full max-w-full"><div class="cursor-pointer hover:scale-105 transition-transform duration-200" title="Click to'[39m
 }
-📸 SCREENSHOT: debug-actual-content-actual-page-content-1758957448889.png
+📸 SCREENSHOT: debug-actual-content-actual-page-content-1758964947131.png
 🎮 GAME LOGIC: Error check
    Data: { hasError: [33mfalse[39m }
 📊 TEST REPORT: debug-actual-content
-   Duration: 4946ms
+   Duration: 5165ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -397,35 +397,35 @@ ACTUAL PAGE CONTENT: {
    Avg Interaction Time: 0ms
 DEBUG REPORT: {
   "testName": "debug-actual-content",
-  "duration": 4946,
+  "duration": 5165,
   "userActions": [],
   "stateChanges": [],
   "errors": [],
   "performance": {
-    "loadTime": 1047,
+    "loadTime": 1236,
     "interactionTimes": [],
     "renderTimes": []
   },
   "screenshots": [
-    "debug-actual-content-actual-page-content-1758957448889.png"
+    "debug-actual-content-actual-page-content-1758964947131.png"
   ]
 }
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="foundation\footer-positioning.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="4" failures="0" skipped="0" time="13.349" errors="0">
-<testcase name="Footer Positioning Tests › footer should remain visible and positioned correctly across different screens" classname="foundation\footer-positioning.spec.ts" time="3.287">
+<testsuite name="foundation\footer-positioning.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="foundation-tests" tests="4" failures="0" skipped="0" time="14.406" errors="0">
+<testcase name="Footer Positioning Tests › footer should remain visible and positioned correctly across different screens" classname="foundation\footer-positioning.spec.ts" time="3.429">
 </testcase>
-<testcase name="Footer Positioning Tests › footer should remain visible on narrow mobile viewports" classname="foundation\footer-positioning.spec.ts" time="2.988">
+<testcase name="Footer Positioning Tests › footer should remain visible on narrow mobile viewports" classname="foundation\footer-positioning.spec.ts" time="3.267">
 </testcase>
-<testcase name="Footer Positioning Tests › footer should remain visible on very tall desktop viewports" classname="foundation\footer-positioning.spec.ts" time="3.55">
+<testcase name="Footer Positioning Tests › footer should remain visible on very tall desktop viewports" classname="foundation\footer-positioning.spec.ts" time="4.086">
 </testcase>
-<testcase name="Footer Positioning Tests › page should not scroll vertically" classname="foundation\footer-positioning.spec.ts" time="3.524">
+<testcase name="Footer Positioning Tests › page should not scroll vertically" classname="foundation\footer-positioning.spec.ts" time="3.624">
 </testcase>
 </testsuite>
-<testsuite name="foundation\framework-foundation.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="5" failures="0" skipped="0" time="19.896" errors="0">
-<testcase name="Framework Foundation Tests › should initialize framework and display title" classname="foundation\framework-foundation.spec.ts" time="2.723">
+<testsuite name="foundation\framework-foundation.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="foundation-tests" tests="5" failures="0" skipped="0" time="18.696" errors="0">
+<testcase name="Framework Foundation Tests › should initialize framework and display title" classname="foundation\framework-foundation.spec.ts" time="3.134">
 <system-out>
 <![CDATA[🎯 USER ACTION: Navigate to framework app
 🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
@@ -434,15 +434,15 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1014ms
+⚡ PERFORMANCE: loadTime = 1051ms
 🌐 DATA FLOW: Framework initialized
    Data: Framework components detected
 🎮 GAME LOGIC: Framework initialized successfully
 🎮 GAME LOGIC: Framework title detected
    Data: { title: [32m'BlameGame'[39m }
-📸 SCREENSHOT: framework-basic-initialization-framework-initialized-1758957446000.png
+📸 SCREENSHOT: framework-basic-initialization-framework-initialized-1758964944424.png
 📊 TEST REPORT: framework-basic-initialization
-   Duration: 2050ms
+   Duration: 2428ms
    User Actions: 1
    State Changes: 0
    Errors: 0
@@ -451,7 +451,7 @@ DEBUG REPORT: {
 ]]>
 </system-out>
 </testcase>
-<testcase name="Framework Foundation Tests › should have working start button" classname="foundation\framework-foundation.spec.ts" time="4.137">
+<testcase name="Framework Foundation Tests › should have working start button" classname="foundation\framework-foundation.spec.ts" time="4.455">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -459,13 +459,13 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1001ms
+⚡ PERFORMANCE: loadTime = 1037ms
 🌐 DATA FLOW: Framework initialized
    Data: Framework components detected
 🎯 USER ACTION: Start button found
 🎯 USER ACTION: Start button clicked successfully
 📊 TEST REPORT: framework-start-button
-   Duration: 3418ms
+   Duration: 3895ms
    User Actions: 2
    State Changes: 0
    Errors: 0
@@ -474,7 +474,7 @@ DEBUG REPORT: {
 ]]>
 </system-out>
 </testcase>
-<testcase name="Framework Foundation Tests › should have working translation system" classname="foundation\framework-foundation.spec.ts" time="3.04">
+<testcase name="Framework Foundation Tests › should have working translation system" classname="foundation\framework-foundation.spec.ts" time="3.114">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -482,7 +482,7 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1026ms
+⚡ PERFORMANCE: loadTime = 850ms
 🌐 DATA FLOW: Framework initialized
    Data: Framework components detected
 🌐 DATA FLOW: Framework translation system check
@@ -490,7 +490,7 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: Current language detected
    Data: { language: [32m'de'[39m }
 📊 TEST REPORT: framework-translations
-   Duration: 1530ms
+   Duration: 1357ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -499,7 +499,7 @@ DEBUG REPORT: {
 ]]>
 </system-out>
 </testcase>
-<testcase name="Framework Foundation Tests › should handle framework content loading" classname="foundation\framework-foundation.spec.ts" time="3.678">
+<testcase name="Framework Foundation Tests › should handle framework content loading" classname="foundation\framework-foundation.spec.ts" time="2.51">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -507,7 +507,7 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1066ms
+⚡ PERFORMANCE: loadTime = 1031ms
 🌐 DATA FLOW: Framework initialized
    Data: Framework components detected
 🌐 DATA FLOW: Framework content check
@@ -515,7 +515,7 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: Framework content check completed
    Data: { available: [33mfalse[39m }
 📊 TEST REPORT: framework-content-loading
-   Duration: 1636ms
+   Duration: 1768ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -524,7 +524,7 @@ DEBUG REPORT: {
 ]]>
 </system-out>
 </testcase>
-<testcase name="Framework Foundation Tests › should maintain responsive layout" classname="foundation\framework-foundation.spec.ts" time="6.318">
+<testcase name="Framework Foundation Tests › should maintain responsive layout" classname="foundation\framework-foundation.spec.ts" time="5.483">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -532,20 +532,20 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1295ms
+⚡ PERFORMANCE: loadTime = 1057ms
 🌐 DATA FLOW: Framework initialized
    Data: Framework components detected
 🎯 USER ACTION: Testing desktop viewport
 🎮 GAME LOGIC: desktop layout working
-📸 SCREENSHOT: framework-responsive-layout-framework-desktop-1758957450522.png
+📸 SCREENSHOT: framework-responsive-layout-framework-desktop-1758964948181.png
 🎯 USER ACTION: Testing tablet viewport
 🎮 GAME LOGIC: tablet layout working
-📸 SCREENSHOT: framework-responsive-layout-framework-tablet-1758957451713.png
+📸 SCREENSHOT: framework-responsive-layout-framework-tablet-1758964949398.png
 🎯 USER ACTION: Testing mobile viewport
 🎮 GAME LOGIC: mobile layout working
-📸 SCREENSHOT: framework-responsive-layout-framework-mobile-1758957452570.png
+📸 SCREENSHOT: framework-responsive-layout-framework-mobile-1758964950289.png
 📊 TEST REPORT: framework-responsive-layout
-   Duration: 4500ms
+   Duration: 4537ms
    User Actions: 3
    State Changes: 0
    Errors: 0
@@ -555,8 +555,8 @@ DEBUG REPORT: {
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="foundation\local-storage.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="8" failures="2" skipped="0" time="25.435" errors="0">
-<testcase name="Foundation: Local Storage › should save and retrieve game settings" classname="foundation\local-storage.spec.ts" time="3.067">
+<testsuite name="foundation\local-storage.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="foundation-tests" tests="8" failures="2" skipped="0" time="22.927" errors="0">
+<testcase name="Foundation: Local Storage › should save and retrieve game settings" classname="foundation\local-storage.spec.ts" time="2.498">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -564,7 +564,7 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1114ms
+⚡ PERFORMANCE: loadTime = 1070ms
 💾 PERSISTENCE: localStorage write (gameSettings)
    Value: { language: [32m'de'[39m, soundEnabled: [33mtrue[39m, volume: [33m0.8[39m, theme: [32m'dark'[39m }
 💾 PERSISTENCE: Game settings saved (gameSettings)
@@ -573,7 +573,7 @@ DEBUG REPORT: {
    Value: {"language":"de","soundEnabled":true,"volume":0.8,"theme":"dark"}
 💾 PERSISTENCE: Game settings retrieved and verified
 📊 TEST REPORT: local-storage-settings
-   Duration: 1623ms
+   Duration: 1780ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -582,7 +582,7 @@ DEBUG REPORT: {
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Local Storage › should persist data across page reloads" classname="foundation\local-storage.spec.ts" time="3.781">
+<testcase name="Foundation: Local Storage › should persist data across page reloads" classname="foundation\local-storage.spec.ts" time="3.641">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -590,7 +590,7 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1092ms
+⚡ PERFORMANCE: loadTime = 1037ms
 💾 PERSISTENCE: localStorage write (gameState)
    Value: {
   currentQuestion: [33m5[39m,
@@ -605,13 +605,13 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 837ms
+⚡ PERFORMANCE: loadTime = 1059ms
 🎯 USER ACTION: Page reloaded
 💾 PERSISTENCE: localStorage read (gameState)
    Value: {"currentQuestion":5,"totalQuestions":100,"score":42,"gameMode":"classic"}
 💾 PERSISTENCE: Game state restored after reload
 📊 TEST REPORT: local-storage-persistence
-   Duration: 2615ms
+   Duration: 3024ms
    User Actions: 1
    State Changes: 0
    Errors: 0
@@ -620,7 +620,7 @@ DEBUG REPORT: {
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Local Storage › should handle localStorage quota limits gracefully" classname="foundation\local-storage.spec.ts" time="2.221">
+<testcase name="Foundation: Local Storage › should handle localStorage quota limits gracefully" classname="foundation\local-storage.spec.ts" time="2.298">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -628,7 +628,7 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1222ms
+⚡ PERFORMANCE: loadTime = 993ms
 💾 PERSISTENCE: Quota test completed (quotaTest)
    Value: {
   beforeSize: [33m1291[39m,
@@ -637,7 +637,7 @@ DEBUG REPORT: {
   errorOccurred: [33mtrue[39m
 }
 📊 TEST REPORT: local-storage-quota-limits
-   Duration: 1621ms
+   Duration: 1499ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -646,7 +646,7 @@ DEBUG REPORT: {
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Local Storage › should recover from corrupted localStorage data" classname="foundation\local-storage.spec.ts" time="0.424">
+<testcase name="Foundation: Local Storage › should recover from corrupted localStorage data" classname="foundation\local-storage.spec.ts" time="1.654">
 <failure message="local-storage.spec.ts:143:7 should recover from corrupted localStorage data" type="FAILURE">
 <![CDATA[  [foundation-tests] › foundation\local-storage.spec.ts:143:7 › Foundation: Local Storage › should recover from corrupted localStorage data 
 
@@ -674,7 +674,7 @@ DEBUG REPORT: {
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Local Storage › should maintain NameBlame player data" classname="foundation\local-storage.spec.ts" time="3.516">
+<testcase name="Foundation: Local Storage › should maintain NameBlame player data" classname="foundation\local-storage.spec.ts" time="3.013">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -682,7 +682,7 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1114ms
+⚡ PERFORMANCE: loadTime = 856ms
 💾 PERSISTENCE: localStorage write (nameBlamePlayers)
    Value: {
   players: [
@@ -711,7 +711,7 @@ DEBUG REPORT: {
 💾 PERSISTENCE: localStorage read (nameBlamePlayers)
    Value: {"players":[{"name":"Alice","blameCount":4},{"name":"Bob","blameCount":1},{"name":"Charlie","blameCount":5}],"currentPlayerIndex":1,"round":2}
 📊 TEST REPORT: local-storage-nameblame-data
-   Duration: 1473ms
+   Duration: 1193ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -720,7 +720,7 @@ DEBUG REPORT: {
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Local Storage › should handle concurrent localStorage operations" classname="foundation\local-storage.spec.ts" time="3.397">
+<testcase name="Foundation: Local Storage › should handle concurrent localStorage operations" classname="foundation\local-storage.spec.ts" time="2.338">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -728,11 +728,11 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1125ms
+⚡ PERFORMANCE: loadTime = 1120ms
 💾 PERSISTENCE: Concurrent operations completed (concurrent)
    Value: { total: [33m20[39m, successful: [33m20[39m }
 📊 TEST REPORT: local-storage-concurrent-operations
-   Duration: 1651ms
+   Duration: 1718ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -741,7 +741,7 @@ DEBUG REPORT: {
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Local Storage › should preserve language preferences correctly" classname="foundation\local-storage.spec.ts" time="5.583">
+<testcase name="Foundation: Local Storage › should preserve language preferences correctly" classname="foundation\local-storage.spec.ts" time="4.716">
 <failure message="local-storage.spec.ts:288:7 should preserve language preferences correctly" type="FAILURE">
 <![CDATA[  [foundation-tests] › foundation\local-storage.spec.ts:288:7 › Foundation: Local Storage › should preserve language preferences correctly 
 
@@ -777,7 +777,7 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1142ms
+⚡ PERFORMANCE: loadTime = 1053ms
 💾 PERSISTENCE: localStorage write (i18nextLng)
    Value: de
 💾 PERSISTENCE: Language preference set to de
@@ -787,7 +787,7 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1172ms
+⚡ PERFORMANCE: loadTime = 960ms
 💾 PERSISTENCE: localStorage read (i18nextLng)
    Value: de
 💾 PERSISTENCE: Language de restored correctly
@@ -800,7 +800,7 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 842ms
+⚡ PERFORMANCE: loadTime = 946ms
 💾 PERSISTENCE: localStorage read (i18nextLng)
    Value: de
 
@@ -812,7 +812,7 @@ DEBUG REPORT: {
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Local Storage › should handle storage cleanup and optimization" classname="foundation\local-storage.spec.ts" time="3.446">
+<testcase name="Foundation: Local Storage › should handle storage cleanup and optimization" classname="foundation\local-storage.spec.ts" time="2.769">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -820,7 +820,7 @@ DEBUG REPORT: {
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1262ms
+⚡ PERFORMANCE: loadTime = 1343ms
 💾 PERSISTENCE: localStorage write (gameSettings)
    Value: { theme: [32m'dark'[39m }
 💾 PERSISTENCE: localStorage write (oldGameState)
@@ -830,7 +830,7 @@ DEBUG REPORT: {
 💾 PERSISTENCE: localStorage write (tempData)
    Value: { temporary: [33mtrue[39m }
 💾 PERSISTENCE: localStorage write (userPrefs)
-   Value: { lastPlayed: [33m1758957453535[39m }
+   Value: { lastPlayed: [33m1758964951211[39m }
 💾 PERSISTENCE: Test data stored for cleanup test
 💾 PERSISTENCE: Cleanup completed (cleanup)
    Value: { beforeCount: [33m9[39m, afterCount: [33m8[39m, removed: [33m1[39m }
@@ -840,7 +840,7 @@ DEBUG REPORT: {
    Value: {"volume":0.5}
 💾 PERSISTENCE: localStorage read (tempData)
 📊 TEST REPORT: local-storage-cleanup
-   Duration: 1748ms
+   Duration: 2063ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -850,8 +850,8 @@ DEBUG REPORT: {
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="foundation\question-advancement-debug.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="1" failures="0" skipped="0" time="29.902" errors="0">
-<testcase name="Question Advancement - Debug Test › should advance through questions when clicking next button" classname="foundation\question-advancement-debug.spec.ts" time="29.902">
+<testsuite name="foundation\question-advancement-debug.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="foundation-tests" tests="1" failures="0" skipped="0" time="30.716" errors="0">
+<testcase name="Question Advancement - Debug Test › should advance through questions when clicking next button" classname="foundation\question-advancement-debug.spec.ts" time="30.716">
 <system-out>
 <![CDATA[🧪 Testing question advancement...
 ✅ Clicked start button
@@ -870,8 +870,8 @@ DEBUG REPORT: {
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="foundation\simple-debug-console.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="1" failures="0" skipped="0" time="6.247" errors="0">
-<testcase name="Debug console output" classname="foundation\simple-debug-console.spec.ts" time="6.247">
+<testsuite name="foundation\simple-debug-console.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="foundation-tests" tests="1" failures="0" skipped="0" time="6.627" errors="0">
+<testcase name="Debug console output" classname="foundation\simple-debug-console.spec.ts" time="6.627">
 <system-out>
 <![CDATA[CONSOLE: 🔧 useDarkMode result: {isDark: false, hasToggle: true}
 CONSOLE: 🔧 GameShell debug: {showFooter: true, features: Object, darkModeToggle: true, darkModeToggleType: boolean, darkModeToggleStrict: true}
@@ -907,23 +907,23 @@ Footer after start exists: [33mtrue[39m
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="foundation\tablet-landscape-optimization.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="4" failures="0" skipped="0" time="19.713" errors="0">
-<testcase name="Tablet Landscape Optimization Tests › should display optimized layout for iPad landscape" classname="foundation\tablet-landscape-optimization.spec.ts" time="4.713">
+<testsuite name="foundation\tablet-landscape-optimization.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="foundation-tests" tests="4" failures="0" skipped="0" time="18.502" errors="0">
+<testcase name="Tablet Landscape Optimization Tests › should display optimized layout for iPad landscape" classname="foundation\tablet-landscape-optimization.spec.ts" time="5.348">
 </testcase>
-<testcase name="Tablet Landscape Optimization Tests › should handle different tablet orientations gracefully" classname="foundation\tablet-landscape-optimization.spec.ts" time="5.823">
+<testcase name="Tablet Landscape Optimization Tests › should handle different tablet orientations gracefully" classname="foundation\tablet-landscape-optimization.spec.ts" time="5.596">
 <system-out>
 <![CDATA[✅ landscape orientation (1180x820) working correctly
 ✅ portrait orientation (820x1180) working correctly
 ]]>
 </system-out>
 </testcase>
-<testcase name="Tablet Landscape Optimization Tests › should use improved button colors for better readability" classname="foundation\tablet-landscape-optimization.spec.ts" time="1.012">
+<testcase name="Tablet Landscape Optimization Tests › should use improved button colors for better readability" classname="foundation\tablet-landscape-optimization.spec.ts" time="2.031">
 </testcase>
-<testcase name="Tablet Landscape Optimization Tests › should properly scale player selection grid on tablets" classname="foundation\tablet-landscape-optimization.spec.ts" time="8.165">
+<testcase name="Tablet Landscape Optimization Tests › should properly scale player selection grid on tablets" classname="foundation\tablet-landscape-optimization.spec.ts" time="5.527">
 </testcase>
 </testsuite>
-<testsuite name="foundation\translation-system.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="7" failures="4" skipped="0" time="24.367" errors="0">
-<testcase name="Foundation: Translation System › should initialize translation system on app load" classname="foundation\translation-system.spec.ts" time="2.046">
+<testsuite name="foundation\translation-system.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="foundation-tests" tests="7" failures="4" skipped="0" time="23.561" errors="0">
+<testcase name="Foundation: Translation System › should initialize translation system on app load" classname="foundation\translation-system.spec.ts" time="2.558">
 <failure message="translation-system.spec.ts:19:7 should initialize translation system on app load" type="FAILURE">
 <![CDATA[  [foundation-tests] › foundation\translation-system.spec.ts:19:7 › Foundation: Translation System › should initialize translation system on app load 
 
@@ -959,7 +959,7 @@ Footer after start exists: [33mtrue[39m
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1021ms
+⚡ PERFORMANCE: loadTime = 1199ms
 🌐 DATA FLOW: Translation system check
    Data: { translationsLoaded: [33mfalse[39m }
 
@@ -971,7 +971,7 @@ Footer after start exists: [33mtrue[39m
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Translation System › should load translations for all supported languages" classname="foundation\translation-system.spec.ts" time="4.16">
+<testcase name="Foundation: Translation System › should load translations for all supported languages" classname="foundation\translation-system.spec.ts" time="2.321">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -979,7 +979,7 @@ Footer after start exists: [33mtrue[39m
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1025ms
+⚡ PERFORMANCE: loadTime = 1128ms
 🎯 USER ACTION: Testing language on de
 🌐 DATA FLOW: Language change not available
    Data: { language: [32m'de'[39m }
@@ -993,7 +993,7 @@ Footer after start exists: [33mtrue[39m
 🌐 DATA FLOW: Language change not available
    Data: { language: [32m'fr'[39m }
 📊 TEST REPORT: translation-system-languages
-   Duration: 1413ms
+   Duration: 1609ms
    User Actions: 4
    State Changes: 0
    Errors: 0
@@ -1002,7 +1002,7 @@ Footer after start exists: [33mtrue[39m
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Translation System › should translate UI elements correctly" classname="foundation\translation-system.spec.ts" time="4.987">
+<testcase name="Foundation: Translation System › should translate UI elements correctly" classname="foundation\translation-system.spec.ts" time="5.305">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -1010,7 +1010,7 @@ Footer after start exists: [33mtrue[39m
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 956ms
+⚡ PERFORMANCE: loadTime = 1054ms
 🌐 DATA FLOW: German translation found
    Data: { key: [32m'start'[39m, expectedGerman: [32m'Spiel'[39m }
 🌐 DATA FLOW: English translation found
@@ -1024,7 +1024,7 @@ Footer after start exists: [33mtrue[39m
 🌐 DATA FLOW: English translation not found
    Data: { key: [32m'question'[39m, expectedGerman: [32m'Frage'[39m }
 📊 TEST REPORT: translation-system-ui
-   Duration: 4399ms
+   Duration: 4688ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -1033,7 +1033,7 @@ Footer after start exists: [33mtrue[39m
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Translation System › should handle missing translations gracefully" classname="foundation\translation-system.spec.ts" time="3.016">
+<testcase name="Foundation: Translation System › should handle missing translations gracefully" classname="foundation\translation-system.spec.ts" time="2.491">
 <system-out>
 <![CDATA[🎮 GAME LOGIC: 🎮 NameBlameModule.init() called with provider: null
 🎮 GAME LOGIC: 🎮 Created filtered question provider with 40 questions
@@ -1041,11 +1041,11 @@ Footer after start exists: [33mtrue[39m
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 1049ms
+⚡ PERFORMANCE: loadTime = 1281ms
 🌐 DATA FLOW: Fallback behavior test
    Data: { available: [33mfalse[39m }
 📊 TEST REPORT: translation-system-fallback
-   Duration: 1437ms
+   Duration: 1720ms
    User Actions: 0
    State Changes: 0
    Errors: 0
@@ -1054,7 +1054,7 @@ Footer after start exists: [33mtrue[39m
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Translation System › should maintain language preference in localStorage" classname="foundation\translation-system.spec.ts" time="3.952">
+<testcase name="Foundation: Translation System › should maintain language preference in localStorage" classname="foundation\translation-system.spec.ts" time="4.327">
 <failure message="translation-system.spec.ts:177:7 should maintain language preference in localStorage" type="FAILURE">
 <![CDATA[  [foundation-tests] › foundation\translation-system.spec.ts:177:7 › Foundation: Translation System › should maintain language preference in localStorage 
 
@@ -1090,7 +1090,7 @@ Footer after start exists: [33mtrue[39m
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 925ms
+⚡ PERFORMANCE: loadTime = 1286ms
 🎯 USER ACTION: Changed language to Spanish
 💾 PERSISTENCE: localStorage read (i18nextLng)
    Value: de
@@ -1102,7 +1102,7 @@ Footer after start exists: [33mtrue[39m
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 856ms
+⚡ PERFORMANCE: loadTime = 795ms
 🎯 USER ACTION: Page reloaded
 🌐 DATA FLOW: Language restored after reload
    Data: { language: [32m'unknown'[39m }
@@ -1115,7 +1115,7 @@ Footer after start exists: [33mtrue[39m
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Translation System › should detect browser language correctly" classname="foundation\translation-system.spec.ts" time="2.207">
+<testcase name="Foundation: Translation System › should detect browser language correctly" classname="foundation\translation-system.spec.ts" time="2.288">
 <failure message="translation-system.spec.ts:216:7 should detect browser language correctly" type="FAILURE">
 <![CDATA[  [foundation-tests] › foundation\translation-system.spec.ts:216:7 › Foundation: Translation System › should detect browser language correctly 
 
@@ -1151,7 +1151,7 @@ Footer after start exists: [33mtrue[39m
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 871ms
+⚡ PERFORMANCE: loadTime = 1203ms
 🌐 DATA FLOW: Browser language detection
    Data: { detected: [32m'unknown'[39m }
 
@@ -1163,7 +1163,7 @@ Footer after start exists: [33mtrue[39m
 ]]>
 </system-out>
 </testcase>
-<testcase name="Foundation: Translation System › should handle rapid language switching" classname="foundation\translation-system.spec.ts" time="3.999">
+<testcase name="Foundation: Translation System › should handle rapid language switching" classname="foundation\translation-system.spec.ts" time="4.271">
 <failure message="translation-system.spec.ts:246:7 should handle rapid language switching" type="FAILURE">
 <![CDATA[  [foundation-tests] › foundation\translation-system.spec.ts:246:7 › Foundation: Translation System › should handle rapid language switching 
 
@@ -1199,7 +1199,7 @@ Footer after start exists: [33mtrue[39m
 🎮 GAME LOGIC: 🎮 Set window.gameCategories to 33 categories
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
 🎮 GAME LOGIC: 🎮 Entering intro phase - resetting provider state
-⚡ PERFORMANCE: loadTime = 867ms
+⚡ PERFORMANCE: loadTime = 1189ms
 🎯 USER ACTION: Rapid language switch on de
    Details: { iteration: [33m0[39m }
 🎯 USER ACTION: Rapid language switch on en
@@ -1232,8 +1232,8 @@ Footer after start exists: [33mtrue[39m
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="foundation\ui-functionality.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="foundation-tests" tests="5" failures="2" skipped="0" time="6.305" errors="0">
-<testcase name="UI Functionality Tests › should display background gradient correctly" classname="foundation\ui-functionality.spec.ts" time="0.747">
+<testsuite name="foundation\ui-functionality.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="foundation-tests" tests="5" failures="2" skipped="0" time="6.577" errors="0">
+<testcase name="UI Functionality Tests › should display background gradient correctly" classname="foundation\ui-functionality.spec.ts" time="0.818">
 <failure message="ui-functionality.spec.ts:13:7 should display background gradient correctly" type="FAILURE">
 <![CDATA[  [foundation-tests] › foundation\ui-functionality.spec.ts:13:7 › UI Functionality Tests › should display background gradient correctly 
 
@@ -1272,7 +1272,7 @@ Footer after start exists: [33mtrue[39m
 ]]>
 </system-out>
 </testcase>
-<testcase name="UI Functionality Tests › should toggle dark/light mode correctly" classname="foundation\ui-functionality.spec.ts" time="3.027">
+<testcase name="UI Functionality Tests › should toggle dark/light mode correctly" classname="foundation\ui-functionality.spec.ts" time="3.018">
 <failure message="ui-functionality.spec.ts:47:7 should toggle dark/light mode correctly" type="FAILURE">
 <![CDATA[  [foundation-tests] › foundation\ui-functionality.spec.ts:47:7 › UI Functionality Tests › should toggle dark/light mode correctly 
 
@@ -1313,22 +1313,66 @@ After toggle HTML classes: dark
 ]]>
 </system-out>
 </testcase>
-<testcase name="UI Functionality Tests › should change language and reload app" classname="foundation\ui-functionality.spec.ts" time="0.689">
+<testcase name="UI Functionality Tests › should change language and reload app" classname="foundation\ui-functionality.spec.ts" time="0.783">
 <system-out>
 <![CDATA[Language selector not found, skipping language test
 ]]>
 </system-out>
 </testcase>
-<testcase name="UI Functionality Tests › should have consistent button sizes on question cards" classname="foundation\ui-functionality.spec.ts" time="0.993">
+<testcase name="UI Functionality Tests › should have consistent button sizes on question cards" classname="foundation\ui-functionality.spec.ts" time="1.14">
 </testcase>
-<testcase name="UI Functionality Tests › should show loading card stack animation with shadows" classname="foundation\ui-functionality.spec.ts" time="0.849">
+<testcase name="UI Functionality Tests › should show loading card stack animation with shadows" classname="foundation\ui-functionality.spec.ts" time="0.818">
 <system-out>
 <![CDATA[Loading cards not found, might need to trigger loading state
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="flows\nameblame-mode\blame-progression.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testsuite name="flows\classic-mode\critical-playability.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="classic-mode-flows" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Critical Player Experience: Game Playability › players should be able to start the game and see questions" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Critical Player Experience: Game Playability › should verify question files are accessible" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Critical Player Experience: Game Playability › should verify app loads without JavaScript errors" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\full-classic-flow.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="classic-mode-flows" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Classic Mode: Full Game Flow › should play through all questions and restart cleanly" classname="flows\classic-mode\full-classic-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\quick-start.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="classic-mode-flows" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Classic Mode: Quick Start Flow › should complete full classic mode game flow" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Classic Mode: Quick Start Flow › should handle rapid question navigation" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Classic Mode: Quick Start Flow › should maintain game state during navigation" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\user-experience-real.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="classic-mode-flows" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="User Experience: Real Gameplay Test › should allow users to start and play the game successfully" classname="flows\classic-mode\user-experience-real.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Experience: Real Gameplay Test › should check if questions are actually loading" classname="flows\classic-mode\user-experience-real.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\blame-progression.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="nameblame-mode-flows" tests="2" failures="0" skipped="2" time="0" errors="0">
 <testcase name="NameBlame Chain Progression Flow › should follow blame chain: blame → reveal → next question with blamed player active" classname="flows\nameblame-mode\blame-progression.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1338,7 +1382,7 @@ After toggle HTML classes: dark
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="flows\nameblame-mode\comprehensive-category-selection.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testsuite name="flows\nameblame-mode\comprehensive-category-selection.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
 <testcase name="NameBlame Category Selection › should handle random category selection flow in NameBlame mode" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1360,7 +1404,7 @@ After toggle HTML classes: dark
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testsuite name="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
 <testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle insufficient players gracefully across different scenarios" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1382,7 +1426,7 @@ After toggle HTML classes: dark
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testsuite name="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
 <testcase name="NameBlame Full Round Progression › should complete a full round with all players blaming on same question" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1404,7 +1448,7 @@ After toggle HTML classes: dark
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="flows\nameblame-mode\comprehensive-player-setup.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testsuite name="flows\nameblame-mode\comprehensive-player-setup.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
 <testcase name="NameBlame Comprehensive Player Setup › should enforce 3-player minimum with proper validation and hints" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1426,7 +1470,7 @@ After toggle HTML classes: dark
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testsuite name="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
 <testcase name="NameBlame UI Feedback &amp; States › should show correct button states throughout blame flow" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1448,7 +1492,7 @@ After toggle HTML classes: dark
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="flows\nameblame-mode\critical-fixes.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testsuite name="flows\nameblame-mode\critical-fixes.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="nameblame-mode-flows" tests="5" failures="0" skipped="5" time="0" errors="0">
 <testcase name="NameBlame Critical Flow Tests › should enforce 3-player minimum requirement for NameBlame mode" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1470,7 +1514,7 @@ After toggle HTML classes: dark
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="flows\nameblame-mode\flow-verification.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testsuite name="flows\nameblame-mode\flow-verification.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="nameblame-mode-flows" tests="2" failures="0" skipped="2" time="0" errors="0">
 <testcase name="NameBlame Flow - Automated Verification › should follow correct flow: IntroScreen → PlayerSetup → LoadingScreen → Game" classname="flows\nameblame-mode\flow-verification.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1480,7 +1524,7 @@ After toggle HTML classes: dark
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="flows\nameblame-mode\framework-integration.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testsuite name="flows\nameblame-mode\framework-integration.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="nameblame-mode-flows" tests="4" failures="0" skipped="4" time="0" errors="0">
 <testcase name="Framework Integration Tests › should validate translation keys for NameBlame mode" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1498,19 +1542,19 @@ After toggle HTML classes: dark
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="flows\nameblame-mode\full-nameblame-flow.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testsuite name="flows\nameblame-mode\full-nameblame-flow.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="nameblame-mode-flows" tests="1" failures="0" skipped="1" time="0" errors="0">
 <testcase name="NameBlame Mode: Full Game Flow › should complete full flow and restart cleanly" classname="flows\nameblame-mode\full-nameblame-flow.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="flows\nameblame-mode\nameblame-round-complete.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testsuite name="flows\nameblame-mode\nameblame-round-complete.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="nameblame-mode-flows" tests="1" failures="0" skipped="1" time="0" errors="0">
 <testcase name="NameBlame Mode - Single Round Full Progression › completes a full blame cycle on first question before advancing" classname="flows\nameblame-mode\nameblame-round-complete.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="flows\nameblame-mode\player-setup.spec.ts" timestamp="2025-09-27T07:17:15.001Z" hostname="nameblame-mode-flows" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testsuite name="flows\nameblame-mode\player-setup.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="nameblame-mode-flows" tests="3" failures="0" skipped="3" time="0" errors="0">
 <testcase name="NameBlame Mode: Player Setup Flow › should set up players and start NameBlame game" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
 <skipped>
 </skipped>
@@ -1520,6 +1564,1002 @@ After toggle HTML classes: dark
 </skipped>
 </testcase>
 <testcase name="NameBlame Mode: Player Setup Flow › should handle minimum and maximum player limits" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="edge-cases\network-failures.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="edge-cases" tests="7" failures="0" skipped="7" time="0" errors="0">
+<testcase name="Edge Cases: Network Failures › should handle offline mode gracefully" classname="edge-cases\network-failures.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases: Network Failures › should handle slow network conditions" classname="edge-cases\network-failures.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases: Network Failures › should handle asset loading failures" classname="edge-cases\network-failures.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases: Network Failures › should handle JSON loading failures" classname="edge-cases\network-failures.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases: Network Failures › should recover from intermittent network issues" classname="edge-cases\network-failures.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases: Network Failures › should handle CDN failures gracefully" classname="edge-cases\network-failures.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Edge Cases: Network Failures › should handle timeout scenarios" classname="edge-cases\network-failures.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\critical-playability.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Critical Player Experience: Game Playability › players should be able to start the game and see questions" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Critical Player Experience: Game Playability › should verify question files are accessible" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Critical Player Experience: Game Playability › should verify app loads without JavaScript errors" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\full-classic-flow.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Classic Mode: Full Game Flow › should play through all questions and restart cleanly" classname="flows\classic-mode\full-classic-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\quick-start.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Classic Mode: Quick Start Flow › should complete full classic mode game flow" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Classic Mode: Quick Start Flow › should handle rapid question navigation" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Classic Mode: Quick Start Flow › should maintain game state during navigation" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\user-experience-real.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="User Experience: Real Gameplay Test › should allow users to start and play the game successfully" classname="flows\classic-mode\user-experience-real.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Experience: Real Gameplay Test › should check if questions are actually loading" classname="flows\classic-mode\user-experience-real.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\blame-progression.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="NameBlame Chain Progression Flow › should follow blame chain: blame → reveal → next question with blamed player active" classname="flows\nameblame-mode\blame-progression.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Chain Progression Flow › should display proper blame context in reveal phase" classname="flows\nameblame-mode\blame-progression.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-category-selection.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Category Selection › should handle random category selection flow in NameBlame mode" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should handle manual category selection with multiple categories" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should validate category selection requirements and loading states" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should integrate category selection with NameBlame game flow" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should handle category selection with different question counts" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle insufficient players gracefully across different scenarios" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should prevent duplicate blames and handle edge cases in blame logic" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle page reload and state recovery scenarios" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle corrupted state and provide graceful recovery" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle extreme input scenarios and boundary conditions" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Full Round Progression › should complete a full round with all players blaming on same question" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should handle multiple rounds with proper question advancement" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should show appropriate notifications and progress indicators" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should handle blame round completion and game ending scenarios" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should maintain consistent player order and rotation" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-player-setup.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Comprehensive Player Setup › should enforce 3-player minimum with proper validation and hints" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should handle dynamic player addition/removal correctly" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should validate player names with proper error handling" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should handle maximum player limits gracefully" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should maintain setup state consistency during player management" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame UI Feedback &amp; States › should show correct button states throughout blame flow" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should provide proper visual feedback for user interactions" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should handle error states and provide recovery options" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should maintain responsive design across different screen sizes" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should provide accessible UI elements and keyboard navigation" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\critical-fixes.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Critical Flow Tests › should enforce 3-player minimum requirement for NameBlame mode" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should prevent auto-advance bug in blame acknowledgement" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should maintain proper player rotation integrity" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should handle blame acknowledgement workflow correctly" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should validate forced setup screen navigation for NameBlame mode" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\flow-verification.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="NameBlame Flow - Automated Verification › should follow correct flow: IntroScreen → PlayerSetup → LoadingScreen → Game" classname="flows\nameblame-mode\flow-verification.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Flow - Automated Verification › should handle Classic mode flow correctly" classname="flows\nameblame-mode\flow-verification.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\framework-integration.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testcase name="Framework Integration Tests › should validate translation keys for NameBlame mode" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should validate Zustand store state management" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should validate framework component integration" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should handle framework error boundaries and loading states" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\full-nameblame-flow.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="NameBlame Mode: Full Game Flow › should complete full flow and restart cleanly" classname="flows\nameblame-mode\full-nameblame-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\nameblame-round-complete.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="NameBlame Mode - Single Round Full Progression › completes a full blame cycle on first question before advancing" classname="flows\nameblame-mode\nameblame-round-complete.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\player-setup.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-firefox" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="NameBlame Mode: Player Setup Flow › should set up players and start NameBlame game" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Mode: Player Setup Flow › should handle player name validation" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Mode: Player Setup Flow › should handle minimum and maximum player limits" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\critical-playability.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Critical Player Experience: Game Playability › players should be able to start the game and see questions" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Critical Player Experience: Game Playability › should verify question files are accessible" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Critical Player Experience: Game Playability › should verify app loads without JavaScript errors" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\full-classic-flow.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Classic Mode: Full Game Flow › should play through all questions and restart cleanly" classname="flows\classic-mode\full-classic-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\quick-start.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Classic Mode: Quick Start Flow › should complete full classic mode game flow" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Classic Mode: Quick Start Flow › should handle rapid question navigation" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Classic Mode: Quick Start Flow › should maintain game state during navigation" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\user-experience-real.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="User Experience: Real Gameplay Test › should allow users to start and play the game successfully" classname="flows\classic-mode\user-experience-real.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Experience: Real Gameplay Test › should check if questions are actually loading" classname="flows\classic-mode\user-experience-real.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\blame-progression.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="NameBlame Chain Progression Flow › should follow blame chain: blame → reveal → next question with blamed player active" classname="flows\nameblame-mode\blame-progression.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Chain Progression Flow › should display proper blame context in reveal phase" classname="flows\nameblame-mode\blame-progression.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-category-selection.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Category Selection › should handle random category selection flow in NameBlame mode" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should handle manual category selection with multiple categories" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should validate category selection requirements and loading states" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should integrate category selection with NameBlame game flow" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should handle category selection with different question counts" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle insufficient players gracefully across different scenarios" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should prevent duplicate blames and handle edge cases in blame logic" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle page reload and state recovery scenarios" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle corrupted state and provide graceful recovery" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle extreme input scenarios and boundary conditions" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Full Round Progression › should complete a full round with all players blaming on same question" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should handle multiple rounds with proper question advancement" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should show appropriate notifications and progress indicators" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should handle blame round completion and game ending scenarios" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should maintain consistent player order and rotation" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-player-setup.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Comprehensive Player Setup › should enforce 3-player minimum with proper validation and hints" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should handle dynamic player addition/removal correctly" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should validate player names with proper error handling" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should handle maximum player limits gracefully" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should maintain setup state consistency during player management" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame UI Feedback &amp; States › should show correct button states throughout blame flow" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should provide proper visual feedback for user interactions" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should handle error states and provide recovery options" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should maintain responsive design across different screen sizes" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should provide accessible UI elements and keyboard navigation" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\critical-fixes.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Critical Flow Tests › should enforce 3-player minimum requirement for NameBlame mode" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should prevent auto-advance bug in blame acknowledgement" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should maintain proper player rotation integrity" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should handle blame acknowledgement workflow correctly" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should validate forced setup screen navigation for NameBlame mode" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\flow-verification.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="NameBlame Flow - Automated Verification › should follow correct flow: IntroScreen → PlayerSetup → LoadingScreen → Game" classname="flows\nameblame-mode\flow-verification.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Flow - Automated Verification › should handle Classic mode flow correctly" classname="flows\nameblame-mode\flow-verification.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\framework-integration.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testcase name="Framework Integration Tests › should validate translation keys for NameBlame mode" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should validate Zustand store state management" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should validate framework component integration" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should handle framework error boundaries and loading states" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\full-nameblame-flow.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="NameBlame Mode: Full Game Flow › should complete full flow and restart cleanly" classname="flows\nameblame-mode\full-nameblame-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\nameblame-round-complete.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="NameBlame Mode - Single Round Full Progression › completes a full blame cycle on first question before advancing" classname="flows\nameblame-mode\nameblame-round-complete.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\player-setup.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="cross-browser-webkit" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="NameBlame Mode: Player Setup Flow › should set up players and start NameBlame game" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Mode: Player Setup Flow › should handle player name validation" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Mode: Player Setup Flow › should handle minimum and maximum player limits" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\critical-playability.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Critical Player Experience: Game Playability › players should be able to start the game and see questions" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Critical Player Experience: Game Playability › should verify question files are accessible" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Critical Player Experience: Game Playability › should verify app loads without JavaScript errors" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\full-classic-flow.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Classic Mode: Full Game Flow › should play through all questions and restart cleanly" classname="flows\classic-mode\full-classic-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\quick-start.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Classic Mode: Quick Start Flow › should complete full classic mode game flow" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Classic Mode: Quick Start Flow › should handle rapid question navigation" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Classic Mode: Quick Start Flow › should maintain game state during navigation" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\user-experience-real.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="User Experience: Real Gameplay Test › should allow users to start and play the game successfully" classname="flows\classic-mode\user-experience-real.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Experience: Real Gameplay Test › should check if questions are actually loading" classname="flows\classic-mode\user-experience-real.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\blame-progression.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="NameBlame Chain Progression Flow › should follow blame chain: blame → reveal → next question with blamed player active" classname="flows\nameblame-mode\blame-progression.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Chain Progression Flow › should display proper blame context in reveal phase" classname="flows\nameblame-mode\blame-progression.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-category-selection.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Category Selection › should handle random category selection flow in NameBlame mode" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should handle manual category selection with multiple categories" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should validate category selection requirements and loading states" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should integrate category selection with NameBlame game flow" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should handle category selection with different question counts" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle insufficient players gracefully across different scenarios" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should prevent duplicate blames and handle edge cases in blame logic" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle page reload and state recovery scenarios" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle corrupted state and provide graceful recovery" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle extreme input scenarios and boundary conditions" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Full Round Progression › should complete a full round with all players blaming on same question" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should handle multiple rounds with proper question advancement" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should show appropriate notifications and progress indicators" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should handle blame round completion and game ending scenarios" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should maintain consistent player order and rotation" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-player-setup.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Comprehensive Player Setup › should enforce 3-player minimum with proper validation and hints" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should handle dynamic player addition/removal correctly" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should validate player names with proper error handling" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should handle maximum player limits gracefully" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should maintain setup state consistency during player management" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame UI Feedback &amp; States › should show correct button states throughout blame flow" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should provide proper visual feedback for user interactions" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should handle error states and provide recovery options" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should maintain responsive design across different screen sizes" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should provide accessible UI elements and keyboard navigation" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\critical-fixes.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Critical Flow Tests › should enforce 3-player minimum requirement for NameBlame mode" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should prevent auto-advance bug in blame acknowledgement" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should maintain proper player rotation integrity" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should handle blame acknowledgement workflow correctly" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should validate forced setup screen navigation for NameBlame mode" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\flow-verification.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="NameBlame Flow - Automated Verification › should follow correct flow: IntroScreen → PlayerSetup → LoadingScreen → Game" classname="flows\nameblame-mode\flow-verification.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Flow - Automated Verification › should handle Classic mode flow correctly" classname="flows\nameblame-mode\flow-verification.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\framework-integration.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testcase name="Framework Integration Tests › should validate translation keys for NameBlame mode" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should validate Zustand store state management" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should validate framework component integration" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should handle framework error boundaries and loading states" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\full-nameblame-flow.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="NameBlame Mode: Full Game Flow › should complete full flow and restart cleanly" classname="flows\nameblame-mode\full-nameblame-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\nameblame-round-complete.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="NameBlame Mode - Single Round Full Progression › completes a full blame cycle on first question before advancing" classname="flows\nameblame-mode\nameblame-round-complete.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\player-setup.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-chrome" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="NameBlame Mode: Player Setup Flow › should set up players and start NameBlame game" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Mode: Player Setup Flow › should handle player name validation" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Mode: Player Setup Flow › should handle minimum and maximum player limits" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\critical-playability.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Critical Player Experience: Game Playability › players should be able to start the game and see questions" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Critical Player Experience: Game Playability › should verify question files are accessible" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Critical Player Experience: Game Playability › should verify app loads without JavaScript errors" classname="flows\classic-mode\critical-playability.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\full-classic-flow.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Classic Mode: Full Game Flow › should play through all questions and restart cleanly" classname="flows\classic-mode\full-classic-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\quick-start.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="Classic Mode: Quick Start Flow › should complete full classic mode game flow" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Classic Mode: Quick Start Flow › should handle rapid question navigation" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Classic Mode: Quick Start Flow › should maintain game state during navigation" classname="flows\classic-mode\quick-start.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\classic-mode\user-experience-real.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="User Experience: Real Gameplay Test › should allow users to start and play the game successfully" classname="flows\classic-mode\user-experience-real.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="User Experience: Real Gameplay Test › should check if questions are actually loading" classname="flows\classic-mode\user-experience-real.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\blame-progression.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="NameBlame Chain Progression Flow › should follow blame chain: blame → reveal → next question with blamed player active" classname="flows\nameblame-mode\blame-progression.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Chain Progression Flow › should display proper blame context in reveal phase" classname="flows\nameblame-mode\blame-progression.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-category-selection.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Category Selection › should handle random category selection flow in NameBlame mode" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should handle manual category selection with multiple categories" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should validate category selection requirements and loading states" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should integrate category selection with NameBlame game flow" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Category Selection › should handle category selection with different question counts" classname="flows\nameblame-mode\comprehensive-category-selection.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle insufficient players gracefully across different scenarios" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should prevent duplicate blames and handle edge cases in blame logic" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle page reload and state recovery scenarios" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle corrupted state and provide graceful recovery" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Edge Cases &amp; Error Scenarios › should handle extreme input scenarios and boundary conditions" classname="flows\nameblame-mode\comprehensive-edge-cases.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Full Round Progression › should complete a full round with all players blaming on same question" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should handle multiple rounds with proper question advancement" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should show appropriate notifications and progress indicators" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should handle blame round completion and game ending scenarios" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Full Round Progression › should maintain consistent player order and rotation" classname="flows\nameblame-mode\comprehensive-full-rounds.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-player-setup.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Comprehensive Player Setup › should enforce 3-player minimum with proper validation and hints" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should handle dynamic player addition/removal correctly" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should validate player names with proper error handling" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should handle maximum player limits gracefully" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Comprehensive Player Setup › should maintain setup state consistency during player management" classname="flows\nameblame-mode\comprehensive-player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame UI Feedback &amp; States › should show correct button states throughout blame flow" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should provide proper visual feedback for user interactions" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should handle error states and provide recovery options" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should maintain responsive design across different screen sizes" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame UI Feedback &amp; States › should provide accessible UI elements and keyboard navigation" classname="flows\nameblame-mode\comprehensive-ui-feedback.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\critical-fixes.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="5" failures="0" skipped="5" time="0" errors="0">
+<testcase name="NameBlame Critical Flow Tests › should enforce 3-player minimum requirement for NameBlame mode" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should prevent auto-advance bug in blame acknowledgement" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should maintain proper player rotation integrity" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should handle blame acknowledgement workflow correctly" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Critical Flow Tests › should validate forced setup screen navigation for NameBlame mode" classname="flows\nameblame-mode\critical-fixes.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\flow-verification.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="NameBlame Flow - Automated Verification › should follow correct flow: IntroScreen → PlayerSetup → LoadingScreen → Game" classname="flows\nameblame-mode\flow-verification.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Flow - Automated Verification › should handle Classic mode flow correctly" classname="flows\nameblame-mode\flow-verification.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\framework-integration.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="4" failures="0" skipped="4" time="0" errors="0">
+<testcase name="Framework Integration Tests › should validate translation keys for NameBlame mode" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should validate Zustand store state management" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should validate framework component integration" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Framework Integration Tests › should handle framework error boundaries and loading states" classname="flows\nameblame-mode\framework-integration.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\full-nameblame-flow.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="NameBlame Mode: Full Game Flow › should complete full flow and restart cleanly" classname="flows\nameblame-mode\full-nameblame-flow.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\nameblame-round-complete.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="NameBlame Mode - Single Round Full Progression › completes a full blame cycle on first question before advancing" classname="flows\nameblame-mode\nameblame-round-complete.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="flows\nameblame-mode\player-setup.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="mobile-safari" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="NameBlame Mode: Player Setup Flow › should set up players and start NameBlame game" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Mode: Player Setup Flow › should handle player name validation" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="NameBlame Mode: Player Setup Flow › should handle minimum and maximum player limits" classname="flows\nameblame-mode\player-setup.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="fixes\category-selection-aria-and-counts.spec.ts" timestamp="2025-09-27T09:22:14.925Z" hostname="fixes-tests" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Category Selection: ARIA, titles, and counts › titles visible, no overflow checkboxes, dynamic counts, max from settings" classname="fixes\category-selection-aria-and-counts.spec.ts" time="0">
 <skipped>
 </skipped>
 </testcase>

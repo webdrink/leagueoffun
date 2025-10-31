@@ -3,14 +3,14 @@
  * Framework-compatible version of CategoryPickScreen for manual category selection.
  * Uses GameShell for consistent layout and integrates with framework architecture.
  */
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../core/Button';
-import { Checkbox } from '../core/Checkbox';
 import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
 import { GameAction } from '../../framework/core/actions';
 import { CATEGORY_EMOJIS } from '../../constants';
 import useTranslation from '../../hooks/useTranslation';
+import { useGameSettings } from '../../hooks/useGameSettings';
 
 interface CategoryInfo {
   id: string;
@@ -22,17 +22,40 @@ interface CategoryInfo {
 const FrameworkCategoryPickScreen: React.FC = () => {
   const { dispatch } = useFrameworkRouter();
   const { t } = useTranslation();
+  const { gameSettings } = useGameSettings();
   
-  // Initialize categories from CATEGORY_EMOJIS
-  const allCategories: CategoryInfo[] = Object.entries(CATEGORY_EMOJIS).map(([name, emoji]) => ({
-    id: name,
-    emoji,
-    name: t(`categories.${name}`) || name,
-    questionCount: 10 // Default question count per category
-  }));
+  // Build categories list and enrich with real question counts when available
+  const allCategories: CategoryInfo[] = useMemo(() => {
+    // Map of counts per localized category name from window.gameCategories if available
+    let countsByName: Record<string, number> = {};
+    if (typeof window !== 'undefined') {
+      const w = window as unknown as { gameCategories?: Array<{ name: string; questions?: string[] }> };
+      if (Array.isArray(w.gameCategories)) {
+        countsByName = w.gameCategories.reduce<Record<string, number>>((acc, c) => {
+          acc[c.name] = (c.questions?.length ?? 0);
+          return acc;
+        }, {});
+      }
+    }
+
+    const categories = Object.entries(CATEGORY_EMOJIS).map(([name, emoji]) => {
+      const localizedName = t(`categories.${name}`) || name;
+      const questionCount = countsByName[localizedName] ?? countsByName[name] ?? 0;
+      return {
+        id: name,
+        emoji,
+        name: localizedName,
+        questionCount
+      };
+    });
+
+    // Filter out categories that have zero questions – we don't want to show them
+    return categories.filter(c => c.questionCount > 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [t]);
 
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const maxSelectable = 10;
+  const maxSelectable = gameSettings?.categoryCount ?? 10;
 
   const toggleCategory = (id: string) => {
     if (selectedCategories.includes(id)) {
@@ -84,22 +107,25 @@ const FrameworkCategoryPickScreen: React.FC = () => {
                   ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/30 dark:border-purple-400' 
                   : 'border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700/50'
                 }`}
+                role="button"
+                aria-pressed={selectedCategories.includes(cat.id)}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleCategory(cat.id);
+                  }
+                }}
                 onClick={() => toggleCategory(cat.id)}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <div className="text-4xl mb-2">{cat.emoji}</div>
-                <div className="text-sm font-semibold text-center text-purple-800 dark:text-purple-200 mb-1 line-clamp-2">
+                <div className="text-sm font-semibold text-center text-purple-800 dark:text-purple-200 mb-1 line-clamp-2 break-words">
                   {cat.name}
                 </div>
-                <div className="text-xs text-gray-600 dark:text-gray-400 mb-3">
+                <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
                   {t('category_pick.questions_available', { count: cat.questionCount })}
-                </div>
-                <div onClick={(e) => e.stopPropagation()}>
-                  <Checkbox
-                    checked={selectedCategories.includes(cat.id)}
-                    aria-label={cat.name}
-                  />
                 </div>
               </motion.label>
             ))}
