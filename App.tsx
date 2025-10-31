@@ -44,6 +44,7 @@ import DebugPanel from './components/debug/DebugPanel';
 import AssetDebugInfo from './components/debug/AssetDebugInfo';
 import CategoryPickScreen from './components/game/CategoryPickScreen';
 import SummaryScreen from './components/game/SummaryScreen';
+import CustomCategoryManager from './components/customCategories/CustomCategoryManager';
 
 import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
 import { LOADING_QUOTES, initialGameSettings } from './constants';
@@ -97,6 +98,7 @@ function App() {
   const [questionStats, setQuestionStats] = useState<Pick<QuestionStats, 'totalQuestions' | 'categories'>>({ totalQuestions: 0, categories: {} });
   const [errorLoadingQuestions, setErrorLoadingQuestions] = useState<string | null>(null);
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [showCustomCategories, setShowCustomCategories] = useState(false);
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
   const [currentLoadingQuote, setCurrentLoadingQuote] = useState<string>('');
@@ -643,6 +645,7 @@ function App() {
             volume={volume}
             onOpenDebugPanel={() => setShowDebug(true)}
             onOpenInfoModal={() => setShowInfoModal(true)}
+            onOpenCustomCategories={() => setShowCustomCategories(true)}
             onUpdateGameSettings={updateGameSettings}
             errorLoadingQuestions={errorLoadingQuestions}
             supportedLanguages={{}}
@@ -761,7 +764,15 @@ function App() {
           }}
         />
       )}
-        <LanguageChangeFeedback
+
+      {showCustomCategories && (
+        <CustomCategoryManager
+          isOpen={showCustomCategories}
+          onClose={() => setShowCustomCategories(false)}
+        />
+      )}
+
+      <LanguageChangeFeedback
         language={gameSettings.language}
         languageName={SUPPORTED_LANGUAGES[gameSettings.language] || gameSettings.language}
       />

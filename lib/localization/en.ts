@@ -201,7 +201,39 @@ const en: Translations = {
   'startGame': 'Start Game',
   'error.loadQuestions': 'Error loading questions. Please check the question files and try again.',
   'loadingQuestions': 'Loading questions...',
-  'error.noQuestionsLoaded': 'No questions loaded. Please check the question files and try again.'
+  'error.noQuestionsLoaded': 'No questions loaded. Please check the question files and try again.',
+
+  // Custom categories
+  'custom_categories.title': 'Custom Categories',
+  'custom_categories.manage': 'Manage Custom Categories',
+  'custom_categories.add_category': 'Add Category',
+  'custom_categories.edit_category': 'Edit Category',
+  'custom_categories.delete_category': 'Delete Category',
+  'custom_categories.category_name': 'Category Name',
+  'custom_categories.emoji': 'Emoji',
+  'custom_categories.questions': 'Questions',
+  'custom_categories.add_question': 'Add Question',
+  'custom_categories.edit_question': 'Edit Question',
+  'custom_categories.delete_question': 'Delete Question',
+  'custom_categories.question_text': 'Question Text',
+  'custom_categories.no_categories': 'No custom categories yet. Create one to get started!',
+  'custom_categories.no_questions': 'No questions yet. Add some questions to this category!',
+  'custom_categories.confirm_delete_category': 'Are you sure you want to delete this category? All questions will be lost.',
+  'custom_categories.confirm_delete_question': 'Are you sure you want to delete this question?',
+  'custom_categories.create_new': 'Create New Category',
+  'custom_categories.save': 'Save',
+  'custom_categories.cancel': 'Cancel',
+  'custom_categories.placeholder_name': 'Enter category name',
+  'custom_categories.placeholder_emoji': 'Pick an emoji',
+  'custom_categories.placeholder_question': 'Who would most likely...',
+  'custom_categories.question_count': '{{count}} question(s)',
+  'custom_categories.select_emoji': 'Select Emoji',
+  'custom_categories.success_created': 'Category created successfully!',
+  'custom_categories.success_updated': 'Category updated successfully!',
+  'custom_categories.success_deleted': 'Category deleted successfully!',
+  'custom_categories.error_name_required': 'Category name is required',
+  'custom_categories.error_emoji_required': 'Emoji is required',
+  'custom_categories.error_question_required': 'Question text is required'
 };
 
 export default en;
