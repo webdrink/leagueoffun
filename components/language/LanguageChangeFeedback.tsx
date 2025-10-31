@@ -41,7 +41,7 @@ const LanguageChangeFeedback: React.FC<LanguageChangeFeedbackProps> = ({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-purple-700 text-white px-4 py-2 rounded-lg shadow-lg z-50"
+          className="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-autumn-700 text-white px-4 py-2 rounded-lg shadow-lg z-50"
         >
           <div className="flex items-center space-x-2">
             <div className="text-lg font-bold">

@@ -69,7 +69,7 @@ const FrameworkSummaryScreen: React.FC = () => {
                 stiffness: 200,
                 damping: 15
               }}
-              className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-${accentColor}-500 to-pink-500 rounded-full mb-3 shadow-lg`}
+              className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-${accentColor}-500 to-rust-500 rounded-full mb-3 shadow-lg`}
             >
               <Trophy size={30} className="text-white drop-shadow-sm" />
             </motion.div>
@@ -78,7 +78,7 @@ const FrameworkSummaryScreen: React.FC = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className={`text-3xl md:text-4xl lg:text-5xl font-bold text-${accentColor}-800 dark:text-${accentColor}-200 mb-1`}
+              className={`text-3xl md:text-4xl lg:text-5xl font-bold text-autumn-800 dark:text-autumn-200 mb-1`}
             >
               {t('summary.game_over')}
             </motion.h1>
@@ -99,11 +99,11 @@ const FrameworkSummaryScreen: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className={`${isClassicMode ? 'flex justify-center' : 'grid grid-cols-2 gap-3'} mb-4 flex-shrink-0`}
           >
-            <div className={`bg-${accentColor}-50 dark:bg-${accentColor}-900/30 rounded-xl p-3 text-center border border-${accentColor}-100 dark:border-${accentColor}-800 ${isClassicMode ? 'w-40' : ''}`}>
-              <div className={`text-xl md:text-2xl font-bold text-${accentColor}-600 dark:text-${accentColor}-400 mb-1`}>
+            <div className={`bg-autumn-50 dark:bg-autumn-900/30 rounded-xl p-3 text-center border border-autumn-100 dark:border-autumn-800 ${isClassicMode ? 'w-40' : ''}`}>
+              <div className={`text-xl md:text-2xl font-bold text-autumn-600 dark:text-autumn-400 mb-1`}>
                 {gameResults.questionsAnswered}
               </div>
-              <div className={`text-xs text-${accentColor}-700 dark:text-${accentColor}-300 font-medium`}>
+              <div className={`text-xs text-autumn-700 dark:text-autumn-300 font-medium`}>
                 {isClassicMode 
                   ? `${gameResults.questionsAnswered} Fragen angeschaut`
                   : t('questions.counter', { current: gameResults.questionsAnswered, total: gameResults.questionsAnswered })
@@ -113,14 +113,14 @@ const FrameworkSummaryScreen: React.FC = () => {
             
             {/* Only show player count in NameBlame mode */}
             {!isClassicMode && (
-              <div className="bg-pink-50 dark:bg-pink-900/30 rounded-xl p-3 text-center border border-pink-100 dark:border-pink-800">
+              <div className="bg-rust-50 dark:bg-rust-900/30 rounded-xl p-3 text-center border border-rust-100 dark:border-rust-800">
                 <div className="flex items-center justify-center mb-1">
-                  <Users size={16} className="text-pink-600 dark:text-pink-400 mr-1" />
-                  <span className="text-xl md:text-2xl font-bold text-pink-600 dark:text-pink-400">
+                  <Users size={16} className="text-rust-600 dark:text-rust-400 mr-1" />
+                  <span className="text-xl md:text-2xl font-bold text-rust-600 dark:text-rust-400">
                     {gameResults.activePlayersCount}
                   </span>
                 </div>
-                <div className="text-xs text-pink-700 dark:text-pink-300 font-medium">
+                <div className="text-xs text-rust-700 dark:text-rust-300 font-medium">
                   {t('summary.team_message', { activePlayersCount: gameResults.activePlayersCount })}
                 </div>
               </div>
@@ -180,7 +180,7 @@ const FrameworkSummaryScreen: React.FC = () => {
                         <span className="font-semibold text-gray-800 dark:text-gray-200 text-sm">{player}</span>
                       </div>
                       <div className="flex items-center">
-                        <div className={`bg-${accentColor}-100 dark:bg-${accentColor}-900/40 text-${accentColor}-700 dark:text-${accentColor}-300 px-2 py-1 rounded-full text-xs font-bold`}>
+                        <div className={`bg-autumn-100 dark:bg-autumn-900/40 text-autumn-700 dark:text-autumn-300 px-2 py-1 rounded-full text-xs font-bold`}>
                           {count as number}
                         </div>
                       </div>
@@ -200,11 +200,11 @@ const FrameworkSummaryScreen: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200 dark:border-purple-700 rounded-xl p-4 text-center">
-                  <p className="text-base font-medium text-purple-800 dark:text-purple-200 mb-1">
+                <div className="bg-gradient-to-r from-autumn-50 to-rust-50 dark:from-autumn-900/20 dark:to-rust-900/20 border border-autumn-200 dark:border-autumn-700 rounded-xl p-4 text-center">
+                  <p className="text-base font-medium text-autumn-800 dark:text-autumn-200 mb-1">
                     🎯 Classic Mode Abgeschlossen!
                   </p>
-                  <p className="text-sm text-purple-600 dark:text-purple-300">
+                  <p className="text-sm text-autumn-600 dark:text-autumn-300">
                     Du hast {gameResults.questionsAnswered} interessante Fragen durchgeschaut. Möchtest du das NameBlame-Modus mit Freunden ausprobieren?
                   </p>
                 </div>
@@ -219,7 +219,7 @@ const FrameworkSummaryScreen: React.FC = () => {
             >
               <Button
                 onClick={handleRestart}
-                className={`w-full bg-gradient-to-r from-${accentColor}-500 to-pink-500 hover:from-${accentColor}-600 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg text-base border-0`}
+                className={`w-full bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg text-base border-0`}
               >
                 {t('summary.play_again')}
               </Button>

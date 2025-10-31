@@ -133,13 +133,13 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
           <div className="mt-2 sm:mt-4">
             {/* Show blame context when in 'blamed' phase */}
             {blameState?.phase === 'reveal' && blameState.currentBlamer && blameState.currentBlamed && (
-              <div className="text-center mb-4 p-3 bg-pink-100 rounded-lg border-2 border-pink-300">
-                <p className="text-purple-700 font-semibold">
+              <div className="text-center mb-4 p-3 bg-rust-100 rounded-lg border-2 border-rust-300">
+                <p className="text-autumn-700 font-semibold">
                   {t('questions.blamed_you_for', { 
                     name: blameState.currentBlamer
                   })}
                 </p>
-                <p className="text-purple-600 text-sm mt-1">
+                <p className="text-autumn-600 text-sm mt-1">
                   &ldquo;{blameState.currentQuestion}&rdquo;
                 </p>
               </div>
@@ -159,7 +159,7 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
                       <Button
                         key={player.id}
                         onClick={() => onBlame(player.name)}
-                        className={`bg-pink-400 hover:bg-pink-200 text-purple-700 font-semibold rounded-lg py-2.5 px-3 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-pink-00 focus:ring-opacity-75
+                        className={`bg-rust-400 hover:bg-rust-200 text-autumn-700 font-semibold rounded-lg py-2.5 px-3 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-rust-00 focus:ring-opacity-75
                               ${isSelf ? 'opacity-60 cursor-not-allowed !bg-gray-300 !text-gray-500' : 'hover:scale-105'}`}
                         disabled={!!isSelf}
                         title={
@@ -181,7 +181,7 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
               <div className="mt-4 text-center">
                 <Button 
                   onClick={onNextBlame} 
-                  className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg shadow font-semibold"
+                  className="bg-autumn-600 hover:bg-autumn-700 text-white px-6 py-3 rounded-lg shadow font-semibold"
                   aria-label={isLastPlayerInRound ? t('blame.continue_to_question') : t('blame.continue_to_next')}
                 >
                   {t('blame.continue_to_question')}
@@ -196,14 +196,14 @@ const QuestionScreen: React.FC<QuestionScreenProps> = ({
             <Button 
               onClick={handleBackWithDirection} 
               disabled={index === 0} 
-              className="bg-white/80 hover:bg-white text-purple-700 border-purple-300 px-4 py-2.5 rounded-lg shadow disabled:opacity-60"
+              className="bg-white/80 hover:bg-white text-autumn-700 border-autumn-300 px-4 py-2.5 rounded-lg shadow disabled:opacity-60"
               aria-label={t('questions.previous_question')}
             >
               {t('app.back')}
             </Button>
             <Button 
               onClick={handleNextWithDirection} 
-              className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-lg shadow flex-grow"
+              className="bg-autumn-600 hover:bg-autumn-700 text-white px-4 py-2.5 rounded-lg shadow flex-grow"
               aria-label={index === totalQuestions - 1 ? t('questions.show_summary') : t('questions.next_question')}
             >
               {index === totalQuestions - 1 ? t('questions.summary') : t('questions.next')}

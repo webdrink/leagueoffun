@@ -82,6 +82,34 @@ const de: Translations = {
   'settings.light_mode': 'Zum Hellen Modus wechseln',
   'settings.theme': 'Design',
 
+  // Season/Theme selector
+  'season.title': 'Design',
+  'season.auto': 'Auto (Aktuelle Jahreszeit)',
+  'season.auto_desc': 'Folgt der echten Jahreszeit',
+  'season.fall': '🍂 Herbst',
+  'season.fall_desc': 'Warme Herbstfarben',
+  'season.winter': '❄️ Winter',
+  'season.winter_desc': 'Kühle Eisfarben',
+  'season.spring': '🌸 Frühling',
+  'season.spring_desc': 'Frische Pastelltöne',
+  'season.summer': '☀️ Sommer',
+  'season.summer_desc': 'Helle Sonnentöne',
+  'season.cyber': '⚡ Cyber',
+  'season.cyber_desc': 'Nerdiges Matrix-Design',
+
+  // FAQ
+  'faq.title': 'Häufig gestellte Fragen',
+  'faq.how_to_play': 'Wie spiele ich das Spiel?',
+  'faq.how_to_play_answer': 'Füge zunächst mindestens 2 Spieler hinzu. Beantworte dann Fragen darüber, wer am ehesten bestimmte Dinge tun würde. Im NameBlame-Modus wählt der aktive Spieler jemanden zum Beschuldigen aus, und diese Person wird zum nächsten aktiven Spieler.',
+  'faq.what_is_nameblame': 'Was ist der NameBlame-Modus?',
+  'faq.what_is_nameblame_answer': 'NameBlame ist ein spezieller Spielmodus, bei dem jede Frage einmal angezeigt wird. Der aktive Spieler wählt aus, wen er beschuldigt. Der beschuldigte Spieler liest die Frage laut vor und wird zum nächsten aktiven Spieler für die nächste Frage.',
+  'faq.how_to_change_language': 'Wie ändere ich die Sprache?',
+  'faq.how_to_change_language_answer': 'Klicke auf die Sprachauswahl in der Fußzeile, um deine bevorzugte Sprache aus Englisch, Deutsch, Spanisch oder Französisch zu wählen.',
+  'faq.how_to_change_theme': 'Wie ändere ich das Design?',
+  'faq.how_to_change_theme_answer': 'Gehe zu Einstellungen und verwende die Design-Auswahl, um zwischen Herbst, Winter, Frühling, Sommer oder Cyber-Designs zu wählen. Du kannst es auch auf Auto stellen, um der aktuellen Jahreszeit zu folgen.',
+  'faq.reset_data': 'Wie setze ich App-Daten zurück?',
+  'faq.reset_data_answer': 'Klicke unten auf die Schaltfläche "App-Daten zurücksetzen", um alle gespeicherten Daten einschließlich Einstellungen, Spielernamen und Spielverlauf zu löschen. Diese Aktion kann nicht rückgängig gemacht werden.',
+
   // Player setup
   'players.setup_title': 'Spieler einrichten',
   'players.add_player': 'Spieler hinzufügen',

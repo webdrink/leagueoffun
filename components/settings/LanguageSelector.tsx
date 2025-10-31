@@ -81,7 +81,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className = '', com
             <option 
               key={code} 
               value={code} 
-              className="bg-purple-600 dark:bg-purple-700 text-white dark:text-white py-2 px-3 hover:bg-purple-500 dark:hover:bg-purple-600"
+              className="bg-autumn-600 dark:bg-autumn-700 text-white dark:text-white py-2 px-3 hover:bg-autumn-500 dark:hover:bg-autumn-600"
             >
               {name}
             </option>
@@ -107,7 +107,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className = '', com
           id="language-select"
           value={gameSettings.language}
           onChange={handleLanguageChange}
-          className="w-full p-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 cursor-pointer hover:border-purple-300 dark:hover:border-purple-500 transition-all duration-200 appearance-none"
+          className="w-full p-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl shadow-sm focus:ring-2 focus:ring-autumn-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 cursor-pointer hover:border-autumn-300 dark:hover:border-autumn-500 transition-all duration-200 appearance-none"
         >
           {Object.entries(SUPPORTED_LANGUAGES).map(([code, name]) => (
             <option key={code} value={code} className="py-2">

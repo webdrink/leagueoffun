@@ -2,6 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    /* Theme color variables - default to fall theme */
+    --theme-primary: 245 158 11; /* autumn-500 */
+    --theme-primary-light: 251 191 36; /* autumn-400 */
+    --theme-primary-dark: 217 119 6; /* autumn-600 */
+    --theme-secondary: 239 68 68; /* rust-500 */
+    --theme-secondary-light: 248 113 113; /* rust-400 */
+    --theme-secondary-dark: 220 38 38; /* rust-600 */
+    --theme-accent: 191 160 148; /* brown-500 */
+  }
+
+  .season-winter {
+    --theme-primary: 14 165 233; /* frost-500 */
+    --theme-primary-light: 56 189 248; /* frost-400 */
+    --theme-primary-dark: 2 132 199; /* frost-600 */
+    --theme-secondary: 100 116 139; /* ice-500 */
+    --theme-secondary-light: 148 163 184; /* ice-400 */
+    --theme-secondary-dark: 71 85 105; /* ice-600 */
+    --theme-accent: 226 232 240; /* ice-200 */
+  }
+
+  .season-spring {
+    --theme-primary: 217 70 239; /* bloom-500 */
+    --theme-primary-light: 232 121 249; /* bloom-400 */
+    --theme-primary-dark: 192 38 211; /* bloom-600 */
+    --theme-secondary: 34 197 94; /* meadow-500 */
+    --theme-secondary-light: 74 222 128; /* meadow-400 */
+    --theme-secondary-dark: 22 163 74; /* meadow-600 */
+    --theme-accent: 187 247 208; /* meadow-200 */
+  }
+
+  .season-summer {
+    --theme-primary: 245 158 11; /* sun-500 */
+    --theme-primary-light: 251 191 36; /* sun-400 */
+    --theme-primary-dark: 217 119 6; /* sun-600 */
+    --theme-secondary: 6 182 212; /* ocean-500 */
+    --theme-secondary-light: 34 211 238; /* ocean-400 */
+    --theme-secondary-dark: 8 145 178; /* ocean-600 */
+    --theme-accent: 165 243 252; /* ocean-200 */
+  }
+
+  .season-cyber {
+    --theme-primary: 34 197 94; /* cyber-500 */
+    --theme-primary-light: 74 222 128; /* cyber-400 */
+    --theme-primary-dark: 22 163 74; /* cyber-600 */
+    --theme-secondary: 20 184 166; /* neon-500 */
+    --theme-secondary-light: 45 212 191; /* neon-400 */
+    --theme-secondary-dark: 13 148 136; /* neon-600 */
+    --theme-accent: 16 185 129; /* matrix-500 */
+  }
+}
+
 @media (max-width: 500px) {
   .w-80, .h-64 {
     width: 95vw !important;
@@ -22,14 +75,14 @@
 }
 
 :focus {
-  outline: 2px solid #c084fc; /* Adjusted focus color to match purple theme */
+  outline: 2px solid rgb(var(--theme-primary) / 0.6);
   outline-offset: 2px;
 }
 
 :focus-visible {
-  outline: 3px solid #a855f7; /* Adjusted focus color to match purple theme */
+  outline: 3px solid rgb(var(--theme-primary) / 0.8);
   outline-offset: 3px;
-  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.3); /* Adjusted shadow color */
+  box-shadow: 0 0 0 2px rgb(var(--theme-primary) / 0.3);
 }
 
 /* Improve keyboard accessibility for interactive elements */

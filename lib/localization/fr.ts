@@ -46,6 +46,34 @@ const fr: Translations = {
   'settings.group.general': 'Général',
   'settings.no_dynamic_fields': 'Aucun paramètre dynamique défini. Utilisation des valeurs par défaut.',
   
+  // Season/Theme selector
+  'season.title': 'Thème',
+  'season.auto': 'Auto (Saison Actuelle)',
+  'season.auto_desc': 'Suit la vraie saison',
+  'season.fall': '🍂 Automne',
+  'season.fall_desc': 'Couleurs chaudes d\'automne',
+  'season.winter': '❄️ Hiver',
+  'season.winter_desc': 'Bleus glacés',
+  'season.spring': '🌸 Printemps',
+  'season.spring_desc': 'Verts pastels frais',
+  'season.summer': '☀️ Été',
+  'season.summer_desc': 'Soleil brillant',
+  'season.cyber': '⚡ Cyber',
+  'season.cyber_desc': 'Thème matrix geek',
+
+  // FAQ
+  'faq.title': 'Questions Fréquemment Posées',
+  'faq.how_to_play': 'Comment jouer au jeu?',
+  'faq.how_to_play_answer': 'Commencez par ajouter au moins 2 joueurs. Répondez ensuite aux questions sur qui serait le plus susceptible de faire certaines choses. En mode NameBlame, le joueur actif sélectionne quelqu\'un à blâmer, et cette personne devient le prochain joueur actif.',
+  'faq.what_is_nameblame': 'Qu\'est-ce que le mode NameBlame?',
+  'faq.what_is_nameblame_answer': 'NameBlame est un mode de jeu spécial où chaque question est affichée une fois. Le joueur actif sélectionne qui blâmer. Le joueur blâmé lit la question à voix haute et devient le prochain joueur actif.',
+  'faq.how_to_change_language': 'Comment changer la langue?',
+  'faq.how_to_change_language_answer': 'Cliquez sur le sélecteur de langue dans le pied de page pour choisir votre langue préférée parmi l\'anglais, l\'allemand, l\'espagnol ou le français.',
+  'faq.how_to_change_theme': 'Comment changer le thème?',
+  'faq.how_to_change_theme_answer': 'Allez dans Paramètres et utilisez le sélecteur de Thème pour choisir parmi les thèmes Automne, Hiver, Printemps, Été ou Cyber. Vous pouvez également le régler sur Auto pour suivre la saison actuelle.',
+  'faq.reset_data': 'Comment réinitialiser les données de l\'application?',
+  'faq.reset_data_answer': 'Cliquez sur le bouton "Réinitialiser les données" ci-dessous pour effacer toutes les données stockées, y compris les paramètres, les noms des joueurs et l\'historique des jeux. Cette action ne peut pas être annulée.',
+  
   // Player setup
   'players.setup_title': 'Configuration des joueurs',
   'players.add_player': 'Ajouter un joueur',

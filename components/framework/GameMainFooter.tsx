@@ -127,7 +127,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
             onClick={primaryAction.onClick}
             disabled={primaryAction.disabled || loading}
             variant={primaryAction.variant || 'default'}
-            className={`${primaryAction.className || ''} w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl`}
+            className={`${primaryAction.className || ''} w-full px-6 py-3 bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white font-bold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl`}
           >
             {primaryAction.label}
           </Button>
@@ -187,7 +187,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
             onClick={nextBlameAction.onClick}
             disabled={nextBlameAction.disabled || loading}
             variant="default"
-            className={`${nextBlameAction.className || ''} px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl`}
+            className={`${nextBlameAction.className || ''} px-8 py-3 bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white font-bold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl`}
           >
             {nextBlameAction.label}
           </Button>
@@ -245,7 +245,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
             onClick={primaryAction.onClick}
             disabled={primaryAction.disabled || loading}
             variant={primaryAction.variant || 'default'}
-            className={`${primaryAction.className || ''} w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl`}
+            className={`${primaryAction.className || ''} w-full py-3 bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white font-bold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl`}
           >
             {primaryAction.label}
           </Button>

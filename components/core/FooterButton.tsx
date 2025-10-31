@@ -7,10 +7,10 @@ import React from 'react';
 
 export const FOOTER_ICON_STYLE = `
   text-white dark:text-white
-  border-2 border-purple-500/80 dark:border-purple-400/80
-  hover:bg-purple-500/20 hover:border-purple-400
+  border-2 border-autumn-500/80 dark:border-autumn-400/80
+  hover:bg-autumn-500/20 hover:border-autumn-400
   hover:text-white dark:hover:text-white
-  bg-purple-600/60 dark:bg-purple-500/60
+  bg-autumn-600/60 dark:bg-autumn-500/60
   transition-all duration-200
   rounded-xl
   backdrop-blur-md
@@ -18,7 +18,7 @@ export const FOOTER_ICON_STYLE = `
   font-medium
   hover:shadow-2xl
   transform hover:scale-105
-  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/60
+  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-autumn-400/60
   min-h-[44px] min-w-[44px]
   p-2.5
   flex items-center justify-center

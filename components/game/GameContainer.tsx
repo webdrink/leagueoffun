@@ -39,7 +39,7 @@ interface GameContainerProps {
 const GameContainer: React.FC<GameContainerProps> = ({ children, onTitleClick }) => {
   return (
     <div
-      className="min-h-screen w-full flex flex-col items-center justify-start px-3 sm:px-4 lg:px-6 py-3 sm:py-4 bg-gradient-to-b from-pink-500 to-pink-300"
+      className="min-h-screen w-full flex flex-col items-center justify-start px-3 sm:px-4 lg:px-6 py-3 sm:py-4 bg-gradient-to-b from-autumn-500 to-autumn-300"
     >
       <GameLayout>
         <LayoutHeader>

@@ -25,7 +25,7 @@ const FrameworkQuestionScreen: React.FC = () => {
       <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2 overflow-hidden" aria-hidden="true">
         <div
           ref={fillRef}
-          className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300"
+          className="bg-gradient-to-r from-autumn-500 to-rust-500 h-2 rounded-full transition-all duration-300"
         />
       </div>
     );
@@ -143,7 +143,7 @@ const FrameworkQuestionScreen: React.FC = () => {
             </div>
           )}
           {(currentQuestion.categoryName || currentQuestion.categoryEmoji) && (
-            <div className="inline-flex items-center gap-2 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-200 px-3 py-1 lg:px-4 lg:py-2 rounded-full text-xs lg:text-sm font-medium mb-2 lg:mb-3 flex-shrink-0" data-testid="category-badge">
+            <div className="inline-flex items-center gap-2 bg-autumn-100 dark:bg-autumn-900 text-autumn-700 dark:text-autumn-200 px-3 py-1 lg:px-4 lg:py-2 rounded-full text-xs lg:text-sm font-medium mb-2 lg:mb-3 flex-shrink-0" data-testid="category-badge">
               {currentQuestion.categoryEmoji && <span>{currentQuestion.categoryEmoji}</span>}
               <span>{currentQuestion.categoryName}</span>
             </div>
@@ -156,7 +156,7 @@ const FrameworkQuestionScreen: React.FC = () => {
             className="flex-1 flex items-center justify-center min-h-0 w-full overflow-hidden"
           >
             <h1 className={`
-              font-bold text-purple-800 dark:text-purple-200 leading-tight text-center break-words hyphens-auto
+              font-bold text-autumn-800 dark:text-autumn-200 leading-tight text-center break-words hyphens-auto
               ${currentQuestion.text.length > 150 ? 'text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl' : 
                 currentQuestion.text.length > 100 ? 'text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl' :
                 currentQuestion.text.length > 50 ? 'text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl' :
@@ -177,13 +177,13 @@ const FrameworkQuestionScreen: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-3 mb-3 text-center border-2 border-purple-200 dark:border-purple-700"
+                className="bg-gradient-to-r from-autumn-50 to-rust-50 dark:from-autumn-900/20 dark:to-rust-900/20 rounded-xl p-3 mb-3 text-center border-2 border-autumn-200 dark:border-autumn-700"
               >
-                <h3 className="text-sm font-bold text-purple-800 dark:text-purple-200 mb-1">
+                <h3 className="text-sm font-bold text-autumn-800 dark:text-autumn-200 mb-1">
                   {t('question.blame_revealed')}
                 </h3>
-                <p className="text-purple-600 dark:text-purple-300 text-xs">
-                  <span className="font-bold text-pink-600 dark:text-pink-400">{selectedPlayer}</span> {t('question.was_blamed')}
+                <p className="text-autumn-600 dark:text-autumn-300 text-xs">
+                  <span className="font-bold text-rust-600 dark:text-rust-400">{selectedPlayer}</span> {t('question.was_blamed')}
                 </p>
               </motion.div>
             ) : null
@@ -196,7 +196,7 @@ const FrameworkQuestionScreen: React.FC = () => {
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full">
                   <Button
                     onClick={handleAdvance}
-                    className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 lg:py-4 px-6 lg:px-8 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg h-12 lg:h-14 text-sm lg:text-base"
+                    className="w-full bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white font-bold py-3 lg:py-4 px-6 lg:px-8 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg h-12 lg:h-14 text-sm lg:text-base"
                     data-testid="next-button"
                   >
                     {progress.index + 1 < progress.total
@@ -212,7 +212,7 @@ const FrameworkQuestionScreen: React.FC = () => {
                 <Button
                   onClick={handlePrevious}
                   variant="outline"
-                  className="w-1/3 h-12 lg:h-14 font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-purple-600 dark:text-purple-400 border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20 text-sm lg:text-base"
+                  className="w-1/3 h-12 lg:h-14 font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-autumn-600 dark:text-autumn-400 border-autumn-500 hover:bg-autumn-50 dark:hover:bg-autumn-900/20 text-sm lg:text-base"
                   disabled={progress.index === 0}
                   data-testid="classic-back"
                 >
@@ -220,7 +220,7 @@ const FrameworkQuestionScreen: React.FC = () => {
                 </Button>
                 <Button
                   onClick={handleAdvance}
-                  className="w-2/3 h-12 lg:h-14 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm lg:text-base"
+                  className="w-2/3 h-12 lg:h-14 bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white font-bold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm lg:text-base"
                   data-testid="classic-next"
                 >
                   {progress.index + 1 < progress.total
@@ -258,7 +258,7 @@ const FrameworkQuestionScreen: React.FC = () => {
                       className={`
                         ${isCurrentPlayer
                           ? 'bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-700 dark:to-gray-800 text-gray-600 dark:text-gray-400 cursor-not-allowed opacity-60'
-                          : 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white hover:scale-105 shadow-lg hover:shadow-xl'
+                          : 'bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white hover:scale-105 shadow-lg hover:shadow-xl'
                         }
                         border-0 py-2.5 lg:py-3 px-3 lg:px-4 rounded-xl transition-all duration-200 transform text-sm lg:text-base font-semibold min-h-[48px] lg:min-h-[56px]
                       `}

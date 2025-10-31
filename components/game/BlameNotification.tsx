@@ -81,7 +81,7 @@ const BlameNotification: React.FC<BlameNotificationProps> = ({
           }}
           className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 max-w-md w-full mx-4"
         >
-          <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-4 rounded-xl shadow-xl border-2 border-pink-300">
+          <div className="bg-gradient-to-r from-rust-500 to-autumn-600 text-white p-4 rounded-xl shadow-xl border-2 border-rust-300">
             <div className="flex items-start justify-between">
               <div className="flex items-start space-x-3">
                 <div className="flex-shrink-0 mt-0.5">
@@ -91,13 +91,13 @@ const BlameNotification: React.FC<BlameNotificationProps> = ({
                   <h3 className="font-bold text-lg mb-2">
                     {t('blame.notification_title')}
                   </h3>
-                  <p className="text-pink-100 mb-2">
+                  <p className="text-rust-100 mb-2">
                     <span className="font-semibold text-white">{blamer}</span>{' '}
                     {t('blame.blamed_player_for')}{' '}
                     <span className="font-semibold text-white">{blamed}</span>
                   </p>
                   <div className="bg-white/20 rounded-lg p-2 mt-2">
-                    <p className="text-sm text-pink-50 italic">
+                    <p className="text-sm text-rust-50 italic">
                       &ldquo;{question}&rdquo;
                     </p>
                   </div>
@@ -111,7 +111,7 @@ const BlameNotification: React.FC<BlameNotificationProps> = ({
               {onDismiss && (
                 <button
                   onClick={handleDismiss}
-                  className="flex-shrink-0 ml-2 text-pink-200 hover:text-white transition-colors"
+                  className="flex-shrink-0 ml-2 text-rust-200 hover:text-white transition-colors"
                   aria-label={t('common.close')}
                 >
                   <X className="h-5 w-5" />

@@ -70,6 +70,34 @@ const en: Translations = {
   'settings.light_mode': 'Switch to Light Mode',
   'settings.theme': 'Theme',
 
+  // Season/Theme selector
+  'season.title': 'Theme',
+  'season.auto': 'Auto (Current Season)',
+  'season.auto_desc': 'Follows the real season',
+  'season.fall': '🍂 Fall',
+  'season.fall_desc': 'Warm autumn colors',
+  'season.winter': '❄️ Winter',
+  'season.winter_desc': 'Cool icy blues',
+  'season.spring': '🌸 Spring',
+  'season.spring_desc': 'Fresh pastel greens',
+  'season.summer': '☀️ Summer',
+  'season.summer_desc': 'Bright sunshine',
+  'season.cyber': '⚡ Cyber',
+  'season.cyber_desc': 'Nerdy matrix theme',
+
+  // FAQ
+  'faq.title': 'Frequently Asked Questions',
+  'faq.how_to_play': 'How do I play the game?',
+  'faq.how_to_play_answer': 'Start by adding at least 2 players. Then answer questions about who would most likely do certain things. In NameBlame mode, the active player selects someone to blame, and that person becomes the next active player.',
+  'faq.what_is_nameblame': 'What is NameBlame mode?',
+  'faq.what_is_nameblame_answer': 'NameBlame is a special game mode where each question is shown once. The active player selects who to blame. The blamed player reads the question aloud and becomes the next active player for the next question.',
+  'faq.how_to_change_language': 'How do I change the language?',
+  'faq.how_to_change_language_answer': 'Click the language selector in the footer to choose your preferred language from English, German, Spanish, or French.',
+  'faq.how_to_change_theme': 'How do I change the theme?',
+  'faq.how_to_change_theme_answer': 'Go to Settings and use the Theme selector to choose from Fall, Winter, Spring, Summer, or Cyber themes. You can also set it to Auto to follow the current season.',
+  'faq.reset_data': 'How do I reset app data?',
+  'faq.reset_data_answer': 'Click the "Reset App Data" button below to clear all stored data including settings, player names, and game history. This action cannot be undone.',
+
   // Player setup
   'players.setup_title': 'Set Up Players',
   'players.add_player': 'Add Player',

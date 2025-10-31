@@ -83,16 +83,16 @@ const FrameworkCategoryPickScreen: React.FC = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.3 }}
-          className="category-container w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl h-full max-h-full bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-2xl rounded-3xl p-4 sm:p-6 lg:p-8 border-2 border-purple-100 dark:border-purple-800 flex flex-col min-h-0"
+          className="category-container w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl h-full max-h-full bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-2xl rounded-3xl p-4 sm:p-6 lg:p-8 border-2 border-autumn-100 dark:border-autumn-800 flex flex-col min-h-0"
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-700 dark:text-purple-300 text-center mb-4 sm:mb-6 flex-shrink-0">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-autumn-700 dark:text-autumn-300 text-center mb-4 sm:mb-6 flex-shrink-0">
             {t('category_pick.title')}
           </h2>
 
           <div className="text-center mb-3 sm:mb-4 flex-shrink-0">
             <p className="text-sm text-gray-600 dark:text-gray-400">
               {t('category_pick.max_categories', { count: maxSelectable })} • {' '}
-              <span className="font-medium text-purple-600 dark:text-purple-400">
+              <span className="font-medium text-autumn-600 dark:text-autumn-400">
                 {t('category_pick.selected_count', { count: selectedCategories.length })}
               </span>
             </p>
@@ -104,7 +104,7 @@ const FrameworkCategoryPickScreen: React.FC = () => {
                 key={cat.id}
                 className={`flex flex-col items-center justify-center p-3 sm:p-3 lg:p-4 border rounded-xl shadow-sm cursor-pointer transition-all duration-200 select-none min-h-[88px] sm:min-h-[100px] lg:min-h-[120px]
                 ${selectedCategories.includes(cat.id) 
-                  ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/30 dark:border-purple-400' 
+                  ? 'border-autumn-500 bg-autumn-50 dark:bg-autumn-900/30 dark:border-autumn-400' 
                   : 'border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700/50'
                 }`}
                 role="button"
@@ -121,7 +121,7 @@ const FrameworkCategoryPickScreen: React.FC = () => {
                 whileTap={{ scale: 0.98 }}
               >
                 <div className="text-4xl mb-2">{cat.emoji}</div>
-                <div className="text-sm font-semibold text-center text-purple-800 dark:text-purple-200 mb-1 line-clamp-2 break-words">
+                <div className="text-sm font-semibold text-center text-autumn-800 dark:text-autumn-200 mb-1 line-clamp-2 break-words">
                   {cat.name}
                 </div>
                 <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
@@ -135,7 +135,7 @@ const FrameworkCategoryPickScreen: React.FC = () => {
             <Button
               onClick={handleBack}
               variant="outline"
-              className="text-purple-600 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/30 border-purple-300 dark:border-purple-600 px-6 py-3"
+              className="text-autumn-600 dark:text-autumn-300 hover:bg-autumn-100 dark:hover:bg-autumn-900/30 border-autumn-300 dark:border-autumn-600 px-6 py-3"
             >
               {t('category_pick.back')}
             </Button>
@@ -143,7 +143,7 @@ const FrameworkCategoryPickScreen: React.FC = () => {
             <Button
               onClick={handleConfirm}
               disabled={selectedCategories.length === 0}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {t('category_pick.confirm', { count: selectedCategories.length })}
             </Button>

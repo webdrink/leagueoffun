@@ -11,7 +11,7 @@ interface VolumeControlProps {
 const VolumeControl: React.FC<VolumeControlProps> = ({ volume, onChange, soundEnabled, onToggleSound }) => {
   return (
     <div className="mt-2 flex items-center space-x-2 px-2 bg-white/80 backdrop-blur-sm rounded-lg p-2 shadow">
-      <button onClick={onToggleSound} className="focus:outline-none text-xl p-1 rounded-full hover:bg-pink-100 transition-colors">
+      <button onClick={onToggleSound} className="focus:outline-none text-xl p-1 rounded-full hover:bg-rust-100 transition-colors">
         {soundEnabled ? '🔊' : '🔈'}
       </button>
       <Slider
