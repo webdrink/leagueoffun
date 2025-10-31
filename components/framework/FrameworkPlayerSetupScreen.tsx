@@ -67,7 +67,7 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
             >
               <ArrowLeft size={20} />
             </Button>
-            <h1 className="text-2xl font-bold text-purple-800 dark:text-purple-200">
+            <h1 className="text-2xl font-bold text-autumn-800 dark:text-autumn-200">
               {t('players.setup_title')}
             </h1>
           </div>
@@ -94,7 +94,7 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
               />
               <Button
                 onClick={handleAddPlayer}
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-4"
+                className="bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white px-4"
                 disabled={!tempPlayerName.trim() || players.length >= 12}
               >
                 <Plus size={16} />
@@ -118,13 +118,13 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.2 }}
-                  className="flex items-center justify-between bg-purple-50 dark:bg-purple-900/30 rounded-lg p-3"
+                  className="flex items-center justify-between bg-autumn-50 dark:bg-autumn-900/30 rounded-lg p-3"
                 >
                   <div className="flex items-center">
-                    <div className="w-8 h-8 bg-purple-500 dark:bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">
+                    <div className="w-8 h-8 bg-autumn-500 dark:bg-autumn-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">
                       {index + 1}
                     </div>
-                    <span className="font-medium text-purple-800 dark:text-purple-200">{player.name}</span>
+                    <span className="font-medium text-autumn-800 dark:text-autumn-200">{player.name}</span>
                   </div>
                   <Button
                     onClick={() => handleRemovePlayer(player.id)}
@@ -156,7 +156,7 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
           {/* Start Game Button */}
           <Button
             onClick={handleStartGame}
-            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg text-lg"
+            className="w-full bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg text-lg"
             disabled={players.length < 3}
           >
             {players.length >= 3 ? t('players.start_game') : t('players.add_player')}

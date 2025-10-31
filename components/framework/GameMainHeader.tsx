@@ -131,7 +131,7 @@ const GameMainHeader: React.FC<GameMainHeaderProps> = ({
                 className={`
                   px-3 py-1 rounded-full text-xs font-medium
                   ${blamePhase === 'reveal' 
-                    ? 'bg-pink-500/80 text-white' 
+                    ? 'bg-rust-500/80 text-white' 
                     : 'bg-white/20 text-white'
                   }
                 `}

@@ -32,7 +32,7 @@ const DarkModeToggle: React.FC<DarkModeToggleProps> = ({
   // Button styling based on variant
   const variantClasses = {
     minimal: "text-white/90 dark:text-gray-200/90 hover:text-white dark:hover:text-gray-100 hover:bg-white/10 dark:hover:bg-gray-600/20 bg-transparent border-none p-2",
-    outlined: "text-white border-2 border-white/90 hover:bg-white/40 hover:border-white hover:text-purple-800 bg-black/50 font-medium hover:shadow-2xl transform hover:scale-105 backdrop-blur-md shadow-xl",
+    outlined: "text-white border-2 border-white/90 hover:bg-white/40 hover:border-white hover:text-autumn-800 bg-black/50 font-medium hover:shadow-2xl transform hover:scale-105 backdrop-blur-md shadow-xl",
     filled: "bg-white/20 dark:bg-gray-700/60 text-white dark:text-gray-100 hover:bg-white/30 dark:hover:bg-gray-600/70 border-white/30 dark:border-gray-400/30 backdrop-blur-sm shadow-lg",
     footer: FOOTER_ICON_STYLE + ' cursor-pointer'
   }[variant];

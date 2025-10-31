@@ -46,6 +46,34 @@ const es: Translations = {
   'settings.group.general': 'General',
   'settings.no_dynamic_fields': 'No hay configuraciones dinámicas definidas. Usando valores predeterminados.',
   
+  // Season/Theme selector
+  'season.title': 'Tema',
+  'season.auto': 'Auto (Estación Actual)',
+  'season.auto_desc': 'Sigue la estación real',
+  'season.fall': '🍂 Otoño',
+  'season.fall_desc': 'Colores cálidos de otoño',
+  'season.winter': '❄️ Invierno',
+  'season.winter_desc': 'Azules helados',
+  'season.spring': '🌸 Primavera',
+  'season.spring_desc': 'Verdes pasteles frescos',
+  'season.summer': '☀️ Verano',
+  'season.summer_desc': 'Sol brillante',
+  'season.cyber': '⚡ Cyber',
+  'season.cyber_desc': 'Tema matrix nerd',
+
+  // FAQ
+  'faq.title': 'Preguntas Frecuentes',
+  'faq.how_to_play': '¿Cómo juego?',
+  'faq.how_to_play_answer': 'Comienza agregando al menos 2 jugadores. Luego responde preguntas sobre quién sería más probable que haga ciertas cosas. En el modo NameBlame, el jugador activo selecciona a alguien para culpar, y esa persona se convierte en el siguiente jugador activo.',
+  'faq.what_is_nameblame': '¿Qué es el modo NameBlame?',
+  'faq.what_is_nameblame_answer': 'NameBlame es un modo de juego especial donde cada pregunta se muestra una vez. El jugador activo selecciona a quién culpar. El jugador culpado lee la pregunta en voz alta y se convierte en el siguiente jugador activo.',
+  'faq.how_to_change_language': '¿Cómo cambio el idioma?',
+  'faq.how_to_change_language_answer': 'Haz clic en el selector de idioma en el pie de página para elegir tu idioma preferido entre inglés, alemán, español o francés.',
+  'faq.how_to_change_theme': '¿Cómo cambio el tema?',
+  'faq.how_to_change_theme_answer': 'Ve a Configuración y usa el selector de Tema para elegir entre los temas Otoño, Invierno, Primavera, Verano o Cyber. También puedes configurarlo en Automático para seguir la temporada actual.',
+  'faq.reset_data': '¿Cómo restablezco los datos de la aplicación?',
+  'faq.reset_data_answer': 'Haz clic en el botón "Restablecer datos" a continuación para borrar todos los datos almacenados, incluidas las configuraciones, nombres de jugadores e historial de juegos. Esta acción no se puede deshacer.',
+  
   // Player setup
   'players.setup_title': 'Configurar jugadores',
   'players.add_player': 'Añadir jugador',

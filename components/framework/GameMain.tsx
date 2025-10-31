@@ -65,13 +65,13 @@ const GameMain: React.FC<GameMainProps> = ({
   const getGameTypeClasses = () => {
     switch (gameType) {
       case 'blame':
-        return 'bg-gradient-to-br from-purple-400 to-pink-400';
+        return 'bg-gradient-to-br from-autumn-400 to-rust-400';
       case 'trivia':
         return 'bg-gradient-to-br from-blue-400 to-green-400';
       case 'custom':
         return 'bg-gradient-to-br from-gray-400 to-slate-400';
       default:
-        return 'bg-gradient-to-br from-purple-400 to-pink-400';
+        return 'bg-gradient-to-br from-autumn-400 to-rust-400';
     }
   };
   
@@ -144,8 +144,8 @@ const GameMain: React.FC<GameMainProps> = ({
           >
             <div className="bg-white/90 rounded-lg p-6 shadow-xl">
               <div className="flex items-center space-x-3">
-                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-purple-600"></div>
-                <span className="text-purple-700 font-medium">Loading...</span>
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-autumn-600"></div>
+                <span className="text-autumn-700 font-medium">Loading...</span>
               </div>
             </div>
           </motion.div>

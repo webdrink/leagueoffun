@@ -20,7 +20,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question }) => {
   const categoryName = question.categoryName || question.categoryId || '';
 
   return (
-    <Card className="w-full h-full shadow-xl border-2 border-pink-100 bg-white rounded-2xl flex items-center justify-center p-1">
+    <Card className="w-full h-full shadow-xl border-2 border-rust-100 bg-white rounded-2xl flex items-center justify-center p-1">
       <CardContent className="p-3 sm:p-6 flex flex-col items-center text-center justify-center h-full w-full">
         {categoryEmoji && (
           <div className={`mb-2 sm:mb-3 ${styles['question-card-emoji']}`}>
@@ -29,7 +29,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question }) => {
         )}
         {categoryName && (
           <span
-            className="inline-flex items-center px-2.5 py-1 mb-3 sm:mb-6 rounded-full text-xs sm:text-sm font-semibold bg-pink-100 text-pink-700 border border-pink-200 shadow-sm"
+            className="inline-flex items-center px-2.5 py-1 mb-3 sm:mb-6 rounded-full text-xs sm:text-sm font-semibold bg-rust-100 text-rust-700 border border-rust-200 shadow-sm"
           >
             {categoryName}
           </span>

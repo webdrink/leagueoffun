@@ -79,7 +79,7 @@ const GameSettingsPanel: React.FC<GameSettingsPanelProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center">
-            <Settings className="text-purple-600 dark:text-purple-400 mr-3" size={24} />
+            <Settings className="text-autumn-600 dark:text-autumn-400 mr-3" size={24} />
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">
               {t('settings.game_settings')}
             </h2>
@@ -124,7 +124,7 @@ const GameSettingsPanel: React.FC<GameSettingsPanelProps> = ({
                             aria-label={label}
                             value={value}
                             onChange={(e) => updateSetting(key, Number.parseInt(e.target.value, 10) as unknown as GameSettings[typeof key])}
-                            className="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer dark:bg-purple-700 slider"
+                            className="w-full h-2 bg-autumn-200 rounded-lg appearance-none cursor-pointer dark:bg-autumn-700 slider"
                           />
                           <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
                             <span>{min}</span>
@@ -144,7 +144,7 @@ const GameSettingsPanel: React.FC<GameSettingsPanelProps> = ({
                             type="checkbox"
                             checked={checked}
                             onChange={(e) => updateSetting(key, e.target.checked as unknown as GameSettings[typeof key])}
-                            className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            className="w-4 h-4 text-autumn-600 bg-gray-100 border-gray-300 rounded focus:ring-autumn-500 dark:focus:ring-autumn-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                           />
                         </label>
                       );
@@ -183,7 +183,7 @@ const GameSettingsPanel: React.FC<GameSettingsPanelProps> = ({
             </Button>
             <Button
               onClick={handleSave}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white flex items-center"
+              className="bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white flex items-center"
             >
               <Save size={16} className="mr-2" />
               {t('app.save')}

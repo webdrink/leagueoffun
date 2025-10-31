@@ -16,6 +16,7 @@ import GameSettingsPanel from './GameSettingsPanel';
 import DarkModeToggle from './DarkModeToggle';
 import useTranslation from '../../hooks/useTranslation';
 import useDarkMode from '../../hooks/useDarkMode';
+import useTheme from '../../hooks/useTheme';
 import { GameSettings, UISettingsField } from '../../framework/config/game.schema';
 import { storageGet, storageSet } from '../../framework/persistence/storage';
 
@@ -86,21 +87,16 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
     toggleDarkMode: !!toggleDarkMode
   });
 
-  // Dynamic styling based on config
-  const accentColor = theme.accentColor || 'purple';
+  // Get dynamic seasonal theme
+  const themeDetails = useTheme();
+  const backgroundClasses = `min-h-screen ${themeDetails.gradient} ${themeDetails.animationClass || ''} bg-[length:400%_400%]`;
   
-  // New 5-color system support
-  const colors = theme.colors || {
-    primary: 'purple-500',
-    secondary: 'pink-500',
-    accent: 'indigo-500',
-    neutral: 'gray-500',
-    highlight: 'yellow-400'
-  };
-
-  // Get gradient from theme config with animation
-  const primaryGradient = theme.primaryGradient || 'from-pink-400 via-purple-500 to-indigo-600';
-  const backgroundClasses = `min-h-screen bg-gradient-to-br ${primaryGradient} dark:from-pink-900 dark:via-purple-900 dark:to-indigo-900 animate-gentle-shift bg-[length:400%_400%]`;
+  // Apply season class to document for CSS variables
+  useEffect(() => {
+    const seasonClass = `season-${themeDetails.season}`;
+    document.documentElement.classList.remove('season-fall', 'season-winter', 'season-spring', 'season-summer', 'season-cyber');
+    document.documentElement.classList.add(seasonClass);
+  }, [themeDetails.season]);
 
   return (
     <div className={`${backgroundClasses} ${className} overflow-hidden`}> 
@@ -141,8 +137,8 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                       text={branding.gameName || config.title}
                       tag="h1"
                       className={`
-                        font-bold text-transparent bg-clip-text bg-gradient-to-r from-${colors.primary} to-${colors.secondary}
-                        dark:from-${colors.primary.replace('-500', '-400')} dark:to-${colors.secondary.replace('-500', '-400')}
+                        font-bold text-transparent bg-clip-text bg-gradient-to-r from-autumn-500 to-rust-500
+                        dark:from-autumn-400 dark:to-rust-400
                         drop-shadow-sm leading-tight text-center w-full max-w-full break-words hyphens-auto
                         text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-[3.5rem]
                         line-clamp-2
@@ -158,7 +154,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.4 }}
-                      className={`text-${accentColor}-600 dark:text-${accentColor}-400 font-medium text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl line-clamp-1`}
+                      className={`text-autumn-600 dark:text-autumn-400 font-medium text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl line-clamp-1`}
                     >
                       {t(branding.tagline)}
                     </motion.p>
@@ -221,7 +217,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                   
                   {/* Language Selector - styled to match footer buttons */}
                   {features.languageSelector && (
-                    <div className={`flex items-center bg-purple-600/60 rounded-xl px-3 py-1.5 backdrop-blur-md border-2 border-purple-500/80 shadow-xl hover:bg-purple-500/20 hover:border-purple-400 transition-all duration-200 transform hover:scale-105 min-h-[44px]`} data-testid="language-selector">
+                    <div className={`flex items-center bg-autumn-600/60 rounded-xl px-3 py-1.5 backdrop-blur-md border-2 border-autumn-500/80 shadow-xl hover:bg-autumn-500/20 hover:border-autumn-400 transition-all duration-200 transform hover:scale-105 min-h-[44px]`} data-testid="language-selector">
                       <LanguageSelector compact />
                     </div>
                   )}

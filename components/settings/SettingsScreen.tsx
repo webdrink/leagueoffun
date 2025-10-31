@@ -5,6 +5,7 @@ import useTranslation from '../../hooks/useTranslation';
 import { Button } from '../core/Button';
 import { GameSettings, SupportedLanguage } from '../../types';
 import { SUPPORTED_LANGUAGES } from '../../hooks/utils/languageSupport';
+import SeasonSelector from './SeasonSelector';
 
 interface SettingsScreenProps {
   gameSettings: GameSettings;
@@ -63,12 +64,12 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({
         >
           <ChevronLeftIcon size={20} />
         </Button>
-        <h2 className="text-2xl font-bold text-purple-700">{t('settings.title')}</h2>
+        <h2 className="text-2xl font-bold text-autumn-700">{t('settings.title')}</h2>
       </div>
       
       {/* Language Settings */}
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-purple-600 mb-3">
+        <h3 className="text-lg font-semibold text-autumn-600 mb-3">
           {t('settings.language')}
         </h3>
         <div className="grid grid-cols-2 gap-2">
@@ -78,7 +79,7 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({
               onClick={() => handleLanguageChange(code as SupportedLanguage)}
               className={`p-3 rounded-lg border transition-colors ${
                 gameSettings.language === code
-                  ? 'bg-purple-100 border-purple-400 text-purple-700 font-medium'
+                  ? 'bg-autumn-100 border-autumn-400 text-autumn-700 font-medium'
                   : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100'
               }`}
             >
@@ -93,10 +94,15 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({
         </div>
       </div>
       
+      {/* Season/Theme Selector */}
+      <div className="mb-6">
+        <SeasonSelector />
+      </div>
+      
       <div className="mt-8 flex justify-end">
         <Button
           onClick={onBack}
-          className="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg"
+          className="px-5 py-2 bg-autumn-600 hover:bg-autumn-700 text-white rounded-lg"
         >
           {t('settings.save')}
         </Button>

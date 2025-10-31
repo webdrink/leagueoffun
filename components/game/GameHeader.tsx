@@ -41,7 +41,7 @@ const GameHeader: React.FC<GameHeaderProps> = ({ title, onTitleClick }) => {
   return (
     <div className="w-full flex justify-center flex-shrink-0">
       <div className="
-        shadow-2xl rounded-2xl border-pink-200 
+        shadow-2xl rounded-2xl border-rust-200 
         px-3 sm:px-4 md:px-6 lg:px-8 
         py-3 sm:py-3 md:py-4 lg:py-4
         w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl
@@ -53,7 +53,7 @@ const GameHeader: React.FC<GameHeaderProps> = ({ title, onTitleClick }) => {
         <h1
           className="
             text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl 
-            font-extrabold text-purple-700 text-center 
+            font-extrabold text-autumn-700 text-center 
             cursor-pointer select-none tracking-tight 
             drop-shadow-lg leading-tight
             w-full max-w-full
