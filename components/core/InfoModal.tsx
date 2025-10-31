@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, AlertTriangle } from 'lucide-react';
 import { Button } from './Button';
 import useTranslation from '../../hooks/useTranslation';
+import { clearAllCustomCategories } from '../../lib/customCategories/storage';
+import { clearAllCategoryModifications } from '../../lib/customCategories/builtInModifications';
 
 interface FAQItem {
   question: string;
@@ -113,6 +115,33 @@ interface InfoModalProps {
  */
 const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose, onResetAppData, title = "Information", children }) => {
   const { t } = useTranslation();
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [resetConfirmText, setResetConfirmText] = useState('');
+
+  const handleResetClick = () => {
+    setShowResetConfirm(true);
+  };
+
+  const handleResetConfirm = () => {
+    if (resetConfirmText === 'RESET') {
+      // Clear all custom data
+      clearAllCustomCategories();
+      clearAllCategoryModifications();
+      
+      // Call the onResetAppData callback for any additional cleanup
+      onResetAppData();
+      
+      // Close modal
+      setShowResetConfirm(false);
+      setResetConfirmText('');
+      onClose();
+    }
+  };
+
+  const handleResetCancel = () => {
+    setShowResetConfirm(false);
+    setResetConfirmText('');
+  };
   
   if (!isOpen) return null;
 
@@ -130,24 +159,100 @@ const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose, onResetAppData, 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-md relative"
+            className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto relative"
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
-          >            <h2 className="text-xl font-semibold mb-4">{title || t('modal.info_title')}</h2>
+          >
+            <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">{title || t('modal.info_title')}</h2>
             
             {/* FAQ Section */}
             <div className="mb-6">
               <FAQSection />
             </div>
             
-            <div className="mb-6 space-y-3 text-sm text-gray-700 dark:text-gray-300">
-              {children && children}
-            </div>
-            <div className="flex justify-end space-x-3">
-              <Button onClick={onClose} variant="outline" className="bg-gray-200 hover:bg-gray-300 text-gray-800">
-                {t('modal.close')}
+            {children && (
+              <div className="mb-6 space-y-3 text-sm text-gray-700 dark:text-gray-300">
+                {children}
+              </div>
+            )}
+
+            {/* Danger Zone - Reset Section */}
+            <div className="mb-6 p-4 border-2 border-red-500/50 rounded-lg bg-red-50 dark:bg-red-900/20">
+              <h3 className="text-lg font-semibold text-red-700 dark:text-red-400 mb-2 flex items-center">
+                <AlertTriangle size={20} className="mr-2" />
+                {t('reset.danger_zone')}
+              </h3>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                {t('reset.reset_description')}
+              </p>
+              <Button 
+                onClick={handleResetClick}
+                className="bg-red-600 hover:bg-red-700 text-white w-full"
+              >
+                {t('reset.reset_all_data')}
               </Button>
-              <Button onClick={() => { onResetAppData(); onClose(); }} className="bg-red-500 hover:bg-red-600 text-white">
-                {t('modal.reset_app_data')}
+            </div>
+
+            {/* Reset Confirmation Dialog */}
+            <AnimatePresence>
+              {showResetConfirm && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[60] p-4"
+                  onClick={handleResetCancel}
+                >
+                  <motion.div
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.9, opacity: 0 }}
+                    className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl p-6 w-full max-w-md"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <h3 className="text-xl font-bold text-red-600 dark:text-red-400 mb-4 flex items-center">
+                      <AlertTriangle size={24} className="mr-2" />
+                      {t('reset.confirm_title')}
+                    </h3>
+                    <p className="text-gray-700 dark:text-gray-300 mb-4 whitespace-pre-line">
+                      {t('reset.confirm_message')}
+                    </p>
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        {t('reset.type_confirm')}
+                      </label>
+                      <input
+                        type="text"
+                        value={resetConfirmText}
+                        onChange={(e) => setResetConfirmText(e.target.value)}
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 dark:bg-gray-700 dark:text-gray-200"
+                        placeholder="RESET"
+                        autoFocus
+                      />
+                    </div>
+                    <div className="flex space-x-3">
+                      <Button
+                        onClick={handleResetCancel}
+                        variant="outline"
+                        className="flex-1"
+                      >
+                        {t('reset.cancel')}
+                      </Button>
+                      <Button
+                        onClick={handleResetConfirm}
+                        disabled={resetConfirmText !== 'RESET'}
+                        className="flex-1 bg-red-600 hover:bg-red-700 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {t('reset.confirm_button')}
+                      </Button>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            
+            <div className="flex justify-end">
+              <Button onClick={onClose} variant="outline" className="bg-gray-200 hover:bg-gray-300 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200">
+                {t('modal.close')}
               </Button>
             </div>
           </motion.div>

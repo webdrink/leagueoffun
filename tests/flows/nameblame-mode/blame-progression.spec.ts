@@ -73,7 +73,7 @@ test.describe('NameBlame Chain Progression Flow', () => {
     await page.waitForTimeout(2000);
     
     // Should now be in reveal phase - check for blame context display
-    const blameContext = page.locator('.bg-pink-100'); // blame context container
+    const blameContext = page.locator('.bg-autumn-100'); // blame context container
     await expect(blameContext).toBeVisible();
     console.log('✅ Reveal phase: blame context visible');
     
@@ -181,7 +181,7 @@ test.describe('NameBlame Chain Progression Flow', () => {
     await page.waitForTimeout(1500);
     
     // Check blame context shows correctly
-    const blameContext = page.locator('.bg-pink-100');
+    const blameContext = page.locator('.bg-autumn-100');
     await expect(blameContext).toBeVisible();
     
     // Should contain blame information

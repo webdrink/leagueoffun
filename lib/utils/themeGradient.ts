@@ -23,7 +23,7 @@ interface GradientOptions {
  * Falls back to provided color if conversion fails
  */
 function colorToCSS(colorClass: string, isDark = false): string {
-  // Handle Tailwind color classes like 'purple-500' or 'pink-400'
+  // Handle Tailwind color classes like 'autumn-500' or 'rust-400'
   if (colorClass.includes('-')) {
     const [colorName, shade] = colorClass.split('-');
     
@@ -53,11 +53,11 @@ export function buildThemeGradient(
     isDark = false
   } = options;
 
-  // Extract colors with fallbacks
-  const primary = colors.primary || 'purple-500';
-  const secondary = colors.secondary || 'pink-500';
-  const accent = colors.accent || 'indigo-600';
-  const highlight = colors.highlight || 'yellow-400';
+  // Extract colors with fallbacks (autumn/rust palette)
+  const primary = colors.primary || 'autumn-500';
+  const secondary = colors.secondary || 'rust-500';
+  const accent = colors.accent || 'orange-600';
+  const highlight = colors.highlight || 'amber-400';
 
   // Convert to CSS-ready colors
   const primaryCSS = colorToCSS(primary, isDark);
@@ -99,7 +99,7 @@ export function buildDarkGradient(colors: ThemeColors, options: GradientOptions 
     secondary: 'gray-800', 
     accent: 'gray-700',
     neutral: colors.neutral || 'gray-600',
-    highlight: colors.primary || 'purple-500' // Keep some accent color
+    highlight: colors.primary || 'autumn-500' // Keep some accent color
   };
 
   return buildThemeGradient(darkColors, { ...options, isDark: true });

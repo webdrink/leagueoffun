@@ -21,6 +21,23 @@ import useTheme from '../../hooks/useTheme';
 import { GameSettings, UISettingsField } from '../../framework/config/game.schema';
 import { storageGet, storageSet } from '../../framework/persistence/storage';
 
+const adjustTone = (color: string | undefined, tone: string, fallback: string) => {
+  if (!color) {
+    return fallback;
+  }
+
+  const segments = color.split('-');
+  if (segments.length === 2 && /^\d{3}$/.test(segments[1])) {
+    return `${segments[0]}-${tone}`;
+  }
+
+  if (/^\d{3}$/.test(color)) {
+    return `${fallback.split('-')[0]}-${tone}`;
+  }
+
+  return `${color}-${tone}`;
+};
+
 interface GameShellProps {
   children: React.ReactNode;
   className?: string;
@@ -36,6 +53,23 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
   const features = ui?.features || {};
   const branding = ui?.branding || {};
   const theme = ui?.theme || {};
+  const defaultThemeColors = {
+    primary: 'autumn-500',
+    secondary: 'rust-500',
+    accent: 'orange-600',
+    neutral: 'gray-500',
+    highlight: 'amber-400'
+  };
+  const themeColors = {
+    ...defaultThemeColors,
+    ...(theme.colors || {})
+  };
+  const primaryGradient = theme.primaryGradient
+    ? theme.primaryGradient
+    : `from-${themeColors.primary} via-${themeColors.accent} to-${themeColors.secondary}`;
+  const darkGradient = `dark:from-${adjustTone(themeColors.primary, '400', 'autumn-400')} dark:via-${adjustTone(themeColors.accent, '400', 'orange-400')} dark:to-${adjustTone(themeColors.secondary, '400', 'rust-400')}`;
+  const accentTone = adjustTone(themeColors.accent, '600', 'autumn-600');
+  const accentToneDark = adjustTone(themeColors.accent, '300', 'autumn-300');
   
   // Local state for modals and settings
   const [showInfoModal, setShowInfoModal] = useState(false);
@@ -139,8 +173,8 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                       text={branding.gameName || config.title}
                       tag="h1"
                       className={`
-                        font-bold text-transparent bg-clip-text bg-gradient-to-r from-autumn-500 to-rust-500
-                        dark:from-autumn-400 dark:to-rust-400
+                        font-bold text-transparent bg-clip-text bg-gradient-to-r ${primaryGradient}
+                        ${darkGradient}
                         drop-shadow-sm leading-tight text-center w-full max-w-full break-words hyphens-auto
                         text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-[3.5rem]
                         line-clamp-2
@@ -156,7 +190,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.4 }}
-                      className={`text-autumn-600 dark:text-autumn-400 font-medium text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl line-clamp-1`}
+                      className={`text-${accentTone} dark:text-${accentToneDark} font-medium text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl line-clamp-1`}
                     >
                       {t(branding.tagline)}
                     </motion.p>
@@ -234,7 +268,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                 {/* Bottom Row: Donation Notice */}
                 <div className="border-t border-white/30 pt-3">
                   <p className="text-sm text-center text-white font-medium">
-                    💜 {t('footer.support_message') || 'Support us to unlock more games!'} 
+                    🍂 {t('footer.support_message') || 'Support us to unlock more games!'} 
                     <span className="block text-white/90 text-xs mt-1">
                       {t('footer.donate_message') || 'Your donation helps us create better games.'}
                     </span>

@@ -21,7 +21,8 @@ test.describe('Tablet Landscape Optimization Tests', () => {
     // Check if we can navigate to NameBlame mode
     const startButton = page.locator('button:has-text("Spiel starten")');
     if (await startButton.isVisible()) {
-      await startButton.click();
+      await startButton.waitFor({ state: 'visible' });
+      await startButton.click({ force: true });
       await page.waitForTimeout(2000);
       
       // Look for a question screen or player setup
@@ -113,12 +114,12 @@ test.describe('Tablet Landscape Optimization Tests', () => {
         };
       });
       
-      // Should use gradient (backgroundImage) or purple/pink colors
+      // Should use gradient (backgroundImage) or autumn/rust fallback colors
       const hasGradient = buttonStyles.backgroundImage.includes('gradient');
-      const hasPurpleBackground = buttonStyles.backgroundColor.includes('rgb(168, 85, 247)') || // purple-500
-                                  buttonStyles.backgroundColor.includes('rgb(139, 69, 193)'); // purple-600
+      const hasAutumnBackground = buttonStyles.backgroundColor.includes('rgb(245, 158, 11)') || // autumn-500
+                  buttonStyles.backgroundColor.includes('rgb(239, 68, 68)'); // rust-500
       
-      expect(hasGradient || hasPurpleBackground).toBe(true);
+      expect(hasGradient || hasAutumnBackground).toBe(true);
       
       // Text should be white for good contrast
       expect(buttonStyles.color).toContain('rgb(255, 255, 255)');
@@ -136,7 +137,8 @@ test.describe('Tablet Landscape Optimization Tests', () => {
     // Try to get to NameBlame mode with player selection
     const startButton = page.locator('button:has-text("Spiel starten")');
     if (await startButton.isVisible()) {
-      await startButton.click();
+      await startButton.waitFor({ state: 'visible' });
+      await startButton.click({ force: true });
       await page.waitForTimeout(2000);
       
       // Look for player selection interface

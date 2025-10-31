@@ -1,137 +1,17 @@
-<testsuites id="" name="" tests="11" failures="3" skipped="0" errors="0" time="12.189684999999999">
-<testsuite name="foundation\theme-system.spec.ts" timestamp="2025-10-31T09:06:56.466Z" hostname="foundation-tests" tests="11" failures="3" skipped="0" time="68.409" errors="0">
-<testcase name="Theme System › should detect and apply the current season automatically" classname="foundation\theme-system.spec.ts" time="2.917">
-<failure message="theme-system.spec.ts:16:7 should detect and apply the current season automatically" type="FAILURE">
-<![CDATA[  [foundation-tests] › foundation\theme-system.spec.ts:16:7 › Theme System › should detect and apply the current season automatically 
-
-    Error: expect(received).toBe(expected) // Object.is equality
-
-    Expected: "fall"
-    Received: null
-
-      31 |     });
-      32 |
-    > 33 |     expect(seasonClass).toBe(expectedSeason);
-         |                         ^
-      34 |   });
-      35 |
-      36 |   test('should apply fall theme colors to background', async ({ page }) => {
-        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\theme-system.spec.ts:33:25
-
-    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ..\test-results\foundation-theme-system-Th-991a7-urrent-season-automatically-foundation-tests\test-failed-1.png
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    ..\test-results\foundation-theme-system-Th-991a7-urrent-season-automatically-foundation-tests\video.webm
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    Error Context: ..\test-results\foundation-theme-system-Th-991a7-urrent-season-automatically-foundation-tests\error-context.md
-]]>
-</failure>
+<testsuites id="" name="" tests="4" failures="0" skipped="0" errors="0" time="8.129650000000373">
+<testsuite name="foundation\tablet-landscape-optimization.spec.ts" timestamp="2025-10-31T12:24:16.049Z" hostname="foundation-tests" tests="4" failures="0" skipped="0" time="14.621" errors="0">
+<testcase name="Tablet Landscape Optimization Tests › should display optimized layout for iPad landscape" classname="foundation\tablet-landscape-optimization.spec.ts" time="3.515">
+</testcase>
+<testcase name="Tablet Landscape Optimization Tests › should handle different tablet orientations gracefully" classname="foundation\tablet-landscape-optimization.spec.ts" time="5.198">
 <system-out>
-<![CDATA[
-[[ATTACHMENT|..\test-results\foundation-theme-system-Th-991a7-urrent-season-automatically-foundation-tests\test-failed-1.png]]
-
-[[ATTACHMENT|..\test-results\foundation-theme-system-Th-991a7-urrent-season-automatically-foundation-tests\video.webm]]
-
-[[ATTACHMENT|..\test-results\foundation-theme-system-Th-991a7-urrent-season-automatically-foundation-tests\error-context.md]]
+<![CDATA[✅ landscape orientation (1180x820) working correctly
+✅ portrait orientation (820x1180) working correctly
 ]]>
 </system-out>
 </testcase>
-<testcase name="Theme System › should apply fall theme colors to background" classname="foundation\theme-system.spec.ts" time="7.811">
-<failure message="theme-system.spec.ts:36:7 should apply fall theme colors to background" type="FAILURE">
-<![CDATA[  [foundation-tests] › foundation\theme-system.spec.ts:36:7 › Theme System › should apply fall theme colors to background 
-
-    Error: expect(received).toContain(expected) // indexOf
-
-    Expected substring: "252, 211, 77"
-    Received string:    "none"
-
-      46 |
-      47 |     // Should contain autumn/rust color values
-    > 48 |     expect(background).toContain('252, 211, 77'); // autumn-300
-         |                        ^
-      49 |   });
-      50 |
-      51 |   test('should persist theme selection to localStorage', async ({ page }) => {
-        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\theme-system.spec.ts:48:24
-
-    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ..\test-results\foundation-theme-system-Th-ff3eb--theme-colors-to-background-foundation-tests\test-failed-1.png
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    ..\test-results\foundation-theme-system-Th-ff3eb--theme-colors-to-background-foundation-tests\video.webm
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    Error Context: ..\test-results\foundation-theme-system-Th-ff3eb--theme-colors-to-background-foundation-tests\error-context.md
-]]>
-</failure>
-<system-out>
-<![CDATA[
-[[ATTACHMENT|..\test-results\foundation-theme-system-Th-ff3eb--theme-colors-to-background-foundation-tests\test-failed-1.png]]
-
-[[ATTACHMENT|..\test-results\foundation-theme-system-Th-ff3eb--theme-colors-to-background-foundation-tests\video.webm]]
-
-[[ATTACHMENT|..\test-results\foundation-theme-system-Th-ff3eb--theme-colors-to-background-foundation-tests\error-context.md]]
-]]>
-</system-out>
+<testcase name="Tablet Landscape Optimization Tests › should use improved button colors for better readability" classname="foundation\tablet-landscape-optimization.spec.ts" time="0.759">
 </testcase>
-<testcase name="Theme System › should persist theme selection to localStorage" classname="foundation\theme-system.spec.ts" time="6.053">
-</testcase>
-<testcase name="Theme System › should apply CSS variables based on selected season" classname="foundation\theme-system.spec.ts" time="6.284">
-</testcase>
-<testcase name="Theme System › should update season class when theme is changed" classname="foundation\theme-system.spec.ts" time="8.604">
-</testcase>
-<testcase name="Theme System › should change background gradient when season changes" classname="foundation\theme-system.spec.ts" time="6.144">
-</testcase>
-<testcase name="Theme System › should not have any purple or pink colors in header" classname="foundation\theme-system.spec.ts" time="5.224">
-</testcase>
-<testcase name="Theme System › should not have purple/pink in tagline" classname="foundation\theme-system.spec.ts" time="5.343">
-</testcase>
-<testcase name="Theme System › should have autumn colors in footer buttons" classname="foundation\theme-system.spec.ts" time="8.399">
-</testcase>
-<testcase name="Theme System › should maintain theme selection after page reload" classname="foundation\theme-system.spec.ts" time="8.341">
-</testcase>
-<testcase name="Theme System › should have time-based gradient variations" classname="foundation\theme-system.spec.ts" time="3.289">
-<failure message="theme-system.spec.ts:211:7 should have time-based gradient variations" type="FAILURE">
-<![CDATA[  [foundation-tests] › foundation\theme-system.spec.ts:211:7 › Theme System › should have time-based gradient variations 
-
-    Error: expect(received).toContain(expected) // indexOf
-
-    Expected substring: "linear-gradient"
-    Received string:    "none"
-
-      219 |
-      220 |     // Should have gradient defined
-    > 221 |     expect(background).toContain('linear-gradient');
-          |                        ^
-      222 |   });
-      223 | });
-      224 |
-        at C:\Users\pbziu\OneDrive\Dokumente\Development\blamegame\tests\foundation\theme-system.spec.ts:221:24
-
-    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ..\test-results\foundation-theme-system-Th-65357-e-based-gradient-variations-foundation-tests\test-failed-1.png
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    ..\test-results\foundation-theme-system-Th-65357-e-based-gradient-variations-foundation-tests\video.webm
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    Error Context: ..\test-results\foundation-theme-system-Th-65357-e-based-gradient-variations-foundation-tests\error-context.md
-]]>
-</failure>
-<system-out>
-<![CDATA[
-[[ATTACHMENT|..\test-results\foundation-theme-system-Th-65357-e-based-gradient-variations-foundation-tests\test-failed-1.png]]
-
-[[ATTACHMENT|..\test-results\foundation-theme-system-Th-65357-e-based-gradient-variations-foundation-tests\video.webm]]
-
-[[ATTACHMENT|..\test-results\foundation-theme-system-Th-65357-e-based-gradient-variations-foundation-tests\error-context.md]]
-]]>
-</system-out>
+<testcase name="Tablet Landscape Optimization Tests › should properly scale player selection grid on tablets" classname="foundation\tablet-landscape-optimization.spec.ts" time="5.149">
 </testcase>
 </testsuite>
 </testsuites>

@@ -499,7 +499,7 @@ test.describe('NameBlame Edge Cases & Error Scenarios', () => {
       await page.waitForTimeout(500);
       
       // Check if name was processed correctly
-      const playerList = page.locator('.bg-pink-50'); // Player list items
+      const playerList = page.locator('.bg-autumn-50'); // Player list items
       const currentPlayerCount = await playerList.count();
       
       tracker.logGameEvent(`Extreme name ${index + 1} result`, {
@@ -539,7 +539,7 @@ test.describe('NameBlame Edge Cases & Error Scenarios', () => {
     
     // Test 3: Try to start game with extreme conditions
     const startGameButton = page.getByRole('button', { name: /spiel.*starten|start.*game/i });
-    const finalPlayerCount = await page.locator('.bg-pink-50').count();
+    const finalPlayerCount = await page.locator('.bg-autumn-50').count();
     
     if (finalPlayerCount >= 3) {
       const gameCanStart = await startGameButton.first().isEnabled();

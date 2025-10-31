@@ -294,7 +294,38 @@ const de: Translations = {
   'custom_categories.success_deleted': 'Kategorie erfolgreich gelöscht!',
   'custom_categories.error_name_required': 'Kategoriename ist erforderlich',
   'custom_categories.error_emoji_required': 'Emoji ist erforderlich',
-  'custom_categories.error_question_required': 'Fragentext ist erforderlich'
+  'custom_categories.error_emoji_invalid': 'Bitte geben Sie ein gültiges einzelnes Emoji ein',
+  'custom_categories.error_question_required': 'Fragentext ist erforderlich',
+  'custom_categories.emoji_help': 'Tippen Sie, um die Emoji-Tastatur Ihres Geräts zu verwenden',
+  'custom_categories.built_in_category': 'Spielkategorie',
+  'custom_categories.custom_category': 'Ihre Kategorie',
+  'custom_categories.section_built_in': 'Spielkategorien',
+  'custom_categories.section_custom': 'Ihre benutzerdefinierten Kategorien',
+  'custom_categories.edit_built_in': 'Fragen hinzufügen oder unerwünschte ausblenden',
+  'custom_categories.hide_question': 'Frage ausblenden',
+  'custom_categories.unhide_question': 'Frage einblenden',
+  'custom_categories.hidden_question': 'Ausgeblendet',
+  'custom_categories.game_question': 'Spielfrage',
+  'custom_categories.your_question': 'Ihre Frage',
+  'custom_categories.modifications': '{{added}} hinzugefügt, {{hidden}} ausgeblendet',
+  'custom_categories.added_count': '{{count}} hinzugefügt',
+  'custom_categories.hidden_count': '{{count}} ausgeblendet',
+  'custom_categories.confirm_hide_question': 'Diese Frage aus dem Spiel ausblenden?',
+  'custom_categories.confirm_unhide_question': 'Diese Frage wieder im Spiel anzeigen?',
+  'custom_categories.cannot_hide_all': 'Kann nicht alle Fragen ausblenden. Mindestens eine Frage muss sichtbar bleiben.',
+  'custom_categories.loading_questions': 'Fragen werden geladen...',
+  
+  // Reset functionality
+  'reset.danger_zone': 'Gefahrenbereich',
+  'reset.reset_all_data': 'Alle App-Daten zurücksetzen',
+  'reset.reset_description': 'Dies löscht dauerhaft alle benutzerdefinierten Kategorien, Änderungen an Spielkategorien und setzt alle Einstellungen zurück. Diese Aktion kann nicht rückgängig gemacht werden.',
+  'reset.confirm_title': 'Alle Daten zurücksetzen?',
+  'reset.confirm_message': 'Sind Sie absolut sicher? Dies löscht:\n\n• Alle benutzerdefinierten Kategorien und Fragen\n• Alle Änderungen an Spielkategorien\n• Alle Spieleinstellungen\n\nDiese Aktion ist dauerhaft und kann nicht rückgängig gemacht werden.',
+  'reset.type_confirm': 'Geben Sie "RESET" ein, um zu bestätigen',
+  'reset.cancel': 'Abbrechen',
+  'reset.confirm_button': 'Alles zurücksetzen',
+  'reset.success': 'App-Daten wurden erfolgreich zurückgesetzt.',
+  'reset.error': 'Fehler beim Zurücksetzen der App-Daten. Bitte versuchen Sie es erneut.'
 };
 
 export default de;

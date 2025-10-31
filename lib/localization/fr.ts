@@ -216,7 +216,38 @@ const fr: Translations = {
   'custom_categories.success_deleted': 'Catégorie supprimée avec succès !',
   'custom_categories.error_name_required': 'Le nom de la catégorie est obligatoire',
   'custom_categories.error_emoji_required': 'L\'emoji est obligatoire',
-  'custom_categories.error_question_required': 'Le texte de la question est obligatoire'
+  'custom_categories.error_emoji_invalid': 'Veuillez saisir un seul emoji valide',
+  'custom_categories.error_question_required': 'Le texte de la question est obligatoire',
+  'custom_categories.emoji_help': 'Appuyez pour utiliser le clavier emoji de votre appareil',
+  'custom_categories.built_in_category': 'Catégorie du Jeu',
+  'custom_categories.custom_category': 'Votre Catégorie',
+  'custom_categories.section_built_in': 'Catégories du Jeu',
+  'custom_categories.section_custom': 'Vos Catégories Personnalisées',
+  'custom_categories.edit_built_in': 'Ajouter des questions ou masquer celles non désirées',
+  'custom_categories.hide_question': 'Masquer la Question',
+  'custom_categories.unhide_question': 'Afficher la Question',
+  'custom_categories.hidden_question': 'Masquée',
+  'custom_categories.game_question': 'Question du Jeu',
+  'custom_categories.your_question': 'Votre Question',
+  'custom_categories.modifications': '{{added}} ajoutées, {{hidden}} masquées',
+  'custom_categories.added_count': '{{count}} ajoutées',
+  'custom_categories.hidden_count': '{{count}} masquées',
+  'custom_categories.confirm_hide_question': 'Masquer cette question du jeu ?',
+  'custom_categories.confirm_unhide_question': 'Afficher à nouveau cette question dans le jeu ?',
+  'custom_categories.cannot_hide_all': 'Impossible de masquer toutes les questions. Au moins une question doit rester visible.',
+  'custom_categories.loading_questions': 'Chargement des questions...',
+  
+  // Reset functionality
+  'reset.danger_zone': 'Zone Dangereuse',
+  'reset.reset_all_data': 'Réinitialiser Toutes les Données',
+  'reset.reset_description': 'Cela supprimera définitivement toutes les catégories personnalisées, les modifications des catégories du jeu et réinitialisera tous les paramètres. Cette action ne peut pas être annulée.',
+  'reset.confirm_title': 'Réinitialiser Toutes les Données ?',
+  'reset.confirm_message': 'Êtes-vous absolument sûr ? Cela supprimera :\n\n• Toutes les catégories et questions personnalisées\n• Toutes les modifications des catégories du jeu\n• Tous les paramètres du jeu\n\nCette action est permanente et ne peut pas être annulée.',
+  'reset.type_confirm': 'Tapez "RESET" pour confirmer',
+  'reset.cancel': 'Annuler',
+  'reset.confirm_button': 'Tout Réinitialiser',
+  'reset.success': 'Les données de l\'application ont été réinitialisées avec succès.',
+  'reset.error': 'Échec de la réinitialisation des données de l\'application. Veuillez réessayer.'
 };
 
 export default fr;

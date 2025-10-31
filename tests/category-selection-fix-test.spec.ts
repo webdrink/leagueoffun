@@ -44,7 +44,7 @@ test.describe('Category Selection Fixes', () => {
         await page.waitForTimeout(500);
         
         // Count selected categories (should be 1)
-        const selectedCategories = page.locator('label.border-purple-500');
+        const selectedCategories = page.locator('label.border-autumn-500');
         const selectionCount = await selectedCategories.count();
         
         console.log(`Selection count after single click: ${selectionCount}`);
@@ -88,7 +88,7 @@ test.describe('Category Selection Fixes', () => {
         await page.waitForTimeout(500);
         
         // Check if it got selected
-        const isSelected = await secondCategory.evaluate(el => el.classList.contains('border-purple-500'));
+        const isSelected = await secondCategory.evaluate(el => el.classList.contains('border-autumn-500'));
         console.log(`Click on emoji area worked: ${isSelected}`);
         if (isSelected) {
           console.log('✅ Entire category box is clickable');

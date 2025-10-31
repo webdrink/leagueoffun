@@ -61,15 +61,15 @@ const FrameworkIntroScreen: React.FC = () => {
   };
 
   // Dynamic styling based on config
-  const accentColor = theme.accentColor || 'purple';
+  const accentColor = theme.accentColor || 'autumn';
   
   // New 5-color system support
   const colors = theme.colors || {
-    primary: 'purple-500',
-    secondary: 'pink-500',
-    accent: 'indigo-500',
+    primary: 'autumn-500',
+    secondary: 'rust-500',
+    accent: 'orange-600',
     neutral: 'gray-500',
-    highlight: 'yellow-400'
+    highlight: 'amber-400'
   };
   
 
@@ -157,7 +157,7 @@ const FrameworkIntroScreen: React.FC = () => {
                     id="categorySelectionToggle"
                     checked={selectCategories}
                     onCheckedChange={handleToggleCategorySelection}
-                    className="data-[state=checked]:bg-purple-500 data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600"
+                    className="data-[state=checked]:bg-autumn-500 data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600"
                   />
                   <span className="ml-3 font-medium text-gray-800 dark:text-gray-200">
                     {t('intro.select_categories')}
@@ -183,15 +183,15 @@ const FrameworkIntroScreen: React.FC = () => {
             <motion.div 
               className={`relative overflow-hidden rounded-xl p-4 mb-4 border-2 transition-all duration-300 shadow-lg ${
                 gameMode 
-                  ? `bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/40 dark:to-pink-900/40 border-purple-300 dark:border-purple-600 ring-2 ring-purple-200 dark:ring-purple-700/50` 
-                  : `bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-600`
+                  ? `bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 border-amber-300 dark:border-amber-600 ring-2 ring-amber-200 dark:ring-amber-700/50` 
+                  : `bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 hover:border-autumn-300 dark:hover:border-autumn-600`
               }`}
               whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               {gameMode && (
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10"
+                  className="absolute inset-0 bg-gradient-to-r from-autumn-500/10 to-rust-500/10"
                   initial={{ x: '-100%' }}
                   animate={{ x: '100%' }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
@@ -203,12 +203,12 @@ const FrameworkIntroScreen: React.FC = () => {
                     id="gameModeToggle"
                     checked={gameMode}
                     onCheckedChange={handleToggleGameMode}
-                    className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-purple-500 data-[state=checked]:to-pink-500 data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600 shadow-lg"
+                    className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-autumn-500 data-[state=checked]:to-rust-500 data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600 shadow-lg"
                   />
                   <div className="ml-3 flex-grow">
                     <span className={`font-semibold text-base ${
                       gameMode 
-                        ? 'text-purple-800 dark:text-purple-200' 
+                        ? 'text-autumn-800 dark:text-autumn-200' 
                         : 'text-gray-800 dark:text-gray-200'
                     }`}>
                       {t('intro.name_blame_mode')}
@@ -219,7 +219,7 @@ const FrameworkIntroScreen: React.FC = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         className="flex items-center mt-1"
                       >
-                        <span className="text-xs bg-purple-500 text-white px-2 py-0.5 rounded-full font-medium">
+                        <span className="text-xs bg-autumn-500 text-white px-2 py-0.5 rounded-full font-medium">
                           AKTIV
                         </span>
                       </motion.div>
@@ -233,9 +233,9 @@ const FrameworkIntroScreen: React.FC = () => {
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.4, delay: 0.1 }}
-                  className="mt-3 pt-3 border-t border-purple-200 dark:border-purple-700"
+                  className="mt-3 pt-3 border-t border-autumn-200 dark:border-autumn-700"
                 >
-                  <p className="text-sm text-purple-700 dark:text-purple-300 leading-relaxed">
+                  <p className="text-sm text-autumn-700 dark:text-autumn-300 leading-relaxed">
                     {t('intro.name_blame_explanation')}
                   </p>
                 </motion.div>

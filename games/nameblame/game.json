@@ -73,15 +73,15 @@
       "subtitle": "intro.subtitle"
     },
     "theme": {
-      "primaryGradient": "from-pink-400 via-purple-500 to-indigo-600",
+      "primaryGradient": "from-autumn-400 via-rust-500 to-brown-600",
       "cardBackground": "bg-white",
-      "accentColor": "purple",
+      "accentColor": "autumn",
       "colors": {
-        "primary": "purple-500",
-        "secondary": "pink-500",
-        "accent": "indigo-600",
+        "primary": "autumn-500",
+        "secondary": "rust-500",
+        "accent": "orange-600",
         "neutral": "gray-600",
-        "highlight": "yellow-500"
+        "highlight": "amber-400"
       }
     }
   },

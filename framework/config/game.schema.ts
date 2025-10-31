@@ -70,22 +70,22 @@ const UIBrandingConfigSchema = z.object({
 
 const UIThemeConfigSchema = z.object({
   // Legacy support
-  primaryGradient: z.string().default('from-blue-400 via-purple-500 to-indigo-600'),
+  primaryGradient: z.string().default('from-amber-400 via-orange-500 to-red-600'),
   cardBackground: z.string().default('bg-white'),
   accentColor: z.string().default('blue'),
   // New 5-color system
   colors: z.object({
-    primary: z.string().default('purple-500'),      // Main brand color (buttons, titles)
-    secondary: z.string().default('pink-500'),      // Secondary brand color (gradients, accents)
-    accent: z.string().default('indigo-500'),       // Highlighting and emphasis
+    primary: z.string().default('autumn-500'),      // Main brand color (buttons, titles)
+    secondary: z.string().default('rust-500'),      // Secondary brand color (gradients, accents)
+    accent: z.string().default('orange-600'),       // Highlighting and emphasis
     neutral: z.string().default('gray-500'),        // Text, borders, neutral elements
-    highlight: z.string().default('yellow-400')     // Success, warnings, special highlights
+    highlight: z.string().default('amber-400')      // Success, warnings, special highlights
   }).default({
-    primary: 'purple-500',
-    secondary: 'pink-500', 
-    accent: 'indigo-500',
+    primary: 'autumn-500',
+    secondary: 'rust-500', 
+    accent: 'orange-600',
     neutral: 'gray-500',
-    highlight: 'yellow-400'
+    highlight: 'amber-400'
   })
 }).default({});
 

@@ -46,7 +46,7 @@ const SeasonSelector: React.FC = () => {
       name: t('season.spring') || '🌸 Spring',
       icon: <Flower2 size={20} />,
       gradient: 'from-bloom-400 to-meadow-400',
-      description: t('season.spring_desc') || 'Fresh pastel greens and pinks',
+      description: t('season.spring_desc') || 'Fresh pastel greens and blooms',
     },
     {
       id: 'summer',

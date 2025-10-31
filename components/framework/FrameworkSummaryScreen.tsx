@@ -46,7 +46,7 @@ const FrameworkSummaryScreen: React.FC = () => {
   const mostBlamed = mostBlamedPlayerData ? [mostBlamedPlayerData.name, mostBlamedPlayerData.count] : null;
   
   const theme = config.ui?.theme || {};
-  const accentColor = theme.accentColor || 'purple';
+  const accentColor = theme.accentColor || theme.colors?.primary?.split('-')[0] || 'autumn';
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full p-4">

@@ -1,7 +1,7 @@
 /**
  * FooterButton
  * Reusable footer button component with consistent styling matching the language selector pattern.
- * Provides purple backdrop, borders, hover effects, and accessibility features.
+ * Provides autumn-toned backdrop, borders, hover effects, and accessibility features.
  */
 import React from 'react';
 

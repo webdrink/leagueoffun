@@ -215,7 +215,38 @@ const es: Translations = {
   'custom_categories.success_deleted': '¡Categoría eliminada con éxito!',
   'custom_categories.error_name_required': 'El nombre de la categoría es obligatorio',
   'custom_categories.error_emoji_required': 'El emoji es obligatorio',
-  'custom_categories.error_question_required': 'El texto de la pregunta es obligatorio'
+  'custom_categories.error_emoji_invalid': 'Por favor, introduce un único emoji válido',
+  'custom_categories.error_question_required': 'El texto de la pregunta es obligatorio',
+  'custom_categories.emoji_help': 'Toca para usar el teclado de emojis de tu dispositivo',
+  'custom_categories.built_in_category': 'Categoría del Juego',
+  'custom_categories.custom_category': 'Tu Categoría',
+  'custom_categories.section_built_in': 'Categorías del Juego',
+  'custom_categories.section_custom': 'Tus Categorías Personalizadas',
+  'custom_categories.edit_built_in': 'Añadir preguntas u ocultar las no deseadas',
+  'custom_categories.hide_question': 'Ocultar Pregunta',
+  'custom_categories.unhide_question': 'Mostrar Pregunta',
+  'custom_categories.hidden_question': 'Oculta',
+  'custom_categories.game_question': 'Pregunta del Juego',
+  'custom_categories.your_question': 'Tu Pregunta',
+  'custom_categories.modifications': '{{added}} añadidas, {{hidden}} ocultas',
+  'custom_categories.added_count': '{{count}} añadidas',
+  'custom_categories.hidden_count': '{{count}} ocultas',
+  'custom_categories.confirm_hide_question': '¿Ocultar esta pregunta del juego?',
+  'custom_categories.confirm_unhide_question': '¿Mostrar esta pregunta en el juego de nuevo?',
+  'custom_categories.cannot_hide_all': 'No se pueden ocultar todas las preguntas. Al menos una pregunta debe permanecer visible.',
+  'custom_categories.loading_questions': 'Cargando preguntas...',
+  
+  // Reset functionality
+  'reset.danger_zone': 'Zona de Peligro',
+  'reset.reset_all_data': 'Restablecer Todos los Datos',
+  'reset.reset_description': 'Esto eliminará permanentemente todas las categorías personalizadas, modificaciones a categorías del juego y restablecerá todas las configuraciones. Esta acción no se puede deshacer.',
+  'reset.confirm_title': '¿Restablecer Todos los Datos?',
+  'reset.confirm_message': '¿Estás absolutamente seguro? Esto eliminará:\n\n• Todas las categorías y preguntas personalizadas\n• Todas las modificaciones a categorías del juego\n• Todas las configuraciones del juego\n\nEsta acción es permanente y no se puede deshacer.',
+  'reset.type_confirm': 'Escribe "RESET" para confirmar',
+  'reset.cancel': 'Cancelar',
+  'reset.confirm_button': 'Restablecer Todo',
+  'reset.success': 'Los datos de la aplicación se han restablecido correctamente.',
+  'reset.error': 'Error al restablecer los datos de la aplicación. Por favor, inténtalo de nuevo.'
 };
 
 export default es;

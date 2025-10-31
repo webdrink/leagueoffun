@@ -4,6 +4,7 @@
  */
 
 import { getCustomCategories } from './storage';
+import { getCategoryModifications } from './builtInModifications';
 import { CustomCategory } from './types';
 import { Category, Question } from '../utils/questionLoaders';
 import { SupportedLanguage } from '../../types';
@@ -83,6 +84,7 @@ export const mergeWithCustomCategories = (
 /**
  * Merge custom questions with built-in questions
  * Custom questions are added to the pool
+ * Also applies modifications to built-in categories (added questions and hidden questions)
  */
 export const mergeWithCustomQuestions = (
   builtInQuestions: Question[],
@@ -91,7 +93,40 @@ export const mergeWithCustomQuestions = (
   const customCategories = getCustomCategories();
   const customQuestions = convertCustomQuestionsToStandard(customCategories, language);
   
-  return [...builtInQuestions, ...customQuestions];
+  // Get modifications to built-in categories
+  const modifications = getCategoryModifications();
+  
+  // Start with built-in questions, filtered by hidden questions
+  let filteredBuiltInQuestions = [...builtInQuestions];
+  
+  // Apply hidden questions filter
+  modifications.forEach(mod => {
+    if (mod.hiddenQuestionIds.length > 0) {
+      filteredBuiltInQuestions = filteredBuiltInQuestions.filter(
+        q => !(q.categoryId === mod.categoryId && mod.hiddenQuestionIds.includes(q.questionId))
+      );
+    }
+  });
+  
+  // Add custom questions from built-in category modifications
+  const addedQuestionsFromMods: Question[] = [];
+  modifications.forEach(mod => {
+    mod.addedQuestions.forEach(q => {
+      // Find the category to get its details
+      const category = builtInQuestions.find(bq => bq.categoryId === mod.categoryId);
+      if (category) {
+        addedQuestionsFromMods.push({
+          questionId: q.id,
+          text: q.text[language] || q.text.en || '',
+          categoryId: mod.categoryId,
+          categoryName: category.categoryName,
+          categoryEmoji: category.categoryEmoji
+        });
+      }
+    });
+  });
+  
+  return [...filteredBuiltInQuestions, ...customQuestions, ...addedQuestionsFromMods];
 };
 
 /**

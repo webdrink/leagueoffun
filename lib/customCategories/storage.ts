@@ -215,3 +215,10 @@ export const importCustomCategories = (jsonString: string): boolean => {
     return false;
   }
 };
+
+/**
+ * Clear all custom categories (for app reset)
+ */
+export const clearAllCustomCategories = (): void => {
+  saveCustomCategories([]);
+};

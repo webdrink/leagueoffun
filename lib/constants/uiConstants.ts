@@ -50,13 +50,13 @@ export const BUTTON_SIZES = {
 // Footer button styling (used in GameShell) - improved visibility matching language selector
 export const FOOTER_BUTTON_CLASSES = `
   text-white dark:text-white
-  border-2 border-purple-500/80 dark:border-purple-400/80
-  hover:bg-purple-500/20 hover:border-purple-400 
+  border-2 border-autumn-500/80 dark:border-autumn-400/80
+  hover:bg-autumn-500/20 hover:border-autumn-400 
   hover:text-white dark:hover:text-white
-  bg-purple-600/60 dark:bg-purple-500/60
+  bg-autumn-600/60 dark:bg-autumn-500/60
   transition-all duration-200 rounded-xl backdrop-blur-md shadow-xl
   font-medium hover:shadow-2xl transform hover:scale-105
-  focus:outline-none focus:ring-2 focus:ring-purple-400/50
+  focus:outline-none focus:ring-2 focus:ring-autumn-400/50
   ${BUTTON_SIZES.ICON}
 `.replace(/\s+/g, ' ').trim();
 

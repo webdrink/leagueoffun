@@ -261,7 +261,38 @@ const en: Translations = {
   'custom_categories.success_deleted': 'Category deleted successfully!',
   'custom_categories.error_name_required': 'Category name is required',
   'custom_categories.error_emoji_required': 'Emoji is required',
-  'custom_categories.error_question_required': 'Question text is required'
+  'custom_categories.error_emoji_invalid': 'Please enter a valid single emoji',
+  'custom_categories.error_question_required': 'Question text is required',
+  'custom_categories.emoji_help': 'Tap to use your device\'s emoji keyboard',
+  'custom_categories.built_in_category': 'Game Category',
+  'custom_categories.custom_category': 'Your Category',
+  'custom_categories.section_built_in': 'Game Categories',
+  'custom_categories.section_custom': 'Your Custom Categories',
+  'custom_categories.edit_built_in': 'Add Questions or Hide Unwanted Ones',
+  'custom_categories.hide_question': 'Hide Question',
+  'custom_categories.unhide_question': 'Unhide Question',
+  'custom_categories.hidden_question': 'Hidden',
+  'custom_categories.game_question': 'Game Question',
+  'custom_categories.your_question': 'Your Question',
+  'custom_categories.modifications': '{{added}} added, {{hidden}} hidden',
+  'custom_categories.added_count': '{{count}} added',
+  'custom_categories.hidden_count': '{{count}} hidden',
+  'custom_categories.confirm_hide_question': 'Hide this question from the game?',
+  'custom_categories.confirm_unhide_question': 'Show this question in the game again?',
+  'custom_categories.cannot_hide_all': 'Cannot hide all questions. At least one question must remain visible.',
+  'custom_categories.loading_questions': 'Loading questions...',
+  
+  // Reset functionality
+  'reset.danger_zone': 'Danger Zone',
+  'reset.reset_all_data': 'Reset All App Data',
+  'reset.reset_description': 'This will permanently delete all custom categories, modifications to game categories, and reset all settings. This action cannot be undone.',
+  'reset.confirm_title': 'Reset All Data?',
+  'reset.confirm_message': 'Are you absolutely sure? This will delete:\n\n• All custom categories and questions\n• All modifications to game categories\n• All game settings\n\nThis action is permanent and cannot be undone.',
+  'reset.type_confirm': 'Type "RESET" to confirm',
+  'reset.cancel': 'Cancel',
+  'reset.confirm_button': 'Reset Everything',
+  'reset.success': 'App data has been reset successfully.',
+  'reset.error': 'Failed to reset app data. Please try again.'
 };
 
 export default en;

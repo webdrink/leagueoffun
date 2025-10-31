@@ -184,7 +184,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
           <Button 
             variant="outline" 
             onClick={onOpenCustomCategories} 
-            className="text-purple-600 hover:text-purple-800 hover:bg-purple-50 border-purple-300 p-2"
+            className="text-autumn-600 hover:text-autumn-800 hover:bg-autumn-50 border-autumn-300 p-2"
             title={t('custom_categories.manage')}
           >
             <FolderPlus size={20} />

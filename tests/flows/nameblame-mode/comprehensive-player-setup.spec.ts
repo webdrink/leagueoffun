@@ -396,7 +396,7 @@ test.describe('NameBlame Comprehensive Player Setup', () => {
     await tracker.takeScreenshot('max-players-test');
     
     // Count actual players added
-    const playerElements = page.locator('.bg-pink-50'); // Player list items have this class
+    const playerElements = page.locator('.bg-autumn-50'); // Player list items have this class
     const actualPlayerCount = await playerElements.count();
     tracker.logGameEvent('Final player count', { count: actualPlayerCount });
     
@@ -443,7 +443,7 @@ test.describe('NameBlame Comprehensive Player Setup', () => {
     const stateSnapshots: Array<{operation: string, playerCount: number, buttonEnabled: boolean, hintVisible: boolean}> = [];
     
     const captureState = async (operation: string) => {
-      const playerElements = page.locator('.bg-pink-50');
+      const playerElements = page.locator('.bg-autumn-50');
       const playerCount = await playerElements.count();
       const buttonEnabled = await startGameButton.first().isEnabled();
       const hintVisible = await page.getByText(/mindestens.*3.*spieler|minimum.*3.*player/i).count() > 0;
