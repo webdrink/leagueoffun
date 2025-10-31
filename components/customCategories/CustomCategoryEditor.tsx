@@ -106,14 +106,14 @@ const CustomCategoryEditor: React.FC<CustomCategoryEditorProps> = ({
     if (isEditing && category) {
       addQuestionToCategory(category.id, newQuestionText);
       setQuestions([...questions, {
-        id: `temp_${Date.now()}`,
+        id: `temp_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
         text: newQuestionText,
         createdAt: new Date().toISOString()
       }]);
     } else {
       // For new categories, add to local state
       setQuestions([...questions, {
-        id: `temp_${Date.now()}`,
+        id: `temp_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
         text: newQuestionText,
         createdAt: new Date().toISOString()
       }]);

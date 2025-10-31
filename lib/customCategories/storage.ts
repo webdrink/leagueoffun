@@ -43,7 +43,7 @@ export const addCustomCategory = (
   const categories = getCustomCategories();
   
   const newCategory: CustomCategory = {
-    id: `custom_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    id: `custom_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
     emoji,
     name,
     questions: [],
@@ -109,7 +109,7 @@ export const addQuestionToCategory = (
   if (categoryIndex === -1) return null;
   
   const newQuestion: CustomQuestion = {
-    id: `q_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    id: `q_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
     text,
     createdAt: new Date().toISOString()
   };

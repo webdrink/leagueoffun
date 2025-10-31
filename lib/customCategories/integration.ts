@@ -9,6 +9,22 @@ import { Category, Question } from '../utils/questionLoaders';
 import { SupportedLanguage } from '../../types';
 
 /**
+ * Get localized text with fallback logic
+ * Falls back to: current language -> 'en' -> 'de' -> first available
+ */
+const getLocalizedText = (
+  textRecord: Record<SupportedLanguage, string>,
+  language: SupportedLanguage,
+  defaultText = ''
+): string => {
+  return textRecord[language] || 
+         textRecord.en || 
+         textRecord.de || 
+         Object.values(textRecord).find(v => v) || 
+         defaultText;
+};
+
+/**
  * Convert custom categories to the format expected by the question loader
  */
 export const convertCustomCategoriesToStandard = (
@@ -18,10 +34,10 @@ export const convertCustomCategoriesToStandard = (
     const standardCategory: Category = {
       id: cat.id,
       emoji: cat.emoji,
-      en: cat.name.en || cat.name.de || 'Custom Category',
-      de: cat.name.de || cat.name.en || 'Benutzerdefiniert',
-      es: cat.name.es || cat.name.en || 'Categoría Personalizada',
-      fr: cat.name.fr || cat.name.en || 'Catégorie Personnalisée'
+      en: getLocalizedText(cat.name, 'en', 'Custom Category'),
+      de: getLocalizedText(cat.name, 'de', 'Benutzerdefiniert'),
+      es: getLocalizedText(cat.name, 'es', 'Categoría Personalizada'),
+      fr: getLocalizedText(cat.name, 'fr', 'Catégorie Personnalisée')
     };
     return standardCategory;
   });
@@ -40,9 +56,9 @@ export const convertCustomQuestionsToStandard = (
     category.questions.forEach(question => {
       questions.push({
         questionId: question.id,
-        text: question.text[language] || question.text.en || question.text.de || '',
+        text: getLocalizedText(question.text, language, ''),
         categoryId: category.id,
-        categoryName: category.name[language] || category.name.en || category.name.de || '',
+        categoryName: getLocalizedText(category.name, language, ''),
         categoryEmoji: category.emoji
       });
     });
