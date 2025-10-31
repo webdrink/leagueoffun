@@ -5,7 +5,7 @@
  */
 import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Settings, Info, Volume2, VolumeX } from 'lucide-react';
+import { Settings, Info, Volume2, VolumeX, FolderPlus } from 'lucide-react';
 import SplitText from '../core/SplitText';
 import FooterButton from '../core/FooterButton';
 import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
@@ -14,6 +14,7 @@ import InfoModal from '../core/InfoModal';
 import LanguageSelector from '../settings/LanguageSelector';
 import GameSettingsPanel from './GameSettingsPanel';
 import DarkModeToggle from './DarkModeToggle';
+import CustomCategoryManager from '../customCategories/CustomCategoryManager';
 import useTranslation from '../../hooks/useTranslation';
 import useDarkMode from '../../hooks/useDarkMode';
 import useTheme from '../../hooks/useTheme';
@@ -39,6 +40,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
   // Local state for modals and settings
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showSettingsPanel, setShowSettingsPanel] = useState(false);
+  const [showCustomCategories, setShowCustomCategories] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   // Persisted game settings per game id
   const storageKey = useMemo(() => `game.settings.${config.id}`, [config.id]);
@@ -193,6 +195,12 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                       {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
                     </FooterButton>
                   )}
+                  <FooterButton
+                    onClick={() => setShowCustomCategories(true)}
+                    title={t('custom_categories.manage')}
+                  >
+                    <FolderPlus size={18} />
+                  </FooterButton>
                   {features.settingsPanel && (
                     <FooterButton
                       onClick={() => setShowSettingsPanel(true)}
@@ -276,6 +284,14 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
             storageSet(storageKey, reset);
             eventBus.publish({ type: 'SETTINGS/UPDATED', gameId: config.id, settings: reset });
           }}
+        />
+      )}
+
+      {/* Custom Category Manager */}
+      {showCustomCategories && (
+        <CustomCategoryManager
+          isOpen={showCustomCategories}
+          onClose={() => setShowCustomCategories(false)}
         />
       )}
     </div>

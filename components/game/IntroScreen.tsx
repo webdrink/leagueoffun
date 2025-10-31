@@ -5,7 +5,7 @@ import { Label } from '../core/Label';
 import VolumeControl from '../core/VolumeControl';
 import { GameSettings, QuestionStats, SupportedLanguage } from '../../types';
 import { Switch } from '../core/Switch';
-import { Settings as SettingsIcon, Info as InfoIcon } from 'lucide-react'; // Using lucide-react consistently
+import { Settings as SettingsIcon, Info as InfoIcon, FolderPlus } from 'lucide-react'; // Using lucide-react consistently
 import LanguageSelector from '../settings/LanguageSelector';
 import useTranslation from '../../hooks/useTranslation';
 
@@ -31,6 +31,7 @@ interface IntroScreenProps {
   showCategorySelectToggle?: boolean;
   onToggleCategorySelect?: (checked: boolean) => void;
   onNameBlameModeChange?: (enabled: boolean) => void; // Add callback for mode change navigation
+  onOpenCustomCategories?: () => void; // Add callback for custom categories
 }
 
 /**
@@ -83,7 +84,8 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
   questionStats: _questionStats,
   showCategorySelectToggle,
   onToggleCategorySelect,
-  onNameBlameModeChange
+  onNameBlameModeChange,
+  onOpenCustomCategories
 }) => {
   const { t } = useTranslation();
   
@@ -178,6 +180,16 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
       </div>
 
       <div className="mt-6 flex justify-end space-x-2">
+        {onOpenCustomCategories && (
+          <Button 
+            variant="outline" 
+            onClick={onOpenCustomCategories} 
+            className="text-purple-600 hover:text-purple-800 hover:bg-purple-50 border-purple-300 p-2"
+            title={t('custom_categories.manage')}
+          >
+            <FolderPlus size={20} />
+          </Button>
+        )}
         <Button variant="outline" onClick={onOpenDebugPanel} className="text-autumn-600 hover:text-autumn-800 hover:bg-autumn-50 border-autumn-300 p-2">
           <SettingsIcon size={20} />
         </Button>

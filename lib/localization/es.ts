@@ -183,7 +183,39 @@ const es: Translations = {
 
   // Footer
   'footer.support_message': '¡Apóyanos para más juegos!',
-  'footer.donate_message': 'Tu donación nos ayuda a crear mejores juegos.'
+  'footer.donate_message': 'Tu donación nos ayuda a crear mejores juegos.',
+
+  // Custom categories
+  'custom_categories.title': 'Categorías Personalizadas',
+  'custom_categories.manage': 'Gestionar Categorías',
+  'custom_categories.add_category': 'Añadir Categoría',
+  'custom_categories.edit_category': 'Editar Categoría',
+  'custom_categories.delete_category': 'Eliminar Categoría',
+  'custom_categories.category_name': 'Nombre de Categoría',
+  'custom_categories.emoji': 'Emoji',
+  'custom_categories.questions': 'Preguntas',
+  'custom_categories.add_question': 'Añadir Pregunta',
+  'custom_categories.edit_question': 'Editar Pregunta',
+  'custom_categories.delete_question': 'Eliminar Pregunta',
+  'custom_categories.question_text': 'Texto de Pregunta',
+  'custom_categories.no_categories': '¡Aún no hay categorías personalizadas. Crea una para comenzar!',
+  'custom_categories.no_questions': '¡Aún no hay preguntas. Añade algunas preguntas a esta categoría!',
+  'custom_categories.confirm_delete_category': '¿Estás seguro de que quieres eliminar esta categoría? Se perderán todas las preguntas.',
+  'custom_categories.confirm_delete_question': '¿Estás seguro de que quieres eliminar esta pregunta?',
+  'custom_categories.create_new': 'Crear Nueva Categoría',
+  'custom_categories.save': 'Guardar',
+  'custom_categories.cancel': 'Cancelar',
+  'custom_categories.placeholder_name': 'Ingresa el nombre de la categoría',
+  'custom_categories.placeholder_emoji': 'Elige un emoji',
+  'custom_categories.placeholder_question': '¿Quién probablemente...',
+  'custom_categories.question_count': '{{count}} pregunta(s)',
+  'custom_categories.select_emoji': 'Seleccionar Emoji',
+  'custom_categories.success_created': '¡Categoría creada con éxito!',
+  'custom_categories.success_updated': '¡Categoría actualizada con éxito!',
+  'custom_categories.success_deleted': '¡Categoría eliminada con éxito!',
+  'custom_categories.error_name_required': 'El nombre de la categoría es obligatorio',
+  'custom_categories.error_emoji_required': 'El emoji es obligatorio',
+  'custom_categories.error_question_required': 'El texto de la pregunta es obligatorio'
 };
 
 export default es;

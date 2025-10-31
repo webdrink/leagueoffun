@@ -262,7 +262,39 @@ const de: Translations = {
   'startGame': 'Spiel starten',
   'error.loadQuestions': 'Fehler beim Laden der Fragen. Bitte überprüfen Sie die Fragendateien und versuchen Sie es erneut.',
   'loadingQuestions': 'Fragen werden geladen...',
-  'error.noQuestionsLoaded': 'Keine Fragen geladen. Bitte überprüfen Sie die Fragendateien und versuchen Sie es erneut.'
+  'error.noQuestionsLoaded': 'Keine Fragen geladen. Bitte überprüfen Sie die Fragendateien und versuchen Sie es erneut.',
+
+  // Custom categories
+  'custom_categories.title': 'Benutzerdefinierte Kategorien',
+  'custom_categories.manage': 'Kategorien verwalten',
+  'custom_categories.add_category': 'Kategorie hinzufügen',
+  'custom_categories.edit_category': 'Kategorie bearbeiten',
+  'custom_categories.delete_category': 'Kategorie löschen',
+  'custom_categories.category_name': 'Kategoriename',
+  'custom_categories.emoji': 'Emoji',
+  'custom_categories.questions': 'Fragen',
+  'custom_categories.add_question': 'Frage hinzufügen',
+  'custom_categories.edit_question': 'Frage bearbeiten',
+  'custom_categories.delete_question': 'Frage löschen',
+  'custom_categories.question_text': 'Fragentext',
+  'custom_categories.no_categories': 'Noch keine benutzerdefinierten Kategorien. Erstelle eine, um loszulegen!',
+  'custom_categories.no_questions': 'Noch keine Fragen. Füge einige Fragen zu dieser Kategorie hinzu!',
+  'custom_categories.confirm_delete_category': 'Möchtest du diese Kategorie wirklich löschen? Alle Fragen gehen verloren.',
+  'custom_categories.confirm_delete_question': 'Möchtest du diese Frage wirklich löschen?',
+  'custom_categories.create_new': 'Neue Kategorie erstellen',
+  'custom_categories.save': 'Speichern',
+  'custom_categories.cancel': 'Abbrechen',
+  'custom_categories.placeholder_name': 'Kategorienamen eingeben',
+  'custom_categories.placeholder_emoji': 'Emoji auswählen',
+  'custom_categories.placeholder_question': 'Wer würde am ehesten...',
+  'custom_categories.question_count': '{{count}} Frage(n)',
+  'custom_categories.select_emoji': 'Emoji auswählen',
+  'custom_categories.success_created': 'Kategorie erfolgreich erstellt!',
+  'custom_categories.success_updated': 'Kategorie erfolgreich aktualisiert!',
+  'custom_categories.success_deleted': 'Kategorie erfolgreich gelöscht!',
+  'custom_categories.error_name_required': 'Kategoriename ist erforderlich',
+  'custom_categories.error_emoji_required': 'Emoji ist erforderlich',
+  'custom_categories.error_question_required': 'Fragentext ist erforderlich'
 };
 
 export default de;

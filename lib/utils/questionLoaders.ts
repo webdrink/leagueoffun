@@ -7,6 +7,8 @@
 
 import { getAssetsPath } from './assetUtils';
 import { fetchAsset, fetchWithRetry } from './fetchUtils';
+import { mergeWithCustomCategories, mergeWithCustomQuestions } from '../customCategories/integration';
+import { SupportedLanguage } from '../../types';
 
 // Define types for our data structures
 export interface Category {
@@ -29,6 +31,7 @@ export interface Question extends BaseQuestion {
 
 /**
  * Loads categories from the central categories.json file
+ * Merges with custom categories from localStorage
  * 
  * @returns Promise resolving to an array of Category objects
  */
@@ -39,11 +42,17 @@ export const loadCategoriesFromJson = async (): Promise<Category[]> => {
     const response = await fetchAsset('questions/categories.json');
     const categories: Category[] = await response.json();
     
-    console.log(`Successfully loaded ${categories.length} categories`);
-    return categories;
+    console.log(`Successfully loaded ${categories.length} built-in categories`);
+    
+    // Merge with custom categories
+    const mergedCategories = mergeWithCustomCategories(categories);
+    console.log(`Total categories (including custom): ${mergedCategories.length}`);
+    
+    return mergedCategories;
   } catch (error) {
     console.error('Error loading categories from JSON:', error);
-    throw error;
+    // Still try to return custom categories even if built-in loading fails
+    return mergeWithCustomCategories([]);
   }
 };
 
@@ -102,13 +111,17 @@ export const loadQuestionsFromJson = async (language: string = 'de', categories:
       }
     }
     
-    console.log(`Successfully loaded ${allQuestions.length} questions in total`);
+    console.log(`Successfully loaded ${allQuestions.length} built-in questions`);
     
     if (allQuestions.length === 0) {
       console.warn(`No questions could be loaded for ${language}, using fallbacks`);
     }
     
-    return allQuestions;
+    // Merge with custom questions
+    const mergedQuestions = mergeWithCustomQuestions(allQuestions, language as SupportedLanguage);
+    console.log(`Total questions (including custom): ${mergedQuestions.length}`);
+    
+    return mergedQuestions;
   } catch (error) {
     console.error('Error loading questions from JSON:', error);
     throw error;
