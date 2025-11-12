@@ -207,6 +207,37 @@ pnpm build
 pnpm preview
 ```
 
+## 🎯 Framework Extraction Analysis
+
+**NEW (Nov 2025):** Comprehensive analysis of framework extraction feasibility and recommendations.
+
+We've completed an in-depth analysis to answer: *"Is this framework ready to be extracted into its own repository?"*
+
+**The short answer: YES ✅** (with a phased approach)
+
+### 📊 Key Findings
+- **Framework Maturity:** 9/10 - Highly config-driven and generic
+- **Extraction Feasibility:** HIGH - Clear boundaries and solid architecture
+- **Recommendation:** Extract after completing migration and validating with a second game
+- **Expected ROI:** 50-70% faster game development, break-even after 2nd game
+
+### 📚 Analysis Documents
+
+Start here based on your role:
+
+- **👔 Decision Makers** → [Executive Summary](FRAMEWORK_EXTRACTION_EXECUTIVE_SUMMARY.md) (10 min read)
+  - Clear YES/NO answers, timeline, costs, ROI
+- **👨‍💻 Technical Leads** → [Actionable Recommendations](FRAMEWORK_EXTRACTION_RECOMMENDATIONS.md) (20 min read)
+  - Prioritized actions, decision tree, implementation guide
+- **🏗️ Architects** → [Full Analysis](FRAMEWORK_EXTRACTION_ANALYSIS.md) (45 min read)
+  - Comprehensive technical evaluation, metrics, trade-offs
+- **💻 Developers** → [Code Mapping](FRAMEWORK_CODE_MAPPING.md) (30 min read)
+  - Visual diagrams, component inventory, migration checklist
+
+**📋 Not sure where to start?** See the [Document Index](FRAMEWORK_EXTRACTION_INDEX.md) for navigation help.
+
+---
+
 ## 📄 License
 
 This framework is available under the [MIT License](../LICENSE).
