@@ -17,7 +17,7 @@ export type { EventBus, GameEvent } from './core/events/eventBus';
 
 // Module System
 export { gameModuleRegistry } from './core/modules';
-export type { GameModule, GameModuleContext } from './core/modules';
+export type { GameModule, GameModuleContextMinimal, ScreenRegistry } from './core/modules';
 
 // Router and Navigation
 export { FrameworkRouter, useFrameworkRouter } from './core/router/FrameworkRouter';
@@ -36,14 +36,14 @@ export { default as GameHost } from './core/GameHost';
 // Configuration
 // ============================================================================
 
-export type { GameConfig, GameSettings, UIConfig, UISettingsField } from './config/game.schema';
+export type { GameConfig, GameSettings, UISettingsConfig, UISettingsField } from './config/game.schema';
 export { discoverGameConfigs } from './config/discovery/discover';
 
 // ============================================================================
 // Persistence
 // ============================================================================
 
-export { storageGet, storageSet, storageClear, STORAGE_KEYS } from './persistence/storage';
+export { storageGet, storageSet, storageRemove, storageClearNamespace, STORAGE_KEYS } from './persistence/storage';
 
 // ============================================================================
 // UI Components
@@ -73,6 +73,9 @@ export {
   DataLoader,
   GameInfoLoader,
   GameLayout,
+  GameHeader,
+  GameBody,
+  GameFooter,
 } from './ui/components';
 
 // Screen Components
