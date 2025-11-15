@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '../core/Button'; // Adjusted path
+import { Button } from '../../framework/ui/components/Button'; // Adjusted path
 import { NameBlameEntry } from '../../types'; // Path should be correct
-import Confetti from '../core/Confetti'; // Adjusted path
+import Confetti from '../../framework/ui/components/Confetti'; // Adjusted path
 import { Award, Users, Repeat } from 'lucide-react';
 import useTranslation from '../../hooks/useTranslation';
 

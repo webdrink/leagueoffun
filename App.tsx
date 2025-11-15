@@ -37,7 +37,7 @@ import IntroScreen from './components/game/IntroScreen';
 import QuestionScreen from './components/game/QuestionScreen';
 import PlayerSetupScreen from './components/game/PlayerSetupScreen';
 import LoadingContainer from './components/game/LoadingContainer';
-import InfoModal from './components/core/InfoModal';
+import { InfoModal } from './framework';
 import GameContainer from './components/game/GameContainer';
 import LanguageChangeFeedback from './components/language/LanguageChangeFeedback';
 import DebugPanel from './components/debug/DebugPanel';

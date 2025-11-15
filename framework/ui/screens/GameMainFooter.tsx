@@ -26,10 +26,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '../core/Button';
-import FooterButton from '../core/FooterButton';
-import { useGameStateStore, useBlameGameStore, selectCurrentPlayer, selectIsInBlamedPhase } from '../../store';
-import useTranslation from '../../hooks/useTranslation';
+import { Button } from '../components/Button';
+import FooterButton from '../components/FooterButton';
+import { useGameStateStore, useBlameGameStore, selectCurrentPlayer, selectIsInBlamedPhase } from '../../../store';
+import useTranslation from '../../../hooks/useTranslation';
 
 interface ActionButton {
   label: string;

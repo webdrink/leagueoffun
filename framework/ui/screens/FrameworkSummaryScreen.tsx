@@ -5,15 +5,15 @@
  */
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
-import { GameAction } from '../../framework/core/actions';
-import { Button } from '../core/Button';
+import { useFrameworkRouter } from '../../core/router/FrameworkRouter';
+import { GameAction } from '../../core/actions';
+import { Button } from '../components/Button';
 import { Trophy, Users, Crown } from 'lucide-react';
-import useTranslation from '../../hooks/useTranslation';
-import { useGameSettings } from '../../hooks/useGameSettings';
-import { useProviderState } from '../../hooks/useProviderState';
-import useNameBlameSetup from '../../hooks/useNameBlameSetup';
-import { useBlameGameStore } from '../../store/BlameGameStore';
+import useTranslation from '../../../hooks/useTranslation';
+import { useGameSettings } from '../../../hooks/useGameSettings';
+import { useProviderState } from '../../../hooks/useProviderState';
+import useNameBlameSetup from '../../../hooks/useNameBlameSetup';
+import { useBlameGameStore } from '../../../store/BlameGameStore';
 
 const FrameworkSummaryScreen: React.FC = () => {
   const { dispatch, config } = useFrameworkRouter();

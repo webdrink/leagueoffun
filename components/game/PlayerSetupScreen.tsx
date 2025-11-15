@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Input } from '../core/Input';
-import { Button } from '../core/Button';
+import { Input } from '../../framework/ui/components/Input';
+import { Button } from '../../framework/ui/components/Button';
 import { Player } from '../../types';
 import { ArrowLeft, UserPlus, Trash2 } from 'lucide-react';
 import useTranslation from '../../hooks/useTranslation';

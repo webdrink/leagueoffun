@@ -1,8 +1,8 @@
 import React from 'react';
 import { DataLoader } from './DataLoader';
-import { useGameStore, GameInfo } from '../../store/gameStore';
-import { fetchAssetWithFallback } from '../../lib/utils/fetchUtils';
-import { logger } from '../../lib/utils/logger';
+import { useGameStore, GameInfo } from '../../../store/gameStore';
+import { fetchAssetWithFallback } from '../../../lib/utils/fetchUtils';
+import { logger } from '../../../lib/utils/logger';
 
 /**
  * GameInfoLoader Component

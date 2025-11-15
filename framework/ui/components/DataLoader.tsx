@@ -1,6 +1,6 @@
 import React from "react";
 import ErrorDisplay from './ErrorDisplay';
-import { logger } from '../../lib/utils/logger';
+import { logger } from '../../../lib/utils/logger';
 
 export type DataLoaderProps<T> = {
   fetchData: () => Promise<T>;

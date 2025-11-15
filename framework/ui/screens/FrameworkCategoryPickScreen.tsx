@@ -5,12 +5,12 @@
  */
 import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '../core/Button';
-import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
-import { GameAction } from '../../framework/core/actions';
-import { CATEGORY_EMOJIS } from '../../constants';
-import useTranslation from '../../hooks/useTranslation';
-import { useGameSettings } from '../../hooks/useGameSettings';
+import { Button } from '../components/Button';
+import { useFrameworkRouter } from '../../core/router/FrameworkRouter';
+import { GameAction } from '../../core/actions';
+import { CATEGORY_EMOJIS } from '../../../constants';
+import useTranslation from '../../../hooks/useTranslation';
+import { useGameSettings } from '../../../hooks/useGameSettings';
 
 interface CategoryInfo {
   id: string;

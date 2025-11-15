@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent } from '../core/Card'; // Adjusted path
+import { Card, CardContent } from '../../framework/ui/components/Card'; // Adjusted path
 import { Question } from '../../types'; // Path should be correct if types is in blamegame/
 import styles from './QuestionCard.module.css';
 

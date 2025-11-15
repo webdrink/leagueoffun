@@ -6,20 +6,20 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Settings, Info, Volume2, VolumeX, FolderPlus } from 'lucide-react';
-import SplitText from '../core/SplitText';
-import FooterButton from '../core/FooterButton';
-import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
-import { GameAction } from '../../framework/core/actions';
-import InfoModal from '../core/InfoModal';
-import LanguageSelector from '../settings/LanguageSelector';
+import SplitText from '../components/SplitText';
+import FooterButton from '../components/FooterButton';
+import { useFrameworkRouter } from '../../core/router/FrameworkRouter';
+import { GameAction } from '../../core/actions';
+import InfoModal from '../components/InfoModal';
+import LanguageSelector from '../../../components/settings/LanguageSelector';
 import GameSettingsPanel from './GameSettingsPanel';
 import DarkModeToggle from './DarkModeToggle';
-import CustomCategoryManager from '../customCategories/CustomCategoryManager';
-import useTranslation from '../../hooks/useTranslation';
-import useDarkMode from '../../hooks/useDarkMode';
-import useTheme from '../../hooks/useTheme';
-import { GameSettings, UISettingsField } from '../../framework/config/game.schema';
-import { storageGet, storageSet } from '../../framework/persistence/storage';
+import CustomCategoryManager from '../../../components/customCategories/CustomCategoryManager';
+import useTranslation from '../../../hooks/useTranslation';
+import useDarkMode from '../../../hooks/useDarkMode';
+import useTheme from '../../../hooks/useTheme';
+import { GameSettings, UISettingsField } from '../../config/game.schema';
+import { storageGet, storageSet } from '../../persistence/storage';
 
 const adjustTone = (color: string | undefined, tone: string, fallback: string) => {
   if (!color) {

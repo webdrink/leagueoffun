@@ -7,7 +7,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { X, Plus, Trash2, Save, EyeOff, Eye, Loader } from 'lucide-react';
-import { Button } from '../core/Button';
+import { Button } from '../../framework/ui/components/Button';
 import useTranslation from '../../hooks/useTranslation';
 import { 
   addCustomCategory, 

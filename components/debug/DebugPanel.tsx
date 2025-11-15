@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from "../core/Button"; // Adjusted path
+import { Button } from "../../framework/ui/components/Button"; // Adjusted path
 import DebugInput from "./DebugInput"; // Adjusted path (same directory)
 import type { GameSettings, QuestionStats } from "../../types"; // Path remains correct
 import { XIcon, RotateCcwIcon, Trash2Icon, EyeIcon, EyeOffIcon } from 'lucide-react';

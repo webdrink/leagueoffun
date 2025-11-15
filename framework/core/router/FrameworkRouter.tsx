@@ -10,7 +10,7 @@ import { EventBus } from '../events/eventBus';
 import { GameConfig } from '../../config/game.schema';
 import { ScreenRegistry } from '../modules';
 import { createDispatcher } from '../dispatcher';
-import GameShell from '../../../components/framework/GameShell';
+import GameShell from '../../ui/screens/GameShell';
 
 interface FrameworkRouterContext {
   currentPhaseId: string;
