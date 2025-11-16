@@ -22,7 +22,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useGameStateStore } from '../../store';
+import { useGameStateStore } from '../../../store';
 
 interface GameMainScreenProps {
   children: React.ReactNode;

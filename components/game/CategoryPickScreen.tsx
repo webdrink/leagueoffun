@@ -11,7 +11,7 @@
  */
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '../core/Button';
+import { Button } from '../../framework/ui/components/Button';
 import useTranslation from '../../hooks/useTranslation';
 
 interface CategoryInfo {

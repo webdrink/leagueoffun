@@ -1,17 +1,2 @@
-<testsuites id="" name="" tests="4" failures="0" skipped="0" errors="0" time="8.129650000000373">
-<testsuite name="foundation\tablet-landscape-optimization.spec.ts" timestamp="2025-10-31T12:24:16.049Z" hostname="foundation-tests" tests="4" failures="0" skipped="0" time="14.621" errors="0">
-<testcase name="Tablet Landscape Optimization Tests › should display optimized layout for iPad landscape" classname="foundation\tablet-landscape-optimization.spec.ts" time="3.515">
-</testcase>
-<testcase name="Tablet Landscape Optimization Tests › should handle different tablet orientations gracefully" classname="foundation\tablet-landscape-optimization.spec.ts" time="5.198">
-<system-out>
-<![CDATA[✅ landscape orientation (1180x820) working correctly
-✅ portrait orientation (820x1180) working correctly
-]]>
-</system-out>
-</testcase>
-<testcase name="Tablet Landscape Optimization Tests › should use improved button colors for better readability" classname="foundation\tablet-landscape-optimization.spec.ts" time="0.759">
-</testcase>
-<testcase name="Tablet Landscape Optimization Tests › should properly scale player selection grid on tablets" classname="foundation\tablet-landscape-optimization.spec.ts" time="5.149">
-</testcase>
-</testsuite>
+<testsuites id="" name="" tests="0" failures="0" skipped="0" errors="0" time="0.333404">
 </testsuites>

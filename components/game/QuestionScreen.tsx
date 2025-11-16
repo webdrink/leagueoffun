@@ -23,7 +23,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '../core/Button';
+import { Button } from '../../framework/ui/components/Button';
 import { Question, Player, GameSettings, NameBlameState } from '../../types';
 import QuestionCard from './QuestionCard';
 import QuestionProgress from './QuestionProgress'; // Import the new QuestionProgress component

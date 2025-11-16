@@ -7,7 +7,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, Edit2, Trash2, Loader } from 'lucide-react';
-import { Button } from '../core/Button';
+import { Button } from '../../framework/ui/components/Button';
 import useTranslation from '../../hooks/useTranslation';
 import { getCustomCategories, deleteCustomCategory } from '../../lib/customCategories/storage';
 import { getCategoryModifications } from '../../lib/customCategories/builtInModifications';

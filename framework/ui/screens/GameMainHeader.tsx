@@ -24,8 +24,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useGameStateStore, useBlameGameStore, selectGameProgress, selectCurrentPlayer, selectBlamePhase, selectCurrentBlameContext } from '../../store';
-import useTranslation from '../../hooks/useTranslation';
+import { useGameStateStore, useBlameGameStore, selectGameProgress, selectCurrentPlayer, selectBlamePhase, selectCurrentBlameContext } from '../../../store';
+import useTranslation from '../../../hooks/useTranslation';
 
 interface GameMainHeaderProps {
   showProgress?: boolean;

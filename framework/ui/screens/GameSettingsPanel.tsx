@@ -6,9 +6,9 @@
 import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Settings, X, Save, RotateCcw } from 'lucide-react';
-import { Button } from '../core/Button';
-import useTranslation from '../../hooks/useTranslation';
-import { GameSettings, UISettingsField } from '../../framework/config/game.schema';
+import { Button } from '../components/Button';
+import useTranslation from '../../../hooks/useTranslation';
+import { GameSettings, UISettingsField } from '../../config/game.schema';
 
 interface GameSettingsPanelProps {
   isOpen: boolean;

@@ -3,12 +3,12 @@
  */
 import { GameModule } from '../../framework/core/modules';
 import { nameBlamePhaseControllers } from './phases';
-import FrameworkIntroScreen from '../../components/framework/FrameworkIntroScreen';
-import FrameworkCategoryPickScreen from '../../components/framework/FrameworkCategoryPickScreen';
-import FrameworkPreparingScreen from '../../components/framework/FrameworkPreparingScreen';
-import FrameworkPlayerSetupScreen from '../../components/framework/FrameworkPlayerSetupScreen';
-import FrameworkQuestionScreen from '../../components/framework/FrameworkQuestionScreen';
-import FrameworkSummaryScreen from '../../components/framework/FrameworkSummaryScreen';
+import FrameworkIntroScreen from '../../framework/ui/screens/FrameworkIntroScreen';
+import FrameworkCategoryPickScreen from '../../framework/ui/screens/FrameworkCategoryPickScreen';
+import FrameworkPreparingScreen from '../../framework/ui/screens/FrameworkPreparingScreen';
+import FrameworkPlayerSetupScreen from '../../framework/ui/screens/FrameworkPlayerSetupScreen';
+import FrameworkQuestionScreen from '../../framework/ui/screens/FrameworkQuestionScreen';
+import FrameworkSummaryScreen from '../../framework/ui/screens/FrameworkSummaryScreen';
 import { StaticListProvider } from '../../providers/StaticListProvider';
 import { createQuestionProvider, type EnrichedQuestion } from '../../providers/factories/createQuestionProvider';
 import { loadCategoriesFromJson, loadQuestionsFromJson } from '../../lib/utils/questionLoaders';

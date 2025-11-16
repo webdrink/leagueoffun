@@ -5,11 +5,11 @@
  */
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import LoadingContainer from '../game/LoadingContainer';
-import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
-import { GameAction } from '../../framework/core/actions';
-import { CATEGORY_EMOJIS } from '../../constants';
-import useTranslation from '../../hooks/useTranslation';
+import LoadingContainer from '../../../components/game/LoadingContainer';
+import { useFrameworkRouter } from '../../core/router/FrameworkRouter';
+import { GameAction } from '../../core/actions';
+import { CATEGORY_EMOJIS } from '../../../constants';
+import useTranslation from '../../../hooks/useTranslation';
 
 // Loading quotes for the animation
 const LOADING_QUOTES = [

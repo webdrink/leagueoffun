@@ -1,4 +1,4 @@
-import { Switch } from "../core/Switch"; // Corrected path
+import { Switch } from "../../framework/ui/components/Switch"; // Corrected path
 import type { GameSettings } from "../../types"; // Import as type
 
 interface DebugInputPropsBase {

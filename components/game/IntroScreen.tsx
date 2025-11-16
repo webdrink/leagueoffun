@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '../core/Button';
-import { Label } from '../core/Label';
-import VolumeControl from '../core/VolumeControl';
+import { Button } from '../../framework/ui/components/Button';
+import { Label } from '../../framework/ui/components/Label';
+import VolumeControl from '../../framework/ui/components/VolumeControl';
 import { GameSettings, QuestionStats, SupportedLanguage } from '../../types';
-import { Switch } from '../core/Switch';
+import { Switch } from '../../framework/ui/components/Switch';
 import { Settings as SettingsIcon, Info as InfoIcon, FolderPlus } from 'lucide-react'; // Using lucide-react consistently
 import LanguageSelector from '../settings/LanguageSelector';
 import useTranslation from '../../hooks/useTranslation';

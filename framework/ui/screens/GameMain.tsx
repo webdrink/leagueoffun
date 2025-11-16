@@ -23,7 +23,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useGameStateStore, selectGameStep, selectIsLoading } from '../../store';
+import { useGameStateStore, selectGameStep, selectIsLoading } from '../../../store';
 
 interface GameMainProps {
   header?: React.ReactNode;

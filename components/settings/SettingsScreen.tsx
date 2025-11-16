@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeftIcon } from 'lucide-react';
 import useTranslation from '../../hooks/useTranslation';
-import { Button } from '../core/Button';
+import { Button } from '../../framework/ui/components/Button';
 import { GameSettings, SupportedLanguage } from '../../types';
 import { SUPPORTED_LANGUAGES } from '../../hooks/utils/languageSupport';
 import SeasonSelector from './SeasonSelector';

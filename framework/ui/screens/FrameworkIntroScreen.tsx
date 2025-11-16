@@ -5,14 +5,14 @@
  */
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
-import { GameAction } from '../../framework/core/actions';
-import { Button } from '../core/Button';
-import { Label } from '../core/Label';
-import { Switch } from '../core/Switch';
-import useTranslation from '../../hooks/useTranslation';
-import { useGameSettings } from '../../hooks/useGameSettings';
-import { GameSettings } from '../../types';
+import { useFrameworkRouter } from '../../core/router/FrameworkRouter';
+import { GameAction } from '../../core/actions';
+import { Button } from '../components/Button';
+import { Label } from '../components/Label';
+import { Switch } from '../components/Switch';
+import useTranslation from '../../../hooks/useTranslation';
+import { useGameSettings } from '../../../hooks/useGameSettings';
+import { GameSettings } from '../../../types';
 
 const FrameworkIntroScreen: React.FC = () => {
   const { dispatch, config } = useFrameworkRouter();

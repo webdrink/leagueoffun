@@ -4,13 +4,13 @@
  */
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useFrameworkRouter } from '../../framework/core/router/FrameworkRouter';
-import { GameAction } from '../../framework/core/actions';
-import { Button } from '../core/Button';
-import useTranslation from '../../hooks/useTranslation';
-import { useProviderState } from '../../hooks/useProviderState';
-import { useGameSettings } from '../../hooks/useGameSettings';
-import useNameBlameSetup from '../../hooks/useNameBlameSetup';
+import { useFrameworkRouter } from '../../core/router/FrameworkRouter';
+import { GameAction } from '../../core/actions';
+import { Button } from '../components/Button';
+import useTranslation from '../../../hooks/useTranslation';
+import { useProviderState } from '../../../hooks/useProviderState';
+import { useGameSettings } from '../../../hooks/useGameSettings';
+import useNameBlameSetup from '../../../hooks/useNameBlameSetup';
 
 const FrameworkQuestionScreen: React.FC = () => {
   // ProgressBar subcomponent to avoid inline style width lint violation

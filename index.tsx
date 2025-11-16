@@ -4,7 +4,7 @@ import './index.css';
 // Import i18n instance before App to ensure it's initialized
 import './lib/localization/i18n';
 import GameHost from './framework/core/GameHost';
-import { GameInfoLoader } from './components/core/GameInfoLoader';
+import { GameInfoLoader } from './framework';
 import { registerSW } from 'virtual:pwa-register';
 
 // Register service worker for PWA

@@ -19,7 +19,7 @@
  */
 import React from 'react';
 import GameHeader from './GameHeader'; // Title component specific to BlameGame
-import { GameLayout, GameHeader as LayoutHeader, GameBody, GameFooter } from '../core/GameLayout';
+import { GameLayout, GameHeader as LayoutHeader, GameBody, GameFooter } from '../../framework/ui/components/GameLayout';
 
 interface GameContainerProps {
   children: React.ReactNode;

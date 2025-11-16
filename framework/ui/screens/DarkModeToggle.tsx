@@ -5,9 +5,9 @@
  */
 import React from 'react';
 import { Sun, Moon } from 'lucide-react';
-import { Button } from '../core/Button';
-import { FOOTER_ICON_STYLE } from '../core/FooterButton';
-import useDarkMode from '../../hooks/useDarkMode';
+import { Button } from '../components/Button';
+import { FOOTER_ICON_STYLE } from '../components/FooterButton';
+import useDarkMode from '../../../hooks/useDarkMode';
 
 interface DarkModeToggleProps {
   className?: string;

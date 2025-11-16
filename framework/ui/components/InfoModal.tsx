@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown, AlertTriangle } from 'lucide-react';
 import { Button } from './Button';
-import useTranslation from '../../hooks/useTranslation';
-import { clearAllCustomCategories } from '../../lib/customCategories/storage';
-import { clearAllCategoryModifications } from '../../lib/customCategories/builtInModifications';
+import useTranslation from '../../../hooks/useTranslation';
+import { clearAllCustomCategories } from '../../../lib/customCategories/storage';
+import { clearAllCategoryModifications } from '../../../lib/customCategories/builtInModifications';
 
 interface FAQItem {
   question: string;
