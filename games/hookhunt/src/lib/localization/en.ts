@@ -1,0 +1,207 @@
+/**
+ * English translations
+ */
+import { Translations } from './types';
+
+const en: Translations = {
+  // General app keys
+  'app.title': 'Blame Game',
+  'app.footer': '© 2025 Blame Game',
+  'app.back': 'Back',
+  'app.next': 'Next',
+  'app.save': 'Save',
+  'app.cancel': 'Cancel',
+  'app.loading': 'Loading...',
+
+  // Intro screen
+  'intro.start_game': 'Start Game',
+  'intro.player_setup': 'Set Up Players',
+  'intro.settings': 'Settings',
+  'intro.info': 'Info',
+  'intro.sound_toggle': 'Sound',
+  'intro.name_blame_toggle': 'NameBlame Mode',
+  'intro.name_blame_mode': 'NameBlame Mode',
+  'intro.name_blame_explanation': 'In NameBlame mode, each question is shown once. The active player selects who to blame. The blamed player reads the question aloud and becomes the next active player.',
+  'intro.enable_debug': 'Enable Debug Mode',
+  'intro.heading': 'Guess who would do what?',
+  'intro.subheading': 'What do you think? Do you know your friends?',
+  'intro.tagline': 'Guess who would do what?',
+  'intro.main_question': 'Who would most likely...',
+  'intro.subtitle': 'What do you think? Do you know your friends?',
+  'intro.error_loading_questions': 'Error loading questions:',
+  'intro.error_check_files': 'Please check the questions file and try again.',
+  'intro.loading_questions': 'Loading questions...',
+  'intro.mainTitle': 'Who would do what?',
+  'intro.subTitle': 'What do you think? Who would most likely...',
+  'intro.who_would': 'Who would most likely...',
+  'intro.select_categories': 'Manual category selection',
+
+  // Settings
+  'settings.title': 'Settings',
+  'settings.game_settings': 'Game Settings',
+  'settings.content_settings': 'Content Settings',
+  'settings.game_behavior': 'Game Behavior',
+  'settings.experience': 'Experience',
+  // Dynamic UI groups
+  'settings.group.content': 'Content',
+  'settings.group.behavior': 'Behavior',
+  'settings.group.experience': 'Experience',
+  'settings.group.general': 'General',
+  'settings.no_dynamic_fields': 'No dynamic settings defined. Using defaults.',
+  'settings.categories_per_game': 'Categories per Game',
+  'settings.questions_per_category': 'Questions per Category',
+  'settings.max_questions_total': 'Max Questions Total',
+  'settings.allow_repeat_questions': 'Allow Repeat Questions',
+  'settings.shuffle_questions': 'Shuffle Questions',
+  'settings.shuffle_categories': 'Shuffle Categories',
+  'settings.allow_skip_questions': 'Allow Skip Questions',
+  'settings.show_progress': 'Show Progress',
+  'settings.enable_sounds': 'Enable Sounds',
+  'settings.enable_animations': 'Enable Animations',
+  'settings.reset': 'Reset',
+  'settings.language': 'Language',
+  'settings.sound': 'Sound',
+  'settings.sound_on': 'Enable Sound',
+  'settings.sound_off': 'Mute Sound',
+  'settings.volume': 'Volume',
+  'settings.animations': 'Animations',
+  'settings.reset_data': 'Reset App Data',
+  'settings.dark_mode': 'Switch to Dark Mode',
+  'settings.light_mode': 'Switch to Light Mode',
+  'settings.theme': 'Theme',
+
+  // Player setup
+  'players.setup_title': 'Set Up Players',
+  'players.add_player': 'Add Player',
+  'players.player_name': 'Player Name',
+  'players.player_name_input': 'Enter player name',
+  'players.start_game': 'Start Game',
+  'players.back': 'Back',
+  'players.max_players': 'Maximum number of players reached!',
+  'players.min_players': 'At least 3 players required',
+  'players.min_players_nameblame_hint': 'You need at least 3 players for NameBlame mode.',
+  'players.name_required': 'Name required',
+  'players.name_exists': 'Name already exists',
+  'players.remove': 'Remove',
+  'players.remove_player': 'Remove player {name}',
+  'players.add_players_to_start': 'Add players to start',
+  'players.minimum_players_needed': 'You need at least 2 players to start',
+
+  // Game
+  'game.question': 'Question',
+  'game.select_player': 'Select a player',
+  'game.next_question': 'Next Question',
+  'game.previous_question': 'Previous Question',
+  'game.progress': 'Question {current} of {total}',
+  'game.blame': 'Blame',
+  'game.summary': 'Summary',
+  'game.play_again': 'Play Again',
+
+  // Questions
+  'questions.player_turn': 'Your turn',
+  'questions.counter': 'Question {{current}} of {{total}}',
+  'questions.who_blame': 'Who do you blame?',
+  'questions.cannot_blame_self': 'You cannot blame yourself',
+  'questions.blame_player': 'Blame {{name}}',
+  'questions.blamed_you_for': '{{name}} blamed you for',
+  'questions.next_blame': 'Next',
+  'questions.previous_question': 'Previous Question',
+  'questions.next_question': 'Next Question',
+  'questions.summary': 'Summary',
+  'questions.next': 'Next',
+  'questions.show_summary': 'Show Summary',
+
+  // NameBlame specific
+  'question.blame_revealed': 'Blame Revealed!',
+  'question.was_blamed': 'was blamed',
+  'question.select_player': 'Select a player',
+  'question.progress': 'Question {{current}} of {{total}}',
+  'question.view_results': 'View Results',
+  'question.next_question': 'Next Question',
+
+  // Summary
+  'summary.title': 'Thanks for playing!',
+  'summary.game_over': 'Game Complete!',
+  'summary.game_complete': 'Game Complete!',
+  'summary.thanks_for_playing': 'Thanks for playing!',
+  'summary.questions_answered': 'Questions Answered',
+  'summary.questions_completed': 'You answered {count} questions!',
+  'summary.most_blamed': 'Most Blamed Player',
+  'summary.most_blamed_player': 'Most Blamed Player',
+  'summary.most_blamed_singular': 'Most Blamed',
+  'summary.most_blamed_plural': 'Most Blamed',
+  'summary.blame_count': '{{count}} blame{{s}}',
+  'summary.blamed_count': '{{count}} blame{{s}}',
+  'summary.plural_suffix': 's',
+  'summary.no_blames_given': 'No blames given!',
+  'summary.team_round': 'Team Round',
+  'summary.team_message': '{{activePlayersCount}} players',
+  'summary.players': 'Players',
+  'summary.new_game': 'Start New Game',
+  'summary.play_again': 'Play Again',
+  'summary.back_to_start': 'Back to Start',
+  'summary.blame_stats': 'Blame Statistics',
+  'summary.blame_statistics': 'Blame Statistics',
+  'summary.recent_blames': 'Recent Activity',
+  'summary.no_stats': 'No blames given!',
+
+  // Blame notifications
+  'blame.notification_title': 'Blame Recorded!',
+  'blame.blamed_player_for': 'blamed',
+  'blame.notification_for_blamed': 'You were blamed by {{blamer}}!',
+  'blame.continue_to_next': 'Continue to next player',
+  'blame.continue_to_question': 'Continue to next question',
+  'blame.round_complete': 'All players have blamed - advancing to next question',
+  'blame.already_blamed_this_round': '{player} has already blamed in this round',
+
+  // Modal
+  'modal.info_title': 'Information',
+  'modal.info_description': 'Game instructions, privacy information, or other notes could be shown here.',
+  'modal.reset_data_description': 'This modal is mainly for resetting app data.',
+  'modal.close': 'Close',
+  'modal.reset_app_data': 'Reset App Data',
+
+  // Info section/modal
+  'info.title': 'Information',
+  'info.how_to_play': 'How to play Blame Game',
+  'info.name_blame_explanation': 'In NameBlame mode, you can blame other players',
+  'info.confirm_reset': 'Are you sure you want to reset all app data?',
+
+  // Debug panel
+  'debug.panel_title': 'Debug Panel',
+  'debug.title': 'Debug Panel Title',
+  'debug.question_stats': 'Question Statistics',
+  'debug.total': 'Total',
+  'debug.played': 'Played',
+  'debug.available': 'Available',
+  'debug.categories': 'Categories',
+  'debug.reset': 'Reset',
+  'debug.reset_all_settings': 'Reset All Settings',
+  'debug.reset_app_data': 'Reset App Data',
+  'debug.confirm_reset_data': 'Are you sure you want to reset ALL app data? This includes settings and played questions.',
+  'debug.settings': 'Settings (Debug)',
+  'debug.questions': 'Questions (Debug)',
+  'debug.animations': 'Animations (Debug)',
+  'debug.language': 'Language (Debug)',
+  'debug.reset_data': 'Reset Data (Debug)',
+
+  // Category pick screen
+  'category_pick.title': 'Select Categories',
+  'category_pick.confirm': 'Start with {{count}} Categories',
+  'category_pick.back': 'Back',
+  'category_pick.questions_available': '{{count}} Questions',
+  'category_pick.max_categories': 'Max {{count}} categories',
+  'category_pick.selected_count': '{{count}} selected',
+
+  // Footer
+  'footer.support_message': 'Support us to unlock more games!',
+  'footer.donate_message': 'Your donation helps us create better games.',
+
+  // Additional keys
+  'startGame': 'Start Game',
+  'error.loadQuestions': 'Error loading questions. Please check the question files and try again.',
+  'loadingQuestions': 'Loading questions...',
+  'error.noQuestionsLoaded': 'No questions loaded. Please check the question files and try again.'
+};
+
+export default en;

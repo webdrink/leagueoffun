@@ -50,7 +50,22 @@ Build output: `dist/`
 ```
 hookhunt/
 ├── src/
-│   ├── App.tsx          # Main app (currently "coming soon")
+│   ├── assets/          # Game assets (audio, images)
+│   ├── components/      # React components
+│   │   ├── core/        # Basic UI components (Button, Card, etc.)
+│   │   ├── debug/       # Debugging tools
+│   │   ├── framework/   # Framework integration components
+│   │   ├── game/        # Game-specific components
+│   │   ├── hookhunt/    # HookHunt specific components
+│   │   ├── language/    # Language selection components
+│   │   └── settings/    # Settings components
+│   ├── context/         # React Context providers
+│   ├── hooks/           # Custom React hooks
+│   ├── lib/             # Utility libraries and constants
+│   ├── store/           # State management (Zustand/Context)
+│   ├── types/           # TypeScript type definitions
+│   ├── App.tsx          # Entry wrapper
+│   ├── HookHuntApp.tsx  # Main game application component
 │   ├── main.tsx         # Entry point
 │   └── index.css        # Styles
 ├── public/              # Static assets
@@ -58,6 +73,17 @@ hookhunt/
 ├── tsconfig.json
 └── vite.config.ts
 ```
+
+## Components
+
+The components are organized by their function:
+
+- **Core**: Reusable UI elements like `Button`, `Card`, `Input`.
+- **Game**: Generic game components.
+- **HookHunt**: Components specific to the HookHunt gameplay logic.
+- **Framework**: Components that integrate with the League of Fun framework.
+- **Settings/Language**: UI for configuring the game.
+
 
 ## Player ID Integration
 

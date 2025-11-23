@@ -1,0 +1,155 @@
+{
+  "id": "hookhunt",
+  "title": "HookHunt",
+  "description": "A music quiz game where you guess songs from their catchiest hooks using Spotify playlists",
+  "version": "1.0.0",
+  "minPlayers": 1,
+  "maxPlayers": 8,
+  "tags": ["music", "quiz", "spotify", "party", "multiplayer"],
+  "themeRef": "hookhunt",
+  "i18nNamespaces": ["hookhunt"],
+  "screens": {
+    "intro": "HookHuntIntroScreen",
+    "spotify-auth": "SpotifyAuthScreen", 
+    "playlist-selection": "PlaylistSelectionScreen",
+    "player-setup": "PlayerSetupScreen",
+    "game": "HookHuntGameScreen",
+    "summary": "HookHuntSummaryScreen"
+  },
+  "phases": [
+    {
+      "id": "intro",
+      "screenId": "intro",
+      "allowedActions": ["ADVANCE", "CUSTOM"]
+    },
+    {
+      "id": "auth",
+      "screenId": "spotify-auth", 
+      "allowedActions": ["ADVANCE", "BACK"]
+    },
+    {
+      "id": "playlist",
+      "screenId": "playlist-selection",
+      "allowedActions": ["ADVANCE", "BACK"]
+    },
+    {
+      "id": "setup",
+      "screenId": "player-setup",
+      "allowedActions": ["ADVANCE", "BACK"]
+    },
+    {
+      "id": "playing",
+      "screenId": "game",
+      "allowedActions": ["ADVANCE", "BACK", "CUSTOM"]
+    },
+    {
+      "id": "summary",
+      "screenId": "summary",
+      "allowedActions": ["RESTART", "BACK"]
+    }
+  ],
+  "contentProvider": {
+    "type": "spotify",
+    "shuffle": true
+  },
+  "ui": {
+    "layout": {
+      "showHeader": true,
+      "showFooter": true,
+      "headerStyle": "full"
+    },
+    "features": {
+      "soundControl": true,
+      "volumeControl": true,
+      "languageSelector": false,
+      "categorySelection": false,
+      "gameMode": "hookhunt",
+      "playerSetup": true,
+      "infoModal": true,
+      "settingsPanel": true,
+      "kofiLink": false,
+      "githubLink": true,
+      "versionDisplay": true,
+      "darkModeToggle": true
+    },
+    "branding": {
+      "showFrameworkBadge": false,
+      "gameName": "HookHunt",
+      "tagline": "Guess the song from the hook!",
+      "mainQuestion": "Can you name that tune?",
+      "subtitle": "Test your music knowledge with Spotify playlists"
+    },
+    "theme": {
+      "primaryGradient": "from-cyan-500 via-teal-500 to-blue-600",
+      "cardBackground": "bg-slate-800",
+      "accentColor": "cyan",
+      "colors": {
+        "primary": "cyan-500",
+        "secondary": "teal-500",
+        "accent": "blue-500",
+        "neutral": "slate-400",
+        "highlight": "emerald-400"
+      }
+    },
+    "settings": {
+      "fields": [
+        {
+          "key": "hookDuration",
+          "type": "number",
+          "label": "hookhunt.settings.hookDuration",
+          "group": "audio",
+          "min": 5,
+          "max": 30,
+          "step": 1,
+          "order": 1
+        },
+        {
+          "key": "matchingThreshold", 
+          "type": "number",
+          "label": "hookhunt.settings.matchingThreshold",
+          "group": "gameplay",
+          "min": 0.5,
+          "max": 0.95,
+          "step": 0.05,
+          "order": 2
+        },
+        {
+          "key": "enableAnimations",
+          "type": "boolean", 
+          "label": "hookhunt.settings.enableAnimations",
+          "group": "ui",
+          "order": 3
+        },
+        {
+          "key": "enableSounds",
+          "type": "boolean",
+          "label": "hookhunt.settings.enableSounds", 
+          "group": "audio",
+          "order": 4
+        }
+      ]
+    }
+  },
+  "gameSettings": {
+    "hookDuration": 10,
+    "matchingThreshold": 0.7,
+    "maxSongsPerRound": 10,
+    "allowSkipSongs": true,
+    "showProgress": true,
+    "enableSounds": true,
+    "enableAnimations": true,
+    "autoAdvanceTime": 0,
+    "gameTimeLimit": 0
+  },
+  "featureFlags": {
+    "spotifyIntegration": true,
+    "audioAnalysis": true,
+    "fuzzyMatching": true,
+    "multiplayer": true,
+    "roomSupport": false
+  },
+  "multiplayer": {
+    "supportsRoom": false,
+    "requiresRoom": false
+  }
+}

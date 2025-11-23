@@ -1,0 +1,27 @@
+// Category emoji mappings for game display
+
+export const CATEGORY_EMOJIS: { [key: string]: string } = {
+  "Beim Feiern": "🎉",
+  "In Beziehungen": "❤️",
+  "Bei der Arbeit": "💼",
+  "In der Schule": "📚",
+  "In peinlichen Momenten": "😳",
+  "Im Urlaub": "✈️",
+  "Beim Sport": "🏃",
+  "In der Freundschaft": "🤝",
+  "Im Alltag": "🏠",
+  "In der Familie": "👨‍👩‍👧‍👦",
+  "In der Zukunft": "🔮",
+  "Beim Essen": "🍕",
+  "Im Bad": "🛁",
+  "Im Internet": "🌐",
+  "Im Straßenverkehr": "🚗",
+  "Bei Filmen & Serien": "🎬",
+  "In der WG": "🛋️",
+  "Beim Flirten": "😉",
+  "Auf Partys mit Fremden": "🥳",
+  "Beim Weltuntergang": "☄️",
+  "Im Paralleluniversum": "✨",
+  "Im Land der schlechten Entscheidungen": "🤔",
+  "Im inneren Monolog": "🧠",
+};
