@@ -1,0 +1,352 @@
+[
+  {
+    "questionId": "who_fails_thesis_because_league_ranked",
+    "text": "\"Qui n'écrit pas sa thèse parce que la SoloQ est plus importante ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_dreams_of_being_a_sexy_android",
+    "text": "\"Qui rêve secrètement d'être une sexy androïde comme 2B ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_more_games_than_friends",
+    "text": "\"Qui a plus de jeux Steam que de contacts sociaux ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_thinks_nietzsche_would_main_zed",
+    "text": "\"Qui pense que Nietzsche aurait joué Zed ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_cursed_league_chat_logs",
+    "text": "\"Qui serait banni pour ses conversations sur League ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_writes_bachelor_thesis_about_hentai_ai",
+    "text": "\"Qui écrit sa thèse sur l'IA générant du hentai ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_acts_like_elden_ring_npc",
+    "text": "\"Qui parle parfois comme un PNJ d'Elden Ring en crise existentielle ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_still_uses_the_philosophy_books_as_coasters",
+    "text": "\"Qui utilise ses livres de philosophie uniquement comme sous-verres ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_argues_that_hollow_knight_is_a_religion",
+    "text": "\"Qui défend Hollow Knight comme une religion mondiale ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_flexes_their_steam_achievements_on_dates",
+    "text": "\"Qui se vante de ses succès Steam lors de rendez-vous ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_gamescom_trauma_from_con_crushes",
+    "text": "\"Qui a un traumatisme de la Gamescom à cause des crushs de convention ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_would_swap_thesis_for_riot_skin",
+    "text": "\"Qui échangerait sa thèse de licence contre un ensemble de skins de League ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_considers_dark_jokes_as_love_language",
+    "text": "\"Qui utilise l'humour noir comme langue d'amour ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_sees_philosophy_as_dlc_for_life",
+    "text": "\"Qui considère la philosophie comme un DLC mal équilibré pour la vie ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_watches_anime_openings_before_coding",
+    "text": "\"Qui regarde des intros d'anime pour se motiver avant de coder ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_a_toxic_relatable_lol_champion",
+    "text": "\"Qui s'identifie beaucoup trop à un champion toxique de LoL ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_thinks_super_auto_pets_is_underrated_genius",
+    "text": "\"Qui pense que Super Auto Pets est une génialité sous-estimée ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_prefers_void_over_real_life",
+    "text": "\"Qui préférerait vivre dans l'univers de Hollow Knight plutôt que dans le monde réel ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_suffers_from_late_night_nihilism",
+    "text": "\"Qui devient régulièrement dépressif existentiel après 2 heures du matin ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_custom_league_rage_emotes",
+    "text": "\"Qui a des émoticônes personnalisées pour rager sur League ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_waifu_list_in_spreadsheet",
+    "text": "\"Qui fait une liste de niveaux de waifus sur Excel ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_tells_dark_jokes_and_then_apologizes_laughing",
+    "text": "\"Qui raconte des blagues sombres et s'excuse en riant ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_plays_support_to_cope_with_life",
+    "text": "\"Qui joue support parce que c'est la seule forme de contrôle dans la vie ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_lost_to_bot_in_balatro",
+    "text": "\"Qui a perdu contre un bot dans Balatro et l'a refoulé ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_fantasizes_about_2b_giving_thesis_feedback",
+    "text": "\"Qui s'imagine que 2B commente sa thèse ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_uses_philosophy_to_win_arguments_online",
+    "text": "\"Qui cite Kant dans des disputes sur Discord ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_cried_over_nier_ending",
+    "text": "\"Qui a pleuré à la fin de Nier Automata – silencieusement mais amèrement ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_multiple_steam_alibis",
+    "text": "\"Qui possède plusieurs comptes Steam pour cacher ses heures de jeu ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_uses_dark_humor_to_mask_smartness",
+    "text": "\"Qui dissimule son intelligence derrière de l'humour noir ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_would_delete_thesis_to_win_ranked",
+    "text": "\"Qui supprimerait sa thèse si cela garantissait une victoire en ranked ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_a_lol_skin_addiction",
+    "text": "\"Qui a dépensé plus d'argent pour des skins que pour de la nourriture ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_would_join_religion_led_by_emil",
+    "text": "\"Qui suivrait une secte si Emil la dirigeait ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_pretends_gamescom_cosplay_was_ironic",
+    "text": "\"Qui fait semblant que son cosplay de Gamescom était ironique ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_uses_github_as_digital_dust_collector",
+    "text": "\"Qui utilise GitHub principalement comme cimetière de projets ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_is_more_npc_than_the_npcs",
+    "text": "\"Qui a tellement de routine qu'il pourrait même être un NPC ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_thinks_9s_is_more_relatable_than_any_friend",
+    "text": "\"Qui peut s'identifier davantage à 9S qu'à ses amis ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_knows_exactly_how_many_hours_lost_in_lol",
+    "text": "\"Qui connaît le nombre exact d'heures perdues dans League – et en est fier ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_sings_anime_openings_wrong_but_loud",
+    "text": "\"Qui chante les intros d'anime de manière incorrecte, mais avec passion ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_thinks_ai_should_grade_thesis",
+    "text": "\"Qui pense que ChatGPT pourrait tranquillement évaluer sa thèse ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_would_program_a_waifu",
+    "text": "\"Qui se programmerait simplement sa waifu parfaite ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_crush_on_virtual_character",
+    "text": "\"Qui avait des sentiments sérieux pour un personnage numérique ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_replayed_nier_just_for_feels",
+    "text": "\"Qui a terminé Nier plusieurs fois – juste pour la douleur émotionnelle ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_uses_late_night_ranked_as_therapy",
+    "text": "\"Qui traite le classement nocturne comme une séance de thérapie ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_turns_every_discussion_into_lore_debate",
+    "text": "\"Qui transforme des conversations normales en débats sur l'univers ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_knows_their_kda_but_not_birthday_of_friends",
+    "text": "\"Qui connaît son KDA, mais pas les anniversaires de ses amis ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_prefers_game_characters_over_real_people",
+    "text": "\"Qui s'entend mieux avec des personnages de jeu qu'avec de vraies personnes ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_would_delete_insta_but_not_steam",
+    "text": "\"Qui supprimerait immédiatement Instagram, mais jamais Steam ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_treats_birthday_like_sidequest",
+    "text": "\"Qui voit son propre anniversaire comme une quête secondaire ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_laughs_when_npcs_die",
+    "text": "\"Qui rit quand des PNJ meurent inutilement dans les jeux ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_thinks_reality_needs_patch_notes",
+    "text": "\"Qui pense que la vie réelle a désespérément besoin de notes de mise à jour ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_laughs_at_own_bad_puns",
+    "text": "\"Qui rit le plus fort de ses propres mauvais jeux de mots ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_would_challenge_god_for_memes",
+    "text": "\"Qui défierait Dieu en duel – mais seulement à cause d'un bon mème ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_thinks_silence_is_comedic_timing",
+    "text": "\"Qui pense que le silence est parfois le meilleur point ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_would_die_and_ghost_post",
+    "text": "\"Qui meurt – et continue pourtant à poster ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_resting_sans_face",
+    "text": "\"Qui a un visage comme 'Sans avant le café' ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_makes_terrible_jokes_on_purpose",
+    "text": "\"Qui fait délibérément de mauvaises blagues – et en est fier ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_actually_lives_in_the_pun_dimension",
+    "text": "\"Qui vit mentalement en permanence dans la dimension des jeux de mots ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_would_win_fight_by_confusing_enemy",
+    "text": "\"Qui gagne des combats uniquement par la confusion de l'adversaire ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_nothing_to_say_but_says_it_funny",
+    "text": "\"Qui ne dit rien de pertinent – mais est toujours divertissant ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_would_offer_you_a_hotdog_in_hell",
+    "text": "\"Qui te proposerait un hot-dog en enfer ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_breaks_tension_with_jokes",
+    "text": "\"Qui casse chaque situation sérieuse avec une blague ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_reacts_to_crisis_with_skeleton_joke",
+    "text": "\"Qui répond aux crises de la vie avec une blague sur les squelettes ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_would_reset_the_timeline_out_of_spite",
+    "text": "\"Qui redémarrerait la timeline – par défi ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_is_funny_till_the_existential_dread_hits",
+    "text": "\"Qui est drôle – jusqu'à ce que le vide existentiel arrive ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_would_date_a_skeleton",
+    "text": "\"Qui sortirait sérieusement avec un squelette, si son nom est Sans ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_pun_for_every_situation",
+    "text": "\"Qui a le jeu de mots parfait pour chaque situation de la vie ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_trained_irony_to_level_99",
+    "text": "\"Qui a porté l'ironie au niveau 99 ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_makes_you_laugh_then_question_reality",
+    "text": "\"Qui te fait rire – et juste après, te plonge dans une crise existentielle ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_one_eye_for_jokes_one_for_regret",
+    "text": "\"Qui regarde avec un œil pour les blagues – et un autre pour un profond regret ?\"",
+    "category": "alex"
+  },
+  {
+    "questionId": "who_has_a_joke_for_your_therapy_session",
+    "text": "\"Qui a exactement la phrase que tu n'as pas besoin pour chaque séance de thérapie ?\"",
+    "category": "alex"
+  }
+]

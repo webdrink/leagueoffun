@@ -1,0 +1,302 @@
+[
+  {
+    "questionId": "wer_spoilert_versehentlich_alles",
+    "text": "Wer spoilert versehentlich alles?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_schlaft_immer_mitten_im_film_ein",
+    "text": "Wer schläft IMMER mitten im Film ein?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_lacht_an_stellen_die_nicht_lustig_sind",
+    "text": "Wer lacht an Stellen, die nicht lustig sind?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_kennt_alle_zitate_auswendig",
+    "text": "Wer kennt alle Zitate auswendig?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_weint_bei_animationsfilmen",
+    "text": "Wer weint bei Animationsfilmen?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_guckt_heimlich_weiter_obwohl_man_zusammen_scha",
+    "text": "Wer guckt heimlich weiter, obwohl man 'zusammen' schauen wollte?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_liest_vorab_den_plot_auf_wikipedia",
+    "text": "Wer liest vorab den Plot auf Wikipedia?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_versteht_nie_wer_wer_ist",
+    "text": "Wer versteht nie, wer wer ist?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_diskutiert_nach_jeder_folge_stundenlang",
+    "text": "Wer diskutiert nach jeder Folge stundenlang?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_schaut_lieber_makingofs_als_den_film_selbst",
+    "text": "Wer schaut lieber Making-Ofs als den Film selbst?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_schaut_filme_nur_wegen_der_popcornmaschine",
+    "text": "Wer schaut Filme nur wegen der Popcorn-Maschine?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_kennt_alle_easter_eggs_aber_keine_handlung",
+    "text": "Wer kennt alle Easter Eggs, aber keine Handlung?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_schaut_serien_nur_um_mitreden_zu_konnen",
+    "text": "Wer schaut Serien nur, um mitreden zu können?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_macht_aus_jedem_filmabend_ein_quiz",
+    "text": "Wer macht aus jedem Filmabend ein Quiz?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_schaut_filme_in_originalsprache_versteht_aber_",
+    "text": "Wer schaut Filme in Originalsprache – versteht aber nichts?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_hat_eine_watchlist_die_nie_kurzer_wird",
+    "text": "Wer hat eine Watchlist, die nie kürzer wird?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_schaut_serien_ruckwarts_um_spoiler_zu_vermeide",
+    "text": "Wer schaut Serien rückwärts, um Spoiler zu vermeiden?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_diskutiert_uber_filmfehler_statt_zuzuschauen",
+    "text": "Wer diskutiert über Filmfehler, statt zuzuschauen?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_schaut_abspann_um_alle_namen_zu_lesen",
+    "text": "Wer schaut Abspann, um alle Namen zu lesen?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_macht_aus_jedem_filmabend_ein_event_mit_dressc",
+    "text": "Wer macht aus jedem Filmabend ein Event mit Dresscode?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_schaut_horrorfilme_mit_licht_an",
+    "text": "Wer schaut Horrorfilme mit Licht an?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_schaut_serien_nur_mit_snacks",
+    "text": "Wer schaut Serien nur mit Snacks?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_schaut_filme_und_schlaft_nach_10_minuten_ein",
+    "text": "Wer schaut Filme und schläft nach 10 Minuten ein?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "wer_schaut_serien_die_niemand_kennt",
+    "text": "Wer schaut Serien, die niemand kennt?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_always_picks_movie",
+    "text": "Wer wählt immer den Film aus?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_talks_during_movies",
+    "text": "Wer redet während des Films?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_uses_phone_in_theater",
+    "text": "Wer benutzt das Handy im Kino?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_reveals_spoilers",
+    "text": "Wer verrät Spoiler?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_multiple_times",
+    "text": "Wer schaut Filme mehrmals an?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_cries_during_emotional_scenes",
+    "text": "Wer weint bei emotionalen Szenen?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_binge_watches_entire_series",
+    "text": "Wer schaut ganze Serien am Stück?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "movies_series_sample_question_1",
+    "text": "Sample question 1 for movies_series in de",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "movies_series_sample_question_2",
+    "text": "Sample question 2 for movies_series in de",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_talks_during_movies",
+    "text": "¿Quién habla durante las películas?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_spoils_endings",
+    "text": "¿Quién revela los finales?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_most_series",
+    "text": "¿Quién ve más series?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_falls_asleep_during_movies",
+    "text": "¿Quién se duerme durante las películas?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_cries_at_sad_scenes",
+    "text": "¿Quién llora en las escenas tristes?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_spoils_movie_endings",
+    "text": "¿Quién revela los finales de las películas?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_same_movie_repeatedly",
+    "text": "¿Quién ve la misma película repetidamente?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_falls_asleep_during_movies",
+    "text": "¿Quién se duerme durante las películas?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_most_movies",
+    "text": "\"¿Quién ve más películas?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_binges_entire_series_in_one_day",
+    "text": "\"¿Quién ve una serie completa en un día?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_always_spoils_movie_endings",
+    "text": "\"¿Quién siempre revela los finales de las películas?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_cries_during_romantic_movies",
+    "text": "\"¿Quién llora con las películas románticas?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_quotes_movies_constantly",
+    "text": "\"¿Quién cita películas constantemente?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_knows_most_movie_trivia",
+    "text": "\"¿Quién conoce más datos sobre películas?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_recommends_movies_to_everyone",
+    "text": "\"¿Quién recomienda películas a todos?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_is_the_movie_critic",
+    "text": "\"¿Quién es el mayor crítico de cine?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_in_original_language",
+    "text": "\"¿Quién ve películas en versión original?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_is_the_biggest_film_buff",
+    "text": "\"¿Quién es el mayor fanático del cine?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_on_their_phone",
+    "text": "\"¿Quién ve películas en el móvil?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_in_the_cinema",
+    "text": "\"¿Quién ve películas en el cine?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_with_friends",
+    "text": "\"¿Quién ve películas con amigos?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_with_family",
+    "text": "\"¿Quién ve películas con la familia?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_alone",
+    "text": "\"¿Quién ve películas solo?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_with_popcorn",
+    "text": "\"¿Quién ve películas con palomitas saladas?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_with_subtitles",
+    "text": "\"¿Quién ve películas con subtítulos?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_with_dubbed_audio",
+    "text": "\"¿Quién ve películas con doblaje?\"",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_romance_movies",
+    "text": "\"¿Quién ve películas románticas?\"",
+    "category": "movies_series"
+  }
+]

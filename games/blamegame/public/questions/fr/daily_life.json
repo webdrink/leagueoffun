@@ -1,0 +1,112 @@
+[
+  {
+    "questionId": "who_forgets_appointments",
+    "text": "Qui oublie les rendez-vous?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_is_always_on_time",
+    "text": "Qui est toujours à l'heure?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_loses_keys_most_often",
+    "text": "Qui perd ses clés le plus souvent?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_spends_too_much_time_on_phone",
+    "text": "Qui passe trop de temps sur son téléphone?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_is_night_owl",
+    "text": "Qui est un oiseau de nuit?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_is_early_bird",
+    "text": "Qui est un lève-tôt?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_keeps_cleanest_home",
+    "text": "Qui garde sa maison la plus propre?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_forgets_to_reply_messages",
+    "text": "Qui oublie de répondre aux messages?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_buys_unnecessary_things",
+    "text": "Qui achète des choses inutiles?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_cancels_plans_last_minute",
+    "text": "Qui annule les plans à la dernière minute?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_is_best_cook",
+    "text": "Qui est le meilleur cuisinier?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_forgets_birthdays",
+    "text": "Qui oublie les anniversaires?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_is_most_organized",
+    "text": "Qui est le plus organisé?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_hits_snooze_most_times",
+    "text": "Qui appuie le plus souvent sur le bouton snooze?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_takes_longest_showers",
+    "text": "Qui prend les douches les plus longues?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_spends_too_much_on_coffee",
+    "text": "Qui dépense trop pour le café?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_is_biggest_procrastinator",
+    "text": "Qui est le plus grand procrastinateur?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_gets_lost_most_easily",
+    "text": "Qui se perd le plus facilement?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_has_most_alarms_in_morning",
+    "text": "Qui a le plus de réveils le matin?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "who_keeps_expired_food_in_fridge",
+    "text": "Qui garde des aliments périmés dans le réfrigérateur?",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "daily_life_sample_question_1",
+    "text": "Question d'exemple 1 pour daily_life en fr",
+    "category": "daily_life"
+  },
+  {
+    "questionId": "daily_life_sample_question_2",
+    "text": "Question d'exemple 2 pour daily_life en fr",
+    "category": "daily_life"
+  }
+]

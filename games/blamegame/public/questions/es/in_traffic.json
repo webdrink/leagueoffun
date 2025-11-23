@@ -1,0 +1,117 @@
+[
+  {
+    "questionId": "who_gets_road_rage",
+    "text": "¿Quién se enfada más en la carretera?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_backseat_drives",
+    "text": "¿Quién da instrucciones desde el asiento del pasajero?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_drives_too_slow",
+    "text": "Wer fährt zu langsam?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_drives_too_fast",
+    "text": "¿Quién conduce demasiado rápido?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_changes_radio_stations",
+    "text": "Wer wechselt ständig die Radiosender?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_forgets_directions",
+    "text": "¿Quién olvida las direcciones?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_sings_loudly_in_car",
+    "text": "Wer singt laut im Auto?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_texts_while_driving",
+    "text": "Wer schreibt Nachrichten während der Fahrt?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_never_offers_to_drive",
+    "text": "Wer bietet nie an zu fahren?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_always_needs_bathroom_breaks",
+    "text": "Wer braucht immer Toilettenpausen?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_falls_asleep_in_car",
+    "text": "Wer schläft im Auto ein?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "in_traffic_sample_question_1",
+    "text": "Sample question 1 for in_traffic in de",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "in_traffic_sample_question_2",
+    "text": "Sample question 2 for in_traffic in de",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_claims_they_drive_best",
+    "text": "\"¿Quién afirma que puede conducir mejor que nadie?\"",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_ignores_navigation_system",
+    "text": "\"¿Quién siempre ignora el GPS porque cree que sabe más?\"",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_honks_at_green_light",
+    "text": "\"¿Quién ya toca la bocina en verde?\"",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_plays_race_tracks_at_red_lights",
+    "text": "\"¿Quién inicia una carrera en cada semáforo?\"",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_parks_with_questionable_angles",
+    "text": "\"¿Quién siempre estaciona de manera torcida?\"",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_believes_bike_has_right_of_way_always",
+    "text": "\"¿Quién piensa que las bicicletas siempre tienen prioridad?\"",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_listens_to_audiobooks_and_misses_exit",
+    "text": "\"¿Quién se pierde la salida por escuchar audiolibros?\"",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_has_emergency_snacks_in_glovebox",
+    "text": "\"¿Quién tiene bocadillos de emergencia en la guantera?\"",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_names_their_gps_voice",
+    "text": "\"¿Quién le ha puesto un nombre a la voz del GPS?\"",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_thinks_blinker_is_optional",
+    "text": "\"¿Quién considera que usar las luces intermitentes es opcional?\"",
+    "category": "in_traffic"
+  }
+]

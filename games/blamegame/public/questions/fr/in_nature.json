@@ -1,0 +1,152 @@
+[
+  {
+    "questionId": "who_complains_most_during_hike",
+    "text": "Qui se plaint le plus pendant une randonnée?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_gets_lost_in_woods",
+    "text": "Qui se perd dans les bois?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_could_survive_in_wilderness",
+    "text": "Qui pourrait survivre dans la nature sauvage?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_afraid_of_bugs",
+    "text": "Qui a peur des insectes?",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_forgets_sunscreen",
+    "text": "\"Qui oublie la crème solaire ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_afraid_of_insects",
+    "text": "\"Qui a peur des insectes ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_takes_too_many_landscape_photos",
+    "text": "\"Qui prend trop de photos de paysages ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_packs_too_much_for_trips",
+    "text": "\"Qui emporte trop de choses pour les excursions ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_identifies_plants_correctly",
+    "text": "\"Qui identifie correctement les plantes ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_wants_to_camp_longer",
+    "text": "\"Qui veut camper plus longtemps ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_adventurous",
+    "text": "\"Qui est le plus aventurier ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_attracts_most_mosquitoes",
+    "text": "\"Qui attire le plus de moustiques ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_best_at_building_camps",
+    "text": "\"Qui sait le mieux monter un camp ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_fearless",
+    "text": "\"Qui est le plus intrépide ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_stung",
+    "text": "\"Qui sera le plus susceptible de se faire piquer ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sunburned",
+    "text": "\"Qui sera le plus susceptible d'attraper un coup de soleil ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_poison_ivy",
+    "text": "\"Qui sera le plus susceptible d'entrer en contact avec du sumac vénéneux ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_stuck_in_a_tree",
+    "text": "\"Qui sera le plus susceptible de rester coincé dans un arbre ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_rain",
+    "text": "\"Qui sera le plus susceptible d'être surpris par la pluie ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sick_from_camping",
+    "text": "\"Qui sera le plus susceptible de tomber malade en faisant du camping ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_hurt_while_hiking",
+    "text": "\"Qui sera le plus susceptible de se blesser en randonnée ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_eaten_by_wildlife",
+    "text": "\"Qui sera le plus susceptible d'être mangé par des animaux sauvages ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_lost_in_the_dark",
+    "text": "\"Qui sera le plus susceptible de se perdre dans le noir ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_a_storm",
+    "text": "\"Qui sera le plus susceptible d'être surpris par une tempête ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sick_from_food",
+    "text": "\"Qui sera le plus susceptible de tomber malade à cause de la nourriture ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_a_snowstorm",
+    "text": "\"Qui sera le plus susceptible d'être pris dans une tempête de neige ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_a_flood",
+    "text": "\"Qui sera le plus susceptible d'être pris dans une inondation ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_caught_in_a_hurricane",
+    "text": "\"Qui sera le plus susceptible d'être pris dans un ouragan ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_always_needs_bathroom_in_wilderness",
+    "text": "\"Qui doit toujours aller aux toilettes dans la nature ?\"",
+    "category": "in_nature"
+  },
+  {
+    "questionId": "who_leaves_no_trace",
+    "text": "\"Qui ne laisse aucune trace ?\"",
+    "category": "in_nature"
+  }
+]

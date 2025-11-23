@@ -1,0 +1,45 @@
+import React from 'react';
+import { Card, CardContent } from '../../framework/ui/components/Card'; // Adjusted path
+import { Question } from '../../types'; // Path should be correct if types is in blamegame/
+import styles from './QuestionCard.module.css';
+
+interface QuestionCardProps {
+  question: Question;
+}
+
+/**
+ * Renders a styled card displaying a question, including its category emoji, category name, and question text.
+ *
+ * @param question - The question object containing the text, category emoji, and category name to display.
+ * @returns A React functional component that displays the question details inside a styled card.
+ */
+const QuestionCard: React.FC<QuestionCardProps> = ({ question }) => {
+  console.log('QuestionCard received question:', question);
+    // Ensure we have fallbacks for potentially missing category information
+  const categoryEmoji = question.categoryEmoji || '❓';
+  const categoryName = question.categoryName || question.categoryId || '';
+
+  return (
+    <Card className="w-full h-full shadow-xl border-2 border-rust-100 bg-white rounded-2xl flex items-center justify-center p-1">
+      <CardContent className="p-3 sm:p-6 flex flex-col items-center text-center justify-center h-full w-full">
+        {categoryEmoji && (
+          <div className={`mb-2 sm:mb-3 ${styles['question-card-emoji']}`}>
+            {categoryEmoji}
+          </div>
+        )}
+        {categoryName && (
+          <span
+            className="inline-flex items-center px-2.5 py-1 mb-3 sm:mb-6 rounded-full text-xs sm:text-sm font-semibold bg-rust-100 text-rust-700 border border-rust-200 shadow-sm"
+          >
+            {categoryName}
+          </span>
+        )}
+        <h2 className={`font-semibold text-gray-800 break-words ${styles['question-card-text']}`}>
+          {question.text}
+        </h2>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default QuestionCard;

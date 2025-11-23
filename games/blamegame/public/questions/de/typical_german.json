@@ -1,0 +1,252 @@
+[
+  {
+    "questionId": "who_is_most_punctual",
+    "text": "Wer ist am pünktlichsten?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_follows_rules_most_strictly",
+    "text": "Wer befolgt Regeln am strengsten?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_recycles_most_properly",
+    "text": "Wer trennt am korrektesten den Müll?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_plans_everything_in_advance",
+    "text": "Wer plant alles im Voraus?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_is_most_efficient",
+    "text": "Wer ist am effizientesten?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_complains_about_everything",
+    "text": "Wer beschwert sich über alles?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_is_most_organized",
+    "text": "Wer ist am organisiertesten?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "who_is_most_direct",
+    "text": "Wer ist am direktesten?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_einen_aktenordner_fur_alles",
+    "text": "Wer hat für alles einen farblich sortierten Aktenordner?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_sagt_ich_bin_nicht_rassistisch_aber",
+    "text": "Wer beginnt Diskussionen mit 'Ich bin ja nicht rassistisch, aber...?'",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_zeigt_auf_den_fahrplan_mit_absicht",
+    "text": "Wer zeigt anderen mit Genugtuung den Fahrplan, wenn sie zu spät sind?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_steht_10_minuten_vor_abfahrt_am_gleis",
+    "text": "Wer steht 10 Minuten vor Abfahrt schon mit nervösem Blick am Gleis?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_klebt_sich_den_namen_auf_das_brot",
+    "text": "Wer schreibt seinen Namen auf das Pausenbrot im Kühlschrank?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_eine_garagenordnung",
+    "text": "Wer hat eine schriftlich ausformulierte Garagenordnung?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_beschwert_sich_uber_geruch_im_treppenhaus",
+    "text": "Wer beschwert sich sofort über Kochgeruch im Treppenhaus?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_klatscht_beim_landen_im_flugzeug",
+    "text": "Wer klatscht beim Landen im Flugzeug?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_sagt_puuh_das_war_knapp_bei_orangen_lichtern",
+    "text": "Wer sagt bei jeder gelben Ampel 'Puh, das war knapp'?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_ist_stolz_auf_sein_pfandsystem",
+    "text": "Wer verteidigt das Pfandsystem mit nationalem Stolz?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_achtet_krankhaft_auf_die_rechtschreibung",
+    "text": "Wer leidet innerlich, wenn irgendwo ein Apostroph falsch gesetzt ist?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_sagt_danke_beim_aussteigen",
+    "text": "Wer bedankt sich beim Busfahrer – auch wenn er schlecht gelaunt war?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_trennt_muell_mit_militaerischer_disziplin",
+    "text": "Wer trennt Müll, als ginge es um die Rettung der Welt?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_rennt_wegen_einem_cent_zuruck_in_den_laden",
+    "text": "Wer geht wegen 0,01€ zurück zur Kasse?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_angst_vor_der_mitteilung_der_hausverwaltung",
+    "text": "Wer bekommt Panik bei einem Brief von der Hausverwaltung?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_verkauft_auf_kleinanzeigen_fur_1_euro_mit_abholung",
+    "text": "Wer verkauft Sachen für 1€ – aber nur mit Selbstabholung und Terminfenster?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_mehr_versicherung_als_freunde",
+    "text": "Wer hat mehr Versicherungen als enge Freunde?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_zahlt_bar_aus_prinzip",
+    "text": "Wer zahlt selbst kontaktloses Wasser lieber bar?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_einen_grillplatz_im_kofferraum",
+    "text": "Wer hat IMMER einen Einweggrill im Kofferraum?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_nimmt_das_parken_vor_dem_eigenen_haus_persoenlich",
+    "text": "Wer betrachtet das Parken vor dem eigenen Haus als Kriegserklärung?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_den_vorgarten_auf_den_millimeter_geplant",
+    "text": "Wer mäht den Rasen in diagonalen Mustern?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_liest_die_bedienungsanleitung_vor_dem_aufbauen",
+    "text": "Wer liest die Bedienungsanleitung von Anfang bis Ende – vor dem Aufbau?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_meldet_den_nachbarn_anonym",
+    "text": "Wer meldet Nachbarn anonym wegen Ruhestörung?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_fuehrt_liste_von_geoeffneten_supermaerkten_am_feiertag",
+    "text": "Wer weiß immer, welcher Supermarkt an Feiertagen offen hat?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_beim_camping_die_parzelle_abgeklebt",
+    "text": "Wer klebt beim Camping seine Parzelle mit Maßband und Flatterband ab?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_schreit_bitte_an_der_kasse",
+    "text": "Wer ruft an der Kasse extra laut 'BITTE!'?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_kennt_die_abfallkalender_auswendig",
+    "text": "Wer kennt den Abfallkalender auswendig?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_regt_sich_ueber_bollerwagen_an_ostern_auf",
+    "text": "Wer beschwert sich laut über Bollerwagen an Karfreitag?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_macht_powerpoint_fur_den_urlaub",
+    "text": "Wer plant den Urlaub mit Excel und PowerPoint?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_bestellt_mit_sonderwuenschen_und_sagt_dann_ist_gut_so",
+    "text": "Wer gibt fünf Sonderwünsche auf – und sagt dann 'Aber sonst passt’s!'?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_liebt_die_meldung_die_wartezeit_betraegt_ungefaehr",
+    "text": "Wer freut sich insgeheim über die Anzeige 'Die Wartezeit beträgt etwa 12 Minuten'?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_einen_ordner_nur_fur_steuern",
+    "text": "Wer hat einen Ordner, der nur 'Steuern 2018–heute' heißt?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_wuenscht_sich_nur_ruhe",
+    "text": "Wer sagt auf die Frage 'Was wünschst du dir?' einfach nur 'Ruhe'?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_mehr_schuhe_vor_der_tuer_als_im_schrank",
+    "text": "Wer hat mehr Schuhe vor der Tür als im Schrank?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_kann_nicht_entspannen_wenn_die_spuelmaschine_fertig_ist",
+    "text": "Wer kann nicht entspannen, wenn die Spülmaschine fertig ist, aber nicht ausgeräumt?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_ein_festes_grillanzuendritual",
+    "text": "Wer hat ein ritualisiertes Grillanzündverfahren mit Einweisung?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_mochtet_kein_kleingeld_wechseln",
+    "text": "Wer hasst es, Kleingeld zu wechseln – und hebt es trotzdem auf?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_einen_lieblings_stempel",
+    "text": "Wer besitzt einen privaten Lieblings-Stempel?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_sein_wlan_gastnetzwerk_mit_passwort_fuer_jeden_besuch",
+    "text": "Wer hat für jeden Besuch ein neues Passwort fürs Gäste-WLAN?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_druckt_emails_aus",
+    "text": "Wer druckt E-Mails zur Sicherheit nochmal aus?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_hat_ein_kalenderbuch_mit_farbcodes",
+    "text": "Wer benutzt einen Kalender mit Farbcodes, Post-its und Jahresübersicht?",
+    "category": "typical_german"
+  },
+  {
+    "questionId": "typical_german_fuehlt_sich_fur_die_ordentlichkeit_andrer_mitverantwortlich",
+    "text": "Wer räumt fremde Einkaufswagen ordentlich zurück?",
+    "category": "typical_german"
+  }
+]

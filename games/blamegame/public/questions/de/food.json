@@ -1,0 +1,142 @@
+[
+  {
+    "questionId": "who_is_pickiest_eater",
+    "text": "Wer ist der wählerischste Esser?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_takes_food_photos_for_social_media",
+    "text": "Wer macht Essensfotos für soziale Medien?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_always_tries_new_restaurants",
+    "text": "Wer probiert immer neue Restaurants aus?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_eats_fastest",
+    "text": "Wer isst am schnellsten?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_always_hungry",
+    "text": "Wer hat immer Hunger?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_best_cook",
+    "text": "Wer ist der beste Koch?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_has_unusual_food_combinations",
+    "text": "Wer isst ungewöhnliche Essenzkombinationen?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_steals_food_from_others_plates",
+    "text": "Wer stiehlt Essen von den Tellern anderer?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_adventurous_eater",
+    "text": "Wer ist der abenteuerlustigste Esser?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_always_orders_same_dish",
+    "text": "Wer bestellt immer das gleiche Gericht?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_try_new_recipes",
+    "text": "Wer probiert am ehesten neue Rezepte aus?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_eat_leftovers",
+    "text": "Wer isst am ehesten Reste?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_order_takeout",
+    "text": "Wer bestellt am ehesten Essen zum Mitnehmen?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_try_new_cuisines",
+    "text": "Wer probiert am ehesten neue Küchen aus?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_eat_dessert_first",
+    "text": "Wer isst am ehesten zuerst das Dessert?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_order_extra_sides",
+    "text": "Wer bestellt am ehesten zusätzliche Beilagen?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_eat_snacks_before_meals",
+    "text": "Wer isst am ehesten Snacks vor den Mahlzeiten?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_has_most_dietary_restrictions",
+    "text": "Wer hat die meisten Ernährungseinschränkungen?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_orders_extra_cheese_on_everything",
+    "text": "Wer bestellt auf alles extra Käse?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_eats_pizza_with_cutlery",
+    "text": "Wer isst Pizza mit Besteck?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_photos_food_before_eating",
+    "text": "Wer fotografiert jedes Gericht, bevor es gegessen wird?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_would_pay_for_feet_pics_if_they_were_edible",
+    "text": "Wer würde für Fußbilder bezahlen, wenn man sie essen könnte?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_calls_ketchup_a_vegetable",
+    "text": "Wer bezeichnet Ketchup als Gemüseportion?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_can_taste_the_difference_between_tap_and_bottled",
+    "text": "Wer schmeckt angeblich den Unterschied zwischen Leitungs- und Mineralwasser?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_licks_the_plate_clean",
+    "text": "Wer leckt den Teller sauber?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_carries_hotsauce_in_pocket",
+    "text": "Wer hat immer Tabasco in der Tasche?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_eats_breakfast_for_dinner",
+    "text": "Wer isst zum Abendessen Müsli?",
+    "category": "food"
+  },
+  {
+    "questionId": "who_tried_every_diet_for_one_day",
+    "text": "Wer hat schon jede Diät genau einen Tag durchgehalten?",
+    "category": "food"
+  }
+]

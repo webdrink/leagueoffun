@@ -1,0 +1,117 @@
+[
+  {
+    "questionId": "who_never_does_dishes",
+    "text": "Qui ne fait jamais la vaisselle?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_takes_longest_showers",
+    "text": "Qui prend les douches les plus longues?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_eats_others_food",
+    "text": "Qui mange la nourriture des autres?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_is_messiest_roommate",
+    "text": "Qui est le colocataire le plus désordonné?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_is_loudest_at_night",
+    "text": "\"Qui est le plus bruyant la nuit ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_never_buys_toilet_paper",
+    "text": "\"Qui n'achète jamais de papier toilette ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_leaves_dirty_laundry_everywhere",
+    "text": "\"Qui laisse des vêtements sales partout ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_brings_too_many_guests_over",
+    "text": "\"Qui amène trop d'invités ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_is_cleanest_roommate",
+    "text": "\"Qui est le colocataire le plus ordonné ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_pays_bills_late",
+    "text": "\"Qui paie les factures en retard ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_leaves_empty_containers_in_fridge",
+    "text": "\"Qui laisse des contenants vides dans le réfrigérateur ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_borrows_without_asking",
+    "text": "\"Qui emprunte des choses sans demander ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_organizes_apartment_parties",
+    "text": "\"Qui organise des soirées dans l'appartement ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_steals_roommates_milk",
+    "text": "\"Qui vole toujours le lait des colocataires ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_has_left_dishes_for_science",
+    "text": "\"Qui laisse la vaisselle traîner pour faire de la 'recherche sur la moisissure' ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_organises_house_meetings_for_fun",
+    "text": "\"Qui organise volontairement des plénières en colocation ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_labels_everything_with_name",
+    "text": "\"Qui étiquette tout avec son nom ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_plays_loud_music_at_2am",
+    "text": "\"Qui écoute de la musique forte à 2 heures du matin ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_has_plants_take_over_livingroom",
+    "text": "\"Qui transforme le salon en jungle ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_invites_randoms_to_crash_on_couch",
+    "text": "\"Qui laisse constamment des étrangers dormir sur le canapé ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_fails_to_take_out_trash_on_turn",
+    "text": "\"Qui oublie toujours son service de poubelle ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_turns_bathroom_into_spa",
+    "text": "\"Qui transforme la salle de bain en spa ?\"",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_has_emergency_chocolate_stash",
+    "text": "\"Qui a une réserve secrète de chocolat ?\"",
+    "category": "in_shared_apartment"
+  }
+]

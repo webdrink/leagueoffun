@@ -1,0 +1,102 @@
+[
+  {
+    "questionId": "who_always_takes_photos_of_food",
+    "text": "Qui prend toujours des photos de nourriture?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_steals_food_from_others_plates",
+    "text": "Qui vole de la nourriture des assiettes des autres?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_takes_longest_to_order",
+    "text": "Qui met le plus de temps à commander?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_complains_about_food",
+    "text": "Qui se plaint de la nourriture?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_never_pays_fair_share",
+    "text": "Qui ne paie jamais sa juste part?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_finishes_meal_first",
+    "text": "Qui finit son repas en premier?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_eats_messiest",
+    "text": "Qui mange le plus salement?",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_has_strangest_food_combinations",
+    "text": "\"Qui a les combinaisons alimentaires les plus étranges ?\"",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_is_picky_eater",
+    "text": "\"Qui est un mangeur difficile ?\"",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_talks_with_mouth_full",
+    "text": "\"Qui parle la bouche pleine ?\"",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_saves_leftovers",
+    "text": "\"Qui garde les restes ?\"",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_always_wants_dessert",
+    "text": "\"Qui veut toujours un dessert ?\"",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_orders_the_same_thing_every_time",
+    "text": "\"Qui commande toujours la même chose ?\"",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_is_always_on_a_diet",
+    "text": "\"Qui est toujours au régime ?\"",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_eats_the_most_snacks",
+    "text": "\"Qui mange le plus de collations ?\"",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_is_best_cook",
+    "text": "\"Qui est le meilleur cuisinier ?\"",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_always_orders_takeout",
+    "text": "\"Qui commande toujours à emporter ?\"",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_eats_the_fastest",
+    "text": "\"Qui mange le plus vite ?\"",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_is_most_adventurous_eater",
+    "text": "\"Qui est le mangeur le plus aventurier ?\"",
+    "category": "eating"
+  },
+  {
+    "questionId": "who_always_tries_new_restaurants",
+    "text": "\"Qui essaie toujours de nouveaux restaurants ?\"",
+    "category": "eating"
+  }
+]

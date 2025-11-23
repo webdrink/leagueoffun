@@ -1,0 +1,48 @@
+name: 🚀 Deploy HookHunt
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'games/hookhunt/**'
+      - 'packages/**'
+      - '.github/workflows/deploy-hookhunt.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "deploy-hookhunt"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    name: 🏗️ Build & Deploy HookHunt
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📥 Install Dependencies
+        run: npm install
+
+      - name: 🏗️ Build HookHunt
+        run: npm run build:hookhunt
+
+      - name: 📤 Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: hookhunt-dist
+          path: games/hookhunt/dist/
+          retention-days: 30
+
+      - name: ✅ Build Complete
+        run: echo "✅ HookHunt built successfully"

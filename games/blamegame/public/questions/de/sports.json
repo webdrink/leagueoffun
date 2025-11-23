@@ -1,0 +1,112 @@
+[
+  {
+    "questionId": "who_is_most_competitive",
+    "text": "Wer ist am wettbewerbsorientiertesten?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_is_worst_loser",
+    "text": "Wer ist der schlechteste Verlierer?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_talks_during_sports_games",
+    "text": "Wer redet während der Sportspiele?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_pretends_to_understand_rules",
+    "text": "Wer tut so, als würde er die Regeln verstehen?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_makes_excuses_for_losing",
+    "text": "Wer findet Ausreden fürs Verlieren?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_brags_about_victories",
+    "text": "Wer prahlt mit Siegen?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_cheats_at_games",
+    "text": "Wer schummelt bei Spielen?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_gives_up_easiest",
+    "text": "Wer gibt am leichtesten auf?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_takes_games_too_seriously",
+    "text": "Wer nimmt Spiele zu ernst?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_never_exercises",
+    "text": "Wer macht nie Sport?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_shows_off_athletic_abilities",
+    "text": "Wer gibt mit sportlichen Fähigkeiten an?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_buys_exercise_equipment_never_uses",
+    "text": "Wer kauft Fitnessgeräte und benutzt sie nie?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_buys_fancy_gear_rarely_uses",
+    "text": "Wer kauft teure Sportausrüstung und nutzt sie nie?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_counts_warmup_as_workout",
+    "text": "Wer zählt Aufwärmen als Workout?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_joins_gym_for_sauna_only",
+    "text": "Wer tritt dem Fitnessstudio nur wegen der Sauna bei?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_competes_with_fitness_tracker",
+    "text": "Wer macht Wettkämpfe nur mit dem Schrittzähler?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_screams_like_tennis_star",
+    "text": "Wer schreit beim Sport wie ein Tennisprofi?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_wears_headband_for_style",
+    "text": "Wer trägt Stirnband nur als Modeaccessoire?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_celebrates_smallest_personal_record",
+    "text": "Wer feiert jeden Mini-Rekord ekstatisch?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_turns_every_activity_into_competition",
+    "text": "Wer macht aus allem einen Wettkampf?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_forgets_water_but_brings_protein_shake",
+    "text": "Wer vergisst Wasser, hat aber den Proteinshake dabei?",
+    "category": "sports"
+  },
+  {
+    "questionId": "who_streams_workout_live",
+    "text": "Wer streamt sein Workout live?",
+    "category": "sports"
+  }
+]

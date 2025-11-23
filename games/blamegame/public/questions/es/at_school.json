@@ -1,0 +1,347 @@
+[
+  {
+    "questionId": "who_is_class_clown",
+    "text": "¿Quién es el payaso de la clase?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_was_best_at_math",
+    "text": "¿Quién era el mejor en matemáticas?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_class_best",
+    "text": "¿Quién es el mejor de la clase?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_was_best_at_english",
+    "text": "¿Quién era el mejor en inglés?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_teacher_pet",
+    "text": "¿Quién es el favorito del profesor?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_was_best_at_history",
+    "text": "¿Quién era el mejor en historia?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_biology",
+    "text": "¿Quién es el mejor en biología?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_sports",
+    "text": "¿Quién es el mejor en deportes?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_chemistry",
+    "text": "¿Quién es el mejor en química?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_art",
+    "text": "¿Quién es el mejor en arte?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_music",
+    "text": "¿Quién es el mejor en música?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_physics",
+    "text": "¿Quién es el mejor en física?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_best_at_computer_science",
+    "text": "¿Quién es el mejor en informática?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_cheats_most_in_school",
+    "text": "¿Quién hace más trampas en la escuela?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_sleeps_most_in_school",
+    "text": "¿Quién duerme más en la escuela?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_misses_most_classes",
+    "text": "¿Quién falta más a clases?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_laughs_most_in_school",
+    "text": "¿Quién se ríe más en la escuela?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_cries_most_in_school",
+    "text": "¿Quién llora más en la escuela?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_teacher_more_than_student",
+    "text": "¿Quién es más maestro que estudiante?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_enjoys_school_most",
+    "text": "¿Quién disfruta más la escuela?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_has_best_excuses_for_homework",
+    "text": "¿Quién tiene las mejores excusas para no hacer la tarea?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_class_clown_during_break",
+    "text": "¿Quién es el payaso de la clase durante el recreo?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_is_most_prepared",
+    "text": "¿Quién está siempre preparado?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_always_forgets_homework",
+    "text": "¿Quién siempre olvida la tarea?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_sits_in_back_row",
+    "text": "¿Quién siempre se sienta en la última fila?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_always_raises_hand",
+    "text": "¿Quién siempre levanta la mano?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_sleeps_during_class",
+    "text": "¿Quién duerme durante la clase?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_texts_during_lectures",
+    "text": "¿Quién envía mensajes durante las clases?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_comes_unprepared_to_exams",
+    "text": "¿Quién llega sin preparación a los exámenes?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_copies_homework_last_minute",
+    "text": "¿Quién copia la tarea en el último minuto?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_brings_best_lunch_to_school",
+    "text": "¿Quién lleva el mejor almuerzo a la escuela?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_asks_for_deadline_extension",
+    "text": "¿Quién pide extensiones de plazo?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_arrives_last_minute_to_class",
+    "text": "¿Quién llega en el último minuto a clase?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_takes_best_notes",
+    "text": "¿Quién toma las mejores notas?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_forgets_school_supplies",
+    "text": "¿Quién olvida los materiales escolares?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_always_has_excuses",
+    "text": "¿Quién siempre tiene excusas?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_joins_too_many_clubs",
+    "text": "¿Quién se une a demasiados clubes?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_disrupts_class_most",
+    "text": "¿Quién interrumpe más la clase?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_stresses_over_minor_assignments",
+    "text": "¿Quién se estresa por tareas menores?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_procrastinates_until_deadline",
+    "text": "¿Quién procrastina hasta el plazo?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_studies_night_before_exam",
+    "text": "¿Quién estudia la noche antes del examen?",
+    "category": "at_school"
+  },
+  {
+    "questionId": "at_school_sample_question_1",
+    "text": "Pregunta de ejemplo 1 para at_school en es",
+    "category": "at_school"
+  },
+  {
+    "questionId": "at_school_sample_question_2",
+    "text": "Pregunta de ejemplo 2 para at_school en es",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_ist_der_klassenstreber",
+    "text": "\"¿Quién es el empollón de la clase?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_ist_am_besten_in_biologie",
+    "text": "\"¿Quién es el mejor en biología?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_ist_der_klassenbester_in_sport",
+    "text": "\"¿Quién es el mejor de la clase en deportes?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_ist_am_besten_in_chemie",
+    "text": "\"¿Quién es el mejor en química?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_kunst",
+    "text": "\"¿Quién es el mejor de la clase en arte?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_musik",
+    "text": "\"¿Quién es el mejor de la clase en música?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_physik",
+    "text": "\"¿Quién es el mejor de la clase en física?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_ist_der_klassenbeste_in_informatik",
+    "text": "\"¿Quién es el mejor de la clase en informática?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_gespickt",
+    "text": "\"¿Quién ha copiado más en la escuela?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_geschummelt",
+    "text": "\"¿Quién ha hecho trampa más en la escuela?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_geschlafen",
+    "text": "\"¿Quién ha dormido más en la escuela?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_gefehlt",
+    "text": "\"¿Quién ha faltado más en la escuela?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_gelacht",
+    "text": "\"¿Quién ha reído más en la escuela?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_hat_am_meisten_in_der_schule_geweint",
+    "text": "\"¿Quién ha llorado más en la escuela?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_war_eher_der_lehrer_als_der_schuler",
+    "text": "\"¿Quién era más el profesor que el alumno?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wem_hat_die_schule_spass_gemacht",
+    "text": "\"¿A quién le divirtió la escuela?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_hat_am_haufigsten_geschummelt",
+    "text": "\"¿Quién hizo trampa con más frecuencia?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_hatte_den_schlimmsten_sitznachbarn",
+    "text": "\"¿Quién tuvo al peor compañero de asiento?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_war_heimlich_verliebt_in_eine_lehrperson",
+    "text": "\"¿Quién estaba secretamente enamorado de un profesor?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_war_klassensprecherin_aus_versehen",
+    "text": "\"¿Quién fue el representante de clase por accidente?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_hat_die_besten_ausreden_fur_nicht_gemachte_hau",
+    "text": "\"¿Quién tiene las mejores excusas para no haber hecho los deberes?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_war_der_pausenclown",
+    "text": "\"¿Quién era el payaso del recreo?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_wurde_am_haufigsten_erwischt",
+    "text": "\"¿Quién fue el que más veces fue atrapado?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_hatte_den_hasslichsten_turnbeutel",
+    "text": "\"¿Quién tenía la mochila de gimnasia más fea?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "wer_war_immer_vorbereitet",
+    "text": "\"¿Quién siempre estaba preparado?\"",
+    "category": "at_school"
+  },
+  {
+    "questionId": "who_skips_most_classes",
+    "text": "\"¿Quién falta a más clases?\"",
+    "category": "at_school"
+  }
+]

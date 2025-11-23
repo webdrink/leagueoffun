@@ -1,0 +1,127 @@
+[
+  {
+    "questionId": "who_trips_in_public_most_often",
+    "text": "Who trips in public most often?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_makes_awkward_comments",
+    "text": "Who makes the most awkward comments?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_has_most_embarrassing_photos",
+    "text": "Who has the most embarrassing photos?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_calls_people_wrong_names",
+    "text": "Who calls people by the wrong names?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_has_wardrobe_malfunctions",
+    "text": "Who has the most wardrobe malfunctions?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_sends_texts_to_wrong_person",
+    "text": "Who sends texts to the wrong person?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_speaks_before_thinking",
+    "text": "Who speaks before thinking?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_has_embarrassing_laugh",
+    "text": "Who has an embarrassing laugh?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_gets_caught_in_lies",
+    "text": "Who gets caught in lies?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_walks_into_glass_doors",
+    "text": "Who walks into glass doors?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_embarrasses_self_on_social_media",
+    "text": "Who embarrasses themselves on social media?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_forgets_important_names",
+    "text": "Who forgets important names?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_has_food_stuck_in_teeth",
+    "text": "Who often has food stuck in their teeth?",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "embarrassing_moments_sample_question_1",
+    "text": "Sample question 1 for embarrassing_moments in en",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "embarrassing_moments_sample_question_2",
+    "text": "Sample question 2 for embarrassing_moments in en",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_sings_in_public",
+    "text": "\"Who sings in public?\"",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_tells_cringe_jokes",
+    "text": "\"Who tells the cringe jokes?\"",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_dances_inappropriately",
+    "text": "\"Who dances inappropriately?\"",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_forgets_own_age",
+    "text": "\"Who forgets their own age?\"",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_makes_funny_noises",
+    "text": "\"Who makes the funniest sounds?\"",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_tells_awkward_stories",
+    "text": "\"Who tells the most embarrassing stories?\"",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_makes_funny_faces_in_photos",
+    "text": "\"Who makes the funniest faces in photos?\"",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_always_says_wrong_things",
+    "text": "\"Who always says the wrong things?\"",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_dances_weirdly_in_public",
+    "text": "\"Who dances weirdly in public?\"",
+    "category": "embarrassing_moments"
+  },
+  {
+    "questionId": "who_always_has_awkward_silences",
+    "text": "\"Who always has awkward silence?\"",
+    "category": "embarrassing_moments"
+  }
+]

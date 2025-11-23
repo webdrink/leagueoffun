@@ -1,0 +1,25 @@
+{
+  "name": "@leagueoffun/framework-ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./components": "./src/components/index.ts",
+    "./screens": "./src/screens/index.ts"
+  },
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "framer-motion": "^11.0.0",
+    "lucide-react": "^0.507.0",
+    "@radix-ui/react-checkbox": "^1.3.1",
+    "@radix-ui/react-label": "^2.1.6",
+    "@radix-ui/react-slider": "^1.3.4",
+    "@radix-ui/react-switch": "^1.2.4",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.2.0"
+  }
+}

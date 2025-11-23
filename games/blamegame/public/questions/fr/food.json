@@ -1,0 +1,142 @@
+[
+  {
+    "questionId": "who_is_pickiest_eater",
+    "text": "\"Qui est le mangeur le plus difficile ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_takes_food_photos_for_social_media",
+    "text": "\"Qui prend des photos de nourriture pour les réseaux sociaux ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_always_tries_new_restaurants",
+    "text": "\"Qui essaie toujours de nouveaux restaurants ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_eats_fastest",
+    "text": "\"Qui mange le plus rapidement ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_always_hungry",
+    "text": "\"Qui a toujours faim ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_best_cook",
+    "text": "\"Qui est le meilleur cuisinier ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_has_unusual_food_combinations",
+    "text": "\"Qui mange des combinaisons de saveurs inhabituelles ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_steals_food_from_others_plates",
+    "text": "\"Qui vole de la nourriture dans les assiettes des autres ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_adventurous_eater",
+    "text": "\"Qui est le mangeur le plus aventureux ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_always_orders_same_dish",
+    "text": "\"Qui commande toujours le même plat ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_try_new_recipes",
+    "text": "\"Qui essaie le plus souvent de nouvelles recettes ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_eat_leftovers",
+    "text": "\"Qui mange le plus souvent des restes ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_order_takeout",
+    "text": "\"Qui commande le plus souvent de la nourriture à emporter ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_try_new_cuisines",
+    "text": "\"Qui essaie le plus souvent de nouvelles cuisines ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_eat_dessert_first",
+    "text": "\"Qui mange le dessert en premier ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_order_extra_sides",
+    "text": "\"Qui commande le plus souvent des accompagnements supplémentaires ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_is_most_likely_to_eat_snacks_before_meals",
+    "text": "\"Qui grignote le plus souvent avant les repas ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_has_most_dietary_restrictions",
+    "text": "\"Qui a le plus de restrictions alimentaires ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_orders_extra_cheese_on_everything",
+    "text": "\"Qui commande du fromage supplémentaire sur tout ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_eats_pizza_with_cutlery",
+    "text": "\"Qui mange de la pizza avec des couverts ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_photos_food_before_eating",
+    "text": "\"Qui prend en photo chaque plat avant qu'il ne soit mangé ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_would_pay_for_feet_pics_if_they_were_edible",
+    "text": "\"Qui paierait pour des photos de pieds si on pouvait les manger ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_calls_ketchup_a_vegetable",
+    "text": "\"Qui considère le ketchup comme une portion de légumes ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_can_taste_the_difference_between_tap_and_bottled",
+    "text": "\"Qui prétend goûter la différence entre l'eau du robinet et l'eau minérale ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_licks_the_plate_clean",
+    "text": "\"Qui lèche l'assiette propre ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_carries_hotsauce_in_pocket",
+    "text": "\"Qui a toujours du Tabasco dans sa poche ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_eats_breakfast_for_dinner",
+    "text": "\"Qui mange des céréales pour le dîner ?\"",
+    "category": "food"
+  },
+  {
+    "questionId": "who_tried_every_diet_for_one_day",
+    "text": "\"Qui a déjà tenu un régime exactement un jour ?\"",
+    "category": "food"
+  }
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "questionId": "who_talks_to_everyone_at_party",
+    "text": "Wer spricht mit jedem auf der Party?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_hides_in_corner_at_parties",
+    "text": "Wer versteckt sich in der Ecke auf Partys?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_pretends_to_know_people",
+    "text": "Wer tut so, als wÃ¼rde er Leute kennen?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_leaves_without_saying_goodbye",
+    "text": "Wer geht ohne sich zu verabschieden?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_makes_friends_with_strangers",
+    "text": "Wer freundet sich mit Fremden an?",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "parties_with_strangers_sample_question_1",
+    "text": "Sample question 1 for parties_with_strangers in de",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "parties_with_strangers_sample_question_2",
+    "text": "Sample question 2 for parties_with_strangers in de",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_stands_in_corner_alone",
+    "text": "\"Who is standing alone in a corner?\"",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_makes_new_friends_instantly",
+    "text": "\"Who immediately finds new friends?\"",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_forgets_names_immediately",
+    "text": "\"Who forgets names right away?\"",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_introduces_themselves_with_fake_job",
+    "text": "\"Who introduces themselves with a fake job?\"",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_collects_strangers_instagram_handles",
+    "text": "\"Who collects Instagram handles from strangers?\"",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_dances_with_coat_still_on",
+    "text": "\"Who dances while still wearing their coat?\"",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_becomes_dj_using_phone_playlist",
+    "text": "\"Who hijacks the sound system with their phone playlist?\"",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_forgets_names_after_2_seconds",
+    "text": "\"Who forgets names after two seconds?\"",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_trades_shoes_with_random_person",
+    "text": "\"Who swaps shoes with a stranger?\"",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_tells_same_story_multiple_times",
+    "text": "\"Who tells the same story multiple times?\"",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_joins_group_photos_uninvited",
+    "text": "\"Who jumps into group photos uninvited?\"",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_becomes_instant_therapist_for_stranger",
+    "text": "\"Who spontaneously becomes a therapist for strangers?\"",
+    "category": "parties_with_strangers"
+  },
+  {
+    "questionId": "who_leaves_with_wrong_jacket",
+    "text": "\"Who ends up going home with the wrong jacket?\"",
+    "category": "parties_with_strangers"
+  }
+]

@@ -1,0 +1,142 @@
+[
+  {
+    "questionId": "who_is_most_romantic",
+    "text": "Wer ist am romantischsten?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_falls_in_love_quickly",
+    "text": "Wer verliebt sich schnell?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_gives_best_relationship_advice",
+    "text": "Wer gibt die besten Beziehungsratschläge?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_takes_longest_to_commit",
+    "text": "Wer braucht am längsten, um sich zu binden?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_ghosts_people_after_third_date",
+    "text": "Wer ghostet Leute nach dem dritten Date?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_falls_in_love_too_quickly",
+    "text": "Wer verliebt sich zu schnell?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_has_strictest_dating_rules",
+    "text": "Wer hat die strengsten Dating-Regeln?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_would_write_love_letter",
+    "text": "Wer würde einen Liebesbrief schreiben?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_secretly_plans_wedding_in_mind",
+    "text": "Wer plant heimlich eine Hochzeit im Kopf?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_is_worst_at_flirting",
+    "text": "Wer kann am schlechtesten flirten?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_has_biggest_heart",
+    "text": "Wer hat das größte Herz?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_gives_relationship_advice_but_is_single",
+    "text": "Wer hat die meisten Beziehungstipps, ist aber selbst Single?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_withdraws_quickest",
+    "text": "Wer zieht sich am schnellsten zurück?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_plans_first_date_for_weeks",
+    "text": "Wer plant das erste Date wochenlang?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_forgets_anniversary",
+    "text": "Wer vergisst den Jahrestag?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_writes_longest_messages",
+    "text": "Wer schreibt die längsten Nachrichten?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_always_brings_small_gifts",
+    "text": "Wer bringt immer kleine Geschenke mit?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_takes_most_couple_selfies",
+    "text": "Wer macht die meisten Selfies zu zweit?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_is_most_jealous",
+    "text": "Wer ist am eifersüchtigsten?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_always_suggests_new_activities",
+    "text": "Wer schlägt immer neue Aktivitäten vor?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_takes_longest_to_respond",
+    "text": "Wer braucht am längsten, um sich zu melden?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_talks_most_about_future",
+    "text": "Wer redet am meisten über die Zukunft?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_has_most_inside_jokes",
+    "text": "Wer hat die meisten Insider-Witze?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "relationship_advice",
+    "text": "Wer würde am ehesten guten Beziehungsrat geben?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "first_date",
+    "text": "Wer würde das beste erste Date planen?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "forget_anniversary",
+    "text": "Wer würde am ehesten einen Jahrestag vergessen?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "matchmaker",
+    "text": "Wer wäre der beste Kuppler?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "secret_admirer",
+    "text": "Wer hätte am ehesten einen heimlichen Verehrer?",
+    "category": "relationships"
+  }
+]

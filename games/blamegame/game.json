@@ -1,0 +1,12 @@
+{
+  "name": "blamegame",
+  "title": "BlameGame",
+  "description": "Who do you want to blame and for what?",
+  "domain": "https://blamegame.leagueoffun.de",
+  "icon": "https://blamegame.leagueoffun.de/logo.png",
+  "minPlayers": 3,
+  "maxPlayers": 16,
+  "playMode": "local",
+  "deviceRequirement": "shared",
+  "tags": ["humor", "deduction", "chaos"]
+}

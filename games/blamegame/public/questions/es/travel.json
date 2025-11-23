@@ -1,0 +1,92 @@
+[
+  {
+    "questionId": "who_always_forgets_passport",
+    "text": "\"¿Quién siempre olvida el pasaporte?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_overpacks_for_trips",
+    "text": "\"¿Quién empaca demasiado para los viajes?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_gets_lost_in_new_cities",
+    "text": "\"¿Quién se pierde en ciudades nuevas?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_takes_too_many_travel_photos",
+    "text": "\"¿Quién toma demasiadas fotos de viaje?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_always_arrives_late_at_airport",
+    "text": "\"¿Quién siempre llega tarde al aeropuerto?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_plans_every_travel_detail",
+    "text": "\"¿Quién planea cada detalle del viaje?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_prefers_local_cuisine_abroad",
+    "text": "\"¿Quién prefiere la cocina local en el extranjero?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_needs_bathroom_breaks_most_often",
+    "text": "\"¿Quién necesita más paradas en el baño?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_packs_two_days_before_trip",
+    "text": "\"¿Quién empaca solo dos horas antes de la salida?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_claps_when_plane_lands",
+    "text": "\"¿Quién aplaude al aterrizar?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_convinces_security_to_smile_for_photo",
+    "text": "\"¿Quién intenta hacer sonreír a la seguridad para la foto?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_travels_with_only_hand_luggage",
+    "text": "\"¿Quién siempre viaja solo con equipaje de mano?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_gets_lost_with_google_maps",
+    "text": "\"¿Quién se pierde a pesar de Google Maps?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_buys_souvenirs_for_pet",
+    "text": "\"¿Quién compra souvenirs para su mascota?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_eats_airport_snack_as_fine_dining",
+    "text": "\"¿Quién celebra los snacks del aeropuerto como si fueran cocina gourmet?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_tries_to_learn_basic_phrases_but_forgets",
+    "text": "\"¿Quién aprende vocabulario básico y lo olvida de inmediato?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_has_stamp_collection_in_passport",
+    "text": "\"¿Quién presume de su pasaporte lleno de sellos?\"",
+    "category": "travel"
+  },
+  {
+    "questionId": "who_posts_hourly_travel_updates",
+    "text": "\"¿Quién publica actualizaciones de viaje cada hora?\"",
+    "category": "travel"
+  }
+]

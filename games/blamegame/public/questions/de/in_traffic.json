@@ -1,0 +1,107 @@
+[
+  {
+    "questionId": "who_gets_road_rage",
+    "text": "Wer bekommt Straßenwut?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_backseat_drives",
+    "text": "Wer gibt Anweisungen vom Beifahrersitz?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_drives_too_slow",
+    "text": "Wer fährt zu langsam?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_drives_too_fast",
+    "text": "Wer fährt zu schnell?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_changes_radio_stations",
+    "text": "Wer wechselt ständig die Radiosender?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_forgets_directions",
+    "text": "Wer vergisst den Weg?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_sings_loudly_in_car",
+    "text": "Wer singt laut im Auto?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_texts_while_driving",
+    "text": "Wer schreibt Nachrichten während der Fahrt?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_never_offers_to_drive",
+    "text": "Wer bietet nie an zu fahren?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_always_needs_bathroom_breaks",
+    "text": "Wer braucht immer Toilettenpausen?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_falls_asleep_in_car",
+    "text": "Wer schläft im Auto ein?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_claims_they_drive_best",
+    "text": "Wer behauptet, er könne am besten Autofahren?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_ignores_navigation_system",
+    "text": "Wer ignoriert immer das Navi, weil er es besser weiß?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_honks_at_green_light",
+    "text": "Wer hupt schon bei Grün?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_plays_race_tracks_at_red_lights",
+    "text": "Wer startet an jeder Ampel ein Rennspiel?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_parks_with_questionable_angles",
+    "text": "Wer parkt grundsätzlich schief?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_believes_bike_has_right_of_way_always",
+    "text": "Wer denkt, dass Fahrräder immer Vorfahrt haben?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_listens_to_audiobooks_and_misses_exit",
+    "text": "Wer verpasst die Ausfahrt wegen Hörbüchern?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_has_emergency_snacks_in_glovebox",
+    "text": "Wer hat Notfall-Snacks im Handschuhfach?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_names_their_gps_voice",
+    "text": "Wer hat der Navi-Stimme einen Namen gegeben?",
+    "category": "in_traffic"
+  },
+  {
+    "questionId": "who_thinks_blinker_is_optional",
+    "text": "Wer hält Blinken für optional?",
+    "category": "in_traffic"
+  }
+]

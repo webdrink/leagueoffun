@@ -1,0 +1,142 @@
+[
+  {
+    "questionId": "who_is_most_romantic",
+    "text": "¿Quién es más romántico?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_falls_in_love_quickly",
+    "text": "¿Quién se enamora rápidamente?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_gives_best_relationship_advice",
+    "text": "¿Quién da los mejores consejos de relaciones?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_takes_longest_to_commit",
+    "text": "¿A quién le cuesta más comprometerse?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_ghosts_people_after_third_date",
+    "text": "\"¿Quién ghostea a las personas después de la tercera cita?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_falls_in_love_too_quickly",
+    "text": "\"¿Quién se enamora demasiado rápido?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_has_strictest_dating_rules",
+    "text": "\"¿Quién tiene las reglas de citas más estrictas?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_would_write_love_letter",
+    "text": "\"¿Quién escribiría una carta de amor?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_secretly_plans_wedding_in_mind",
+    "text": "\"¿Quién planea secretamente una boda en su cabeza?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_is_worst_at_flirting",
+    "text": "\"¿Quién puede coquetear peor?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_has_biggest_heart",
+    "text": "\"¿Quién tiene el corazón más grande?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_gives_relationship_advice_but_is_single",
+    "text": "\"¿Quién tiene más consejos sobre relaciones, pero está soltero?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_withdraws_quickest",
+    "text": "\"¿Quién se retira más rápido?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_plans_first_date_for_weeks",
+    "text": "\"¿Quién planea la primera cita durante semanas?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_forgets_anniversary",
+    "text": "\"¿Quién olvida el aniversario?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_writes_longest_messages",
+    "text": "\"¿Quién escribe los mensajes más largos?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_always_brings_small_gifts",
+    "text": "\"¿Quién siempre trae pequeños regalos?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_takes_most_couple_selfies",
+    "text": "\"¿Quién hace más selfies de dos?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_is_most_jealous",
+    "text": "\"¿Quién es el más celoso?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_always_suggests_new_activities",
+    "text": "\"¿Quién siempre sugiere nuevas actividades?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_takes_longest_to_respond",
+    "text": "\"¿Quién tarda más en responder?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_talks_most_about_future",
+    "text": "\"¿Quién habla más sobre el futuro?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_has_most_inside_jokes",
+    "text": "\"¿Quién tiene más chistes internos?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "relationship_advice",
+    "text": "\"¿Quién sería el más propenso a dar buenos consejos sobre relaciones?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "first_date",
+    "text": "\"¿Quién planearía la mejor primera cita?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "forget_anniversary",
+    "text": "\"¿Quién sería más propenso a olvidar un aniversario?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "matchmaker",
+    "text": "\"¿Quién sería el mejor celestino?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "secret_admirer",
+    "text": "\"¿Quién tendría más probabilidades de tener un admirador secreto?\"",
+    "category": "relationships"
+  }
+]

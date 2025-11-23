@@ -1,0 +1,132 @@
+[
+  {
+    "questionId": "who_makes_worst_decisions",
+    "text": "Who makes the worst decisions?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_never_learns_from_mistakes",
+    "text": "Who never learns from mistakes?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_is_most_impulsive",
+    "text": "Who is the most impulsive?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_do_it_for_a_dare",
+    "text": "Who would do it for a dare?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_ignores_warning_signs",
+    "text": "Who ignores warning signs?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "bad_decisions_land_sample_question_1",
+    "text": "Sample question 1 for bad decisions land",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "bad_decisions_land_sample_question_2",
+    "text": "Sample question 2 for bad decisions land",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_takes_risks_without_thinking",
+    "text": "\"Who takes risks without thinking?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_trusts_people_too_easily",
+    "text": "\"Who trusts people too easily?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_makes_decisions_based_on_emotions",
+    "text": "\"Who makes decisions based on emotions?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_follow_a_stranger_home",
+    "text": "\"Who would follow a stranger home?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_a_dangerous_stunt",
+    "text": "\"Who would try a dangerous stunt?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_steal_a_car",
+    "text": "\"Who would steal a car?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_get_lost_in_the_woods",
+    "text": "\"Who would get lost in the woods?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_a_strange_food",
+    "text": "\"Who would try a strange food?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_jump_off_a_cliff",
+    "text": "\"Who would jump off a cliff?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_get_into_a_fight",
+    "text": "\"Who would get into a fight?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_to_fix_a_broken_device",
+    "text": "\"Who would try to fix a broken device?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_ride_a_wild_animal",
+    "text": "\"Who would ride a wild animal?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_ask_a_stranger_for_money",
+    "text": "\"Who would ask a stranger for money?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_to_sneak_into_a_party",
+    "text": "\"Who would try to sneak into a party?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_ride_a_skateboard_down_a_stairs",
+    "text": "\"Who would ride a skateboard down a staircase?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_to_catch_a_fish_with_bare_hands",
+    "text": "\"Who would try to catch a fish with bare hands?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_to_jump_over_a_fire",
+    "text": "\"Who would try to jump over a fire?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_ask_a_stranger_for_help",
+    "text": "\"Who would ask a stranger for help?\"",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_to_fix_a_strange_machine",
+    "text": "\"Who would try to fix a strange machine?\"",
+    "category": "bad_decisions_land"
+  }
+]

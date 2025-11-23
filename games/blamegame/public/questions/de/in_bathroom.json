@@ -1,0 +1,132 @@
+[
+  {
+    "questionId": "who_takes_longest_in_bathroom",
+    "text": "Wer braucht am längsten im Badezimmer?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_leaves_wet_towels_on_floor",
+    "text": "Wer lässt nasse Handtücher auf dem Boden liegen?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_sings_in_shower",
+    "text": "Wer singt unter der Dusche?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_forgets_to_buy_toilet_paper",
+    "text": "Wer vergisst, Toilettenpapier zu kaufen?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_has_most_beauty_products",
+    "text": "Wer hat die meisten Schönheitsprodukte?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_leaves_hair_in_drain",
+    "text": "Wer lässt Haare im Abfluss?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_uses_all_hot_water",
+    "text": "Wer verbraucht das ganze heiße Wasser?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_takes_longest_showers",
+    "text": "Wer nimmt die längsten Duschen?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_hoards_bathroom_products",
+    "text": "Wer hortet Badezimmerprodukte?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_leaves_bathroom_messiest",
+    "text": "Wer hinterlässt das Badezimmer am unordentlichsten?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_takes_selfies_in_mirror",
+    "text": "Wer macht Selfies im Spiegel?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_has_most_bathroom_time",
+    "text": "Wer hat die meiste Zeit im Badezimmer?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_leaves_bathroom_light_on",
+    "text": "Wer lässt das Badezimmerlicht an?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_has_most_bathroom_essentials",
+    "text": "Wer hat die meisten Badezimmerutensilien?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_takes_bathroom_breaks_during_work",
+    "text": "Wer macht während der Arbeit die meisten Badezimmerpausen?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_has_most_bathroom_organization_skills",
+    "text": "Wer hat die besten Organisationsfähigkeiten im Badezimmer?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_sings_in_shower_like_concert",
+    "text": "Wer singt unter der Dusche ein ganzes Konzert?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_uses_face_mask_every_day",
+    "text": "Wer macht täglich eine Gesichtsmaske?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_spends_an_hour_styling_hair",
+    "text": "Wer braucht eine Stunde fürs Haarstyling?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_leaves_empty_toilet_paper_roll",
+    "text": "Wer lässt die leere Klopapierrolle hängen?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_brushes_teeth_while_dancing",
+    "text": "Wer tanzt beim Zähneputzen?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_has_more_shampoo_than_clothes",
+    "text": "Wer besitzt mehr Shampoos als Kleidungsstücke?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_checks_phone_on_toilet_longest",
+    "text": "Wer scrollt am längsten auf dem Klo?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_tried_diy_haircut_and_regretted",
+    "text": "Wer hat sich selbst die Haare geschnitten und bereut es?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_has_rubber_duck_collection",
+    "text": "Wer sammelt Badeenten?",
+    "category": "in_bathroom"
+  },
+  {
+    "questionId": "who_uses_roommate_luxury_soap_secretly",
+    "text": "Wer benutzt heimlich die Luxus-Seife der Mitbewohner:innen?",
+    "category": "in_bathroom"
+  }
+]

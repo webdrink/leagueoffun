@@ -1,0 +1,112 @@
+[
+  {
+    "questionId": "who_gets_sunburned_first",
+    "text": "¿Quién se quema primero con el sol?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_packs_too_much",
+    "text": "¿Quién empaca demasiado?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_learns_local_language",
+    "text": "¿Quién aprende el idioma local?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_gets_food_poisoning",
+    "text": "¿Quién sufre intoxicación alimentaria?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_plans_every_minute",
+    "text": "¿Quién planifica cada minuto?",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_overplans_vacation_itinerary",
+    "text": "\"¿Quién planea el plan de vacaciones?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_takes_most_vacation_photos",
+    "text": "\"¿Quién toma la mayoría de las fotos de vacaciones?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_spends_too_much_on_souvenirs",
+    "text": "\"¿Quién gasta demasiado en souvenirs?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_packs_at_last_minute",
+    "text": "\"¿Quién empaca en el último minuto?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_gets_homesick_first",
+    "text": "\"¿Quién siente nostalgia por casa primero?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_keeps_vacation_schedule",
+    "text": "\"¿Quién se adhiere al plan de vacaciones?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_gets_lost_in_foreign_city",
+    "text": "\"¿Quién se pierde en una ciudad extranjera?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_overpacks_luggage",
+    "text": "\"¿Quién empaca demasiado equipaje?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_tries_most_local_foods",
+    "text": "\"¿Quién prueba la mayoría de los platos locales?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_never_wants_vacation_to_end",
+    "text": "\"¿Quién nunca quiere que se acabe las vacaciones?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_takes_the_most_souvenirs_home",
+    "text": "\"¿Quién trae más souvenirs a casa?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_is_the_first_to_get_sick",
+    "text": "\"¿Quién se enfermará primero?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_is_the_best_travel_companion",
+    "text": "\"¿Quién es el mejor compañero de viaje?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_is_the_worst_travel_companion",
+    "text": "\"¿Quién es el peor compañero de viaje?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_sunburned",
+    "text": "\"¿Quién es más propenso a quemarse con el sol?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_food_poisoning",
+    "text": "\"¿Quién es más propenso a tener una intoxicación alimentaria?\"",
+    "category": "on_vacation"
+  },
+  {
+    "questionId": "who_is_most_likely_to_get_homesick",
+    "text": "\"¿Quién es más propenso a sentir nostalgia?\"",
+    "category": "on_vacation"
+  }
+]

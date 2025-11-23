@@ -1,0 +1,21 @@
+{
+  "extends": "../../packages/shared-config/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@framework-ui/*": ["../../packages/framework-ui/src/*"],
+      "@game-core/*": ["../../packages/game-core/src/*"],
+      "@shared-config/*": ["../../packages/shared-config/*"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "vite.config.ts"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

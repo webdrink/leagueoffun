@@ -1,0 +1,117 @@
+[
+  {
+    "questionId": "who_never_does_dishes",
+    "text": "Wer spült nie das Geschirr?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_eats_others_food",
+    "text": "Wer isst das Essen anderer?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_is_loudest_at_night",
+    "text": "Wer ist nachts am lautesten?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_never_buys_toilet_paper",
+    "text": "Wer kauft nie Toilettenpapier?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_leaves_dirty_laundry_everywhere",
+    "text": "Wer lässt schmutzige Wäsche überall liegen?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_brings_too_many_guests_over",
+    "text": "Wer bringt zu viele Gäste mit?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_is_cleanest_roommate",
+    "text": "Wer ist der ordentlichste Mitbewohner?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_pays_bills_late",
+    "text": "Wer zahlt Rechnungen zu spät?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_takes_longest_showers",
+    "text": "Wer duscht am längsten?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_leaves_empty_containers_in_fridge",
+    "text": "Wer lässt leere Behälter im Kühlschrank?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_borrows_without_asking",
+    "text": "Wer leiht sich Dinge ohne zu fragen?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_organizes_apartment_parties",
+    "text": "Wer organisiert Wohnungspartys?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_is_messiest_roommate",
+    "text": "Wer ist der unordentlichste Mitbewohner?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_steals_roommates_milk",
+    "text": "Wer klaut immer die Milch der Mitbewohner:innen?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_has_left_dishes_for_science",
+    "text": "Wer lässt das Geschirr stehen, um \"Schimmel-Forschung\" zu betreiben?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_organises_house_meetings_for_fun",
+    "text": "Wer veranstaltet freiwillig WG-Plena?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_labels_everything_with_name",
+    "text": "Wer beschriftet alles mit seinem Namen?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_plays_loud_music_at_2am",
+    "text": "Wer hört um 2 Uhr nachts laute Musik?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_has_plants_take_over_livingroom",
+    "text": "Wer verwandelt das Wohnzimmer in einen Dschungel?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_invites_randoms_to_crash_on_couch",
+    "text": "Wer lässt ständig Fremde auf dem Sofa schlafen?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_fails_to_take_out_trash_on_turn",
+    "text": "Wer vergisst immer seinen Müll-Dienst?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_turns_bathroom_into_spa",
+    "text": "Wer macht aus dem Bad ein Day-Spa?",
+    "category": "in_shared_apartment"
+  },
+  {
+    "questionId": "who_has_emergency_chocolate_stash",
+    "text": "Wer hat einen geheimen Schokoladenvorrat?",
+    "category": "in_shared_apartment"
+  }
+]

@@ -1,0 +1,113 @@
+[
+  {
+    "questionId": "who_watches_most_movies",
+    "text": "Wer schaut die meisten Filme?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_binges_entire_series_in_one_day",
+    "text": "Wer schaut eine ganze Serie an einem Tag?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_always_spoils_movie_endings",
+    "text": "Wer verrät immer die Filmenden?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_cries_during_romantic_movies",
+    "text": "Wer weint bei romantischen Filmen?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_talks_during_movies",
+    "text": "Wer redet während Filme?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_falls_asleep_during_movies",
+    "text": "Wer schläft während Filmen ein?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_quotes_movies_constantly",
+    "text": "Wer zitiert ständig Filme?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_knows_most_movie_trivia",
+    "text": "Wer kennt die meisten Filmfakten?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_same_movie_repeatedly",
+    "text": "Wer schaut denselben Film immer wieder?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_recommends_movies_to_everyone",
+    "text": "Wer empfiehlt jedem Filme?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_is_the_movie_critic",
+    "text": "Wer ist der größte Filmkritiker?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_in_original_language",
+    "text": "Wer schaut Filme in Originalsprache?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_is_the_biggest_film_buff",
+    "text": "Wer ist der größte Filmfan?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_on_their_phone",
+    "text": "Wer schaut Filme auf dem Handy?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_in_the_cinema",
+    "text": "Wer schaut Filme im Kino?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_with_friends",
+    "text": "Wer schaut Filme mit Freunden?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_with_family",
+    "text": "Wer schaut Filme mit der Familie?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_alone",
+    "text": "Wer schaut Filme alleine?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_with_popcorn",
+    "text": "Wer schaut Filme mit salzigem Popcorn?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_with_subtitles",
+    "text": "Wer schaut Filme mit Untertiteln?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_movies_with_dubbed_audio",
+    "text": "Wer schaut Filme mit synchronisierter Sprache?",
+    "category": "movies_series"
+  },
+  {
+    "questionId": "who_watches_romance_movies",
+    "text": "Wer schaut romantische Filme?",
+    "category": "movies_series"
+  }
+
+]

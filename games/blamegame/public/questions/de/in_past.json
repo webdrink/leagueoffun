@@ -1,0 +1,92 @@
+[
+  {
+    "questionId": "who_would_miss_old_times_most",
+    "text": "Wer würde die alten Zeiten am meisten vermissen?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_adapt_worst_to_past",
+    "text": "Wer würde sich am schlechtesten an die Vergangenheit anpassen?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_change_history",
+    "text": "Wer würde die Geschichte verändern?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_knows_most_about_history",
+    "text": "Wer weiß am meisten über Geschichte?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_be_best_time_traveler",
+    "text": "Wer wäre der beste Zeitreisende?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_still_use_old_technology",
+    "text": "Wer würde immer noch alte Technologie verwenden?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_lives_still_in_the_past",
+    "text": "Wer lebt immer noch in der Vergangenheit?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_knows_most_about_history",
+    "text": "Wer weiß am meisten über Geschichte?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_wants_to_visit_dinosaurs",
+    "text": "Wer möchte Dinosaurier live sehen?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_thinks_they_were_a_viking",
+    "text": "Wer glaubt, im früheren Leben ein Wikinger gewesen zu sein?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_misses_90s_ringtones",
+    "text": "Wer vermisst Nokia-Klingeltöne aus den 90ern?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_bring_smartphone_to_middle_ages",
+    "text": "Wer würde ein Smartphone ins Mittelalter schmuggeln?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_collects_vintage_cassettes",
+    "text": "Wer sammelt alte Musikkassetten?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_thinks_their_childhood_cartoon_best",
+    "text": "Wer findet, dass seine Kinderserien DIE besten waren?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_was_tamagotchi_serial_killer",
+    "text": "Wer war Tamagotchi-Serienmörder:in?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_have_scrapbooks_of_ticket_stubs",
+    "text": "Wer hat ein Sammelalbum voller Konzerttickets?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_reminisces_about_pre_internet_bliss",
+    "text": "Wer schwärmt vom Leben vor dem Internet?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_claims_they_invented_planking",
+    "text": "Wer behauptet, Planking erfunden zu haben?",
+    "category": "in_past"
+  }
+]

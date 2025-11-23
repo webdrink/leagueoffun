@@ -1,0 +1,14 @@
+{
+  "extends": "../../packages/shared-config/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@framework-ui/*": ["../../packages/framework-ui/src/*"],
+      "@game-core/*": ["../../packages/game-core/src/*"],
+      "@shared-config/*": ["../../packages/shared-config/*"]
+    }
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

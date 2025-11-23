@@ -1,0 +1,3 @@
+# This file disables Jekyll processing for GitHub Pages
+# This ensures that all files, including those starting with underscores
+# and JSON files in subdirectories, are served correctly

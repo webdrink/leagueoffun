@@ -1,0 +1,147 @@
+[
+  {
+    "questionId": "who_would_live_in_fantasy_world",
+    "text": "¿Quién viviría en un mundo de fantasía?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_tame_dragons",
+    "text": "¿Quién domaría dragones?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_be_great_wizard",
+    "text": "¿Quién sería un gran mago?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_quest_for_treasure",
+    "text": "¿Quién buscaría tesoros?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_fight_monsters",
+    "text": "¿Quién lucharía contra monstruos?",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "in_fantasy_sample_question_1",
+    "text": "Pregunta de ejemplo 1 para in_fantasy en es",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "in_fantasy_sample_question_2",
+    "text": "Pregunta de ejemplo 2 para in_fantasy en es",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_become_hero_in_fantasy",
+    "text": "\"¿Quién se convertiría en un héroe en un mundo de fantasía?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_find_magic_items",
+    "text": "\"¿Quién encontraría objetos mágicos?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_have_fantasy_pets",
+    "text": "\"¿Quién tendría criaturas fantásticas?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_create_fantasy_world",
+    "text": "\"¿Quién crearía un mundo de fantasía?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_become_king_or_queen",
+    "text": "\"¿Quién se convertiría en rey o reina?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_have_fantasy_powers",
+    "text": "\"¿Quién tendría habilidades fantásticas?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_be_fantasy_sidekick",
+    "text": "\"¿Quién sería el compañero en un mundo de fantasía?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_have_fantasy_quests",
+    "text": "\"¿Quién tendría misiones fantásticas?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_be_fantasy_guide",
+    "text": "\"¿Quién sería el líder en un mundo de fantasía?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_find_hidden_treasures",
+    "text": "\"¿Quién encontraría tesoros ocultos?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_be_fantasy_villain",
+    "text": "\"¿Quién sería el villano en un mundo de fantasía?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_have_fantasy_adventures",
+    "text": "\"¿Quién tendría las mejores aventuras de fantasía?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_imagines_being_a_superhero",
+    "text": "\"¿Quién se imagina siendo un superhéroe?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_dreams_of_dragon_pet",
+    "text": "\"¿Quién sueña con tener un dragón como mascota?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_move_into_hogwarts_tomorrow",
+    "text": "\"¿Quién se mudaría a Hogwarts mañana?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_plans_apocalypse_escape_route",
+    "text": "\"¿Quién planea una ruta de escape para el apocalipsis zombi?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_believes_cats_rule_secretly",
+    "text": "\"¿Quién cree que los gatos gobiernan el mundo en secreto?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_wants_lightsaber_for_household",
+    "text": "\"¿Quién desea tener un sable de luz para el hogar?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_has_entire_lotr_quotes_memorized",
+    "text": "\"¿Quién puede recitar de memoria citas de El Señor de los Anillos?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_thinks_they_have_hidden_magic_powers",
+    "text": "\"¿Quién está convencido de que tiene poderes mágicos secretos?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_would_choose_dragons_over_wifi",
+    "text": "\"¿Quién preferiría dragones a un buen Wi-Fi?\"",
+    "category": "in_fantasy"
+  },
+  {
+    "questionId": "who_plots_kingdom_in_mirror",
+    "text": "\"¿Quién reina en pensamientos sobre un reino de espejos?\"",
+    "category": "in_fantasy"
+  }
+]

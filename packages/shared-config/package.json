@@ -1,0 +1,11 @@
+{
+  "name": "@leagueoffun/shared-config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "tsconfig.base.json",
+    "tailwind.config.js",
+    "postcss.config.js"
+  ]
+}

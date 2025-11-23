@@ -1,0 +1,152 @@
+[
+  {
+    "questionId": "who_is_most_romantic",
+    "text": "Wer ist am romantischsten?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_ghosts_people_after_third_date",
+    "text": "Wer ghostet Leute nach dem dritten Date?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_falls_in_love_too_quickly",
+    "text": "Wer verliebt sich zu schnell?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_has_strictest_dating_rules",
+    "text": "Wer hat die strengsten Dating-Regeln?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_would_write_love_letter",
+    "text": "Wer wÃ¼rde einen Liebesbrief schreiben?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_secretly_plans_wedding_in_mind",
+    "text": "Wer plant heimlich eine Hochzeit im Kopf?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_is_worst_at_flirting",
+    "text": "Wer kann am schlechtesten flirten?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_has_biggest_heart",
+    "text": "Wer hat das grÃ¶ÃŸte Herz?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_gives_relationship_advice_but_is_single",
+    "text": "Wer hat die meisten Beziehungstipps, ist aber selbst Single?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_withdraws_quickest",
+    "text": "Wer zieht sich am schnellsten zurÃ¼ck?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_plans_first_date_for_weeks",
+    "text": "Wer plant das erste Date wochenlang?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_forgets_anniversary",
+    "text": "Wer vergisst den Jahrestag?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_writes_longest_messages",
+    "text": "Wer schreibt die lÃ¤ngsten Nachrichten?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_always_brings_small_gifts",
+    "text": "Wer bringt immer kleine Geschenke mit?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_takes_most_couple_selfies",
+    "text": "Wer macht die meisten Selfies zu zweit?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_is_most_jealous",
+    "text": "Wer ist am eifersÃ¼chtigsten?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_always_suggests_new_activities",
+    "text": "Wer schlÃ¤gt immer neue AktivitÃ¤ten vor?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_takes_longest_to_respond",
+    "text": "Wer braucht am lÃ¤ngsten, um sich zu melden?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_talks_most_about_future",
+    "text": "Wer redet am meisten Ã¼ber die Zukunft?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_has_most_inside_jokes",
+    "text": "Wer hat die meisten Insider-Witze?",
+    "category": "relationships"
+  },
+  {
+    "questionId": "relationship_sample_question_1",
+    "text": "Sample question 1 for relationships in de",
+    "category": "relationships"
+  },
+  {
+    "questionId": "relationship_sample_question_2",
+    "text": "Sample question 2 for relationships in de",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_falls_in_love_quickly",
+    "text": "\"Who falls in love quickly?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_gives_best_relationship_advice",
+    "text": "\"Who gives the best relationship advice?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "who_takes_longest_to_commit",
+    "text": "\"Who takes the longest to commit?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "relationship_advice",
+    "text": "\"Who would be most likely to give good relationship advice?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "first_date",
+    "text": "\"Who would plan the best first date?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "forget_anniversary",
+    "text": "\"Who would be most likely to forget an anniversary?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "matchmaker",
+    "text": "\"Who would be the best matchmaker?\"",
+    "category": "relationships"
+  },
+  {
+    "questionId": "secret_admirer",
+    "text": "\"Who would most likely have a secret admirer?\"",
+    "category": "relationships"
+  }
+]

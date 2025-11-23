@@ -1,0 +1,275 @@
+{
+  "components": [
+    {
+      "name": "DebugInput",
+      "path": "components/debug/DebugInput.tsx",
+      "props": []
+    },
+    {
+      "name": "DebugPanel",
+      "path": "components/debug/DebugPanel.tsx",
+      "props": [
+        "DebugPanelProps"
+      ]
+    },
+    {
+      "name": "AssetDebugInfo",
+      "path": "components/debug/AssetDebugInfo.tsx",
+      "props": [
+        "AssetDebugInfoProps"
+      ]
+    },
+    {
+      "name": "LanguageTester",
+      "path": "components/debug/LanguageTester.tsx",
+      "props": []
+    },
+    {
+      "name": "SettingsScreen",
+      "path": "components/settings/SettingsScreen.tsx",
+      "props": [
+        "SettingsScreenProps"
+      ]
+    },
+    {
+      "name": "LanguageSelector",
+      "path": "components/settings/LanguageSelector.tsx",
+      "props": [
+        "LanguageSelectorProps"
+      ]
+    },
+    {
+      "name": "ErrorDisplay",
+      "path": "components/core/ErrorDisplay.tsx",
+      "props": [
+        "ErrorDisplayProps"
+      ]
+    },
+    {
+      "name": "Slider",
+      "path": "components/core/Slider.tsx",
+      "props": []
+    },
+    {
+      "name": "Switch",
+      "path": "components/core/Switch.tsx",
+      "props": []
+    },
+    {
+      "name": "PrimaryButton",
+      "path": "components/core/PrimaryButton.tsx",
+      "props": []
+    },
+    {
+      "name": "Checkbox",
+      "path": "components/core/Checkbox.tsx",
+      "props": []
+    },
+    {
+      "name": "Input",
+      "path": "components/core/Input.tsx",
+      "props": []
+    },
+    {
+      "name": "VolumeControl",
+      "path": "components/core/VolumeControl.tsx",
+      "props": [
+        "VolumeControlProps"
+      ]
+    },
+    {
+      "name": "Button",
+      "path": "components/core/Button.tsx",
+      "props": [
+        "ButtonProps"
+      ]
+    },
+    {
+      "name": "ProgressBar",
+      "path": "components/core/ProgressBar.tsx",
+      "props": []
+    },
+    {
+      "name": "Confetti",
+      "path": "components/core/Confetti.tsx",
+      "props": [
+        "ConfettiProps"
+      ]
+    },
+    {
+      "name": "InfoModal",
+      "path": "components/core/InfoModal.tsx",
+      "props": [
+        "InfoModalProps"
+      ]
+    },
+    {
+      "name": "Label",
+      "path": "components/core/Label.tsx",
+      "props": []
+    },
+    {
+      "name": "Card",
+      "path": "components/core/Card.tsx",
+      "props": []
+    },
+    {
+      "name": "LanguageChangeFeedback",
+      "path": "components/language/LanguageChangeFeedback.tsx",
+      "props": [
+        "LanguageChangeFeedbackProps"
+      ]
+    },
+    {
+      "name": "QuestionScreen",
+      "path": "components/game/QuestionScreen.tsx",
+      "props": [
+        "QuestionScreenProps"
+      ]
+    },
+    {
+      "name": "LoadingCardStack",
+      "path": "components/game/LoadingCardStack.tsx",
+      "props": [
+        "LoadingCardStackProps"
+      ]
+    },
+    {
+      "name": "IntroScreen",
+      "path": "components/game/IntroScreen.tsx",
+      "props": [
+        "IntroScreenProps"
+      ]
+    },
+    {
+      "name": "GameHeader",
+      "path": "components/game/GameHeader.tsx",
+      "props": [
+        "GameHeaderProps"
+      ]
+    },
+    {
+      "name": "GameContainer",
+      "path": "components/game/GameContainer.tsx",
+      "props": [
+        "GameContainerProps"
+      ]
+    },
+    {
+      "name": "PlayerSetupScreen",
+      "path": "components/game/PlayerSetupScreen.tsx",
+      "props": [
+        "PlayerSetupScreenProps"
+      ]
+    },
+    {
+      "name": "CategoryPickScreen",
+      "path": "components/game/CategoryPickScreen.tsx",
+      "props": [
+        "CategoryPickScreenProps"
+      ]
+    },
+    {
+      "name": "LoadingContainer",
+      "path": "components/game/LoadingContainer.tsx",
+      "props": [
+        "LoadingContainerProps"
+      ]
+    },
+    {
+      "name": "QuestionProgress",
+      "path": "components/game/QuestionProgress.tsx",
+      "props": [
+        "QuestionProgressProps"
+      ]
+    },
+    {
+      "name": "SummaryScreen",
+      "path": "components/game/SummaryScreen.tsx",
+      "props": [
+        "SummaryScreenProps"
+      ]
+    },
+    {
+      "name": "QuestionCard",
+      "path": "components/game/QuestionCard.tsx",
+      "props": [
+        "QuestionCardProps"
+      ]
+    }
+  ],
+  "hooks": [
+    {
+      "name": "useQuestions",
+      "path": "hooks/useQuestions.ts",
+      "props": []
+    },
+    {
+      "name": "useTranslation",
+      "path": "hooks/useTranslation.ts",
+      "props": []
+    },
+    {
+      "name": "useGameState",
+      "path": "hooks/useGameState.ts",
+      "props": []
+    },
+    {
+      "name": "useGameSettings",
+      "path": "hooks/useGameSettings.ts",
+      "props": []
+    },
+    {
+      "name": "useNameBlameSetup",
+      "path": "hooks/useNameBlameSetup.ts",
+      "props": []
+    },
+    {
+      "name": "useLocalStorage",
+      "path": "hooks/useLocalStorage.ts",
+      "props": []
+    },
+    {
+      "name": "useTheme",
+      "path": "hooks/useTheme.ts",
+      "props": []
+    },
+    {
+      "name": "useSound",
+      "path": "hooks/useSound.ts",
+      "props": []
+    },
+    {
+      "name": "questionLoaderAdapter",
+      "path": "hooks/utils/questionLoaderAdapter.ts",
+      "props": []
+    },
+    {
+      "name": "storageUtils",
+      "path": "hooks/utils/storageUtils.ts",
+      "props": []
+    },
+    {
+      "name": "index",
+      "path": "hooks/utils/index.ts",
+      "props": []
+    },
+    {
+      "name": "soundUtils",
+      "path": "hooks/utils/soundUtils.ts",
+      "props": []
+    },
+    {
+      "name": "languageSupport",
+      "path": "hooks/utils/languageSupport.ts",
+      "props": []
+    }
+  ],
+  "context": [
+    {
+      "name": "GameContext",
+      "path": "context/GameContext.tsx",
+      "props": []
+    }
+  ]
+}

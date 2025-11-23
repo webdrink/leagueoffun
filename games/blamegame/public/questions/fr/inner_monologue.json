@@ -1,0 +1,82 @@
+[
+  {
+    "questionId": "who_overthinks_everything",
+    "text": "Qui réfléchit trop à tout?",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_has_most_elaborate_daydreams",
+    "text": "Qui a les rêveries les plus élaborées?",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_argues_with_themselves",
+    "text": "Qui se dispute avec soi-même?",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_has_craziest_thoughts",
+    "text": "Qui a les pensées les plus folles?",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_rehearses_conversations_in_head",
+    "text": "\"Qui répète des conversations dans sa tête ?\"",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_creates_alternate_scenarios",
+    "text": "\"Qui crée des scénarios alternatifs ?\"",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_runs_through_social_scenarios",
+    "text": "\"Qui joue des scénarios sociaux dans sa tête ?\"",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_replays_embarrassing_moments_at_night",
+    "text": "\"Qui pense la nuit à des moments embarrassants de 2009 ?\"",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_practices_award_speech_in_shower",
+    "text": "\"Qui s'exerce sous la douche à un discours des Oscars ?\"",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_questions_if_they_locked_door",
+    "text": "\"Qui se demande sans cesse si la porte est verrouillée ?\"",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_argues_with_imaginary_rival",
+    "text": "\"Qui se dispute avec un rival imaginaire ?\"",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_composes_comebacks_too_late",
+    "text": "\"Qui trouve toujours les meilleures répliques trop tard ?\"",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_gives_self_pep_talk_before_calls",
+    "text": "\"Qui se fait des discours de motivation avant des appels téléphoniques ?\"",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_has_soundtrack_in_head",
+    "text": "\"Qui a une bande-son personnelle qui tourne dans sa tête ?\"",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_plans_world_domination_in_line",
+    "text": "\"Qui planifie la domination mondiale pendant qu'il fait la queue ?\"",
+    "category": "inner_monologue"
+  },
+  {
+    "questionId": "who_thinks_barista_is_secretly_judging",
+    "text": "\"Qui croit que la barista l'évalue secrètement ?\"",
+    "category": "inner_monologue"
+  }
+]

@@ -1,0 +1,97 @@
+[
+  {
+    "questionId": "who_would_miss_old_times_most",
+    "text": "Qui regretterait le plus les temps anciens?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_adapt_worst_to_past",
+    "text": "Qui s'adapterait le plus mal au passé?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_change_history",
+    "text": "Qui changerait l'histoire?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_live_in_medieval_times",
+    "text": "Qui vivrait à l'époque médiévale?",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_knows_most_about_history",
+    "text": "\"Qui sait le plus sur l'histoire ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_be_best_time_traveler",
+    "text": "\"Qui serait le meilleur voyageur dans le temps ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_still_use_old_technology",
+    "text": "\"Qui utiliserait encore de la vieille technologie ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_lives_still_in_the_past",
+    "text": "\"Qui vit encore dans le passé ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_knows_most_about_history",
+    "text": "\"Qui sait le plus sur l'histoire ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_wants_to_visit_dinosaurs",
+    "text": "\"Qui aimerait voir des dinosaures en direct ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_thinks_they_were_a_viking",
+    "text": "\"Qui croit avoir été un viking dans une vie antérieure ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_misses_90s_ringtones",
+    "text": "\"Qui regrette les sonneries Nokia des années 90 ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_would_bring_smartphone_to_middle_ages",
+    "text": "\"Qui ferait passer un smartphone au Moyen Âge ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_collects_vintage_cassettes",
+    "text": "\"Qui collectionne les vieilles cassettes audio ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_thinks_their_childhood_cartoon_best",
+    "text": "\"Qui pense que ses séries pour enfants étaient LES meilleures ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_was_tamagotchi_serial_killer",
+    "text": "\"Qui était le/la tueur(euse) en série de Tamagotchi ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_have_scrapbooks_of_ticket_stubs",
+    "text": "\"Qui a un album de collection plein de billets de concert ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_reminisces_about_pre_internet_bliss",
+    "text": "\"Qui rêve de la vie avant Internet ?\"",
+    "category": "in_past"
+  },
+  {
+    "questionId": "who_claims_they_invented_planking",
+    "text": "\"Qui prétend avoir inventé le planking ?\"",
+    "category": "in_past"
+  }
+]

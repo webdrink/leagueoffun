@@ -1,0 +1,122 @@
+[
+  {
+    "questionId": "who_makes_worst_decisions",
+    "text": "Wer trifft die schlechtesten Entscheidungen?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_never_learns_from_mistakes",
+    "text": "Wer lernt nie aus Fehlern?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_is_most_impulsive",
+    "text": "Wer ist am impulsivsten?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_do_it_for_a_dare",
+    "text": "Wer würde es für eine Mutprobe tun?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_ignores_warning_signs",
+    "text": "Wer ignoriert Warnsignale?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_takes_risks_without_thinking",
+    "text": "Wer geht Risiken ein, ohne nachzudenken?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_trusts_people_too_easily",
+    "text": "Wer vertraut Menschen zu leicht?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_makes_decisions_based_on_emotions",
+    "text": "Wer trifft Entscheidungen basierend auf Emotionen?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_follow_a_stranger_home",
+    "text": "Wer würde einem Fremden nach Hause folgen?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_a_dangerous_stunt",
+    "text": "Wer würde einen gefährlichen Stunt ausprobieren?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_steal_a_car",
+    "text": "Wer würde ein Auto stehlen?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_get_lost_in_the_woods",
+    "text": "Wer würde sich im Wald verlaufen?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_a_strange_food",
+    "text": "Wer würde ein seltsames Essen probieren?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_jump_off_a_cliff",
+    "text": "Wer würde von einer Klippe springen?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_get_into_a_fight",
+    "text": "Wer würde in einen Streit geraten?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_to_fix_a_broken_device",
+    "text": "Wer würde versuchen, ein defektes Gerät zu reparieren?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_ride_a_wild_animal",
+    "text": "Wer würde ein wildes Tier reiten?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_ask_a_stranger_for_money",
+    "text": "Wer würde einen Fremden um Geld bitten?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_to_sneak_into_a_party",
+    "text": "Wer würde versuchen, sich heimlich in eine Party zu schleichen?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_ride_a_skateboard_down_a_stairs",
+    "text": "Wer würde mit einem Skateboard eine Treppe hinunterfahren?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_to_catch_a_fish_with_bare_hands",
+    "text": "Wer würde versuchen, einen Fisch mit bloßen Händen zu fangen?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_to_jump_over_a_fire",
+    "text": "Wer würde versuchen, über ein Feuer zu springen?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_ask_a_stranger_for_help",
+    "text": "Wer würde einen Fremden um Hilfe bitten?",
+    "category": "bad_decisions_land"
+  },
+  {
+    "questionId": "who_would_try_to_fix_a_strange_machine",
+    "text": "Wer würde versuchen, eine seltsame Maschine zu reparieren?",
+    "category": "bad_decisions_land"
+  }
+]
