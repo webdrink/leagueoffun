@@ -7,17 +7,17 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev:blamegame",
-    "dev:blamegame": "cd games/blamegame && npm run dev",
-    "dev:hookhunt": "cd games/hookhunt && npm run dev",
-    "dev:game-picker": "cd games/game-picker && npm run dev",
-    "build": "npm run build:blamegame",
-    "build:blamegame": "cd games/blamegame && npm run build",
-    "build:hookhunt": "cd games/hookhunt && npm run build",
-    "build:game-picker": "cd games/game-picker && npm run build",
-    "lint": "npm run lint --workspaces --if-present",
-    "typecheck": "npm run typecheck --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present",
+    "dev": "node scripts/run-workspace-task.cjs games/blamegame dev",
+    "dev:blamegame": "node scripts/run-workspace-task.cjs games/blamegame dev",
+    "dev:hookhunt": "node scripts/run-workspace-task.cjs games/hookhunt dev",
+    "dev:game-picker": "node scripts/run-workspace-task.cjs games/game-picker dev",
+    "build": "node scripts/run-workspace-task.cjs games/blamegame build",
+    "build:blamegame": "node scripts/run-workspace-task.cjs games/blamegame build",
+    "build:hookhunt": "node scripts/run-workspace-task.cjs games/hookhunt build",
+    "build:game-picker": "node scripts/run-workspace-task.cjs games/game-picker build",
+    "lint": "node scripts/run-monorepo-script.cjs lint",
+    "typecheck": "node scripts/run-monorepo-script.cjs typecheck",
+    "test": "node scripts/run-monorepo-script.cjs test",
     "install:all": "npm install && npm install --workspaces"
   }
 }

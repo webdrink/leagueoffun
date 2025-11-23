@@ -53,22 +53,32 @@ The central hub for discovering and launching League of Fun games. Maintains pla
 
 ### Prerequisites
 - Node.js 18+
-- npm with workspaces support
+- pnpm 10+ for local development (via `corepack enable pnpm` or manual install)
+- npm 8+/workspaces (used automatically in CI/CD)
 
 ### Development
 
 ```bash
-# Install all dependencies
-npm install
+# Install all dependencies (local development)
+pnpm install
 
-# Run a specific game
-npm run dev:blamegame
-npm run dev:hookhunt  
-npm run dev:game-picker
+# Run a specific game locally (pnpm auto-selects workspace)
+pnpm run dev:blamegame
+pnpm run dev:hookhunt  
+pnpm run dev:game-picker
 
-# Build all games
-npm run build
+# Build all games locally
+pnpm run build
+
+# CI/CD continues to call the same scripts with npm
+npm install && npm run build
 ```
+
+### Package Manager Strategy
+
+- **Local:** pnpm is the default; scripts route through `scripts/run-*-task.cjs` so pnpm is used automatically.
+- **Remote/CI:** npm remains the execution environment. The helper scripts detect `CI=true` (or `USE_NPM=1`) and fall back to npm to keep pipelines stable.
+- **Forcing npm locally:** run `USE_NPM=1 pnpm run build` (PowerShell: `$env:USE_NPM=1; pnpm run build`) to mimic CI behavior.
 
 [📖 Full Documentation →](docs/monorepo-structure.md)
 

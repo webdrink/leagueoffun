@@ -1,0 +1,10 @@
+packages:
+  - games/*
+  - packages/*
+  - components/*
+  - providers
+  - framework
+  - lib
+  - hooks
+  - store
+  - utils

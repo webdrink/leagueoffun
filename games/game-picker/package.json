@@ -11,8 +11,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@leagueoffun/framework-ui": "*",
-    "@leagueoffun/game-core": "*",
+    "@leagueoffun/framework-ui": "workspace:*",
+    "@leagueoffun/game-core": "workspace:*",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "framer-motion": "^11.0.0",
