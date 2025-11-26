@@ -104,13 +104,18 @@ function App() {
 
   const handleReturnToHub = () => {
     if (returnUrl) {
-      const url = new URL(decodeURIComponent(returnUrl));
-      url.searchParams.set('playerId', playerId);
-      url.searchParams.set('gameId', 'hookhunt');
-      url.searchParams.set('score', '0');
-      url.searchParams.set('playedAt', new Date().toISOString());
-      window.location.href = url.toString();
+      try {
+        const url = new URL(decodeURIComponent(returnUrl));
+        url.searchParams.set('playerId', playerId);
+        url.searchParams.set('gameId', 'hookhunt');
+        url.searchParams.set('score', '0');
+        url.searchParams.set('playedAt', new Date().toISOString());
+        window.location.href = url.toString();
+        return;
+      } catch (e) {}
     }
+    // Fallback to League of Fun hub if no returnUrl
+    window.location.href = 'https://leagueoffun.de';
   };
 
   const itemVariants = animationsEnabled

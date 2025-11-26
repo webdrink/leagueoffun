@@ -30,6 +30,7 @@ import { Button } from '../components/Button';
 import FooterButton from '../components/FooterButton';
 import { useGameStateStore, useBlameGameStore, selectCurrentPlayer, selectIsInBlamedPhase } from '../../../store';
 import useTranslation from '../../../hooks/useTranslation';
+import { usePlayerId, returnToHub } from '../../../hooks/usePlayerId';
 
 interface ActionButton {
   label: string;
@@ -86,6 +87,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
   className = ''
 }) => {
   const { t } = useTranslation();
+  const { playerId, returnUrl } = usePlayerId();
   
   // Subscribe to framework state
   const currentPlayer = useGameStateStore(selectCurrentPlayer);
@@ -108,7 +110,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
   
   // Render navigation interface (classic mode)
   const renderNavigation = () => (
-  <div className="flex justify-between items-center space-x-4 w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto">
+  <div className="flex justify-between items-center space-x-4 w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto" data-testid="game-shell-footer">
       {secondaryAction && (
         <motion.div variants={itemVariants}>
           <FooterButton
@@ -120,6 +122,32 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
           </FooterButton>
         </motion.div>
       )}
+
+      {/* Return to Game Picker button */}
+      <motion.div variants={itemVariants}>
+        <FooterButton
+          onClick={() => {
+            if (returnUrl) {
+              try {
+                returnToHub(returnUrl, playerId, 0);
+                return;
+              } catch (e) {}
+            }
+            // Local fallback: if running locally and picker is on port 999, go there
+            const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+            if (isLocal) {
+              window.location.href = 'http://localhost:999/';
+            } else {
+              window.location.href = 'https://leagueoffun.de';
+            }
+          }}
+          className="px-4 py-2"
+          title={t ? t('footer.return_to_picker') : 'Back to Game Picker'}
+          aria-label={t ? t('footer.return_to_picker') : 'Back to Game Picker'}
+        >
+          ↩
+        </FooterButton>
+      </motion.div>
       
       {primaryAction && (
         <motion.div variants={itemVariants} className="flex-1">

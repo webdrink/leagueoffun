@@ -200,8 +200,22 @@ function App() {
   }, []);
 
   const handlePlayGame = (gameId: string, gameUrl: string) => {
+    const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const returnUrl = encodeURIComponent(window.location.href);
-    const targetUrl = `${gameUrl}?playerId=${playerId}&returnUrl=${returnUrl}`;
+    
+    // In local development, route to local game servers on their specific ports
+    let targetBaseUrl = gameUrl;
+    if (isLocalDev) {
+      // Map game ID to local dev ports
+      const localPorts: Record<string, number> = {
+        'blamegame': 9991,
+        'hookhunt': 9992,
+      };
+      const port = localPorts[gameId] || 9991;
+      targetBaseUrl = `http://localhost:${port}`;
+    }
+    
+    const targetUrl = `${targetBaseUrl}?playerId=${playerId}&returnUrl=${returnUrl}`;
     window.location.href = targetUrl;
   };
 

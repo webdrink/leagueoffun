@@ -9,7 +9,7 @@ test.describe('NameBlame Player Setup Debug', () => {
       }
     });
 
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:999');
     
     // Navigate to intro and check all elements
     console.log('🎯 Step 1: Checking intro screen elements');

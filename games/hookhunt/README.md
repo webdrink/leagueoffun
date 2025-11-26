@@ -31,7 +31,7 @@ npm run dev:hookhunt
 npm run dev
 ```
 
-Visit `http://localhost:5173`
+Visit `http://localhost:999`
 
 ## Building
 
@@ -182,7 +182,7 @@ Automatic deployment via GitHub Actions:
 ## URLs
 
 - **Game**: https://hookhunt.leagueoffun.de
-- **Local Dev**: http://localhost:5173
+- **Local Dev**: http://localhost:999
 
 ## Development Roadmap
 

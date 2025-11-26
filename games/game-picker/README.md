@@ -28,7 +28,7 @@ npm run dev:game-picker
 npm run dev
 ```
 
-Visit `http://localhost:5173`
+Visit `http://localhost:999`
 
 ## Building
 
@@ -166,7 +166,7 @@ Automatic deployment via GitHub Actions:
 ## URLs
 
 - **Hub**: https://leagueoffun.de
-- **Local Dev**: http://localhost:5173
+- **Local Dev**: http://localhost:999
 
 ## Key Components
 

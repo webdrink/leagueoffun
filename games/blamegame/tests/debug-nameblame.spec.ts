@@ -9,7 +9,7 @@ test.describe('NameBlame Flow Debug', () => {
     });
 
     // Navigate to the app
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:999');
 
     // Wait for page to load
     await page.waitForTimeout(2000);

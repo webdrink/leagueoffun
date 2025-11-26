@@ -12,5 +12,9 @@ export default defineConfig({
       '@shared-config': path.resolve(__dirname, '../../packages/shared-config')
     }
   },
-  plugins: [react()]
+  plugins: [react()],
+  server: {
+    port: 999,
+    strictPort: true,
+  }
 });

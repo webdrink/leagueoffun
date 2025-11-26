@@ -5,7 +5,7 @@ import { Label } from '../../framework/ui/components/Label';
 import VolumeControl from '../../framework/ui/components/VolumeControl';
 import { GameSettings, QuestionStats, SupportedLanguage } from '../../types';
 import { Switch } from '../../framework/ui/components/Switch';
-import { Settings as SettingsIcon, Info as InfoIcon, FolderPlus } from 'lucide-react'; // Using lucide-react consistently
+import { Settings as SettingsIcon, Info as InfoIcon, FolderPlus, Home } from 'lucide-react'; // Using lucide-react consistently
 import LanguageSelector from '../settings/LanguageSelector';
 import useTranslation from '../../hooks/useTranslation';
 
@@ -32,6 +32,7 @@ interface IntroScreenProps {
   onToggleCategorySelect?: (checked: boolean) => void;
   onNameBlameModeChange?: (enabled: boolean) => void; // Add callback for mode change navigation
   onOpenCustomCategories?: () => void; // Add callback for custom categories
+  onReturnToPicker?: () => void; // Add callback to return to game picker
 }
 
 /**
@@ -85,7 +86,8 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
   showCategorySelectToggle,
   onToggleCategorySelect,
   onNameBlameModeChange,
-  onOpenCustomCategories
+  onOpenCustomCategories,
+  onReturnToPicker
 }) => {
   const { t } = useTranslation();
   
@@ -179,23 +181,41 @@ const IntroScreen: React.FC<IntroScreenProps> = ({
         <LanguageSelector />
       </div>
 
-      <div className="mt-6 flex justify-end space-x-2">
-        {onOpenCustomCategories && (
-          <Button 
-            variant="outline" 
-            onClick={onOpenCustomCategories} 
-            className="text-autumn-600 hover:text-autumn-800 hover:bg-autumn-50 border-autumn-300 p-2"
-            title={t('custom_categories.manage')}
-          >
-            <FolderPlus size={20} />
+      <div className="mt-6 flex justify-between items-center">
+        {/* Left side - return to game picker */}
+        <div>
+          {onReturnToPicker && (
+            <Button 
+              variant="outline" 
+              onClick={onReturnToPicker} 
+              className="text-autumn-600 hover:text-autumn-800 hover:bg-autumn-50 border-autumn-300 p-2"
+              title={t('common.back_to_picker', 'Back to Game Picker')}
+              data-testid="return-to-picker-button"
+            >
+              <Home size={20} />
+            </Button>
+          )}
+        </div>
+        
+        {/* Right side - settings buttons */}
+        <div className="flex space-x-2">
+          {onOpenCustomCategories && (
+            <Button 
+              variant="outline" 
+              onClick={onOpenCustomCategories} 
+              className="text-autumn-600 hover:text-autumn-800 hover:bg-autumn-50 border-autumn-300 p-2"
+              title={t('custom_categories.manage')}
+            >
+              <FolderPlus size={20} />
+            </Button>
+          )}
+          <Button variant="outline" onClick={onOpenDebugPanel} className="text-autumn-600 hover:text-autumn-800 hover:bg-autumn-50 border-autumn-300 p-2">
+            <SettingsIcon size={20} />
           </Button>
-        )}
-        <Button variant="outline" onClick={onOpenDebugPanel} className="text-autumn-600 hover:text-autumn-800 hover:bg-autumn-50 border-autumn-300 p-2">
-          <SettingsIcon size={20} />
-        </Button>
-        <Button variant="outline" onClick={onOpenInfoModal} className="text-autumn-600 hover:text-autumn-800 hover:bg-autumn-50 border-autumn-300 p-2">
-          <InfoIcon size={20} />
-        </Button>
+          <Button variant="outline" onClick={onOpenInfoModal} className="text-autumn-600 hover:text-autumn-800 hover:bg-autumn-50 border-autumn-300 p-2">
+            <InfoIcon size={20} />
+          </Button>
+        </div>
       </div>
     </motion.div>
   );

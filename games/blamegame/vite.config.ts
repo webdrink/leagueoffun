@@ -81,4 +81,8 @@ export default defineConfig({
       }
     })
   ],
+  server: {
+    port: 9991,
+    strictPort: true,
+  }
 });

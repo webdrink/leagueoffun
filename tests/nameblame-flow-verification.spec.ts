@@ -21,7 +21,7 @@ test.describe('NameBlame Flow - Automated Verification', () => {
       }
     });
 
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:999');
     await page.waitForTimeout(2000);
 
     // Step 1: Verify we're on IntroScreen
@@ -129,7 +129,7 @@ test.describe('NameBlame Flow - Automated Verification', () => {
   test('should handle Classic mode flow correctly', async ({ page }) => {
     const gameSteps: string[] = [];
     
-    await page.goto('http://localhost:5173');
+    await page.goto('http://localhost:999');
     await page.waitForTimeout(2000);
 
     // Step 1: Verify IntroScreen

@@ -38,7 +38,7 @@ pnpm install
 pnpm dev
 ```
 
-Your game will be available at `http://localhost:5173` *(assuming you don't have anything else running on that port)*
+Your game will be available at `http://localhost:999` *(assuming you don't have anything else running on that port)*
 
 **✨ In 5 minutes, you'll have a working party game!**  
 *(\*Results may vary. "Working" is subjective. Your definition of 5 minutes may differ from ours.)*

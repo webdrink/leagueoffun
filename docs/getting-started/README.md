@@ -42,7 +42,7 @@ pnpm install
 pnpm dev
 ```
 
-Open `http://localhost:5173` in your browser. You should see the NameBlame game running!
+Open `http://localhost:999` in your browser. You should see the NameBlame game running!
 
 *If you see an error instead, welcome to the club. Check the console for cryptic error messages.*
 

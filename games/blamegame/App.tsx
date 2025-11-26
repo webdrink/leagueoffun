@@ -45,6 +45,7 @@ import AssetDebugInfo from './components/debug/AssetDebugInfo';
 import CategoryPickScreen from './components/game/CategoryPickScreen';
 import SummaryScreen from './components/game/SummaryScreen';
 import CustomCategoryManager from './components/customCategories/CustomCategoryManager';
+import { usePlayerId, returnToHub } from './hooks/usePlayerId';
 
 import { SUPPORTED_LANGUAGES } from './hooks/utils/languageSupport';
 import { LOADING_QUOTES, initialGameSettings } from './constants';
@@ -54,6 +55,8 @@ import { useFrameworkEventBus } from './hooks/useFrameworkEventBus';
 import { dispatchAdvance, dispatchSelectTarget, createDispatchContext } from './lib/utils/frameworkActions';
 
 function App() {
+    // Return-to-hub support
+    const { playerId, returnUrl } = usePlayerId();
   const { soundEnabled, toggleSound, playSound, volume, setVolume } = useSound();
   const { t, i18n } = useTranslation();
   const { gameSettings, updateGameSettings } = useGameSettings();
@@ -115,6 +118,27 @@ function App() {
   
   // Create dispatch context for framework actions
   const dispatchContext = createDispatchContext(frameworkEventBus);
+
+  const handleReturnToPicker = () => {
+    // Handle local development - stay on local server
+    const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    
+    if (returnUrl) {
+      try {
+        returnToHub(returnUrl, playerId, 0);
+        return;
+      } catch (e) {
+        console.error('Error returning to hub:', e);
+      }
+    }
+    
+    // Fallback: local dev goes to local picker on port 999, production goes to leagueoffun.de
+    if (isLocalDev) {
+      window.location.href = 'http://localhost:999/';
+    } else {
+      window.location.href = 'https://leagueoffun.de';
+    }
+  };
 
   const getEmoji = useCallback((categoryName: string): string => {
     // Find in current round first, then all questions as fallback
@@ -662,6 +686,7 @@ function App() {
                 setGameStep('playerSetup');
               }
             }}
+            onReturnToPicker={handleReturnToPicker}
           />
         )}
 

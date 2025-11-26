@@ -15,23 +15,26 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['html'],
+    ['html', { open: 'never' }],
     ['json', { outputFile: 'playwright-report/results.json' }],
     ['junit', { outputFile: 'playwright-report/results.xml' }]
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://localhost:999',
+
+    /* Run tests in headless mode */
+    headless: true,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     
-    /* Take screenshot on failure */
-    screenshot: 'only-on-failure',
+    /* Take screenshot on every test to ensure visual consistency */
+    screenshot: 'on',
     
-    /* Record video on failure */
-    video: 'retain-on-failure',
+    /* Record video on every test */
+    video: 'on',
     
     /* Timeout for each test */
     actionTimeout: 10000,
@@ -140,8 +143,8 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5173',
+    command: 'npm run dev:game-picker',
+    url: 'http://localhost:999',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
   },
