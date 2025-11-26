@@ -6,6 +6,7 @@ export * from './modules';
 export * from './phases';
 export * from './dispatcher';
 export * from './actions';
+export * from './context/AnimationContext';
 
 // Player ID helper types
 export type PlayerId = string;

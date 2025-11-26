@@ -130,6 +130,20 @@ export default defineConfig({
       dependencies: ['foundation-tests'],
     },
 
+    /* Visual regression tests */
+    {
+      name: 'visual-tests',
+      testMatch: /visual\/.*\.spec\.ts/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+
+    /* E2E game flow tests */
+    {
+      name: 'e2e-tests',
+      testMatch: /e2e\/.*\.spec\.ts/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+
     /* Legacy browser support (optional) */
     // {
     //   name: 'Microsoft Edge',
