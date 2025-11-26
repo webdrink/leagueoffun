@@ -1,10 +1,6 @@
 packages:
-  - games/*
+  - apps/*
   - packages/*
-  - components/*
-  - providers
-  - framework
-  - lib
-  - hooks
-  - store
-  - utils
+
+onlyBuiltDependencies:
+  - esbuild

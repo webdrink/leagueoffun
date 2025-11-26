@@ -1,30 +1,30 @@
-name: 🚀 Deploy HookHunt
+name: 🚀 Deploy Game Picker
 
 # Target hosting repository (change this to update where builds are deployed)
 env:
-  TARGET_REPO: webdrink/hookhunt-site
-  APP_NAME: hookhunt
-  DEPLOY_PATH: deploy-hookhunt
+  TARGET_REPO: webdrink/leagueoffun-site
+  APP_NAME: gamepicker
+  DEPLOY_PATH: deploy-gamepicker
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'apps/hookhunt/**'
+      - 'apps/gamepicker/**'
       - 'packages/**'
-      - '.github/workflows/deploy-hookhunt.yml'
+      - '.github/workflows/deploy-gamepicker.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: "deploy-hookhunt"
+  group: "deploy-gamepicker"
   cancel-in-progress: false
 
 jobs:
   build-and-deploy:
-    name: 🏗️ Build & Deploy HookHunt
+    name: 🏗️ Build & Deploy Game Picker
     runs-on: ubuntu-latest
     
     steps:
@@ -50,14 +50,14 @@ jobs:
             pnpm install --no-frozen-lockfile
           fi
 
-      - name: 🏗️ Build HookHunt
-        run: pnpm --filter @leagueoffun/hookhunt build
+      - name: 🏗️ Build Game Picker
+        run: pnpm --filter @leagueoffun/gamepicker build
 
       - name: 📤 Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: hookhunt-dist
-          path: apps/hookhunt/dist/
+          name: gamepicker-dist
+          path: apps/gamepicker/dist/
           retention-days: 30
 
       - name: ⬇️ Checkout Hosting Repository
@@ -117,4 +117,4 @@ jobs:
           fi
 
       - name: ✅ Build Complete
-        run: echo "✅ HookHunt built and deployed successfully"
+        run: echo "✅ Game Picker built and deployed successfully"

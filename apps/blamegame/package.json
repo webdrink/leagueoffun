@@ -1,7 +1,8 @@
 {
-  "name": "blamegame",
+  "name": "@leagueoffun/blamegame",
   "version": "0.1.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",

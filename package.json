@@ -3,21 +3,21 @@
   "version": "0.1.1",
   "private": true,
   "workspaces": [
-    "games/*",
+    "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "dev": "node scripts/run-workspace-task.cjs games/blamegame dev",
-    "dev:blamegame": "node scripts/run-workspace-task.cjs games/blamegame dev",
-    "dev:hookhunt": "node scripts/run-workspace-task.cjs games/hookhunt dev",
-    "dev:game-picker": "node scripts/run-workspace-task.cjs games/game-picker dev",
-    "build": "node scripts/run-workspace-task.cjs games/blamegame build",
-    "build:blamegame": "node scripts/run-workspace-task.cjs games/blamegame build",
-    "build:hookhunt": "node scripts/run-workspace-task.cjs games/hookhunt build",
-    "build:game-picker": "node scripts/run-workspace-task.cjs games/game-picker build",
-    "lint": "node scripts/run-monorepo-script.cjs lint",
-    "typecheck": "node scripts/run-monorepo-script.cjs typecheck",
-    "test": "node scripts/run-monorepo-script.cjs test",
-    "install:all": "npm install && npm install --workspaces"
+    "dev": "pnpm --filter @leagueoffun/gamepicker dev",
+    "dev:gamepicker": "pnpm --filter @leagueoffun/gamepicker dev",
+    "dev:blamegame": "pnpm --filter @leagueoffun/blamegame dev",
+    "dev:hookhunt": "pnpm --filter @leagueoffun/hookhunt dev",
+    "build": "pnpm --filter @leagueoffun/gamepicker build && pnpm --filter @leagueoffun/blamegame build && pnpm --filter @leagueoffun/hookhunt build",
+    "build:gamepicker": "pnpm --filter @leagueoffun/gamepicker build",
+    "build:blamegame": "pnpm --filter @leagueoffun/blamegame build",
+    "build:hookhunt": "pnpm --filter @leagueoffun/hookhunt build",
+    "lint": "pnpm -r run lint",
+    "typecheck": "pnpm -r run typecheck",
+    "test": "pnpm -r run test",
+    "install:all": "pnpm install"
   }
 }
