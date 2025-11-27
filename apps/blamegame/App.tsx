@@ -134,7 +134,7 @@ function App() {
     
     // Fallback: local dev goes to local picker on port 999, production goes to leagueoffun.de
     if (isLocalDev) {
-      window.location.href = 'http://localhost:999/';
+      window.location.href = 'http://localhost:9990/';
     } else {
       window.location.href = 'https://leagueoffun.de';
     }

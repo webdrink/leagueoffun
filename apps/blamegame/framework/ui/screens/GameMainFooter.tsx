@@ -138,7 +138,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
             // Local fallback: if running locally and picker is on port 999, go there
             const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
             if (isLocal) {
-              window.location.href = 'http://localhost:999/';
+              window.location.href = 'http://localhost:9990/';
             } else {
               window.location.href = 'https://leagueoffun.de';
             }
