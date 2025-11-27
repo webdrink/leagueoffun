@@ -86,7 +86,7 @@ All three apps are deployed automatically from this monorepo using a single unif
 
 | App | Target | URL | Deployment Method |
 |-----|--------|-----|-------------------|
-| Gamepicker | This repo (GitHub Pages) | https://www.leagueoffun.com | GitHub Pages Actions |
+| Gamepicker | `webdrink/leagueoffun` (GitHub Pages) | https://www.leagueoffun.com | GitHub Pages Actions |
 | Blamegame | `webdrink/blamegame` | https://blamegame.leagueoffun.de | Push via PAT |
 | HookHunt | `webdrink/HookHunt` | https://hookhunt.leagueoffun.com | Push via PAT |
 
