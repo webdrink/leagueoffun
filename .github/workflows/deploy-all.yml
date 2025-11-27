@@ -1,0 +1,311 @@
+name: 🚀 Deploy All Apps
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/**'
+      - 'packages/**'
+      - '.github/workflows/deploy-all.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'deploy-all'
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '9'
+
+jobs:
+  build:
+    name: 🏗️ Build All Apps
+    runs-on: ubuntu-latest
+    outputs:
+      gamepicker-changed: ${{ steps.filter.outputs.gamepicker }}
+      blamegame-changed: ${{ steps.filter.outputs.blamegame }}
+      hookhunt-changed: ${{ steps.filter.outputs.hookhunt }}
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check Changed Paths
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            gamepicker:
+              - 'apps/gamepicker/**'
+              - 'packages/**'
+            blamegame:
+              - 'apps/blamegame/**'
+              - 'packages/**'
+            hookhunt:
+              - 'apps/hookhunt/**'
+              - 'packages/**'
+
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: 📥 Install Dependencies
+        run: |
+          echo "📥 Installing dependencies..."
+          if ! pnpm install --frozen-lockfile; then
+            echo "⚠️ Lockfile mismatch, updating dependencies..."
+            pnpm install --no-frozen-lockfile
+          fi
+
+      - name: 🏗️ Build Gamepicker
+        run: |
+          echo "🏗️ Building Gamepicker..."
+          pnpm --filter @leagueoffun/gamepicker build
+          echo "✅ Gamepicker build complete"
+
+      - name: 🏗️ Build Blamegame
+        run: |
+          echo "🏗️ Building Blamegame..."
+          pnpm --filter @leagueoffun/blamegame build
+          echo "✅ Blamegame build complete"
+
+      - name: 🏗️ Build HookHunt
+        run: |
+          echo "🏗️ Building HookHunt..."
+          pnpm --filter @leagueoffun/hookhunt build
+          echo "✅ HookHunt build complete"
+
+      - name: 📤 Upload Gamepicker Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gamepicker-dist
+          path: apps/gamepicker/dist/
+          retention-days: 1
+
+      - name: 📤 Upload Blamegame Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: blamegame-dist
+          path: apps/blamegame/dist/
+          retention-days: 1
+
+      - name: 📤 Upload HookHunt Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hookhunt-dist
+          path: apps/hookhunt/dist/
+          retention-days: 1
+
+  deploy-gamepicker:
+    name: 🎮 Deploy Gamepicker (GitHub Pages)
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: ⬇️ Download Gamepicker Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: gamepicker-dist
+          path: ./dist
+
+      - name: 📝 Add CNAME for Custom Domain
+        run: |
+          echo "www.leagueoffun.com" > ./dist/CNAME
+          echo "📝 Added CNAME: www.leagueoffun.com"
+
+      - name: 📝 Add .nojekyll
+        run: touch ./dist/.nojekyll
+
+      - name: ⚙️ Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: ⬆️ Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: ✅ Gamepicker Deployment Complete
+        run: |
+          echo "✅ Gamepicker deployed successfully!"
+          echo "🌐 URL: ${{ steps.deployment.outputs.page_url }}"
+
+  deploy-blamegame:
+    name: 🎯 Deploy Blamegame
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Download Blamegame Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: blamegame-dist
+          path: ./blamegame-dist
+
+      - name: ⬇️ Clone Target Repository
+        run: |
+          echo "📥 Cloning webdrink/blamegame..."
+          git clone https://x-access-token:${{ secrets.DEPLOY_PAT }}@github.com/webdrink/blamegame.git deploy-blamegame
+          echo "✅ Repository cloned"
+
+      - name: 🚀 Deploy to webdrink/blamegame
+        run: |
+          echo "🚀 Deploying Blamegame to webdrink/blamegame..."
+          
+          cd deploy-blamegame
+          
+          # Preserve README.md if it exists
+          if [ -f "README.md" ]; then
+            cp README.md /tmp/README_blamegame_backup
+            echo "📝 Preserved README.md"
+          fi
+          
+          # Remove all files except .git
+          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
+          
+          # Copy new build files
+          cp -r ../blamegame-dist/* .
+          
+          # Restore README.md
+          if [ -f "/tmp/README_blamegame_backup" ]; then
+            cp /tmp/README_blamegame_backup README.md
+            echo "📝 Restored README.md"
+          fi
+          
+          # Ensure CNAME file exists with correct domain
+          echo "blamegame.leagueoffun.de" > CNAME
+          echo "📝 Added CNAME: blamegame.leagueoffun.de"
+          
+          # Add .nojekyll file for GitHub Pages
+          touch .nojekyll
+          
+          # Configure git
+          git config user.name "leagueoffun-bot"
+          git config user.email "ci@users.noreply.github.com"
+          
+          # Check for changes and commit
+          git add -A
+          if git diff --cached --quiet; then
+            echo "✅ No changes to deploy"
+          else
+            git commit -m "Deploy Blamegame - $(date +'%Y-%m-%d %H:%M:%S')"
+            git push
+            echo "✅ Blamegame deployment complete!"
+          fi
+
+      - name: ✅ Blamegame Deployment Complete
+        run: |
+          echo "✅ Blamegame deployed successfully!"
+          echo "🌐 URL: https://blamegame.leagueoffun.de"
+
+  deploy-hookhunt:
+    name: 🎵 Deploy HookHunt
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Download HookHunt Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: hookhunt-dist
+          path: ./hookhunt-dist
+
+      - name: ⬇️ Clone Target Repository
+        run: |
+          echo "📥 Cloning webdrink/HookHunt..."
+          git clone https://x-access-token:${{ secrets.DEPLOY_PAT }}@github.com/webdrink/HookHunt.git deploy-hookhunt
+          echo "✅ Repository cloned"
+
+      - name: 🚀 Deploy to webdrink/HookHunt
+        run: |
+          echo "🚀 Deploying HookHunt to webdrink/HookHunt..."
+          
+          cd deploy-hookhunt
+          
+          # Preserve README.md if it exists
+          if [ -f "README.md" ]; then
+            cp README.md /tmp/README_hookhunt_backup
+            echo "📝 Preserved README.md"
+          fi
+          
+          # Remove all files except .git
+          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
+          
+          # Copy new build files
+          cp -r ../hookhunt-dist/* .
+          
+          # Restore README.md
+          if [ -f "/tmp/README_hookhunt_backup" ]; then
+            cp /tmp/README_hookhunt_backup README.md
+            echo "📝 Restored README.md"
+          fi
+          
+          # Ensure CNAME file exists with correct domain
+          echo "hookhunt.leagueoffun.com" > CNAME
+          echo "📝 Added CNAME: hookhunt.leagueoffun.com"
+          
+          # Add .nojekyll file for GitHub Pages
+          touch .nojekyll
+          
+          # Configure git
+          git config user.name "leagueoffun-bot"
+          git config user.email "ci@users.noreply.github.com"
+          
+          # Check for changes and commit
+          git add -A
+          if git diff --cached --quiet; then
+            echo "✅ No changes to deploy"
+          else
+            git commit -m "Deploy HookHunt - $(date +'%Y-%m-%d %H:%M:%S')"
+            git push
+            echo "✅ HookHunt deployment complete!"
+          fi
+
+      - name: ✅ HookHunt Deployment Complete
+        run: |
+          echo "✅ HookHunt deployed successfully!"
+          echo "🌐 URL: https://hookhunt.leagueoffun.com"
+
+  summary:
+    name: 📊 Deployment Summary
+    needs: [deploy-gamepicker, deploy-blamegame, deploy-hookhunt]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: 📊 Generate Summary
+        run: |
+          echo "## 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| App | Status | URL |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|-----|" >> $GITHUB_STEP_SUMMARY
+          echo "| Gamepicker | ${{ needs.deploy-gamepicker.result == 'success' && '✅ Success' || '❌ Failed' }} | https://www.leagueoffun.com |" >> $GITHUB_STEP_SUMMARY
+          echo "| Blamegame | ${{ needs.deploy-blamegame.result == 'success' && '✅ Success' || '❌ Failed' }} | https://blamegame.leagueoffun.de |" >> $GITHUB_STEP_SUMMARY
+          echo "| HookHunt | ${{ needs.deploy-hookhunt.result == 'success' && '✅ Success' || '❌ Failed' }} | https://hookhunt.leagueoffun.com |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Triggered by:** @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+
+      - name: ❌ Fail if Any Deployment Failed
+        if: needs.deploy-gamepicker.result != 'success' || needs.deploy-blamegame.result != 'success' || needs.deploy-hookhunt.result != 'success'
+        run: |
+          echo "❌ One or more deployments failed!"
+          exit 1

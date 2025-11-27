@@ -108,6 +108,29 @@ pnpm test --project=firefox
 pnpm test --project=webkit
 ```
 
+## 🚀 Deployment
+
+Deployment is managed centrally from the monorepo root using a unified GitHub Actions workflow.
+
+**Live URL:** https://blamegame.leagueoffun.de
+
+### How It Works
+
+1. The unified workflow at `.github/workflows/deploy-all.yml` builds and deploys all apps
+2. Blamegame is deployed by pushing built files to the `webdrink/blamegame` repository
+3. GitHub Pages serves the content from `webdrink/blamegame` with custom domain `blamegame.leagueoffun.de`
+4. Deployment triggers on:
+   - Push to `main` branch (when `apps/blamegame/**` or `packages/**` change)
+   - Manual trigger via `workflow_dispatch`
+
+### Manual Deployment
+
+To manually trigger a deployment, go to the **Actions** tab in the monorepo root, select **"🚀 Deploy All Apps"** workflow, and click **"Run workflow"**.
+
+**Note:** Do NOT push built artifacts manually to the `webdrink/blamegame` deploy repository. All deployments should go through the unified workflow.
+
+For more details, see the [main README](../../README.md#-deployment).
+
 ## 🌐 Live Demo
 
 The Blame Game is deployed at [blamegame.leagueoffun.de](https://blamegame.leagueoffun.de).
