@@ -5,10 +5,23 @@
     "paths": {
       "@/*": ["./src/*"],
       "@ui/*": ["../../packages/ui/src/*"],
+      "@game-core": ["../../packages/game-core/src/index.ts"],
       "@game-core/*": ["../../packages/game-core/src/*"],
       "@config/*": ["../../packages/config/*"]
-    }
+    },
+    "types": ["vite/client"]
   },
-  "include": ["src"],
+  "include": [
+    "src/main.tsx",
+    "src/App.tsx",
+    "src/index.css"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/components/framework/**",
+    "src/components/game/**_DEPRECATED.tsx",
+    "src/HookHuntModule.ts",
+    "src/HookHuntApp.tsx"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

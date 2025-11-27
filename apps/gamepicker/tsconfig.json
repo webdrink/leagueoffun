@@ -5,6 +5,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@ui/*": ["../../packages/ui/src/*"],
+      "@game-core": ["../../packages/game-core/src/index.ts"],
       "@game-core/*": ["../../packages/game-core/src/*"],
       "@config/*": ["../../packages/config/*"]
     }

@@ -2,7 +2,7 @@
  * Phase controller contracts.
  */
 import { GameAction, PhaseTransitionResult } from './actions';
-import { GameConfig } from '../config/game.schema';
+import { GameConfig } from './config/game.schema';
 import { EventBus } from './events/eventBus';
 
 export interface GameModuleContext {

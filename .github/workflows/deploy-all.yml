@@ -45,11 +45,27 @@ jobs:
       - name: 📥 Install Dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: 🔍 Type Check
+        run: pnpm typecheck
+
       - name: 🏗️ Build Gamepicker
         run: |
           echo "🏗️ Building Gamepicker..."
           pnpm --filter @leagueoffun/gamepicker build
           echo "✅ Gamepicker build complete"
+
+      - name: ✅ Verify Gamepicker Build
+        run: |
+          if [ ! -f "apps/gamepicker/dist/index.html" ]; then
+            echo "❌ Error: Gamepicker index.html not found"
+            exit 1
+          fi
+          if [ ! -d "apps/gamepicker/dist/assets" ]; then
+            echo "❌ Error: Gamepicker assets folder not found"
+            exit 1
+          fi
+          echo "✅ Gamepicker build verification passed"
+          ls -la apps/gamepicker/dist/
 
       - name: 🏗️ Build Blamegame
         run: |
@@ -57,11 +73,37 @@ jobs:
           pnpm --filter @leagueoffun/blamegame build
           echo "✅ Blamegame build complete"
 
+      - name: ✅ Verify Blamegame Build
+        run: |
+          if [ ! -f "apps/blamegame/dist/index.html" ]; then
+            echo "❌ Error: Blamegame index.html not found"
+            exit 1
+          fi
+          if [ ! -d "apps/blamegame/dist/assets" ]; then
+            echo "❌ Error: Blamegame assets folder not found"
+            exit 1
+          fi
+          echo "✅ Blamegame build verification passed"
+          ls -la apps/blamegame/dist/
+
       - name: 🏗️ Build HookHunt
         run: |
           echo "🏗️ Building HookHunt..."
           pnpm --filter @leagueoffun/hookhunt build
           echo "✅ HookHunt build complete"
+
+      - name: ✅ Verify HookHunt Build
+        run: |
+          if [ ! -f "apps/hookhunt/dist/index.html" ]; then
+            echo "❌ Error: HookHunt index.html not found"
+            exit 1
+          fi
+          if [ ! -d "apps/hookhunt/dist/assets" ]; then
+            echo "❌ Error: HookHunt assets folder not found"
+            exit 1
+          fi
+          echo "✅ HookHunt build verification passed"
+          ls -la apps/hookhunt/dist/
 
       - name: 📤 Upload Gamepicker Artifact
         uses: actions/upload-artifact@v4
