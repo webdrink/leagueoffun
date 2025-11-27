@@ -4,7 +4,7 @@
 
 League of Fun is a monorepo containing multiple React-based party games. It includes:
 - **Gamepicker**: Central hub for discovering and launching games (https://www.leagueoffun.com)
-- **BlameGame**: A "who would most likely" party game (https://blamegame.leagueoffun.de)
+- **BlameGame**: A "who would most likely" party game (https://blamegame.leagueoffun.com)
 - **HookHunt**: A music guessing game (https://hookhunt.leagueoffun.com)
 
 All apps are built with React 19, TypeScript, Vite, Tailwind CSS, and Framer Motion with comprehensive multilingual support and PWA capabilities.
@@ -37,7 +37,7 @@ All three apps are deployed using a single unified GitHub Actions workflow (`.gi
 | App | Target Repository | URL | Method |
 |-----|-------------------|-----|--------|
 | Gamepicker | `webdrink/leagueoffun` (GitHub Pages) | https://www.leagueoffun.com | GitHub Pages Actions |
-| Blamegame | `webdrink/blamegame` | https://blamegame.leagueoffun.de | Push via PAT |
+| Blamegame | `webdrink/blamegame` | https://blamegame.leagueoffun.com | Push via PAT |
 | HookHunt | `webdrink/HookHunt` | https://hookhunt.leagueoffun.com | Push via PAT |
 
 **Workflow Triggers:**
