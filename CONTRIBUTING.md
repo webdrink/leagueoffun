@@ -39,7 +39,7 @@ cd leagueoffun
 pnpm install
 
 # Start development servers
-pnpm run dev:gamepicker  # Port 999
+pnpm run dev:gamepicker  # Port 9990
 pnpm run dev:blamegame   # Port 9991
 pnpm run dev:hookhunt    # Port 9992
 ```
