@@ -131,7 +131,9 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
               try {
                 returnToHub(returnUrl, playerId, 0);
                 return;
-              } catch (e) {}
+              } catch (e) {
+                console.error('Error returning to hub:', e);
+              }
             }
             // Local fallback: if running locally and picker is on port 999, go there
             const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';

@@ -32,11 +32,20 @@ const useTranslation = () => {
   /**
    * Translation function
    * @param key The flat key to the translation (e.g., 'app.title')
-   * @param params Optional parameters for interpolation
+   * @param paramsOrDefault Optional parameters for interpolation or a default string value
    */
-  const t = (key: string, params?: Record<string, string | number>): string => {
+  const t = (key: string, paramsOrDefault?: Record<string, string | number> | string): string => {
+    // Handle string as default value
+    if (typeof paramsOrDefault === 'string') {
+      const value = i18nT(key);
+      if (!value || value === key) {
+        return paramsOrDefault;
+      }
+      return value;
+    }
+    
     // Use the built-in i18next translation function
-    const value = i18nT(key, params);
+    const value = i18nT(key, paramsOrDefault);
 
     // If there's no translation, provide a fallback
     if (!value || value === key) {

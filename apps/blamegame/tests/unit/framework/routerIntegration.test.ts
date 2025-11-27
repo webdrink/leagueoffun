@@ -183,7 +183,7 @@ test.describe('FrameworkRouter Integration Tests', () => {
         'intro': mockController
       };
 
-      let currentPhaseId = 'intro';
+      const currentPhaseId = 'intro';
 
       // Simulate dispatcher creation and usage
       const staticPhaseId = currentPhaseId; // avoid reassignment warning

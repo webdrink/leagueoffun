@@ -98,13 +98,14 @@ const CustomCategoryEditor: React.FC<CustomCategoryEditorProps> = ({
       // Add built-in questions (mark hidden ones)
       categoryQuestions.forEach(q => {
         const isHidden = modifications?.hiddenQuestionIds.includes(q.questionId!) || false;
+        const questionText = q.text || '';
         questionItems.push({
           id: q.questionId!,
           text: {
-            en: q.text,
-            de: q.text,
-            es: q.text,
-            fr: q.text
+            en: questionText,
+            de: questionText,
+            es: questionText,
+            fr: questionText
           },
           isBuiltIn: true,
           isHidden

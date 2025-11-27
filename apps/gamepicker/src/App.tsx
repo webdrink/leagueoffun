@@ -1,9 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Gamepad2, User, Sparkles, Music, Target, Trophy, Users, Zap } from 'lucide-react';
+import { Gamepad2, User, Sparkles, Music, Target, Trophy, Users, Zap, Copy, Check } from 'lucide-react';
 import { usePlayer } from './PlayerContext';
 import { useAnimations } from '@game-core';
 import { games, GameInfo } from './games.config';
+
+// Session ID display with copy functionality
+function SessionIdDisplay() {
+  const { playerId } = usePlayer();
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(playerId);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  }, [playerId]);
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white/80 hover:text-white text-sm group"
+      title="Click to copy Session ID. Used to reconnect to ongoing sessions."
+      aria-label={`Session ID: ${playerId.slice(0, 8)}. Click to copy.`}
+    >
+      <User size={16} />
+      <span className="font-mono">Session: {playerId.slice(0, 8)}...</span>
+      {copied ? (
+        <Check size={14} className="text-green-400" />
+      ) : (
+        <Copy size={14} className="opacity-50 group-hover:opacity-100" />
+      )}
+    </button>
+  );
+}
 
 // Animation toggle component
 function AnimationToggle() {
@@ -14,6 +47,8 @@ function AnimationToggle() {
       onClick={toggleAnimations}
       className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white/80 hover:text-white text-sm"
       aria-label={animationsEnabled ? 'Disable animations' : 'Enable animations'}
+      role="switch"
+      aria-checked={animationsEnabled}
     >
       {animationsEnabled ? <Zap size={16} /> : <Zap size={16} className="opacity-50" />}
       <span className="hidden sm:inline">{animationsEnabled ? 'Animations On' : 'Animations Off'}</span>
@@ -285,10 +320,7 @@ function App() {
         >
           {/* Settings bar */}
           <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center gap-2 text-white/70 text-sm">
-              <User size={16} />
-              <span className="font-mono">ID: {playerId.slice(0, 8)}...</span>
-            </div>
+            <SessionIdDisplay />
             <AnimationToggle />
           </div>
           

@@ -54,7 +54,7 @@ export function AnimationProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const toggleAnimations = () => {
-    setAnimationsEnabled(prev => !prev);
+    setAnimationsEnabled((prev: boolean) => !prev);
   };
 
   return (

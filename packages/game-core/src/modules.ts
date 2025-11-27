@@ -1,7 +1,7 @@
 /**
  * GameModule interface & registry.
  */
-import { GameConfig } from '../config/game.schema';
+import { GameConfig } from './config/game.schema';
 import { PhaseControllerMap } from './phases';
 import { EventBus } from './events/eventBus';
 import { GameAction } from './actions';

@@ -8,6 +8,7 @@ test.describe('EventBus Unit Tests', () => {
   test('should create EventBus and publish/subscribe to events', async ({ page }) => {
     const result = await page.evaluate(() => {
       // Import and create EventBus
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const { createEventBus } = require('../../framework/core/events/eventBus');
       const bus = createEventBus();
       
@@ -40,6 +41,7 @@ test.describe('EventBus Unit Tests', () => {
 
   test('should handle subscriber errors gracefully', async ({ page }) => {
     const result = await page.evaluate(() => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const { createEventBus } = require('../../framework/core/events/eventBus');
       const bus = createEventBus();
       
@@ -68,6 +70,7 @@ test.describe('EventBus Unit Tests', () => {
 
   test('should clear all subscribers', async ({ page }) => {
     const result = await page.evaluate(() => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const { createEventBus } = require('../../framework/core/events/eventBus');
       const bus = createEventBus();
       

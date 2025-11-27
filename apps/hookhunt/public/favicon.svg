@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="hookhuntGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="45" fill="url(#hookhuntGradient)"/>
+  <path d="M35 40 L50 30 L65 40 L65 60 L50 70 L35 60 Z" fill="white" stroke="white" stroke-width="2"/>
+  <circle cx="50" cy="50" r="8" fill="#f97316"/>
+</svg>
