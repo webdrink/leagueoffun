@@ -158,14 +158,27 @@ localStorage.setItem('leagueoffun.playerStats', JSON.stringify(stats));
 
 ## Deployment
 
-Automatic deployment via GitHub Actions:
-- Triggers on changes to `games/game-picker/**`
-- Builds and uploads artifacts
-- Independent of other games
+Deployment is managed centrally from the monorepo root using a unified GitHub Actions workflow.
+
+**Live URL:** https://www.leagueoffun.com
+
+### How It Works
+
+1. The unified workflow at `.github/workflows/deploy-all.yml` builds and deploys all apps
+2. Gamepicker is deployed to GitHub Pages in the `webdrink/leagueoffun` repository
+3. Deployment triggers on:
+   - Push to `main` branch (when `apps/gamepicker/**` or `packages/**` change)
+   - Manual trigger via `workflow_dispatch`
+
+### Manual Deployment
+
+To manually trigger a deployment, go to the **Actions** tab in the monorepo root, select **"🚀 Deploy All Apps"** workflow, and click **"Run workflow"**.
+
+For more details, see the [main README](../../README.md#-deployment).
 
 ## URLs
 
-- **Hub**: https://leagueoffun.de
+- **Production**: https://www.leagueoffun.com
 - **Local Dev**: http://localhost:999
 
 ## Key Components

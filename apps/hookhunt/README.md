@@ -174,14 +174,30 @@ HookHunt uses a music-inspired blue/purple color palette:
 
 ## Deployment
 
-Automatic deployment via GitHub Actions:
-- Triggers on changes to `games/hookhunt/**`
-- Builds and uploads artifacts
-- Independent of other games
+Deployment is managed centrally from the monorepo root using a unified GitHub Actions workflow.
+
+**Live URL:** https://hookhunt.leagueoffun.com
+
+### How It Works
+
+1. The unified workflow at `.github/workflows/deploy-all.yml` builds and deploys all apps
+2. HookHunt is deployed by pushing built files to the `webdrink/HookHunt` repository
+3. GitHub Pages serves the content from `webdrink/HookHunt` with custom domain `hookhunt.leagueoffun.com`
+4. Deployment triggers on:
+   - Push to `main` branch (when `apps/hookhunt/**` or `packages/**` change)
+   - Manual trigger via `workflow_dispatch`
+
+### Manual Deployment
+
+To manually trigger a deployment, go to the **Actions** tab in the monorepo root, select **"🚀 Deploy All Apps"** workflow, and click **"Run workflow"**.
+
+**Note:** Do NOT push built artifacts manually to the `webdrink/HookHunt` deploy repository. All deployments should go through the unified workflow.
+
+For more details, see the [main README](../../README.md#-deployment).
 
 ## URLs
 
-- **Game**: https://hookhunt.leagueoffun.de
+- **Production**: https://hookhunt.leagueoffun.com
 - **Local Dev**: http://localhost:999
 
 ## Development Roadmap

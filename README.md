@@ -13,7 +13,7 @@ A party game for friends! One person reads a question, passes the phone, and the
 - 🎮 Two game modes: Classic & NameBlame
 - 🌍 Multi-language support (English, German, Spanish, French)
 - 📱 Mobile-first, optimized for group play
-- [Play Now →](https://blamegame.leagueoffun.com)
+- [Play Now →](https://blamegame.leagueoffun.de)
 
 ### 🎵 HookHunt
 **"Guess the hit from the hook!"**
@@ -22,6 +22,7 @@ Test your music knowledge by identifying songs from their iconic hooks. *(Coming
 - 🎶 Music guessing gameplay
 - 🏆 Score tracking
 - 🌟 Multiple difficulty levels
+- [Play Now →](https://hookhunt.leagueoffun.com)
 
 ### 🏠 Game Picker Hub
 The central hub for discovering and launching League of Fun games. Maintains player identity and stats across all games.
@@ -29,22 +30,26 @@ The central hub for discovering and launching League of Fun games. Maintains pla
 - 👤 Player ID management
 - 📊 Cross-game statistics
 - 🎮 Unified game launcher
+- [Visit Hub →](https://www.leagueoffun.com)
 
-## 🏗️ Monorepo Structure
+## 🏗️ Architecture
+
+This monorepo contains all League of Fun games and shared packages. Deployment is handled by a unified GitHub Actions workflow that builds and deploys all apps automatically.
 
 ```
 .
 ├── apps/
+│   ├── gamepicker/         # Central hub / landing page
 │   ├── blamegame/          # BlameGame application
-│   ├── hookhunt/           # HookHunt application  
-│   └── gamepicker/         # Central hub / landing page
+│   └── hookhunt/           # HookHunt application  
 │
 ├── packages/
 │   ├── ui/                 # Shared UI components
 │   ├── game-core/          # Game logic primitives
 │   └── config/             # Shared configurations
 │
-└── .github/workflows/      # Independent CI/CD pipelines
+└── .github/workflows/
+    └── deploy-all.yml      # Unified deployment workflow
 ```
 
 ## 🚀 Quick Start
@@ -68,52 +73,73 @@ pnpm run dev:hookhunt    # HookHunt
 pnpm run build
 
 # Build a specific app
+pnpm run build:gamepicker
 pnpm run build:blamegame
 pnpm run build:hookhunt
-pnpm run build:gamepicker
 ```
 
 ## 🚀 Deployment
 
-Each game is deployed to its own hosting repository via GitHub Actions:
+All three apps are deployed automatically from this monorepo using a single unified GitHub Actions workflow (`deploy-all.yml`).
 
-| App | Hosting Repository | URL |
-|-----|-------------------|-----|
-| BlameGame | `webdrink/blamegame-site` | https://blamegame.leagueoffun.com |
-| HookHunt | `webdrink/hookhunt-site` | https://hookhunt.leagueoffun.com |
-| Game Picker | `webdrink/leagueoffun-site` | https://leagueoffun.com |
+### Deployment Targets
+
+| App | Target | URL | Deployment Method |
+|-----|--------|-----|-------------------|
+| Gamepicker | `webdrink/leagueoffun` (GitHub Pages) | https://www.leagueoffun.com | GitHub Pages Actions |
+| Blamegame | `webdrink/blamegame` | https://blamegame.leagueoffun.de | Push via PAT |
+| HookHunt | `webdrink/HookHunt` | https://hookhunt.leagueoffun.com | Push via PAT |
 
 ### How Deployment Works
 
-1. When code is pushed to `main`, the relevant workflow triggers based on changed files
-2. The workflow builds the app using pnpm
-3. The built files are pushed to the corresponding hosting repository
-4. GitHub Pages serves the static files from the hosting repository
+1. **Trigger**: The workflow runs on:
+   - Push to `main` branch (when files in `apps/` or `packages/` change)
+   - Manual trigger via `workflow_dispatch`
 
-### Changing Target Hosting Repositories
+2. **Build Phase**: All three apps are built in parallel using pnpm
 
-Each deployment workflow has a `TARGET_REPO` environment variable at the top of the file:
+3. **Deploy Phase**: Each app is deployed to its target:
+   - **Gamepicker**: Deployed to GitHub Pages in this repository using the official `actions/deploy-pages@v4` action
+   - **Blamegame**: Built files are pushed to `webdrink/blamegame` repository
+   - **HookHunt**: Built files are pushed to `webdrink/HookHunt` repository
 
-```yaml
-env:
-  TARGET_REPO: webdrink/blamegame-site  # Change this to update deployment target
-```
-
-To change where an app deploys, simply update this variable in the workflow file.
+4. **Idempotence**: The workflow only commits and pushes when there are actual changes (checked with `git diff --cached --quiet`)
 
 ### Required Secrets
 
-- `DEPLOY_TOKEN`: A Personal Access Token with `repo` write access, used for pushing to hosting repositories
+The following secret must be configured in this repository:
 
-### Hosting Repository Structure
+| Secret | Description | Required Permissions |
+|--------|-------------|---------------------|
+| `DEPLOY_PAT` | Personal Access Token | `repo` write access to `webdrink/blamegame` and `webdrink/HookHunt` |
 
-Each hosting repository is "dumb" and contains only:
+### Target Repository Structure
+
+The external deploy repositories (`webdrink/blamegame` and `webdrink/HookHunt`) contain:
 - Built static files (from `dist/`)
 - `.nojekyll` (to disable Jekyll processing)
-- `CNAME` (for custom domain - manually configured)
-- `README.md` (optional)
+- `CNAME` (custom domain configuration - created automatically)
+- `README.md` (preserved during deployments if present)
 
-The `CNAME` file is preserved during deployments to maintain custom domain settings.
+### Manual Deployment
+
+To manually trigger a deployment:
+1. Go to **Actions** tab in this repository
+2. Select **"🚀 Deploy All Apps"** workflow
+3. Click **"Run workflow"**
+4. Select the `main` branch
+5. Click **"Run workflow"** button
+
+### Workflow Files
+
+The deployment is managed by these workflow files:
+
+- `.github/workflows/deploy-all.yml` - Main unified deployment workflow (builds and deploys all apps)
+
+Legacy individual workflows exist but the unified workflow is the primary deployment method:
+- `.github/workflows/deploy-gamepicker.yml` - Individual Gamepicker deployment
+- `.github/workflows/deploy-blamegame.yml` - Individual Blamegame deployment
+- `.github/workflows/deploy-hookhunt.yml` - Individual HookHunt deployment
 
 ## 📦 Workspace Packages
 

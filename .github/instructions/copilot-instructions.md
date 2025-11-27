@@ -1,7 +1,83 @@
-# BlameGame AI Coding Agent Instructions
+# League of Fun AI Coding Agent Instructions
 
 ## Project Overview
-BlameGame is a React-based party game application with two game modes: Classic (team-based) and NameBlame (player-specific blaming). Built with React 19, TypeScript, Vite, Tailwind CSS, and Framer Motion with comprehensive multilingual support and PWA capabilities.
+
+League of Fun is a monorepo containing multiple React-based party games. It includes:
+- **Gamepicker**: Central hub for discovering and launching games (https://www.leagueoffun.com)
+- **BlameGame**: A "who would most likely" party game (https://blamegame.leagueoffun.com)
+- **HookHunt**: A music guessing game (https://hookhunt.leagueoffun.com)
+
+All apps are built with React 19, TypeScript, Vite, Tailwind CSS, and Framer Motion with comprehensive multilingual support and PWA capabilities.
+
+## Monorepo Structure
+
+```
+.
+├── apps/
+│   ├── gamepicker/         # Central hub / landing page
+│   ├── blamegame/          # BlameGame application
+│   └── hookhunt/           # HookHunt application  
+│
+├── packages/
+│   ├── ui/                 # Shared UI components
+│   ├── game-core/          # Game logic primitives
+│   └── config/             # Shared configurations
+│
+└── .github/workflows/
+    └── deploy-all.yml      # Unified deployment workflow
+```
+
+## Deployment System
+
+### Unified Deployment Workflow
+
+All three apps are deployed using a single unified GitHub Actions workflow (`.github/workflows/deploy-all.yml`). 
+
+**Deployment Targets:**
+| App | Target Repository | URL | Method |
+|-----|-------------------|-----|--------|
+| Gamepicker | `webdrink/leagueoffun` (GitHub Pages) | https://www.leagueoffun.com | GitHub Pages Actions |
+| Blamegame | `webdrink/blamegame` | https://blamegame.leagueoffun.com | Push via PAT |
+| HookHunt | `webdrink/HookHunt` | https://hookhunt.leagueoffun.com | Push via PAT |
+
+**Workflow Triggers:**
+- Push to `main` branch (when files in `apps/` or `packages/` change)
+- Manual trigger via `workflow_dispatch`
+
+**Required Secrets:**
+- `DEPLOY_PAT`: Personal Access Token with `repo` write access to `webdrink/blamegame` and `webdrink/HookHunt`
+
+### Adding a New Game
+
+To add a new game to the monorepo and deployment pipeline:
+
+1. **Create the app**: Add a new app in `apps/newgame/` following the existing structure
+2. **Add package.json**: Include `@leagueoffun/newgame` as the name
+3. **Add root scripts**: Update the root `package.json`:
+   ```json
+   "dev:newgame": "pnpm --filter @leagueoffun/newgame dev",
+   "build:newgame": "pnpm --filter @leagueoffun/newgame build"
+   ```
+4. **Update workflow**: Add new build and deploy jobs to `.github/workflows/deploy-all.yml`:
+   - Add a build step for the new app
+   - Add artifact upload step
+   - Add a deploy job following the pattern of existing apps
+5. **Create deploy repo**: Create a new GitHub repository (e.g., `webdrink/newgame`)
+6. **Configure CNAME**: The workflow will automatically create the CNAME file with the custom domain
+7. **Update PAT**: Ensure `DEPLOY_PAT` has write access to the new deploy repo
+
+### Important Rules for Deployment
+
+- **DO NOT** push built artifacts manually to deploy repositories
+- **DO NOT** modify files directly in `webdrink/blamegame` or `webdrink/HookHunt`
+- All deployments must go through the unified workflow in the monorepo
+- The workflow is idempotent - it only commits when there are actual changes
+
+---
+
+## BlameGame Specific Instructions
+
+BlameGame is a React-based party game application with two game modes: Classic (team-based) and NameBlame (player-specific blaming).
 
 ## Architecture & Data Flow
 
