@@ -2,7 +2,7 @@ name: 🚀 Deploy HookHunt
 
 # Target hosting repository (change this to update where builds are deployed)
 env:
-  TARGET_REPO: webdrink/hookhunt-site
+  TARGET_REPO: webdrink/HookHunt
   APP_NAME: hookhunt
   DEPLOY_PATH: deploy-hookhunt
 
@@ -52,6 +52,38 @@ jobs:
 
       - name: 🏗️ Build HookHunt
         run: pnpm --filter @leagueoffun/hookhunt build
+
+      - name: 🔍 Validate Build Output
+        run: |
+          echo "🔍 Validating build output..."
+          
+          # Check index.html exists
+          if [ ! -f "apps/${{ env.APP_NAME }}/dist/index.html" ]; then
+            echo "❌ Error: index.html not found"
+            exit 1
+          fi
+          
+          # Check assets folder exists
+          if [ ! -d "apps/${{ env.APP_NAME }}/dist/assets" ]; then
+            echo "❌ Error: assets folder not found"
+            exit 1
+          fi
+          
+          # List all files for debugging
+          echo "📦 Build contents:"
+          ls -lah apps/${{ env.APP_NAME }}/dist/
+          
+          # Verify JavaScript and CSS files exist
+          JS_COUNT=$(find apps/${{ env.APP_NAME }}/dist/assets -name "*.js" | wc -l)
+          CSS_COUNT=$(find apps/${{ env.APP_NAME }}/dist/assets -name "*.css" | wc -l)
+          
+          echo "✅ Found $JS_COUNT JavaScript files"
+          echo "✅ Found $CSS_COUNT CSS files"
+          
+          if [ $JS_COUNT -eq 0 ]; then
+            echo "❌ Error: No JavaScript files found"
+            exit 1
+          fi
 
       - name: 📤 Upload Build Artifacts
         uses: actions/upload-artifact@v4
