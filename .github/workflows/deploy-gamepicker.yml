@@ -94,7 +94,9 @@ jobs:
           echo "📝 Added CNAME: www.leagueoffun.com"
 
       - name: 📝 Add .nojekyll
-        run: touch apps/${{ env.APP_NAME }}/dist/.nojekyll
+        run: |
+          touch apps/${{ env.APP_NAME }}/dist/.nojekyll
+          echo "📝 Added .nojekyll file"
 
       - name: 📤 Upload Build Artifacts
         uses: actions/upload-artifact@v4
