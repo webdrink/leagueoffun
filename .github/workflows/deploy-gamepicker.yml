@@ -1,10 +1,8 @@
 name: 🚀 Deploy Game Picker
 
-# Target hosting repository (change this to update where builds are deployed)
+# Deploy Game Picker to GitHub Pages on this repository (webdrink/leagueoffun)
 env:
-  TARGET_REPO: webdrink/leagueoffun-site
   APP_NAME: gamepicker
-  DEPLOY_PATH: deploy-gamepicker
 
 on:
   push:
@@ -17,6 +15,8 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: "deploy-gamepicker"
@@ -26,6 +26,9 @@ jobs:
   build-and-deploy:
     name: 🏗️ Build & Deploy Game Picker
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
       - name: ⬇️ Checkout Repository
@@ -53,6 +56,46 @@ jobs:
       - name: 🏗️ Build Game Picker
         run: pnpm --filter @leagueoffun/gamepicker build
 
+      - name: 🔍 Validate Build Output
+        run: |
+          echo "🔍 Validating build output..."
+          
+          # Check index.html exists
+          if [ ! -f "apps/${{ env.APP_NAME }}/dist/index.html" ]; then
+            echo "❌ Error: index.html not found"
+            exit 1
+          fi
+          
+          # Check assets folder exists
+          if [ ! -d "apps/${{ env.APP_NAME }}/dist/assets" ]; then
+            echo "❌ Error: assets folder not found"
+            exit 1
+          fi
+          
+          # List all files for debugging
+          echo "📦 Build contents:"
+          ls -lah apps/${{ env.APP_NAME }}/dist/
+          
+          # Verify JavaScript and CSS files exist
+          JS_COUNT=$(find apps/${{ env.APP_NAME }}/dist/assets -name "*.js" | wc -l)
+          CSS_COUNT=$(find apps/${{ env.APP_NAME }}/dist/assets -name "*.css" | wc -l)
+          
+          echo "✅ Found $JS_COUNT JavaScript files"
+          echo "✅ Found $CSS_COUNT CSS files"
+          
+          if [ $JS_COUNT -eq 0 ]; then
+            echo "❌ Error: No JavaScript files found"
+            exit 1
+          fi
+
+      - name: 📝 Add CNAME for Custom Domain
+        run: |
+          echo "www.leagueoffun.com" > apps/${{ env.APP_NAME }}/dist/CNAME
+          echo "📝 Added CNAME: www.leagueoffun.com"
+
+      - name: 📝 Add .nojekyll
+        run: touch apps/${{ env.APP_NAME }}/dist/.nojekyll
+
       - name: 📤 Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -60,61 +103,19 @@ jobs:
           path: apps/gamepicker/dist/
           retention-days: 30
 
-      - name: ⬇️ Checkout Hosting Repository
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ env.TARGET_REPO }}
-          path: ${{ env.DEPLOY_PATH }}
-          token: ${{ secrets.DEPLOY_TOKEN }}
+      - name: ⚙️ Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
-      - name: 🚀 Deploy to Hosting Repository
-        run: |
-          echo "🚀 Deploying ${{ env.APP_NAME }} to ${{ env.TARGET_REPO }}..."
-          
-          cd ${{ env.DEPLOY_PATH }}
-          
-          # Preserve CNAME and README.md if they exist
-          if [ -f "CNAME" ]; then
-            cp CNAME /tmp/CNAME_backup
-            echo "📝 Preserved CNAME file"
-          fi
-          if [ -f "README.md" ]; then
-            cp README.md /tmp/README_backup
-            echo "📝 Preserved README.md file"
-          fi
-          
-          # Remove all files except .git
-          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
-          
-          # Copy new build files
-          cp -r ../apps/${{ env.APP_NAME }}/dist/* .
-          
-          # Restore preserved files
-          if [ -f "/tmp/CNAME_backup" ]; then
-            cp /tmp/CNAME_backup CNAME
-            echo "📝 Restored CNAME file"
-          fi
-          if [ -f "/tmp/README_backup" ]; then
-            cp /tmp/README_backup README.md
-            echo "📝 Restored README.md file"
-          fi
-          
-          # Add .nojekyll file for GitHub Pages
-          touch .nojekyll
-          
-          # Configure git
-          git config user.name "leagueoffun-bot"
-          git config user.email "ci@users.noreply.github.com"
-          
-          # Check for changes and commit
-          git add -A
-          if git diff --cached --quiet; then
-            echo "✅ No changes to deploy"
-          else
-            git commit -m "Deploy ${{ env.APP_NAME }} - $(date +'%Y-%m-%d %H:%M:%S')"
-            git push
-            echo "✅ Deployment complete!"
-          fi
+      - name: ⬆️ Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/${{ env.APP_NAME }}/dist
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
       - name: ✅ Build Complete
-        run: echo "✅ Game Picker built and deployed successfully"
+        run: |
+          echo "✅ Game Picker deployed successfully!"
+          echo "🌐 URL: ${{ steps.deployment.outputs.page_url }}"
