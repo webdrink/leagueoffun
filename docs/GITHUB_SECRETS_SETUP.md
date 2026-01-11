@@ -52,11 +52,11 @@ This is the Spotify OAuth Client ID used for HookHunt's Spotify integration.
 
 #### Prerequisites:
 
-You need a Spotify Developer account and a registered application. See [`docs/SPOTIFY_SETUP.md`](./docs/SPOTIFY_SETUP.md) for detailed instructions.
+You need a Spotify Developer account and a registered application. See [`SPOTIFY_SETUP.md`](./SPOTIFY_SETUP.md) for detailed instructions.
 
 #### Steps:
 
-1. Follow the setup guide in [`docs/SPOTIFY_SETUP.md`](./docs/SPOTIFY_SETUP.md) to create a Spotify application
+1. Follow the setup guide in [`SPOTIFY_SETUP.md`](./SPOTIFY_SETUP.md) to create a Spotify application
 2. Copy the **Client ID** from your Spotify app dashboard
 3. Add to repository secrets:
    - Go to `webdrink/leagueoffun` repository
@@ -190,8 +190,8 @@ If you encounter issues with secrets:
 
 - [GitHub Encrypted Secrets Documentation](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
 - [Creating a Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
-- [Spotify OAuth Setup Guide](./docs/SPOTIFY_SETUP.md)
-- [Deployment Architecture](./DEPLOYMENT.md)
+- [Spotify OAuth Setup Guide](./SPOTIFY_SETUP.md)
+- [Deployment Architecture](../DEPLOYMENT.md)
 
 ---
 
