@@ -97,7 +97,7 @@ jobs:
         with:
           repository: ${{ env.TARGET_REPO }}
           path: ${{ env.DEPLOY_PATH }}
-          token: ${{ secrets.DEPLOY_TOKEN }}
+          token: ${{ secrets.DEPLOY_PAT }}
 
       - name: 🚀 Deploy to Hosting Repository
         run: |
