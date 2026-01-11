@@ -87,6 +87,9 @@ jobs:
           ls -la apps/blamegame/dist/
 
       - name: 🏗️ Build HookHunt
+        env:
+          VITE_SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          VITE_SPOTIFY_REDIRECT_URI: https://hookhunt.leagueoffun.com/callback
         run: |
           echo "🏗️ Building HookHunt..."
           pnpm --filter @leagueoffun/hookhunt build

@@ -46,7 +46,7 @@ This repository is a monorepo containing multiple game applications and shared p
 
 ### HookHunt
 - **Path**: `games/hookhunt`
-- **URL**: `hookhunt.leagueoffun.de`
+- **URL**: `hookhunt.leagueoffun.com`
 - **Purpose**: Music guessing game (coming soon)
 - **Features**:
   - Guess songs from their hooks

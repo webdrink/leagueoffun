@@ -8,7 +8,7 @@ The goal was to professionalize the repository structure and implement a coheren
 
 1. **Game Picker** (leagueoffun.de) - Central hub for game discovery
 2. **BlameGame** (blamegame.leagueoffun.de) - Party game: "Who would most likely..."
-3. **HookHunt** (hookhunt.leagueoffun.de) - Music quiz game (Coming Soon)
+3. **HookHunt** (hookhunt.leagueoffun.com) - Music quiz game (Coming Soon)
 
 ## Visual Changes Summary
 
