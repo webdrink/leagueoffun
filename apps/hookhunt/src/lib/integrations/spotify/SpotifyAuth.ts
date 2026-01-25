@@ -325,7 +325,8 @@ export const spotifyAuth = new SpotifyAuth();
  */
 export function isSpotifyCallback(): boolean {
   const url = new URL(window.location.href);
-  return url.pathname.includes('/games/hookhunt/callback') && url.searchParams.has('code');
+  // Support both subdomain hosting (/callback) and path-based hosting (/games/hookhunt/callback)
+  return (url.pathname === '/callback' || url.pathname.includes('/games/hookhunt/callback')) && url.searchParams.has('code');
 }
 
 /**

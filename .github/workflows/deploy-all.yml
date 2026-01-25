@@ -87,6 +87,9 @@ jobs:
           ls -la apps/blamegame/dist/
 
       - name: 🏗️ Build HookHunt
+        env:
+          VITE_SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          VITE_SPOTIFY_REDIRECT_URI: https://hookhunt.leagueoffun.com/callback
         run: |
           echo "🏗️ Building HookHunt..."
           pnpm --filter @leagueoffun/hookhunt build
@@ -166,6 +169,38 @@ jobs:
           echo "✅ Gamepicker deployed successfully!"
           echo "🌐 URL: ${{ steps.deployment.outputs.page_url }}"
 
+      - name: 🧪 Smoke Test - Wait for Pages Deployment
+        run: |
+          echo "⏳ Waiting 30 seconds for GitHub Pages to update..."
+          sleep 30
+
+      - name: 🧪 Smoke Test - Verify Site Accessibility
+        run: |
+          echo "🧪 Testing https://www.leagueoffun.com..."
+          
+          # Try up to 3 times with 10 second delays
+          for i in {1..3}; do
+            if curl -f -s -o /dev/null -w "%{http_code}" https://www.leagueoffun.com | grep -q "200"; then
+              echo "✅ Site is accessible (HTTP 200)"
+              
+              # Verify HTML contains expected content
+              RESPONSE=$(curl -s https://www.leagueoffun.com)
+              if echo "$RESPONSE" | grep -q "<title>"; then
+                echo "✅ HTML content verified"
+                exit 0
+              else
+                echo "⚠️ HTML content check failed"
+                exit 1
+              fi
+            else
+              echo "⚠️ Attempt $i failed, retrying in 10 seconds..."
+              sleep 10
+            fi
+          done
+          
+          echo "❌ Site accessibility check failed after 3 attempts"
+          exit 1
+
   deploy-blamegame:
     name: 🎯 Deploy Blamegame
     needs: build
@@ -235,6 +270,38 @@ jobs:
           echo "✅ Blamegame deployed successfully!"
           echo "🌐 URL: https://blamegame.leagueoffun.de"
 
+      - name: 🧪 Smoke Test - Wait for Pages Deployment
+        run: |
+          echo "⏳ Waiting 30 seconds for GitHub Pages to update..."
+          sleep 30
+
+      - name: 🧪 Smoke Test - Verify Site Accessibility
+        run: |
+          echo "🧪 Testing https://blamegame.leagueoffun.de..."
+          
+          # Try up to 3 times with 10 second delays
+          for i in {1..3}; do
+            if curl -f -s -o /dev/null -w "%{http_code}" https://blamegame.leagueoffun.de | grep -q "200"; then
+              echo "✅ Site is accessible (HTTP 200)"
+              
+              # Verify HTML contains expected content
+              RESPONSE=$(curl -s https://blamegame.leagueoffun.de)
+              if echo "$RESPONSE" | grep -q "<title>"; then
+                echo "✅ HTML content verified"
+                exit 0
+              else
+                echo "⚠️ HTML content check failed"
+                exit 1
+              fi
+            else
+              echo "⚠️ Attempt $i failed, retrying in 10 seconds..."
+              sleep 10
+            fi
+          done
+          
+          echo "❌ Site accessibility check failed after 3 attempts"
+          exit 1
+
   deploy-hookhunt:
     name: 🎵 Deploy HookHunt
     needs: build
@@ -303,6 +370,38 @@ jobs:
         run: |
           echo "✅ HookHunt deployed successfully!"
           echo "🌐 URL: https://hookhunt.leagueoffun.com"
+
+      - name: 🧪 Smoke Test - Wait for Pages Deployment
+        run: |
+          echo "⏳ Waiting 30 seconds for GitHub Pages to update..."
+          sleep 30
+
+      - name: 🧪 Smoke Test - Verify Site Accessibility
+        run: |
+          echo "🧪 Testing https://hookhunt.leagueoffun.com..."
+          
+          # Try up to 3 times with 10 second delays
+          for i in {1..3}; do
+            if curl -f -s -o /dev/null -w "%{http_code}" https://hookhunt.leagueoffun.com | grep -q "200"; then
+              echo "✅ Site is accessible (HTTP 200)"
+              
+              # Verify HTML contains expected content
+              RESPONSE=$(curl -s https://hookhunt.leagueoffun.com)
+              if echo "$RESPONSE" | grep -q "<title>"; then
+                echo "✅ HTML content verified"
+                exit 0
+              else
+                echo "⚠️ HTML content check failed"
+                exit 1
+              fi
+            else
+              echo "⚠️ Attempt $i failed, retrying in 10 seconds..."
+              sleep 10
+            fi
+          done
+          
+          echo "❌ Site accessibility check failed after 3 attempts"
+          exit 1
 
   summary:
     name: 📊 Deployment Summary
