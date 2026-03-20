@@ -20,7 +20,7 @@ export function getSpotifyAuthUrl(): string {
   const baseUrl = ((import.meta as any).env?.BASE_URL as string | undefined) || '/';
   const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
   const appBase = new URL(normalizedBase, window.location.origin);
-  const redirectUri = new URL('callback', appBase).toString();
+  const redirectUri = new URL('callback/', appBase).toString();
   const params = new URLSearchParams({
     client_id: clientId,
     response_type: 'token',

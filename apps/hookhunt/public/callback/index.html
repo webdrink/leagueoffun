@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HookHunt Auth</title>
+    <script>
+      (function () {
+        var current = window.location;
+        var basePath = current.pathname.startsWith('/HookHunt/') ? '/HookHunt/' : '/';
+        var redirect = current.origin + basePath + current.search + current.hash;
+        window.location.replace(redirect);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Completing authentication...</p>
+  </body>
+</html>
