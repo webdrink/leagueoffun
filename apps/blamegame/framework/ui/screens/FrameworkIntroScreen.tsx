@@ -60,20 +60,6 @@ const FrameworkIntroScreen: React.FC = () => {
     console.log('Category selection changed to:', checked);
   };
 
-  // Dynamic styling based on config
-  const accentColor = theme.accentColor || 'autumn';
-  
-  // New 5-color system support
-  const colors = theme.colors || {
-    primary: 'autumn-500',
-    secondary: 'rust-500',
-    accent: 'orange-600',
-    neutral: 'gray-500',
-    highlight: 'amber-400'
-  };
-  
-
-
   return (
   <div className="flex flex-col items-center justify-center min-h-[60vh] py-4 w-full">
         <motion.div
@@ -102,12 +88,12 @@ const FrameworkIntroScreen: React.FC = () => {
           {/* Main Question */}
           {branding.mainQuestion && (
             <div className="text-center mb-8">
-              <h2 className={`text-2xl lg:text-3xl font-bold text-${accentColor}-800 dark:text-${accentColor}-200 mb-2`}>
+              <h2 className="text-2xl lg:text-3xl font-bold text-autumn-700 dark:text-autumn-200 mb-2">
                 {t(branding.mainQuestion)}
               </h2>
               {branding.subtitle && (
                 <p className="
-                  text-gray-700 dark:text-gray-200 
+                  text-slate-600 dark:text-slate-200
                   text-sm sm:text-base lg:text-lg
                   w-full max-w-full
                   break-words hyphens-auto
@@ -130,7 +116,7 @@ const FrameworkIntroScreen: React.FC = () => {
           >
             <Button
               onClick={handleStartGame}
-              className={`w-full bg-gradient-to-r from-${colors.primary} to-${colors.secondary} hover:from-${colors.primary.replace('-500', '-600')} hover:to-${colors.secondary.replace('-500', '-600')} text-white font-bold py-4 lg:py-5 px-6 rounded-xl transition-all duration-200 shadow-lg mb-6 text-lg lg:text-xl relative overflow-hidden`}
+              className="w-full bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white font-bold py-4 lg:py-5 px-6 rounded-xl transition-all duration-200 shadow-lg mb-6 text-lg lg:text-xl relative overflow-hidden"
             >
               <motion.div
                 className="absolute inset-0 bg-white/20 rounded-xl"
@@ -183,20 +169,12 @@ const FrameworkIntroScreen: React.FC = () => {
             <motion.div 
               className={`relative overflow-hidden rounded-xl p-4 mb-4 border-2 transition-all duration-300 shadow-lg ${
                 gameMode 
-                  ? `bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 border-amber-300 dark:border-amber-600 ring-2 ring-amber-200 dark:ring-amber-700/50` 
-                  : `bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 hover:border-autumn-300 dark:hover:border-autumn-600`
+                  ? `bg-amber-50 dark:bg-amber-900/25 border-amber-300 dark:border-amber-500 ring-2 ring-amber-200 dark:ring-amber-700/40` 
+                  : `bg-white dark:bg-gray-800/70 border-gray-300 dark:border-gray-600 hover:border-autumn-400 dark:hover:border-autumn-500`
               }`}
               whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              {gameMode && (
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-autumn-500/10 to-rust-500/10"
-                  initial={{ x: '-100%' }}
-                  animate={{ x: '100%' }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                />
-              )}
               <div className="relative flex items-center justify-between">
                 <Label htmlFor="gameModeToggle" className="flex items-center cursor-pointer select-none flex-grow">
                   <Switch
@@ -208,7 +186,7 @@ const FrameworkIntroScreen: React.FC = () => {
                   <div className="ml-3 flex-grow">
                     <span className={`font-semibold text-base ${
                       gameMode 
-                        ? 'text-autumn-800 dark:text-autumn-200' 
+                        ? 'text-amber-800 dark:text-amber-200' 
                         : 'text-gray-800 dark:text-gray-200'
                     }`}>
                       {t('intro.name_blame_mode')}

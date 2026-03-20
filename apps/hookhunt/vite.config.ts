@@ -3,13 +3,14 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
-  base: '/',
+  // Use repo subpath for GitHub Pages deployments, root for custom domains/local.
+  base: process.env.VITE_BASE_PATH || '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@framework-ui': path.resolve(__dirname, '../../packages/framework-ui/src'),
+      '@framework-ui': path.resolve(__dirname, '../../packages/ui/src'),
       '@game-core': path.resolve(__dirname, '../../packages/game-core/src'),
-      '@shared-config': path.resolve(__dirname, '../../packages/shared-config')
+      '@shared-config': path.resolve(__dirname, '../../packages/config')
     }
   },
   plugins: [react()],

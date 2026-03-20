@@ -1,0 +1,54 @@
+{
+  "game": {
+    "subtitle": "Errate den Hit aus dem Hook! 🎵"
+  },
+  "screens": {
+    "intro": {
+      "title": "Willkommen bei HookHunt",
+      "description": "Teste dein Musikwissen und erkenne Songs anhand ihrer ikonischen Hooks.",
+      "singleplayer": "Allein spielen",
+      "hotSeat": "Hot Seat (Weitergeben)"
+    },
+    "playerSetup": {
+      "title": "Spielernamen eingeben",
+      "addPlayer": "Spieler hinzufügen",
+      "placeholder": "Spieler {{number}}",
+      "continue": "Weiter",
+      "back": "Zurück"
+    },
+    "playlistSelect": {
+      "title": "Wähle deine Playlist",
+      "loginSpotify": "Spotify verbinden",
+      "yourPlaylists": "Deine Playlists",
+      "curated": "Kuratiert",
+      "search": "Spotify durchsuchen",
+      "searchPlaceholder": "Playlists suchen",
+      "select": "Auswählen",
+      "back": "Zurück"
+    },
+    "gameplay": {
+      "title": "Erkenne den Song!",
+      "guessPlaceholder": "Titel, Künstler oder Dekade eingeben (z. B. 90er)",
+      "submit": "Absenden",
+      "skip": "Überspringen",
+      "currentPlayer": "Aktueller Spieler: {{name}}",
+      "score": "Punkte: {{score}}",
+      "next": "Weiter"
+    },
+    "summary": {
+      "title": "Spiel beendet!",
+      "winner": "{{name}} gewinnt!",
+      "playAgain": "Nochmal spielen",
+      "backToHub": "Zurück zu League of Fun"
+    }
+  },
+  "footer": {
+    "enable_animations": "Animationen aktivieren",
+    "disable_animations": "Animationen deaktivieren",
+    "settings": "Einstellungen",
+    "dark_mode": "Dunkelmodus",
+    "light_mode": "Hellmodus",
+    "support_message": "Unterstütze uns, um mehr Spiele freizuschalten!",
+    "donation_message": "Deine Spende hilft uns, bessere Spiele zu entwickeln."
+  }
+}

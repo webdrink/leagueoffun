@@ -21,23 +21,6 @@ import useTheme from '../../../hooks/useTheme';
 import { GameSettings, UISettingsField } from '../../config/game.schema';
 import { storageGet, storageSet } from '../../persistence/storage';
 
-const adjustTone = (color: string | undefined, tone: string, fallback: string) => {
-  if (!color) {
-    return fallback;
-  }
-
-  const segments = color.split('-');
-  if (segments.length === 2 && /^\d{3}$/.test(segments[1])) {
-    return `${segments[0]}-${tone}`;
-  }
-
-  if (/^\d{3}$/.test(color)) {
-    return `${fallback.split('-')[0]}-${tone}`;
-  }
-
-  return `${color}-${tone}`;
-};
-
 interface GameShellProps {
   children: React.ReactNode;
   className?: string;
@@ -53,23 +36,6 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
   const features = ui?.features || {};
   const branding = ui?.branding || {};
   const theme = ui?.theme || {};
-  const defaultThemeColors = {
-    primary: 'autumn-500',
-    secondary: 'rust-500',
-    accent: 'orange-600',
-    neutral: 'gray-500',
-    highlight: 'amber-400'
-  };
-  const themeColors = {
-    ...defaultThemeColors,
-    ...(theme.colors || {})
-  };
-  const primaryGradient = theme.primaryGradient
-    ? theme.primaryGradient
-    : `from-${themeColors.primary} via-${themeColors.accent} to-${themeColors.secondary}`;
-  const darkGradient = `dark:from-${adjustTone(themeColors.primary, '400', 'autumn-400')} dark:via-${adjustTone(themeColors.accent, '400', 'orange-400')} dark:to-${adjustTone(themeColors.secondary, '400', 'rust-400')}`;
-  const accentTone = adjustTone(themeColors.accent, '600', 'autumn-600');
-  const accentToneDark = adjustTone(themeColors.accent, '300', 'autumn-300');
   
   // Local state for modals and settings
   const [showInfoModal, setShowInfoModal] = useState(false);
@@ -151,7 +117,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
               data-testid="game-header"
             >
               <div
-                className={`${theme.cardBackground || 'bg-white dark:bg-gray-800'} rounded-3xl shadow-2xl px-4 sm:px-5 md:px-6 py-3 sm:py-4 w-full backdrop-blur-sm bg-white/90 dark:bg-gray-800/90 flex items-center justify-center min-h-[64px]`}
+                className={`${theme.cardBackground || ''} rounded-[2rem] border border-white/50 dark:border-slate-500/40 shadow-[0_18px_50px_rgba(15,23,42,0.35)] px-4 sm:px-5 md:px-6 py-3 sm:py-4 w-full backdrop-blur-md bg-white/88 dark:bg-slate-900/78 flex items-center justify-center min-h-[64px]`}
               >
                 <div className="text-center w-full max-w-full">
                   <div
@@ -173,8 +139,9 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                       text={branding.gameName || config.title}
                       tag="h1"
                       className={`
-                        font-bold text-transparent bg-clip-text bg-gradient-to-r ${primaryGradient}
-                        ${darkGradient}
+                        font-bold text-transparent bg-clip-text bg-gradient-to-r
+                        from-autumn-600 via-orange-500 to-rust-600
+                        dark:from-autumn-300 dark:via-orange-300 dark:to-rust-300
                         drop-shadow-sm leading-tight text-center w-full max-w-full break-words hyphens-auto
                         text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-[3.5rem]
                         line-clamp-2
@@ -190,7 +157,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.4 }}
-                      className={`text-${accentTone} dark:text-${accentToneDark} font-medium text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl line-clamp-1`}
+                      className="text-autumn-700 dark:text-autumn-200 font-medium text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl line-clamp-1"
                     >
                       {t(branding.tagline)}
                     </motion.p>
@@ -217,7 +184,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
             <>
               <div className="h-3 sm:h-4 flex-shrink-0"></div>
               <footer className="flex-shrink-0 flex flex-col items-center justify-center pb-3 sm:pb-4" data-testid="game-shell-footer">
-              <div className="bg-black/60 backdrop-blur-xl rounded-2xl p-4 mx-auto w-full max-w-2xl border border-white/20 shadow-2xl">
+              <div className="bg-gradient-to-r from-slate-950/55 via-slate-900/55 to-slate-950/55 backdrop-blur-xl rounded-2xl p-4 mx-auto w-full max-w-2xl border border-white/20 shadow-2xl">
                 {/* Top Row: Main Controls */}
                 <div className="flex justify-center items-center gap-3 text-white dark:text-gray-200 mb-3">
                   {/* Main control buttons - all with consistent styling */}
@@ -259,7 +226,7 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                   
                   {/* Language Selector - styled to match footer buttons */}
                   {features.languageSelector && (
-                    <div className={`flex items-center bg-autumn-600/60 rounded-xl px-3 py-1.5 backdrop-blur-md border-2 border-autumn-500/80 shadow-xl hover:bg-autumn-500/20 hover:border-autumn-400 transition-all duration-200 transform hover:scale-105 min-h-[44px]`} data-testid="language-selector">
+                    <div className="flex items-center bg-white/10 rounded-xl px-3 py-1.5 backdrop-blur-md border-2 border-white/30 shadow-xl hover:bg-white/20 hover:border-white/50 transition-all duration-200 transform hover:scale-105 min-h-[44px]" data-testid="language-selector">
                       <LanguageSelector compact />
                     </div>
                   )}

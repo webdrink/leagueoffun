@@ -1,0 +1,54 @@
+{
+  "game": {
+    "subtitle": "Guess the hit from the hook! 🎵"
+  },
+  "screens": {
+    "intro": {
+      "title": "Welcome to HookHunt",
+      "description": "Test your music knowledge by identifying songs from their iconic hooks.",
+      "singleplayer": "Play Solo",
+      "hotSeat": "Hot Seat (Pass & Play)"
+    },
+    "playerSetup": {
+      "title": "Enter Player Names",
+      "addPlayer": "Add Player",
+      "placeholder": "Player {{number}}",
+      "continue": "Continue",
+      "back": "Back"
+    },
+    "playlistSelect": {
+      "title": "Choose Your Playlist",
+      "loginSpotify": "Connect Spotify",
+      "yourPlaylists": "Your Playlists",
+      "curated": "Curated Collections",
+      "search": "Search Spotify",
+      "searchPlaceholder": "Search playlists",
+      "select": "Select",
+      "back": "Back"
+    },
+    "gameplay": {
+      "title": "Guess the song!",
+      "guessPlaceholder": "Type title, artist or decade (e.g., 90s)",
+      "submit": "Submit",
+      "skip": "Skip",
+      "currentPlayer": "Current Player: {{name}}",
+      "score": "Score: {{score}}",
+      "next": "Next"
+    },
+    "summary": {
+      "title": "Game Over!",
+      "winner": "{{name}} wins!",
+      "playAgain": "Play Again",
+      "backToHub": "Back to League of Fun"
+    }
+  },
+  "footer": {
+    "enable_animations": "Enable animations",
+    "disable_animations": "Disable animations",
+    "settings": "Settings",
+    "dark_mode": "Dark mode",
+    "light_mode": "Light mode",
+    "support_message": "Support us to unlock more games!",
+    "donation_message": "Your donation helps us create better games."
+  }
+}

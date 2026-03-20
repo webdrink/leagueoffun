@@ -1,19 +1,35 @@
 import React, { useEffect, useState, ReactNode } from 'react';
-import { motion } from 'framer-motion';
-import { Music, ArrowLeft, Zap, Play, Headphones, Users, Trophy, Star, Sparkles, Settings, Info, Moon, Sun } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Music, ArrowLeft, Zap, Settings, Moon, Sun } from 'lucide-react';
 import { useAnimations } from '@game-core';
+import { useTranslation } from 'react-i18next';
+import './i18n/config';
+
+import IntroScreen from './screens/Intro';
+import PlayerSetupScreen from './screens/PlayerSetup';
+import PlaylistSelectScreen from './screens/PlaylistSelect';
+import GameplayScreen from './screens/Gameplay';
+import SummaryScreen from './screens/Summary';
+import SettingsModal from './components/SettingsModal';
+import { readTokenFromHash, storeAccessToken } from './utils/spotifyAuth';
 
 // Reusable FooterButton component matching BlameGame style
 interface FooterButtonProps {
   onClick?: () => void;
   title: string;
   children: ReactNode;
+  disabled?: boolean;
 }
 
-const FooterButton: React.FC<FooterButtonProps> = ({ onClick, title, children }) => (
+const FooterButton: React.FC<FooterButtonProps> = ({ onClick, title, children, disabled = false }) => (
   <button
     onClick={onClick}
-    className="flex items-center justify-center w-11 h-11 bg-orange-600/60 rounded-xl backdrop-blur-md border-2 border-orange-500/80 shadow-xl hover:bg-orange-500/70 hover:border-orange-400 transition-all duration-200 transform hover:scale-105"
+    disabled={disabled}
+    className={`flex items-center justify-center w-11 h-11 rounded-xl backdrop-blur-md border-2 shadow-xl transition-all duration-200 transform hover:scale-105 ${
+      disabled
+        ? 'bg-gray-400/40 border-gray-400/50 text-gray-600 cursor-not-allowed'
+        : 'bg-orange-600/60 border-orange-500/80 hover:bg-orange-500/70 hover:border-orange-400'
+    }`}
     title={title}
   >
     {children}
@@ -52,6 +68,10 @@ const getSeasonalGradient = (season: Season, isDark: boolean): string => {
   }
 };
 
+// Game types
+type GameStep = 'intro' | 'playerSetup' | 'playlistSelect' | 'game' | 'summary';
+type GameMode = 'singleplayer' | 'hotSeat';
+
 // Dark mode hook
 function useDarkMode() {
   const [isDark, setIsDark] = useState(() => {
@@ -75,11 +95,40 @@ function useDarkMode() {
   return { isDark, toggle: () => setIsDark(prev => !prev) };
 }
 
+interface GameSettings {
+  gameMode: GameMode;
+  playerNames: string[];
+  currentPlayerIndex: number;
+  playlistId?: string;
+  pointsToWin: number;
+  matchThreshold: number; // percentage 0..100
+  pointsForPartial: number;
+  pointsForFull: number;
+}
+
+interface PlayerScore {
+  name: string;
+  score: number;
+}
+
 function App() {
+  const { t } = useTranslation();
   const [playerId, setPlayerId] = useState<string>('');
   const [returnUrl, setReturnUrl] = useState<string>('');
   const { animationsEnabled, toggleAnimations } = useAnimations();
   const { isDark, toggle: toggleDarkMode } = useDarkMode();
+  const [gameStep, setGameStep] = useState<GameStep>('intro');
+  const [showSettings, setShowSettings] = useState(false);
+  const [gameSettings, setGameSettings] = useState<GameSettings>({
+    gameMode: 'singleplayer',
+    playerNames: [],
+    currentPlayerIndex: 0,
+    pointsToWin: 10,
+    matchThreshold: 70,
+    pointsForPartial: 1,
+    pointsForFull: 2,
+  });
+  const [playerScores, setPlayerScores] = useState<PlayerScore[]>([]);
   
   // Get season from localStorage or auto-detect (doesn't need to be stateful as it rarely changes)
   const season: Season = (() => {
@@ -88,6 +137,12 @@ function App() {
   })();
 
   useEffect(() => {
+    const tokenFromHash = readTokenFromHash();
+    if (tokenFromHash) {
+      storeAccessToken(tokenFromHash);
+      window.history.replaceState(null, document.title, window.location.pathname + window.location.search);
+    }
+
     const params = new URLSearchParams(window.location.search);
     const pid = params.get('playerId');
     const rurl = params.get('returnUrl');
@@ -108,32 +163,51 @@ function App() {
         const url = new URL(decodeURIComponent(returnUrl));
         url.searchParams.set('playerId', playerId);
         url.searchParams.set('gameId', 'hookhunt');
-        url.searchParams.set('score', '0');
+        url.searchParams.set('score', String(playerScores[0]?.score || 0));
         url.searchParams.set('playedAt', new Date().toISOString());
         window.location.href = url.toString();
         return;
       } catch (e) {}
     }
     // Fallback to League of Fun hub if no returnUrl
-    window.location.href = 'https://leagueoffun.de';
+    window.location.href = 'https://www.leagueoffun.com';
   };
 
-  const itemVariants = animationsEnabled
-    ? {
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 }
-      }
-    : {
-        initial: { opacity: 1, y: 0 },
-        animate: { opacity: 1, y: 0 }
-      };
+  const startGame = (mode: GameMode) => {
+    setGameSettings(prev => ({ ...prev, gameMode: mode }));
+    setGameStep('playerSetup');
+  };
 
-  const features = [
-    { icon: <Headphones size={18} />, text: 'Listen to 7-12 second hooks' },
-    { icon: <Users size={18} />, text: 'Play with friends' },
-    { icon: <Trophy size={18} />, text: 'Compete for high scores' },
-    { icon: <Star size={18} />, text: 'Connect your Spotify' },
-  ];
+  const submitPlayers = (names: string[]) => {
+    const validNames = names.filter(n => n.trim().length > 0);
+    setGameSettings(prev => ({ ...prev, playerNames: validNames, currentPlayerIndex: 0 }));
+    setPlayerScores(validNames.map(n => ({ name: n, score: 0 })));
+    setGameStep('playlistSelect');
+  };
+
+  const selectPlaylist = (playlistId: string) => {
+    setGameSettings(prev => ({ ...prev, playlistId }));
+    setGameStep('game');
+  };
+
+  const finishGame = (scores: PlayerScore[]) => {
+    setPlayerScores(scores);
+    setGameStep('summary');
+  };
+
+  const resetGame = () => {
+    setGameStep('intro');
+    setGameSettings({
+      gameMode: 'singleplayer',
+      playerNames: [],
+      currentPlayerIndex: 0,
+      pointsToWin: 10,
+      matchThreshold: 70,
+      pointsForPartial: 1,
+      pointsForFull: 2,
+    });
+    setPlayerScores([]);
+  };
 
   const backgroundGradient = getSeasonalGradient(season, isDark);
 
@@ -165,7 +239,7 @@ function App() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="text-orange-600 dark:text-orange-400 font-medium text-sm sm:text-base md:text-lg"
                 >
-                  Guess the hit from the hook! 🎵
+                  {t('game.subtitle')}
                 </motion.p>
               </div>
             </div>
@@ -176,125 +250,49 @@ function App() {
 
           {/* Main Content Area */}
           <main className="flex-1 flex flex-col bg-transparent min-h-0 overflow-auto">
-            <div className="flex-1 flex items-center justify-center bg-transparent py-2 sm:py-4 px-0 min-h-0">
-              <motion.div
-                initial={animationsEnabled ? { opacity: 0, y: 20, scale: 0.95 } : {}}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="bg-white/95 dark:bg-gray-800/95 rounded-3xl shadow-2xl p-6 md:p-8 w-full backdrop-blur-sm"
-              >
-                {/* Coming Soon Badge - Preserved from original design */}
-                <motion.div
-                  variants={itemVariants}
-                  initial="initial"
-                  animate="animate"
-                  transition={{ delay: 0.2 }}
-                  className="text-center mb-6"
-                >
-                  <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 dark:from-yellow-500/30 dark:to-orange-500/30 rounded-full border border-yellow-400/50 dark:border-yellow-500/50">
-                    <Sparkles size={20} className="text-yellow-500 dark:text-yellow-400" />
-                    <span className="text-yellow-600 dark:text-yellow-400 font-semibold text-lg">Coming Soon!</span>
-                  </div>
-                </motion.div>
-
-                {/* Game Icon */}
-                <motion.div
-                  variants={itemVariants}
-                  initial="initial"
-                  animate="animate"
-                  transition={{ delay: 0.3 }}
-                  className="flex justify-center mb-6"
-                >
-                  <div className="relative">
-                    <div className="w-20 h-20 bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-xl">
-                      <Music size={40} className="text-white" />
-                    </div>
-                    {animationsEnabled && (
-                      <motion.div
-                        className="absolute -top-1 -right-1"
-                        animate={{ rotate: [0, 15, 0, -15, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      >
-                        <Sparkles size={20} className="text-yellow-500" />
-                      </motion.div>
-                    )}
-                  </div>
-                </motion.div>
-
-                {/* Description */}
-                <motion.div
-                  variants={itemVariants}
-                  initial="initial"
-                  animate="animate"
-                  transition={{ delay: 0.4 }}
-                  className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl p-4 mb-6 border border-gray-200 dark:border-gray-600"
-                >
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-center">
-                    HookHunt is under development! Get ready to test your music knowledge
-                    by identifying songs from their iconic hooks. Connect your Spotify playlist
-                    and challenge friends to see who knows their tunes best!
-                  </p>
-                </motion.div>
-
-                {/* Features grid */}
-                <motion.div
-                  variants={itemVariants}
-                  initial="initial"
-                  animate="animate"
-                  transition={{ delay: 0.5 }}
-                  className="grid grid-cols-2 gap-3 mb-6"
-                >
-                  {features.map((feature, index) => (
-                    <motion.div
-                      key={feature.text}
-                      className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600"
-                      whileHover={animationsEnabled ? { scale: 1.02 } : {}}
-                      initial={animationsEnabled ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.6 + index * 0.1 }}
-                    >
-                      <div className="text-orange-500 dark:text-orange-400">{feature.icon}</div>
-                      <span className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm">{feature.text}</span>
-                    </motion.div>
-                  ))}
-                </motion.div>
-
-                {/* Action buttons */}
-                <motion.div
-                  variants={itemVariants}
-                  initial="initial"
-                  animate="animate"
-                  transition={{ delay: 0.7 }}
-                  className="space-y-3"
-                >
-                  {/* Disabled play button - matches BlameGame button style */}
-                  <button
-                    disabled
-                    className="w-full bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700 text-gray-500 dark:text-gray-400 font-bold py-4 px-6 rounded-xl cursor-not-allowed transition-all duration-200"
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      <Play size={20} />
-                      Game Coming Soon
-                    </span>
-                  </button>
-                  
-                  {/* Return to hub */}
-                  {returnUrl && (
-                    <motion.button
-                      onClick={handleReturnToHub}
-                      className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
-                      whileHover={animationsEnabled ? { scale: 1.02 } : {}}
-                      whileTap={animationsEnabled ? { scale: 0.98 } : {}}
-                    >
-                      <span className="flex items-center justify-center gap-2">
-                        <ArrowLeft size={20} />
-                        Back to League of Fun
-                      </span>
-                    </motion.button>
-                  )}
-                </motion.div>
-              </motion.div>
-            </div>
+            <AnimatePresence mode="wait">
+              {gameStep === 'intro' && (
+                <IntroScreen key="intro" onStart={startGame} animationsEnabled={animationsEnabled} />
+              )}
+              {gameStep === 'playerSetup' && (
+                <PlayerSetupScreen
+                  key="playerSetup"
+                  mode={gameSettings.gameMode}
+                  onSubmit={submitPlayers}
+                  onBack={() => setGameStep('intro')}
+                  animationsEnabled={animationsEnabled}
+                />
+              )}
+              {gameStep === 'playlistSelect' && (
+                <PlaylistSelectScreen
+                  key="playlistSelect"
+                  onSelect={selectPlaylist}
+                  onBack={() => setGameStep('playerSetup')}
+                  animationsEnabled={animationsEnabled}
+                />
+              )}
+              {gameStep === 'game' && gameSettings.playlistId && (
+                <GameplayScreen
+                  key="game"
+                  playlistId={gameSettings.playlistId}
+                  playerNames={gameSettings.playerNames}
+                  mode={gameSettings.gameMode}
+                  settings={gameSettings}
+                  onFinish={finishGame}
+                  animationsEnabled={animationsEnabled}
+                />
+              )}
+              {gameStep === 'summary' && (
+                <SummaryScreen
+                  key="summary"
+                  scores={playerScores}
+                  mode={gameSettings.gameMode}
+                  onPlayAgain={resetGame}
+                  onBackToHub={handleReturnToHub}
+                  animationsEnabled={animationsEnabled}
+                />
+              )}
+            </AnimatePresence>
           </main>
 
           {/* Padding before footer */}
@@ -308,31 +306,23 @@ function App() {
                 {/* Animation toggle */}
                 <FooterButton
                   onClick={toggleAnimations}
-                  title={animationsEnabled ? 'Disable animations' : 'Enable animations'}
+                  title={animationsEnabled ? t('footer.disable_animations') : t('footer.enable_animations')}
                 >
                   <Zap size={18} className={animationsEnabled ? '' : 'opacity-50'} />
                 </FooterButton>
                 
-                {/* Settings button - Coming soon alert */}
+                {/* Settings */}
                 <FooterButton
-                  onClick={() => alert('Settings coming soon!')}
-                  title="Settings"
+                  onClick={() => setShowSettings(true)}
+                  title={t('footer.settings')}
                 >
                   <Settings size={18} />
-                </FooterButton>
-                
-                {/* Info button - Coming soon alert */}
-                <FooterButton
-                  onClick={() => alert('HookHunt is under development. Stay tuned!')}
-                  title="Information"
-                >
-                  <Info size={18} />
                 </FooterButton>
                 
                 {/* Dark Mode Toggle */}
                 <FooterButton
                   onClick={toggleDarkMode}
-                  title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                  title={isDark ? t('footer.light_mode') : t('footer.dark_mode')}
                 >
                   {isDark ? <Sun size={18} /> : <Moon size={18} />}
                 </FooterButton>
@@ -341,9 +331,9 @@ function App() {
               {/* Bottom Row: Support message */}
               <div className="border-t border-white/30 pt-3">
                 <p className="text-sm text-center text-white font-medium">
-                  🍂 Support us to unlock more games! 
+                  🎵 {t('footer.support_message')}
                   <span className="block text-white/90 text-xs mt-1">
-                    Your donation helps us create better games.
+                    {t('footer.donation_message')}
                   </span>
                 </p>
               </div>
@@ -354,6 +344,13 @@ function App() {
           <div className="h-4 sm:h-6 flex-shrink-0"></div>
         </div>
       </div>
+      {/* Settings Modal */}
+      <SettingsModal
+        isOpen={showSettings}
+        onClose={() => setShowSettings(false)}
+        settings={gameSettings}
+        onChange={setGameSettings}
+      />
     </div>
   );
 }

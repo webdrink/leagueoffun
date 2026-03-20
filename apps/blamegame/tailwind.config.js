@@ -2,9 +2,17 @@
 export default {
   content: [
     "./index.html",
-    "./*.{js,ts,jsx,tsx}", // Include root level TS/JS files like App.tsx, index.tsx
-    "./components/**/*.{js,ts,jsx,tsx}", // Include all TS/JS files in components folder
-    "./hooks/**/*.{js,ts,jsx,tsx}", // Added hooks directory
+    "./*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./context/**/*.{js,ts,jsx,tsx}",
+    "./framework/**/*.{js,ts,jsx,tsx}",
+    "./games/**/*.{js,ts,jsx,tsx}",
+    "./hooks/**/*.{js,ts,jsx,tsx}",
+    "./lib/**/*.{js,ts,jsx,tsx}",
+    "./providers/**/*.{js,ts,jsx,tsx}",
+    "./store/**/*.{js,ts,jsx,tsx}",
+    "../../packages/ui/src/**/*.{js,ts,jsx,tsx}",
+    "../../packages/game-core/src/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: 'class', // Enable dark mode based on class toggle (was 'media')
   theme: {
@@ -12,40 +20,40 @@ export default {
       colors: {
         // Fall/Autumn Theme (current season)
         autumn: {
-          50: '#fffbeb',
-          100: '#fef3c7',
-          200: '#fde68a',
-          300: '#fcd34d',
-          400: '#fbbf24',
-          500: '#f59e0b',
-          600: '#d97706',
-          700: '#b45309',
-          800: '#92400e',
-          900: '#78350f',
+          50: '#fff8ee',
+          100: '#ffeccf',
+          200: '#ffd49b',
+          300: '#f8bb6b',
+          400: '#ee9f4e',
+          500: '#dc8332',
+          600: '#ba6520',
+          700: '#8f4b19',
+          800: '#6a3815',
+          900: '#46240f',
         },
         rust: {
-          50: '#fef2f2',
-          100: '#fee2e2',
-          200: '#fecaca',
-          300: '#fca5a5',
-          400: '#f87171',
-          500: '#ef4444',
-          600: '#dc2626',
-          700: '#b91c1c',
-          800: '#991b1b',
-          900: '#7f1d1d',
+          50: '#fff4f1',
+          100: '#ffe6de',
+          200: '#ffc8b9',
+          300: '#f5a08a',
+          400: '#e67661',
+          500: '#c95a43',
+          600: '#a64331',
+          700: '#7d3225',
+          800: '#5d251d',
+          900: '#3d1712',
         },
         brown: {
-          50: '#fdf8f6',
-          100: '#f2e8e5',
-          200: '#eaddd7',
-          300: '#e0cec7',
-          400: '#d2bab0',
-          500: '#bfa094',
-          600: '#a18072',
-          700: '#977669',
-          800: '#846358',
-          900: '#43302b',
+          50: '#fef8f4',
+          100: '#f5e7df',
+          200: '#ead2c5',
+          300: '#ddbaa8',
+          400: '#c99b85',
+          500: '#ae7f68',
+          600: '#8e6653',
+          700: '#714f41',
+          800: '#573d33',
+          900: '#35231d',
         },
         // Winter Theme
         frost: {
@@ -208,4 +216,3 @@ export default {
   },
   plugins: [],
 }
-
