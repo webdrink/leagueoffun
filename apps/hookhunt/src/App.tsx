@@ -1,6 +1,6 @@
 import React, { useEffect, useState, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Music, ArrowLeft, Zap, Settings, Moon, Sun } from 'lucide-react';
+import { Zap, Settings, Moon, Sun } from 'lucide-react';
 import { useAnimations } from '@game-core';
 import { useTranslation } from 'react-i18next';
 import './i18n/config';
@@ -27,8 +27,8 @@ const FooterButton: React.FC<FooterButtonProps> = ({ onClick, title, children, d
     disabled={disabled}
     className={`flex items-center justify-center w-11 h-11 rounded-xl backdrop-blur-md border-2 shadow-xl transition-all duration-200 transform hover:scale-105 ${
       disabled
-        ? 'bg-gray-400/40 border-gray-400/50 text-gray-600 cursor-not-allowed'
-        : 'bg-orange-600/60 border-orange-500/80 hover:bg-orange-500/70 hover:border-orange-400'
+        ? 'bg-slate-500/30 border-slate-500/40 text-slate-500 cursor-not-allowed'
+        : 'bg-slate-900/10 border-slate-500/35 text-slate-700 hover:bg-slate-900/16 hover:border-slate-500/45 dark:bg-white/12 dark:border-white/35 dark:text-white dark:hover:bg-white/22 dark:hover:border-white/50'
     }`}
     title={title}
   >
@@ -51,20 +51,20 @@ const getSeasonalGradient = (season: Season, isDark: boolean): string => {
   switch (season) {
     case 'fall':
       return isDark 
-        ? 'bg-gradient-to-br from-amber-900 via-orange-900 to-red-900'
-        : 'bg-gradient-to-br from-amber-400 via-orange-500 to-red-500';
+        ? 'bg-gradient-to-br from-slate-950 via-amber-950 to-orange-950'
+        : 'bg-gradient-to-br from-amber-300 via-orange-400 to-rose-300';
     case 'winter':
       return isDark
-        ? 'bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900'
-        : 'bg-gradient-to-br from-slate-300 via-blue-400 to-indigo-500';
+        ? 'bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950'
+        : 'bg-gradient-to-br from-sky-200 via-blue-200 to-indigo-200';
     case 'spring':
       return isDark
-        ? 'bg-gradient-to-br from-green-900 via-emerald-900 to-teal-900'
-        : 'bg-gradient-to-br from-green-400 via-emerald-500 to-teal-500';
+        ? 'bg-gradient-to-br from-slate-950 via-emerald-950 to-teal-900'
+        : 'bg-gradient-to-br from-emerald-200 via-teal-200 to-cyan-200';
     case 'summer':
       return isDark
-        ? 'bg-gradient-to-br from-yellow-900 via-orange-900 to-pink-900'
-        : 'bg-gradient-to-br from-yellow-400 via-orange-500 to-pink-500';
+        ? 'bg-gradient-to-br from-slate-950 via-orange-950 to-rose-950'
+        : 'bg-gradient-to-br from-amber-200 via-orange-200 to-rose-200';
   }
 };
 
@@ -212,24 +212,25 @@ function App() {
   const backgroundGradient = getSeasonalGradient(season, isDark);
 
   return (
-    <div className={`min-h-screen ${backgroundGradient} animate-gentle-shift overflow-hidden`}>
+    <div className={`min-h-screen ${backgroundGradient} animate-gentle-shift overflow-hidden relative`}>
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,255,255,0.2),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(251,146,60,0.22),transparent_30%),radial-gradient(circle_at_50%_100%,rgba(15,23,42,0.2),transparent_45%)] dark:bg-[radial-gradient(circle_at_20%_15%,rgba(148,163,184,0.14),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(249,115,22,0.2),transparent_30%),radial-gradient(circle_at_50%_100%,rgba(2,6,23,0.4),transparent_45%)]" />
       {/* Fixed Layout Container matching BlameGame structure */}
-      <div className="h-screen flex flex-col bg-transparent overflow-hidden">
+      <div className="h-screen flex flex-col bg-transparent overflow-hidden relative z-10">
         {/* Main Viewport-Responsive Container */}
-        <div className="flex flex-col h-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mx-auto w-full px-3 sm:px-4 lg:px-6 bg-transparent">
+        <div className="flex flex-col h-full max-w-sm sm:max-w-lg lg:max-w-2xl xl:max-w-3xl mx-auto w-full px-3 sm:px-5 lg:px-8 bg-transparent">
           
           {/* Top Padding */}
-          <div className="h-4 sm:h-6 flex-shrink-0"></div>
+          <div className="h-4 sm:h-5 flex-shrink-0"></div>
           
           {/* Header Card - Matching BlameGame style */}
-          <header className="py-3 sm:py-4 flex-shrink-0 flex justify-center items-center">
-            <div className="bg-white/90 dark:bg-gray-800/90 rounded-3xl shadow-2xl px-4 sm:px-5 md:px-6 py-3 sm:py-4 w-full backdrop-blur-sm flex items-center justify-center min-h-[64px]">
-              <div className="text-center w-full max-w-full">
+          <header className="py-2 sm:py-3 flex-shrink-0 flex justify-center items-center">
+            <div className="hh-surface-card px-5 sm:px-7 py-3 sm:py-4 w-full flex items-center justify-center min-h-[74px]">
+              <div className="text-center w-full max-w-full hh-content">
                 <motion.h1
                   initial={animationsEnabled ? { opacity: 0, y: -10 } : {}}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-600 to-red-600 dark:from-orange-400 dark:via-orange-500 dark:to-red-500 drop-shadow-sm leading-tight text-center w-full text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
+                  className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-500 to-rose-500 dark:from-orange-300 dark:via-amber-300 dark:to-rose-300 drop-shadow-sm leading-tight text-center w-full text-3xl sm:text-4xl md:text-5xl"
                 >
                   HookHunt
                 </motion.h1>
@@ -237,7 +238,7 @@ function App() {
                   initial={animationsEnabled ? { opacity: 0, y: 10 } : {}}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-orange-600 dark:text-orange-400 font-medium text-sm sm:text-base md:text-lg"
+                  className="text-orange-700 dark:text-orange-200/95 font-semibold text-sm sm:text-base md:text-lg"
                 >
                   {t('game.subtitle')}
                 </motion.p>
@@ -300,9 +301,9 @@ function App() {
 
           {/* Footer - Matching BlameGame style */}
           <footer className="flex-shrink-0 flex flex-col items-center justify-center pb-3 sm:pb-4">
-            <div className="bg-black/60 backdrop-blur-xl rounded-2xl p-4 mx-auto w-full max-w-2xl border border-white/20 shadow-2xl">
+            <div className="hh-surface-card p-4 sm:p-5 mx-auto w-full">
               {/* Top Row: Main Controls */}
-              <div className="flex justify-center items-center gap-3 text-white dark:text-gray-200 mb-3">
+              <div className="hh-content flex justify-center items-center gap-3 text-slate-700 dark:text-slate-200 mb-3">
                 {/* Animation toggle */}
                 <FooterButton
                   onClick={toggleAnimations}
@@ -329,10 +330,10 @@ function App() {
               </div>
               
               {/* Bottom Row: Support message */}
-              <div className="border-t border-white/30 pt-3">
-                <p className="text-sm text-center text-white font-medium">
+              <div className="hh-content border-t border-slate-300/60 dark:border-white/10 pt-3">
+                <p className="text-sm text-center text-slate-700 dark:text-slate-100 font-semibold">
                   🎵 {t('footer.support_message')}
-                  <span className="block text-white/90 text-xs mt-1">
+                  <span className="block text-slate-600 dark:text-slate-200/90 text-xs mt-1">
                     {t('footer.donation_message')}
                   </span>
                 </p>

@@ -60,10 +60,10 @@ export default function PlaylistSelectScreen({ onSelect, onBack, animationsEnabl
   return (
     <div className="flex-1 flex flex-col bg-transparent min-h-0 overflow-auto">
       <div className="flex items-center justify-between px-2 mb-2">
-        <button onClick={onBack} className="text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 flex items-center gap-1">
+        <button onClick={onBack} className="hh-btn-muted !w-auto !px-3 !py-2">
           <ArrowLeft size={18} /> {t('screens.playlistSelect.back')}
         </button>
-        <h2 className="text-lg font-bold">{t('screens.playlistSelect.title')}</h2>
+        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">{t('screens.playlistSelect.title')}</h2>
         <div />
       </div>
 
@@ -71,15 +71,16 @@ export default function PlaylistSelectScreen({ onSelect, onBack, animationsEnabl
         initial={animationsEnabled ? { opacity: 0, y: 10 } : {}}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="bg-white/95 dark:bg-gray-800/95 rounded-3xl shadow-2xl p-4 md:p-6 w-full backdrop-blur-sm flex-1 flex flex-col overflow-auto"
+        className="hh-surface-card p-4 md:p-6 w-full flex-1 flex flex-col overflow-auto"
       >
         {!token && (
-          <div className="mb-4">
+          <div className="hh-content mb-4">
+            <p className="hh-subtitle mb-3 text-center">{t('screens.playlistSelect.loginSpotify')}</p>
             <button
               onClick={() => {
                 window.location.href = getSpotifyAuthUrl();
               }}
-              className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 bg-green-500 hover:bg-green-600 text-white w-full font-semibold transition-all"
+              className="hh-btn-primary"
             >
               <LogIn size={18} /> {t('screens.playlistSelect.loginSpotify')}
             </button>
@@ -89,47 +90,47 @@ export default function PlaylistSelectScreen({ onSelect, onBack, animationsEnabl
         {token && (
           <>
             {/* Your playlists - Primary focus */}
-            <div className="mb-4 flex-1">
-              <h3 className="font-semibold mb-2 flex items-center gap-2">
+            <div className="hh-content mb-5 flex-1">
+              <h3 className="hh-section-title">
                 <Music size={18} className="text-orange-500" />
                 {t('screens.playlistSelect.yourPlaylists')}
               </h3>
-              {loading && <div className="text-sm text-gray-500">Loading…</div>}
+              {loading && <div className="text-sm text-slate-500 dark:text-slate-400">Loading…</div>}
               {!loading && yourPlaylists.length > 0 && (
                 <div className="grid grid-cols-2 gap-2 mb-4">
                   {yourPlaylists.map(pl => (
                     <button
                       key={pl.id}
                       onClick={() => onSelect(pl.id)}
-                      className="rounded-xl border border-gray-300 dark:border-gray-600 px-3 py-3 text-left hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors"
+                      className="rounded-2xl border border-slate-200/80 dark:border-slate-700 px-3 py-3 text-left bg-white/60 dark:bg-slate-800/60 hover:bg-orange-50 dark:hover:bg-slate-700 transition-colors"
                     >
-                      <div className="font-medium truncate text-sm">{pl.name}</div>
-                      <div className="text-xs text-gray-500">{t('screens.playlistSelect.select')}</div>
+                      <div className="font-semibold truncate text-sm text-slate-800 dark:text-slate-100">{pl.name}</div>
+                      <div className="text-xs text-slate-500">{t('screens.playlistSelect.select')}</div>
                     </button>
                   ))}
                 </div>
               )}
               {!loading && yourPlaylists.length === 0 && (
-                <p className="text-sm text-gray-500 mb-4">No playlists found. Create one on Spotify!</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">No playlists found. Create one on Spotify!</p>
               )}
             </div>
 
             {/* Search - Secondary */}
-            <div className="mb-4">
-              <h3 className="font-semibold mb-2">{t('screens.playlistSelect.search')}</h3>
+            <div className="hh-content mb-5">
+              <h3 className="hh-section-title">{t('screens.playlistSelect.search')}</h3>
               <div className="flex gap-2 mb-2">
                 <input
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                   onKeyPress={e => e.key === 'Enter' && doSearch()}
                   placeholder={t('screens.playlistSelect.searchPlaceholder')}
-                  className="flex-1 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-3 py-2 text-sm"
+                  className="hh-input text-sm"
                 />
                 <button
                   onClick={doSearch}
                   title={t('screens.playlistSelect.search')}
                   aria-label={t('screens.playlistSelect.search')}
-                  className="rounded-xl px-3 py-2 bg-orange-500 hover:bg-orange-600 text-white flex items-center gap-1 transition-all"
+                  className="hh-btn-secondary !w-auto !px-3"
                 >
                   <Search size={16} />
                 </button>
@@ -140,10 +141,10 @@ export default function PlaylistSelectScreen({ onSelect, onBack, animationsEnabl
                     <button
                       key={pl.id}
                       onClick={() => onSelect(pl.id)}
-                      className="rounded-xl border border-gray-300 dark:border-gray-600 px-3 py-3 text-left hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors"
+                      className="rounded-2xl border border-slate-200/80 dark:border-slate-700 px-3 py-3 text-left bg-white/60 dark:bg-slate-800/60 hover:bg-orange-50 dark:hover:bg-slate-700 transition-colors"
                     >
-                      <div className="font-medium truncate text-sm">{pl.name}</div>
-                      <div className="text-xs text-gray-500">{t('screens.playlistSelect.select')}</div>
+                      <div className="font-semibold truncate text-sm text-slate-800 dark:text-slate-100">{pl.name}</div>
+                      <div className="text-xs text-slate-500">{t('screens.playlistSelect.select')}</div>
                     </button>
                   ))}
                 </div>
@@ -151,17 +152,17 @@ export default function PlaylistSelectScreen({ onSelect, onBack, animationsEnabl
             </div>
 
             {/* Curated - Fallback */}
-            <div>
-              <h3 className="font-semibold mb-2">{t('screens.playlistSelect.curated')}</h3>
+            <div className="hh-content">
+              <h3 className="hh-section-title">{t('screens.playlistSelect.curated')}</h3>
               <div className="grid grid-cols-2 gap-2">
                 {CURATED.map(pl => (
                   <button
                     key={pl.id}
                     onClick={() => onSelect(pl.id)}
-                    className="rounded-xl border border-gray-300 dark:border-gray-600 px-3 py-3 text-left hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors"
+                    className="rounded-2xl border border-slate-200/80 dark:border-slate-700 px-3 py-3 text-left bg-white/60 dark:bg-slate-800/60 hover:bg-orange-50 dark:hover:bg-slate-700 transition-colors"
                   >
-                    <div className="font-medium truncate text-sm">{pl.name}</div>
-                    <div className="text-xs text-gray-500">{t('screens.playlistSelect.select')}</div>
+                    <div className="font-semibold truncate text-sm text-slate-800 dark:text-slate-100">{pl.name}</div>
+                    <div className="text-xs text-slate-500">{t('screens.playlistSelect.select')}</div>
                   </button>
                 ))}
               </div>

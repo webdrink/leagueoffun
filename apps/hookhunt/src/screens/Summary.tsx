@@ -22,29 +22,29 @@ export default function SummaryScreen({ scores, onPlayAgain, onBackToHub, animat
         initial={animationsEnabled ? { opacity: 0, y: 10 } : {}}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="bg-white/95 dark:bg-gray-800/95 rounded-3xl shadow-2xl p-6 md:p-8 w-full backdrop-blur-sm"
+        className="hh-surface-card p-6 md:p-8 w-full"
       >
-        <div className="text-center mb-4">
-          <h2 className="text-xl font-bold">{t('screens.summary.title')}</h2>
+        <div className="hh-content text-center mb-5">
+          <h2 className="text-2xl font-extrabold text-slate-800 dark:text-white">{t('screens.summary.title')}</h2>
           {winner && (
-            <p className="text-orange-600 font-semibold">{t('screens.summary.winner', { name: winner.name })}</p>
+            <p className="text-orange-600 dark:text-orange-300 font-semibold mt-1">{t('screens.summary.winner', { name: winner.name })}</p>
           )}
         </div>
 
-        <div className="space-y-2 mb-6">
+        <div className="hh-content space-y-2 mb-6">
           {scores.map(s => (
-            <div key={s.name} className="flex items-center justify-between rounded-xl border border-gray-300 dark:border-gray-600 px-3 py-2">
-              <div className="font-medium">{s.name}</div>
-              <div className="text-sm">{s.score}</div>
+            <div key={s.name} className="flex items-center justify-between rounded-2xl border border-slate-200/80 dark:border-slate-700 bg-white/60 dark:bg-slate-800/60 px-4 py-3">
+              <div className="font-semibold text-slate-800 dark:text-slate-100">{s.name}</div>
+              <div className="hh-chip">{s.score}</div>
             </div>
           ))}
         </div>
 
-        <div className="flex gap-2">
-          <button onClick={onPlayAgain} className="flex-1 rounded-xl px-4 py-3 bg-orange-500 text-white font-semibold">
+        <div className="hh-content flex gap-2">
+          <button onClick={onPlayAgain} className="hh-btn-primary flex-1 !py-3">
             {t('screens.summary.playAgain')}
           </button>
-          <button onClick={onBackToHub} className="flex-1 rounded-xl px-4 py-3 bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold">
+          <button onClick={onBackToHub} className="hh-btn-muted flex-1 !py-3">
             {t('screens.summary.backToHub')}
           </button>
         </div>

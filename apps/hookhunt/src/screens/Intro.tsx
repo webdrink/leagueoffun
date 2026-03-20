@@ -23,26 +23,27 @@ export default function IntroScreen({ onStart, animationsEnabled }: IntroProps) 
         initial={variants.initial}
         animate={variants.animate}
         transition={{ duration: 0.5 }}
-        className="bg-white/95 dark:bg-gray-800/95 rounded-3xl shadow-2xl p-6 md:p-8 w-full backdrop-blur-sm"
+        className="hh-surface-card p-6 md:p-8 w-full"
       >
-        <div className="flex justify-center mb-6">
+        <div className="hh-content flex justify-center mb-6">
           <div className="relative">
-            <div className="w-20 h-20 bg-gradient-to-br from-orange-400 via-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-xl">
+            <div className="w-20 h-20 bg-gradient-to-br from-orange-400 via-orange-500 to-rose-500 rounded-full flex items-center justify-center shadow-xl ring-4 ring-white/40 dark:ring-slate-800/70">
               <Music size={40} className="text-white" />
             </div>
           </div>
         </div>
-        <div className="text-center mb-6">
-          <h2 className="text-xl font-bold mb-2">{t('screens.intro.title')}</h2>
-          <p className="text-gray-600 dark:text-gray-300">{t('screens.intro.description')}</p>
+        <div className="hh-content text-center mb-6">
+          <p className="hh-label mb-2">{t('game.subtitle')}</p>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 dark:text-white mb-2">{t('screens.intro.title')}</h2>
+          <p className="hh-subtitle max-w-xl mx-auto">{t('screens.intro.description')}</p>
         </div>
 
-        <div className="space-y-3">
+        <div className="hh-content space-y-3">
           <button
             onClick={() => onStart('singleplayer')}
-            className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="hh-btn-primary"
           >
-            <span className="flex items-center justify-center gap-2">
+            <span className="inline-flex items-center justify-center gap-2">
               <Play size={20} />
               {t('screens.intro.singleplayer')}
             </span>
@@ -50,9 +51,9 @@ export default function IntroScreen({ onStart, animationsEnabled }: IntroProps) 
 
           <button
             onClick={() => onStart('hotSeat')}
-            className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="hh-btn-secondary"
           >
-            <span className="flex items-center justify-center gap-2">
+            <span className="inline-flex items-center justify-center gap-2">
               <Users size={20} />
               {t('screens.intro.hotSeat')}
             </span>
