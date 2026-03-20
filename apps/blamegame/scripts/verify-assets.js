@@ -137,7 +137,7 @@ const verifyCNAME = () => {
   if (fileExists(cnamePath)) {
     try {
       const content = fs.readFileSync(cnamePath, 'utf8').trim();
-      if (content === 'blamegame.leagueoffun.de') {
+      if (content === 'blamegame.leagueoffun.com') {
         console.log('✅ CNAME file exists with correct domain');
         return true;
       } else {

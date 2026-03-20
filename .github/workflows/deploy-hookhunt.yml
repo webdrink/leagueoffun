@@ -108,11 +108,7 @@ jobs:
           
           cd ${{ env.DEPLOY_PATH }}
           
-          # Preserve CNAME and README.md if they exist
-          if [ -f "CNAME" ]; then
-            cp CNAME /tmp/CNAME_backup
-            echo "📝 Preserved CNAME file"
-          fi
+          # Preserve README.md if it exists
           if [ -f "README.md" ]; then
             cp README.md /tmp/README_backup
             echo "📝 Preserved README.md file"
@@ -125,14 +121,13 @@ jobs:
           cp -r ../apps/${{ env.APP_NAME }}/dist/* .
           
           # Restore preserved files
-          if [ -f "/tmp/CNAME_backup" ]; then
-            cp /tmp/CNAME_backup CNAME
-            echo "📝 Restored CNAME file"
-          fi
           if [ -f "/tmp/README_backup" ]; then
             cp /tmp/README_backup README.md
             echo "📝 Restored README.md file"
           fi
+
+          # Ensure custom domain mapping is always correct
+          echo "hookhunt.leagueoffun.com" > CNAME
           
           # Add .nojekyll file for GitHub Pages
           touch .nojekyll

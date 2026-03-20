@@ -42,7 +42,7 @@ const ensureCNAME = () => {
   try {
     if (!fs.existsSync(CNAME_PATH)) {
       console.log('Creating CNAME file in dist directory...');
-      fs.writeFileSync(CNAME_PATH, 'blamegame.leagueoffun.de');
+      fs.writeFileSync(CNAME_PATH, 'blamegame.leagueoffun.com');
       console.log('✅ CNAME file created successfully');
     } else {
       console.log('✅ CNAME file already exists');

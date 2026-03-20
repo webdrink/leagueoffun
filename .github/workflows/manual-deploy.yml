@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: https://blamegame.leagueoffun.de
+      url: https://blamegame.leagueoffun.com
     
     steps:
       - name: ⬇️ Checkout
@@ -55,7 +55,7 @@ jobs:
             "emergency")
               echo "🚨 Emergency build mode"
               pnpm run build:domain || pnpm run build
-              echo "blamegame.leagueoffun.de" > dist/CNAME
+              echo "blamegame.leagueoffun.com" > dist/CNAME
               ;;
             "force-pages")
               echo "🚀 Force GitHub Pages build"
@@ -97,7 +97,7 @@ jobs:
           </body>
           </html>
           EOF
-              echo "blamegame.leagueoffun.de" > dist/CNAME
+              echo "blamegame.leagueoffun.com" > dist/CNAME
               ;;
           esac
 
@@ -120,9 +120,9 @@ jobs:
           sleep 60
           
           for attempt in {1..5}; do
-            if curl -f -s --max-time 30 "https://blamegame.leagueoffun.de/" > /dev/null; then
+            if curl -f -s --max-time 30 "https://blamegame.leagueoffun.com/" > /dev/null; then
               echo "✅ Manual deployment successful!"
-              echo "🌐 Site: https://blamegame.leagueoffun.de/"
+              echo "🌐 Site: https://blamegame.leagueoffun.com/"
               break
             else
               echo "⚠️ Verification attempt $attempt failed, retrying..."
@@ -148,7 +148,7 @@ jobs:
               
               **Status:** 
               - ✅ Manual override completed
-              - 🌐 Site: https://blamegame.leagueoffun.de/
+              - 🌐 Site: https://blamegame.leagueoffun.com/
               
               **Note:** This was a manual intervention to bypass automatic deployment issues.
               
@@ -164,6 +164,6 @@ jobs:
           echo "**Reason:** ${{ github.event.inputs.reason }}" >> $GITHUB_STEP_SUMMARY
           echo "**Triggered by:** @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
           echo "**Status:** Manual override completed" >> $GITHUB_STEP_SUMMARY
-          echo "**Site:** https://blamegame.leagueoffun.de/" >> $GITHUB_STEP_SUMMARY
+          echo "**Site:** https://blamegame.leagueoffun.com/" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "_Manual intervention to ensure site availability during infrastructure issues._" >> $GITHUB_STEP_SUMMARY

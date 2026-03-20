@@ -245,8 +245,8 @@ jobs:
           fi
           
           # Ensure CNAME file exists with correct domain
-          echo "blamegame.leagueoffun.de" > CNAME
-          echo "📝 Added CNAME: blamegame.leagueoffun.de"
+          echo "blamegame.leagueoffun.com" > CNAME
+          echo "📝 Added CNAME: blamegame.leagueoffun.com"
           
           # Add .nojekyll file for GitHub Pages
           touch .nojekyll
@@ -268,7 +268,7 @@ jobs:
       - name: ✅ Blamegame Deployment Complete
         run: |
           echo "✅ Blamegame deployed successfully!"
-          echo "🌐 URL: https://blamegame.leagueoffun.de"
+          echo "🌐 URL: https://blamegame.leagueoffun.com"
 
       - name: 🧪 Smoke Test - Wait for Pages Deployment
         run: |
@@ -277,15 +277,15 @@ jobs:
 
       - name: 🧪 Smoke Test - Verify Site Accessibility
         run: |
-          echo "🧪 Testing https://blamegame.leagueoffun.de..."
+          echo "🧪 Testing https://blamegame.leagueoffun.com..."
           
           # Try up to 3 times with 10 second delays
           for i in {1..3}; do
-            if curl -f -s -o /dev/null -w "%{http_code}" https://blamegame.leagueoffun.de | grep -q "200"; then
+            if curl -f -s -o /dev/null -w "%{http_code}" https://blamegame.leagueoffun.com | grep -q "200"; then
               echo "✅ Site is accessible (HTTP 200)"
               
               # Verify HTML contains expected content
-              RESPONSE=$(curl -s https://blamegame.leagueoffun.de)
+              RESPONSE=$(curl -s https://blamegame.leagueoffun.com)
               if echo "$RESPONSE" | grep -q "<title>"; then
                 echo "✅ HTML content verified"
                 exit 0
@@ -417,7 +417,7 @@ jobs:
           echo "| App | Status | URL |" >> $GITHUB_STEP_SUMMARY
           echo "|-----|--------|-----|" >> $GITHUB_STEP_SUMMARY
           echo "| Gamepicker | ${{ needs.deploy-gamepicker.result == 'success' && '✅ Success' || '❌ Failed' }} | https://www.leagueoffun.com |" >> $GITHUB_STEP_SUMMARY
-          echo "| Blamegame | ${{ needs.deploy-blamegame.result == 'success' && '✅ Success' || '❌ Failed' }} | https://blamegame.leagueoffun.de |" >> $GITHUB_STEP_SUMMARY
+          echo "| Blamegame | ${{ needs.deploy-blamegame.result == 'success' && '✅ Success' || '❌ Failed' }} | https://blamegame.leagueoffun.com |" >> $GITHUB_STEP_SUMMARY
           echo "| HookHunt | ${{ needs.deploy-hookhunt.result == 'success' && '✅ Success' || '❌ Failed' }} | https://hookhunt.leagueoffun.com |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Triggered by:** @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY

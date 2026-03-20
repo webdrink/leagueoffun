@@ -13,7 +13,7 @@ export const games: GameInfo[] = [
     id: 'blamegame',
     name: 'BlameGame',
     description: 'The ultimate party game! Answer "Who would most likely..." questions and point fingers at your friends. Discover who your group really thinks would do the craziest things!',
-    entryUrl: 'https://blamegame.leagueoffun.de',
+    entryUrl: 'https://blamegame.leagueoffun.com',
     icon: '/assets/blamegame-icon.svg',
     tags: ['party', 'friends', 'social']
   },

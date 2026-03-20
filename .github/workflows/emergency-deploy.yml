@@ -27,7 +27,7 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'failure' || github.event_name == 'workflow_dispatch' }}
     environment:
       name: github-pages
-      url: https://blamegame.leagueoffun.de
+      url: https://blamegame.leagueoffun.com
     
     steps:
       - name: ⬇️ Emergency Checkout
@@ -69,7 +69,7 @@ jobs:
           elif pnpm run build; then
             echo "✅ Fallback build succeeded"
             # Ensure CNAME file exists for custom domain
-            echo "blamegame.leagueoffun.de" > dist/CNAME
+            echo "blamegame.leagueoffun.com" > dist/CNAME
           else
             echo "❌ All build strategies failed, creating minimal static site..."
             
@@ -148,7 +148,7 @@ jobs:
           </body>
           </html>
           EOF
-            echo "blamegame.leagueoffun.de" > dist/CNAME
+            echo "blamegame.leagueoffun.com" > dist/CNAME
             echo "🆘 Created intelligent emergency maintenance page with auto-recovery"
           fi
 
@@ -201,7 +201,7 @@ jobs:
               # Wait reasonable time and verify
               sleep 120
               
-              if curl -f -s --max-time 30 "https://blamegame.leagueoffun.de/" > /dev/null; then
+              if curl -f -s --max-time 30 "https://blamegame.leagueoffun.com/" > /dev/null; then
                 echo "✅ GitHub Pages deployment successful!"
                 echo "deployment_method=github-pages" >> $GITHUB_OUTPUT
                 echo "deployment_success=true" >> $GITHUB_OUTPUT
@@ -234,7 +234,7 @@ jobs:
             echo "✅ Artifact uploaded successfully"
             sleep 60
             
-            if curl -f -s --max-time 30 "https://blamegame.leagueoffun.de/" > /dev/null; then
+            if curl -f -s --max-time 30 "https://blamegame.leagueoffun.com/" > /dev/null; then
               echo "✅ Artifact deployment successful!"
               echo "deployment_method=artifact-upload" >> $GITHUB_OUTPUT
               echo "deployment_success=true" >> $GITHUB_OUTPUT
@@ -280,11 +280,11 @@ jobs:
             echo "🔍 Verification attempt $attempt/10..."
             
             # Try multiple endpoints
-            if curl -f -s --max-time 30 "https://blamegame.leagueoffun.de/" > /dev/null ||
-               curl -f -s --max-time 30 "https://blamegame.leagueoffun.de/index.html" > /dev/null; then
+            if curl -f -s --max-time 30 "https://blamegame.leagueoffun.com/" > /dev/null ||
+               curl -f -s --max-time 30 "https://blamegame.leagueoffun.com/index.html" > /dev/null; then
               
               echo "✅ Emergency deployment verified!"
-              echo "🌐 Site accessible at: https://blamegame.leagueoffun.de/"
+              echo "🌐 Site accessible at: https://blamegame.leagueoffun.com/"
               echo "EMERGENCY_DEPLOY_SUCCESS=true" >> $GITHUB_ENV
               break
             else
@@ -321,7 +321,7 @@ jobs:
               
               **Current Status:**
               - ✅ Emergency deployment completed
-              - 🌐 Site accessible at: https://blamegame.leagueoffun.de/
+              - 🌐 Site accessible at: https://blamegame.leagueoffun.com/
               - ⚠️ May be running in maintenance mode
               
               **Next Steps:**
@@ -351,6 +351,6 @@ jobs:
           fi
           
           echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Site:** https://blamegame.leagueoffun.de/" >> $GITHUB_STEP_SUMMARY
+          echo "**Site:** https://blamegame.leagueoffun.com/" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "_Emergency deployment ensures site availability during main workflow issues._" >> $GITHUB_STEP_SUMMARY

@@ -11,7 +11,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const SITE_URL = 'https://blamegame.leagueoffun.de';
+const SITE_URL = 'https://blamegame.leagueoffun.com';
 const PACKAGE_JSON_PATH = path.join(__dirname, '..', 'package.json');
 
 function fetchUrl(url) {
