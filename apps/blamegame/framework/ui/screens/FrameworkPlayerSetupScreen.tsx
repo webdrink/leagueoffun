@@ -11,6 +11,7 @@ import { ArrowLeft, Plus, X } from 'lucide-react';
 import useTranslation from '../../../hooks/useTranslation';
 import useNameBlameSetup from '../../../hooks/useNameBlameSetup';
 import { useMultiplayerStore } from '../../network/store';
+import { useShallow } from 'zustand/react/shallow';
 
 const FrameworkPlayerSetupScreen: React.FC = () => {
   const { dispatch, role, multiplayer } = useFrameworkRouter();
@@ -25,12 +26,12 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
     addPlayer,
     removePlayer
   } = useNameBlameSetup();
-  const multiplayerState = useMultiplayerStore((state) => ({
+  const multiplayerState = useMultiplayerStore(useShallow((state) => ({
     enabled: state.enabled,
     players: state.players,
     roomId: state.roomId,
     selfPlayerId: state.selfPlayerId
-  }));
+  })));
 
   const isMultiplayer = !!multiplayerState.enabled && !!role;
   const renderedPlayers = isMultiplayer

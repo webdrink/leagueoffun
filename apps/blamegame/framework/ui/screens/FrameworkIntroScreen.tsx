@@ -14,6 +14,7 @@ import useTranslation from '../../../hooks/useTranslation';
 import { useGameSettings } from '../../../hooks/useGameSettings';
 import { GameSettings } from '../../../types';
 import { useMultiplayerStore } from '../../network/store';
+import { useShallow } from 'zustand/react/shallow';
 import { buildQrImageUrl, buildRoomUrl, generateRoomCode } from '../../network/utils/roomLinks';
 import { sanitizeRoomCode } from '../../network/protocol';
 
@@ -53,7 +54,7 @@ const FrameworkIntroScreen: React.FC = () => {
     }
   });
 
-  const multiplayerState = useMultiplayerStore((state) => ({
+  const multiplayerState = useMultiplayerStore(useShallow((state) => ({
     enabled: state.enabled,
     roomId: state.roomId,
     status: state.status,
@@ -62,7 +63,7 @@ const FrameworkIntroScreen: React.FC = () => {
     fallbackReason: state.fallbackReason,
     manualOfferToken: state.manualOfferToken,
     manualAnswerToken: state.manualAnswerToken
-  }));
+  })));
 
   const isInMultiplayerRoom = !!multiplayerState.enabled && !!multiplayerState.roomId && !!role;
   const selfPlayer = multiplayerState.players.find((player) => player.id === multiplayerState.selfPlayerId);

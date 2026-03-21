@@ -12,6 +12,7 @@ import { useProviderState } from '../../../hooks/useProviderState';
 import { useGameSettings } from '../../../hooks/useGameSettings';
 import useNameBlameSetup from '../../../hooks/useNameBlameSetup';
 import { useMultiplayerStore } from '../../network/store';
+import { useShallow } from 'zustand/react/shallow';
 
 const FrameworkQuestionScreen: React.FC = () => {
   // ProgressBar subcomponent to avoid inline style width lint violation
@@ -39,12 +40,12 @@ const FrameworkQuestionScreen: React.FC = () => {
 
   // Get actual players from shared NameBlame setup hook
   const { getActivePlayers, currentPlayerIndex, advancePlayer, recordNameBlame } = useNameBlameSetup();
-  const multiplayerState = useMultiplayerStore((state) => ({
+  const multiplayerState = useMultiplayerStore(useShallow((state) => ({
     enabled: state.enabled,
     players: state.players,
     authoritativeState: state.authoritativeState,
     selfPlayerId: state.selfPlayerId
-  }));
+  })));
   const isMultiplayer = !!multiplayerState.enabled && !!role;
   
   // Get active players (with non-empty names) for blame selection
