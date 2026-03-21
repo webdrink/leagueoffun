@@ -668,7 +668,7 @@ export default function GameplayScreen({
         className="hh-surface-card p-5 md:p-7 w-full"
       >
         <div className="hh-content mb-4 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
-          <div className="rounded-2xl border border-slate-200/80 dark:border-slate-700 bg-white/80 dark:bg-slate-900/60 px-4 py-3">
+          <div className="rounded-2xl border border-white/80 dark:border-slate-600/70 bg-gradient-to-br from-white/85 via-orange-50/75 to-rose-50/60 dark:from-slate-900/70 dark:via-slate-800/70 dark:to-slate-900/65 px-4 py-3 shadow-[0_14px_30px_-24px_rgba(15,23,42,0.6)]">
             <div className="text-[11px] uppercase tracking-[0.12em] text-slate-500 dark:text-slate-300">
               {t('screens.gameplay.currentPlayer', { name: scores[currentPlayerIdx]?.name })}
             </div>
@@ -676,32 +676,37 @@ export default function GameplayScreen({
               {t('screens.gameplay.score', { score: scores[currentPlayerIdx]?.score })}
             </div>
           </div>
-          <div className="hh-chip text-[11px]">
+          <div className="hh-chip text-[11px] shadow-[0_12px_24px_-18px_rgba(249,115,22,0.75)]">
             {t('screens.gameplay.roundLabel', { current: currentIndex + 1, total: Math.max(tracks.length, 1) })}
           </div>
         </div>
 
-        <div className="hh-content mb-4 rounded-3xl border border-slate-700/40 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4 sm:p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+        <div className="hh-content mb-4 rounded-3xl border border-slate-700/45 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 p-4 sm:p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_22px_42px_-30px_rgba(2,6,23,0.95)]">
           <audio ref={audioRef} preload="auto" className="hidden" />
 
           <div className="flex items-center justify-between gap-3">
             <div className="text-white">
-              <p className="text-sm font-semibold tracking-wide">{t('screens.gameplay.hookOnlyMode')}</p>
+              <p className="text-sm font-semibold tracking-wide text-orange-200">{t('screens.gameplay.hookOnlyMode')}</p>
               <p className="mt-1 text-xs text-slate-300">
                 {t('screens.gameplay.hookWindow', { seconds: HOOK_CLIP_SECONDS })}
               </p>
             </div>
-            <div className={`h-3 w-3 rounded-full ${hookPlaying ? 'bg-emerald-400 animate-pulse' : 'bg-amber-300'}`} />
+            <div className={`h-3.5 w-3.5 rounded-full ring-4 ring-white/10 ${hookPlaying ? 'bg-emerald-400 animate-pulse' : 'bg-amber-300'}`} />
           </div>
 
-          <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-700/80">
+          <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-slate-700/85">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-orange-400 to-rose-400 transition-all duration-200"
+              className="h-full rounded-full bg-gradient-to-r from-orange-400 via-orange-400 to-rose-400 transition-all duration-200"
               style={{ width: `${hookProgressPercent}%` }}
             />
           </div>
+          <div className="mt-1 text-[11px] text-right text-slate-300">
+            {hookRemainingMs === null
+              ? t('screens.gameplay.hookReady')
+              : t('screens.gameplay.hookTimeRemaining', { seconds: Math.max(0, Math.ceil(hookRemainingMs / 1000)) })}
+          </div>
 
-          <div className="mt-3 flex flex-wrap items-center gap-2">
+          <div className="mt-3 flex flex-wrap items-center gap-2.5">
             <button
               onClick={() => startHookFromBeginning(currentTrack)}
               className="hh-btn-primary !w-auto !px-4 !py-2.5"
@@ -719,19 +724,14 @@ export default function GameplayScreen({
             </button>
             <button
               onClick={revealTrack}
-              className="hh-btn-muted !w-auto !px-4 !py-2.5 border-rose-300 text-rose-700 dark:text-rose-200"
+              className="hh-btn-muted !w-auto !px-4 !py-2.5 border-rose-300 text-rose-700 dark:text-rose-200 hover:border-rose-400"
               disabled={roundRevealed}
             >
               {t('screens.gameplay.revealTrackNoPoints')}
             </button>
           </div>
 
-          <div className="mt-3 text-xs text-slate-300 space-y-1">
-            <p>
-              {hookRemainingMs === null
-                ? t('screens.gameplay.hookReady')
-                : t('screens.gameplay.hookTimeRemaining', { seconds: Math.max(0, Math.ceil(hookRemainingMs / 1000)) })}
-            </p>
+          <div className="mt-3 grid gap-1 rounded-2xl border border-slate-700/70 bg-black/20 px-3 py-2.5 text-xs text-slate-300">
             <p>
               {hookLoading
                 ? t('screens.gameplay.hookAnalyzing')
@@ -747,7 +747,7 @@ export default function GameplayScreen({
           </div>
 
           {roundRevealed && (
-            <div className="mt-3 rounded-2xl border border-amber-300/60 bg-amber-100/15 px-3 py-3 text-xs text-amber-100">
+            <div className="mt-3 rounded-2xl border border-amber-300/60 bg-amber-100/15 px-3 py-3 text-xs text-amber-100 shadow-[0_16px_30px_-24px_rgba(245,158,11,0.8)]">
               <p className="font-semibold">{t('screens.gameplay.revealedNoPoints')}</p>
               <p className="mt-1">
                 {t('screens.gameplay.answer')}: {currentTrack?.name} • {currentTrack?.artists?.map((artist) => artist.name).join(', ')}
@@ -782,7 +782,7 @@ export default function GameplayScreen({
 
           {spotifyError && (
             <div className="mt-3 space-y-2">
-              <p className="text-xs text-rose-300">{spotifyError}</p>
+              <p className="rounded-xl border border-rose-400/35 bg-rose-400/10 px-3 py-2 text-xs text-rose-200">{spotifyError}</p>
               <button onClick={onBackToPlaylist} className="hh-btn-muted !w-auto !px-4 !py-2">
                 <ArrowLeft size={15} /> {t('screens.gameplay.backToPlaylist')}
               </button>
@@ -806,7 +806,7 @@ export default function GameplayScreen({
           </button>
         </div>
 
-        <div className="hh-content flex items-center justify-between">
+        <div className="hh-content flex items-center justify-between gap-3">
           <div className="text-xs text-slate-600 dark:text-slate-300">
             {t('screens.gameplay.roundLabel', { current: currentIndex + 1, total: Math.max(tracks.length, 1) })}
           </div>
@@ -814,7 +814,7 @@ export default function GameplayScreen({
             {scores.map((score) => (
               <span
                 key={score.name}
-                className="text-xs rounded-full px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+                className="text-xs rounded-full px-2.5 py-1.5 border border-white/80 dark:border-slate-600/80 bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 shadow-[0_10px_22px_-18px_rgba(15,23,42,0.75)]"
               >
                 {score.name}: {score.score} • {t('screens.gameplay.playerHeard', { seconds: formatSeconds(score.heardMs) })}
               </span>

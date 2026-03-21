@@ -25,10 +25,10 @@ const FooterButton: React.FC<FooterButtonProps> = ({ onClick, title, children, d
   <button
     onClick={onClick}
     disabled={disabled}
-    className={`flex items-center justify-center w-11 h-11 rounded-xl backdrop-blur-md border-2 shadow-xl transition-all duration-200 transform hover:scale-105 ${
+    className={`flex items-center justify-center w-11 h-11 rounded-2xl border shadow-[0_14px_28px_-18px_rgba(15,23,42,0.65)] transition-all duration-200 ${
       disabled
         ? 'bg-slate-500/30 border-slate-500/40 text-slate-500 cursor-not-allowed'
-        : 'bg-slate-900/10 border-slate-500/35 text-slate-700 hover:bg-slate-900/16 hover:border-slate-500/45 dark:bg-white/12 dark:border-white/35 dark:text-white dark:hover:bg-white/22 dark:hover:border-white/50'
+        : 'bg-white/80 border-white/90 text-slate-700 hover:-translate-y-0.5 hover:bg-white hover:border-orange-200 dark:bg-slate-800/75 dark:border-slate-600/80 dark:text-white dark:hover:bg-slate-700/85 dark:hover:border-orange-400/70'
     }`}
     title={title}
   >
@@ -51,20 +51,20 @@ const getSeasonalGradient = (season: Season, isDark: boolean): string => {
   switch (season) {
     case 'fall':
       return isDark 
-        ? 'bg-gradient-to-br from-slate-950 via-amber-950 to-orange-950'
-        : 'bg-gradient-to-br from-amber-300 via-orange-400 to-rose-300';
+        ? 'bg-gradient-to-br from-slate-950 via-amber-950 to-rose-950'
+        : 'bg-gradient-to-br from-amber-200 via-orange-300 to-rose-200';
     case 'winter':
       return isDark
-        ? 'bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950'
-        : 'bg-gradient-to-br from-sky-200 via-blue-200 to-indigo-200';
+        ? 'bg-gradient-to-br from-slate-950 via-blue-950 to-cyan-950'
+        : 'bg-gradient-to-br from-cyan-100 via-sky-200 to-indigo-200';
     case 'spring':
       return isDark
-        ? 'bg-gradient-to-br from-slate-950 via-emerald-950 to-teal-900'
-        : 'bg-gradient-to-br from-emerald-200 via-teal-200 to-cyan-200';
+        ? 'bg-gradient-to-br from-slate-950 via-emerald-950 to-teal-950'
+        : 'bg-gradient-to-br from-emerald-200 via-teal-200 to-cyan-100';
     case 'summer':
       return isDark
-        ? 'bg-gradient-to-br from-slate-950 via-orange-950 to-rose-950'
-        : 'bg-gradient-to-br from-amber-200 via-orange-200 to-rose-200';
+        ? 'bg-gradient-to-br from-slate-950 via-orange-950 to-pink-950'
+        : 'bg-gradient-to-br from-amber-100 via-orange-200 to-pink-100';
   }
 };
 
@@ -223,7 +223,9 @@ function App() {
 
   return (
     <div className={`min-h-screen ${backgroundGradient} animate-gentle-shift overflow-hidden relative`}>
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,255,255,0.2),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(251,146,60,0.22),transparent_30%),radial-gradient(circle_at_50%_100%,rgba(15,23,42,0.2),transparent_45%)] dark:bg-[radial-gradient(circle_at_20%_15%,rgba(148,163,184,0.14),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(249,115,22,0.2),transparent_30%),radial-gradient(circle_at_50%_100%,rgba(2,6,23,0.4),transparent_45%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_14%,rgba(255,255,255,0.34),transparent_36%),radial-gradient(circle_at_82%_8%,rgba(251,146,60,0.28),transparent_30%),radial-gradient(circle_at_42%_92%,rgba(15,23,42,0.26),transparent_45%)] dark:bg-[radial-gradient(circle_at_16%_14%,rgba(148,163,184,0.18),transparent_36%),radial-gradient(circle_at_82%_8%,rgba(249,115,22,0.24),transparent_30%),radial-gradient(circle_at_42%_92%,rgba(2,6,23,0.5),transparent_45%)]" />
+      <div className="pointer-events-none absolute -top-24 left-1/2 h-[24rem] w-[24rem] -translate-x-1/2 rounded-full bg-gradient-to-br from-white/45 via-orange-200/20 to-transparent blur-3xl dark:from-orange-300/10 dark:via-slate-900/0 dark:to-transparent" />
+      <div className="pointer-events-none absolute bottom-20 right-[-6rem] h-[18rem] w-[18rem] rounded-full bg-gradient-to-br from-emerald-200/35 via-cyan-200/15 to-transparent blur-3xl dark:from-cyan-400/10 dark:via-teal-500/10 dark:to-transparent" />
       {/* Fixed Layout Container matching BlameGame structure */}
       <div className="h-screen flex flex-col bg-transparent overflow-hidden relative z-10">
         {/* Main Viewport-Responsive Container */}
@@ -235,6 +237,7 @@ function App() {
           {/* Header Card - Matching BlameGame style */}
           <header className="py-2 sm:py-3 flex-shrink-0 flex justify-center items-center">
             <div className="hh-surface-card px-5 sm:px-7 py-3 sm:py-4 w-full flex items-center justify-center min-h-[74px]">
+              <div className="hh-shimmer absolute inset-0 opacity-30" />
               <div className="text-center w-full max-w-full hh-content">
                 <motion.h1
                   initial={animationsEnabled ? { opacity: 0, y: -10 } : {}}
