@@ -2,7 +2,8 @@ import { joinRoom, selfId, type Room } from 'trystero/torrent';
 import { parseEnvelope, type MultiplayerEnvelope } from '../protocol';
 import { RoomTransport, TransportHandlers, TransportStartOptions } from '../transport';
 
-const ACTION_NAMESPACE = 'leagueoffun-envelope-v1';
+// Trystero action namespaces are limited to 12 bytes.
+const ACTION_NAMESPACE = 'lofenv1';
 
 const noopHandlers: TransportHandlers = {
   onReady: () => undefined,
