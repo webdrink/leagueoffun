@@ -53,7 +53,7 @@ jobs:
       - name: 🏗️ Build HookHunt
         env:
           VITE_SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
-          VITE_SPOTIFY_REDIRECT_URI: https://hookhunt.leagueoffun.com/callback
+          VITE_SPOTIFY_REDIRECT_URI: https://hookhunt.leagueoffun.com/callback/
         run: pnpm --filter @leagueoffun/hookhunt build
 
       - name: 🔍 Validate Build Output
