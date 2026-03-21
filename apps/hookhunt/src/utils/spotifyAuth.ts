@@ -43,12 +43,17 @@ function getEnvClientId(): string | undefined {
   return value?.trim() || undefined;
 }
 
+function getNormalizedBasePath(): string {
+  const baseUrl = (import.meta.env.BASE_URL as string | undefined) || '/';
+  const prefixed = baseUrl.startsWith('/') ? baseUrl : `/${baseUrl}`;
+  return prefixed.endsWith('/') ? prefixed : `${prefixed}/`;
+}
+
 function getConfiguredRedirectUri(): string {
   const explicit = import.meta.env.VITE_SPOTIFY_REDIRECT_URI as string | undefined;
   if (explicit?.trim()) return explicit.trim();
 
-  const baseUrl = (import.meta.env.BASE_URL as string | undefined) || '/';
-  const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+  const normalizedBase = getNormalizedBasePath();
   const runtimeOrigin = new URL(window.location.origin);
 
   // Spotify OAuth no longer accepts localhost aliases; prefer loopback literal.
@@ -202,8 +207,9 @@ export async function handleSpotifyCallback(): Promise<SpotifyCallbackResult> {
     return { handled: false, success: false };
   }
 
-  // Clean callback params from URL immediately for stable routing.
-  window.history.replaceState(null, document.title, window.location.pathname);
+  // Clean callback params and normalize back to app root path.
+  const appRootPath = getNormalizedBasePath();
+  window.history.replaceState(null, document.title, appRootPath);
 
   if (error) {
     return { handled: true, success: false, error };

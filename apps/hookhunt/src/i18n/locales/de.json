@@ -1,6 +1,9 @@
 {
   "game": {
-    "subtitle": "Errate den Hit aus dem Hook! 🎵"
+    "subtitle": "Errate den Hit aus dem Hook! 🎵",
+    "spotifyConnectedAs": "Spotify: {{name}}",
+    "spotifyConnectedFallback": "Verbunden",
+    "spotifyNotConnected": "Spotify nicht verbunden"
   },
   "screens": {
     "intro": {

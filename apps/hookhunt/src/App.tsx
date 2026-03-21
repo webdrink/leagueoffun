@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ReactNode } from 'react';
+import React, { useCallback, useEffect, useState, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, Settings, Moon, Sun } from 'lucide-react';
 import { resolvePlayerSession, stripSessionParamsFromUrl, useAnimations } from '@game-core';
@@ -11,7 +11,7 @@ import PlaylistSelectScreen from './screens/PlaylistSelect';
 import GameplayScreen from './screens/Gameplay';
 import SummaryScreen from './screens/Summary';
 import SettingsModal from './components/SettingsModal';
-import { handleSpotifyCallback } from './utils/spotifyAuth';
+import { getValidAccessToken, handleSpotifyCallback } from './utils/spotifyAuth';
 
 // Reusable FooterButton component matching BlameGame style
 interface FooterButtonProps {
@@ -119,7 +119,15 @@ interface HookHuntSessionSnapshot {
   updatedAt: string;
 }
 
-const HOOKHUNT_SESSION_KEY = 'hookhunt.app.session.v1';
+interface SpotifyProfileCache {
+  id?: string;
+  display_name?: string;
+  email?: string;
+}
+
+const SPOTIFY_PROFILE_CACHE_KEY = 'hookhunt.spotify.profile';
+const HOOKHUNT_SESSION_KEY_LEGACY = 'hookhunt.app.session.v1';
+const HOOKHUNT_SESSION_KEY_PREFIX = 'hookhunt.app.session.v2';
 
 const DEFAULT_GAME_SETTINGS: GameSettings = {
   gameMode: 'singleplayer',
@@ -173,10 +181,14 @@ function sanitizeStep(input: unknown): GameStep {
   return 'intro';
 }
 
-function readPersistedSession(): HookHuntSessionSnapshot | null {
+function getPlayerScopedSessionKey(playerId: string): string {
+  return `${HOOKHUNT_SESSION_KEY_PREFIX}.${playerId}`;
+}
+
+function parseSessionSnapshot(raw: string | null): HookHuntSessionSnapshot | null {
+  if (!raw) return null;
+
   try {
-    const raw = localStorage.getItem(HOOKHUNT_SESSION_KEY);
-    if (!raw) return null;
     const parsed = JSON.parse(raw) as Partial<HookHuntSessionSnapshot> | null;
     if (!parsed || typeof parsed !== 'object') return null;
 
@@ -191,32 +203,77 @@ function readPersistedSession(): HookHuntSessionSnapshot | null {
   }
 }
 
-function persistSession(snapshot: HookHuntSessionSnapshot) {
+function readPersistedSession(playerId: string): HookHuntSessionSnapshot | null {
+  const scopedSnapshot = parseSessionSnapshot(localStorage.getItem(getPlayerScopedSessionKey(playerId)));
+  if (scopedSnapshot) return scopedSnapshot;
+
+  // Migrate from old global session key for existing players.
+  const legacySnapshot = parseSessionSnapshot(localStorage.getItem(HOOKHUNT_SESSION_KEY_LEGACY));
+  if (legacySnapshot) {
+    try {
+      localStorage.setItem(getPlayerScopedSessionKey(playerId), JSON.stringify(legacySnapshot));
+    } catch {
+      // Ignore storage access failures.
+    }
+  }
+  return legacySnapshot;
+}
+
+function persistSession(playerId: string, snapshot: HookHuntSessionSnapshot) {
   try {
-    localStorage.setItem(HOOKHUNT_SESSION_KEY, JSON.stringify(snapshot));
+    localStorage.setItem(getPlayerScopedSessionKey(playerId), JSON.stringify(snapshot));
   } catch {
     // Ignore quota and storage access errors.
   }
 }
 
+function readCachedSpotifyDisplayName(): string | null {
+  try {
+    const raw = localStorage.getItem(SPOTIFY_PROFILE_CACHE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as SpotifyProfileCache;
+    return parsed.display_name || parsed.email || parsed.id || null;
+  } catch {
+    return null;
+  }
+}
+
 function App() {
   const { t } = useTranslation();
-  const [restoredSession] = useState<HookHuntSessionSnapshot | null>(() => readPersistedSession());
   const [playerId, setPlayerId] = useState<string>(() => localStorage.getItem('leagueoffun.playerId') || localStorage.getItem('hookhunt.playerId') || '');
   const [returnUrl, setReturnUrl] = useState<string>(() => localStorage.getItem('hookhunt.returnUrl') || localStorage.getItem('leagueoffun.returnUrl') || '');
   const { animationsEnabled, toggleAnimations } = useAnimations();
   const { isDark, toggle: toggleDarkMode } = useDarkMode();
-  const [gameStep, setGameStep] = useState<GameStep>(() => restoredSession?.gameStep || 'intro');
+  const [gameStep, setGameStep] = useState<GameStep>('intro');
   const [showSettings, setShowSettings] = useState(false);
-  const [gameSettings, setGameSettings] = useState<GameSettings>(() => restoredSession?.gameSettings || { ...DEFAULT_GAME_SETTINGS });
-  const [playerScores, setPlayerScores] = useState<PlayerScore[]>(() => restoredSession?.playerScores || []);
+  const [gameSettings, setGameSettings] = useState<GameSettings>({ ...DEFAULT_GAME_SETTINGS });
+  const [playerScores, setPlayerScores] = useState<PlayerScore[]>([]);
   const [isHandlingAuth, setIsHandlingAuth] = useState(true);
+  const [sessionHydrated, setSessionHydrated] = useState(false);
+  const [spotifyConnected, setSpotifyConnected] = useState(false);
+  const [spotifyDisplayName, setSpotifyDisplayName] = useState<string | null>(null);
   
   // Get season from localStorage or auto-detect (doesn't need to be stateful as it rarely changes)
   const season: Season = (() => {
     const saved = localStorage.getItem('lof.v1.theme.season') as Season | null;
     return saved || getCurrentSeason();
   })();
+
+  const refreshSpotifyState = useCallback(async () => {
+    try {
+      const token = await getValidAccessToken();
+      if (!token) {
+        setSpotifyConnected(false);
+        setSpotifyDisplayName(null);
+        return;
+      }
+      setSpotifyConnected(true);
+      setSpotifyDisplayName(readCachedSpotifyDisplayName());
+    } catch {
+      setSpotifyConnected(false);
+      setSpotifyDisplayName(null);
+    }
+  }, []);
 
   useEffect(() => {
     const init = async () => {
@@ -231,13 +288,31 @@ function App() {
       if (session.returnUrl) {
         setReturnUrl(session.returnUrl);
       }
-      stripSessionParamsFromUrl();
 
+      const restoredSession = readPersistedSession(session.playerId);
+      if (restoredSession) {
+        setGameStep(restoredSession.gameStep);
+        setGameSettings(restoredSession.gameSettings);
+        setPlayerScores(restoredSession.playerScores);
+      }
+
+      stripSessionParamsFromUrl();
+      await refreshSpotifyState();
+
+      setSessionHydrated(true);
       setIsHandlingAuth(false);
     };
 
-    init();
-  }, []);
+    init().catch(() => {
+      setSessionHydrated(true);
+      setIsHandlingAuth(false);
+    });
+  }, [refreshSpotifyState]);
+
+  useEffect(() => {
+    if (gameStep !== 'playlistSelect') return;
+    refreshSpotifyState().catch(() => undefined);
+  }, [gameStep, refreshSpotifyState]);
 
   useEffect(() => {
     if (gameStep === 'game' && !gameSettings.playlistId) {
@@ -250,13 +325,14 @@ function App() {
   }, [gameStep, gameSettings.playlistId, playerScores.length]);
 
   useEffect(() => {
-    persistSession({
+    if (!sessionHydrated || !playerId) return;
+    persistSession(playerId, {
       gameStep,
       gameSettings,
       playerScores,
       updatedAt: new Date().toISOString(),
     });
-  }, [gameStep, gameSettings, playerScores]);
+  }, [gameStep, gameSettings, playerId, playerScores, sessionHydrated]);
 
   const handleReturnToHub = () => {
     if (returnUrl) {
@@ -340,6 +416,17 @@ function App() {
                 >
                   {t('game.subtitle')}
                 </motion.p>
+                <div className="mt-2">
+                  <span className={`hh-chip !text-[10px] sm:!text-xs ${
+                    spotifyConnected
+                      ? '!border-emerald-300/80 dark:!border-emerald-500/70 !text-emerald-800 dark:!text-emerald-200'
+                      : '!border-slate-300/80 dark:!border-slate-600 !text-slate-700 dark:!text-slate-200'
+                  }`}>
+                    {spotifyConnected
+                      ? t('game.spotifyConnectedAs', { name: spotifyDisplayName || t('game.spotifyConnectedFallback') })
+                      : t('game.spotifyNotConnected')}
+                  </span>
+                </div>
               </div>
             </div>
           </header>
