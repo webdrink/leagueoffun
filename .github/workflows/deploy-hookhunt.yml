@@ -50,6 +50,16 @@ jobs:
             pnpm install --no-frozen-lockfile
           fi
 
+      - name: 🔐 Validate Spotify Build Env
+        env:
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+        run: |
+          if [ -z "${SPOTIFY_CLIENT_ID}" ]; then
+            echo "❌ SPOTIFY_CLIENT_ID secret is empty or unavailable."
+            exit 1
+          fi
+          echo "✅ SPOTIFY_CLIENT_ID present (length: ${#SPOTIFY_CLIENT_ID})"
+
       - name: 🏗️ Build HookHunt
         env:
           VITE_SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
@@ -85,6 +95,18 @@ jobs:
           
           if [ $JS_COUNT -eq 0 ]; then
             echo "❌ Error: No JavaScript files found"
+            exit 1
+          fi
+
+          # Guardrail: fail if build accidentally ships missing Spotify client ID state.
+          if grep -R --line-number "Missing Spotify Client ID" apps/${{ env.APP_NAME }}/dist/assets/*.js >/dev/null 2>&1; then
+            echo "❌ HookHunt bundle indicates missing Spotify client ID at build time."
+            exit 1
+          fi
+
+          # Guardrail: never leak client secret into static bundle.
+          if grep -R --line-number "SPOTIFY_CLIENT_SECRET" apps/${{ env.APP_NAME }}/dist >/dev/null 2>&1; then
+            echo "❌ Found forbidden SPOTIFY_CLIENT_SECRET marker in dist output."
             exit 1
           fi
 

@@ -52,11 +52,33 @@ jobs:
       - name: 🏗️ Build Blamegame
         run: pnpm --filter @leagueoffun/blamegame build
 
+      - name: 🔐 Validate Spotify Build Env
+        env:
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+        run: |
+          if [ -z "${SPOTIFY_CLIENT_ID}" ]; then
+            echo "❌ SPOTIFY_CLIENT_ID secret is empty or unavailable."
+            exit 1
+          fi
+          echo "✅ SPOTIFY_CLIENT_ID present (length: ${#SPOTIFY_CLIENT_ID})"
+
       - name: 🏗️ Build HookHunt
         env:
           VITE_SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           VITE_SPOTIFY_REDIRECT_URI: https://hookhunt.leagueoffun.com/callback/
         run: pnpm --filter @leagueoffun/hookhunt build
+
+      - name: 🔒 Verify HookHunt Bundle Safety
+        run: |
+          if grep -R --line-number "Missing Spotify Client ID" apps/hookhunt/dist/assets/*.js >/dev/null 2>&1; then
+            echo "❌ HookHunt bundle indicates missing Spotify client ID at build time."
+            exit 1
+          fi
+
+          if grep -R --line-number "SPOTIFY_CLIENT_SECRET" apps/hookhunt/dist >/dev/null 2>&1; then
+            echo "❌ Found forbidden SPOTIFY_CLIENT_SECRET marker in dist output."
+            exit 1
+          fi
 
       - name: 📊 CI Summary
         if: always()
