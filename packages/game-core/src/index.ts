@@ -11,6 +11,7 @@ export * from './dispatcher';
 export * from './actions';
 export * from './utils/url';
 export * from './context/AnimationContext';
+export * from './network';
 
 // Player ID helper types
 export type PlayerId = string;

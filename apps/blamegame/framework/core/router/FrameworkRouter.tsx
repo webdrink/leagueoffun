@@ -12,6 +12,10 @@ import { ScreenRegistry } from '../modules';
 import { createDispatcher } from '../dispatcher';
 import { storageGet, storageSet } from '../../persistence/storage';
 import GameShell from '../../ui/screens/GameShell';
+import type { MultiplayerSessionManager } from '../../network/manager';
+import type { RoomRole } from '../../network/protocol';
+import { useMultiplayerStore } from '../../network/store';
+import { getProvider } from '../../../games/nameblame/NameBlameModule';
 
 interface FrameworkRouterContext {
   currentPhaseId: string;
@@ -19,6 +23,8 @@ interface FrameworkRouterContext {
   eventBus: EventBus;
   config: GameConfig;
   playerId?: string | null;
+  role?: RoomRole | null;
+  multiplayer?: MultiplayerSessionManager | null;
 }
 
 const RouterContext = createContext<FrameworkRouterContext | null>(null);
@@ -37,6 +43,8 @@ interface FrameworkRouterProps {
   eventBus: EventBus;
   playerId?: string | null;
   roomId?: string | null;
+  role?: RoomRole | null;
+  multiplayer?: MultiplayerSessionManager | null;
   children?: React.ReactNode;
 }
 
@@ -47,6 +55,8 @@ export const FrameworkRouter: React.FC<FrameworkRouterProps> = ({
   eventBus,
   playerId = null,
   roomId = null,
+  role = null,
+  multiplayer = null,
   children
 }) => {
   const phaseStorageKey = playerId
@@ -64,24 +74,87 @@ export const FrameworkRouter: React.FC<FrameworkRouterProps> = ({
     return exists ? persisted : defaultPhase;
   });
   
+  const readProviderIndex = () => {
+    const provider = getProvider();
+    return provider?.progress().index ?? 0;
+  };
+
+  const syncProviderIndex = (targetIndex: number) => {
+    const provider = getProvider();
+    if (!provider) {
+      return;
+    }
+
+    const boundedTarget = Math.max(0, targetIndex);
+    let currentIndex = provider.progress().index;
+    while (currentIndex < boundedTarget) {
+      provider.next();
+      currentIndex += 1;
+    }
+    while (currentIndex > boundedTarget) {
+      provider.previous();
+      currentIndex -= 1;
+    }
+
+    eventBus.publish({ type: 'CONTENT/NEXT', index: boundedTarget });
+  };
+
   // Create module context
   const moduleCtx = {
     config,
     dispatch: ((_action: GameAction, _payload?: unknown) => {}) as (action: GameAction, payload?: unknown) => void,
     eventBus,
     playerId,
-    roomId
+    roomId,
+    role,
+    network: {
+      enabled: !!multiplayer,
+      role,
+      manager: multiplayer
+    }
   };
 
-  // Create dispatcher with phase management
-  const dispatch = createDispatcher({
+  // Create local dispatcher with phase management
+  const localDispatch = createDispatcher({
     getCurrentPhaseId: () => currentPhaseId,
     setCurrentPhaseId,
     controllers: phaseControllers,
     eventBus,
     moduleCtx
   });
-  
+
+  const dispatch = (action: GameAction, payload?: unknown) => {
+    const metadata = payload && typeof payload === 'object' ? (payload as { __fromNetwork?: boolean }) : {};
+    const isFromNetwork = !!metadata.__fromNetwork;
+
+    if (multiplayer && role === 'controller' && !isFromNetwork) {
+      multiplayer.sendPlayerInput(action, payload).catch((error) => {
+        eventBus.publish({
+          type: 'ERROR',
+          error: `Failed to send controller action: ${error instanceof Error ? error.message : 'Unknown error'}`
+        });
+      });
+      return;
+    }
+
+    localDispatch(action, payload);
+
+    if (multiplayer && role === 'host' && !isFromNetwork) {
+      const currentProviderIndex = readProviderIndex();
+      multiplayer.broadcastStatePatch({
+        action,
+        payload,
+        phaseId: currentPhaseId,
+        providerIndex: currentProviderIndex
+      }).catch((error) => {
+        eventBus.publish({
+          type: 'ERROR',
+          error: `Failed to broadcast state patch: ${error instanceof Error ? error.message : 'Unknown error'}`
+        });
+      });
+    }
+  };
+
   // Update dispatch reference in context
   moduleCtx.dispatch = dispatch;
 
@@ -91,6 +164,8 @@ export const FrameworkRouter: React.FC<FrameworkRouterProps> = ({
     eventBus,
     config,
     playerId,
+    role,
+    multiplayer
   };
 
   // Find current phase and screen
@@ -101,6 +176,77 @@ export const FrameworkRouter: React.FC<FrameworkRouterProps> = ({
   useEffect(() => {
     storageSet(phaseStorageKey, RESUMABLE_PHASES.has(currentPhaseId) ? currentPhaseId : 'intro');
   }, [currentPhaseId, phaseStorageKey]);
+
+  useEffect(() => {
+    if (!multiplayer) {
+      return;
+    }
+
+    multiplayer.setCallbacks({
+      onPlayerInput: (inputPayload) => {
+        localDispatch(inputPayload.action as GameAction, inputPayload.payload);
+
+        const currentProviderIndex = readProviderIndex();
+        multiplayer.broadcastStatePatch({
+          action: inputPayload.action,
+          payload: inputPayload.payload,
+          phaseId: currentPhaseId,
+          providerIndex: currentProviderIndex,
+          originPlayerId: inputPayload.playerId
+        }).catch((error) => {
+          eventBus.publish({
+            type: 'ERROR',
+            error: `Failed to rebroadcast host patch: ${error instanceof Error ? error.message : 'Unknown error'}`
+          });
+        });
+      },
+      onStatePatch: (patch) => {
+        localDispatch(patch.action as GameAction, patch.payload);
+
+        if (patch.phaseId && patch.phaseId !== currentPhaseId) {
+          setCurrentPhaseId(patch.phaseId);
+        }
+
+        syncProviderIndex(patch.providerIndex);
+      },
+      onStateSnapshot: (snapshot) => {
+        if (snapshot.phaseId !== currentPhaseId) {
+          setCurrentPhaseId(snapshot.phaseId);
+        }
+        syncProviderIndex(snapshot.providerIndex);
+      },
+      onPlayersUpdated: (players) => {
+        eventBus.publish({ type: 'NETWORK/PLAYERS', players });
+      },
+      onError: (error) => {
+        eventBus.publish({ type: 'ERROR', error });
+      }
+    });
+  }, [currentPhaseId, eventBus, localDispatch, multiplayer]);
+
+  useEffect(() => {
+    if (!multiplayer || role !== 'host') {
+      return;
+    }
+
+    const currentState = useMultiplayerStore.getState().authoritativeState;
+    const players = useMultiplayerStore.getState().players;
+    const providerIndex = readProviderIndex();
+
+    multiplayer.broadcastStateSnapshot({
+      phaseId: currentPhaseId,
+      providerIndex,
+      players,
+      currentPlayerId: currentState?.currentPlayerId ?? null,
+      selectedTargetId: currentState?.selectedTargetId ?? null,
+      reveal: currentState?.reveal ?? false
+    }).catch((error) => {
+      eventBus.publish({
+        type: 'ERROR',
+        error: `Failed to broadcast host snapshot: ${error instanceof Error ? error.message : 'Unknown error'}`
+      });
+    });
+  }, [currentPhaseId, eventBus, multiplayer, role]);
 
   // Fire initial onEnter exactly once (publish PHASE/ENTER if controller does not)
   useEffect(() => {

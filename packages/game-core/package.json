@@ -14,11 +14,17 @@
     "./persistence": "./src/persistence/storage.ts",
     "./config": "./src/config/game.schema.ts",
     "./discovery": "./src/config/discovery/discover.ts",
-    "./utils": "./src/utils/url.ts"
+    "./utils": "./src/utils/url.ts",
+    "./network": "./src/network/index.ts",
+    "./network/*": "./src/network/*"
+  },
+  "dependencies": {
+    "trystero": "^0.22.0",
+    "zod": "^3.23.8",
+    "zustand": "^5.0.8"
   },
   "peerDependencies": {
-    "react": "^19.1.0",
-    "zod": "^3.23.8"
+    "react": "^19.1.0"
   },
   "devDependencies": {
     "@types/react": "^19.1.2",

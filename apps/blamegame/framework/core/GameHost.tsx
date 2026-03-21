@@ -13,6 +13,9 @@ import { FrameworkRouter } from './router/FrameworkRouter';
 import { storageGet, storageSet, STORAGE_KEYS } from '../persistence/storage';
 import { parseInitialParams } from '../utils/url';
 import { GameConfig } from '../config/game.schema';
+import { createMultiplayerSession, setActiveMultiplayerSession } from '../network/runtime';
+import type { MultiplayerSessionManager } from '../network/manager';
+import { applyPlayerInput } from '../network/reducer';
 import App from '../../App'; // Import legacy App for fallback
 // Register modules (legacy side-effect import)
 import '../../games/nameblame';
@@ -30,6 +33,7 @@ const GameHost: React.FC = () => {
   const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
   const [moduleReady, setModuleReady] = useState(false);
   const [activeConfig, setActiveConfig] = useState<GameConfig | null>(null);
+  const [multiplayer, setMultiplayer] = useState<MultiplayerSessionManager | null>(null);
 
   // INIT lifecycle
   useEffect(() => { 
@@ -45,7 +49,7 @@ const GameHost: React.FC = () => {
   }, []);
 
   // Check for legacy mode
-  const params = parseInitialParams();
+  const params = useMemo(() => parseInitialParams(), []);
   const isLegacyMode = params.game === null && window.location.search.includes('legacy=true');
   
   // Discover configs on mount
@@ -70,6 +74,9 @@ const GameHost: React.FC = () => {
   // Load & init module when selection changes
   useEffect(() => {
     if (!selectedGameId) return;
+    let canceled = false;
+    let ownedSession: MultiplayerSessionManager | null = null;
+
     const cfg = configs.find(c => c.id === selectedGameId) || null;
     setActiveConfig(cfg);
     if (!cfg) return;
@@ -80,21 +87,111 @@ const GameHost: React.FC = () => {
       return;
     }
     setLoadState({ status: 'loading' });
-    Promise.resolve(mod.init({
-      config: cfg,
-      dispatch: () => {}, // replaced later by router
-      eventBus,
-      playerId: playerSession.playerId,
-      roomId: params.roomId || null
-    })).then(() => {
-      setModuleReady(true);
-      setLoadState({ status: 'ready' });
-      eventBus.publish({ type: 'LIFECYCLE/READY' });
-    }).catch(err => {
-      setLoadState({ status: 'error', error: (err as Error).message });
-      eventBus.publish({ type: 'ERROR', error: `Init failed: ${(err as Error).message}` });
-    });
-  }, [selectedGameId, configs, eventBus, playerSession.playerId, params.roomId]);
+
+    const run = async () => {
+      let session: MultiplayerSessionManager | null = null;
+      try {
+        const multiplayerEnabled = !!cfg.multiplayer?.supportsRoom && !!params.roomId && !!params.role;
+        if (multiplayerEnabled) {
+          const storedName = (() => {
+            try {
+              return localStorage.getItem('blamegame.multiplayer.displayName')?.trim() || '';
+            } catch {
+              return '';
+            }
+          })();
+
+          const displayName = storedName || `Player-${playerSession.playerId.slice(0, 4)}`;
+
+          session = createMultiplayerSession();
+          ownedSession = session;
+          session.setCallbacks({
+            onPlayersUpdated: (players) => {
+              eventBus.publish({ type: 'NETWORK/PLAYERS', players });
+            },
+            onError: (error) => {
+              eventBus.publish({ type: 'ERROR', error });
+            }
+          });
+
+          await session.start({
+            appId: `leagueoffun-${cfg.id}`,
+            roomId: params.roomId || '',
+            role: params.role || 'controller',
+            selfPlayerId: playerSession.playerId,
+            selfDisplayName: displayName,
+            manualOfferToken: params.offerToken,
+            playerInputReducer: applyPlayerInput
+          });
+
+          if (canceled) {
+            await session.stop();
+            return;
+          }
+
+          setActiveMultiplayerSession(session);
+          setMultiplayer(session);
+          eventBus.publish({
+            type: 'NETWORK/STATUS',
+            status: 'connected',
+            roomId: params.roomId || undefined,
+            transport: 'relay'
+          });
+        } else {
+          setActiveMultiplayerSession(null);
+          setMultiplayer(null);
+        }
+
+        await Promise.resolve(mod.init({
+          config: cfg,
+          dispatch: () => {}, // replaced later by router
+          eventBus,
+          playerId: playerSession.playerId,
+          roomId: params.roomId || null,
+          role: params.role || null,
+          network: {
+            enabled: !!session,
+            role: params.role || null,
+            manager: session
+          }
+        }));
+
+        if (canceled) {
+          return;
+        }
+
+        setModuleReady(true);
+        setLoadState({ status: 'ready' });
+        eventBus.publish({ type: 'LIFECYCLE/READY' });
+      } catch (err) {
+        if (session) {
+          try {
+            await session.stop();
+          } catch {
+            // Ignore cleanup errors.
+          }
+        }
+
+        if (canceled) {
+          return;
+        }
+
+        setLoadState({ status: 'error', error: (err as Error).message });
+        eventBus.publish({ type: 'ERROR', error: `Init failed: ${(err as Error).message}` });
+      }
+    };
+
+    run();
+
+    return () => {
+      canceled = true;
+      if (ownedSession) {
+        ownedSession.stop().catch(() => undefined);
+      }
+      setActiveMultiplayerSession(null);
+      setMultiplayer(null);
+    };
+  }, [selectedGameId, configs, eventBus, playerSession.playerId, params.roomId, params.role, params.offerToken]);
 
   const handleSelect = useCallback((id: string) => {
     setSelectedGameId(id);
@@ -129,6 +226,8 @@ const GameHost: React.FC = () => {
           eventBus={eventBus}
           playerId={playerSession.playerId}
           roomId={params.roomId || null}
+          role={params.role || null}
+          multiplayer={multiplayer}
         />
       </div>
     );

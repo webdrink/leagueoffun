@@ -12,6 +12,10 @@ export type GameEvent =
   | { type: 'CONTENT/NEXT'; index: number }
   | { type: 'SETTINGS/UPDATED'; gameId: string; settings: unknown }
   | { type: 'GAME/COMPLETE'; summary?: unknown }
+  | { type: 'NETWORK/STATUS'; status: string; roomId?: string; transport?: string }
+  | { type: 'NETWORK/PLAYERS'; players: unknown }
+  | { type: 'NETWORK/MESSAGE'; messageType: string; senderId: string }
+  | { type: 'NETWORK/FALLBACK_REQUIRED'; reason: string }
   | { type: 'ERROR'; error: string; meta?: Record<string, unknown> };
 
 export type EventBusSubscriber = (evt: GameEvent) => void;

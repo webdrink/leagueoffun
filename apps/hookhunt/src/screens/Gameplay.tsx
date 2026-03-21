@@ -44,6 +44,8 @@ interface GameplayProps {
 const HOOK_CLIP_MS = 30_000;
 const HOOK_CLIP_SECONDS = Math.round(HOOK_CLIP_MS / 1000);
 const REPLAY_PENALTY_PER_REPLAY = 0.15;
+const SPOTIFY_READY_WAIT_MS = 6_000;
+const SPOTIFY_READY_POLL_MS = 200;
 
 interface RoundFeedback {
   details: GuessEvaluation;
@@ -222,6 +224,7 @@ export default function GameplayScreen({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const playbackRequestRef = useRef(0);
   const spotifyPlayerRef = useRef<SpotifyWebPlaybackPlayer | null>(null);
+  const spotifyDeviceIdRef = useRef<string | null>(null);
   const hookStopTimerRef = useRef<number | null>(null);
   const heardStartedAtRef = useRef<number | null>(null);
   const roundHeardMsRef = useRef(0);
@@ -356,6 +359,28 @@ export default function GameplayScreen({
   }, [spotifyPlayer]);
 
   useEffect(() => {
+    spotifyDeviceIdRef.current = spotifyDeviceId;
+  }, [spotifyDeviceId]);
+
+  const waitForSpotifyDeviceReady = useCallback(async (maxWaitMs = SPOTIFY_READY_WAIT_MS): Promise<boolean> => {
+    if (spotifyPlayerRef.current && spotifyDeviceIdRef.current) {
+      return true;
+    }
+
+    const startedAt = Date.now();
+    while (Date.now() - startedAt < maxWaitMs) {
+      await new Promise<void>((resolve) => {
+        window.setTimeout(resolve, SPOTIFY_READY_POLL_MS);
+      });
+      if (spotifyPlayerRef.current && spotifyDeviceIdRef.current) {
+        return true;
+      }
+    }
+
+    return false;
+  }, []);
+
+  useEffect(() => {
     if (!hookClipEndsAt) {
       setHookRemainingMs(null);
       return;
@@ -403,6 +428,7 @@ export default function GameplayScreen({
 
         player.addListener('not_ready', () => {
           if (cancelled) return;
+          setSpotifyDeviceId(null);
           setSpotifyError(t('screens.gameplay.spotifyDeviceUnavailable'));
         });
 
@@ -527,14 +553,48 @@ export default function GameplayScreen({
         return;
       }
 
-      if (!spotifyPlayer || !spotifyDeviceId) {
-        setSpotifyError(t('screens.gameplay.spotifyPlayerNotReady'));
-        return;
+      if (!spotifyPlayerRef.current || !spotifyDeviceIdRef.current) {
+        const becameReady = await waitForSpotifyDeviceReady();
+        if (requestId !== playbackRequestRef.current) return;
+        if (!becameReady || !spotifyPlayerRef.current || !spotifyDeviceIdRef.current) {
+          setSpotifyError(t('screens.gameplay.spotifyPlayerNotReady'));
+          return;
+        }
       }
 
       try {
-        await transferPlaybackToDevice(spotifyDeviceId);
-        await startPlaybackOnDevice(spotifyDeviceId, track.uri, effectiveHookStartMs);
+        let activeDeviceId = spotifyDeviceIdRef.current;
+        if (!activeDeviceId) {
+          setSpotifyError(t('screens.gameplay.spotifyPlayerNotReady'));
+          return;
+        }
+
+        try {
+          await transferPlaybackToDevice(activeDeviceId);
+          await startPlaybackOnDevice(activeDeviceId, track.uri, effectiveHookStartMs);
+        } catch (firstError) {
+          const firstMessage = firstError instanceof Error ? firstError.message : '';
+          const normalizedMessage = firstMessage.toLowerCase();
+          const transientDeviceError =
+            normalizedMessage.includes('no device') ||
+            normalizedMessage.includes('cannot perform operation') ||
+            normalizedMessage.includes('no list was loaded');
+
+          if (!transientDeviceError) {
+            throw firstError;
+          }
+
+          const becameReady = await waitForSpotifyDeviceReady();
+          if (requestId !== playbackRequestRef.current) return;
+          if (!becameReady || !spotifyDeviceIdRef.current) {
+            throw firstError;
+          }
+
+          activeDeviceId = spotifyDeviceIdRef.current;
+          await transferPlaybackToDevice(activeDeviceId);
+          await startPlaybackOnDevice(activeDeviceId, track.uri, effectiveHookStartMs);
+        }
+
         if (requestId !== playbackRequestRef.current) return;
         setPlaybackSource('spotify');
         setHookPlaying(true);
@@ -547,7 +607,7 @@ export default function GameplayScreen({
         setSpotifyError(`${t('screens.gameplay.spotifyPlaybackFailed')} ${normalizeSpotifyError(message, t)}`);
       }
     },
-    [clearHookStopTimer, scheduleHookStop, spotifyDeviceId, spotifyPlayer, startHeardTracking, stopHeardTracking, t]
+    [clearHookStopTimer, scheduleHookStop, startHeardTracking, stopHeardTracking, t, waitForSpotifyDeviceReady]
   );
 
   const pauseHook = useCallback(() => {

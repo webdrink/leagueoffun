@@ -5,6 +5,7 @@ import { GameConfig } from './config/game.schema';
 import { PhaseControllerMap } from './phases';
 import { EventBus } from './events/eventBus';
 import { GameAction } from './actions';
+import type { MultiplayerSessionManager, RoomRole } from './network';
 import type { ComponentType } from 'react'; // Corrected import statement
 
 // Temporary relaxed typing for legacy screens; will tighten after full extraction.
@@ -17,6 +18,12 @@ export interface GameModuleContextMinimal {
   eventBus: EventBus;
   playerId?: string | null;
   roomId?: string | null;
+  role?: RoomRole | null;
+  network?: {
+    enabled: boolean;
+    role: RoomRole | null;
+    manager: MultiplayerSessionManager | null;
+  } | null;
 }
 export interface GameModule {
   id: string;

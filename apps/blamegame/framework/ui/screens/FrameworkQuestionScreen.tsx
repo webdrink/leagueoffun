@@ -11,6 +11,7 @@ import useTranslation from '../../../hooks/useTranslation';
 import { useProviderState } from '../../../hooks/useProviderState';
 import { useGameSettings } from '../../../hooks/useGameSettings';
 import useNameBlameSetup from '../../../hooks/useNameBlameSetup';
+import { useMultiplayerStore } from '../../network/store';
 
 const FrameworkQuestionScreen: React.FC = () => {
   // ProgressBar subcomponent to avoid inline style width lint violation
@@ -30,7 +31,7 @@ const FrameworkQuestionScreen: React.FC = () => {
       </div>
     );
   };
-  const { dispatch } = useFrameworkRouter();
+  const { dispatch, role, multiplayer } = useFrameworkRouter();
   const { t } = useTranslation();
   
   const { gameSettings } = useGameSettings();
@@ -38,17 +39,37 @@ const FrameworkQuestionScreen: React.FC = () => {
 
   // Get actual players from shared NameBlame setup hook
   const { getActivePlayers, currentPlayerIndex, advancePlayer, recordNameBlame } = useNameBlameSetup();
+  const multiplayerState = useMultiplayerStore((state) => ({
+    enabled: state.enabled,
+    players: state.players,
+    authoritativeState: state.authoritativeState,
+    selfPlayerId: state.selfPlayerId
+  }));
+  const isMultiplayer = !!multiplayerState.enabled && !!role;
   
   // Get active players (with non-empty names) for blame selection
   const players = useMemo(() => {
-    return isNameBlameMode ? getActivePlayers() : [];
-  }, [isNameBlameMode, getActivePlayers]);
+    if (!isNameBlameMode) {
+      return [];
+    }
+    if (isMultiplayer) {
+      return multiplayerState.players.map((player) => ({ id: player.id, name: player.name }));
+    }
+    return getActivePlayers();
+  }, [isNameBlameMode, isMultiplayer, multiplayerState.players, getActivePlayers]);
   
   // Get current active player for self-blame prevention
   const currentPlayer = useMemo(() => {
     if (!isNameBlameMode || players.length === 0) return null;
+    if (isMultiplayer) {
+      const currentPlayerId = multiplayerState.authoritativeState?.currentPlayerId;
+      if (currentPlayerId) {
+        return players.find((player) => player.id === currentPlayerId) || null;
+      }
+      return players[0] || null;
+    }
     return players[currentPlayerIndex % players.length] || null;
-  }, [isNameBlameMode, players, currentPlayerIndex]);
+  }, [isNameBlameMode, isMultiplayer, players, currentPlayerIndex, multiplayerState.authoritativeState?.currentPlayerId]);
   
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
   const [isRevealing, setIsRevealing] = useState(false);
@@ -73,19 +94,32 @@ const FrameworkQuestionScreen: React.FC = () => {
     }
     
     setSelectedPlayer(playerName);
-    dispatch(GameAction.SELECT_TARGET, { target: playerName });
+    const targetPlayer = players.find((player) => player.name === playerName);
+    dispatch(GameAction.SELECT_TARGET, { target: playerName, targetPlayerId: targetPlayer?.id || null });
     
     // Record the blame action
-    if (currentPlayer && currentQuestion) {
+    if (!isMultiplayer && currentPlayer && currentQuestion) {
       recordNameBlame(currentPlayer.name, playerName, currentQuestion.text);
     }
     
     setIsRevealing(true);
+
+    if (isMultiplayer && role === 'host' && multiplayer) {
+      const providerIndex = progress.index;
+      multiplayer.broadcastStateSnapshot({
+        phaseId: 'play',
+        providerIndex,
+        players: multiplayerState.players,
+        currentPlayerId: currentPlayer?.id || null,
+        selectedTargetId: targetPlayer?.id || null,
+        reveal: true
+      }).catch(() => undefined);
+    }
   };
 
   const handleAdvance = () => {
     // In NameBlame mode, advance to the blamed player
-    if (isNameBlameMode && selectedPlayer) {
+    if (isNameBlameMode && selectedPlayer && !isMultiplayer) {
       // Find the blamed player's index and set them as current
       const blamedPlayerIndex = players.findIndex(p => p.name === selectedPlayer);
       if (blamedPlayerIndex !== -1) {
@@ -98,11 +132,48 @@ const FrameworkQuestionScreen: React.FC = () => {
     dispatch(GameAction.ADVANCE);
     setSelectedPlayer(null);
     setIsRevealing(false);
+
+    if (isMultiplayer && role === 'host' && multiplayer) {
+      const currentState = multiplayerState.authoritativeState;
+      const selected = players.find((player) => player.name === selectedPlayer);
+      const nextCurrentPlayerId = selected?.id || currentState?.currentPlayerId || players[0]?.id || null;
+      const providerIndex = progress.index + 1 < progress.total ? progress.index + 1 : progress.index;
+      multiplayer.broadcastStateSnapshot({
+        phaseId: progress.index + 1 < progress.total ? 'play' : 'summary',
+        providerIndex,
+        players: multiplayerState.players,
+        currentPlayerId: nextCurrentPlayerId,
+        selectedTargetId: null,
+        reveal: false
+      }).catch(() => undefined);
+    }
   };
 
   const handlePrevious = () => {
     dispatch(GameAction.BACK);
   };
+
+  useEffect(() => {
+    if (!isMultiplayer) {
+      return;
+    }
+
+    const currentState = multiplayerState.authoritativeState;
+    if (!currentState) {
+      return;
+    }
+
+    const selectedTargetId = currentState.selectedTargetId;
+    if (!selectedTargetId) {
+      setSelectedPlayer(null);
+      setIsRevealing(false);
+      return;
+    }
+
+    const targetPlayer = players.find((player) => player.id === selectedTargetId);
+    setSelectedPlayer(targetPlayer?.name ?? null);
+    setIsRevealing(currentState.reveal);
+  }, [isMultiplayer, multiplayerState.authoritativeState, players]);
 
   if (!currentQuestion || !progress) {
     // Loading state relies on global GameShell background; center content only

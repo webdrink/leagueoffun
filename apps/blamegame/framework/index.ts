@@ -104,3 +104,11 @@ export type { GameMenuProps } from './ui/GameMenu';
 // ============================================================================
 
 export { parseInitialParams } from './utils/url';
+
+// ============================================================================
+// Multiplayer
+// ============================================================================
+
+export { useMultiplayerStore } from './network/store';
+export { MultiplayerSessionManager } from './network/manager';
+export { getActiveMultiplayerSession } from './network/runtime';

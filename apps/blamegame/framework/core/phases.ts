@@ -4,6 +4,14 @@
 import { GameAction, PhaseTransitionResult } from './actions';
 import { GameConfig } from '../config/game.schema';
 import { EventBus } from './events/eventBus';
+import type { MultiplayerSessionManager } from '../network/manager';
+import type { RoomRole } from '../network/protocol';
+
+export interface MultiplayerModuleContext {
+  enabled: boolean;
+  role: RoomRole | null;
+  manager: MultiplayerSessionManager | null;
+}
 
 export interface GameModuleContext {
   config: GameConfig;
@@ -11,6 +19,8 @@ export interface GameModuleContext {
   eventBus: EventBus;
   playerId?: string | null;
   roomId?: string | null;
+  role?: RoomRole | null;
+  network?: MultiplayerModuleContext | null;
   // Future: access to stores & content provider
 }
 

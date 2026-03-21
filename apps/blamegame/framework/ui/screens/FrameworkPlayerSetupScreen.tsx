@@ -10,9 +10,10 @@ import { Button } from '../components/Button';
 import { ArrowLeft, Plus, X } from 'lucide-react';
 import useTranslation from '../../../hooks/useTranslation';
 import useNameBlameSetup from '../../../hooks/useNameBlameSetup';
+import { useMultiplayerStore } from '../../network/store';
 
 const FrameworkPlayerSetupScreen: React.FC = () => {
-  const { dispatch } = useFrameworkRouter();
+  const { dispatch, role, multiplayer } = useFrameworkRouter();
   const { t } = useTranslation();
   
   // Use shared NameBlame hook for player data management with localStorage persistence
@@ -24,17 +25,42 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
     addPlayer,
     removePlayer
   } = useNameBlameSetup();
+  const multiplayerState = useMultiplayerStore((state) => ({
+    enabled: state.enabled,
+    players: state.players,
+    roomId: state.roomId,
+    selfPlayerId: state.selfPlayerId
+  }));
+
+  const isMultiplayer = !!multiplayerState.enabled && !!role;
+  const renderedPlayers = isMultiplayer
+    ? multiplayerState.players.map((player) => ({ id: player.id, name: player.name }))
+    : players;
+  const selfPlayer = multiplayerState.players.find((player) => player.id === multiplayerState.selfPlayerId);
+  const isSelfReady = !!selfPlayer?.ready;
 
   const handleAddPlayer = () => {
+    if (isMultiplayer) {
+      return;
+    }
     addPlayer();
   };
 
   const handleRemovePlayer = (playerId: string) => {
+    if (isMultiplayer) {
+      return;
+    }
     removePlayer(playerId);
   };
 
   const handleStartGame = () => {
-    if (players.length < 3) {
+    if (isMultiplayer && role !== 'host') {
+      multiplayer?.sendReady(true).catch(() => undefined);
+      return;
+    }
+
+    const minPlayers = isMultiplayer ? 2 : 3;
+    if (renderedPlayers.length < minPlayers) {
       return; // Error already handled by hook
     }
     dispatch(GameAction.ADVANCE);
@@ -48,6 +74,13 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
     if (e.key === 'Enter') {
       handleAddPlayer();
     }
+  };
+
+  const handleToggleReady = () => {
+    if (!multiplayer) {
+      return;
+    }
+    multiplayer.sendReady(!isSelfReady).catch(() => undefined);
   };
 
   return (
@@ -77,41 +110,50 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
               {t('players.min_players_nameblame_hint')}
             </p>
 
-          {/* Add Player Input */}
-          <div className="mb-6">
-            <div className="flex gap-2 mb-2">
-              <input
-                type="text"
-                value={tempPlayerName}
-                onChange={(e) => {
-                  setTempPlayerName(e.target.value);
-                  // Error clearing is handled by the hook
-                }}
-                onKeyPress={handleKeyPress}
-                placeholder={t('players.player_name_input')}
-                className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-autumn-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100"
-                maxLength={20}
-              />
-              <Button
-                onClick={handleAddPlayer}
-                className="bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white px-4"
-                disabled={!tempPlayerName.trim() || players.length >= 12}
-              >
-                <Plus size={16} />
-              </Button>
+          {isMultiplayer && (
+            <div className="mb-6 rounded-lg border border-emerald-200 bg-emerald-50/70 p-3 text-sm text-emerald-800 dark:border-emerald-600/40 dark:bg-emerald-950/20 dark:text-emerald-200">
+              <p className="font-semibold">Room {multiplayerState.roomId}</p>
+              <p className="text-xs">Role: {role === 'host' ? 'Host' : 'Controller'}</p>
             </div>
-            {nameInputError && (
-              <p className="text-red-500 text-xs">{nameInputError}</p>
-            )}
-          </div>
+          )}
+
+          {/* Add Player Input */}
+          {!isMultiplayer && (
+            <div className="mb-6">
+              <div className="flex gap-2 mb-2">
+                <input
+                  type="text"
+                  value={tempPlayerName}
+                  onChange={(e) => {
+                    setTempPlayerName(e.target.value);
+                    // Error clearing is handled by the hook
+                  }}
+                  onKeyPress={handleKeyPress}
+                  placeholder={t('players.player_name_input')}
+                  className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-autumn-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+                  maxLength={20}
+                />
+                <Button
+                  onClick={handleAddPlayer}
+                  className="bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white px-4"
+                  disabled={!tempPlayerName.trim() || players.length >= 12}
+                >
+                  <Plus size={16} />
+                </Button>
+              </div>
+              {nameInputError && (
+                <p className="text-red-500 text-xs">{nameInputError}</p>
+              )}
+            </div>
+          )}
 
           {/* Players List */}
           <div className="mb-6">
             <h3 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
-              {t('players.player_name')} ({players.length}/12)
+              {t('players.player_name')} ({renderedPlayers.length}/12)
             </h3>
             <div className="space-y-2 max-h-48 overflow-y-auto pr-1 custom-scrollbar">
-              {players.map((player, index) => (
+              {renderedPlayers.map((player, index) => (
                 <motion.div
                   key={player.id}
                   initial={{ opacity: 0, x: -20 }}
@@ -130,6 +172,7 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
                     onClick={() => handleRemovePlayer(player.id)}
                     variant="outline"
                     className="text-red-500 hover:text-red-700 p-1 border-red-200 dark:border-red-400/40 hover:border-red-300 dark:hover:border-red-300"
+                    disabled={isMultiplayer}
                   >
                     <X size={16} />
                   </Button>
@@ -137,7 +180,7 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
               ))}
             </div>
             
-            {players.length === 0 && (
+            {renderedPlayers.length === 0 && (
               <div className="text-center py-8 text-gray-500 dark:text-gray-400">
                 <p className="text-sm">{t('players.add_players_to_start')}</p>
               </div>
@@ -145,7 +188,7 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
           </div>
 
           {/* Min Players Warning */}
-          {players.length > 0 && players.length < 3 && (
+          {renderedPlayers.length > 0 && renderedPlayers.length < (isMultiplayer ? 2 : 3) && (
             <div className="bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-600/40 rounded-lg p-3 mb-6">
               <p className="text-yellow-800 dark:text-yellow-300 text-sm">
                 {t('players.min_players')}
@@ -153,14 +196,26 @@ const FrameworkPlayerSetupScreen: React.FC = () => {
             </div>
           )}
 
-          {/* Start Game Button */}
-          <Button
-            onClick={handleStartGame}
-            className="w-full bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg text-lg"
-            disabled={players.length < 3}
-          >
-            {players.length >= 3 ? t('players.start_game') : t('players.add_player')}
-          </Button>
+          {isMultiplayer && role !== 'host' ? (
+            <Button
+              onClick={handleToggleReady}
+              className={`w-full font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg text-lg ${
+                isSelfReady
+                  ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                  : 'bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white'
+              }`}
+            >
+              {isSelfReady ? 'Set Not Ready' : 'Set Ready'}
+            </Button>
+          ) : (
+            <Button
+              onClick={handleStartGame}
+              className="w-full bg-gradient-to-r from-autumn-500 to-rust-500 hover:from-autumn-600 hover:to-rust-600 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg text-lg"
+              disabled={renderedPlayers.length < (isMultiplayer ? 2 : 3)}
+            >
+              {renderedPlayers.length >= (isMultiplayer ? 2 : 3) ? t('players.start_game') : t('players.add_player')}
+            </Button>
+          )}
         </motion.div>
       </div>
   );
