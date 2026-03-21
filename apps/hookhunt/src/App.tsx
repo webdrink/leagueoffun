@@ -290,6 +290,7 @@ function App() {
                   mode={gameSettings.gameMode}
                   settings={gameSettings}
                   onFinish={finishGame}
+                  onBackToPlaylist={() => setGameStep('playlistSelect')}
                   animationsEnabled={animationsEnabled}
                 />
               )}

@@ -19,6 +19,9 @@ const SCOPES = [
   'user-read-private',
   'playlist-read-private',
   'playlist-read-collaborative',
+  'streaming',
+  'user-read-playback-state',
+  'user-modify-playback-state',
 ];
 
 interface SpotifyTokenResponse {
@@ -46,7 +49,14 @@ function getConfiguredRedirectUri(): string {
 
   const baseUrl = (import.meta.env.BASE_URL as string | undefined) || '/';
   const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-  const appBase = new URL(normalizedBase, window.location.origin);
+  const runtimeOrigin = new URL(window.location.origin);
+
+  // Spotify OAuth no longer accepts localhost aliases; prefer loopback literal.
+  if (runtimeOrigin.hostname === 'localhost') {
+    runtimeOrigin.hostname = '127.0.0.1';
+  }
+
+  const appBase = new URL(normalizedBase, runtimeOrigin.toString());
   return new URL('callback/', appBase).toString();
 }
 
