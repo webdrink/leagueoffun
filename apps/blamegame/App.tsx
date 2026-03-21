@@ -54,6 +54,25 @@ import { useBlameGameStore } from './store/BlameGameStore';
 import { useFrameworkEventBus } from './hooks/useFrameworkEventBus';
 import { dispatchAdvance, dispatchSelectTarget, createDispatchContext } from './lib/utils/frameworkActions';
 
+const BLAMEGAME_STEP_KEY = 'blamegame.app.step';
+const RESUMABLE_STEPS: GameStep[] = ['intro', 'playerSetup', 'categoryPick'];
+
+function readPersistedStep(): GameStep {
+  try {
+    const raw = localStorage.getItem(BLAMEGAME_STEP_KEY);
+    if (raw && RESUMABLE_STEPS.includes(raw as GameStep)) {
+      return raw as GameStep;
+    }
+  } catch {
+    // Ignore storage access errors.
+  }
+  return 'intro';
+}
+
+function toPersistedStep(step: GameStep): GameStep {
+  return RESUMABLE_STEPS.includes(step) ? step : 'intro';
+}
+
 function App() {
     // Return-to-hub support
     const { playerId, returnUrl } = usePlayerId();
@@ -97,7 +116,7 @@ function App() {
     currentBlamed
   } = useBlameGameStore();
 
-  const [gameStep, setGameStep] = useState<GameStep>('intro');
+  const [gameStep, setGameStep] = useState<GameStep>(() => readPersistedStep());
   const [questionStats, setQuestionStats] = useState<Pick<QuestionStats, 'totalQuestions' | 'categories'>>({ totalQuestions: 0, categories: {} });
   const [errorLoadingQuestions, setErrorLoadingQuestions] = useState<string | null>(null);
   const [showInfoModal, setShowInfoModal] = useState(false);
@@ -112,6 +131,14 @@ function App() {
 
   // State for debug panel
   const [showDebug, setShowDebug] = useState(false);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(BLAMEGAME_STEP_KEY, toPersistedStep(gameStep));
+    } catch {
+      // Ignore storage access errors.
+    }
+  }, [gameStep]);
   
   // Access framework EventBus for debug integration
   const frameworkEventBus = useFrameworkEventBus();

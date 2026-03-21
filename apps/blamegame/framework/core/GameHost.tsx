@@ -4,6 +4,7 @@
  * For now it wraps the legacy <App /> to allow incremental migration.
  */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { resolvePlayerSession, stripSessionParamsFromUrl } from '@game-core';
 import { createEventBus } from './events/eventBus';
 import GameMenu from '../ui/GameMenu';
 import { discoverGameConfigs } from '../config/discovery/discover';
@@ -23,6 +24,7 @@ interface LoadState {
 
 const GameHost: React.FC = () => {
   const eventBus = useMemo(() => createEventBus(), []);
+  const [playerSession] = useState(() => resolvePlayerSession('blamegame'));
   const [loadState, setLoadState] = useState<LoadState>({ status: 'idle' });
   const [configs, setConfigs] = useState<GameConfig[]>([]);
   const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
@@ -37,6 +39,10 @@ const GameHost: React.FC = () => {
       (window as unknown as { frameworkEventBus?: typeof eventBus }).frameworkEventBus = eventBus;
     }
   }, [eventBus]);
+
+  useEffect(() => {
+    stripSessionParamsFromUrl();
+  }, []);
 
   // Check for legacy mode
   const params = parseInitialParams();
@@ -78,8 +84,8 @@ const GameHost: React.FC = () => {
       config: cfg,
       dispatch: () => {}, // replaced later by router
       eventBus,
-      playerId: null,
-      roomId: null
+      playerId: playerSession.playerId,
+      roomId: params.roomId || null
     })).then(() => {
       setModuleReady(true);
       setLoadState({ status: 'ready' });
@@ -88,7 +94,7 @@ const GameHost: React.FC = () => {
       setLoadState({ status: 'error', error: (err as Error).message });
       eventBus.publish({ type: 'ERROR', error: `Init failed: ${(err as Error).message}` });
     });
-  }, [selectedGameId, configs, eventBus]);
+  }, [selectedGameId, configs, eventBus, playerSession.playerId, params.roomId]);
 
   const handleSelect = useCallback((id: string) => {
     setSelectedGameId(id);
@@ -121,6 +127,8 @@ const GameHost: React.FC = () => {
           screenRegistry={screenRegistry}
           phaseControllers={controllers}
           eventBus={eventBus}
+          playerId={playerSession.playerId}
+          roomId={params.roomId || null}
         />
       </div>
     );

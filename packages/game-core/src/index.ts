@@ -1,6 +1,7 @@
 // Game Core - Shared game logic and utilities
 export * from './events/eventBus';
 export * from './persistence/storage';
+export * from './persistence/playerSession';
 export * from './config/game.schema';
 export * from './config/discovery/discover';
 export * from './modules';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, UserPlus } from 'lucide-react';
@@ -7,14 +7,26 @@ type GameMode = 'singleplayer' | 'hotSeat';
 
 interface PlayerSetupProps {
   mode: GameMode;
+  initialPlayers?: string[];
   onSubmit: (names: string[]) => void;
   onBack: () => void;
   animationsEnabled: boolean;
 }
 
-export default function PlayerSetupScreen({ mode, onSubmit, onBack, animationsEnabled }: PlayerSetupProps) {
+function getInitialPlayers(mode: GameMode, initialPlayers?: string[]): string[] {
+  if (initialPlayers && initialPlayers.length > 0) {
+    return initialPlayers;
+  }
+  return mode === 'singleplayer' ? ['Player 1'] : ['Player 1', 'Player 2'];
+}
+
+export default function PlayerSetupScreen({ mode, initialPlayers, onSubmit, onBack, animationsEnabled }: PlayerSetupProps) {
   const { t } = useTranslation();
-  const [players, setPlayers] = useState<string[]>(mode === 'singleplayer' ? ['Player 1'] : ['Player 1', 'Player 2']);
+  const [players, setPlayers] = useState<string[]>(() => getInitialPlayers(mode, initialPlayers));
+
+  useEffect(() => {
+    setPlayers(getInitialPlayers(mode, initialPlayers));
+  }, [mode, initialPlayers]);
 
   const addPlayer = () => setPlayers(prev => [...prev, `Player ${prev.length + 1}`]);
   const updatePlayer = (idx: number, value: string) => setPlayers(prev => prev.map((p, i) => (i === idx ? value : p)));

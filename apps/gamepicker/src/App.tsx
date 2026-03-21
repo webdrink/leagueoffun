@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Gamepad2, User, Sparkles, Music, Target, Trophy, Users, Zap, Copy, Check } from 'lucide-react';
+import { Gamepad2, User, Sparkles, Music, Target, Trophy, Users, Zap, Copy, Check, Clock3 } from 'lucide-react';
 import { usePlayer } from './PlayerContext';
 import { useAnimations } from '@game-core';
 import { games, GameInfo } from './games.config';
@@ -61,9 +61,10 @@ interface GameCardProps {
   game: GameInfo;
   index: number;
   onPlay: (gameId: string, gameUrl: string) => void;
+  isLastPlayed: boolean;
 }
 
-function GameCard({ game, index, onPlay }: GameCardProps) {
+function GameCard({ game, index, onPlay, isLastPlayed }: GameCardProps) {
   const { animationsEnabled } = useAnimations();
   const [isHovered, setIsHovered] = useState(false);
   
@@ -177,6 +178,12 @@ function GameCard({ game, index, onPlay }: GameCardProps) {
               <h2 className="text-2xl font-bold text-slate-900 mb-2">
                 {game.name}
               </h2>
+              {isLastPlayed && (
+                <div className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 mb-2">
+                  <Clock3 size={12} />
+                  Continue Last Session
+                </div>
+              )}
               <div className="flex flex-wrap gap-2">
                 {game.tags.map(tag => (
                   <span
@@ -226,17 +233,42 @@ function App() {
   const { playerId } = usePlayer();
   const { animationsEnabled } = useAnimations();
   const [playerStats, setPlayerStats] = useState<Array<{ gameId: string; score: number; playedAt: string }>>([]);
+  const [lastGameId, setLastGameId] = useState<string | null>(() => localStorage.getItem('leagueoffun.lastGameId'));
 
   useEffect(() => {
     const stats = localStorage.getItem('leagueoffun.playerStats');
     if (stats) {
-      setPlayerStats(JSON.parse(stats));
+      try {
+        const parsed = JSON.parse(stats) as Array<{ gameId: string; score: number; playedAt: string }>;
+        setPlayerStats(parsed);
+        if (parsed.length > 0) {
+          const latest = [...parsed].sort((a, b) => new Date(b.playedAt).getTime() - new Date(a.playedAt).getTime())[0];
+          if (latest?.gameId) {
+            setLastGameId(latest.gameId);
+          }
+        }
+      } catch {
+        setPlayerStats([]);
+      }
     }
   }, []);
+
+  const orderedGames = useMemo(() => {
+    if (!lastGameId) return games;
+    return [...games].sort((a, b) => {
+      if (a.id === lastGameId) return -1;
+      if (b.id === lastGameId) return 1;
+      return 0;
+    });
+  }, [lastGameId]);
 
   const handlePlayGame = (gameId: string, gameUrl: string) => {
     const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const returnUrl = encodeURIComponent(window.location.href);
+    const playedAt = new Date().toISOString();
+    localStorage.setItem('leagueoffun.lastGameId', gameId);
+    localStorage.setItem('leagueoffun.lastPlayedAt', playedAt);
+    setLastGameId(gameId);
     
     // In local development, route to local game servers on their specific ports
     let targetBaseUrl = gameUrl;
@@ -385,12 +417,13 @@ function App() {
 
         {/* Games Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {games.map((game, index) => (
+          {orderedGames.map((game, index) => (
             <GameCard
               key={game.id}
               game={game}
               index={index}
               onPlay={handlePlayGame}
+              isLastPlayed={game.id === lastGameId}
             />
           ))}
         </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { generatePlayerId, PlayerId } from '@game-core';
+import { PlayerId, resolvePlayerSession, stripSessionParamsFromUrl } from '@game-core';
 
 interface UsePlayerIdReturn {
   playerId: PlayerId;
@@ -7,38 +7,13 @@ interface UsePlayerIdReturn {
 }
 
 export function usePlayerId(): UsePlayerIdReturn {
-  const [playerId, setPlayerId] = useState<PlayerId>(() => {
-    // Check URL first
-    const params = new URLSearchParams(window.location.search);
-    const urlPlayerId = params.get('playerId');
-    
-    if (urlPlayerId) {
-      localStorage.setItem('blamegame.playerId', urlPlayerId);
-      return urlPlayerId;
-    }
-    
-    // Check localStorage
-    const stored = localStorage.getItem('blamegame.playerId');
-    if (stored) {
-      return stored;
-    }
-    
-    // Generate new
-    const newId = generatePlayerId();
-    localStorage.setItem('blamegame.playerId', newId);
-    return newId;
-  });
-
-  const [returnUrl, setReturnUrl] = useState<string | null>(() => {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('returnUrl');
-  });
+  const [session] = useState(() => resolvePlayerSession('blamegame'));
+  const playerId: PlayerId = session.playerId;
+  const returnUrl: string | null = session.returnUrl;
 
   useEffect(() => {
     // Clean URL on mount
-    if (window.location.search) {
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
+    stripSessionParamsFromUrl();
   }, []);
 
   return { playerId, returnUrl };

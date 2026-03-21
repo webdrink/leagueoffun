@@ -134,6 +134,7 @@ dist
 
 # Vite build output
 dist/
+.playwright-cli/
 
 # IDE files
 .vscode/

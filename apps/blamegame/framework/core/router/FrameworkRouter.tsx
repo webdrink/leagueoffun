@@ -10,6 +10,7 @@ import { EventBus } from '../events/eventBus';
 import { GameConfig } from '../../config/game.schema';
 import { ScreenRegistry } from '../modules';
 import { createDispatcher } from '../dispatcher';
+import { storageGet, storageSet } from '../../persistence/storage';
 import GameShell from '../../ui/screens/GameShell';
 
 interface FrameworkRouterContext {
@@ -32,6 +33,8 @@ interface FrameworkRouterProps {
   screenRegistry: ScreenRegistry;
   phaseControllers: Record<string, import('../phases').PhaseController>;
   eventBus: EventBus;
+  playerId?: string | null;
+  roomId?: string | null;
   children?: React.ReactNode;
 }
 
@@ -40,17 +43,27 @@ export const FrameworkRouter: React.FC<FrameworkRouterProps> = ({
   screenRegistry,
   phaseControllers,
   eventBus,
+  playerId = null,
+  roomId = null,
   children
 }) => {
-  const [currentPhaseId, setCurrentPhaseId] = useState(config.phases[0]?.id || 'intro');
+  const [currentPhaseId, setCurrentPhaseId] = useState(() => {
+    const defaultPhase = config.phases[0]?.id || 'intro';
+    const persisted = storageGet<string>('session.phase');
+    if (!persisted) return defaultPhase;
+    const resumable = new Set(['intro', 'playerSetup', 'categoryPick']);
+    if (!resumable.has(persisted)) return defaultPhase;
+    const exists = config.phases.some((phase) => phase.id === persisted);
+    return exists ? persisted : defaultPhase;
+  });
   
   // Create module context
   const moduleCtx = {
     config,
     dispatch: ((_action: GameAction, _payload?: unknown) => {}) as (action: GameAction, payload?: unknown) => void,
     eventBus,
-    playerId: null,
-    roomId: null
+    playerId,
+    roomId
   };
 
   // Create dispatcher with phase management
@@ -76,6 +89,11 @@ export const FrameworkRouter: React.FC<FrameworkRouterProps> = ({
   const currentPhase = config.phases.find(p => p.id === currentPhaseId);
   const screenId = currentPhase?.screenId;
   const ScreenComponent = screenId ? screenRegistry[screenId] : null;
+
+  useEffect(() => {
+    const resumable = new Set(['intro', 'playerSetup', 'categoryPick']);
+    storageSet('session.phase', resumable.has(currentPhaseId) ? currentPhaseId : 'intro');
+  }, [currentPhaseId]);
 
   // Fire initial onEnter exactly once (publish PHASE/ENTER if controller does not)
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { generatePlayerId, PlayerId } from '@game-core';
+import { PlayerId, resolvePlayerSession, stripSessionParamsFromUrl } from '@game-core';
 
 interface PlayerContextValue {
   playerId: PlayerId;
@@ -7,47 +7,64 @@ interface PlayerContextValue {
 
 const PlayerContext = createContext<PlayerContextValue | null>(null);
 
-const PLAYER_ID_KEY = 'leagueoffun.playerId';
-
 export function PlayerProvider({ children }: { children: React.ReactNode }) {
-  const [playerId, setPlayerId] = useState<PlayerId>(() => {
-    const stored = localStorage.getItem(PLAYER_ID_KEY);
-    if (stored) {
-      return stored;
-    }
-    const newId = generatePlayerId();
-    localStorage.setItem(PLAYER_ID_KEY, newId);
-    return newId;
+  const [playerId] = useState<PlayerId>(() => {
+    const session = resolvePlayerSession('gamepicker');
+    return session.playerId;
   });
 
   // Check for returning game data in URL
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const returnedPlayerId = params.get('playerId');
-    const gameId = params.get('gameId');
+    const gameId = params.get('gameId')?.trim();
     const score = params.get('score');
-    const playedAt = params.get('playedAt');
+    const playedAt = params.get('playedAt')?.trim();
 
-    if (returnedPlayerId && gameId) {
-      // Reconcile player ID if different
-      if (returnedPlayerId !== playerId) {
-        console.warn('Player ID mismatch - using existing:', playerId);
+    if (gameId && score && playedAt) {
+      const numericScore = Number.parseInt(score, 10);
+      if (Number.isNaN(numericScore)) {
+        stripSessionParamsFromUrl();
+        return;
       }
 
       // Store game stats
-      if (score && playedAt) {
-        const stats = JSON.parse(localStorage.getItem('leagueoffun.playerStats') || '[]');
-        stats.push({
-          gameId,
-          score: parseInt(score, 10),
-          playedAt
-        });
-        localStorage.setItem('leagueoffun.playerStats', JSON.stringify(stats));
-        console.log('Stored game stat:', { gameId, score, playedAt });
+      try {
+        const stats = JSON.parse(localStorage.getItem('leagueoffun.playerStats') || '[]') as Array<{
+          gameId: string;
+          score: number;
+          playedAt: string;
+        }>;
+        const alreadyExists = stats.some(
+          (entry) =>
+            entry.gameId === gameId &&
+            entry.playedAt === playedAt &&
+            entry.score === numericScore
+        );
+        if (!alreadyExists) {
+          stats.push({
+            gameId,
+            score: numericScore,
+            playedAt,
+          });
+        }
+        // Keep only the latest 100 items.
+        const trimmed = stats.slice(-100);
+        localStorage.setItem('leagueoffun.playerStats', JSON.stringify(trimmed));
+        localStorage.setItem('leagueoffun.lastGameId', gameId);
+        localStorage.setItem('leagueoffun.lastPlayedAt', playedAt);
+      } catch (error) {
+        console.error('Failed to store player stats:', error);
       }
+    }
 
-      // Clean URL
-      window.history.replaceState({}, document.title, window.location.pathname);
+    stripSessionParamsFromUrl();
+  }, [playerId]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('leagueoffun.playerId', playerId);
+    } catch {
+      // Ignore storage access issues.
     }
   }, [playerId]);
 

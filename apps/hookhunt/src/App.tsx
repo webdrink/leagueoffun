@@ -1,7 +1,7 @@
 import React, { useEffect, useState, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, Settings, Moon, Sun } from 'lucide-react';
-import { useAnimations } from '@game-core';
+import { resolvePlayerSession, stripSessionParamsFromUrl, useAnimations } from '@game-core';
 import { useTranslation } from 'react-i18next';
 import './i18n/config';
 
@@ -112,24 +112,104 @@ interface PlayerScore {
   heardMs: number;
 }
 
+interface HookHuntSessionSnapshot {
+  gameStep: GameStep;
+  gameSettings: GameSettings;
+  playerScores: PlayerScore[];
+  updatedAt: string;
+}
+
+const HOOKHUNT_SESSION_KEY = 'hookhunt.app.session.v1';
+
+const DEFAULT_GAME_SETTINGS: GameSettings = {
+  gameMode: 'singleplayer',
+  playerNames: [],
+  currentPlayerIndex: 0,
+  pointsToWin: 10,
+  matchThreshold: 70,
+  pointsForPartial: 1,
+  pointsForFull: 2,
+};
+
+function sanitizeSettings(input: unknown): GameSettings {
+  if (!input || typeof input !== 'object') return { ...DEFAULT_GAME_SETTINGS };
+  const maybe = input as Partial<GameSettings>;
+  const gameMode: GameMode = maybe.gameMode === 'hotSeat' ? 'hotSeat' : 'singleplayer';
+  const playerNames = Array.isArray(maybe.playerNames)
+    ? maybe.playerNames.filter((value): value is string => typeof value === 'string')
+    : [];
+
+  return {
+    ...DEFAULT_GAME_SETTINGS,
+    ...maybe,
+    gameMode,
+    playerNames,
+    currentPlayerIndex:
+      typeof maybe.currentPlayerIndex === 'number' && maybe.currentPlayerIndex >= 0
+        ? maybe.currentPlayerIndex
+        : 0,
+    playlistId:
+      typeof maybe.playlistId === 'string' && maybe.playlistId.trim().length > 0
+        ? maybe.playlistId
+        : undefined,
+  };
+}
+
+function sanitizeScores(input: unknown): PlayerScore[] {
+  if (!Array.isArray(input)) return [];
+  return input
+    .filter((entry): entry is PlayerScore => Boolean(entry && typeof entry === 'object'))
+    .map((entry) => ({
+      name: typeof entry.name === 'string' ? entry.name : 'Player',
+      score: typeof entry.score === 'number' ? entry.score : 0,
+      heardMs: typeof entry.heardMs === 'number' ? entry.heardMs : 0,
+    }));
+}
+
+function sanitizeStep(input: unknown): GameStep {
+  if (input === 'intro' || input === 'playerSetup' || input === 'playlistSelect' || input === 'game' || input === 'summary') {
+    return input;
+  }
+  return 'intro';
+}
+
+function readPersistedSession(): HookHuntSessionSnapshot | null {
+  try {
+    const raw = localStorage.getItem(HOOKHUNT_SESSION_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<HookHuntSessionSnapshot> | null;
+    if (!parsed || typeof parsed !== 'object') return null;
+
+    return {
+      gameStep: sanitizeStep(parsed.gameStep),
+      gameSettings: sanitizeSettings(parsed.gameSettings),
+      playerScores: sanitizeScores(parsed.playerScores),
+      updatedAt: typeof parsed.updatedAt === 'string' ? parsed.updatedAt : new Date().toISOString(),
+    };
+  } catch {
+    return null;
+  }
+}
+
+function persistSession(snapshot: HookHuntSessionSnapshot) {
+  try {
+    localStorage.setItem(HOOKHUNT_SESSION_KEY, JSON.stringify(snapshot));
+  } catch {
+    // Ignore quota and storage access errors.
+  }
+}
+
 function App() {
   const { t } = useTranslation();
-  const [playerId, setPlayerId] = useState<string>('');
-  const [returnUrl, setReturnUrl] = useState<string>('');
+  const [restoredSession] = useState<HookHuntSessionSnapshot | null>(() => readPersistedSession());
+  const [playerId, setPlayerId] = useState<string>(() => localStorage.getItem('leagueoffun.playerId') || localStorage.getItem('hookhunt.playerId') || '');
+  const [returnUrl, setReturnUrl] = useState<string>(() => localStorage.getItem('hookhunt.returnUrl') || localStorage.getItem('leagueoffun.returnUrl') || '');
   const { animationsEnabled, toggleAnimations } = useAnimations();
   const { isDark, toggle: toggleDarkMode } = useDarkMode();
-  const [gameStep, setGameStep] = useState<GameStep>('intro');
+  const [gameStep, setGameStep] = useState<GameStep>(() => restoredSession?.gameStep || 'intro');
   const [showSettings, setShowSettings] = useState(false);
-  const [gameSettings, setGameSettings] = useState<GameSettings>({
-    gameMode: 'singleplayer',
-    playerNames: [],
-    currentPlayerIndex: 0,
-    pointsToWin: 10,
-    matchThreshold: 70,
-    pointsForPartial: 1,
-    pointsForFull: 2,
-  });
-  const [playerScores, setPlayerScores] = useState<PlayerScore[]>([]);
+  const [gameSettings, setGameSettings] = useState<GameSettings>(() => restoredSession?.gameSettings || { ...DEFAULT_GAME_SETTINGS });
+  const [playerScores, setPlayerScores] = useState<PlayerScore[]>(() => restoredSession?.playerScores || []);
   const [isHandlingAuth, setIsHandlingAuth] = useState(true);
   
   // Get season from localStorage or auto-detect (doesn't need to be stateful as it rarely changes)
@@ -146,24 +226,37 @@ function App() {
         console.error('Spotify callback handling failed:', error);
       }
 
-      const params = new URLSearchParams(window.location.search);
-      const pid = params.get('playerId');
-      const rurl = params.get('returnUrl');
-
-      if (pid) {
-        setPlayerId(pid);
-        localStorage.setItem('hookhunt.playerId', pid);
+      const session = resolvePlayerSession('hookhunt');
+      setPlayerId(session.playerId);
+      if (session.returnUrl) {
+        setReturnUrl(session.returnUrl);
       }
-
-      if (rurl) {
-        setReturnUrl(rurl);
-      }
+      stripSessionParamsFromUrl();
 
       setIsHandlingAuth(false);
     };
 
     init();
   }, []);
+
+  useEffect(() => {
+    if (gameStep === 'game' && !gameSettings.playlistId) {
+      setGameStep('playlistSelect');
+      return;
+    }
+    if (gameStep === 'summary' && playerScores.length === 0) {
+      setGameStep('intro');
+    }
+  }, [gameStep, gameSettings.playlistId, playerScores.length]);
+
+  useEffect(() => {
+    persistSession({
+      gameStep,
+      gameSettings,
+      playerScores,
+      updatedAt: new Date().toISOString(),
+    });
+  }, [gameStep, gameSettings, playerScores]);
 
   const handleReturnToHub = () => {
     if (returnUrl) {
@@ -179,8 +272,8 @@ function App() {
         console.error('Failed to return to hub with provided returnUrl', e);
       }
     }
-    // Fallback to League of Fun hub if no returnUrl
-    window.location.href = 'https://www.leagueoffun.com';
+    const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    window.location.href = isLocalDev ? 'http://localhost:9990/' : 'https://www.leagueoffun.com';
   };
 
   const startGame = (mode: GameMode) => {
@@ -207,15 +300,7 @@ function App() {
 
   const resetGame = () => {
     setGameStep('intro');
-    setGameSettings({
-      gameMode: 'singleplayer',
-      playerNames: [],
-      currentPlayerIndex: 0,
-      pointsToWin: 10,
-      matchThreshold: 70,
-      pointsForPartial: 1,
-      pointsForFull: 2,
-    });
+    setGameSettings({ ...DEFAULT_GAME_SETTINGS });
     setPlayerScores([]);
   };
 
@@ -272,6 +357,7 @@ function App() {
                 <PlayerSetupScreen
                   key="playerSetup"
                   mode={gameSettings.gameMode}
+                  initialPlayers={gameSettings.playerNames}
                   onSubmit={submitPlayers}
                   onBack={() => setGameStep('intro')}
                   animationsEnabled={animationsEnabled}
