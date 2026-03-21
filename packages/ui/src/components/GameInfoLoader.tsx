@@ -1,44 +1,48 @@
 import React from 'react';
 import { DataLoader } from './DataLoader';
-import { useGameStore, GameInfo } from '../../../store/gameStore';
-import { fetchAssetWithFallback } from '../../../lib/utils/fetchUtils';
-import { logger } from '../../../lib/utils/logger';
 
 /**
  * GameInfoLoader Component
  *
- * Purpose: Fetches the game's meta information from `game.json` and writes it
- *          into the global zustand store so any component can access it.
+ * Purpose: Fetches game metadata and exposes it to the caller.
+ * The default fetcher loads `game.json` from the current app root.
  *
  * Props:
  *  - children: React.ReactNode - React children to render once the data is
  *    loaded.
  *
- * Expected Behavior: On mount, this component retrieves `game.json` using
- * `fetchAssetWithFallback`, stores the result via `useGameStore`, and then renders its
- * children. If the fetch fails, the underlying DataLoader handles the error
- * state.
- *
- * Dependencies:
- *  - React
- *  - DataLoader (for generic async handling)
- *  - zustand store from `useGameStore`
- *  - fetchAssetWithFallback utility for path-safe fetches
- *
- * Integrated by: index.tsx wraps the entire <App /> with this loader.
+ * Expected Behavior: On mount, this component retrieves `game.json`, calls
+ * `onGameInfo`, and then renders its children.
  */
-export const GameInfoLoader: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const setGameInfo = useGameStore(state => state.setGameInfo);
+export interface GameInfoLoaderProps<TGameInfo = Record<string, unknown>> {
+  children: React.ReactNode;
+  fetchGameInfo?: () => Promise<TGameInfo>;
+  onGameInfo?: (info: TGameInfo) => void;
+}
+
+export const GameInfoLoader = <TGameInfo extends Record<string, unknown> = Record<string, unknown>>({
+  children,
+  fetchGameInfo,
+  onGameInfo
+}: GameInfoLoaderProps<TGameInfo>) => {
+  const defaultFetcher = React.useCallback(async () => {
+    const response = await fetch('game.json');
+    if (!response.ok) {
+      throw new Error(`Failed to load game info (${response.status})`);
+    }
+    return response.json() as Promise<TGameInfo>;
+  }, []);
+
+  const fetcher = fetchGameInfo ?? defaultFetcher;
+
   return (
-    <DataLoader<GameInfo>
-      fetchData={() => fetchAssetWithFallback('game.json').then(res => res.json())}
+    <DataLoader<TGameInfo>
+      fetchData={fetcher}
       onData={(info) => {
-        logger.log('GAME', 'Game info loaded');
-        setGameInfo(info);
+        onGameInfo?.(info);
       }}
     >
       {() => <>{children}</>}
     </DataLoader>
   );
 };
-

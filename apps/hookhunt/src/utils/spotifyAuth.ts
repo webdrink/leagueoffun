@@ -1,8 +1,7 @@
 const getEnvClientId = (): string | undefined => {
   // Vite uses import.meta.env prefixed with VITE_
   const viteId = (import.meta as any).env?.VITE_SPOTIFY_CLIENT_ID as string | undefined;
-  const procId = (typeof process !== 'undefined' ? (process as any).env?.SPOTIFY_CLIENT_ID : undefined) as string | undefined;
-  return viteId || procId;
+  return viteId;
 };
 
 const SCOPES = [

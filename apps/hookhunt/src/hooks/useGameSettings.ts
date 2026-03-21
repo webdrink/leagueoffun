@@ -12,7 +12,7 @@ import { useGameStore } from '../store/gameStore';
  * - `setGameSettings`: Function to directly set the game settings.
  * - `updateGameSettings`: Function to update specific fields in the game settings.
  *
- * Uses the `useLocalStorage` hook to persist settings under the key `'blamegame-settings'`.
+ * Uses the `useLocalStorage` hook to persist settings under the key `'hookhunt-settings'`.
  */
 export const useGameSettings = () => {
   const storeGameSettings = useGameStore(state => state.gameSettings);
@@ -20,7 +20,7 @@ export const useGameSettings = () => {
   const updateStoreGameSettings = useGameStore(state => state.updateGameSettings);
 
   const [persistedSettings, setPersistedSettings] = useLocalStorage<GameSettings>(
-    'blamegame-settings',
+    'hookhunt-settings',
     initialGameSettings
   );
 

@@ -7,9 +7,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@framework-ui': path.resolve(__dirname, '../../packages/framework-ui/src'),
+      '@framework-ui': path.resolve(__dirname, '../../packages/ui/src'),
       '@game-core': path.resolve(__dirname, '../../packages/game-core/src'),
-      '@shared-config': path.resolve(__dirname, '../../packages/shared-config')
+      '@shared-config': path.resolve(__dirname, '../../packages/config')
     }
   },
   plugins: [react()],

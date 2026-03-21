@@ -212,11 +212,10 @@ test.describe('Accessibility', () => {
 test.describe('Hub Integration', () => {
   test('should handle playerId from URL', async ({ page }) => {
     // Navigate with playerId parameter (simulating coming from hub)
-    await page.goto('/?playerId=test-player-123&returnUrl=https://leagueoffun.de');
+    await page.goto('/?playerId=test-player-123&returnUrl=https://www.leagueoffun.com');
     await waitForGameReady(page);
     
     // Game should load normally
     await expect(page.getByRole('heading', { name: /BlameGame/i })).toBeVisible();
   });
 });
-

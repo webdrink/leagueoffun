@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": [
+    "src/index.ts",
+    "src/GameMenu.tsx",
+    "src/GameHost.tsx",
+    "src/router/FrameworkRouter.tsx",
+    "src/components/**/*.ts",
+    "src/components/**/*.tsx",
+    "src/lib/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/screens/**/*"
+  ]
+}

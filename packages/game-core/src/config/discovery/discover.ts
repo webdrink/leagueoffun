@@ -4,11 +4,20 @@
  */
 import { GameConfigSchema, GameConfig } from '../game.schema';
 
+type ImportMetaWithGlob = ImportMeta & {
+  glob: <T = unknown>(
+    pattern: string,
+    options?: { eager?: boolean; import?: string }
+  ) => Record<string, T>;
+};
+
+const viteImportMeta = import.meta as ImportMetaWithGlob;
+
 // Vite glob import for game.json files - try multiple patterns
 const rawConfigs: Record<string, { default: GameConfig }> = {
-  ...import.meta.glob('/src/games/**/game.json', { eager: true }),
-  ...import.meta.glob('../../games/**/game.json', { eager: true }),
-  ...import.meta.glob('../../../games/**/game.json', { eager: true })
+  ...viteImportMeta.glob<{ default: GameConfig }>('/src/games/**/game.json', { eager: true }),
+  ...viteImportMeta.glob<{ default: GameConfig }>('../../games/**/game.json', { eager: true }),
+  ...viteImportMeta.glob<{ default: GameConfig }>('../../../games/**/game.json', { eager: true })
 } as Record<string, { default: GameConfig }>;
 
 export function discoverGameConfigs(): GameConfig[] {

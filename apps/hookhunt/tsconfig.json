@@ -14,7 +14,13 @@
   "include": [
     "src/main.tsx",
     "src/App.tsx",
-    "src/index.css"
+    "src/index.css",
+    "src/screens/**/*.ts",
+    "src/screens/**/*.tsx",
+    "src/components/SettingsModal.tsx",
+    "src/utils/**/*.ts",
+    "src/i18n/**/*.ts",
+    "src/types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules",

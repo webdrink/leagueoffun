@@ -167,7 +167,9 @@ function App() {
         url.searchParams.set('playedAt', new Date().toISOString());
         window.location.href = url.toString();
         return;
-      } catch (e) {}
+      } catch (e) {
+        console.error('Failed to return to hub with provided returnUrl', e);
+      }
     }
     // Fallback to League of Fun hub if no returnUrl
     window.location.href = 'https://www.leagueoffun.com';

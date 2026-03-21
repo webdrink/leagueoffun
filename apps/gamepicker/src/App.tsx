@@ -23,7 +23,7 @@ function SessionIdDisplay() {
   return (
     <button
       onClick={handleCopy}
-      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white/80 hover:text-white text-sm group"
+      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-900/40 hover:bg-slate-900/55 border border-white/10 transition-colors text-white/85 hover:text-white text-sm group"
       title="Click to copy Session ID. Used to reconnect to ongoing sessions."
       aria-label={`Session ID: ${playerId.slice(0, 8)}. Click to copy.`}
     >
@@ -45,7 +45,7 @@ function AnimationToggle() {
   return (
     <button
       onClick={toggleAnimations}
-      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white/80 hover:text-white text-sm"
+      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-900/40 hover:bg-slate-900/55 border border-white/10 transition-colors text-white/85 hover:text-white text-sm"
       aria-label={animationsEnabled ? 'Disable animations' : 'Enable animations'}
       role="switch"
       aria-checked={animationsEnabled}
@@ -81,33 +81,33 @@ function GameCard({ game, index, onPlay }: GameCardProps) {
   const getGameGradient = (id: string) => {
     switch (id) {
       case 'blamegame':
-        return 'from-orange-500 via-red-500 to-pink-500';
+        return 'from-amber-500 via-orange-500 to-red-500';
       case 'hookhunt':
-        return 'from-blue-500 via-purple-500 to-pink-500';
+        return 'from-cyan-500 via-teal-500 to-emerald-500';
       default:
-        return 'from-purple-500 via-pink-500 to-orange-500';
+        return 'from-sky-500 via-cyan-500 to-teal-500';
     }
   };
   
   const getGameAccent = (id: string) => {
     switch (id) {
       case 'blamegame':
-        return 'bg-orange-100 text-orange-700 border-orange-200';
+        return 'bg-amber-100 text-amber-800 border-amber-200';
       case 'hookhunt':
-        return 'bg-blue-100 text-blue-700 border-blue-200';
+        return 'bg-teal-100 text-teal-800 border-teal-200';
       default:
-        return 'bg-purple-100 text-purple-700 border-purple-200';
+        return 'bg-cyan-100 text-cyan-800 border-cyan-200';
     }
   };
   
   const getButtonGradient = (id: string) => {
     switch (id) {
       case 'blamegame':
-        return 'from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600';
+        return 'from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700';
       case 'hookhunt':
-        return 'from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600';
+        return 'from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700';
       default:
-        return 'from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700';
+        return 'from-sky-500 to-cyan-600 hover:from-sky-600 hover:to-cyan-700';
     }
   };
 
@@ -152,7 +152,7 @@ function GameCard({ game, index, onPlay }: GameCardProps) {
         className={`absolute inset-0 bg-gradient-to-r ${getGameGradient(game.id)} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 -z-10`}
       />
       
-      <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+      <div className="bg-white/95 rounded-3xl shadow-xl overflow-hidden border border-white/70">
         {/* Decorative header bar */}
         <div className={`h-2 bg-gradient-to-r ${getGameGradient(game.id)}`} />
         
@@ -174,7 +174,7 @@ function GameCard({ game, index, onPlay }: GameCardProps) {
             </div>
             
             <div className="flex-1">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">
                 {game.name}
               </h2>
               <div className="flex flex-wrap gap-2">
@@ -190,12 +190,12 @@ function GameCard({ game, index, onPlay }: GameCardProps) {
             </div>
           </div>
           
-          <p className="text-gray-600 mb-6 text-lg leading-relaxed">
+          <p className="text-slate-600 mb-6 text-lg leading-relaxed">
             {game.description}
           </p>
           
           {/* Game features/stats */}
-          <div className="flex items-center gap-6 mb-6 text-sm text-gray-500">
+          <div className="flex items-center gap-6 mb-6 text-sm text-slate-500">
             <div className="flex items-center gap-2">
               <Users size={16} />
               <span>2+ players</span>
@@ -280,22 +280,22 @@ function App() {
     : {};
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-cyan-950 to-emerald-900 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Animated floating shapes */}
         {animationsEnabled && (
           <>
             <motion.div
-              className="absolute top-20 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl"
+              className="absolute top-20 left-10 w-64 h-64 bg-cyan-400/15 rounded-full blur-3xl"
               animate={floatingAnimation}
             />
             <motion.div
-              className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl"
+              className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl"
               animate={{ ...floatingAnimation, transition: { ...floatingAnimation.transition, delay: 1 } }}
             />
             <motion.div
-              className="absolute top-1/2 left-1/3 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"
+              className="absolute top-1/2 left-1/3 w-48 h-48 bg-amber-300/15 rounded-full blur-3xl"
               animate={{ ...floatingAnimation, transition: { ...floatingAnimation.transition, delay: 0.5 } }}
             />
           </>
@@ -304,8 +304,8 @@ function App() {
         {/* Static gradient orbs for non-animated state */}
         {!animationsEnabled && (
           <>
-            <div className="absolute top-20 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl" />
+            <div className="absolute top-20 left-10 w-64 h-64 bg-cyan-400/15 rounded-full blur-3xl" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl" />
           </>
         )}
       </div>
@@ -331,7 +331,7 @@ function App() {
           >
             <div className="relative">
               <div className="w-16 h-16 bg-white rounded-2xl shadow-2xl flex items-center justify-center">
-                <Gamepad2 size={32} className="text-purple-600" />
+                <Gamepad2 size={32} className="text-teal-700" />
               </div>
               {animationsEnabled && (
                 <motion.div
@@ -346,12 +346,12 @@ function App() {
           </motion.div>
           
           <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-4 tracking-tight">
-            League of <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300">Fun</span>
+            League of <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400">Fun</span>
           </h1>
           
           <p className="text-xl text-white/90 max-w-lg mx-auto leading-relaxed">
-            Bringing friends together through unforgettable party games. 
-            Choose your adventure and let the fun begin! 🎉
+            Bringing friends together through unforgettable party games.
+            Choose your adventure and let the fun begin.
           </p>
         </motion.header>
 
@@ -361,11 +361,11 @@ function App() {
             initial={animationsEnabled ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 mb-8 border border-white/20"
+            className="bg-slate-900/35 backdrop-blur-md rounded-2xl p-4 mb-8 border border-white/15"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Trophy size={24} className="text-yellow-400" />
+                <Trophy size={24} className="text-amber-300" />
                 <div>
                   <p className="text-white font-semibold">Recent Activity</p>
                   <p className="text-white/70 text-sm">
@@ -402,7 +402,7 @@ function App() {
           transition={{ delay: 0.6 }}
           className="text-center"
         >
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 text-white/80">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900/35 backdrop-blur-sm rounded-full border border-white/20 text-white/85">
             <Sparkles size={18} className="text-yellow-400" />
             <span>More games coming soon!</span>
           </div>
@@ -413,13 +413,13 @@ function App() {
           initial={animationsEnabled ? { opacity: 0 } : { opacity: 1 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="text-center py-12 mt-8 border-t border-white/10"
+          className="text-center py-12 mt-8 border-t border-white/15"
         >
           <p className="text-white/70 mb-2">
             © 2025 League of Fun
           </p>
           <p className="text-white/50 text-sm">
-            Bringing people together through games 🎮
+            Bringing people together through games.
           </p>
         </motion.footer>
       </div>

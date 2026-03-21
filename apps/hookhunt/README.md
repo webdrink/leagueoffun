@@ -176,13 +176,13 @@ HookHunt uses a music-inspired blue/purple color palette:
 
 Deployment is managed centrally from the monorepo root using a unified GitHub Actions workflow.
 
-**Live URL:** https://hookhunt.leagueoffun.com
+**Live URL:** https://webdrink.github.io/HookHunt/
 
 ### How It Works
 
 1. The unified workflow at `.github/workflows/deploy-all.yml` builds and deploys all apps
 2. HookHunt is deployed by pushing built files to the `webdrink/HookHunt` repository
-3. GitHub Pages serves the content from `webdrink/HookHunt` with custom domain `hookhunt.leagueoffun.com`
+3. GitHub Pages serves the content from `webdrink/HookHunt` at `https://webdrink.github.io/HookHunt/`
 4. Deployment triggers on:
    - Push to `main` branch (when `apps/hookhunt/**` or `packages/**` change)
    - Manual trigger via `workflow_dispatch`
@@ -197,7 +197,7 @@ For more details, see the [main README](../../README.md#-deployment).
 
 ## URLs
 
-- **Production**: https://hookhunt.leagueoffun.com
+- **Production**: https://webdrink.github.io/HookHunt/
 - **Local Dev**: http://localhost:999
 
 ## Development Roadmap

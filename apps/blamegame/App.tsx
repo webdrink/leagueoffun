@@ -132,11 +132,11 @@ function App() {
       }
     }
     
-    // Fallback: local dev goes to local picker on port 999, production goes to leagueoffun.de
+    // Fallback: local dev goes to local picker on port 999, production goes to leagueoffun.com
     if (isLocalDev) {
       window.location.href = 'http://localhost:9990/';
     } else {
-      window.location.href = 'https://leagueoffun.de';
+      window.location.href = 'https://www.leagueoffun.com';
     }
   };
 

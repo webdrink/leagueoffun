@@ -140,7 +140,7 @@ const GameMainFooter: React.FC<GameMainFooterProps> = ({
             if (isLocal) {
               window.location.href = 'http://localhost:9990/';
             } else {
-              window.location.href = 'https://leagueoffun.de';
+              window.location.href = 'https://www.leagueoffun.com';
             }
           }}
           className="px-4 py-2"

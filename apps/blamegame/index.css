@@ -5,13 +5,13 @@
 @layer base {
   :root {
     /* Theme color variables - default to fall theme */
-    --theme-primary: 245 158 11; /* autumn-500 */
-    --theme-primary-light: 251 191 36; /* autumn-400 */
-    --theme-primary-dark: 217 119 6; /* autumn-600 */
-    --theme-secondary: 239 68 68; /* rust-500 */
-    --theme-secondary-light: 248 113 113; /* rust-400 */
-    --theme-secondary-dark: 220 38 38; /* rust-600 */
-    --theme-accent: 191 160 148; /* brown-500 */
+    --theme-primary: 220 131 50; /* autumn-500 */
+    --theme-primary-light: 238 159 78; /* autumn-400 */
+    --theme-primary-dark: 186 101 32; /* autumn-600 */
+    --theme-secondary: 201 90 67; /* rust-500 */
+    --theme-secondary-light: 230 118 97; /* rust-400 */
+    --theme-secondary-dark: 166 67 49; /* rust-600 */
+    --theme-accent: 174 127 104; /* brown-500 */
   }
 
   .season-winter {
@@ -52,6 +52,15 @@
     --theme-secondary-light: 45 212 191; /* neon-400 */
     --theme-secondary-dark: 13 148 136; /* neon-600 */
     --theme-accent: 16 185 129; /* matrix-500 */
+  }
+
+  html, body, #root {
+    font-family: "Avenir Next", "Montserrat", "Segoe UI", sans-serif;
+  }
+
+  h1, h2, h3, .game-header-font {
+    font-family: "Avenir Next Condensed", "Trebuchet MS", "Segoe UI", sans-serif;
+    letter-spacing: 0.01em;
   }
 }
 
@@ -95,6 +104,22 @@ body, #root, .app-container {
   transition: background-color 1s ease-in-out, background-image 1s ease-in-out;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: rgb(42 26 18);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 15% 15%, rgb(255 231 199 / 0.18), transparent 40%),
+    radial-gradient(circle at 85% 20%, rgb(233 146 112 / 0.15), transparent 42%),
+    radial-gradient(circle at 50% 95%, rgb(120 74 48 / 0.3), transparent 48%);
 }
 
 /* Prevent page-level scrolling - force viewport to be exactly the screen size */
