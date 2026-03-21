@@ -1,5 +1,6 @@
 const SPOTIFY_ACCOUNTS = 'https://accounts.spotify.com';
 const TOKEN_REFRESH_BUFFER_MS = 45_000;
+const FALLBACK_SPOTIFY_CLIENT_ID = '556a3baca0464c9b95cbaada1ac4bd0e';
 
 const STORAGE_KEYS = {
   accessToken: 'hookhunt.spotify.access_token',
@@ -40,7 +41,7 @@ export interface SpotifyCallbackResult {
 
 function getEnvClientId(): string | undefined {
   const value = import.meta.env.VITE_SPOTIFY_CLIENT_ID as string | undefined;
-  return value?.trim() || undefined;
+  return value?.trim() || FALLBACK_SPOTIFY_CLIENT_ID;
 }
 
 function getNormalizedBasePath(): string {
