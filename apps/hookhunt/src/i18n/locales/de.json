@@ -59,7 +59,16 @@
       "trackUnavailable": "Dieser Track ist für Browser-Wiedergabe nicht verfügbar.",
       "previewNotice": "Preview-Clips sind feste 30-Sekunden-Ausschnitte. Die Hook-Zeit basiert auf einer Volltrack-Analyse.",
       "hookAnalyzing": "Hook-Position wird analysiert...",
-      "hookEstimatedAt": "Geschätzter Hook-Start: {{time}}"
+      "hookEstimatedAt": "Geschätzter Hook-Start: {{time}}",
+      "hookOnlyMode": "Hook-Only Modus",
+      "hookWindow": "Hör genau hin: Pro Runde werden nur {{seconds}} Sekunden abgespielt.",
+      "hookReady": "Hook bereit",
+      "hookTimeRemaining": "Clip verbleibend: {{seconds}}s",
+      "hookStartsAt": "Hook-Clip Start: {{time}}",
+      "hookSourcePreview": "Quelle: Spotify 30s-Preview (in HookHunt als kurzer Clip begrenzt).",
+      "hookSourceSpotify": "Quelle: Spotify Volltrack-Stream (nach Hook-Clip automatisch gestoppt).",
+      "previewPlaybackFailed": "Der Preview-Clip konnte nicht abgespielt werden.",
+      "roundLabel": "Runde {{current}} / {{total}}"
     },
     "summary": {
       "title": "Spiel beendet!",

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Pause, Play, RotateCcw, SkipForward } from 'lucide-react';
+import { ArrowLeft, RotateCcw, SkipForward } from 'lucide-react';
 import {
   getEstimatedHookStartMs,
   getPlaylistTracks,
@@ -33,6 +33,9 @@ interface GameplayProps {
   onBackToPlaylist: () => void;
   animationsEnabled: boolean;
 }
+
+const HOOK_CLIP_MS = 12_000;
+const HOOK_CLIP_SECONDS = Math.round(HOOK_CLIP_MS / 1000);
 
 let spotifySdkReadyPromise: Promise<void> | null = null;
 
@@ -73,6 +76,30 @@ function loadSpotifyWebPlaybackSdk(): Promise<void> {
 
 function canPlayViaSpotify(track: SpotifyTrack): track is SpotifyTrack & { uri: string } {
   return Boolean(track.uri && !track.is_local);
+}
+
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, value));
+}
+
+function stableFractionFromString(input: string): number {
+  let hash = 0;
+  for (let i = 0; i < input.length; i += 1) {
+    hash = (hash * 31 + input.charCodeAt(i)) >>> 0;
+  }
+  return (hash % 10_000) / 10_000;
+}
+
+function getFallbackHookStartMs(track: SpotifyTrack): number {
+  const durationMs = track.duration_ms || 180_000;
+  const minStart = clamp(Math.round(durationMs * 0.18), 10_000, 65_000);
+  const maxStart = Math.max(minStart, durationMs - HOOK_CLIP_MS - 6_000);
+  if (maxStart <= minStart) {
+    return minStart;
+  }
+
+  const fraction = stableFractionFromString(track.id);
+  return Math.round(minStart + fraction * (maxStart - minStart));
 }
 
 function formatHookTime(ms: number | null): string {
@@ -118,19 +145,59 @@ export default function GameplayScreen({
   const [tracks, setTracks] = useState<SpotifyTrack[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [guess, setGuess] = useState('');
-  const [scores, setScores] = useState(playerNames.map(n => ({ name: n, score: 0 })));
+  const [scores, setScores] = useState(playerNames.map((name) => ({ name, score: 0 })));
   const [currentPlayerIdx, setCurrentPlayerIdx] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [hookEstimateMs, setHookEstimateMs] = useState<number | null>(null);
+  const [activeHookStartMs, setActiveHookStartMs] = useState<number | null>(null);
   const [hookLoading, setHookLoading] = useState(false);
+  const [hookPlaying, setHookPlaying] = useState(false);
+  const [hookClipEndsAt, setHookClipEndsAt] = useState<number | null>(null);
+  const [hookRemainingMs, setHookRemainingMs] = useState<number | null>(null);
   const [spotifyPlayer, setSpotifyPlayer] = useState<SpotifyWebPlaybackPlayer | null>(null);
   const [spotifyDeviceId, setSpotifyDeviceId] = useState<string | null>(null);
   const [spotifyError, setSpotifyError] = useState<string | null>(null);
-  const [spotifyPlaying, setSpotifyPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const playbackRequestRef = useRef(0);
   const spotifyPlayerRef = useRef<SpotifyWebPlaybackPlayer | null>(null);
+  const hookStopTimerRef = useRef<number | null>(null);
+
+  const clearHookStopTimer = useCallback(() => {
+    if (hookStopTimerRef.current !== null) {
+      window.clearTimeout(hookStopTimerRef.current);
+      hookStopTimerRef.current = null;
+    }
+    setHookClipEndsAt(null);
+  }, []);
+
+  const scheduleHookStop = useCallback(
+    (source: 'preview' | 'spotify', requestId: number) => {
+      clearHookStopTimer();
+
+      const stopAt = Date.now() + HOOK_CLIP_MS;
+      setHookClipEndsAt(stopAt);
+      hookStopTimerRef.current = window.setTimeout(() => {
+        if (requestId !== playbackRequestRef.current) {
+          return;
+        }
+
+        if (source === 'preview') {
+          const audio = audioRef.current;
+          if (audio) {
+            audio.pause();
+          }
+        } else if (spotifyPlayerRef.current) {
+          spotifyPlayerRef.current.pause().catch(() => undefined);
+        }
+
+        setHookPlaying(false);
+        setHookClipEndsAt(null);
+        hookStopTimerRef.current = null;
+      }, HOOK_CLIP_MS);
+    },
+    [clearHookStopTimer]
+  );
 
   useEffect(() => {
     const shuffle = <T,>(input: T[]): T[] => {
@@ -146,27 +213,27 @@ export default function GameplayScreen({
       setLoading(true);
       setError(null);
       try {
-        const tks = await getPlaylistTracks(playlistId);
-        const playable = tks.filter((track) => Boolean(track.preview_url) || canPlayViaSpotify(track));
+        const fetchedTracks = await getPlaylistTracks(playlistId);
+        const playable = fetchedTracks.filter((track) => Boolean(track.preview_url) || canPlayViaSpotify(track));
         if (playable.length === 0) {
           setTracks([]);
           setError(t('screens.gameplay.noPlayableTracks'));
           return;
         }
 
-        // Randomize playlist order once per game and play from the randomized queue.
         const randomized = shuffle(playable);
         setTracks(randomized.slice(0, Math.min(30, randomized.length)));
         setCurrentIndex(0);
-      } catch (e) {
-        console.error('Failed to load playlist tracks:', e);
+      } catch (loadError) {
+        console.error('Failed to load playlist tracks:', loadError);
         setTracks([]);
-        setError(e instanceof Error ? e.message : t('screens.gameplay.loadFailed'));
+        setError(loadError instanceof Error ? loadError.message : t('screens.gameplay.loadFailed'));
       } finally {
         setLoading(false);
       }
     };
-    load();
+
+    load().catch(() => undefined);
   }, [playlistId, t]);
 
   const currentTrack = tracks[currentIndex];
@@ -175,10 +242,31 @@ export default function GameplayScreen({
     () => tracks.some((track) => !track.preview_url && canPlayViaSpotify(track)),
     [tracks]
   );
+  const hookProgressPercent = useMemo(() => {
+    if (hookRemainingMs === null) return 0;
+    return clamp((hookRemainingMs / HOOK_CLIP_MS) * 100, 0, 100);
+  }, [hookRemainingMs]);
 
   useEffect(() => {
     spotifyPlayerRef.current = spotifyPlayer;
   }, [spotifyPlayer]);
+
+  useEffect(() => {
+    if (!hookClipEndsAt) {
+      setHookRemainingMs(null);
+      return;
+    }
+
+    const tick = () => {
+      setHookRemainingMs(Math.max(0, hookClipEndsAt - Date.now()));
+    };
+
+    tick();
+    const intervalId = window.setInterval(tick, 250);
+    return () => {
+      window.clearInterval(intervalId);
+    };
+  }, [hookClipEndsAt]);
 
   useEffect(() => {
     if (!needsSpotifyPlayback) {
@@ -237,10 +325,10 @@ export default function GameplayScreen({
         player.addListener('player_state_changed', (state: SpotifyWebPlaybackPlayerState | null) => {
           if (cancelled) return;
           if (!state) {
-            setSpotifyPlaying(false);
+            setHookPlaying(false);
             return;
           }
-          setSpotifyPlaying(!state.paused);
+          setHookPlaying(!state.paused);
         });
 
         const connected = await player.connect();
@@ -267,7 +355,7 @@ export default function GameplayScreen({
       }
       setSpotifyPlayer(null);
       setSpotifyDeviceId(null);
-      setSpotifyPlaying(false);
+      setHookPlaying(false);
     };
   }, [needsSpotifyPlayback, t]);
 
@@ -278,22 +366,35 @@ export default function GameplayScreen({
       const requestId = ++playbackRequestRef.current;
       setSpotifyError(null);
       setHookLoading(true);
+      setHookPlaying(false);
+      clearHookStopTimer();
 
       const estimate = await getEstimatedHookStartMs(track.id);
       if (requestId !== playbackRequestRef.current) return;
+
       setHookEstimateMs(estimate);
+      const effectiveHookStartMs = track.preview_url ? 0 : estimate ?? getFallbackHookStartMs(track);
+      setActiveHookStartMs(effectiveHookStartMs);
       setHookLoading(false);
 
       if (track.preview_url) {
         if (spotifyPlayerRef.current) {
           spotifyPlayerRef.current.pause().catch(() => undefined);
-          setSpotifyPlaying(false);
         }
+
         const audio = audioRef.current;
-        if (audio) {
-          audio.src = track.preview_url;
-          audio.currentTime = 0;
-          audio.play().catch(() => undefined);
+        if (!audio) return;
+        audio.src = track.preview_url;
+        audio.currentTime = 0;
+
+        try {
+          await audio.play();
+          if (requestId !== playbackRequestRef.current) return;
+          setHookPlaying(true);
+          scheduleHookStop('preview', requestId);
+        } catch {
+          setHookPlaying(false);
+          setSpotifyError(t('screens.gameplay.previewPlaybackFailed'));
         }
         return;
       }
@@ -317,51 +418,61 @@ export default function GameplayScreen({
 
       try {
         await transferPlaybackToDevice(spotifyDeviceId);
-        await startPlaybackOnDevice(spotifyDeviceId, track.uri, estimate ?? 0);
+        await startPlaybackOnDevice(spotifyDeviceId, track.uri, effectiveHookStartMs);
         if (requestId !== playbackRequestRef.current) return;
-        setSpotifyPlaying(true);
+        setHookPlaying(true);
+        scheduleHookStop('spotify', requestId);
       } catch (playbackError) {
+        setHookPlaying(false);
         const message = playbackError instanceof Error ? playbackError.message : t('screens.gameplay.spotifyPlaybackFailed');
         setSpotifyError(`${t('screens.gameplay.spotifyPlaybackFailed')} ${normalizeSpotifyError(message, t)}`);
       }
     },
-    [spotifyPlayer, spotifyDeviceId, t]
+    [clearHookStopTimer, scheduleHookStop, spotifyDeviceId, spotifyPlayer, t]
   );
 
   useEffect(() => {
     playCurrentTrack(currentTrack).catch(() => undefined);
   }, [currentTrack, playCurrentTrack]);
 
-  useEffect(() => () => {
-    playbackRequestRef.current += 1;
-    const audio = audioRef.current;
-    if (audio) {
-      audio.pause();
-    }
-    if (spotifyPlayerRef.current) {
-      spotifyPlayerRef.current.disconnect();
-    }
-  }, []);
+  useEffect(
+    () => () => {
+      playbackRequestRef.current += 1;
+      clearHookStopTimer();
+
+      const audio = audioRef.current;
+      if (audio) {
+        audio.pause();
+      }
+      if (spotifyPlayerRef.current) {
+        spotifyPlayerRef.current.disconnect();
+      }
+    },
+    [clearHookStopTimer]
+  );
 
   const advance = () => {
+    clearHookStopTimer();
+    setHookPlaying(false);
+
     const audio = audioRef.current;
     if (audio) {
       audio.pause();
     }
     if (spotifyPlayerRef.current) {
       spotifyPlayerRef.current.pause().catch(() => undefined);
-      setSpotifyPlaying(false);
     }
 
     const nextIdx = currentIndex + 1;
     if (nextIdx >= tracks.length) {
       onFinish(scores);
-    } else {
-      setCurrentIndex(nextIdx);
-      setGuess('');
-      if (mode === 'hotSeat') {
-        setCurrentPlayerIdx(i => (i + 1) % playerNames.length);
-      }
+      return;
+    }
+
+    setCurrentIndex(nextIdx);
+    setGuess('');
+    if (mode === 'hotSeat') {
+      setCurrentPlayerIdx((index) => (index + 1) % playerNames.length);
     }
   };
 
@@ -369,7 +480,7 @@ export default function GameplayScreen({
     if (!currentTrack) return;
     const artist = currentTrack.artists?.[0]?.name || '';
     const title = currentTrack.name || '';
-    const res = pointsForGuess(
+    const result = pointsForGuess(
       guess,
       title,
       artist,
@@ -380,17 +491,16 @@ export default function GameplayScreen({
     );
 
     let newScores = scores;
-    if (res.awarded > 0) {
-      newScores = scores.map((s, i) => 
-        i === currentPlayerIdx 
-          ? { ...s, score: s.score + res.awarded }
-          : s
+    if (result.awarded > 0) {
+      newScores = scores.map((score, index) =>
+        index === currentPlayerIdx
+          ? { ...score, score: score.score + result.awarded }
+          : score
       );
       setScores(newScores);
     }
 
-    // Check for winner with the new scores
-    const winner = newScores.find(s => s.score >= settings.pointsToWin);
+    const winner = newScores.find((score) => score.score >= settings.pointsToWin);
     if (winner) {
       onFinish(newScores);
       return;
@@ -423,73 +533,78 @@ export default function GameplayScreen({
     );
   }
 
-  const toggleSpotifyPause = async () => {
-    if (!spotifyPlayerRef.current) return;
-    try {
-      if (spotifyPlaying) {
-        await spotifyPlayerRef.current.pause();
-        setSpotifyPlaying(false);
-      } else {
-        await spotifyPlayerRef.current.resume();
-        setSpotifyPlaying(true);
-      }
-    } catch {
-      setSpotifyError(t('screens.gameplay.spotifyPlaybackFailed'));
-    }
-  };
-
   return (
     <div className="flex-1 flex items-start justify-center bg-transparent py-2 sm:py-3 px-0 min-h-0">
       <motion.div
         initial={animationsEnabled ? { opacity: 0, y: 10 } : {}}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="hh-surface-card p-6 md:p-8 w-full"
+        className="hh-surface-card p-5 md:p-7 w-full"
       >
-        <div className="hh-content flex items-center justify-between mb-4">
-          <div className="text-sm font-semibold text-slate-700 dark:text-slate-200">
-            {t('screens.gameplay.currentPlayer', { name: scores[currentPlayerIdx]?.name })}
+        <div className="hh-content mb-4 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
+          <div className="rounded-2xl border border-slate-200/80 dark:border-slate-700 bg-white/80 dark:bg-slate-900/60 px-4 py-3">
+            <div className="text-[11px] uppercase tracking-[0.12em] text-slate-500 dark:text-slate-300">
+              {t('screens.gameplay.currentPlayer', { name: scores[currentPlayerIdx]?.name })}
+            </div>
+            <div className="mt-1 text-lg font-bold text-slate-900 dark:text-slate-100">
+              {t('screens.gameplay.score', { score: scores[currentPlayerIdx]?.score })}
+            </div>
           </div>
-          <div className="hh-chip">{t('screens.gameplay.score', { score: scores[currentPlayerIdx]?.score })}</div>
+          <div className="hh-chip text-[11px]">
+            {t('screens.gameplay.roundLabel', { current: currentIndex + 1, total: Math.max(tracks.length, 1) })}
+          </div>
         </div>
 
-        <div className="hh-content mb-4">
-          {currentTrack?.preview_url ? (
-            <div className="rounded-2xl border border-slate-200/80 dark:border-slate-700 bg-white/75 dark:bg-slate-900/55 p-4 space-y-3">
-              <audio ref={audioRef} controls className="w-full" />
-              <div className="flex gap-2">
-                <button onClick={() => playCurrentTrack(currentTrack)} className="hh-btn-muted !w-auto !px-4 !py-2">
-                  <RotateCcw size={15} /> {t('screens.gameplay.replayHook')}
-                </button>
-              </div>
-              <p className="text-xs text-slate-600 dark:text-slate-300">
-                {t('screens.gameplay.previewNotice')}
+        <div className="hh-content mb-4 rounded-3xl border border-slate-700/40 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4 sm:p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+          <audio ref={audioRef} preload="auto" className="hidden" />
+
+          <div className="flex items-center justify-between gap-3">
+            <div className="text-white">
+              <p className="text-sm font-semibold tracking-wide">{t('screens.gameplay.hookOnlyMode')}</p>
+              <p className="mt-1 text-xs text-slate-300">
+                {t('screens.gameplay.hookWindow', { seconds: HOOK_CLIP_SECONDS })}
               </p>
             </div>
-          ) : (
-            <div className="rounded-2xl border border-slate-200/80 dark:border-slate-700 bg-white/75 dark:bg-slate-900/55 p-4 space-y-3">
-              <p className="text-sm text-slate-700 dark:text-slate-200 font-medium">
-                {t('screens.gameplay.spotifyPlaybackLabel')}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <button onClick={() => playCurrentTrack(currentTrack)} className="hh-btn-muted !w-auto !px-4 !py-2">
-                  <RotateCcw size={15} /> {t('screens.gameplay.replayHook')}
-                </button>
-                <button onClick={toggleSpotifyPause} className="hh-btn-muted !w-auto !px-4 !py-2" disabled={!spotifyDeviceId}>
-                  {spotifyPlaying ? <Pause size={15} /> : <Play size={15} />}
-                  {spotifyPlaying ? t('screens.gameplay.pause') : t('screens.gameplay.resume')}
-                </button>
-              </div>
-              {spotifyError && (
-                <div className="space-y-2">
-                  <p className="text-xs text-rose-700 dark:text-rose-300">
-                    {spotifyError}
-                  </p>
-                  <button onClick={onBackToPlaylist} className="hh-btn-muted !w-auto !px-4 !py-2">
-                    <ArrowLeft size={15} /> {t('screens.gameplay.backToPlaylist')}
-                  </button>
-                </div>
-              )}
+            <div className={`h-3 w-3 rounded-full ${hookPlaying ? 'bg-emerald-400 animate-pulse' : 'bg-amber-300'}`} />
+          </div>
+
+          <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-700/80">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-orange-400 to-rose-400 transition-all duration-200"
+              style={{ width: `${hookProgressPercent}%` }}
+            />
+          </div>
+
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <button onClick={() => playCurrentTrack(currentTrack)} className="hh-btn-primary !w-auto !px-4 !py-2.5">
+              <RotateCcw size={15} /> {t('screens.gameplay.replayHook')}
+            </button>
+            <span className="rounded-xl border border-slate-600/80 bg-slate-800/70 px-3 py-2 text-xs text-slate-200">
+              {hookRemainingMs === null
+                ? t('screens.gameplay.hookReady')
+                : t('screens.gameplay.hookTimeRemaining', { seconds: Math.max(0, Math.ceil(hookRemainingMs / 1000)) })}
+            </span>
+          </div>
+
+          <div className="mt-3 text-xs text-slate-300 space-y-1">
+            <p>
+              {hookLoading
+                ? t('screens.gameplay.hookAnalyzing')
+                : t('screens.gameplay.hookStartsAt', { time: formatHookTime(activeHookStartMs ?? hookEstimateMs) })}
+            </p>
+            <p>
+              {currentTrack?.preview_url
+                ? t('screens.gameplay.hookSourcePreview')
+                : t('screens.gameplay.hookSourceSpotify')}
+            </p>
+          </div>
+
+          {spotifyError && (
+            <div className="mt-3 space-y-2">
+              <p className="text-xs text-rose-300">{spotifyError}</p>
+              <button onClick={onBackToPlaylist} className="hh-btn-muted !w-auto !px-4 !py-2">
+                <ArrowLeft size={15} /> {t('screens.gameplay.backToPlaylist')}
+              </button>
             </div>
           )}
         </div>
@@ -497,7 +612,7 @@ export default function GameplayScreen({
         <div className="hh-content flex gap-2 mb-4">
           <input
             value={guess}
-            onChange={e => setGuess(e.target.value)}
+            onChange={(event) => setGuess(event.target.value)}
             placeholder={t('screens.gameplay.guessPlaceholder')}
             className="hh-input flex-1"
           />
@@ -510,19 +625,15 @@ export default function GameplayScreen({
         </div>
 
         <div className="hh-content flex items-center justify-between">
-          <div className="text-xs text-slate-500 dark:text-slate-300">
-            <div>
-              Track {currentIndex + 1} / {Math.max(tracks.length, 1)}
-            </div>
-            <div className="mt-1">
-              {hookLoading
-                ? t('screens.gameplay.hookAnalyzing')
-                : t('screens.gameplay.hookEstimatedAt', { time: formatHookTime(hookEstimateMs) })}
-            </div>
+          <div className="text-xs text-slate-600 dark:text-slate-300">
+            {t('screens.gameplay.roundLabel', { current: currentIndex + 1, total: Math.max(tracks.length, 1) })}
           </div>
           <div className="flex gap-2 flex-wrap justify-end max-w-[65%]">
             {scores.map((score) => (
-              <span key={score.name} className="text-xs rounded-full px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+              <span
+                key={score.name}
+                className="text-xs rounded-full px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+              >
                 {score.name}: {score.score}
               </span>
             ))}

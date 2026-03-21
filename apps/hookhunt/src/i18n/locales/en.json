@@ -59,7 +59,16 @@
       "trackUnavailable": "This track is not available for browser playback.",
       "previewNotice": "Preview clips are fixed 30-second snippets. Hook timestamp is estimated on full-track analysis.",
       "hookAnalyzing": "Analyzing hook position...",
-      "hookEstimatedAt": "Estimated hook start: {{time}}"
+      "hookEstimatedAt": "Estimated hook start: {{time}}",
+      "hookOnlyMode": "Hook-only mode",
+      "hookWindow": "Listen carefully: each round plays only {{seconds}} seconds.",
+      "hookReady": "Hook ready",
+      "hookTimeRemaining": "Clip remaining: {{seconds}}s",
+      "hookStartsAt": "Hook clip start: {{time}}",
+      "hookSourcePreview": "Source: Spotify 30s preview (snippet limited by HookHunt).",
+      "hookSourceSpotify": "Source: Spotify full track stream (auto-stopped after hook clip).",
+      "previewPlaybackFailed": "Could not play the preview clip.",
+      "roundLabel": "Round {{current}} / {{total}}"
     },
     "summary": {
       "title": "Game Over!",
