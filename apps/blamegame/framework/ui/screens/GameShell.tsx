@@ -75,19 +75,6 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
   
   // Dark mode support
   const { isDark, toggle: toggleDarkMode } = useDarkMode();
-  console.log('🔧 useDarkMode result:', { isDark, hasToggle: !!toggleDarkMode });
-
-  // Debug logging for features and dark mode
-  console.log('🔧 GameShell debug:', {
-    showFooter: layout.showFooter,
-    features: features,
-    darkModeToggle: features.darkModeToggle,
-    darkModeToggleType: typeof features.darkModeToggle,
-    darkModeToggleStrict: features.darkModeToggle === true,
-    languageSelector: features.languageSelector,
-    isDark: isDark,
-    toggleDarkMode: !!toggleDarkMode
-  });
 
   // Get dynamic seasonal theme
   const themeDetails = useTheme();
@@ -127,10 +114,9 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
                       try {
                         dispatch(GameAction.RESTART);
                       } catch (error) {
-                        // If framework dispatch fails, try alternative navigation
-                        console.log('Navigating to main menu via restart');
+                        // If framework dispatch fails, try alternative navigation.
                         window.location.hash = '';
-                        window.location.reload(); // Fallback: reload to go back to start
+                        window.location.reload(); // Fallback: reload to go back to start.
                       }
                     }}
                     title="Click to return to main menu"

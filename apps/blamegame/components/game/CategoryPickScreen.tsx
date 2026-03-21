@@ -10,7 +10,6 @@
  * question count, allowing users to select which ones to include in the game.
  */
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Button } from '../../framework/ui/components/Button';
 import useTranslation from '../../hooks/useTranslation';
 
@@ -40,14 +39,6 @@ const CategoryPickScreen: React.FC<CategoryPickScreenProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  // Debug: Log the received categories data
-  React.useEffect(() => {
-    console.log('🔍 CategoryPickScreen received allCategories:', allCategories);
-    console.log('🔍 CategoryPickScreen categories question counts:', 
-      allCategories.map(cat => `${cat.name}: ${cat.questionCount} questions`)
-    );
-  }, [allCategories]);
-
   const toggleCategory = (id: string) => {
     if (selectedCategories.includes(id)) {
       onSelectCategory(selectedCategories.filter((c) => c !== id));
@@ -58,13 +49,7 @@ const CategoryPickScreen: React.FC<CategoryPickScreenProps> = ({
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full min-h-0 p-3 sm:p-4">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.9 }}
-        transition={{ duration: 0.3 }}
-  className="category-container w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl h-full max-h-full bg-white/90 backdrop-blur-md shadow-2xl rounded-3xl p-4 sm:p-6 lg:p-8 border-2 border-rust-100 flex flex-col min-h-0"
-      >
+      <div className="category-container w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl h-full max-h-full bg-white/90 backdrop-blur-md shadow-2xl rounded-3xl p-4 sm:p-6 lg:p-8 border-2 border-rust-100 flex flex-col min-h-0">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-autumn-700 text-center mb-3 sm:mb-4 flex-shrink-0">
         {t('category_pick.title')}
       </h2>
@@ -89,8 +74,10 @@ const CategoryPickScreen: React.FC<CategoryPickScreenProps> = ({
             onClick={() => toggleCategory(cat.id)}
           >
             <div className="text-3xl sm:text-4xl mb-1">{cat.emoji}</div>
-            <div className="text-xs sm:text-sm font-semibold text-center text-autumn-800 line-clamp-2 px-1 break-words">
-              {cat.name}
+            <div className="mb-1 min-h-[2rem] sm:min-h-[2.5rem] w-full px-1 flex items-center justify-center">
+              <span className="text-[11px] sm:text-sm font-semibold text-center leading-snug text-autumn-800 break-words">
+                {cat.name}
+              </span>
             </div>
             <div className="text-xs text-gray-600">
               {t('category_pick.questions_available', { count: cat.questionCount })}
@@ -115,7 +102,7 @@ const CategoryPickScreen: React.FC<CategoryPickScreenProps> = ({
           {t('category_pick.confirm', { count: selectedCategories.length })}
         </Button>
       </div>
-      </motion.div>
+      </div>
     </div>
   );
 };

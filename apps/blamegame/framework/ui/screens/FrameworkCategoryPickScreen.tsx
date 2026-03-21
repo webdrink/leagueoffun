@@ -4,7 +4,6 @@
  * Uses GameShell for consistent layout and integrates with framework architecture.
  */
 import React, { useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
 import { Button } from '../components/Button';
 import { useFrameworkRouter } from '../../core/router/FrameworkRouter';
 import { GameAction } from '../../core/actions';
@@ -70,21 +69,14 @@ const FrameworkCategoryPickScreen: React.FC = () => {
   };
 
   const handleConfirm = () => {
-    // Store selected categories and proceed to next phase
-    // In a full implementation, this would save to the module store
-    console.log('Selected categories:', selectedCategories);
+    // Store selected categories and proceed to next phase.
+    // In a full implementation, this would save to the module store.
     dispatch(GameAction.ADVANCE);
   };
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full min-h-0 py-3 sm:py-4 px-0">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.3 }}
-          className="category-container w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl h-full max-h-full bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-2xl rounded-3xl p-4 sm:p-6 lg:p-8 border-2 border-autumn-100 dark:border-autumn-800 flex flex-col min-h-0"
-        >
+        <div className="category-container w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl h-full max-h-full bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-2xl rounded-3xl p-4 sm:p-6 lg:p-8 border-2 border-autumn-100 dark:border-autumn-800 flex flex-col min-h-0">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-autumn-700 dark:text-autumn-300 text-center mb-4 sm:mb-6 flex-shrink-0">
             {t('category_pick.title')}
           </h2>
@@ -100,7 +92,7 @@ const FrameworkCategoryPickScreen: React.FC = () => {
 
           <div className="category-grid grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6 overflow-y-auto custom-scrollbar pr-2 flex-1 min-h-0">
             {allCategories.map((cat) => (
-              <motion.label
+              <label
                 key={cat.id}
                 className={`flex flex-col items-center justify-center p-3 sm:p-3 lg:p-4 border rounded-xl shadow-sm cursor-pointer transition-all duration-200 select-none min-h-[88px] sm:min-h-[100px] lg:min-h-[120px]
                 ${selectedCategories.includes(cat.id) 
@@ -117,17 +109,17 @@ const FrameworkCategoryPickScreen: React.FC = () => {
                   }
                 }}
                 onClick={() => toggleCategory(cat.id)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
               >
                 <div className="text-4xl mb-2">{cat.emoji}</div>
-                <div className="text-sm font-semibold text-center text-autumn-800 dark:text-autumn-200 mb-1 line-clamp-2 break-words">
-                  {cat.name}
+                <div className="mb-1 min-h-[2rem] sm:min-h-[2.5rem] w-full px-1 flex items-center justify-center">
+                  <span className="text-[11px] sm:text-sm font-semibold text-center leading-snug text-autumn-800 dark:text-autumn-200 break-words">
+                    {cat.name}
+                  </span>
                 </div>
                 <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
                   {t('category_pick.questions_available', { count: cat.questionCount })}
                 </div>
-              </motion.label>
+              </label>
             ))}
           </div>
 
@@ -148,7 +140,7 @@ const FrameworkCategoryPickScreen: React.FC = () => {
               {t('category_pick.confirm', { count: selectedCategories.length })}
             </Button>
           </div>
-        </motion.div>
+        </div>
       </div>
   );
 };
