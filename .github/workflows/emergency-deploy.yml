@@ -82,34 +82,34 @@ jobs:
             
             mkdir -p apps/gamepicker/dist
             cat > apps/gamepicker/dist/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head>
-  <title>League of Fun - Service Recovery</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="300">
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-    .container { max-width: 600px; background: rgba(255,255,255,0.1); padding: 40px; border-radius: 15px; backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-    .status { background: rgba(255,193,7,0.2); border: 2px solid #ffc107; color: #fff; padding: 20px; border-radius: 10px; margin: 20px 0; }
-    .spinner { border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid #fff; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 20px auto; }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>🎮 League of Fun</h1>
-    <div class="spinner"></div>
-    <div class="status">
-      <strong>🔧 Service Recovery in Progress</strong><br><br>
-      Our automatic recovery system is actively working to restore service.
-    </div>
-    <p>⏱️ This page will automatically refresh every 5 minutes</p>
-  </div>
-</body>
-</html>
-EOF
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <title>League of Fun - Service Recovery</title>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <meta http-equiv="refresh" content="300">
+              <style>
+                body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+                .container { max-width: 600px; background: rgba(255,255,255,0.1); padding: 40px; border-radius: 15px; backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+                .status { background: rgba(255,193,7,0.2); border: 2px solid #ffc107; color: #fff; padding: 20px; border-radius: 10px; margin: 20px 0; }
+                .spinner { border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid #fff; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 20px auto; }
+                @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <h1>🎮 League of Fun</h1>
+                <div class="spinner"></div>
+                <div class="status">
+                  <strong>🔧 Service Recovery in Progress</strong><br><br>
+                  Our automatic recovery system is actively working to restore service.
+                </div>
+                <p>⏱️ This page will automatically refresh every 5 minutes</p>
+              </div>
+            </body>
+            </html>
+            EOF
             echo "🆘 Created emergency maintenance page"
           fi
 
@@ -158,28 +158,32 @@ EOF
         uses: actions/github-script@v7
         with:
           script: |
+            const body = [
+              '## 🆘 Emergency Deployment Report',
+              '',
+              'The deployment workflow failed and emergency deployment was automatically triggered.',
+              '',
+              '**Failure Details:**',
+              `- **Failed Workflow:** ${context.payload.workflow_run.name}`,
+              `- **Workflow Run:** ${context.payload.workflow_run.html_url}`,
+              `- **Conclusion:** ${context.payload.workflow_run.conclusion}`,
+              `- **Emergency Deployment:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`,
+              `- **Time:** ${new Date().toISOString()}`,
+              '',
+              '**Next Steps:**',
+              '1. Investigate the failed workflow run',
+              '2. Fix underlying issues',
+              '3. Trigger a new deployment via workflow_dispatch',
+              '4. Close this issue once resolved',
+              '',
+              '_Auto-created by Emergency Fallback Deployment workflow_'
+            ].join('\n');
+
             const issue = await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: '🚨 Deployment Workflow Failed - Emergency Deployment Activated',
-              body: `## 🆘 Emergency Deployment Report
-              
-The deployment workflow failed and emergency deployment was automatically triggered.
-
-**Failure Details:**
-- **Failed Workflow:** ${context.payload.workflow_run.name}
-- **Workflow Run:** ${context.payload.workflow_run.html_url}
-- **Conclusion:** ${context.payload.workflow_run.conclusion}
-- **Emergency Deployment:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-- **Time:** ${new Date().toISOString()}
-
-**Next Steps:**
-1. Investigate the failed workflow run
-2. Fix underlying issues
-3. Trigger a new deployment via workflow_dispatch
-4. Close this issue once resolved
-
-_Auto-created by Emergency Fallback Deployment workflow_`,
+              body,
               labels: ['bug', 'deployment', 'emergency']
             });
             

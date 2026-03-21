@@ -84,30 +84,30 @@ jobs:
           if [ "${{ github.event.inputs.deployment_strategy }}" == "maintenance-mode" ]; then
             mkdir -p apps/gamepicker/dist
             cat > apps/gamepicker/dist/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head>
-  <title>League of Fun - Scheduled Maintenance</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; text-align: center; padding: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-    .container { max-width: 500px; background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(15px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-    .status { background: rgba(255,193,7,0.2); border: 2px solid #ffc107; padding: 20px; border-radius: 15px; margin: 20px 0; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>🎮 League of Fun</h1>
-    <div class="status">
-      <strong>🔧 Scheduled Maintenance</strong>
-    </div>
-    <p>⏰ <strong>We'll be back shortly!</strong></p>
-    <p>We're performing scheduled maintenance to improve your experience.</p>
-  </div>
-</body>
-</html>
-EOF
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <title>League of Fun - Scheduled Maintenance</title>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <style>
+                body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; text-align: center; padding: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+                .container { max-width: 500px; background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(15px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+                .status { background: rgba(255,193,7,0.2); border: 2px solid #ffc107; padding: 20px; border-radius: 15px; margin: 20px 0; }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <h1>🎮 League of Fun</h1>
+                <div class="status">
+                  <strong>🔧 Scheduled Maintenance</strong>
+                </div>
+                <p>⏰ <strong>We'll be back shortly!</strong></p>
+                <p>We're performing scheduled maintenance to improve your experience.</p>
+              </div>
+            </body>
+            </html>
+            EOF
           fi
 
           if [ -d "apps/gamepicker/dist" ]; then
@@ -150,24 +150,28 @@ EOF
         uses: actions/github-script@v7
         with:
           script: |
-            const issue = await github.rest.issues.create({
+            const body = [
+              '## 🔧 Manual Deployment Override Report',
+              '',
+              `**App:** ${{ github.event.inputs.app }}`,
+              `**Strategy:** ${{ github.event.inputs.deployment_strategy }}`,
+              `**Reason:** ${{ github.event.inputs.reason }}`,
+              `**Triggered by:** @${{ github.actor }}`,
+              `**Workflow:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`,
+              `**Time:** ${new Date().toISOString()}`,
+              '',
+              '**Status:**',
+              '- ✅ Manual override completed',
+              '- 🌐 Site: https://www.leagueoffun.com/',
+              '',
+              '_Auto-created by Manual Deployment Override workflow_'
+            ].join('\n');
+
+            await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: '🔧 Manual Deployment Override Executed',
-              body: `## 🔧 Manual Deployment Override Report
-
-**App:** ${{ github.event.inputs.app }}
-**Strategy:** ${{ github.event.inputs.deployment_strategy }}
-**Reason:** ${{ github.event.inputs.reason }}
-**Triggered by:** @${{ github.actor }}
-**Workflow:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-**Time:** ${new Date().toISOString()}
-
-**Status:**
-- ✅ Manual override completed
-- 🌐 Site: https://www.leagueoffun.com/
-
-_Auto-created by Manual Deployment Override workflow_`,
+              body,
               labels: ['deployment', 'manual-intervention']
             });
 
