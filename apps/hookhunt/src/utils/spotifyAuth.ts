@@ -196,6 +196,10 @@ export async function handleSpotifyCallback(): Promise<SpotifyCallbackResult> {
     return { handled: true, success: false, error };
   }
 
+  if (!code) {
+    return { handled: true, success: false, error: 'missing_code' };
+  }
+
   const expectedState = sessionStorage.getItem(PKCE_KEYS.state);
   const verifier = sessionStorage.getItem(PKCE_KEYS.verifier);
   sessionStorage.removeItem(PKCE_KEYS.state);
@@ -217,7 +221,7 @@ export async function handleSpotifyCallback(): Promise<SpotifyCallbackResult> {
   try {
     const tokenResponse = await tokenRequest(new URLSearchParams({
       grant_type: 'authorization_code',
-      code,
+      code: code!,
       redirect_uri: getConfiguredRedirectUri(),
       client_id: clientId,
       code_verifier: verifier,
@@ -241,4 +245,3 @@ export function storeAccessToken(token: string) {
   localStorage.setItem(STORAGE_KEYS.tokenType, 'Bearer');
   localStorage.setItem(STORAGE_KEYS.expiresAt, String(Date.now() + 3600_000));
 }
-

@@ -23,7 +23,7 @@ export default function PlayerSetupScreen({ mode, onSubmit, onBack, animationsEn
   const canContinue = players.filter(p => p.trim().length > 0).length >= (mode === 'singleplayer' ? 1 : 2);
 
   return (
-    <div className="flex-1 flex items-center justify-center bg-transparent py-2 sm:py-4 px-0 min-h-0">
+    <div className="flex-1 flex items-start justify-center bg-transparent py-2 sm:py-3 px-0 min-h-0">
       <motion.div
         initial={animationsEnabled ? { opacity: 0, y: 10 } : {}}
         animate={{ opacity: 1, y: 0 }}

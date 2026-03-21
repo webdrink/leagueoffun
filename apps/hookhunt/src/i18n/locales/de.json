@@ -19,12 +19,20 @@
     "playlistSelect": {
       "title": "Wähle deine Playlist",
       "loginSpotify": "Spotify verbinden",
+      "connectButton": "Spotify verbinden",
       "yourPlaylists": "Deine Playlists",
       "curated": "Kuratiert",
       "search": "Spotify durchsuchen",
       "searchPlaceholder": "Playlists suchen",
       "select": "Auswählen",
-      "back": "Zurück"
+      "back": "Zurück",
+      "missingClientId": "Spotify Client ID ist nicht konfiguriert.",
+      "reload": "Playlists neu laden",
+      "dropdownHint": "Wähle eine deiner Playlists aus und starte das Spiel.",
+      "loading": "Playlists werden geladen...",
+      "noPlaylists": "Keine Playlists im Spotify-Konto gefunden.",
+      "startWithSelection": "Mit dieser Playlist starten",
+      "loadFailed": "Playlists konnten nicht geladen werden."
     },
     "gameplay": {
       "title": "Erkenne den Song!",
@@ -33,7 +41,10 @@
       "skip": "Überspringen",
       "currentPlayer": "Aktueller Spieler: {{name}}",
       "score": "Punkte: {{score}}",
-      "next": "Weiter"
+      "next": "Weiter",
+      "loading": "Playlist-Tracks werden geladen...",
+      "noPlayableTracks": "In dieser Playlist wurden keine abspielbaren 30-Sekunden-Previews gefunden.",
+      "loadFailed": "Playlist-Tracks konnten nicht geladen werden."
     },
     "summary": {
       "title": "Spiel beendet!",
