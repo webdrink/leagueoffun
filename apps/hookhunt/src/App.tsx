@@ -11,7 +11,7 @@ import PlaylistSelectScreen from './screens/PlaylistSelect';
 import GameplayScreen from './screens/Gameplay';
 import SummaryScreen from './screens/Summary';
 import SettingsModal from './components/SettingsModal';
-import { readTokenFromHash, storeAccessToken } from './utils/spotifyAuth';
+import { handleSpotifyCallback } from './utils/spotifyAuth';
 
 // Reusable FooterButton component matching BlameGame style
 interface FooterButtonProps {
@@ -129,6 +129,7 @@ function App() {
     pointsForFull: 2,
   });
   const [playerScores, setPlayerScores] = useState<PlayerScore[]>([]);
+  const [isHandlingAuth, setIsHandlingAuth] = useState(true);
   
   // Get season from localStorage or auto-detect (doesn't need to be stateful as it rarely changes)
   const season: Season = (() => {
@@ -137,24 +138,30 @@ function App() {
   })();
 
   useEffect(() => {
-    const tokenFromHash = readTokenFromHash();
-    if (tokenFromHash) {
-      storeAccessToken(tokenFromHash);
-      window.history.replaceState(null, document.title, window.location.pathname + window.location.search);
-    }
+    const init = async () => {
+      try {
+        await handleSpotifyCallback();
+      } catch (error) {
+        console.error('Spotify callback handling failed:', error);
+      }
 
-    const params = new URLSearchParams(window.location.search);
-    const pid = params.get('playerId');
-    const rurl = params.get('returnUrl');
-    
-    if (pid) {
-      setPlayerId(pid);
-      localStorage.setItem('hookhunt.playerId', pid);
-    }
-    
-    if (rurl) {
-      setReturnUrl(rurl);
-    }
+      const params = new URLSearchParams(window.location.search);
+      const pid = params.get('playerId');
+      const rurl = params.get('returnUrl');
+
+      if (pid) {
+        setPlayerId(pid);
+        localStorage.setItem('hookhunt.playerId', pid);
+      }
+
+      if (rurl) {
+        setReturnUrl(rurl);
+      }
+
+      setIsHandlingAuth(false);
+    };
+
+    init();
   }, []);
 
   const handleReturnToHub = () => {
@@ -271,6 +278,7 @@ function App() {
                   key="playlistSelect"
                   onSelect={selectPlaylist}
                   onBack={() => setGameStep('playerSetup')}
+                  disabled={isHandlingAuth}
                   animationsEnabled={animationsEnabled}
                 />
               )}

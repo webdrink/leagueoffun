@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { SkipForward } from 'lucide-react';
-import { getStoredAccessToken } from '../utils/spotifyAuth';
 import { getPlaylistTracks, SpotifyTrack } from '../utils/spotifyApi';
 import { decadeFromYear, pointsForGuess } from '../utils/scoring';
 
@@ -34,23 +33,46 @@ export default function GameplayScreen({ playlistId, playerNames, mode, settings
   const [guess, setGuess] = useState('');
   const [scores, setScores] = useState(playerNames.map(n => ({ name: n, score: 0 })));
   const [currentPlayerIdx, setCurrentPlayerIdx] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const token = getStoredAccessToken();
 
   useEffect(() => {
+    const shuffle = <T,>(input: T[]): T[] => {
+      const result = [...input];
+      for (let i = result.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    };
+
     const load = async () => {
-      if (!token) return;
+      setLoading(true);
+      setError(null);
       try {
-        const tks = await getPlaylistTracks(token, playlistId);
-        // Shuffle and take first 30
-        const shuffled = [...tks].sort(() => Math.random() - 0.5);
-        setTracks(shuffled.slice(0, 30));
+        const tks = await getPlaylistTracks(playlistId);
+        const playable = tks.filter(track => Boolean(track.preview_url));
+        if (playable.length === 0) {
+          setTracks([]);
+          setError(t('screens.gameplay.noPlayableTracks'));
+          return;
+        }
+
+        // Randomize playlist order once per game and play from the randomized queue.
+        const randomized = shuffle(playable);
+        setTracks(randomized.slice(0, Math.min(30, randomized.length)));
+        setCurrentIndex(0);
       } catch (e) {
-        console.error(e);
+        console.error('Failed to load playlist tracks:', e);
+        setTracks([]);
+        setError(e instanceof Error ? e.message : t('screens.gameplay.loadFailed'));
+      } finally {
+        setLoading(false);
       }
     };
     load();
-  }, [token, playlistId]);
+  }, [playlistId, t]);
 
   const currentTrack = tracks[currentIndex];
   const decade = useMemo(() => decadeFromYear(currentTrack?.release_date), [currentTrack]);
@@ -111,11 +133,23 @@ export default function GameplayScreen({ playlistId, playerNames, mode, settings
     advance();
   };
 
-  if (!token) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center">
         <div className="hh-surface-card text-center p-4 max-w-md">
-          <p className="hh-content text-sm text-slate-600 dark:text-slate-300">Please connect Spotify to play.</p>
+          <p className="hh-content text-sm text-slate-700 dark:text-slate-200">{t('screens.gameplay.loading')}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || tracks.length === 0) {
+    return (
+      <div className="flex items-center justify-center">
+        <div className="hh-surface-card text-center p-4 max-w-md">
+          <p className="hh-content text-sm text-rose-700 dark:text-rose-300">
+            {error || t('screens.gameplay.noPlayableTracks')}
+          </p>
         </div>
       </div>
     );

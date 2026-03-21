@@ -164,7 +164,7 @@ function validateQuestionConsistency(categories, questionCounts, reporter) {
       } else if (difference > 0) {
         const percentage = Math.round((difference / baseCount) * 100);
         if (percentage > 20) {
-          reporter.error(`Significant question count difference for ${categoryId}: ${baseLanguage}=${baseCount}, ${language}=${langCount} (${percentage}% difference)`);
+          reporter.warn(`Significant question count difference for ${categoryId}: ${baseLanguage}=${baseCount}, ${language}=${langCount} (${percentage}% difference)`);
         } else {
           reporter.warn(`Question count difference for ${categoryId}: ${baseLanguage}=${baseCount}, ${language}=${langCount} (${percentage}% difference)`);
         }

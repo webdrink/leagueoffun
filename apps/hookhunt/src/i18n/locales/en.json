@@ -19,12 +19,20 @@
     "playlistSelect": {
       "title": "Choose Your Playlist",
       "loginSpotify": "Connect Spotify",
+      "connectButton": "Connect Spotify",
       "yourPlaylists": "Your Playlists",
       "curated": "Curated Collections",
       "search": "Search Spotify",
       "searchPlaceholder": "Search playlists",
       "select": "Select",
-      "back": "Back"
+      "back": "Back",
+      "missingClientId": "Spotify Client ID is not configured.",
+      "reload": "Reload playlists",
+      "dropdownHint": "Select one of your own playlists and start the game.",
+      "loading": "Loading playlists...",
+      "noPlaylists": "No playlists found on your Spotify account.",
+      "startWithSelection": "Start With This Playlist",
+      "loadFailed": "Could not load playlists."
     },
     "gameplay": {
       "title": "Guess the song!",
@@ -33,7 +41,10 @@
       "skip": "Skip",
       "currentPlayer": "Current Player: {{name}}",
       "score": "Score: {{score}}",
-      "next": "Next"
+      "next": "Next",
+      "loading": "Loading playlist tracks...",
+      "noPlayableTracks": "No playable 30-second previews were found in this playlist.",
+      "loadFailed": "Could not load playlist tracks."
     },
     "summary": {
       "title": "Game Over!",

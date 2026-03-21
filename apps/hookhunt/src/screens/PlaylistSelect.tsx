@@ -1,61 +1,76 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Search, LogIn, Music } from 'lucide-react';
-import { getSpotifyAuthUrl, readTokenFromHash, storeAccessToken, getStoredAccessToken } from '../utils/spotifyAuth';
-import { CURATED, getUserPlaylists, searchPlaylists } from '../utils/spotifyApi';
+import { ArrowLeft, LogIn, Music, RefreshCw } from 'lucide-react';
+import {
+  beginSpotifyLogin,
+  clearSpotifyAuth,
+  getStoredAccessToken,
+  getValidAccessToken,
+  isSpotifyConfigured,
+} from '../utils/spotifyAuth';
+import { getUserPlaylists, SpotifyPlaylist } from '../utils/spotifyApi';
 
 interface PlaylistSelectProps {
   onSelect: (playlistId: string) => void;
   onBack: () => void;
   animationsEnabled: boolean;
+  disabled?: boolean;
 }
 
-export default function PlaylistSelectScreen({ onSelect, onBack, animationsEnabled }: PlaylistSelectProps) {
+export default function PlaylistSelectScreen({
+  onSelect,
+  onBack,
+  animationsEnabled,
+  disabled = false,
+}: PlaylistSelectProps) {
   const { t } = useTranslation();
   const [token, setToken] = useState<string | null>(getStoredAccessToken());
-  const [yourPlaylists, setYourPlaylists] = useState<any[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [playlists, setPlaylists] = useState<SpotifyPlaylist[]>([]);
+  const [selectedPlaylistId, setSelectedPlaylistId] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const canUseSpotify = useMemo(() => isSpotifyConfigured(), []);
+  const canStart = Boolean(selectedPlaylistId) && !loading && !disabled;
 
   useEffect(() => {
-    // If returned from Spotify with token in hash
-    const t = readTokenFromHash();
-    if (t) {
-      storeAccessToken(t);
-      setToken(t);
-      // Clear hash
-      history.replaceState(null, document.title, window.location.pathname + window.location.search);
-    }
+    const hydrateAuth = async () => {
+      const validToken = await getValidAccessToken();
+      setToken(validToken);
+    };
+    hydrateAuth().catch((err) => {
+      console.error('Failed to hydrate Spotify auth:', err);
+      setToken(null);
+    });
   }, []);
 
-  useEffect(() => {
-    const loadPlaylists = async () => {
-      if (!token) return;
-      setLoading(true);
-      try {
-        const pls = await getUserPlaylists(token);
-        setYourPlaylists(pls);
-      } catch (e) {
-        console.error('Failed to load playlists:', e);
-      }
-      setLoading(false);
-    };
-    loadPlaylists();
-  }, [token]);
-
-  const doSearch = async () => {
-    if (!token || !searchQuery.trim()) return;
+  const loadPlaylists = async () => {
+    if (!token) return;
     setLoading(true);
+    setError(null);
     try {
-      const results = await searchPlaylists(token, searchQuery.trim());
-      setSearchResults(results);
-    } catch (e) {
-      console.error('Failed to search playlists:', e);
+      const userPlaylists = await getUserPlaylists();
+      setPlaylists(userPlaylists);
+      setSelectedPlaylistId((previous) => previous || userPlaylists[0]?.id || '');
+    } catch (err) {
+      console.error('Failed to load playlists:', err);
+      const message = err instanceof Error ? err.message : t('screens.playlistSelect.loadFailed');
+      setError(message);
+      if (message.toLowerCase().includes('session')) {
+        clearSpotifyAuth();
+        setToken(null);
+      }
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
+
+  useEffect(() => {
+    loadPlaylists().catch((err) => {
+      console.error('Initial playlist loading failed:', err);
+    });
+  }, [token]);
 
   return (
     <div className="flex-1 flex flex-col bg-transparent min-h-0 overflow-auto">
@@ -63,7 +78,7 @@ export default function PlaylistSelectScreen({ onSelect, onBack, animationsEnabl
         <button onClick={onBack} className="hh-btn-muted !w-auto !px-3 !py-2">
           <ArrowLeft size={18} /> {t('screens.playlistSelect.back')}
         </button>
-        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">{t('screens.playlistSelect.title')}</h2>
+        <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50">{t('screens.playlistSelect.title')}</h2>
         <div />
       </div>
 
@@ -71,103 +86,86 @@ export default function PlaylistSelectScreen({ onSelect, onBack, animationsEnabl
         initial={animationsEnabled ? { opacity: 0, y: 10 } : {}}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="hh-surface-card p-4 md:p-6 w-full flex-1 flex flex-col overflow-auto"
+        className="hh-surface-card p-4 md:p-6 w-full flex-1 flex flex-col"
       >
         {!token && (
-          <div className="hh-content mb-4">
-            <p className="hh-subtitle mb-3 text-center">{t('screens.playlistSelect.loginSpotify')}</p>
+          <div className="hh-content flex-1 flex flex-col items-center justify-center gap-4 text-center">
+            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-orange-400 to-rose-500 text-white flex items-center justify-center shadow-lg">
+              <Music size={28} />
+            </div>
+            <p className="hh-subtitle max-w-md">{t('screens.playlistSelect.loginSpotify')}</p>
+            {!canUseSpotify && (
+              <p className="text-sm text-rose-700 dark:text-rose-300 font-semibold">
+                {t('screens.playlistSelect.missingClientId')}
+              </p>
+            )}
             <button
-              onClick={() => {
-                window.location.href = getSpotifyAuthUrl();
-              }}
-              className="hh-btn-primary"
+              onClick={() => beginSpotifyLogin()}
+              disabled={!canUseSpotify || disabled}
+              className="hh-btn-primary max-w-sm disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              <LogIn size={18} /> {t('screens.playlistSelect.loginSpotify')}
+              <LogIn size={18} /> {t('screens.playlistSelect.connectButton')}
             </button>
           </div>
         )}
 
         {token && (
-          <>
-            {/* Your playlists - Primary focus */}
-            <div className="hh-content mb-5 flex-1">
-              <h3 className="hh-section-title">
-                <Music size={18} className="text-orange-500" />
-                {t('screens.playlistSelect.yourPlaylists')}
-              </h3>
-              {loading && <div className="text-sm text-slate-500 dark:text-slate-400">Loading…</div>}
-              {!loading && yourPlaylists.length > 0 && (
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  {yourPlaylists.map(pl => (
-                    <button
-                      key={pl.id}
-                      onClick={() => onSelect(pl.id)}
-                      className="rounded-2xl border border-slate-200/80 dark:border-slate-700 px-3 py-3 text-left bg-white/60 dark:bg-slate-800/60 hover:bg-orange-50 dark:hover:bg-slate-700 transition-colors"
-                    >
-                      <div className="font-semibold truncate text-sm text-slate-800 dark:text-slate-100">{pl.name}</div>
-                      <div className="text-xs text-slate-500">{t('screens.playlistSelect.select')}</div>
-                    </button>
-                  ))}
-                </div>
-              )}
-              {!loading && yourPlaylists.length === 0 && (
-                <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">No playlists found. Create one on Spotify!</p>
-              )}
-            </div>
-
-            {/* Search - Secondary */}
-            <div className="hh-content mb-5">
-              <h3 className="hh-section-title">{t('screens.playlistSelect.search')}</h3>
-              <div className="flex gap-2 mb-2">
-                <input
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  onKeyPress={e => e.key === 'Enter' && doSearch()}
-                  placeholder={t('screens.playlistSelect.searchPlaceholder')}
-                  className="hh-input text-sm"
-                />
+          <div className="hh-content flex-1 flex flex-col gap-4">
+            <div className="rounded-2xl border border-slate-200/80 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 p-4">
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <h3 className="hh-section-title !mb-0">
+                  <Music size={18} className="text-orange-500" />
+                  {t('screens.playlistSelect.yourPlaylists')}
+                </h3>
                 <button
-                  onClick={doSearch}
-                  title={t('screens.playlistSelect.search')}
-                  aria-label={t('screens.playlistSelect.search')}
-                  className="hh-btn-secondary !w-auto !px-3"
+                  onClick={() => loadPlaylists()}
+                  className="hh-btn-muted !px-3 !py-2 !rounded-xl"
+                  title={t('screens.playlistSelect.reload')}
+                  aria-label={t('screens.playlistSelect.reload')}
+                  disabled={loading || disabled}
                 >
-                  <Search size={16} />
+                  <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
                 </button>
               </div>
-              {searchResults.length > 0 && (
-                <div className="grid grid-cols-2 gap-2">
-                  {searchResults.map(pl => (
-                    <button
-                      key={pl.id}
-                      onClick={() => onSelect(pl.id)}
-                      className="rounded-2xl border border-slate-200/80 dark:border-slate-700 px-3 py-3 text-left bg-white/60 dark:bg-slate-800/60 hover:bg-orange-50 dark:hover:bg-slate-700 transition-colors"
-                    >
-                      <div className="font-semibold truncate text-sm text-slate-800 dark:text-slate-100">{pl.name}</div>
-                      <div className="text-xs text-slate-500">{t('screens.playlistSelect.select')}</div>
-                    </button>
-                  ))}
-                </div>
-              )}
+
+              <p className="hh-subtitle mb-3">{t('screens.playlistSelect.dropdownHint')}</p>
+
+              <select
+                value={selectedPlaylistId}
+                onChange={(event) => setSelectedPlaylistId(event.target.value)}
+                className="hh-input"
+                disabled={loading || playlists.length === 0 || disabled}
+              >
+                {playlists.length === 0 && (
+                  <option value="">
+                    {loading ? t('screens.playlistSelect.loading') : t('screens.playlistSelect.noPlaylists')}
+                  </option>
+                )}
+                {playlists.map((playlist) => (
+                  <option key={playlist.id} value={playlist.id}>
+                    {playlist.name}
+                    {typeof playlist.tracks?.total === 'number' ? ` (${playlist.tracks.total})` : ''}
+                  </option>
+                ))}
+              </select>
             </div>
 
-            {/* Curated - Fallback */}
-            <div className="hh-content">
-              <h3 className="hh-section-title">{t('screens.playlistSelect.curated')}</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {CURATED.map(pl => (
-                  <button
-                    key={pl.id}
-                    onClick={() => onSelect(pl.id)}
-                    className="rounded-2xl border border-slate-200/80 dark:border-slate-700 px-3 py-3 text-left bg-white/60 dark:bg-slate-800/60 hover:bg-orange-50 dark:hover:bg-slate-700 transition-colors"
-                  >
-                    <div className="font-semibold truncate text-sm text-slate-800 dark:text-slate-100">{pl.name}</div>
-                    <div className="text-xs text-slate-500">{t('screens.playlistSelect.select')}</div>
-                  </button>
-                ))}
+            {error && (
+              <div className="rounded-2xl border border-rose-300/80 dark:border-rose-500/40 bg-rose-50 dark:bg-rose-500/10 px-4 py-3 text-sm text-rose-800 dark:text-rose-200">
+                {error}
               </div>
+            )}
+
+            <div className="mt-auto">
+              <button
+                onClick={() => onSelect(selectedPlaylistId)}
+                disabled={!canStart}
+                className="hh-btn-primary disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {t('screens.playlistSelect.startWithSelection')}
+              </button>
             </div>
-          </>
+          </div>
         )}
       </motion.div>
     </div>

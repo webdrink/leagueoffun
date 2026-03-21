@@ -1,46 +1,86 @@
+import { clearSpotifyAuth, getValidAccessToken } from './spotifyAuth';
+
 export interface SpotifyPlaylist {
   id: string;
   name: string;
   images?: { url: string }[];
+  tracks?: { total: number };
 }
 
 export interface SpotifyTrack {
   id: string;
   name: string;
   artists: { name: string }[];
-  album?: { images?: { url: string }[] };
+  album?: { images?: { url: string }[]; release_date?: string };
   preview_url?: string;
   release_date?: string;
 }
 
 const API = 'https://api.spotify.com/v1';
 
-export async function getUserPlaylists(token: string): Promise<SpotifyPlaylist[]> {
-  const res = await fetch(`${API}/me/playlists?limit=50`, {
-    headers: { Authorization: `Bearer ${token}` },
+async function spotifyFetch(path: string): Promise<Response> {
+  const token = await getValidAccessToken();
+  if (!token) {
+    throw new Error('Spotify session expired. Please connect again.');
+  }
+
+  const response = await fetch(`${API}${path}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
+
+  if (response.status === 401) {
+    clearSpotifyAuth();
+    throw new Error('Spotify session expired. Please connect again.');
+  }
+
+  return response;
+}
+
+export async function getUserPlaylists(): Promise<SpotifyPlaylist[]> {
+  const res = await spotifyFetch('/me/playlists?limit=50');
   if (!res.ok) throw new Error('Failed to load playlists');
   const data = await res.json();
   return data.items || [];
 }
 
-export async function searchPlaylists(token: string, query: string): Promise<SpotifyPlaylist[]> {
-  const res = await fetch(`${API}/search?q=${encodeURIComponent(query)}&type=playlist&limit=20`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+export async function searchPlaylists(query: string): Promise<SpotifyPlaylist[]> {
+  const res = await spotifyFetch(`/search?q=${encodeURIComponent(query)}&type=playlist&limit=20`);
   if (!res.ok) throw new Error('Failed to search playlists');
   const data = await res.json();
   return data.playlists?.items || [];
 }
 
-export async function getPlaylistTracks(token: string, playlistId: string): Promise<SpotifyTrack[]> {
-  const res = await fetch(`${API}/playlists/${playlistId}/tracks?limit=100`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  if (!res.ok) throw new Error('Failed to load tracks');
-  const data = await res.json();
-  const items = data.items || [];
-  return items.map((it: any) => it.track).filter(Boolean);
+export async function getPlaylistTracks(playlistId: string): Promise<SpotifyTrack[]> {
+  const tracks: SpotifyTrack[] = [];
+  let offset = 0;
+  const limit = 100;
+  let total = 0;
+
+  do {
+    const res = await spotifyFetch(
+      `/playlists/${playlistId}/tracks?limit=${limit}&offset=${offset}&fields=items(track(id,name,artists(name),album(images,release_date),preview_url)),total`
+    );
+    if (!res.ok) throw new Error('Failed to load tracks');
+
+    const data = await res.json();
+    total = data.total || 0;
+    const items = (data.items || []) as Array<{ track?: SpotifyTrack | null }>;
+
+    items.forEach((item) => {
+      if (item.track?.id) {
+        tracks.push({
+          ...item.track,
+          release_date: item.track.release_date || item.track.album?.release_date,
+        });
+      }
+    });
+
+    offset += limit;
+  } while (offset < total);
+
+  return tracks;
 }
 
 export const CURATED: SpotifyPlaylist[] = [

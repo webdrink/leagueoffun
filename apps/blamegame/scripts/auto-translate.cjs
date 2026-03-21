@@ -143,9 +143,10 @@ class CategoryAnalyzer {
 
 /*** Main ***/
 async function main(){
-  const key=process.env.OPENAI_API_KEY; if(!key) throw new Error('API key missing');
+  const key=process.env.OPENAI_API_KEY;
+  if(!CONFIG.checkOnly && !key) throw new Error('API key missing');
   if(!CONFIG.dryRun) createBackup();
-  const serv=new TranslationService(key),ana=new CategoryAnalyzer(),trk=new TranslationProgressTracker();
+  const serv=new TranslationService(key || ''),ana=new CategoryAnalyzer(),trk=new TranslationProgressTracker();
   ana.loadCats(); ana.loadFiles();
 
   // translate category names if needed

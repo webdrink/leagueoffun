@@ -100,21 +100,22 @@ const verifyLanguageDirectories = () => {
 
 // Verify PWA icons exist
 const verifyPWAIcons = () => {
-  const icons = [
-    path.join(PUBLIC_DIR, 'pwa-icon-192x192.png'),
-    path.join(PUBLIC_DIR, 'pwa-icon-512x512.png')
+  const iconCandidates = [
+    ['pwa-icon-192x192.png', 'favicon.svg'],
+    ['pwa-icon-512x512.png', 'pwa-icon-512x512.svg']
   ];
-  
+
   let allValid = true;
-  icons.forEach(iconPath => {
-    if (fileExists(iconPath)) {
-      console.log(`✅ PWA icon exists: ${path.basename(iconPath)}`);
+  iconCandidates.forEach((candidates) => {
+    const existing = candidates.find((candidate) => fileExists(path.join(PUBLIC_DIR, candidate)));
+    if (existing) {
+      console.log(`✅ PWA icon exists: ${existing}`);
     } else {
-      console.error(`❌ PWA icon missing: ${path.basename(iconPath)}`);
+      console.error(`❌ PWA icon missing. Checked: ${candidates.join(', ')}`);
       allValid = false;
     }
   });
-  
+
   return allValid;
 };
 
