@@ -12,12 +12,15 @@ type ImportMetaWithGlob = ImportMeta & {
 };
 
 const viteImportMeta = import.meta as ImportMetaWithGlob;
+const safeGlob = typeof viteImportMeta.glob === 'function'
+  ? viteImportMeta.glob.bind(viteImportMeta)
+  : (() => ({})) as ImportMetaWithGlob['glob'];
 
 // Vite glob import for game.json files - try multiple patterns
 const rawConfigs: Record<string, { default: GameConfig }> = {
-  ...viteImportMeta.glob<{ default: GameConfig }>('/src/games/**/game.json', { eager: true }),
-  ...viteImportMeta.glob<{ default: GameConfig }>('../../games/**/game.json', { eager: true }),
-  ...viteImportMeta.glob<{ default: GameConfig }>('../../../games/**/game.json', { eager: true })
+  ...safeGlob<{ default: GameConfig }>('/src/games/**/game.json', { eager: true }),
+  ...safeGlob<{ default: GameConfig }>('../../games/**/game.json', { eager: true }),
+  ...safeGlob<{ default: GameConfig }>('../../../games/**/game.json', { eager: true })
 } as Record<string, { default: GameConfig }>;
 
 export function discoverGameConfigs(): GameConfig[] {
