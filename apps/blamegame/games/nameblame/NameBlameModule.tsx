@@ -15,6 +15,12 @@ import { loadCategoriesFromJson, loadQuestionsFromJson } from '../../lib/utils/q
 import { storageGet } from '../../framework/persistence/storage';
 import type { GameSettings } from '../../framework/config/game.schema';
 
+const debugLog = (...args: unknown[]) => {
+  if (import.meta.env.DEV) {
+    console.log(...args);
+  }
+};
+
 // Module-level provider instance with enriched question data
 let provider: StaticListProvider<EnrichedQuestion> | null = null;
 let unsubscribeSettings: (() => void) | null = null;
@@ -22,7 +28,7 @@ let unsubscribeSettings: (() => void) | null = null;
 const NameBlameModule: GameModule = {
   id: 'nameblame',
   async init(ctx) {
-    console.log('🎮 NameBlameModule.init() called with provider:', provider ? 'exists' : 'null');
+    debugLog('🎮 NameBlameModule.init() called with provider:', provider ? 'exists' : 'null');
     if (!provider) {
       try {
         // Merge persisted settings with config defaults (per game id)
@@ -47,7 +53,7 @@ const NameBlameModule: GameModule = {
           allowRepeatQuestions: !!gameSettings.allowRepeatQuestions
         });
         
-        console.log('🎮 Created filtered question provider with', provider.progress().total, 'questions');
+        debugLog('🎮 Created filtered question provider with', provider.progress().total, 'questions');
 
         // Initialize window globals for test compatibility (use full raw dataset, not filtered)
         if (typeof window !== 'undefined') {
@@ -74,8 +80,8 @@ const NameBlameModule: GameModule = {
                   questions: enriched.filter(q => q.categoryId === categoryId).map(q => q.text)
                 };
               });
-            console.log('🎮 Set window.gameQuestions to', enriched.length, 'questions');
-            console.log('🎮 Set window.gameCategories to', (windowObj.gameCategories as unknown[]).length, 'categories');
+            debugLog('🎮 Set window.gameQuestions to', enriched.length, 'questions');
+            debugLog('🎮 Set window.gameCategories to', (windowObj.gameCategories as unknown[]).length, 'categories');
           } catch (e) {
             console.warn('🎮 Failed to load raw questions for debug window globals:', e);
           }

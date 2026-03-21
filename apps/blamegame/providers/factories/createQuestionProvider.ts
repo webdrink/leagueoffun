@@ -7,6 +7,12 @@ import { StaticListProvider } from '../StaticListProvider';
 import { loadQuestionsFromJson, loadCategoriesFromJson } from '../../lib/utils/questionLoaders';
 import { getRandomCategories, shuffleArray } from '../../lib/utils/arrayUtils';
 
+const debugLog = (...args: unknown[]) => {
+  if (import.meta.env.DEV) {
+    console.log(...args);
+  }
+};
+
 // Enhanced question interface with rich category data (extends StaticItem)
 export interface EnrichedQuestion {
   text: string;
@@ -69,14 +75,14 @@ function filterQuestions(
     selectedCategoryIds = config.selectedCategoryIds.filter(id => 
       questionsByCategory.has(id)
     );
-    console.log('Using manually selected categories:', selectedCategoryIds);
+    debugLog('Using manually selected categories:', selectedCategoryIds);
   } else {
     // Random category selection
     const numCategories = Math.min(config.categoriesPerGame, availableCategoryIds.length);
     selectedCategoryIds = config.shuffleCategories 
       ? getRandomCategories(availableCategoryIds, numCategories)
       : availableCategoryIds.slice(0, numCategories);
-    console.log('Using random categories:', selectedCategoryIds);
+    debugLog('Using random categories:', selectedCategoryIds);
   }
 
   // Step 3: Select questions from each category
@@ -107,7 +113,7 @@ function filterQuestions(
       ? shuffleArray(selectedQuestions).slice(0, config.maxQuestionsTotal)
       : selectedQuestions.slice(0, config.maxQuestionsTotal);
     
-    console.log(`Trimmed questions from ${selectedQuestions.length} to ${finalQuestions.length} (maxQuestionsTotal: ${config.maxQuestionsTotal})`);
+    debugLog(`Trimmed questions from ${selectedQuestions.length} to ${finalQuestions.length} (maxQuestionsTotal: ${config.maxQuestionsTotal})`);
   }
 
   // Step 5: Final shuffle if requested
@@ -115,7 +121,7 @@ function filterQuestions(
     finalQuestions = shuffleArray(finalQuestions);
   }
 
-  console.log(`Question filtering complete: ${finalQuestions.length} questions from ${selectedCategoryIds.length} categories`);
+  debugLog(`Question filtering complete: ${finalQuestions.length} questions from ${selectedCategoryIds.length} categories`);
   return finalQuestions;
 }
 
@@ -127,7 +133,7 @@ export async function createQuestionProvider(
 ): Promise<StaticListProvider<EnrichedQuestion>> {
   const fullConfig = { ...DEFAULT_CONFIG, ...config };
   
-  console.log('Creating question provider with config:', fullConfig);
+  debugLog('Creating question provider with config:', fullConfig);
 
   try {
     // Load raw data
@@ -144,7 +150,7 @@ export async function createQuestionProvider(
       id: q.questionId || `question-${index}`
     }));
 
-    console.log(`Loaded ${enrichedQuestions.length} raw questions`);
+    debugLog(`Loaded ${enrichedQuestions.length} raw questions`);
 
     // Apply filtering
     const filteredQuestions = filterQuestions(enrichedQuestions, fullConfig);

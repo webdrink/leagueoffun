@@ -6,16 +6,22 @@ import { GameAction } from '../../framework/core/actions';
 import { getProvider } from './NameBlameModule';
 import { useGameStore } from '../../store/gameStore';
 
+const debugLog = (...args: unknown[]) => {
+  if (import.meta.env.DEV) {
+    console.log(...args);
+  }
+};
+
 export const nameBlamePhaseControllers: Record<string, PhaseController> = {
   intro: {
     onEnter(ctx) {
       // Reset provider when entering intro phase (especially on restart)
-      console.log('🎮 Entering intro phase - resetting provider state');
+      debugLog('🎮 Entering intro phase - resetting provider state');
       const provider = getProvider();
       if (provider) {
         const currentIndex = provider.progress().index;
         if (currentIndex > 0) {
-          console.log(`🔄 Resetting provider from index ${currentIndex} to 0`);
+          debugLog(`🔄 Resetting provider from index ${currentIndex} to 0`);
           while (provider.progress().index > 0) {
             provider.previous();
           }
@@ -115,20 +121,17 @@ export const nameBlamePhaseControllers: Record<string, PhaseController> = {
           // Use provider to determine if we advance to next question or summary
           if (provider) {
             const { index, total } = provider.progress();
-            // eslint-disable-next-line no-console
-            console.log('[phases:play] ADVANCE received. Current index:', index, 'total:', total);
+            debugLog('[phases:play] ADVANCE received. Current index:', index, 'total:', total);
             
             if (index + 1 < total) {
               // Advance to next question
               provider.next();
-              // eslint-disable-next-line no-console
-              console.log('[phases:play] provider.next() called. New index:', provider.progress().index);
+              debugLog('[phases:play] provider.next() called. New index:', provider.progress().index);
               ctx.eventBus.publish({ type: 'CONTENT/NEXT', index: index + 1 });
               return { type: 'STAY' };
             } else {
               // End of questions, go to summary
-              // eslint-disable-next-line no-console
-              console.log('[phases:play] End of questions reached. Going to summary.');
+              debugLog('[phases:play] End of questions reached. Going to summary.');
               ctx.eventBus.publish({ type: 'CONTENT/NEXT', index: index + 1 });
               return { type: 'GOTO', phaseId: 'summary' };
             }
@@ -140,12 +143,10 @@ export const nameBlamePhaseControllers: Record<string, PhaseController> = {
           // Go to previous question or back to intro if first question
           if (provider) {
             const { index } = provider.progress();
-            // eslint-disable-next-line no-console
-            console.log('[phases:play] BACK received. Current index:', index);
+            debugLog('[phases:play] BACK received. Current index:', index);
             if (index > 0) {
               provider.previous();
-              // eslint-disable-next-line no-console
-              console.log('[phases:play] provider.previous() called. New index:', provider.progress().index);
+              debugLog('[phases:play] provider.previous() called. New index:', provider.progress().index);
               ctx.eventBus.publish({ type: 'CONTENT/NEXT', index: index - 1 });
               return { type: 'STAY' };
             } else {

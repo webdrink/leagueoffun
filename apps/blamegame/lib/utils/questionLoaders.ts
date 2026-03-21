@@ -10,6 +10,12 @@ import { fetchAsset, fetchWithRetry } from './fetchUtils';
 import { mergeWithCustomCategories, mergeWithCustomQuestions } from '../customCategories/integration';
 import { SupportedLanguage } from '../../types';
 
+const debugLog = (...args: unknown[]) => {
+  if (import.meta.env.DEV) {
+    console.log(...args);
+  }
+};
+
 // Define types for our data structures
 export interface Category {
   id: string;
@@ -37,16 +43,16 @@ export interface Question extends BaseQuestion {
  */
 export const loadCategoriesFromJson = async (): Promise<Category[]> => {
   try {
-    console.log('Loading categories...');
+    debugLog('Loading categories...');
     
     const response = await fetchAsset('questions/categories.json');
     const categories: Category[] = await response.json();
     
-    console.log(`Successfully loaded ${categories.length} built-in categories`);
+    debugLog(`Successfully loaded ${categories.length} built-in categories`);
     
     // Merge with custom categories
     const mergedCategories = mergeWithCustomCategories(categories);
-    console.log(`Total categories (including custom): ${mergedCategories.length}`);
+    debugLog(`Total categories (including custom): ${mergedCategories.length}`);
     
     return mergedCategories;
   } catch (error) {
@@ -65,7 +71,7 @@ export const loadCategoriesFromJson = async (): Promise<Category[]> => {
  */
 export const loadQuestionsFromJson = async (language: string = 'de', categories: Category[] = []): Promise<Question[]> => {
   try {
-    console.log(`Loading questions for language: ${language}`);
+    debugLog(`Loading questions for language: ${language}`);
     
     // If categories weren't provided, we need to fetch them
     if (!categories || categories.length === 0) {
@@ -85,7 +91,7 @@ export const loadQuestionsFromJson = async (language: string = 'de', categories:
     // Load questions for each category
     for (const category of categories) {
       try {
-        console.log(`Loading questions for category ${category.id} in ${language}`);
+        debugLog(`Loading questions for category ${category.id} in ${language}`);
         
         try {
           const response = await fetchAsset(`questions/${language}/${category.id}.json`);
@@ -101,7 +107,7 @@ export const loadQuestionsFromJson = async (language: string = 'de', categories:
           }));
           
           allQuestions.push(...enhancedQuestions);
-          console.log(`Loaded ${enhancedQuestions.length} questions for category ${category.id}`);
+          debugLog(`Loaded ${enhancedQuestions.length} questions for category ${category.id}`);
         } catch (error) {
           // Continue to next category if this one fails
           console.warn(`Couldn't load questions for category ${category.id} in ${language}, skipping:`, error);
@@ -111,7 +117,7 @@ export const loadQuestionsFromJson = async (language: string = 'de', categories:
       }
     }
     
-    console.log(`Successfully loaded ${allQuestions.length} built-in questions`);
+    debugLog(`Successfully loaded ${allQuestions.length} built-in questions`);
     
     if (allQuestions.length === 0) {
       console.warn(`No questions could be loaded for ${language}, using fallbacks`);
@@ -119,7 +125,7 @@ export const loadQuestionsFromJson = async (language: string = 'de', categories:
     
     // Merge with custom questions
     const mergedQuestions = mergeWithCustomQuestions(allQuestions, language as SupportedLanguage);
-    console.log(`Total questions (including custom): ${mergedQuestions.length}`);
+    debugLog(`Total questions (including custom): ${mergedQuestions.length}`);
     
     return mergedQuestions;
   } catch (error) {
