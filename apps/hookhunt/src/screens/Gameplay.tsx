@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Pause, Play, RefreshCw, RotateCcw, SkipForward } from 'lucide-react';
+import { ArrowLeft, Pause, Play, SkipForward } from 'lucide-react';
 import {
   getEstimatedHookStartMs,
   getPlaylistTracks,
@@ -51,7 +51,6 @@ interface RoundFeedback {
   details: GuessEvaluation;
   listeningFactor: number;
   finalPoints: number;
-  revealedNoPoints: boolean;
 }
 
 let spotifySdkReadyPromise: Promise<void> | null = null;
@@ -241,7 +240,6 @@ export default function GameplayScreen({
   const [hookRemainingMs, setHookRemainingMs] = useState<number | null>(null);
   const [clipRemainingMs, setClipRemainingMs] = useState(HOOK_CLIP_MS);
   const [roundHeardMs, setRoundHeardMs] = useState(0);
-  const [roundRevealed, setRoundRevealed] = useState(false);
   const [playbackSource, setPlaybackSource] = useState<PlaybackSource>('none');
   const [spotifyPlayer, setSpotifyPlayer] = useState<SpotifyWebPlaybackPlayer | null>(null);
   const [spotifyDeviceId, setSpotifyDeviceId] = useState<string | null>(null);
@@ -654,7 +652,7 @@ export default function GameplayScreen({
   }, [clearHookStopTimer, clipRemainingMs, hookClipEndsAt, hookPlaying, playbackSource, stopHeardTracking]);
 
   const resumeHook = useCallback(async () => {
-    if (roundRevealed || !currentTrack) return;
+    if (!currentTrack) return;
 
     if (clipRemainingMs <= 200 || playbackSource === 'none') {
       await startHookFromBeginning(currentTrack, { countAsReplay: true });
@@ -678,12 +676,11 @@ export default function GameplayScreen({
     } catch {
       setSpotifyError(t('screens.gameplay.spotifyPlaybackFailed'));
     }
-  }, [clipRemainingMs, currentTrack, playbackSource, roundRevealed, scheduleHookStop, startHeardTracking, startHookFromBeginning, t]);
+  }, [clipRemainingMs, currentTrack, playbackSource, scheduleHookStop, startHeardTracking, startHookFromBeginning, t]);
 
   useEffect(() => {
     if (!currentTrack) return;
 
-    setRoundRevealed(false);
     setRoundSubmitted(false);
     setRoundFeedback(null);
     setPendingFinishScores(null);
@@ -699,8 +696,7 @@ export default function GameplayScreen({
     setPlaybackSource('none');
     setClipRemainingMs(HOOK_CLIP_MS);
     setHookRemainingMs(null);
-    startHookFromBeginning(currentTrack, { countAsReplay: false }).catch(() => undefined);
-  }, [currentTrack, startHookFromBeginning]);
+  }, [currentTrack]);
 
   useEffect(
     () => () => {
@@ -718,37 +714,6 @@ export default function GameplayScreen({
     },
     [clearHookStopTimer, stopHeardTracking]
   );
-
-  const revealTrack = () => {
-    if (roundRevealed) return;
-    stopAllPlayback();
-    setRoundRevealed(true);
-  };
-
-  const restartRound = useCallback(() => {
-    if (!currentTrack || roundSubmitted) return;
-
-    stopAllPlayback();
-    setRoundRevealed(false);
-    setRoundSubmitted(false);
-    setRoundFeedback(null);
-    setPendingFinishScores(null);
-    setTitleGuess('');
-    setArtistGuess('');
-    setYearGuess('');
-    setReplayCount(0);
-    replayCountRef.current = 0;
-    hasPlayedHookOnceRef.current = false;
-    setRoundHeardMs(0);
-    roundHeardMsRef.current = 0;
-    heardStartedAtRef.current = null;
-    setPlaybackSource('none');
-    setClipRemainingMs(HOOK_CLIP_MS);
-    setHookRemainingMs(null);
-    setHookEstimateMs(null);
-    setActiveHookStartMs(null);
-    startHookFromBeginning(currentTrack, { countAsReplay: false }).catch(() => undefined);
-  }, [currentTrack, roundSubmitted, startHookFromBeginning, stopAllPlayback]);
 
   const advance = () => {
     stopAllPlayback();
@@ -797,7 +762,7 @@ export default function GameplayScreen({
       replayPenaltyPerReplay: REPLAY_PENALTY_PER_REPLAY,
     });
 
-    const pointsAfterReplay = roundRevealed ? 0 : details.pointsAfterReplayPenalty;
+    const pointsAfterReplay = details.pointsAfterReplayPenalty;
     const adjustedPoints = pointsAfterReplay > 0 ? Math.max(0, Math.floor(pointsAfterReplay * factor)) : 0;
 
     const newScores = scores.map((score, index) => {
@@ -813,7 +778,6 @@ export default function GameplayScreen({
       details,
       listeningFactor: factor,
       finalPoints: adjustedPoints,
-      revealedNoPoints: roundRevealed,
     });
     setRoundSubmitted(true);
 
@@ -902,33 +866,19 @@ export default function GameplayScreen({
 
           <div className="mt-3 flex flex-wrap items-center gap-2.5">
             <button
-              onClick={() => startHookFromBeginning(currentTrack, { countAsReplay: true })}
-              className="hh-btn-primary !w-auto !px-4 !py-2.5"
-              disabled={roundRevealed || roundSubmitted}
-            >
-              <RotateCcw size={15} /> {t('screens.gameplay.replayHook')}
-            </button>
-            <button
-              onClick={restartRound}
-              className="hh-btn-muted !w-auto !px-4 !py-2.5"
-              disabled={roundRevealed || roundSubmitted}
-            >
-              <RefreshCw size={15} /> {t('screens.gameplay.restartRound')}
-            </button>
-            <button
               onClick={() => (hookPlaying ? pauseHook() : resumeHook())}
               className="hh-btn-muted !w-auto !px-4 !py-2.5"
-              disabled={roundRevealed || roundSubmitted}
+              disabled={roundSubmitted}
             >
               {hookPlaying ? <Pause size={15} /> : <Play size={15} />}
               {hookPlaying ? t('screens.gameplay.pauseHook') : t('screens.gameplay.playHook')}
             </button>
             <button
-              onClick={revealTrack}
-              className="hh-btn-muted !w-auto !px-4 !py-2.5 border-rose-300 text-rose-700 dark:text-rose-200 hover:border-rose-400"
-              disabled={roundRevealed || roundSubmitted}
+              onClick={advance}
+              className="hh-btn-muted !w-auto !px-4 !py-2.5"
+              disabled={roundSubmitted}
             >
-              {t('screens.gameplay.revealTrackNoPoints')}
+              <SkipForward size={15} /> {t('screens.gameplay.skip')}
             </button>
           </div>
 
@@ -947,40 +897,6 @@ export default function GameplayScreen({
             <p>{t('screens.gameplay.speedFactor', { factor: roundFactor.toFixed(2) })}</p>
             <p>{t('screens.gameplay.replayPenalty', { count: replayCount, percent: Math.round(replayCount * REPLAY_PENALTY_PER_REPLAY * 100) })}</p>
           </div>
-
-          {roundRevealed && (
-            <div className="mt-3 rounded-2xl border border-amber-300/60 bg-amber-100/15 px-3 py-3 text-xs text-amber-100 shadow-[0_16px_30px_-24px_rgba(245,158,11,0.8)]">
-              <p className="font-semibold">{t('screens.gameplay.revealedNoPoints')}</p>
-              <p className="mt-1">
-                {t('screens.gameplay.answer')}: {currentTrack?.name} • {currentTrack?.artists?.map((artist) => artist.name).join(', ')}
-              </p>
-              {currentTrack && (
-                <div className="mt-3 flex items-center gap-3 rounded-xl border border-amber-200/35 bg-black/20 p-2.5">
-                  {currentTrack.album?.images?.[0]?.url && (
-                    <img
-                      src={currentTrack.album.images[0].url}
-                      alt={currentTrack.name}
-                      className="h-12 w-12 rounded-lg object-cover shadow-lg"
-                    />
-                  )}
-                  <div className="min-w-0 flex-1 text-amber-50">
-                    <p className="truncate text-sm font-semibold">{currentTrack.name}</p>
-                    <p className="truncate text-xs text-amber-100/80">
-                      {currentTrack.artists?.map((artist) => artist.name).join(', ')}
-                    </p>
-                  </div>
-                  <a
-                    href={`https://open.spotify.com/track/${currentTrack.id}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hh-btn-muted !w-auto !px-3 !py-2 text-xs"
-                  >
-                    {t('screens.gameplay.openTrack')}
-                  </a>
-                </div>
-              )}
-            </div>
-          )}
 
           {spotifyError && (
             <div className="mt-3 space-y-2">
@@ -1057,12 +973,7 @@ export default function GameplayScreen({
             <button onClick={submit} className="hh-btn-primary !w-auto !px-4 !py-2.5">
               {roundSubmitted
                 ? t('screens.gameplay.next')
-                : roundRevealed
-                  ? t('screens.gameplay.continueNoPoints')
-                  : t('screens.gameplay.submit')}
-            </button>
-            <button onClick={advance} className="hh-btn-muted !w-auto !px-4 !py-2.5" disabled={roundSubmitted}>
-              <SkipForward size={16} /> {t('screens.gameplay.skip')}
+                : t('screens.gameplay.submit')}
             </button>
           </div>
         </div>
