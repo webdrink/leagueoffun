@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 type GameMode = 'singleplayer' | 'hotSeat';
 
 interface SummaryProps {
-  scores: { name: string; score: number }[];
+  scores: { name: string; score: number; heardMs: number }[];
   mode: GameMode;
   onPlayAgain: () => void;
   onBackToHub: () => void;
@@ -34,7 +34,12 @@ export default function SummaryScreen({ scores, onPlayAgain, onBackToHub, animat
         <div className="hh-content space-y-2 mb-6">
           {scores.map(s => (
             <div key={s.name} className="flex items-center justify-between rounded-2xl border border-slate-200/80 dark:border-slate-700 bg-white/60 dark:bg-slate-800/60 px-4 py-3">
-              <div className="font-semibold text-slate-800 dark:text-slate-100">{s.name}</div>
+              <div>
+                <div className="font-semibold text-slate-800 dark:text-slate-100">{s.name}</div>
+                <div className="text-xs text-slate-600 dark:text-slate-300">
+                  {t('screens.summary.heardTime', { seconds: Math.round(s.heardMs / 1000) })}
+                </div>
+              </div>
               <div className="hh-chip">{s.score}</div>
             </div>
           ))}

@@ -109,6 +109,7 @@ interface GameSettings {
 interface PlayerScore {
   name: string;
   score: number;
+  heardMs: number;
 }
 
 function App() {
@@ -190,7 +191,7 @@ function App() {
   const submitPlayers = (names: string[]) => {
     const validNames = names.filter(n => n.trim().length > 0);
     setGameSettings(prev => ({ ...prev, playerNames: validNames, currentPlayerIndex: 0 }));
-    setPlayerScores(validNames.map(n => ({ name: n, score: 0 })));
+    setPlayerScores(validNames.map(n => ({ name: n, score: 0, heardMs: 0 })));
     setGameStep('playlistSelect');
   };
 

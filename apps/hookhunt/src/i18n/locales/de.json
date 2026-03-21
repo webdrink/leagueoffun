@@ -41,7 +41,17 @@
       "skip": "Überspringen",
       "pause": "Pause",
       "resume": "Fortsetzen",
+      "playHook": "Abspielen",
+      "pauseHook": "Pausieren",
       "replayHook": "Hook erneut abspielen",
+      "revealTrackNoPoints": "Track auflösen (0 Punkte)",
+      "revealedNoPoints": "Track wurde aufgelöst. Diese Runde gibt 0 Punkte.",
+      "answer": "Lösung",
+      "continueNoPoints": "Weiter (0 Punkte)",
+      "heardThisRound": "In dieser Runde gehört: {{seconds}}s",
+      "speedFactor": "Punktefaktor: ×{{factor}}",
+      "playerHeard": "{{seconds}}s gehört",
+      "openTrack": "Track öffnen",
       "currentPlayer": "Aktueller Spieler: {{name}}",
       "score": "Punkte: {{score}}",
       "next": "Weiter",
@@ -73,6 +83,7 @@
     "summary": {
       "title": "Spiel beendet!",
       "winner": "{{name}} gewinnt!",
+      "heardTime": "Gehörte Zeit: {{seconds}}s",
       "playAgain": "Nochmal spielen",
       "backToHub": "Zurück zu League of Fun"
     }

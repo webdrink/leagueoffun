@@ -41,7 +41,17 @@
       "skip": "Skip",
       "pause": "Pause",
       "resume": "Resume",
+      "playHook": "Play",
+      "pauseHook": "Pause",
       "replayHook": "Replay Hook",
+      "revealTrackNoPoints": "Reveal Track (0 pts)",
+      "revealedNoPoints": "Track revealed. This round gives 0 points.",
+      "answer": "Answer",
+      "continueNoPoints": "Continue (0 pts)",
+      "heardThisRound": "Heard this round: {{seconds}}s",
+      "speedFactor": "Score factor: ×{{factor}}",
+      "playerHeard": "{{seconds}}s heard",
+      "openTrack": "Open Track",
       "currentPlayer": "Current Player: {{name}}",
       "score": "Score: {{score}}",
       "next": "Next",
@@ -73,6 +83,7 @@
     "summary": {
       "title": "Game Over!",
       "winner": "{{name}} wins!",
+      "heardTime": "Heard time: {{seconds}}s",
       "playAgain": "Play Again",
       "backToHub": "Back to League of Fun"
     }
