@@ -19,6 +19,13 @@ export interface SpotifyTrack {
   release_date?: string;
 }
 
+export interface SpotifyUserProfile {
+  id: string;
+  display_name?: string;
+  email?: string;
+  images?: { url: string }[];
+}
+
 interface SpotifyApiErrorResponse {
   error?: {
     message?: string;
@@ -84,6 +91,12 @@ export async function getUserPlaylists(): Promise<SpotifyPlaylist[]> {
   if (!res.ok) throw new Error('Failed to load playlists');
   const data = await res.json();
   return data.items || [];
+}
+
+export async function getCurrentUserProfile(): Promise<SpotifyUserProfile> {
+  const res = await spotifyFetch('/me');
+  if (!res.ok) throw new Error('Failed to load Spotify profile');
+  return res.json();
 }
 
 export async function searchPlaylists(query: string): Promise<SpotifyPlaylist[]> {

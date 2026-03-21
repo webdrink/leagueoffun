@@ -162,7 +162,7 @@ export async function getValidAccessToken(): Promise<string | null> {
   }
 }
 
-export async function beginSpotifyLogin(): Promise<void> {
+export async function beginSpotifyLogin(forceDialog = false): Promise<void> {
   const clientId = getEnvClientId();
   if (!clientId) {
     throw new Error('Missing Spotify Client ID. Please set VITE_SPOTIFY_CLIENT_ID.');
@@ -183,8 +183,11 @@ export async function beginSpotifyLogin(): Promise<void> {
     code_challenge: challenge,
     state,
     scope: SCOPES.join(' '),
-    show_dialog: 'true',
   });
+
+  if (forceDialog) {
+    params.set('show_dialog', 'true');
+  }
 
   window.location.assign(`${SPOTIFY_ACCOUNTS}/authorize?${params.toString()}`);
 }
