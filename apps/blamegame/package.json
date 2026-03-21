@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite",
     "build": "vite build",
     "build:domain": "VITE_BASE_PATH=/ vite build && node scripts/fix-deployment-paths.js",
     "build:windows-domain": "set VITE_BASE_PATH=/ && vite build && node scripts/fix-deployment-paths.js",
