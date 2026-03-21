@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: ⬇️ Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: 📦 Setup pnpm
         uses: pnpm/action-setup@v4
@@ -38,7 +38,7 @@ jobs:
           version: ${{ env.PNPM_VERSION }}
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
@@ -110,21 +110,21 @@ jobs:
           ls -la apps/hookhunt/dist/
 
       - name: 📤 Upload Gamepicker Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: gamepicker-dist
           path: apps/gamepicker/dist/
           retention-days: 1
 
       - name: 📤 Upload Blamegame Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: blamegame-dist
           path: apps/blamegame/dist/
           retention-days: 1
 
       - name: 📤 Upload HookHunt Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: hookhunt-dist
           path: apps/hookhunt/dist/
@@ -140,7 +140,7 @@ jobs:
 
     steps:
       - name: ⬇️ Download Gamepicker Artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: gamepicker-dist
           path: ./dist
@@ -157,7 +157,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: ⬆️ Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
 
@@ -209,7 +209,7 @@ jobs:
 
     steps:
       - name: ⬇️ Download Blamegame Artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: blamegame-dist
           path: ./blamegame-dist
@@ -310,7 +310,7 @@ jobs:
 
     steps:
       - name: ⬇️ Download HookHunt Artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: hookhunt-dist
           path: ./hookhunt-dist
