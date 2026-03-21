@@ -185,6 +185,14 @@ function getPlayerScopedSessionKey(playerId: string): string {
   return `${HOOKHUNT_SESSION_KEY_PREFIX}.${playerId}`;
 }
 
+function safeStorageGet(key: string): string | null {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
 function parseSessionSnapshot(raw: string | null): HookHuntSessionSnapshot | null {
   if (!raw) return null;
 
@@ -204,11 +212,11 @@ function parseSessionSnapshot(raw: string | null): HookHuntSessionSnapshot | nul
 }
 
 function readPersistedSession(playerId: string): HookHuntSessionSnapshot | null {
-  const scopedSnapshot = parseSessionSnapshot(localStorage.getItem(getPlayerScopedSessionKey(playerId)));
+  const scopedSnapshot = parseSessionSnapshot(safeStorageGet(getPlayerScopedSessionKey(playerId)));
   if (scopedSnapshot) return scopedSnapshot;
 
   // Migrate from old global session key for existing players.
-  const legacySnapshot = parseSessionSnapshot(localStorage.getItem(HOOKHUNT_SESSION_KEY_LEGACY));
+  const legacySnapshot = parseSessionSnapshot(safeStorageGet(HOOKHUNT_SESSION_KEY_LEGACY));
   if (legacySnapshot) {
     try {
       localStorage.setItem(getPlayerScopedSessionKey(playerId), JSON.stringify(legacySnapshot));
@@ -229,7 +237,7 @@ function persistSession(playerId: string, snapshot: HookHuntSessionSnapshot) {
 
 function readCachedSpotifyDisplayName(): string | null {
   try {
-    const raw = localStorage.getItem(SPOTIFY_PROFILE_CACHE_KEY);
+    const raw = safeStorageGet(SPOTIFY_PROFILE_CACHE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as SpotifyProfileCache;
     return parsed.display_name || parsed.email || parsed.id || null;

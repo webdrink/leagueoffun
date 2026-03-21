@@ -5,6 +5,22 @@ import { usePlayer } from './PlayerContext';
 import { useAnimations } from '@game-core';
 import { games, GameInfo } from './games.config';
 
+const legacyStatsKey = 'leagueoffun.playerStats';
+const legacyLastGameKey = 'leagueoffun.lastGameId';
+const legacyLastPlayedAtKey = 'leagueoffun.lastPlayedAt';
+
+function scopedStatsKey(playerId: string) {
+  return `${legacyStatsKey}.${playerId}`;
+}
+
+function scopedLastGameKey(playerId: string) {
+  return `${legacyLastGameKey}.${playerId}`;
+}
+
+function scopedLastPlayedAtKey(playerId: string) {
+  return `${legacyLastPlayedAtKey}.${playerId}`;
+}
+
 // Session ID display with copy functionality
 function SessionIdDisplay() {
   const { playerId } = usePlayer();
@@ -233,10 +249,12 @@ function App() {
   const { playerId } = usePlayer();
   const { animationsEnabled } = useAnimations();
   const [playerStats, setPlayerStats] = useState<Array<{ gameId: string; score: number; playedAt: string }>>([]);
-  const [lastGameId, setLastGameId] = useState<string | null>(() => localStorage.getItem('leagueoffun.lastGameId'));
+  const [lastGameId, setLastGameId] = useState<string | null>(() => (
+    localStorage.getItem(scopedLastGameKey(playerId)) || localStorage.getItem(legacyLastGameKey)
+  ));
 
   useEffect(() => {
-    const stats = localStorage.getItem('leagueoffun.playerStats');
+    const stats = localStorage.getItem(scopedStatsKey(playerId)) || localStorage.getItem(legacyStatsKey);
     if (stats) {
       try {
         const parsed = JSON.parse(stats) as Array<{ gameId: string; score: number; playedAt: string }>;
@@ -251,7 +269,7 @@ function App() {
         setPlayerStats([]);
       }
     }
-  }, []);
+  }, [playerId]);
 
   const orderedGames = useMemo(() => {
     if (!lastGameId) return games;
@@ -266,8 +284,11 @@ function App() {
     const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const returnUrl = encodeURIComponent(window.location.href);
     const playedAt = new Date().toISOString();
-    localStorage.setItem('leagueoffun.lastGameId', gameId);
-    localStorage.setItem('leagueoffun.lastPlayedAt', playedAt);
+    localStorage.setItem(scopedLastGameKey(playerId), gameId);
+    localStorage.setItem(scopedLastPlayedAtKey(playerId), playedAt);
+    // Keep legacy keys for compatibility with older builds.
+    localStorage.setItem(legacyLastGameKey, gameId);
+    localStorage.setItem(legacyLastPlayedAtKey, playedAt);
     setLastGameId(gameId);
     
     // In local development, route to local game servers on their specific ports

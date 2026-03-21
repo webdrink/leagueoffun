@@ -1,6 +1,9 @@
 {
   "game": {
-    "subtitle": "Guess the hit from the hook! 🎵"
+    "subtitle": "Guess the hit from the hook! 🎵",
+    "spotifyConnectedAs": "Spotify: {{name}}",
+    "spotifyConnectedFallback": "Connected",
+    "spotifyNotConnected": "Spotify not connected"
   },
   "screens": {
     "intro": {

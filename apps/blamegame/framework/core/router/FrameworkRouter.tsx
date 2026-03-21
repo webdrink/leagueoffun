@@ -18,9 +18,11 @@ interface FrameworkRouterContext {
   dispatch: (action: GameAction, payload?: unknown) => void;
   eventBus: EventBus;
   config: GameConfig;
+  playerId?: string | null;
 }
 
 const RouterContext = createContext<FrameworkRouterContext | null>(null);
+const RESUMABLE_PHASES = new Set(['intro', 'playerSetup', 'categoryPick']);
 
 export const useFrameworkRouter = () => {
   const ctx = useContext(RouterContext);
@@ -47,12 +49,17 @@ export const FrameworkRouter: React.FC<FrameworkRouterProps> = ({
   roomId = null,
   children
 }) => {
+  const phaseStorageKey = playerId
+    ? `session.phase.${config.id}.${playerId}`
+    : `session.phase.${config.id}`;
   const [currentPhaseId, setCurrentPhaseId] = useState(() => {
     const defaultPhase = config.phases[0]?.id || 'intro';
-    const persisted = storageGet<string>('session.phase');
+    const persisted =
+      storageGet<string>(phaseStorageKey) ||
+      storageGet<string>(`session.phase.${config.id}`) ||
+      storageGet<string>('session.phase');
     if (!persisted) return defaultPhase;
-    const resumable = new Set(['intro', 'playerSetup', 'categoryPick']);
-    if (!resumable.has(persisted)) return defaultPhase;
+    if (!RESUMABLE_PHASES.has(persisted)) return defaultPhase;
     const exists = config.phases.some((phase) => phase.id === persisted);
     return exists ? persisted : defaultPhase;
   });
@@ -82,7 +89,8 @@ export const FrameworkRouter: React.FC<FrameworkRouterProps> = ({
     currentPhaseId,
     dispatch,
     eventBus,
-    config
+    config,
+    playerId,
   };
 
   // Find current phase and screen
@@ -91,9 +99,8 @@ export const FrameworkRouter: React.FC<FrameworkRouterProps> = ({
   const ScreenComponent = screenId ? screenRegistry[screenId] : null;
 
   useEffect(() => {
-    const resumable = new Set(['intro', 'playerSetup', 'categoryPick']);
-    storageSet('session.phase', resumable.has(currentPhaseId) ? currentPhaseId : 'intro');
-  }, [currentPhaseId]);
+    storageSet(phaseStorageKey, RESUMABLE_PHASES.has(currentPhaseId) ? currentPhaseId : 'intro');
+  }, [currentPhaseId, phaseStorageKey]);
 
   // Fire initial onEnter exactly once (publish PHASE/ENTER if controller does not)
   useEffect(() => {

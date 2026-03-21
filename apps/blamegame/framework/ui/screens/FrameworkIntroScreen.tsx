@@ -49,7 +49,6 @@ const FrameworkIntroScreen: React.FC = () => {
     setGameMode(checked);
     // Persist to store synchronously so phase transition can read it
     updateGameSettings({ gameMode: checked ? 'nameBlame' : 'classic' } as Partial<GameSettings>);
-    console.log('Game mode changed to:', checked ? 'nameBlame' : 'classic');
   };
 
   const handleToggleCategorySelection = (checked: boolean) => {
@@ -57,48 +56,30 @@ const FrameworkIntroScreen: React.FC = () => {
     setSelectCategories(checked);
     // Persist to store synchronously so phase transition can read it
     updateGameSettings({ selectCategories: checked } as Partial<GameSettings>);
-    console.log('Category selection changed to:', checked);
   };
 
   return (
   <div className="flex flex-col items-center justify-center min-h-[60vh] py-4 w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ 
-            opacity: 1, 
-            y: 0,
-            boxShadow: [
-              "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-              "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
-              "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
-            ]
-          }}
-          transition={{ 
-            duration: 0.5, 
-            delay: 0.1,
-            boxShadow: {
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }
-          }}
-          className={`${theme.cardBackground || 'bg-white dark:bg-gray-800'} rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl backdrop-blur-sm bg-white/95 dark:bg-gray-800/95`}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className={`${theme.cardBackground || 'bg-white dark:bg-gray-800'} rounded-3xl shadow-2xl p-6 md:p-8 w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl backdrop-blur-sm bg-white/97 dark:bg-slate-900/82 border border-white/80 dark:border-slate-600/60`}
         >
 
           {/* Main Question */}
           {branding.mainQuestion && (
             <div className="text-center mb-8">
-              <h2 className="text-2xl lg:text-3xl font-bold text-autumn-700 dark:text-autumn-200 mb-2">
+              <h2 className="text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-100 mb-2">
                 {t(branding.mainQuestion)}
               </h2>
               {branding.subtitle && (
                 <p className="
-                  text-slate-600 dark:text-slate-200
+                  text-slate-700 dark:text-slate-200
                   text-sm sm:text-base lg:text-lg
                   w-full max-w-full
                   break-words hyphens-auto
                   overflow-hidden
-                  line-clamp-3
                   leading-relaxed
                   px-2
                 ">
@@ -166,11 +147,11 @@ const FrameworkIntroScreen: React.FC = () => {
 
           {/* Game Mode Toggle - Enhanced NameBlame option */}
           {features.gameMode && (
-            <motion.div 
+            <motion.div
               className={`relative overflow-hidden rounded-xl p-4 mb-4 border-2 transition-all duration-300 shadow-lg ${
                 gameMode 
                   ? `bg-amber-50 dark:bg-amber-900/25 border-amber-300 dark:border-amber-500 ring-2 ring-amber-200 dark:ring-amber-700/40` 
-                  : `bg-white dark:bg-gray-800/70 border-gray-300 dark:border-gray-600 hover:border-autumn-400 dark:hover:border-autumn-500`
+                  : `bg-white/95 dark:bg-gray-800/70 border-gray-300 dark:border-gray-600 hover:border-autumn-400 dark:hover:border-autumn-500`
               }`}
               whileHover={{ scale: 1.01 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}

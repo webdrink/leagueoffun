@@ -7,6 +7,22 @@ interface PlayerContextValue {
 
 const PlayerContext = createContext<PlayerContextValue | null>(null);
 
+const legacyStatsKey = 'leagueoffun.playerStats';
+const legacyLastGameKey = 'leagueoffun.lastGameId';
+const legacyLastPlayedAtKey = 'leagueoffun.lastPlayedAt';
+
+function scopedStatsKey(playerId: string) {
+  return `${legacyStatsKey}.${playerId}`;
+}
+
+function scopedLastGameKey(playerId: string) {
+  return `${legacyLastGameKey}.${playerId}`;
+}
+
+function scopedLastPlayedAtKey(playerId: string) {
+  return `${legacyLastPlayedAtKey}.${playerId}`;
+}
+
 export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const [playerId] = useState<PlayerId>(() => {
     const session = resolvePlayerSession('gamepicker');
@@ -29,7 +45,10 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
 
       // Store game stats
       try {
-        const stats = JSON.parse(localStorage.getItem('leagueoffun.playerStats') || '[]') as Array<{
+        const rawStats = localStorage.getItem(scopedStatsKey(playerId))
+          || localStorage.getItem(legacyStatsKey)
+          || '[]';
+        const stats = JSON.parse(rawStats) as Array<{
           gameId: string;
           score: number;
           playedAt: string;
@@ -49,9 +68,13 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         }
         // Keep only the latest 100 items.
         const trimmed = stats.slice(-100);
-        localStorage.setItem('leagueoffun.playerStats', JSON.stringify(trimmed));
-        localStorage.setItem('leagueoffun.lastGameId', gameId);
-        localStorage.setItem('leagueoffun.lastPlayedAt', playedAt);
+        localStorage.setItem(scopedStatsKey(playerId), JSON.stringify(trimmed));
+        localStorage.setItem(scopedLastGameKey(playerId), gameId);
+        localStorage.setItem(scopedLastPlayedAtKey(playerId), playedAt);
+        // Keep legacy keys for compatibility with older builds.
+        localStorage.setItem(legacyStatsKey, JSON.stringify(trimmed));
+        localStorage.setItem(legacyLastGameKey, gameId);
+        localStorage.setItem(legacyLastPlayedAtKey, playedAt);
       } catch (error) {
         console.error('Failed to store player stats:', error);
       }

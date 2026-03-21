@@ -27,7 +27,7 @@ interface GameShellProps {
 }
 
 const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
-  const { config, dispatch, eventBus } = useFrameworkRouter();
+  const { config, dispatch, eventBus, playerId } = useFrameworkRouter();
   const { t } = useTranslation();
   
   // UI configuration from game.json
@@ -43,7 +43,11 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
   const [showCustomCategories, setShowCustomCategories] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   // Persisted game settings per game id
-  const storageKey = useMemo(() => `game.settings.${config.id}`, [config.id]);
+  const storageKey = useMemo(
+    () => (playerId ? `game.settings.${config.id}.${playerId}` : `game.settings.${config.id}`),
+    [config.id, playerId]
+  );
+  const legacyStorageKey = useMemo(() => `game.settings.${config.id}`, [config.id]);
   const defaultGameSettings: GameSettings = {
     categoriesPerGame: 5,
     questionsPerCategory: 8,
@@ -60,7 +64,12 @@ const GameShell: React.FC<GameShellProps> = ({ children, className = '' }) => {
   };
   const initialSettings: GameSettings = { ...defaultGameSettings, ...(config.gameSettings || {}) };
   const [persistedSettings, setPersistedSettings] = useState<GameSettings>(() => {
-    const stored = storageGet<GameSettings>(storageKey);
+    const scopedStored = storageGet<GameSettings>(storageKey);
+    const legacyStored = storageKey !== legacyStorageKey ? storageGet<GameSettings>(legacyStorageKey) : null;
+    const stored = scopedStored || legacyStored;
+    if (!scopedStored && legacyStored) {
+      storageSet(storageKey, legacyStored);
+    }
     return stored ? { ...initialSettings, ...stored } : initialSettings;
   });
 
