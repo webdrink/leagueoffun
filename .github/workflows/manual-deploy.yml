@@ -3,24 +3,37 @@ name: 🔧 Manual Deployment Override
 on:
   workflow_dispatch:
     inputs:
+      app:
+        description: 'App to deploy'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+        - all
+        - gamepicker
+        - blamegame
+        - hookhunt
       deployment_strategy:
         description: 'Deployment strategy to use'
         required: true
-        default: 'emergency'
+        default: 'standard'
         type: choice
         options:
-        - emergency
-        - force-pages
+        - standard
         - maintenance-mode
       reason:
         description: 'Reason for manual deployment'
         required: true
-        default: 'GitHub Pages infrastructure issues'
+        default: 'Manual override requested'
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '9'
 
 jobs:
   manual-deploy:
@@ -28,78 +41,80 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: https://blamegame.leagueoffun.com
-    
+      url: https://www.leagueoffun.com
+
     steps:
       - name: ⬇️ Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           ref: main
 
       - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: ${{ env.PNPM_VERSION }}
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
 
       - name: ⚙️ Install Dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile || pnpm install --no-frozen-lockfile
 
       - name: 🏗️ Build Application
+        if: github.event.inputs.deployment_strategy != 'maintenance-mode'
         run: |
-          case "${{ github.event.inputs.deployment_strategy }}" in
-            "emergency")
-              echo "🚨 Emergency build mode"
-              pnpm run build:domain || pnpm run build
-              echo "blamegame.leagueoffun.com" > dist/CNAME
-              ;;
-            "force-pages")
-              echo "🚀 Force GitHub Pages build"
-              pnpm run build:domain
-              ;;
-            "maintenance-mode")
-              echo "🔧 Maintenance mode build"
-              mkdir -p dist
-              cat > dist/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <title>BlameGame - Scheduled Maintenance</title>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <style>
-              body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; text-align: center; padding: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-              .container { max-width: 500px; background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(15px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-              h1 { margin: 0 0 20px 0; font-size: 2.5em; }
-              .status { background: rgba(255,193,7,0.2); border: 2px solid #ffc107; padding: 20px; border-radius: 15px; margin: 20px 0; }
-              .eta { font-size: 1.2em; margin: 20px 0; }
-              .reason { opacity: 0.9; font-style: italic; margin-top: 30px; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <h1>🎮 BlameGame</h1>
-              <div class="status">
-                <strong>🔧 Scheduled Maintenance</strong>
-              </div>
-              <div class="eta">
-                ⏰ <strong>We'll be back shortly!</strong>
-              </div>
-              <p>We're performing scheduled maintenance to improve your experience.</p>
-              <div class="reason">
-                Reason: ${{ github.event.inputs.reason }}
-              </div>
-            </div>
-          </body>
-          </html>
-          EOF
-              echo "blamegame.leagueoffun.com" > dist/CNAME
-              ;;
-          esac
+          if [ "${{ github.event.inputs.app }}" == "all" ]; then
+            echo "🚀 Building all apps..."
+            pnpm --filter @leagueoffun/gamepicker build
+            pnpm --filter @leagueoffun/blamegame build
+            pnpm --filter @leagueoffun/hookhunt build
+          elif [ "${{ github.event.inputs.app }}" == "gamepicker" ]; then
+            pnpm --filter @leagueoffun/gamepicker build
+          elif [ "${{ github.event.inputs.app }}" == "blamegame" ]; then
+            pnpm --filter @leagueoffun/blamegame build
+          elif [ "${{ github.event.inputs.app }}" == "hookhunt" ]; then
+            pnpm --filter @leagueoffun/hookhunt build
+          fi
+
+      - name: 🔧 Prepare Gamepicker for GitHub Pages
+        run: |
+          if [ "${{ github.event.inputs.deployment_strategy }}" == "maintenance-mode" ]; then
+            mkdir -p apps/gamepicker/dist
+            cat > apps/gamepicker/dist/index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+  <title>League of Fun - Scheduled Maintenance</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; text-align: center; padding: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .container { max-width: 500px; background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(15px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .status { background: rgba(255,193,7,0.2); border: 2px solid #ffc107; padding: 20px; border-radius: 15px; margin: 20px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 League of Fun</h1>
+    <div class="status">
+      <strong>🔧 Scheduled Maintenance</strong>
+    </div>
+    <p>⏰ <strong>We'll be back shortly!</strong></p>
+    <p>We're performing scheduled maintenance to improve your experience.</p>
+  </div>
+</body>
+</html>
+EOF
+          fi
+
+          if [ -d "apps/gamepicker/dist" ]; then
+            echo "www.leagueoffun.com" > apps/gamepicker/dist/CNAME
+            touch apps/gamepicker/dist/.nojekyll
+            echo "✅ Gamepicker dist prepared for GitHub Pages"
+          fi
 
       - name: ⚙️ Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -107,26 +122,27 @@ jobs:
       - name: ⬆️ Upload Build
         uses: actions/upload-pages-artifact@v4
         with:
-          path: './dist'
+          path: 'apps/gamepicker/dist'
 
       - name: 🚀 Deploy Override
+        id: deployment
         uses: actions/deploy-pages@v4
         continue-on-error: true
 
       - name: ✅ Verify Override Deployment
         run: |
           echo "🔍 Verifying manual deployment override..."
-          
-          sleep 60
-          
+
+          sleep 30
+
           for attempt in {1..5}; do
-            if curl -f -s --max-time 30 "https://blamegame.leagueoffun.com/" > /dev/null; then
+            if curl -f -s --max-time 30 "https://www.leagueoffun.com/" > /dev/null; then
               echo "✅ Manual deployment successful!"
-              echo "🌐 Site: https://blamegame.leagueoffun.com/"
+              echo "🌐 Site: https://www.leagueoffun.com/"
               break
             else
-              echo "⚠️ Verification attempt $attempt failed, retrying..."
-              sleep 30
+              echo "⚠️ Verification attempt $attempt/5 failed, retrying..."
+              sleep 20
             fi
           done
 
@@ -138,21 +154,20 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: '🔧 Manual Deployment Override Executed',
-              body: \`## 🔧 Manual Deployment Override Report
-              
-              **Strategy:** ${{ github.event.inputs.deployment_strategy }}
-              **Reason:** ${{ github.event.inputs.reason }}
-              **Triggered by:** @${{ github.actor }}
-              **Workflow:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-              **Time:** \${new Date().toISOString()}
-              
-              **Status:** 
-              - ✅ Manual override completed
-              - 🌐 Site: https://blamegame.leagueoffun.com/
-              
-              **Note:** This was a manual intervention to bypass automatic deployment issues.
-              
-              _Auto-created by Manual Deployment Override workflow_\`,
+              body: `## 🔧 Manual Deployment Override Report
+
+**App:** ${{ github.event.inputs.app }}
+**Strategy:** ${{ github.event.inputs.deployment_strategy }}
+**Reason:** ${{ github.event.inputs.reason }}
+**Triggered by:** @${{ github.actor }}
+**Workflow:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+**Time:** ${new Date().toISOString()}
+
+**Status:**
+- ✅ Manual override completed
+- 🌐 Site: https://www.leagueoffun.com/
+
+_Auto-created by Manual Deployment Override workflow_`,
               labels: ['deployment', 'manual-intervention']
             });
 
@@ -160,10 +175,11 @@ jobs:
         run: |
           echo "## 🔧 Manual Deployment Override Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**App:** ${{ github.event.inputs.app }}" >> $GITHUB_STEP_SUMMARY
           echo "**Strategy:** ${{ github.event.inputs.deployment_strategy }}" >> $GITHUB_STEP_SUMMARY
           echo "**Reason:** ${{ github.event.inputs.reason }}" >> $GITHUB_STEP_SUMMARY
           echo "**Triggered by:** @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
           echo "**Status:** Manual override completed" >> $GITHUB_STEP_SUMMARY
-          echo "**Site:** https://blamegame.leagueoffun.com/" >> $GITHUB_STEP_SUMMARY
+          echo "**Site:** https://www.leagueoffun.com/" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "_Manual intervention to ensure site availability during infrastructure issues._" >> $GITHUB_STEP_SUMMARY

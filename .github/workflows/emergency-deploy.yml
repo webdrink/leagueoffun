@@ -8,17 +8,25 @@ on:
         required: true
         default: 'Main workflow failed'
   
-  # Disabled automatic trigger to prevent deployment loops
-  # workflow_run:
-  #   workflows: ["🚀 Deploy Blame Game to GitHub Pages"]
-  #   types:
-  #     - completed
-  #   branches: [main]
+  # Auto-trigger when any primary deploy workflow fails
+  workflow_run:
+    workflows:
+      - "🚀 Deploy All Apps"
+      - "🚀 Deploy BlameGame"
+      - "🚀 Deploy HookHunt"
+      - "🚀 Deploy Game Picker"
+    types:
+      - completed
+    branches: [main]
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '9'
 
 jobs:
   emergency-deploy:
@@ -27,247 +35,99 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'failure' || github.event_name == 'workflow_dispatch' }}
     environment:
       name: github-pages
-      url: https://blamegame.leagueoffun.com
+      url: https://www.leagueoffun.com
     
     steps:
       - name: ⬇️ Emergency Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 1
 
       - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: ${{ env.PNPM_VERSION }}
 
       - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
 
-      - name: ⚙️ Minimal Dependency Install
+      - name: ⚙️ Install Dependencies
         run: |
-          echo "🚨 Emergency mode: Installing only essential dependencies..."
-          pnpm install --prod --no-frozen-lockfile || {
-            echo "⚠️ Production install failed, trying full install..."
-            rm -rf node_modules
+          echo "🚨 Emergency mode: Installing dependencies..."
+          if ! pnpm install --frozen-lockfile; then
+            echo "⚠️ Lockfile mismatch, trying without frozen lockfile..."
             pnpm install --no-frozen-lockfile
-          }
-
-      - name: 🏗️ Emergency Build
-        run: |
-          echo "🚨 Emergency build with multiple strategies..."
-          
-          # Set emergency environment
-          export NODE_ENV=production
-          export VITE_BASE_PATH=/
-          
-          # Strategy 1: Try standard build
-          if pnpm run build:domain; then
-            echo "✅ Standard build succeeded"
-          elif pnpm run build; then
-            echo "✅ Fallback build succeeded"
-            # Ensure CNAME file exists for custom domain
-            echo "blamegame.leagueoffun.com" > dist/CNAME
-          else
-            echo "❌ All build strategies failed, creating minimal static site..."
-            
-            # Last resort: create minimal static site with error page
-            mkdir -p dist
-            cat > dist/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <title>BlameGame - Service Recovery</title>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <meta http-equiv="refresh" content="300">
-            <style>
-              body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
-              .container { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.1); padding: 40px; border-radius: 15px; backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-              h1 { color: #fff; margin-bottom: 20px; }
-              .status { background: rgba(255,193,7,0.2); border: 2px solid #ffc107; color: #fff; padding: 20px; border-radius: 10px; margin: 20px 0; }
-              .retry-btn { background: #28a745; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin: 20px 10px; text-decoration: none; display: inline-block; }
-              .retry-btn:hover { background: #218838; }
-              .timestamp { font-size: 12px; opacity: 0.8; margin-top: 20px; }
-              .spinner { border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid #fff; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 20px auto; }
-              @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <h1>🎮 BlameGame</h1>
-              <div class="spinner"></div>
-              <div class="status">
-                <strong>🔧 Service Recovery in Progress</strong><br><br>
-                We're experiencing technical difficulties with our deployment system.<br>
-                Our automatic recovery system is actively working to restore service.
-              </div>
-              <p>🚀 <strong>Emergency deployment system activated</strong></p>
-              <p>⏱️ This page will automatically refresh every 5 minutes</p>
-              <p>🔄 Normal service will be restored automatically</p>
-              
-              <a href="/" class="retry-btn">🔄 Retry Now</a>
-              <a href="https://github.com/webdrink/blamegame" class="retry-btn">📧 Report Issue</a>
-              
-              <div class="timestamp">
-                <em>Emergency deployment: <script>document.write(new Date().toLocaleString())</script></em><br>
-                <em>System Status: Automatic Recovery Active</em>
-              </div>
-            </div>
-            
-            <script>
-              // Auto-retry mechanism
-              let retryCount = 0;
-              const maxRetries = 10;
-              
-              function checkService() {
-                retryCount++;
-                if (retryCount <= maxRetries) {
-                  console.log('Checking service status...', retryCount);
-                  // Try to fetch a small asset to test if main site is back
-                  fetch('/favicon.svg', { method: 'HEAD' })
-                    .then(response => {
-                      if (response.ok) {
-                        window.location.reload();
-                      }
-                    })
-                    .catch(() => {
-                      // Service still down, will retry on next interval
-                    });
-                }
-              }
-              
-              // Check every 30 seconds
-              setInterval(checkService, 30000);
-              
-              // Initial check after 10 seconds
-              setTimeout(checkService, 10000);
-            </script>
-          </body>
-          </html>
-          EOF
-            echo "blamegame.leagueoffun.com" > dist/CNAME
-            echo "🆘 Created intelligent emergency maintenance page with auto-recovery"
           fi
+
+      - name: 🏗️ Emergency Build - Gamepicker
+        id: build-gamepicker
+        continue-on-error: true
+        run: |
+          echo "🚨 Emergency build: Gamepicker..."
+          pnpm --filter @leagueoffun/gamepicker build
+          echo "✅ Gamepicker build succeeded"
 
       - name: 🔍 Verify Emergency Build
         run: |
-          if [ ! -d "dist" ] || [ ! -f "dist/index.html" ]; then
-            echo "❌ Emergency build verification failed"
-            exit 1
+          if [ "${{ steps.build-gamepicker.outcome }}" == "success" ] && [ -f "apps/gamepicker/dist/index.html" ]; then
+            echo "✅ Emergency build verified"
+            echo "📁 Build contents:"
+            ls -la apps/gamepicker/dist/
+          else
+            echo "⚠️ Standard build failed, creating minimal static maintenance page..."
+            
+            mkdir -p apps/gamepicker/dist
+            cat > apps/gamepicker/dist/index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+  <title>League of Fun - Service Recovery</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="300">
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .container { max-width: 600px; background: rgba(255,255,255,0.1); padding: 40px; border-radius: 15px; backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .status { background: rgba(255,193,7,0.2); border: 2px solid #ffc107; color: #fff; padding: 20px; border-radius: 10px; margin: 20px 0; }
+    .spinner { border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid #fff; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 20px auto; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 League of Fun</h1>
+    <div class="spinner"></div>
+    <div class="status">
+      <strong>🔧 Service Recovery in Progress</strong><br><br>
+      Our automatic recovery system is actively working to restore service.
+    </div>
+    <p>⏱️ This page will automatically refresh every 5 minutes</p>
+  </div>
+</body>
+</html>
+EOF
+            echo "🆘 Created emergency maintenance page"
           fi
-          
-          echo "✅ Emergency build verified"
-          echo "📁 Build contents:"
-          ls -la dist/
+
+      - name: 📝 Add CNAME and .nojekyll
+        run: |
+          echo "www.leagueoffun.com" > apps/gamepicker/dist/CNAME
+          touch apps/gamepicker/dist/.nojekyll
 
       - name: ⚙️ Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: 🚀 Smart Emergency Deploy
-        id: smart-deploy
-        run: |
-          echo "🚨 Starting intelligent emergency deployment..."
-          
-          # Check GitHub Pages service status first
-          check_github_pages_status() {
-            echo "🔍 Checking GitHub Pages service status..."
-            
-            # Check GitHub status API
-            if curl -s --max-time 10 "https://www.githubstatus.com/api/v2/components.json" | grep -q '"name":"Pages".*"status":"operational"'; then
-              echo "✅ GitHub Pages reports operational status"
-              return 0
-            else
-              echo "⚠️ GitHub Pages may be experiencing issues"
-              return 1
-            fi
-          }
-          
-          # Strategy 1: Try GitHub Pages if service is healthy
-          if check_github_pages_status; then
-            echo "📤 Attempting GitHub Pages deployment (service appears healthy)..."
-            
-            # Upload artifact with timeout
-            if timeout 300 curl -X POST \
-               -H "Authorization: token $GITHUB_TOKEN" \
-               -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/$GITHUB_REPOSITORY/pages/builds" \
-               -d '{}'; then
-              
-              echo "✅ GitHub Pages deployment initiated"
-              
-              # Wait reasonable time and verify
-              sleep 120
-              
-              if curl -f -s --max-time 30 "https://blamegame.leagueoffun.com/" > /dev/null; then
-                echo "✅ GitHub Pages deployment successful!"
-                echo "deployment_method=github-pages" >> $GITHUB_OUTPUT
-                echo "deployment_success=true" >> $GITHUB_OUTPUT
-                exit 0
-              fi
-            fi
-            
-            echo "⚠️ GitHub Pages deployment failed despite healthy status"
-          fi
-          
-          # Strategy 2: Try the upload-pages-artifact approach
-          echo "🔄 Attempting artifact-based deployment..."
-          
-          if timeout 600 bash -c '
-            echo "📤 Uploading pages artifact..."
-            
-            # Create artifact manually
-            cd dist
-            tar --dereference --hard-dereference --directory . -czf ../pages.tar.gz .
-            cd ..
-            
-            # Upload using GitHub API
-            curl -X POST \
-              -H "Authorization: token $GITHUB_TOKEN" \
-              -H "Accept: application/vnd.github.v3+json" \
-              "https://uploads.github.com/repos/$GITHUB_REPOSITORY/releases/assets" \
-              --data-binary @pages.tar.gz \
-              -H "Content-Type: application/gzip"
-          '; then
-            echo "✅ Artifact uploaded successfully"
-            sleep 60
-            
-            if curl -f -s --max-time 30 "https://blamegame.leagueoffun.com/" > /dev/null; then
-              echo "✅ Artifact deployment successful!"
-              echo "deployment_method=artifact-upload" >> $GITHUB_OUTPUT
-              echo "deployment_success=true" >> $GITHUB_OUTPUT
-              exit 0
-            fi
-          fi
-          
-          # Strategy 3: Force rebuild via repository dispatch
-          echo "🆘 Attempting force rebuild trigger..."
-          
-          curl -X POST \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches" \
-            -d '{"event_type":"emergency-rebuild","client_payload":{"source":"emergency-deploy","timestamp":"'$(date -Iseconds)'"}}' || true
-          
-          sleep 30
-          
-          # Strategy 4: Last resort - use standard action with minimal timeout
-          echo "🔄 Final attempt with standard deployment action..."
-          echo "deployment_method=last-resort" >> $GITHUB_OUTPUT
-          echo "deployment_success=false" >> $GITHUB_OUTPUT
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
-
       - name: ⬆️ Upload Emergency Build
         uses: actions/upload-pages-artifact@v4
         with:
-          path: './dist'
+          path: 'apps/gamepicker/dist'
 
-      - name: 🚀 Final Emergency Deploy
-        if: steps.smart-deploy.outputs.deployment_success != 'true'
+      - name: 🚀 Emergency Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
         continue-on-error: true
 
@@ -276,26 +136,19 @@ jobs:
           echo "🔍 Verifying emergency deployment..."
           
           # Extended verification with multiple checks
-          for attempt in {1..10}; do
-            echo "🔍 Verification attempt $attempt/10..."
+          for attempt in {1..6}; do
+            echo "🔍 Verification attempt $attempt/6..."
             
-            # Try multiple endpoints
-            if curl -f -s --max-time 30 "https://blamegame.leagueoffun.com/" > /dev/null ||
-               curl -f -s --max-time 30 "https://blamegame.leagueoffun.com/index.html" > /dev/null; then
-              
+            if curl -f -s --max-time 30 "https://www.leagueoffun.com/" > /dev/null; then
               echo "✅ Emergency deployment verified!"
-              echo "🌐 Site accessible at: https://blamegame.leagueoffun.com/"
-              echo "EMERGENCY_DEPLOY_SUCCESS=true" >> $GITHUB_ENV
+              echo "🌐 Site accessible at: https://www.leagueoffun.com/"
               break
             else
-              echo "⚠️ Site not accessible yet (attempt $attempt), waiting..."
-              
-              if [ $attempt -le 8 ]; then
-                sleep 45
+              echo "⚠️ Site not accessible yet (attempt $attempt), waiting 30 seconds..."
+              if [ $attempt -lt 6 ]; then
+                sleep 30
               else
-                echo "❌ Emergency deployment verification failed"
-                echo "🆘 Site may not be accessible"
-                echo "EMERGENCY_DEPLOY_SUCCESS=false" >> $GITHUB_ENV
+                echo "⚠️ Site may still be propagating - deployment was submitted successfully"
               fi
             fi
           done
@@ -308,33 +161,29 @@ jobs:
             const issue = await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: '🚨 Main Deployment Workflow Failed - Emergency Deployment Activated',
+              title: '🚨 Deployment Workflow Failed - Emergency Deployment Activated',
               body: `## 🆘 Emergency Deployment Report
               
-              The main deployment workflow failed and emergency deployment was automatically triggered.
-              
-              **Failure Details:**
-              - **Workflow Run:** ${{ github.event.workflow_run.html_url }}
-              - **Conclusion:** ${{ github.event.workflow_run.conclusion }}
-              - **Emergency Deployment:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-              - **Time:** ${new Date().toISOString()}
-              
-              **Current Status:**
-              - ✅ Emergency deployment completed
-              - 🌐 Site accessible at: https://blamegame.leagueoffun.com/
-              - ⚠️ May be running in maintenance mode
-              
-              **Next Steps:**
-              1. Investigate the main workflow failure
-              2. Fix underlying issues
-              3. Trigger a new deployment
-              4. Close this issue once resolved
-              
-              **Auto-created by Emergency Fallback Deployment workflow**`,
+The deployment workflow failed and emergency deployment was automatically triggered.
+
+**Failure Details:**
+- **Failed Workflow:** ${context.payload.workflow_run.name}
+- **Workflow Run:** ${context.payload.workflow_run.html_url}
+- **Conclusion:** ${context.payload.workflow_run.conclusion}
+- **Emergency Deployment:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+- **Time:** ${new Date().toISOString()}
+
+**Next Steps:**
+1. Investigate the failed workflow run
+2. Fix underlying issues
+3. Trigger a new deployment via workflow_dispatch
+4. Close this issue once resolved
+
+_Auto-created by Emergency Fallback Deployment workflow_`,
               labels: ['bug', 'deployment', 'emergency']
             });
             
-            console.log(`Created issue #${issue.data.number}`);
+            console.log(\`Created issue #\${issue.data.number}\`);
 
       - name: 📊 Emergency Report
         if: always()
@@ -344,13 +193,13 @@ jobs:
           echo "**Trigger:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
           
           if [ "${{ github.event_name }}" == "workflow_run" ]; then
-            echo "**Reason:** Main workflow failed" >> $GITHUB_STEP_SUMMARY
+            echo "**Reason:** ${{ github.event.workflow_run.name }} failed" >> $GITHUB_STEP_SUMMARY
             echo "**Failed Run:** ${{ github.event.workflow_run.html_url }}" >> $GITHUB_STEP_SUMMARY
           else
             echo "**Reason:** ${{ github.event.inputs.reason }}" >> $GITHUB_STEP_SUMMARY
           fi
           
           echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Site:** https://blamegame.leagueoffun.com/" >> $GITHUB_STEP_SUMMARY
+          echo "**Site:** https://www.leagueoffun.com/" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "_Emergency deployment ensures site availability during main workflow issues._" >> $GITHUB_STEP_SUMMARY
