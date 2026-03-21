@@ -231,3 +231,4 @@ Currently shows placeholder UI. Future testing:
 - Framework components: `packages/framework-ui/`
 - Game utilities: `packages/game-core/`
 - Skeleton reference: This is the template!
+
