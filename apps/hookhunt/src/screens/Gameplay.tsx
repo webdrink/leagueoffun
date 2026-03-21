@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Pause, Play, RotateCcw, SkipForward } from 'lucide-react';
+import { ArrowLeft, Pause, Play, RefreshCw, RotateCcw, SkipForward } from 'lucide-react';
 import {
   getEstimatedHookStartMs,
   getPlaylistTracks,
@@ -10,7 +10,7 @@ import {
   transferPlaybackToDevice,
 } from '../utils/spotifyApi';
 import { getValidAccessToken } from '../utils/spotifyAuth';
-import { decadeFromYear, pointsForGuess } from '../utils/scoring';
+import { evaluateGuess, GuessEvaluation, MatchStatus, releaseYearFromDate } from '../utils/scoring';
 
 type GameMode = 'singleplayer' | 'hotSeat';
 type PlaybackSource = 'none' | 'preview' | 'spotify';
@@ -41,8 +41,16 @@ interface GameplayProps {
   animationsEnabled: boolean;
 }
 
-const HOOK_CLIP_MS = 12_000;
+const HOOK_CLIP_MS = 30_000;
 const HOOK_CLIP_SECONDS = Math.round(HOOK_CLIP_MS / 1000);
+const REPLAY_PENALTY_PER_REPLAY = 0.15;
+
+interface RoundFeedback {
+  details: GuessEvaluation;
+  listeningFactor: number;
+  finalPoints: number;
+  revealedNoPoints: boolean;
+}
 
 let spotifySdkReadyPromise: Promise<void> | null = null;
 
@@ -121,6 +129,30 @@ function formatSeconds(ms: number): number {
   return Math.max(0, Math.round(ms / 1000));
 }
 
+function confidencePct(confidence: number): number {
+  return Math.round(confidence * 100);
+}
+
+function statusText(status: MatchStatus, t: (key: string) => string): string {
+  if (status === 'exact') return t('screens.gameplay.feedbackExact');
+  if (status === 'close') return t('screens.gameplay.feedbackClose');
+  if (status === 'partial') return t('screens.gameplay.feedbackPartial');
+  return t('screens.gameplay.feedbackMiss');
+}
+
+function statusClass(status: MatchStatus): string {
+  if (status === 'exact') {
+    return 'border-emerald-300/80 bg-emerald-50/80 text-emerald-800 dark:border-emerald-500/40 dark:bg-emerald-500/10 dark:text-emerald-100';
+  }
+  if (status === 'close') {
+    return 'border-sky-300/80 bg-sky-50/80 text-sky-800 dark:border-sky-500/40 dark:bg-sky-500/10 dark:text-sky-100';
+  }
+  if (status === 'partial') {
+    return 'border-amber-300/80 bg-amber-50/80 text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-100';
+  }
+  return 'border-rose-300/80 bg-rose-50/80 text-rose-800 dark:border-rose-500/40 dark:bg-rose-500/10 dark:text-rose-100';
+}
+
 function listeningFactor(heardMs: number): number {
   if (heardMs <= 4_000) return 1.5;
   if (heardMs <= 8_000) return 1.25;
@@ -163,9 +195,15 @@ export default function GameplayScreen({
   const { t } = useTranslation();
   const [tracks, setTracks] = useState<SpotifyTrack[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [guess, setGuess] = useState('');
+  const [titleGuess, setTitleGuess] = useState('');
+  const [artistGuess, setArtistGuess] = useState('');
+  const [yearGuess, setYearGuess] = useState('');
   const [scores, setScores] = useState<PlayerRoundScore[]>(playerNames.map((name) => ({ name, score: 0, heardMs: 0 })));
   const [currentPlayerIdx, setCurrentPlayerIdx] = useState(0);
+  const [roundSubmitted, setRoundSubmitted] = useState(false);
+  const [roundFeedback, setRoundFeedback] = useState<RoundFeedback | null>(null);
+  const [pendingFinishScores, setPendingFinishScores] = useState<PlayerRoundScore[] | null>(null);
+  const [replayCount, setReplayCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [hookEstimateMs, setHookEstimateMs] = useState<number | null>(null);
@@ -187,6 +225,8 @@ export default function GameplayScreen({
   const hookStopTimerRef = useRef<number | null>(null);
   const heardStartedAtRef = useRef<number | null>(null);
   const roundHeardMsRef = useRef(0);
+  const replayCountRef = useRef(0);
+  const hasPlayedHookOnceRef = useRef(false);
 
   const clearHookStopTimer = useCallback(() => {
     if (hookStopTimerRef.current !== null) {
@@ -299,16 +339,17 @@ export default function GameplayScreen({
   }, [playlistId, t]);
 
   const currentTrack = tracks[currentIndex];
-  const decade = useMemo(() => decadeFromYear(currentTrack?.release_date), [currentTrack]);
+  const releaseYear = useMemo(() => releaseYearFromDate(currentTrack?.release_date), [currentTrack]);
   const needsSpotifyPlayback = useMemo(
     () => tracks.some((track) => !track.preview_url && canPlayViaSpotify(track)),
     [tracks]
   );
   const roundFactor = useMemo(() => listeningFactor(roundHeardMs), [roundHeardMs]);
-  const hookProgressPercent = useMemo(() => {
+  const hookRemainingPercent = useMemo(() => {
     const remaining = hookRemainingMs ?? clipRemainingMs;
     return clamp((remaining / HOOK_CLIP_MS) * 100, 0, 100);
   }, [clipRemainingMs, hookRemainingMs]);
+  const hookElapsedPercent = useMemo(() => 100 - hookRemainingPercent, [hookRemainingPercent]);
 
   useEffect(() => {
     spotifyPlayerRef.current = spotifyPlayer;
@@ -423,8 +464,15 @@ export default function GameplayScreen({
   }, [needsSpotifyPlayback, t]);
 
   const startHookFromBeginning = useCallback(
-    async (track?: SpotifyTrack) => {
+    async (track?: SpotifyTrack, options?: { countAsReplay?: boolean }) => {
       if (!track) return;
+      if (options?.countAsReplay && hasPlayedHookOnceRef.current) {
+        setReplayCount((previous) => {
+          const next = previous + 1;
+          replayCountRef.current = next;
+          return next;
+        });
+      }
 
       const requestId = ++playbackRequestRef.current;
       setSpotifyError(null);
@@ -457,6 +505,7 @@ export default function GameplayScreen({
           if (requestId !== playbackRequestRef.current) return;
           setPlaybackSource('preview');
           setHookPlaying(true);
+          hasPlayedHookOnceRef.current = true;
           startHeardTracking();
           scheduleHookStop('preview', requestId, HOOK_CLIP_MS);
         } catch {
@@ -489,6 +538,7 @@ export default function GameplayScreen({
         if (requestId !== playbackRequestRef.current) return;
         setPlaybackSource('spotify');
         setHookPlaying(true);
+        hasPlayedHookOnceRef.current = true;
         startHeardTracking();
         scheduleHookStop('spotify', requestId, HOOK_CLIP_MS);
       } catch (playbackError) {
@@ -520,7 +570,7 @@ export default function GameplayScreen({
     if (roundRevealed || !currentTrack) return;
 
     if (clipRemainingMs <= 200 || playbackSource === 'none') {
-      await startHookFromBeginning(currentTrack);
+      await startHookFromBeginning(currentTrack, { countAsReplay: true });
       return;
     }
 
@@ -547,13 +597,22 @@ export default function GameplayScreen({
     if (!currentTrack) return;
 
     setRoundRevealed(false);
+    setRoundSubmitted(false);
+    setRoundFeedback(null);
+    setPendingFinishScores(null);
+    setTitleGuess('');
+    setArtistGuess('');
+    setYearGuess('');
+    setReplayCount(0);
+    replayCountRef.current = 0;
+    hasPlayedHookOnceRef.current = false;
     setRoundHeardMs(0);
     roundHeardMsRef.current = 0;
     heardStartedAtRef.current = null;
     setPlaybackSource('none');
     setClipRemainingMs(HOOK_CLIP_MS);
     setHookRemainingMs(null);
-    startHookFromBeginning(currentTrack).catch(() => undefined);
+    startHookFromBeginning(currentTrack, { countAsReplay: false }).catch(() => undefined);
   }, [currentTrack, startHookFromBeginning]);
 
   useEffect(
@@ -579,6 +638,31 @@ export default function GameplayScreen({
     setRoundRevealed(true);
   };
 
+  const restartRound = useCallback(() => {
+    if (!currentTrack || roundSubmitted) return;
+
+    stopAllPlayback();
+    setRoundRevealed(false);
+    setRoundSubmitted(false);
+    setRoundFeedback(null);
+    setPendingFinishScores(null);
+    setTitleGuess('');
+    setArtistGuess('');
+    setYearGuess('');
+    setReplayCount(0);
+    replayCountRef.current = 0;
+    hasPlayedHookOnceRef.current = false;
+    setRoundHeardMs(0);
+    roundHeardMsRef.current = 0;
+    heardStartedAtRef.current = null;
+    setPlaybackSource('none');
+    setClipRemainingMs(HOOK_CLIP_MS);
+    setHookRemainingMs(null);
+    setHookEstimateMs(null);
+    setActiveHookStartMs(null);
+    startHookFromBeginning(currentTrack, { countAsReplay: false }).catch(() => undefined);
+  }, [currentTrack, roundSubmitted, startHookFromBeginning, stopAllPlayback]);
+
   const advance = () => {
     stopAllPlayback();
     const nextIdx = currentIndex + 1;
@@ -588,7 +672,6 @@ export default function GameplayScreen({
     }
 
     setCurrentIndex(nextIdx);
-    setGuess('');
     if (mode === 'hotSeat') {
       setCurrentPlayerIdx((index) => (index + 1) % playerNames.length);
     }
@@ -596,24 +679,39 @@ export default function GameplayScreen({
 
   const submit = () => {
     if (!currentTrack) return;
+
+    if (roundSubmitted) {
+      if (pendingFinishScores) {
+        onFinish(pendingFinishScores);
+        return;
+      }
+      advance();
+      return;
+    }
+
     stopAllPlayback();
 
     const heardThisRoundMs = roundHeardMsRef.current;
     const factor = listeningFactor(heardThisRoundMs);
-    const artist = currentTrack.artists?.[0]?.name || '';
-    const title = currentTrack.name || '';
-    const baseResult = pointsForGuess(
-      guess,
-      title,
-      artist,
-      decade,
-      settings.matchThreshold,
-      settings.pointsForPartial,
-      settings.pointsForFull
-    );
+    const mainArtist = currentTrack.artists?.[0]?.name || '';
+    const featuredArtists = currentTrack.artists?.slice(1).map((artist) => artist.name) || [];
+    const details = evaluateGuess({
+      titleGuess,
+      artistGuess,
+      yearGuess,
+      targetTitle: currentTrack.name || '',
+      mainArtist,
+      featuredArtists,
+      targetYear: releaseYear,
+      thresholdPct: settings.matchThreshold,
+      partialPoints: settings.pointsForPartial,
+      fullPoints: settings.pointsForFull,
+      replayCount: replayCountRef.current,
+      replayPenaltyPerReplay: REPLAY_PENALTY_PER_REPLAY,
+    });
 
-    const effectiveBasePoints = roundRevealed ? 0 : baseResult.awarded;
-    const adjustedPoints = effectiveBasePoints > 0 ? Math.max(0, Math.floor(effectiveBasePoints * factor)) : 0;
+    const pointsAfterReplay = roundRevealed ? 0 : details.pointsAfterReplayPenalty;
+    const adjustedPoints = pointsAfterReplay > 0 ? Math.max(0, Math.floor(pointsAfterReplay * factor)) : 0;
 
     const newScores = scores.map((score, index) => {
       if (index !== currentPlayerIdx) return score;
@@ -624,14 +722,19 @@ export default function GameplayScreen({
       };
     });
     setScores(newScores);
+    setRoundFeedback({
+      details,
+      listeningFactor: factor,
+      finalPoints: adjustedPoints,
+      revealedNoPoints: roundRevealed,
+    });
+    setRoundSubmitted(true);
 
-    const winner = newScores.find((score) => score.score >= settings.pointsToWin);
-    if (winner) {
-      onFinish(newScores);
-      return;
+    const reachedPointsToWin = newScores.some((score) => score.score >= settings.pointsToWin);
+    const reachedTrackEnd = currentIndex + 1 >= tracks.length;
+    if (reachedPointsToWin || reachedTrackEnd) {
+      setPendingFinishScores(newScores);
     }
-
-    advance();
   };
 
   if (loading) {
@@ -694,10 +797,14 @@ export default function GameplayScreen({
             <div className={`h-3.5 w-3.5 rounded-full ring-4 ring-white/10 ${hookPlaying ? 'bg-emerald-400 animate-pulse' : 'bg-amber-300'}`} />
           </div>
 
-          <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-slate-700/85">
+          <div className="mt-3 relative h-2.5 overflow-visible rounded-full bg-slate-700/85">
             <div
               className="h-full rounded-full bg-gradient-to-r from-orange-400 via-orange-400 to-rose-400 transition-all duration-200"
-              style={{ width: `${hookProgressPercent}%` }}
+              style={{ width: `${hookElapsedPercent}%` }}
+            />
+            <div
+              className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white/90 bg-rose-400 shadow-[0_0_10px_rgba(251,113,133,0.8)] transition-all duration-200"
+              style={{ left: `${hookElapsedPercent}%` }}
             />
           </div>
           <div className="mt-1 text-[11px] text-right text-slate-300">
@@ -708,16 +815,23 @@ export default function GameplayScreen({
 
           <div className="mt-3 flex flex-wrap items-center gap-2.5">
             <button
-              onClick={() => startHookFromBeginning(currentTrack)}
+              onClick={() => startHookFromBeginning(currentTrack, { countAsReplay: true })}
               className="hh-btn-primary !w-auto !px-4 !py-2.5"
-              disabled={roundRevealed}
+              disabled={roundRevealed || roundSubmitted}
             >
               <RotateCcw size={15} /> {t('screens.gameplay.replayHook')}
             </button>
             <button
+              onClick={restartRound}
+              className="hh-btn-muted !w-auto !px-4 !py-2.5"
+              disabled={roundRevealed || roundSubmitted}
+            >
+              <RefreshCw size={15} /> {t('screens.gameplay.restartRound')}
+            </button>
+            <button
               onClick={() => (hookPlaying ? pauseHook() : resumeHook())}
               className="hh-btn-muted !w-auto !px-4 !py-2.5"
-              disabled={roundRevealed}
+              disabled={roundRevealed || roundSubmitted}
             >
               {hookPlaying ? <Pause size={15} /> : <Play size={15} />}
               {hookPlaying ? t('screens.gameplay.pauseHook') : t('screens.gameplay.playHook')}
@@ -725,7 +839,7 @@ export default function GameplayScreen({
             <button
               onClick={revealTrack}
               className="hh-btn-muted !w-auto !px-4 !py-2.5 border-rose-300 text-rose-700 dark:text-rose-200 hover:border-rose-400"
-              disabled={roundRevealed}
+              disabled={roundRevealed || roundSubmitted}
             >
               {t('screens.gameplay.revealTrackNoPoints')}
             </button>
@@ -744,6 +858,7 @@ export default function GameplayScreen({
             </p>
             <p>{t('screens.gameplay.heardThisRound', { seconds: formatSeconds(roundHeardMs) })}</p>
             <p>{t('screens.gameplay.speedFactor', { factor: roundFactor.toFixed(2) })}</p>
+            <p>{t('screens.gameplay.replayPenalty', { count: replayCount, percent: Math.round(replayCount * REPLAY_PENALTY_PER_REPLAY * 100) })}</p>
           </div>
 
           {roundRevealed && (
@@ -790,20 +905,79 @@ export default function GameplayScreen({
           )}
         </div>
 
-        <div className="hh-content flex gap-2 mb-4">
-          <input
-            value={guess}
-            onChange={(event) => setGuess(event.target.value)}
-            placeholder={t('screens.gameplay.guessPlaceholder')}
-            className="hh-input flex-1"
-            disabled={roundRevealed}
-          />
-          <button onClick={submit} className="hh-btn-primary !w-auto !px-4 !py-2.5">
-            {roundRevealed ? t('screens.gameplay.continueNoPoints') : t('screens.gameplay.submit')}
-          </button>
-          <button onClick={advance} className="hh-btn-muted !w-auto !px-4 !py-2.5">
-            <SkipForward size={16} /> {t('screens.gameplay.skip')}
-          </button>
+        {roundFeedback && (
+          <div className="hh-content mb-4 rounded-2xl border border-white/80 dark:border-slate-600/80 bg-white/70 dark:bg-slate-900/60 p-4 space-y-3">
+            <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">
+              {t('screens.gameplay.roundFeedbackTitle')}
+            </p>
+            <div className="grid gap-2 md:grid-cols-3">
+              <div className={`rounded-xl border px-3 py-2 text-xs ${statusClass(roundFeedback.details.fields.title.status)}`}>
+                <p className="font-semibold">{t('screens.gameplay.fieldTitle')}</p>
+                <p>{statusText(roundFeedback.details.fields.title.status, t)} · {confidencePct(roundFeedback.details.fields.title.confidence)}%</p>
+                <p>{t('screens.gameplay.pointsAwarded', { points: roundFeedback.details.fields.title.points })}</p>
+              </div>
+              <div className={`rounded-xl border px-3 py-2 text-xs ${statusClass(roundFeedback.details.fields.artist.status)}`}>
+                <p className="font-semibold">{t('screens.gameplay.fieldArtist')}</p>
+                <p>{statusText(roundFeedback.details.fields.artist.status, t)} · {confidencePct(roundFeedback.details.fields.artist.mainConfidence)}%</p>
+                <p>{t('screens.gameplay.pointsAwarded', { points: roundFeedback.details.fields.artist.points })}</p>
+                {roundFeedback.details.fields.artist.bonusPoints > 0 && (
+                  <p className="font-semibold">{t('screens.gameplay.featureBonus', { points: roundFeedback.details.fields.artist.bonusPoints })}</p>
+                )}
+              </div>
+              <div className={`rounded-xl border px-3 py-2 text-xs ${statusClass(roundFeedback.details.fields.year.status)}`}>
+                <p className="font-semibold">{t('screens.gameplay.fieldYear')}</p>
+                <p>{statusText(roundFeedback.details.fields.year.status, t)} · {confidencePct(roundFeedback.details.fields.year.confidence)}%</p>
+                <p>{t('screens.gameplay.pointsAwarded', { points: roundFeedback.details.fields.year.points })}</p>
+                {roundFeedback.details.fields.year.yearDelta !== null && (
+                  <p>{t('screens.gameplay.yearDelta', { delta: roundFeedback.details.fields.year.yearDelta })}</p>
+                )}
+              </div>
+            </div>
+            <div className="text-xs text-slate-700 dark:text-slate-300 grid gap-1">
+              <p>{t('screens.gameplay.replayPenaltyApplied', { percent: Math.round(roundFeedback.details.replayPenaltyRatio * 100) })}</p>
+              <p>{t('screens.gameplay.speedFactor', { factor: roundFeedback.listeningFactor.toFixed(2) })}</p>
+              <p className="font-semibold">{t('screens.gameplay.roundPointsTotal', { points: roundFeedback.finalPoints })}</p>
+            </div>
+          </div>
+        )}
+
+        <div className="hh-content mb-4 space-y-3">
+          <div className="grid gap-2 md:grid-cols-3">
+            <input
+              value={titleGuess}
+              onChange={(event) => setTitleGuess(event.target.value)}
+              placeholder={t('screens.gameplay.titlePlaceholder')}
+              className="hh-input"
+              disabled={roundSubmitted}
+            />
+            <input
+              value={artistGuess}
+              onChange={(event) => setArtistGuess(event.target.value)}
+              placeholder={t('screens.gameplay.artistPlaceholder')}
+              className="hh-input"
+              disabled={roundSubmitted}
+            />
+            <input
+              value={yearGuess}
+              onChange={(event) => setYearGuess(event.target.value)}
+              placeholder={t('screens.gameplay.yearPlaceholder')}
+              className="hh-input"
+              disabled={roundSubmitted}
+              inputMode="numeric"
+            />
+          </div>
+          <div className="flex gap-2">
+            <button onClick={submit} className="hh-btn-primary !w-auto !px-4 !py-2.5">
+              {roundSubmitted
+                ? t('screens.gameplay.next')
+                : roundRevealed
+                  ? t('screens.gameplay.continueNoPoints')
+                  : t('screens.gameplay.submit')}
+            </button>
+            <button onClick={advance} className="hh-btn-muted !w-auto !px-4 !py-2.5" disabled={roundSubmitted}>
+              <SkipForward size={16} /> {t('screens.gameplay.skip')}
+            </button>
+          </div>
         </div>
 
         <div className="hh-content flex items-center justify-between gap-3">

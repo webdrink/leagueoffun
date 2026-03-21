@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Music, Play, Users } from 'lucide-react';
+import { Play, Users } from 'lucide-react';
 
 type GameMode = 'singleplayer' | 'hotSeat';
 
@@ -9,6 +9,8 @@ interface IntroProps {
   onStart: (mode: GameMode) => void;
   animationsEnabled: boolean;
 }
+
+const HOOKHUNT_LOGO_SRC = '/assets/hookhunt-logo.svg';
 
 export default function IntroScreen({ onStart, animationsEnabled }: IntroProps) {
   const { t } = useTranslation();
@@ -27,8 +29,13 @@ export default function IntroScreen({ onStart, animationsEnabled }: IntroProps) 
       >
         <div className="hh-content flex justify-center mb-6">
           <div className="relative">
-            <div className="w-20 h-20 bg-gradient-to-br from-orange-400 via-orange-500 to-rose-500 rounded-full flex items-center justify-center shadow-xl ring-4 ring-white/40 dark:ring-slate-800/70">
-              <Music size={40} className="text-white" />
+            <div className="w-20 h-20 bg-gradient-to-br from-orange-400 via-orange-500 to-rose-500 rounded-full flex items-center justify-center shadow-xl ring-4 ring-white/40 dark:ring-slate-800/70 p-2.5">
+              <img
+                src={HOOKHUNT_LOGO_SRC}
+                alt="HookHunt logo"
+                className="w-full h-full object-contain"
+                style={{ imageRendering: 'pixelated' }}
+              />
             </div>
           </div>
         </div>

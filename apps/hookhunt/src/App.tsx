@@ -1,7 +1,13 @@
 import React, { useCallback, useEffect, useState, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, Settings, Moon, Sun } from 'lucide-react';
-import { resolvePlayerSession, stripSessionParamsFromUrl, useAnimations } from '@game-core';
+import {
+  createRunId,
+  resolvePlayerSession,
+  saveCompletedGameRun,
+  stripSessionParamsFromUrl,
+  useAnimations,
+} from '@game-core';
 import { useTranslation } from 'react-i18next';
 import './i18n/config';
 
@@ -125,9 +131,17 @@ interface SpotifyProfileCache {
   email?: string;
 }
 
+interface ActiveHookHuntRun {
+  id: string;
+  startedAt: string;
+  playlistId: string;
+  mode: GameMode;
+}
+
 const SPOTIFY_PROFILE_CACHE_KEY = 'hookhunt.spotify.profile';
 const HOOKHUNT_SESSION_KEY_LEGACY = 'hookhunt.app.session.v1';
 const HOOKHUNT_SESSION_KEY_PREFIX = 'hookhunt.app.session.v2';
+const HOOKHUNT_LOGO_SRC = '/assets/hookhunt-logo.svg';
 
 const DEFAULT_GAME_SETTINGS: GameSettings = {
   gameMode: 'singleplayer',
@@ -260,6 +274,7 @@ function App() {
   const [sessionHydrated, setSessionHydrated] = useState(false);
   const [spotifyConnected, setSpotifyConnected] = useState(false);
   const [spotifyDisplayName, setSpotifyDisplayName] = useState<string | null>(null);
+  const [activeRun, setActiveRun] = useState<ActiveHookHuntRun | null>(null);
   
   // Get season from localStorage or auto-detect (doesn't need to be stateful as it rarely changes)
   const season: Season = (() => {
@@ -373,19 +388,62 @@ function App() {
   };
 
   const selectPlaylist = (playlistId: string) => {
+    const modeForRun = gameSettings.gameMode;
+    setActiveRun({
+      id: createRunId(),
+      startedAt: new Date().toISOString(),
+      playlistId,
+      mode: modeForRun,
+    });
     setGameSettings(prev => ({ ...prev, playlistId }));
     setGameStep('game');
   };
 
   const finishGame = (scores: PlayerScore[]) => {
+    const completedAt = new Date().toISOString();
+    const runToPersist = activeRun;
+    const topScore = scores.length > 0 ? Math.max(...scores.map((entry) => entry.score)) : 0;
+    const totalHeardMs = scores.reduce((total, entry) => total + entry.heardMs, 0);
+
+    if (runToPersist) {
+      void saveCompletedGameRun({
+        id: runToPersist.id,
+        gameId: 'hookhunt',
+        playerId,
+        startedAt: runToPersist.startedAt,
+        endedAt: completedAt,
+        score: topScore,
+        metadata: {
+          mode: runToPersist.mode,
+          playlistId: runToPersist.playlistId,
+          playerCount: scores.length,
+          totalHeardMs,
+          pointsToWin: gameSettings.pointsToWin,
+          players: scores.map((entry) => ({
+            name: entry.name,
+            score: entry.score,
+            heardMs: entry.heardMs,
+          })),
+        },
+      }).catch((error) => {
+        console.error('Failed to persist HookHunt run history:', error);
+      });
+    }
+
+    setActiveRun(null);
     setPlayerScores(scores);
     setGameStep('summary');
   };
 
   const resetGame = () => {
+    setActiveRun(null);
     setGameStep('intro');
     setGameSettings({ ...DEFAULT_GAME_SETTINGS });
     setPlayerScores([]);
+  };
+
+  const handleTitleClick = () => {
+    resetGame();
   };
 
   const backgroundGradient = getSeasonalGradient(season, isDark);
@@ -412,9 +470,19 @@ function App() {
                   initial={animationsEnabled ? { opacity: 0, y: -10 } : {}}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-500 to-rose-500 dark:from-orange-300 dark:via-amber-300 dark:to-rose-300 drop-shadow-sm leading-tight text-center w-full text-3xl sm:text-4xl md:text-5xl"
+                  className="inline-flex items-center justify-center gap-3 cursor-pointer"
+                  onClick={handleTitleClick}
+                  title={t('summary.backToHub')}
                 >
-                  HookHunt
+                  <img
+                    src={HOOKHUNT_LOGO_SRC}
+                    alt="HookHunt logo"
+                    className="h-10 w-auto sm:h-12 md:h-14"
+                    style={{ imageRendering: 'pixelated' }}
+                  />
+                  <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-500 to-rose-500 dark:from-orange-300 dark:via-amber-300 dark:to-rose-300 drop-shadow-sm leading-tight text-center text-3xl sm:text-4xl md:text-5xl">
+                    HookHunt
+                  </span>
                 </motion.h1>
                 <motion.p
                   initial={animationsEnabled ? { opacity: 0, y: 10 } : {}}

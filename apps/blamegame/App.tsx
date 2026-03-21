@@ -22,9 +22,10 @@
  *  - useNameBlameSetup
  *  - useTranslation (from react-i18next)
  */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence } from 'framer-motion';
+import { createRunId, saveCompletedGameRun } from '@game-core';
 
 import { GameStep, QuestionStats, Player, SupportedLanguage } from './types';
 import useSound from './hooks/useSound';
@@ -56,6 +57,12 @@ import { dispatchAdvance, dispatchSelectTarget, createDispatchContext } from './
 
 const BLAMEGAME_STEP_KEY = 'blamegame.app.step';
 const RESUMABLE_STEPS: GameStep[] = ['intro', 'playerSetup', 'categoryPick'];
+
+interface ActiveBlameGameRun {
+  id: string;
+  startedAt: string;
+  mode: 'classic' | 'nameBlame';
+}
 
 function readPersistedStep(): GameStep {
   try {
@@ -128,6 +135,8 @@ function App() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [allCategoriesInfo, setAllCategoriesInfo] = useState<Array<{id: string; emoji: string; name: string; questionCount: number}>>([]);
   const [stablePlayerOrderForRound, setStablePlayerOrderForRound] = useState<Player[]>([]); // For NameBlame mode player turn consistency
+  const [activeRun, setActiveRun] = useState<ActiveBlameGameRun | null>(null);
+  const persistedRunIdsRef = useRef<Set<string>>(new Set());
 
   // State for debug panel
   const [showDebug, setShowDebug] = useState(false);
@@ -310,6 +319,44 @@ function App() {
       setCurrentLoadingQuote(''); // Or some default if no quotes are active
     }
   }, [quoteIndex, activeLoadingQuotes]);
+
+  useEffect(() => {
+    if (gameStep !== 'summary' || !activeRun) return;
+    if (persistedRunIdsRef.current.has(activeRun.id)) return;
+    persistedRunIdsRef.current.add(activeRun.id);
+
+    const activePlayers = (
+      stablePlayerOrderForRound.length > 0
+        ? stablePlayerOrderForRound
+        : players.filter((player) => player.name.trim() !== '')
+    ).map((player) => player.name);
+
+    void saveCompletedGameRun({
+      id: activeRun.id,
+      gameId: 'blamegame',
+      playerId,
+      startedAt: activeRun.startedAt,
+      endedAt: new Date().toISOString(),
+      score: nameBlameLog.length,
+      metadata: {
+        mode: activeRun.mode,
+        questionsInRound: currentRoundQuestions.length,
+        totalBlames: nameBlameLog.length,
+        activePlayers,
+      },
+    }).catch((error) => {
+      console.error('Failed to persist BlameGame run history:', error);
+    });
+
+    setActiveRun(null);
+  }, [activeRun, currentRoundQuestions.length, gameStep, nameBlameLog.length, playerId, players, stablePlayerOrderForRound]);
+
+  useEffect(() => {
+    if (gameStep === 'intro' && activeRun) {
+      setActiveRun(null);
+    }
+  }, [activeRun, gameStep]);
+
   // Shared procedure to go into loading, prepare round, then enter game
   const proceedToLoadingAndPrepare = useCallback(async () => {
     console.log(`🎯 FLOW: Proceeding to loading - Mode: ${gameSettings.gameMode}, Players: ${players.filter(p => p.name.trim() !== '').length}, GameStep: ${gameStep}`);
@@ -360,6 +407,11 @@ function App() {
       const minLoadingDuration = gameSettings.rouletteDurationMs || 3000;
       setTimeout(() => {
         clearInterval(quoteTimer);
+        setActiveRun({
+          id: createRunId(),
+          startedAt: new Date().toISOString(),
+          mode: gameSettings.gameMode,
+        });
         setGameStep('game');
         setCurrentPlayerIndex(0);
         if (gameSettings.gameMode === 'nameBlame') {
@@ -798,6 +850,7 @@ function App() {
             nameBlameLog={nameBlameLog}
             questionsAnswered={currentRoundQuestions.length}
             onRestart={() => {
+              setActiveRun(null);
               setGameStep('intro');
             }}
             activePlayersCount={stablePlayerOrderForRound.length > 0 ? stablePlayerOrderForRound.length : players.filter(p => p.name.trim() !== '').length}

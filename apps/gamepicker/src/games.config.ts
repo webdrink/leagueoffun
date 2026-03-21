@@ -22,7 +22,7 @@ export const games: GameInfo[] = [
     name: 'HookHunt',
     description: 'Test your music knowledge! Listen to song hooks and race to guess the track. Connect your Spotify and challenge friends to see who knows their tunes best!',
     entryUrl: 'https://hookhunt.leagueoffun.com',
-    icon: '/assets/hookhunt-icon.svg',
+    icon: '/assets/hookhunt-logo.svg',
     tags: ['music', 'quiz', 'spotify']
   }
 ];

@@ -2,6 +2,7 @@
 export * from './events/eventBus';
 export * from './persistence/storage';
 export * from './persistence/playerSession';
+export * from './persistence/runHistory';
 export * from './config/game.schema';
 export * from './config/discovery/discover';
 export * from './modules';

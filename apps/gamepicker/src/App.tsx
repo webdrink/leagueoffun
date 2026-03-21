@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Gamepad2, User, Sparkles, Music, Target, Trophy, Users, Zap, Copy, Check, Clock3 } from 'lucide-react';
+import { Gamepad2, User, Sparkles, Target, Trophy, Users, Zap, Copy, Check, Clock3 } from 'lucide-react';
 import { usePlayer } from './PlayerContext';
-import { useAnimations } from '@game-core';
+import { listGameRuns, useAnimations } from '@game-core';
 import { games, GameInfo } from './games.config';
+
+const HOOKHUNT_LOGO_SRC = '/assets/hookhunt-logo.svg';
 
 const legacyStatsKey = 'leagueoffun.playerStats';
 const legacyLastGameKey = 'leagueoffun.lastGameId';
@@ -19,6 +21,12 @@ function scopedLastGameKey(playerId: string) {
 
 function scopedLastPlayedAtKey(playerId: string) {
   return `${legacyLastPlayedAtKey}.${playerId}`;
+}
+
+interface CrossGameStats {
+  totalRuns: number;
+  totalScore: number;
+  byGame: Array<{ gameId: string; runs: number; bestScore: number }>;
 }
 
 // Session ID display with copy functionality
@@ -89,7 +97,14 @@ function GameCard({ game, index, onPlay, isLastPlayed }: GameCardProps) {
       case 'blamegame':
         return <Target className="text-white" size={32} />;
       case 'hookhunt':
-        return <Music className="text-white" size={32} />;
+        return (
+          <img
+            src={HOOKHUNT_LOGO_SRC}
+            alt="HookHunt logo"
+            className="h-12 w-auto object-contain"
+            style={{ imageRendering: 'pixelated' }}
+          />
+        );
       default:
         return <Gamepad2 className="text-white" size={32} />;
     }
@@ -192,7 +207,20 @@ function GameCard({ game, index, onPlay, isLastPlayed }: GameCardProps) {
             
             <div className="flex-1">
               <h2 className="text-2xl font-bold text-slate-900 mb-2">
-                {game.name}
+                {game.id === 'hookhunt' ? (
+                  <span className="inline-flex items-center gap-2">
+                    <img
+                      src={HOOKHUNT_LOGO_SRC}
+                      alt=""
+                      aria-hidden="true"
+                      className="h-7 w-auto object-contain"
+                      style={{ imageRendering: 'pixelated' }}
+                    />
+                    <span>{game.name}</span>
+                  </span>
+                ) : (
+                  game.name
+                )}
               </h2>
               {isLastPlayed && (
                 <div className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 mb-2">
@@ -249,6 +277,7 @@ function App() {
   const { playerId } = usePlayer();
   const { animationsEnabled } = useAnimations();
   const [playerStats, setPlayerStats] = useState<Array<{ gameId: string; score: number; playedAt: string }>>([]);
+  const [crossGameStats, setCrossGameStats] = useState<CrossGameStats | null>(null);
   const [lastGameId, setLastGameId] = useState<string | null>(() => (
     localStorage.getItem(scopedLastGameKey(playerId)) || localStorage.getItem(legacyLastGameKey)
   ));
@@ -269,6 +298,49 @@ function App() {
         setPlayerStats([]);
       }
     }
+  }, [playerId]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    void listGameRuns({ playerId, limit: 500 })
+      .then((runs) => {
+        if (cancelled) return;
+        if (runs.length === 0) {
+          setCrossGameStats(null);
+          return;
+        }
+
+        const byGameMap = new Map<string, { runs: number; bestScore: number }>();
+        runs.forEach((run) => {
+          const current = byGameMap.get(run.gameId);
+          if (!current) {
+            byGameMap.set(run.gameId, { runs: 1, bestScore: run.score });
+            return;
+          }
+          byGameMap.set(run.gameId, {
+            runs: current.runs + 1,
+            bestScore: Math.max(current.bestScore, run.score),
+          });
+        });
+
+        setCrossGameStats({
+          totalRuns: runs.length,
+          totalScore: runs.reduce((sum, run) => sum + run.score, 0),
+          byGame: Array.from(byGameMap.entries())
+            .map(([gameId, value]) => ({ gameId, ...value }))
+            .sort((a, b) => b.runs - a.runs),
+        });
+      })
+      .catch((error) => {
+        if (!cancelled) {
+          console.error('Failed to load cross-game run stats:', error);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, [playerId]);
 
   const orderedGames = useMemo(() => {
@@ -409,7 +481,7 @@ function App() {
         </motion.header>
 
         {/* Player stats summary (if any) */}
-        {playerStats.length > 0 && (
+        {(playerStats.length > 0 || crossGameStats) && (
           <motion.div
             initial={animationsEnabled ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
@@ -422,17 +494,29 @@ function App() {
                 <div>
                   <p className="text-white font-semibold">Recent Activity</p>
                   <p className="text-white/70 text-sm">
-                    {playerStats.length} game{playerStats.length !== 1 ? 's' : ''} played
+                    {(crossGameStats?.totalRuns ?? playerStats.length)} run{(crossGameStats?.totalRuns ?? playerStats.length) !== 1 ? 's' : ''} tracked
                   </p>
                 </div>
               </div>
               <div className="text-right">
                 <p className="text-white/70 text-sm">Total Score</p>
                 <p className="text-white font-bold text-lg">
-                  {playerStats.reduce((sum, s) => sum + s.score, 0)}
+                  {crossGameStats?.totalScore ?? playerStats.reduce((sum, s) => sum + s.score, 0)}
                 </p>
               </div>
             </div>
+            {crossGameStats && crossGameStats.byGame.length > 0 && (
+              <div className="mt-3 flex flex-wrap gap-2">
+                {crossGameStats.byGame.map((entry) => (
+                  <span
+                    key={entry.gameId}
+                    className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs text-white/85"
+                  >
+                    {entry.gameId}: {entry.runs} run{entry.runs !== 1 ? 's' : ''} • best {entry.bestScore}
+                  </span>
+                ))}
+              </div>
+            )}
           </motion.div>
         )}
 
