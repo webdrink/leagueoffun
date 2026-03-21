@@ -5,7 +5,7 @@
  * are in the correct locations. It's useful to run before deployment to ensure
  * everything will work correctly.
  * 
- * Run this script with: node scripts/verify-assets.js
+ * Run this script with: node scripts/verify-assets.cjs
  */
 
 const fs = require('fs');

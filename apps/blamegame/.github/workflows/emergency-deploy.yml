@@ -37,22 +37,23 @@ jobs:
           fetch-depth: 1
 
       - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         with:
           version: 9
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+          cache: 'pnpm'
 
       - name: ⚙️ Minimal Dependency Install
         run: |
           echo "🚨 Emergency mode: Installing only essential dependencies..."
-          pnpm install --prod --no-frozen-lockfile || {
-            echo "⚠️ Production install failed, trying full install..."
+          pnpm install --prod --frozen-lockfile || {
+            echo "⚠️ Production frozen-lockfile install failed, trying full install..."
             rm -rf node_modules
-            pnpm install --no-frozen-lockfile
+            pnpm install --frozen-lockfile || pnpm install --no-frozen-lockfile
           }
 
       - name: 🏗️ Emergency Build

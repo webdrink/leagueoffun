@@ -199,6 +199,7 @@ export async function handleSpotifyCallback(): Promise<SpotifyCallbackResult> {
   if (!code) {
     return { handled: true, success: false, error: 'missing_code' };
   }
+  const authCode = code;
 
   const expectedState = sessionStorage.getItem(PKCE_KEYS.state);
   const verifier = sessionStorage.getItem(PKCE_KEYS.verifier);
@@ -221,7 +222,7 @@ export async function handleSpotifyCallback(): Promise<SpotifyCallbackResult> {
   try {
     const tokenResponse = await tokenRequest(new URLSearchParams({
       grant_type: 'authorization_code',
-      code: code!,
+      code: authCode,
       redirect_uri: getConfiguredRedirectUri(),
       client_id: clientId,
       code_verifier: verifier,

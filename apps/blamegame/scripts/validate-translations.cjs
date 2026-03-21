@@ -1,5 +1,5 @@
 /**
- * validate-translations.js
+ * validate-translations.cjs
  * 
  * Simple validation script for CI/CD pipelines
  * Checks translation completeness without requiring OpenAI API

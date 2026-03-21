@@ -48,18 +48,18 @@ Process:
 ```
 
 ### 3. Supporting Scripts
-- **auto-translate.js**: OpenAI-powered translation with rate limiting
-- **validate-translations.js**: Translation completeness validation
+- **auto-translate.cjs**: OpenAI-powered translation with rate limiting
+- **validate-translations.cjs**: Translation completeness validation
 - **fix-deployment-paths.js**: Custom domain path fixing
-- **verify-assets.js**: Build verification and asset checking
+- **verify-assets.cjs**: Build verification and asset checking
 
 ### 4. Package.json Scripts
 ```json
-"translate": "node scripts/auto-translate.js"
-"translate:check": "node scripts/auto-translate.js --dry-run"
-"translate:validate": "node scripts/validate-translations.js"
+"translate": "node scripts/auto-translate.cjs"
+"translate:check": "node scripts/auto-translate.cjs --dry-run"
+"translate:validate": "node scripts/validate-translations.cjs"
 "build:domain": "VITE_BASE_PATH=/ vite build && node scripts/fix-deployment-paths.js"
-"verify-build": "node scripts/verify-assets.js --verify-dist"
+"verify-build": "node scripts/verify-assets.cjs --verify-dist"
 ```
 
 ## 🚀 Deployment Flow

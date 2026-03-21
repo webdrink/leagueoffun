@@ -33,35 +33,37 @@ jobs:
           fetch-depth: 0
 
       - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         with:
           version: 9
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'pnpm'
 
       - name: 📥 Install Dependencies
-        run: |
-          echo "📥 Installing dependencies with lockfile validation..."
-          # Try frozen lockfile first, fallback to updating if needed
-          if ! pnpm install --frozen-lockfile; then
-            echo "⚠️ Lockfile mismatch detected, updating dependencies..."
-            pnpm install --no-frozen-lockfile
-            echo "✅ Dependencies updated successfully"
-          else
-            echo "✅ Dependencies installed from frozen lockfile"
-          fi
+        run: pnpm install --frozen-lockfile
 
       - name: 🔍 Check Translation Status
         id: translation-check
         run: |
           echo "🔍 Checking if translations are needed..."
-          if [ -f "scripts/auto-translate.js" ]; then
-            # Check if there are missing translations
-            node scripts/auto-translate.js --check-only || echo "needs-translation=true" >> $GITHUB_OUTPUT
+          if [ -f "scripts/auto-translate.cjs" ]; then
+            set +e
+            pnpm run translate:check
+            status=$?
+            set -e
+
+            if [ "$status" -eq 0 ]; then
+              echo "needs-translation=false" >> $GITHUB_OUTPUT
+            elif [ "$status" -eq 2 ]; then
+              echo "needs-translation=true" >> $GITHUB_OUTPUT
+            else
+              echo "❌ Translation check failed with unexpected exit code: $status"
+              exit "$status"
+            fi
           else
             echo "needs-translation=false" >> $GITHUB_OUTPUT
           fi
@@ -81,27 +83,18 @@ jobs:
           fetch-depth: 1
 
       - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         with:
           version: 9
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'pnpm'
 
       - name: 📥 Install Dependencies
-        run: |
-          echo "📥 Installing dependencies with lockfile validation..."
-          # Try frozen lockfile first, fallback to updating if needed
-          if ! pnpm install --frozen-lockfile; then
-            echo "⚠️ Lockfile mismatch detected, updating dependencies..."
-            pnpm install --no-frozen-lockfile
-            echo "✅ Dependencies updated successfully"
-          else
-            echo "✅ Dependencies installed from frozen lockfile"
-          fi
+        run: pnpm install --frozen-lockfile
 
       - name: 🌐 Auto-translate if needed
         if: needs.pre-deploy-checks.outputs.needs-translation == 'true'

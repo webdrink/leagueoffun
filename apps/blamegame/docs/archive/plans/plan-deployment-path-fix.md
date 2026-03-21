@@ -39,7 +39,7 @@ Ensure that all static assets (JSON files, images, etc.) load correctly when the
 - [x] Implement updated question loader functions in `utils/questionLoaders.ts`
 - [x] Add proper TypeScript interfaces for question and category data
 - [x] Create audio utilities with proper path handling in `lib/audioUtils.ts`
-- [x] Create verification script for checking required static assets in `scripts/verify-assets.js`
+- [x] Create verification script for checking required static assets in `scripts/verify-assets.cjs`
 - [x] Add `verify-assets` script to package.json
 - [x] Test locally using `npm run build` and `npm run preview`
 - [x] Deploy and verify on GitHub Pages

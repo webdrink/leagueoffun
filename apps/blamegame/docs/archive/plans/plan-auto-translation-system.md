@@ -48,9 +48,9 @@ Create an automated translation system that:
 - File permission problems
 
 ## Impact on Existing Files
-- New script: `scripts/auto-translate.js`
+- New script: `scripts/auto-translate.cjs`
 - Enhanced: `package.json` (new scripts)
-- Enhanced: `scripts/verify-assets.js` (translation verification)
+- Enhanced: `scripts/verify-assets.cjs` (translation verification)
 - Potentially modified: All question JSON files
 - Potentially modified: `categories.json`
 
@@ -79,9 +79,9 @@ Create an automated translation system that:
 The automatic translation system has been successfully implemented with the following components:
 
 ### Core System
-- **`scripts/auto-translate.js`**: Main translation engine with OpenAI integration
-- **`scripts/validate-translations.js`**: Standalone validation for CI/CD
-- **Enhanced `scripts/verify-assets.js`**: Now includes translation verification
+- **`scripts/auto-translate.cjs`**: Main translation engine with OpenAI integration
+- **`scripts/validate-translations.cjs`**: Standalone validation for CI/CD
+- **Enhanced `scripts/verify-assets.cjs`**: Now includes translation verification
 
 ### Build Integration
 - **Enhanced `package.json`**: New npm scripts for translation workflows

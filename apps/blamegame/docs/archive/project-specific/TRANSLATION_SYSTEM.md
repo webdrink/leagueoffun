@@ -40,7 +40,7 @@ Checks translations, builds, and verifies assets.
 
 ## Configuration Options
 
-The translation system can be configured by editing `scripts/auto-translate.js`:
+The translation system can be configured by editing `scripts/auto-translate.cjs`:
 
 ```javascript
 const CONFIG = {

@@ -10,7 +10,7 @@ Ensure `GameInfoLoader` correctly loads `game.json` in all deployment environmen
 ## Technical Steps
 1. Copy `game.json` to the `public/` directory so it is included in the build output.
 2. Update `GameInfoLoader` to use `fetchAssetWithFallback('game.json')` which applies `getAssetsPath` and adds a fallback for legacy deployments.
-3. Extend `verify-assets.js` to check that `game.json` exists in `public` and the build `dist` directory.
+3. Extend `verify-assets.cjs` to check that `game.json` exists in `public` and the build `dist` directory.
 4. Add/update documentation comments as required.
 
 ## Potential Edge Cases
@@ -24,6 +24,6 @@ Ensure `GameInfoLoader` correctly loads `game.json` in all deployment environmen
 ## Checklist
 - [x] `game.json` copied to `public/`
  - [x] `GameInfoLoader` uses `fetchAssetWithFallback`
-- [x] `verify-assets.js` validates presence of `game.json`
+- [x] `verify-assets.cjs` validates presence of `game.json`
 - [x] Documentation comments updated
 
