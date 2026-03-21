@@ -1,0 +1,68 @@
+name: ✅ CI - Lint, Type Check & Build
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches-ignore: [main]
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '9'
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: 🔍 Lint, Type Check & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: 📥 Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🔍 Type Check
+        run: pnpm typecheck
+
+      - name: 🧹 Lint
+        run: pnpm lint
+
+      - name: 🏗️ Build Gamepicker
+        run: pnpm --filter @leagueoffun/gamepicker build
+
+      - name: 🏗️ Build Blamegame
+        run: pnpm --filter @leagueoffun/blamegame build
+
+      - name: 🏗️ Build HookHunt
+        env:
+          VITE_SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          VITE_SPOTIFY_REDIRECT_URI: https://hookhunt.leagueoffun.com/callback/
+        run: pnpm --filter @leagueoffun/hookhunt build
+
+      - name: 📊 CI Summary
+        if: always()
+        run: |
+          echo "## ✅ CI Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** \`${{ github.head_ref || github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
