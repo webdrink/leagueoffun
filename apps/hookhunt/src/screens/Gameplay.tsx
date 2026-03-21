@@ -185,6 +185,31 @@ function normalizeSpotifyError(message: string, t: (key: string) => string): str
   return message;
 }
 
+async function supportsWidevineAudioPlayback(): Promise<boolean> {
+  const requester = (navigator as Navigator & {
+    requestMediaKeySystemAccess?: (
+      keySystem: string,
+      supportedConfigurations: MediaKeySystemConfiguration[]
+    ) => Promise<MediaKeySystemAccess>;
+  }).requestMediaKeySystemAccess;
+
+  if (typeof requester !== 'function') {
+    return false;
+  }
+
+  try {
+    await requester.call(navigator, 'com.widevine.alpha', [
+      {
+        initDataTypes: ['cenc'],
+        audioCapabilities: [{ contentType: 'audio/mp4; codecs="mp4a.40.2"' }],
+      },
+    ]);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export default function GameplayScreen({
   playlistId,
   playerNames,
@@ -557,7 +582,9 @@ export default function GameplayScreen({
         const becameReady = await waitForSpotifyDeviceReady();
         if (requestId !== playbackRequestRef.current) return;
         if (!becameReady || !spotifyPlayerRef.current || !spotifyDeviceIdRef.current) {
-          setSpotifyError(t('screens.gameplay.spotifyPlayerNotReady'));
+          const hasWidevine = await supportsWidevineAudioPlayback();
+          if (requestId !== playbackRequestRef.current) return;
+          setSpotifyError(hasWidevine ? t('screens.gameplay.spotifyPlayerNotReady') : t('screens.gameplay.spotifyDrmUnsupported'));
           return;
         }
       }
