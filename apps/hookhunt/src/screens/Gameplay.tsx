@@ -239,6 +239,7 @@ export default function GameplayScreen({
 }: GameplayProps) {
   const { t } = useTranslation();
   const [rounds, setRounds] = useState<RoundState[]>([]);
+  const [allTracks, setAllTracks] = useState<SpotifyTrack[]>([]);
   const [activeRoundIndex, setActiveRoundIndex] = useState(0);
   const [maxReachedRoundIndex, setMaxReachedRoundIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -366,16 +367,34 @@ export default function GameplayScreen({
   }, []);
 
   const findFallbackTrack = useCallback((startIndex: number): SpotifyTrack | null => {
+    const canUseSpotify = (track: SpotifyTrack) => (
+      !playbackHealth.previewOnlyMode &&
+      playbackHealth.drmSupported !== false &&
+      canPlayViaSpotify(track)
+    );
+
     for (let i = startIndex + 1; i < rounds.length; i += 1) {
       const candidate = rounds[i]?.track;
       if (!candidate) continue;
       if (candidate.preview_url) return candidate;
-      if (!playbackHealth.previewOnlyMode && playbackHealth.drmSupported !== false && canPlayViaSpotify(candidate)) {
-        return candidate;
-      }
+      if (canUseSpotify(candidate)) return candidate;
+    }
+
+    for (let i = 0; i < rounds.length; i += 1) {
+      const candidate = rounds[i]?.track;
+      if (!candidate) continue;
+      if (candidate.preview_url) return candidate;
+    }
+
+    for (const candidate of allTracks) {
+      if (candidate.preview_url) return candidate;
+    }
+
+    for (const candidate of allTracks) {
+      if (canUseSpotify(candidate)) return candidate;
     }
     return null;
-  }, [playbackHealth.drmSupported, playbackHealth.previewOnlyMode, rounds]);
+  }, [allTracks, playbackHealth.drmSupported, playbackHealth.previewOnlyMode, rounds]);
 
   const prepareTrackPlayback = useCallback(async (roundIndex: number): Promise<PreparedPlayback | null> => {
     const round = rounds[roundIndex];
@@ -563,15 +582,18 @@ export default function GameplayScreen({
         const fetchedTracks = await getPlaylistTracks(playlistId);
         const playable = fetchedTracks.filter((track) => Boolean(track.preview_url) || canPlayViaSpotify(track));
         if (playable.length === 0) {
+          setAllTracks([]);
           setRounds([]);
           setError(t('screens.gameplay.noPlayableTracks'));
           return;
         }
         const shuffled = [...playable].sort(() => Math.random() - 0.5).slice(0, Math.min(30, playable.length));
+        setAllTracks(playable);
         setRounds(shuffled.map(buildInitialRound));
         setActiveRoundIndex(0);
         setMaxReachedRoundIndex(0);
       } catch (loadError) {
+        setAllTracks([]);
         setRounds([]);
         setError(loadError instanceof Error ? loadError.message : t('screens.gameplay.loadFailed'));
       } finally {
