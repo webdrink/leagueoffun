@@ -744,10 +744,13 @@ export default function GameplayScreen({
     }
 
     try {
+      if (currentPrepared.source === 'spotify') {
+        await startPreparedPlayback();
+        return;
+      }
+
       if (currentPrepared.source === 'preview' && audioRef.current) {
         await audioRef.current.play();
-      } else if (currentPrepared.source === 'spotify' && spotifyPlayerRef.current) {
-        await spotifyPlayerRef.current.resume();
       } else {
         await startPreparedPlayback();
         return;
