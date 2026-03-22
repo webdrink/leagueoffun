@@ -377,9 +377,11 @@ export default function GameplayScreen({
     return null;
   }, [playbackHealth.drmSupported, playbackHealth.previewOnlyMode, rounds]);
 
-  const prepareTrackPlayback = useCallback(async (roundIndex: number) => {
+  const prepareTrackPlayback = useCallback(async (roundIndex: number): Promise<PreparedPlayback | null> => {
     const round = rounds[roundIndex];
-    if (!round || round.prepareStatus === 'ready' || round.prepareStatus === 'preparing') return;
+    if (!round) return null;
+    if (round.prepareStatus === 'ready' && round.preparedPlayback?.ready) return round.preparedPlayback;
+    if (round.prepareStatus === 'preparing') return null;
 
     updateRound(roundIndex, (prev) => ({ ...prev, prepareStatus: 'preparing' }));
 
@@ -459,10 +461,12 @@ export default function GameplayScreen({
       audioRef.current.load();
       setActiveHookStartMs(prepared.startMs);
     }
+    return prepared;
   }, [activeRoundIndex, findFallbackTrack, playbackHealth.drmSupported, playbackHealth.previewOnlyMode, rounds, updateRound]);
 
-  const startPreparedPlayback = useCallback(async () => {
-    if (!activeRound || !currentPrepared || !currentPrepared.ready || !currentPrepared.resolvedTrack) return;
+  const startPreparedPlayback = useCallback(async (preparedOverride?: PreparedPlayback | null) => {
+    const prepared = preparedOverride ?? currentPrepared;
+    if (!activeRound || !prepared || !prepared.ready || !prepared.resolvedTrack) return;
 
     const requestId = ++playbackRequestRef.current;
     setSpotifyError(null);
@@ -470,14 +474,14 @@ export default function GameplayScreen({
     clearHookStopTimer();
     setClipRemainingMs(HOOK_CLIP_MS);
 
-    const targetTrack = currentPrepared.resolvedTrack;
-    setActiveHookStartMs(currentPrepared.startMs);
+    const targetTrack = prepared.resolvedTrack;
+    setActiveHookStartMs(prepared.startMs);
 
-    if (currentPrepared.source === 'preview' && targetTrack.preview_url) {
+    if (prepared.source === 'preview' && targetTrack.preview_url) {
       const audio = audioRef.current;
       if (!audio) return;
       audio.src = targetTrack.preview_url;
-      audio.currentTime = currentPrepared.startMs / 1000;
+      audio.currentTime = prepared.startMs / 1000;
       audio.load();
       try {
         await audio.play();
@@ -506,7 +510,7 @@ export default function GameplayScreen({
 
     try {
       await withTimeout(transferPlaybackToDevice(spotifyDeviceIdRef.current), 3000);
-      await withTimeout(startPlaybackOnDevice(spotifyDeviceIdRef.current, targetTrack.uri, currentPrepared.startMs), 3000);
+      await withTimeout(startPlaybackOnDevice(spotifyDeviceIdRef.current, targetTrack.uri, prepared.startMs), 3000);
       if (requestId !== playbackRequestRef.current) return;
       setHookPlaying(true);
       startHeardTracking();
@@ -518,7 +522,7 @@ export default function GameplayScreen({
         updateRound(activeRoundIndex, (round) => ({
           ...round,
           preparedPlayback: {
-            ...currentPrepared,
+            ...prepared,
             source: 'preview',
             mode: 'spotify_preview',
             startMs: 0,
@@ -526,11 +530,30 @@ export default function GameplayScreen({
           },
           prepareStatus: 'ready',
         }));
+      } else {
+        const emergencyPreviewTrack = rounds.find((candidate, index) => (
+          index !== activeRoundIndex && Boolean(candidate.track.preview_url)
+        ))?.track || null;
+        if (emergencyPreviewTrack?.preview_url) {
+          const emergencyPrepared: PreparedPlayback = {
+            ready: true,
+            mode: 'fallback_track',
+            source: 'preview',
+            startMs: 0,
+            resolvedTrack: emergencyPreviewTrack,
+            fallbackReason: 'emergency-preview',
+          };
+          updateRound(activeRoundIndex, (round) => ({
+            ...round,
+            preparedPlayback: emergencyPrepared,
+            prepareStatus: 'ready',
+          }));
+        }
       }
       setSpotifyError(`${t('screens.gameplay.spotifyPlaybackFailed')} ${normalizeSpotifyError(message, t)}`);
       setHookPlaying(false);
     }
-  }, [activeRound, activeRoundIndex, clearHookStopTimer, currentPrepared, registerPlaybackFailure, scheduleHookStop, startHeardTracking, stopHeardTracking, t, updateRound, waitForSpotifyDeviceReady]);
+  }, [activeRound, activeRoundIndex, clearHookStopTimer, currentPrepared, registerPlaybackFailure, rounds, scheduleHookStop, startHeardTracking, stopHeardTracking, t, updateRound, waitForSpotifyDeviceReady]);
 
   useEffect(() => {
     const load = async () => {
@@ -662,7 +685,20 @@ export default function GameplayScreen({
   }, [clearHookStopTimer, stopHeardTracking]);
 
   const togglePlayback = useCallback(async () => {
-    if (!activeRound || !currentPrepared?.ready) return;
+    if (!activeRound) return;
+    if (!currentPrepared?.ready) {
+      if (activeRound.prepareStatus === 'preparing') {
+        setSpotifyError(t('screens.gameplay.preparing'));
+        return;
+      }
+      const prepared = await prepareTrackPlayback(activeRoundIndex);
+      if (!prepared?.ready) {
+        setSpotifyError(t('screens.gameplay.prepareFailed'));
+        return;
+      }
+      await startPreparedPlayback(prepared);
+      return;
+    }
 
     if (hookPlaying) {
       const remaining = hookClipEndsAt ? Math.max(0, hookClipEndsAt - Date.now()) : clipRemainingMs;
@@ -700,7 +736,7 @@ export default function GameplayScreen({
     } catch {
       await startPreparedPlayback();
     }
-  }, [activeRound, activeRoundIndex, clearHookStopTimer, clipRemainingMs, currentPrepared, hookClipEndsAt, hookPlaying, scheduleHookStop, startHeardTracking, startPreparedPlayback, stopHeardTracking, updateRound]);
+  }, [activeRound, activeRoundIndex, clearHookStopTimer, clipRemainingMs, currentPrepared, hookClipEndsAt, hookPlaying, prepareTrackPlayback, scheduleHookStop, startHeardTracking, startPreparedPlayback, stopHeardTracking, t, updateRound]);
 
   const handleGuessChange = (field: 'title' | 'artist' | 'year', value: string) => {
     if (readOnlyRound || !activeRound || activeRound.submitted) return;
@@ -839,8 +875,8 @@ export default function GameplayScreen({
             <button
               type="button"
               onClick={() => togglePlayback().catch(() => undefined)}
-              disabled={!currentPrepared?.ready}
-              className="relative h-[110px] w-full rounded-2xl border border-slate-600/70 bg-slate-900/70 overflow-hidden disabled:opacity-50"
+              aria-label={hookPlaying ? t('screens.gameplay.pause') : t('screens.gameplay.playHook')}
+              className="relative h-[110px] w-full rounded-2xl border border-slate-600/70 bg-slate-900/70 overflow-hidden transition-all active:scale-[0.99]"
             >
               {activeRound.revealedFields.title || activeRound.revealedFields.artist || activeRound.revealedFields.year ? (
                 currentTargetTrack?.album?.images?.[0]?.url ? (
@@ -851,7 +887,9 @@ export default function GameplayScreen({
               ) : (
                 <div className="h-full w-full flex items-center justify-center text-xs text-slate-400">{t('screens.gameplay.coverHiddenUntilReveal')}</div>
               )}
-              <span className="absolute bottom-2 right-2 rounded-full bg-black/60 p-2 text-white">{hookPlaying ? <Pause size={14} /> : <Play size={14} />}</span>
+              <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/20 text-white">
+                {hookPlaying ? <Pause size={56} strokeWidth={2} /> : <Play size={56} strokeWidth={2} />}
+              </span>
             </button>
 
             <div className="grid gap-2 rounded-2xl border border-slate-700/70 bg-black/20 px-3 py-3 text-xs text-slate-300">
