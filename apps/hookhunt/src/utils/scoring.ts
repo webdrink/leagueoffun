@@ -217,3 +217,8 @@ export function evaluateGuess(input: GuessEvaluationInput): GuessEvaluation {
     pointsAfterReplayPenalty,
   };
 }
+
+// Preview helper for live UI hints/points; intentionally uses the same scoring path as submit.
+export function evaluateGuessPreview(input: GuessEvaluationInput): GuessEvaluation {
+  return evaluateGuess(input);
+}
