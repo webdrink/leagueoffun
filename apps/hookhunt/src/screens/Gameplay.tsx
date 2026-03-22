@@ -488,12 +488,17 @@ export default function GameplayScreen({
 
     const targetTrack = prepared.resolvedTrack;
     setActiveHookStartMs(prepared.startMs);
-
-    if (prepared.mode === 'external_track' && targetTrack.id) {
+    const openExternalTrack = () => {
+      if (!targetTrack.id) return false;
       const externalUrl = `https://open.spotify.com/track/${encodeURIComponent(targetTrack.id)}`;
       window.open(externalUrl, '_blank', 'noopener,noreferrer');
       setSpotifyError(t('screens.gameplay.externalFallbackOpened'));
       setHookPlaying(false);
+      return true;
+    };
+
+    if (prepared.mode === 'external_track' && targetTrack.id) {
+      openExternalTrack();
       return;
     }
 
@@ -524,7 +529,9 @@ export default function GameplayScreen({
     const ready = await waitForSpotifyDeviceReady();
     if (!ready || !spotifyDeviceIdRef.current) {
       registerPlaybackFailure('spotify-not-ready');
-      setSpotifyError(t('screens.gameplay.spotifyPlayerNotReady'));
+      if (!openExternalTrack()) {
+        setSpotifyError(t('screens.gameplay.spotifyPlayerNotReady'));
+      }
       return;
     }
 
