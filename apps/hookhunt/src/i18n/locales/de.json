@@ -84,6 +84,8 @@
       "hookEstimatedAt": "Geschätzter Hook-Start: {{time}}",
       "hookOnlyMode": "Hook-Only Modus",
       "hookWindow": "Hör genau hin: Pro Runde werden nur {{seconds}} Sekunden abgespielt.",
+      "loadHook": "Hook laden",
+      "hookNeedsLoad": "Lade zuerst den Hook",
       "hookReady": "Hook bereit",
       "hookTimeRemaining": "Clip verbleibend: {{seconds}}s",
       "hookStartsAt": "Hook-Clip Start: {{time}}",

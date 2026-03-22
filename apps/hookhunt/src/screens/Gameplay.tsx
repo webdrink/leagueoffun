@@ -236,6 +236,7 @@ export default function GameplayScreen({
   const [activeHookStartMs, setActiveHookStartMs] = useState<number | null>(null);
   const [hookLoading, setHookLoading] = useState(false);
   const [hookPlaying, setHookPlaying] = useState(false);
+  const [hookPrepared, setHookPrepared] = useState(false);
   const [hookClipEndsAt, setHookClipEndsAt] = useState<number | null>(null);
   const [hookRemainingMs, setHookRemainingMs] = useState<number | null>(null);
   const [clipRemainingMs, setClipRemainingMs] = useState(HOOK_CLIP_MS);
@@ -513,8 +514,9 @@ export default function GameplayScreen({
   }, [needsSpotifyPlayback, t]);
 
   const startHookFromBeginning = useCallback(
-    async (track?: SpotifyTrack, options?: { countAsReplay?: boolean }) => {
+    async (track?: SpotifyTrack, options?: { countAsReplay?: boolean; autoPlay?: boolean }) => {
       if (!track) return;
+      const autoPlay = options?.autoPlay ?? true;
       if (options?.countAsReplay && hasPlayedHookOnceRef.current) {
         setReplayCount((previous) => {
           const next = previous + 1;
@@ -527,6 +529,7 @@ export default function GameplayScreen({
       setSpotifyError(null);
       setHookLoading(true);
       setHookPlaying(false);
+      setHookPrepared(false);
       stopHeardTracking();
       clearHookStopTimer();
       setClipRemainingMs(HOOK_CLIP_MS);
@@ -537,22 +540,29 @@ export default function GameplayScreen({
       setHookEstimateMs(estimate);
       const effectiveHookStartMs = track.preview_url ? 0 : estimate ?? getFallbackHookStartMs(track);
       setActiveHookStartMs(effectiveHookStartMs);
+      setHookPrepared(true);
       setHookLoading(false);
+      setPlaybackSource(track.preview_url ? 'preview' : canPlayViaSpotify(track) ? 'spotify' : 'none');
 
       if (track.preview_url) {
+        const audio = audioRef.current;
+        if (!audio) return;
+
+        audio.src = track.preview_url;
+        audio.currentTime = 0;
+        audio.load();
+
+        if (!autoPlay) {
+          return;
+        }
+
         if (spotifyPlayerRef.current) {
           spotifyPlayerRef.current.pause().catch(() => undefined);
         }
 
-        const audio = audioRef.current;
-        if (!audio) return;
-        audio.src = track.preview_url;
-        audio.currentTime = 0;
-
         try {
           await audio.play();
           if (requestId !== playbackRequestRef.current) return;
-          setPlaybackSource('preview');
           setHookPlaying(true);
           hasPlayedHookOnceRef.current = true;
           startHeardTracking();
@@ -561,6 +571,10 @@ export default function GameplayScreen({
           setHookPlaying(false);
           setSpotifyError(t('screens.gameplay.previewPlaybackFailed'));
         }
+        return;
+      }
+
+      if (!autoPlay) {
         return;
       }
 
@@ -573,6 +587,7 @@ export default function GameplayScreen({
 
       if (!canPlayViaSpotify(track)) {
         setSpotifyError(t('screens.gameplay.trackUnavailable'));
+        setHookPrepared(false);
         return;
       }
 
@@ -583,6 +598,7 @@ export default function GameplayScreen({
           const hasWidevine = await supportsWidevineAudioPlayback();
           if (requestId !== playbackRequestRef.current) return;
           setSpotifyError(hasWidevine ? t('screens.gameplay.spotifyPlayerNotReady') : t('screens.gameplay.spotifyDrmUnsupported'));
+          setHookPrepared(false);
           return;
         }
       }
@@ -653,6 +669,7 @@ export default function GameplayScreen({
 
   const resumeHook = useCallback(async () => {
     if (!currentTrack) return;
+    if (!hookPrepared) return;
 
     if (clipRemainingMs <= 200 || playbackSource === 'none') {
       await startHookFromBeginning(currentTrack, { countAsReplay: true });
@@ -676,7 +693,7 @@ export default function GameplayScreen({
     } catch {
       setSpotifyError(t('screens.gameplay.spotifyPlaybackFailed'));
     }
-  }, [clipRemainingMs, currentTrack, playbackSource, scheduleHookStop, startHeardTracking, startHookFromBeginning, t]);
+  }, [clipRemainingMs, currentTrack, hookPrepared, playbackSource, scheduleHookStop, startHeardTracking, startHookFromBeginning, t]);
 
   useEffect(() => {
     if (!currentTrack) return;
@@ -694,6 +711,7 @@ export default function GameplayScreen({
     roundHeardMsRef.current = 0;
     heardStartedAtRef.current = null;
     setPlaybackSource('none');
+    setHookPrepared(false);
     setClipRemainingMs(HOOK_CLIP_MS);
     setHookRemainingMs(null);
   }, [currentTrack]);
@@ -819,7 +837,7 @@ export default function GameplayScreen({
         initial={animationsEnabled ? { opacity: 0, y: 10 } : {}}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="hh-surface-card p-5 md:p-7 w-full"
+        className="hh-surface-card p-4 sm:p-5 md:p-7 w-full"
       >
         <div className="hh-content mb-4 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
           <div className="rounded-2xl border border-white/80 dark:border-slate-600/70 bg-gradient-to-br from-white/85 via-orange-50/75 to-rose-50/60 dark:from-slate-900/70 dark:via-slate-800/70 dark:to-slate-900/65 px-4 py-3 shadow-[0_14px_30px_-24px_rgba(15,23,42,0.6)]">
@@ -859,23 +877,34 @@ export default function GameplayScreen({
             />
           </div>
           <div className="mt-1 text-[11px] text-right text-slate-300">
-            {hookRemainingMs === null
-              ? t('screens.gameplay.hookReady')
-              : t('screens.gameplay.hookTimeRemaining', { seconds: Math.max(0, Math.ceil(hookRemainingMs / 1000)) })}
+            {hookLoading
+              ? t('screens.gameplay.hookAnalyzing')
+              : !hookPrepared
+                ? t('screens.gameplay.hookNeedsLoad')
+                : hookRemainingMs === null
+                  ? t('screens.gameplay.hookReady')
+                  : t('screens.gameplay.hookTimeRemaining', { seconds: Math.max(0, Math.ceil(hookRemainingMs / 1000)) })}
           </div>
 
-          <div className="mt-3 flex flex-wrap items-center gap-2.5">
+          <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <button
+              onClick={() => startHookFromBeginning(currentTrack, { autoPlay: false })}
+              className="hh-btn-muted !w-full !px-4 !py-2.5"
+              disabled={roundSubmitted || hookLoading}
+            >
+              {t('screens.gameplay.loadHook')}
+            </button>
             <button
               onClick={() => (hookPlaying ? pauseHook() : resumeHook())}
-              className="hh-btn-muted !w-auto !px-4 !py-2.5"
-              disabled={roundSubmitted}
+              className="hh-btn-muted !w-full !px-4 !py-2.5"
+              disabled={roundSubmitted || hookLoading || !hookPrepared}
             >
               {hookPlaying ? <Pause size={15} /> : <Play size={15} />}
               {hookPlaying ? t('screens.gameplay.pauseHook') : t('screens.gameplay.playHook')}
             </button>
             <button
               onClick={advance}
-              className="hh-btn-muted !w-auto !px-4 !py-2.5"
+              className="hh-btn-muted !w-full !px-4 !py-2.5"
               disabled={roundSubmitted}
             >
               <SkipForward size={15} /> {t('screens.gameplay.skip')}
@@ -982,7 +1011,7 @@ export default function GameplayScreen({
           <div className="text-xs text-slate-600 dark:text-slate-300">
             {t('screens.gameplay.roundLabel', { current: currentIndex + 1, total: Math.max(tracks.length, 1) })}
           </div>
-          <div className="flex gap-2 flex-wrap justify-end max-w-[70%]">
+          <div className="flex gap-2 flex-wrap justify-end max-w-full sm:max-w-[70%]">
             {scores.map((score) => (
               <span
                 key={score.name}

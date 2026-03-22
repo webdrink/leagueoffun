@@ -447,6 +447,7 @@ function App() {
   };
 
   const backgroundGradient = getSeasonalGradient(season, isDark);
+  const isGameplayStep = gameStep === 'game';
 
   return (
     <div className={`min-h-screen ${backgroundGradient} animate-gentle-shift overflow-hidden relative`}>
@@ -459,11 +460,11 @@ function App() {
         <div className="flex flex-col h-full max-w-sm sm:max-w-lg lg:max-w-2xl xl:max-w-3xl mx-auto w-full px-3 sm:px-5 lg:px-8 bg-transparent">
           
           {/* Top Padding */}
-          <div className="h-4 sm:h-5 flex-shrink-0"></div>
+          <div className={`${isGameplayStep ? 'h-2 sm:h-3' : 'h-4 sm:h-5'} flex-shrink-0`}></div>
           
           {/* Header Card - Matching BlameGame style */}
-          <header className="py-2 sm:py-3 flex-shrink-0 flex justify-center items-center">
-            <div className="hh-surface-card px-5 sm:px-7 py-3 sm:py-4 w-full flex items-center justify-center min-h-[74px]">
+          <header className={`${isGameplayStep ? 'py-1.5 sm:py-2' : 'py-2 sm:py-3'} flex-shrink-0 flex justify-center items-center`}>
+            <div className={`hh-surface-card px-4 sm:px-7 ${isGameplayStep ? 'py-2 sm:py-3 min-h-[62px]' : 'py-3 sm:py-4 min-h-[74px]'} w-full flex items-center justify-center`}>
               <div className="hh-shimmer absolute inset-0 opacity-30" />
               <div className="text-center w-full max-w-full hh-content">
                 <motion.h1
@@ -477,10 +478,10 @@ function App() {
                   <img
                     src={HOOKHUNT_LOGO_SRC}
                     alt="HookHunt logo"
-                    className="h-10 w-auto sm:h-12 md:h-14"
+                    className={`${isGameplayStep ? 'h-8 sm:h-11 md:h-12' : 'h-10 sm:h-12 md:h-14'} w-auto`}
                     style={{ imageRendering: 'pixelated' }}
                   />
-                  <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-500 to-rose-500 dark:from-orange-300 dark:via-amber-300 dark:to-rose-300 drop-shadow-sm leading-tight text-center text-3xl sm:text-4xl md:text-5xl">
+                  <span className={`font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-500 to-rose-500 dark:from-orange-300 dark:via-amber-300 dark:to-rose-300 drop-shadow-sm leading-tight text-center ${isGameplayStep ? 'text-2xl sm:text-4xl md:text-5xl' : 'text-3xl sm:text-4xl md:text-5xl'}`}>
                     HookHunt
                   </span>
                 </motion.h1>
@@ -488,11 +489,11 @@ function App() {
                   initial={animationsEnabled ? { opacity: 0, y: 10 } : {}}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-orange-700 dark:text-orange-200/95 font-semibold text-sm sm:text-base md:text-lg"
+                  className={`text-orange-700 dark:text-orange-200/95 font-semibold text-sm sm:text-base md:text-lg ${isGameplayStep ? 'hidden sm:block' : ''}`}
                 >
                   {t('game.subtitle')}
                 </motion.p>
-                <div className="mt-2">
+                <div className={isGameplayStep ? 'mt-1' : 'mt-2'}>
                   <span className={`hh-chip !text-[10px] sm:!text-xs ${
                     spotifyConnected
                       ? '!border-emerald-300/80 dark:!border-emerald-500/70 !text-emerald-800 dark:!text-emerald-200'
@@ -508,7 +509,7 @@ function App() {
           </header>
 
           {/* Padding after header */}
-          <div className="h-3 sm:h-4 flex-shrink-0"></div>
+          <div className={`${isGameplayStep ? 'h-2 sm:h-3' : 'h-3 sm:h-4'} flex-shrink-0`}></div>
 
           {/* Main Content Area */}
           <main className="flex-1 flex flex-col bg-transparent min-h-0 overflow-auto">
@@ -561,11 +562,11 @@ function App() {
           </main>
 
           {/* Padding before footer */}
-          <div className="h-3 sm:h-4 flex-shrink-0"></div>
+          <div className={`${isGameplayStep ? 'h-2 sm:h-3' : 'h-3 sm:h-4'} flex-shrink-0`}></div>
 
           {/* Footer - Matching BlameGame style */}
-          <footer className="flex-shrink-0 flex flex-col items-center justify-center pb-3 sm:pb-4">
-            <div className="hh-surface-card p-4 sm:p-5 mx-auto w-full">
+          <footer className={`flex-shrink-0 flex flex-col items-center justify-center ${isGameplayStep ? 'pb-2 sm:pb-3' : 'pb-3 sm:pb-4'}`}>
+            <div className={`hh-surface-card ${isGameplayStep ? 'p-3 sm:p-4' : 'p-4 sm:p-5'} mx-auto w-full`}>
               {/* Top Row: Main Controls */}
               <div className="hh-content flex justify-center items-center gap-3 text-slate-700 dark:text-slate-200 mb-3">
                 {/* Animation toggle */}
@@ -594,19 +595,21 @@ function App() {
               </div>
               
               {/* Bottom Row: Support message */}
-              <div className="hh-content border-t border-slate-300/60 dark:border-white/10 pt-3">
-                <p className="text-sm text-center text-slate-700 dark:text-slate-100 font-semibold">
-                  🎵 {t('footer.support_message')}
-                  <span className="block text-slate-600 dark:text-slate-200/90 text-xs mt-1">
-                    {t('footer.donation_message')}
-                  </span>
-                </p>
-              </div>
+              {!isGameplayStep && (
+                <div className="hh-content border-t border-slate-300/60 dark:border-white/10 pt-3">
+                  <p className="text-sm text-center text-slate-700 dark:text-slate-100 font-semibold">
+                    🎵 {t('footer.support_message')}
+                    <span className="block text-slate-600 dark:text-slate-200/90 text-xs mt-1">
+                      {t('footer.donation_message')}
+                    </span>
+                  </p>
+                </div>
+              )}
             </div>
           </footer>
 
           {/* Bottom Padding */}
-          <div className="h-4 sm:h-6 flex-shrink-0"></div>
+          <div className={`${isGameplayStep ? 'h-2 sm:h-4' : 'h-4 sm:h-6'} flex-shrink-0`}></div>
         </div>
       </div>
       {/* Settings Modal */}
