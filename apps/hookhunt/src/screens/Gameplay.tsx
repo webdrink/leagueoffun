@@ -17,7 +17,7 @@ type PlaybackSource = 'none' | 'preview' | 'spotify';
 
 type PrepareStatus = 'idle' | 'preparing' | 'ready' | 'failed';
 
-type PlaybackMode = 'spotify_full' | 'spotify_preview' | 'fallback_track' | 'none';
+type PlaybackMode = 'spotify_full' | 'spotify_preview' | 'fallback_track' | 'external_track' | 'none';
 
 interface PreparedPlayback {
   ready: boolean;
@@ -451,12 +451,12 @@ export default function GameplayScreen({
         };
       } else {
         prepared = {
-          ready: false,
-          mode: 'none',
+          ready: Boolean(baseTrack.id),
+          mode: baseTrack.id ? 'external_track' : 'none',
           source: 'none',
           startMs: 0,
-          resolvedTrack: null,
-          fallbackReason: 'no-playable-track',
+          resolvedTrack: baseTrack.id ? baseTrack : null,
+          fallbackReason: baseTrack.id ? 'external-spotify-open' : 'no-playable-track',
         };
       }
     }
@@ -488,6 +488,14 @@ export default function GameplayScreen({
 
     const targetTrack = prepared.resolvedTrack;
     setActiveHookStartMs(prepared.startMs);
+
+    if (prepared.mode === 'external_track' && targetTrack.id) {
+      const externalUrl = `https://open.spotify.com/track/${encodeURIComponent(targetTrack.id)}`;
+      window.open(externalUrl, '_blank', 'noopener,noreferrer');
+      setSpotifyError(t('screens.gameplay.externalFallbackOpened'));
+      setHookPlaying(false);
+      return;
+    }
 
     if (prepared.source === 'preview' && targetTrack.preview_url) {
       const audio = audioRef.current;

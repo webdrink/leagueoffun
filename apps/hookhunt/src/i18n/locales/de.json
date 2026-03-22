@@ -93,6 +93,7 @@
       "readyToPlay": "Bereit zum Abspielen",
       "prepareFailed": "Wiedergabequelle konnte nicht vorbereitet werden",
       "fallbackActive": "Fallback-Modus aktiv",
+      "externalFallbackOpened": "Track wird als Fallback in Spotify geöffnet.",
       "metaUnknown": "Unbekannt",
       "metaTitlePlaceholder": "Song Title",
       "metaArtistPlaceholder": "Artists + Features",
