@@ -367,11 +367,7 @@ export default function GameplayScreen({
   }, []);
 
   const findFallbackTrack = useCallback((startIndex: number): SpotifyTrack | null => {
-    const canUseSpotify = (track: SpotifyTrack) => (
-      !playbackHealth.previewOnlyMode &&
-      playbackHealth.drmSupported !== false &&
-      canPlayViaSpotify(track)
-    );
+    const canUseSpotify = (track: SpotifyTrack) => !playbackHealth.previewOnlyMode && canPlayViaSpotify(track);
 
     for (let i = startIndex + 1; i < rounds.length; i += 1) {
       const candidate = rounds[i]?.track;
@@ -394,7 +390,7 @@ export default function GameplayScreen({
       if (canUseSpotify(candidate)) return candidate;
     }
     return null;
-  }, [allTracks, playbackHealth.drmSupported, playbackHealth.previewOnlyMode, rounds]);
+  }, [allTracks, playbackHealth.previewOnlyMode, rounds]);
 
   const prepareTrackPlayback = useCallback(async (roundIndex: number): Promise<PreparedPlayback | null> => {
     const round = rounds[roundIndex];
@@ -420,10 +416,7 @@ export default function GameplayScreen({
       }
     }
 
-    const canUseSpotifyFull =
-      !playbackHealth.previewOnlyMode &&
-      playbackHealth.drmSupported !== false &&
-      canPlayViaSpotify(baseTrack);
+    const canUseSpotifyFull = !playbackHealth.previewOnlyMode && canPlayViaSpotify(baseTrack);
 
     let prepared: PreparedPlayback;
 
@@ -481,7 +474,7 @@ export default function GameplayScreen({
       setActiveHookStartMs(prepared.startMs);
     }
     return prepared;
-  }, [activeRoundIndex, findFallbackTrack, playbackHealth.drmSupported, playbackHealth.previewOnlyMode, rounds, updateRound]);
+  }, [activeRoundIndex, findFallbackTrack, playbackHealth.previewOnlyMode, rounds, updateRound]);
 
   const startPreparedPlayback = useCallback(async (preparedOverride?: PreparedPlayback | null) => {
     const prepared = preparedOverride ?? currentPrepared;
@@ -606,9 +599,9 @@ export default function GameplayScreen({
 
   useEffect(() => {
     supportsWidevineAudioPlayback().then((supported) => {
-      setPlaybackHealth((prev) => ({ ...prev, drmSupported: supported, previewOnlyMode: prev.previewOnlyMode || !supported }));
+      setPlaybackHealth((prev) => ({ ...prev, drmSupported: supported }));
     }).catch(() => {
-      setPlaybackHealth((prev) => ({ ...prev, drmSupported: false, previewOnlyMode: true }));
+      setPlaybackHealth((prev) => ({ ...prev, drmSupported: false }));
     });
   }, []);
 
