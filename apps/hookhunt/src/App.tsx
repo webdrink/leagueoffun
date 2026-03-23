@@ -17,7 +17,7 @@ import PlaylistSelectScreen from './screens/PlaylistSelect';
 import GameplayScreen from './screens/Gameplay';
 import SummaryScreen from './screens/Summary';
 import SettingsModal from './components/SettingsModal';
-import { getValidAccessToken, handleSpotifyCallback } from './utils/spotifyAuth';
+import { getSpotifyAuthState, getValidAccessToken, handleSpotifyCallback, SpotifyAuthState } from './utils/spotifyAuth';
 
 // Reusable FooterButton component matching BlameGame style
 interface FooterButtonProps {
@@ -274,6 +274,7 @@ function App() {
   const [sessionHydrated, setSessionHydrated] = useState(false);
   const [spotifyConnected, setSpotifyConnected] = useState(false);
   const [spotifyDisplayName, setSpotifyDisplayName] = useState<string | null>(null);
+  const [spotifyAuthState, setSpotifyAuthState] = useState<SpotifyAuthState>(getSpotifyAuthState());
   const [activeRun, setActiveRun] = useState<ActiveHookHuntRun | null>(null);
   
   // Get season from localStorage or auto-detect (doesn't need to be stateful as it rarely changes)
@@ -285,6 +286,7 @@ function App() {
   const refreshSpotifyState = useCallback(async () => {
     try {
       const token = await getValidAccessToken();
+      setSpotifyAuthState(getSpotifyAuthState());
       if (!token) {
         setSpotifyConnected(false);
         setSpotifyDisplayName(null);
@@ -293,9 +295,17 @@ function App() {
       setSpotifyConnected(true);
       setSpotifyDisplayName(readCachedSpotifyDisplayName());
     } catch {
+      setSpotifyAuthState(getSpotifyAuthState());
       setSpotifyConnected(false);
       setSpotifyDisplayName(null);
     }
+  }, []);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setSpotifyAuthState(getSpotifyAuthState());
+    }, 1000);
+    return () => window.clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
@@ -494,15 +504,20 @@ function App() {
                   {t('game.subtitle')}
                 </motion.p>
                 <div className={isGameplayStep ? 'mt-1' : 'mt-2'}>
-                  <span className={`hh-chip !text-[10px] sm:!text-xs ${
-                    spotifyConnected
-                      ? '!border-emerald-300/80 dark:!border-emerald-500/70 !text-emerald-800 dark:!text-emerald-200'
-                      : '!border-slate-300/80 dark:!border-slate-600 !text-slate-700 dark:!text-slate-200'
-                  }`}>
-                    {spotifyConnected
-                      ? t('game.spotifyConnectedAs', { name: spotifyDisplayName || t('game.spotifyConnectedFallback') })
-                      : t('game.spotifyNotConnected')}
-                  </span>
+                  <div className="flex flex-col items-center gap-1">
+                    <span className={`hh-chip !text-[10px] sm:!text-xs ${
+                      spotifyConnected
+                        ? '!border-emerald-300/80 dark:!border-emerald-500/70 !text-emerald-800 dark:!text-emerald-200'
+                        : '!border-slate-300/80 dark:!border-slate-600 !text-slate-700 dark:!text-slate-200'
+                    }`}>
+                      {spotifyConnected
+                        ? t('game.spotifyConnectedAs', { name: spotifyDisplayName || t('game.spotifyConnectedFallback') })
+                        : t('game.spotifyNotConnected')}
+                    </span>
+                    <span className="text-[10px] text-slate-600 dark:text-slate-300">
+                      {t('screens.gameplay.authStateLabel', { state: t(`screens.gameplay.authState.${spotifyAuthState}`) })}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

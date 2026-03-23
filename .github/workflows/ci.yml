@@ -66,6 +66,7 @@ jobs:
         env:
           VITE_SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           VITE_SPOTIFY_REDIRECT_URI: https://hookhunt.leagueoffun.com/callback/
+          VITE_BUILD_SHA: ${{ github.sha }}
         run: pnpm --filter @leagueoffun/hookhunt build
 
       - name: 🔒 Verify HookHunt Bundle Safety
@@ -77,6 +78,16 @@ jobs:
 
           if grep -R --line-number "SPOTIFY_CLIENT_SECRET" apps/hookhunt/dist >/dev/null 2>&1; then
             echo "❌ Found forbidden SPOTIFY_CLIENT_SECRET marker in dist output."
+            exit 1
+          fi
+
+          if grep -R --line-number "external-spotify-open" apps/hookhunt/dist/assets/*.js >/dev/null 2>&1; then
+            echo "❌ Found forbidden external Spotify fallback path in HookHunt bundle."
+            exit 1
+          fi
+
+          if grep -R --line-number "requestMediaKeySystemAccess" apps/hookhunt/dist/assets/*.js >/dev/null 2>&1; then
+            echo "❌ Found blocking EME preflight marker in HookHunt bundle."
             exit 1
           fi
 

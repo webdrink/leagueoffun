@@ -92,8 +92,24 @@
       "preparing": "Wiedergabe wird vorbereitet...",
       "readyToPlay": "Bereit zum Abspielen",
       "prepareFailed": "Wiedergabequelle konnte nicht vorbereitet werden",
+      "noPreviewTracksAvailable": "Für diese Runde ist im Preview-Only-Modus keine spielbare Spotify-Preview verfügbar.",
       "fallbackActive": "Fallback-Modus aktiv",
       "externalFallbackOpened": "Track wird als Fallback in Spotify geöffnet.",
+      "degradedToPreview": "Auf In-App-Preview-Fallback umgestellt.",
+      "authStateLabel": "Sitzung: {{state}}",
+      "deviceStateLabel": "Gerät: {{state}}",
+      "authState": {
+        "connected": "verbunden",
+        "refreshing": "wird erneuert",
+        "reauth_required": "erneut verbinden",
+        "degraded": "eingeschränkt"
+      },
+      "deviceState": {
+        "unknown": "unbekannt",
+        "pending": "verbindet",
+        "ready": "bereit",
+        "unavailable": "nicht verfügbar"
+      },
       "metaUnknown": "Unbekannt",
       "metaTitlePlaceholder": "Song Title",
       "metaArtistPlaceholder": "Artists + Features",

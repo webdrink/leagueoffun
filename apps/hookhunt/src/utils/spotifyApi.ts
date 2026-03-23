@@ -28,8 +28,10 @@ export interface SpotifyUserProfile {
 
 interface SpotifyApiErrorResponse {
   error?: {
+    status?: number;
     message?: string;
-  };
+  } | string;
+  message?: string;
 }
 
 interface SpotifyAudioAnalysisSection {
@@ -51,10 +53,34 @@ interface SpotifyAudioAnalysis {
   segments?: SpotifyAudioAnalysisSegment[];
 }
 
+interface SpotifyPlaybackDevice {
+  id: string;
+}
+
+interface SpotifyDevicesResponse {
+  devices?: SpotifyPlaybackDevice[];
+}
+
+interface SpotifyErrorDetails {
+  status: number;
+  message: string;
+  retryAfterMs: number | null;
+}
+
 const API = 'https://api.spotify.com/v1';
 const hookEstimateCache = new Map<string, number | null>();
 let audioAnalysisAvailability: boolean | null = null;
 const ENABLE_AUDIO_ANALYSIS = (import.meta.env.VITE_ENABLE_SPOTIFY_AUDIO_ANALYSIS as string | undefined) === 'true';
+const PLAYER_COMMAND_MAX_ATTEMPTS = 4;
+const PLAYBACK_API_DEBUG_PREFIX = '[HookHuntPlaybackApi]';
+
+function logPlaybackApi(event: string, payload: Record<string, unknown>) {
+  console.info(PLAYBACK_API_DEBUG_PREFIX, {
+    event,
+    at: new Date().toISOString(),
+    ...payload,
+  });
+}
 
 async function spotifyFetch(path: string, init: RequestInit = {}): Promise<Response> {
   const token = await getValidAccessToken();
@@ -78,13 +104,80 @@ async function spotifyFetch(path: string, init: RequestInit = {}): Promise<Respo
   return response;
 }
 
-async function extractSpotifyError(response: Response, fallback: string): Promise<string> {
+function parseRetryAfterMs(headerValue: string | null): number | null {
+  if (!headerValue) return null;
+  const asNumber = Number(headerValue);
+  if (!Number.isFinite(asNumber)) return null;
+  return Math.max(0, Math.round(asNumber * 1000));
+}
+
+async function extractSpotifyErrorDetails(response: Response, fallback: string): Promise<SpotifyErrorDetails> {
+  let message = fallback;
+
   try {
     const data = (await response.json()) as SpotifyApiErrorResponse;
-    return data.error?.message || fallback;
+    if (typeof data.error === 'string' && data.error.trim().length > 0) {
+      message = data.error.trim();
+    } else if (data.error && typeof data.error === 'object' && typeof data.error.message === 'string' && data.error.message.trim().length > 0) {
+      message = data.error.message.trim();
+    } else if (typeof data.message === 'string' && data.message.trim().length > 0) {
+      message = data.message.trim();
+    }
   } catch {
-    return fallback;
+    // Keep fallback message if body parsing fails.
   }
+
+  return {
+    status: response.status,
+    message,
+    retryAfterMs: parseRetryAfterMs(response.headers.get('Retry-After')),
+  };
+}
+
+function getBackoffDelayMs(attempt: number, retryAfterMs: number | null): number {
+  if (typeof retryAfterMs === 'number' && retryAfterMs > 0) {
+    return retryAfterMs;
+  }
+
+  const base = Math.min(3000, 250 * (2 ** (attempt - 1)));
+  const jitter = Math.floor(Math.random() * 200);
+  return base + jitter;
+}
+
+function shouldRetryPlayerCommand(status: number, message: string): boolean {
+  if (status === 404 || status === 429) return true;
+  if (status >= 500) return true;
+
+  if (status === 403) {
+    const normalized = message.toLowerCase();
+    return (
+      normalized.includes('no active device')
+      || normalized.includes('cannot perform operation')
+      || normalized.includes('player command failed')
+    );
+  }
+
+  return false;
+}
+
+async function sleep(ms: number): Promise<void> {
+  await new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+export async function getAvailablePlaybackDeviceIds(): Promise<Set<string>> {
+  const response = await spotifyFetch('/me/player/devices');
+  if (!response.ok) {
+    return new Set<string>();
+  }
+
+  const data = (await response.json()) as SpotifyDevicesResponse;
+  const ids = (data.devices || [])
+    .map((device) => device.id)
+    .filter((id): id is string => typeof id === 'string' && id.length > 0);
+
+  return new Set(ids);
 }
 
 export async function getUserPlaylists(): Promise<SpotifyPlaylist[]> {
@@ -139,27 +232,43 @@ export async function getPlaylistTracks(playlistId: string): Promise<SpotifyTrac
   return tracks;
 }
 
-async function sleep(ms: number): Promise<void> {
-  await new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
-
 export async function transferPlaybackToDevice(deviceId: string): Promise<void> {
-  const res = await spotifyFetch('/me/player', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      device_ids: [deviceId],
-      play: false,
-    }),
-  });
+  for (let attempt = 1; attempt <= PLAYER_COMMAND_MAX_ATTEMPTS; attempt += 1) {
+    logPlaybackApi('transferAttempt', { attempt, deviceId });
+    const deviceIds = await getAvailablePlaybackDeviceIds().catch(() => new Set<string>());
+    if (deviceIds.size > 0 && !deviceIds.has(deviceId)) {
+      logPlaybackApi('transferDeviceUnavailable', { attempt, deviceId, knownDeviceCount: deviceIds.size });
+      if (attempt < PLAYER_COMMAND_MAX_ATTEMPTS) {
+        await sleep(getBackoffDelayMs(attempt, null));
+        continue;
+      }
+      throw new Error('Spotify player is not ready yet. Please wait a moment and retry.');
+    }
 
-  if (!res.ok) {
-    const message = await extractSpotifyError(res, 'Could not transfer Spotify playback to browser.');
-    throw new Error(message);
+    const res = await spotifyFetch('/me/player', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        device_ids: [deviceId],
+        play: false,
+      }),
+    });
+
+    if (res.ok) {
+      logPlaybackApi('transferSuccess', { attempt, deviceId });
+      return;
+    }
+
+    const details = await extractSpotifyErrorDetails(res, 'Could not transfer Spotify playback to browser.');
+    logPlaybackApi('transferResponse', { attempt, deviceId, status: details.status, message: details.message });
+    if (shouldRetryPlayerCommand(details.status, details.message) && attempt < PLAYER_COMMAND_MAX_ATTEMPTS) {
+      await sleep(getBackoffDelayMs(attempt, details.retryAfterMs));
+      continue;
+    }
+
+    throw new Error(details.message);
   }
 }
 
@@ -168,9 +277,18 @@ export async function startPlaybackOnDevice(
   trackUri: string,
   positionMs = 0
 ): Promise<void> {
-  const maxAttempts = 3;
+  for (let attempt = 1; attempt <= PLAYER_COMMAND_MAX_ATTEMPTS; attempt += 1) {
+    logPlaybackApi('startAttempt', { attempt, deviceId, trackUri, positionMs });
+    const deviceIds = await getAvailablePlaybackDeviceIds().catch(() => new Set<string>());
+    if (deviceIds.size > 0 && !deviceIds.has(deviceId)) {
+      logPlaybackApi('startDeviceUnavailable', { attempt, deviceId, knownDeviceCount: deviceIds.size });
+      if (attempt < PLAYER_COMMAND_MAX_ATTEMPTS) {
+        await sleep(getBackoffDelayMs(attempt, null));
+        continue;
+      }
+      throw new Error('Spotify player is not ready yet. Please wait a moment and retry.');
+    }
 
-  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
     const res = await spotifyFetch(`/me/player/play?device_id=${encodeURIComponent(deviceId)}`, {
       method: 'PUT',
       headers: {
@@ -183,17 +301,18 @@ export async function startPlaybackOnDevice(
     });
 
     if (res.ok) {
+      logPlaybackApi('startSuccess', { attempt, deviceId, trackUri });
       return;
     }
 
-    const retryable = res.status === 404 || res.status === 429;
-    if (retryable && attempt < maxAttempts) {
-      await sleep(300 * attempt);
+    const details = await extractSpotifyErrorDetails(res, 'Could not start Spotify playback.');
+    logPlaybackApi('startResponse', { attempt, deviceId, status: details.status, message: details.message });
+    if (shouldRetryPlayerCommand(details.status, details.message) && attempt < PLAYER_COMMAND_MAX_ATTEMPTS) {
+      await sleep(getBackoffDelayMs(attempt, details.retryAfterMs));
       continue;
     }
 
-    const message = await extractSpotifyError(res, 'Could not start Spotify playback.');
-    throw new Error(message);
+    throw new Error(details.message);
   }
 }
 

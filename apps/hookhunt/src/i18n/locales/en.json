@@ -92,8 +92,24 @@
       "preparing": "Preparing playback...",
       "readyToPlay": "Ready to play",
       "prepareFailed": "Could not prepare playback source",
+      "noPreviewTracksAvailable": "No playable Spotify preview is available for this round in preview-only mode.",
       "fallbackActive": "Fallback mode active",
       "externalFallbackOpened": "Opening track in Spotify as fallback.",
+      "degradedToPreview": "Switched to in-app preview fallback.",
+      "authStateLabel": "Session: {{state}}",
+      "deviceStateLabel": "Device: {{state}}",
+      "authState": {
+        "connected": "connected",
+        "refreshing": "refreshing",
+        "reauth_required": "reconnect needed",
+        "degraded": "degraded"
+      },
+      "deviceState": {
+        "unknown": "unknown",
+        "pending": "connecting",
+        "ready": "ready",
+        "unavailable": "unavailable"
+      },
       "metaUnknown": "Unknown",
       "metaTitlePlaceholder": "Song Title",
       "metaArtistPlaceholder": "Artists + Features",

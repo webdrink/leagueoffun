@@ -3,21 +3,23 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Pause, Play } from 'lucide-react';
 import {
+  getAvailablePlaybackDeviceIds,
   getEstimatedHookStartMs,
   getPlaylistTracks,
   SpotifyTrack,
   startPlaybackOnDevice,
   transferPlaybackToDevice,
 } from '../utils/spotifyApi';
-import { getValidAccessToken } from '../utils/spotifyAuth';
+import { getSpotifyAuthState, getValidAccessToken, SpotifyAuthState } from '../utils/spotifyAuth';
 import { evaluateGuess, GuessEvaluation, MatchStatus, releaseYearFromDate } from '../utils/scoring';
 
 type GameMode = 'singleplayer' | 'hotSeat';
 type PlaybackSource = 'none' | 'preview' | 'spotify';
+type PlaybackDeviceState = 'unknown' | 'pending' | 'ready' | 'unavailable';
 
 type PrepareStatus = 'idle' | 'preparing' | 'ready' | 'failed';
 
-type PlaybackMode = 'spotify_full' | 'spotify_preview' | 'fallback_track' | 'external_track' | 'none';
+type PlaybackMode = 'spotify_full' | 'spotify_preview' | 'fallback_track' | 'none';
 
 interface PreparedPlayback {
   ready: boolean;
@@ -26,6 +28,7 @@ interface PreparedPlayback {
   startMs: number;
   resolvedTrack: SpotifyTrack | null;
   fallbackReason: string | null;
+  attemptTrace: string[];
 }
 
 interface RoundState {
@@ -52,7 +55,8 @@ interface RoundState {
 interface SessionPlaybackHealth {
   consecutiveFailures: number;
   previewOnlyMode: boolean;
-  drmSupported: boolean | null;
+  authState: SpotifyAuthState;
+  deviceState: PlaybackDeviceState;
 }
 
 interface Settings {
@@ -86,8 +90,10 @@ const REPLAY_PENALTY_PER_REPLAY = 0.15;
 const SPOTIFY_READY_WAIT_MS = 6_000;
 const SPOTIFY_READY_POLL_MS = 200;
 const MAX_PREPARE_FAILURES_BEFORE_PREVIEW_ONLY = 3;
+const DEBUG_PREFIX = '[HookHuntPlayback]';
 
 let spotifySdkReadyPromise: Promise<void> | null = null;
+let playbackAttemptCounter = 0;
 
 function loadSpotifyWebPlaybackSdk(): Promise<void> {
   if (typeof window === 'undefined') {
@@ -171,25 +177,12 @@ function normalizeSpotifyError(message: string, t: (key: string) => string): str
   return message;
 }
 
-async function supportsWidevineAudioPlayback(): Promise<boolean> {
-  const requester = (navigator as Navigator & {
-    requestMediaKeySystemAccess?: (
-      keySystem: string,
-      supportedConfigurations: MediaKeySystemConfiguration[]
-    ) => Promise<MediaKeySystemAccess>;
-  }).requestMediaKeySystemAccess;
-
-  if (typeof requester !== 'function') return false;
-
-  try {
-    await requester.call(navigator, 'com.widevine.alpha', [{
-      initDataTypes: ['cenc'],
-      audioCapabilities: [{ contentType: 'audio/mp4; codecs="mp4a.40.2"' }],
-    }]);
-    return true;
-  } catch {
-    return false;
-  }
+function logPlaybackEvent(event: string, payload: Record<string, unknown> = {}) {
+  console.info(DEBUG_PREFIX, {
+    event,
+    at: new Date().toISOString(),
+    ...payload,
+  });
 }
 
 function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {
@@ -250,7 +243,8 @@ export default function GameplayScreen({
   const [playbackHealth, setPlaybackHealth] = useState<SessionPlaybackHealth>({
     consecutiveFailures: 0,
     previewOnlyMode: false,
-    drmSupported: null,
+    authState: getSpotifyAuthState(),
+    deviceState: 'unknown',
   });
   const [hookPlaying, setHookPlaying] = useState(false);
   const [hookClipEndsAt, setHookClipEndsAt] = useState<number | null>(null);
@@ -270,6 +264,20 @@ export default function GameplayScreen({
   const currentPrepared = activeRound?.preparedPlayback || null;
   const currentTargetTrack = currentPrepared?.resolvedTrack || activeRound?.track || null;
   const currentPlayerIdx = Math.min(playerNames.length - 1, getPlayerForRound(activeRoundIndex, mode) % Math.max(playerNames.length, 1));
+  const [buildInfo] = useState(() => {
+    const configuredSha = (import.meta.env.VITE_BUILD_SHA as string | undefined)?.trim();
+    const fallbackSha = configuredSha || 'local';
+    const scriptSrc = typeof document !== 'undefined'
+      ? Array.from(document.querySelectorAll('script[type="module"]'))
+        .map((script) => script.getAttribute('src') || '')
+        .find((src) => src.includes('/assets/index-')) || ''
+      : '';
+    const hashMatch = scriptSrc.match(/index-([A-Za-z0-9_-]+)\.js/);
+    return {
+      sha: fallbackSha.slice(0, 8),
+      assetHash: hashMatch?.[1] || 'unknown',
+    };
+  });
 
   const scores = useMemo(() => {
     const initial = playerNames.map((name) => ({ name, score: 0, heardMs: 0 }));
@@ -288,6 +296,14 @@ export default function GameplayScreen({
     return clamp((remaining / HOOK_CLIP_MS) * 100, 0, 100);
   }, [clipRemainingMs, hookRemainingMs]);
   const hookElapsedPercent = useMemo(() => 100 - hookRemainingPercent, [hookRemainingPercent]);
+  const roundProgressPercent = useMemo(
+    () => clamp(((activeRoundIndex + 1) / Math.max(rounds.length, 1)) * 100, 0, 100),
+    [activeRoundIndex, rounds.length]
+  );
+
+  useEffect(() => {
+    console.info('[HookHuntBuild]', buildInfo);
+  }, [buildInfo]);
 
   const updateRound = useCallback((roundIndex: number, updater: (round: RoundState) => RoundState) => {
     setRounds((prev) => prev.map((round, index) => (index === roundIndex ? updater(round) : round)));
@@ -346,22 +362,34 @@ export default function GameplayScreen({
   }, [clearHookStopTimer, stopHeardTracking]);
 
   const waitForSpotifyDeviceReady = useCallback(async (): Promise<boolean> => {
+    setPlaybackHealth((prev) => ({ ...prev, deviceState: 'pending' }));
     if (spotifyPlayerRef.current && spotifyDeviceIdRef.current) return true;
     const startedAt = Date.now();
     while (Date.now() - startedAt < SPOTIFY_READY_WAIT_MS) {
       await new Promise<void>((resolve) => window.setTimeout(resolve, SPOTIFY_READY_POLL_MS));
-      if (spotifyPlayerRef.current && spotifyDeviceIdRef.current) return true;
+      if (spotifyPlayerRef.current && spotifyDeviceIdRef.current) {
+        setPlaybackHealth((prev) => ({ ...prev, deviceState: 'ready' }));
+        return true;
+      }
     }
+    setPlaybackHealth((prev) => ({ ...prev, deviceState: 'unavailable' }));
     return false;
   }, []);
 
   const registerPlaybackFailure = useCallback((reason?: string) => {
     setPlaybackHealth((prev) => {
+      const normalizedReason = (reason || '').toLowerCase();
       const failures = prev.consecutiveFailures + 1;
+      const drmLikeFailure = (
+        normalizedReason.includes('drm')
+        || normalizedReason.includes('eme')
+        || normalizedReason.includes('keysystem')
+      );
       return {
         ...prev,
         consecutiveFailures: failures,
-        previewOnlyMode: prev.previewOnlyMode || failures >= MAX_PREPARE_FAILURES_BEFORE_PREVIEW_ONLY || !!reason?.includes('drm'),
+        previewOnlyMode: prev.previewOnlyMode || failures >= MAX_PREPARE_FAILURES_BEFORE_PREVIEW_ONLY || drmLikeFailure,
+        authState: getSpotifyAuthState(),
       };
     });
   }, []);
@@ -369,7 +397,6 @@ export default function GameplayScreen({
   const findFallbackTrack = useCallback((startIndex: number): SpotifyTrack | null => {
     const canUseSpotify = (track: SpotifyTrack) => (
       !playbackHealth.previewOnlyMode &&
-      playbackHealth.drmSupported !== false &&
       canPlayViaSpotify(track)
     );
 
@@ -394,7 +421,7 @@ export default function GameplayScreen({
       if (canUseSpotify(candidate)) return candidate;
     }
     return null;
-  }, [allTracks, playbackHealth.drmSupported, playbackHealth.previewOnlyMode, rounds]);
+  }, [allTracks, playbackHealth.previewOnlyMode, rounds]);
 
   const prepareTrackPlayback = useCallback(async (roundIndex: number): Promise<PreparedPlayback | null> => {
     const round = rounds[roundIndex];
@@ -407,22 +434,25 @@ export default function GameplayScreen({
     const baseTrack = round.track;
     let startMs = 0;
     let fallbackReason: string | null = null;
+    const attemptTrace: string[] = ['prepare:start'];
 
     if (baseTrack.preview_url) {
       startMs = 0;
+      attemptTrace.push('base:preview');
     } else {
       try {
         const estimate = await withTimeout(getEstimatedHookStartMs(baseTrack.id), 1800);
         startMs = estimate ?? getFallbackHookStartMs(baseTrack);
+        attemptTrace.push(estimate === null ? 'analysis:fallback-estimate' : 'analysis:success');
       } catch {
         startMs = 0;
         fallbackReason = 'hook-analysis-unavailable';
+        attemptTrace.push('analysis:error-start-0');
       }
     }
 
     const canUseSpotifyFull = (
       !playbackHealth.previewOnlyMode &&
-      playbackHealth.drmSupported !== false &&
       canPlayViaSpotify(baseTrack)
     );
 
@@ -436,6 +466,7 @@ export default function GameplayScreen({
         startMs,
         resolvedTrack: baseTrack,
         fallbackReason,
+        attemptTrace: [...attemptTrace, 'mode:spotify_full'],
       };
     } else if (baseTrack.preview_url) {
       prepared = {
@@ -445,6 +476,7 @@ export default function GameplayScreen({
         startMs: 0,
         resolvedTrack: baseTrack,
         fallbackReason: fallbackReason || (playbackHealth.previewOnlyMode ? 'preview-only-mode' : null),
+        attemptTrace: [...attemptTrace, 'mode:base_preview'],
       };
     } else {
       const fallbackTrack = findFallbackTrack(roundIndex);
@@ -456,18 +488,28 @@ export default function GameplayScreen({
           startMs: fallbackTrack.preview_url ? 0 : startMs,
           resolvedTrack: fallbackTrack,
           fallbackReason: 'next-playable-track',
+          attemptTrace: [...attemptTrace, fallbackTrack.preview_url ? 'mode:fallback_preview' : 'mode:fallback_spotify'],
         };
       } else {
         prepared = {
-          ready: Boolean(baseTrack.id),
-          mode: baseTrack.id ? 'external_track' : 'none',
+          ready: false,
+          mode: 'none',
           source: 'none',
           startMs: 0,
-          resolvedTrack: baseTrack.id ? baseTrack : null,
-          fallbackReason: baseTrack.id ? 'external-spotify-open' : 'no-playable-track',
+          resolvedTrack: null,
+          fallbackReason: playbackHealth.previewOnlyMode ? 'no-preview-track-available' : 'no-playable-track',
+          attemptTrace: [...attemptTrace, 'mode:none'],
         };
       }
     }
+
+    logPlaybackEvent('prepareTrackPlayback', {
+      roundIndex,
+      mode: prepared.mode,
+      source: prepared.source,
+      fallbackReason: prepared.fallbackReason,
+      attemptTrace: prepared.attemptTrace,
+    });
 
     updateRound(roundIndex, (prev) => ({
       ...prev,
@@ -482,33 +524,73 @@ export default function GameplayScreen({
       setActiveHookStartMs(prepared.startMs);
     }
     return prepared;
-  }, [activeRoundIndex, findFallbackTrack, playbackHealth.drmSupported, playbackHealth.previewOnlyMode, rounds, updateRound]);
+  }, [activeRoundIndex, findFallbackTrack, playbackHealth.previewOnlyMode, rounds, updateRound]);
+
+  const applyPreviewFallback = useCallback((
+    roundIndex: number,
+    basePrepared: PreparedPlayback,
+    reason: string
+  ): PreparedPlayback | null => {
+    const baseTrack = basePrepared.resolvedTrack;
+    if (baseTrack?.preview_url) {
+      const fallbackPrepared: PreparedPlayback = {
+        ready: true,
+        mode: 'spotify_preview',
+        source: 'preview',
+        startMs: 0,
+        resolvedTrack: baseTrack,
+        fallbackReason: reason,
+        attemptTrace: [...basePrepared.attemptTrace, `fallback:${reason}`, 'fallback:preview_same_track'],
+      };
+      updateRound(roundIndex, (round) => ({ ...round, preparedPlayback: fallbackPrepared, prepareStatus: 'ready' }));
+      return fallbackPrepared;
+    }
+
+    const emergencyPreviewTrack = rounds.find((candidate, index) => (
+      index !== roundIndex && Boolean(candidate.track.preview_url)
+    ))?.track || allTracks.find((track) => Boolean(track.preview_url)) || null;
+
+    if (!emergencyPreviewTrack?.preview_url) {
+      return null;
+    }
+
+    const fallbackPrepared: PreparedPlayback = {
+      ready: true,
+      mode: 'fallback_track',
+      source: 'preview',
+      startMs: 0,
+      resolvedTrack: emergencyPreviewTrack,
+      fallbackReason: reason,
+      attemptTrace: [...basePrepared.attemptTrace, `fallback:${reason}`, 'fallback:preview_other_track'],
+    };
+
+    updateRound(roundIndex, (round) => ({ ...round, preparedPlayback: fallbackPrepared, prepareStatus: 'ready' }));
+    return fallbackPrepared;
+  }, [allTracks, rounds, updateRound]);
 
   const startPreparedPlayback = useCallback(async (preparedOverride?: PreparedPlayback | null) => {
     const prepared = preparedOverride ?? currentPrepared;
     if (!activeRound || !prepared || !prepared.ready || !prepared.resolvedTrack) return;
 
+    const attemptId = ++playbackAttemptCounter;
     const requestId = ++playbackRequestRef.current;
     setSpotifyError(null);
     stopHeardTracking();
     clearHookStopTimer();
     setClipRemainingMs(HOOK_CLIP_MS);
+    setPlaybackHealth((prev) => ({ ...prev, authState: getSpotifyAuthState() }));
 
     const targetTrack = prepared.resolvedTrack;
     setActiveHookStartMs(prepared.startMs);
-    const openExternalTrack = () => {
-      if (!targetTrack.id) return false;
-      const externalUrl = `https://open.spotify.com/track/${encodeURIComponent(targetTrack.id)}`;
-      window.open(externalUrl, '_blank', 'noopener,noreferrer');
-      setSpotifyError(t('screens.gameplay.externalFallbackOpened'));
-      setHookPlaying(false);
-      return true;
-    };
-
-    if (prepared.mode === 'external_track' && targetTrack.id) {
-      openExternalTrack();
-      return;
-    }
+    logPlaybackEvent('startPreparedPlayback', {
+      attemptId,
+      roundIndex: activeRoundIndex,
+      mode: prepared.mode,
+      source: prepared.source,
+      trackId: targetTrack.id,
+      fallbackReason: prepared.fallbackReason,
+      attemptTrace: prepared.attemptTrace,
+    });
 
     if (prepared.source === 'preview' && targetTrack.preview_url) {
       const audio = audioRef.current;
@@ -522,73 +604,109 @@ export default function GameplayScreen({
         setHookPlaying(true);
         startHeardTracking();
         scheduleHookStop('preview', requestId, HOOK_CLIP_MS);
+        logPlaybackEvent('playbackStarted', {
+          attemptId,
+          source: 'preview',
+          trackId: targetTrack.id,
+        });
       } catch {
-        registerPlaybackFailure('preview');
+        registerPlaybackFailure('preview-playback-failed');
         setSpotifyError(t('screens.gameplay.previewPlaybackFailed'));
+        logPlaybackEvent('playbackFailed', {
+          attemptId,
+          source: 'preview',
+          reason: 'preview-playback-failed',
+        });
       }
       return;
     }
 
     if (!canPlayViaSpotify(targetTrack)) {
       setSpotifyError(t('screens.gameplay.trackUnavailable'));
+      logPlaybackEvent('playbackSkipped', {
+        attemptId,
+        reason: 'target-track-not-spotify-playable',
+      });
       return;
     }
 
     const ready = await waitForSpotifyDeviceReady();
     if (!ready || !spotifyDeviceIdRef.current) {
-      registerPlaybackFailure('spotify-not-ready');
-      if (!openExternalTrack()) {
+      registerPlaybackFailure('spotify-device-not-ready');
+      const degradedPrepared = applyPreviewFallback(activeRoundIndex, prepared, 'spotify-device-not-ready');
+      if (degradedPrepared) {
+        setSpotifyError(t('screens.gameplay.degradedToPreview'));
+        logPlaybackEvent('fallbackActivated', {
+          attemptId,
+          reason: 'spotify-device-not-ready',
+          fallbackTrackId: degradedPrepared.resolvedTrack?.id,
+        });
+        await startPreparedPlayback(degradedPrepared);
+      } else {
         setSpotifyError(t('screens.gameplay.spotifyPlayerNotReady'));
       }
       return;
     }
 
     try {
-      await withTimeout(transferPlaybackToDevice(spotifyDeviceIdRef.current), 3000);
-      await withTimeout(startPlaybackOnDevice(spotifyDeviceIdRef.current, targetTrack.uri, prepared.startMs), 3000);
+      const availableIds = await getAvailablePlaybackDeviceIds().catch(() => new Set<string>());
+      if (availableIds.size > 0 && !availableIds.has(spotifyDeviceIdRef.current)) {
+        setPlaybackHealth((prev) => ({ ...prev, deviceState: 'unavailable' }));
+      } else {
+        setPlaybackHealth((prev) => ({ ...prev, deviceState: 'ready' }));
+      }
+
+      await withTimeout(transferPlaybackToDevice(spotifyDeviceIdRef.current), 7_500);
+      await withTimeout(startPlaybackOnDevice(spotifyDeviceIdRef.current, targetTrack.uri, prepared.startMs), 7_500);
       if (requestId !== playbackRequestRef.current) return;
       setHookPlaying(true);
       startHeardTracking();
       scheduleHookStop('spotify', requestId, HOOK_CLIP_MS);
+      logPlaybackEvent('playbackStarted', {
+        attemptId,
+        source: 'spotify',
+        deviceId: spotifyDeviceIdRef.current,
+        trackId: targetTrack.id,
+      });
     } catch (err) {
       const message = err instanceof Error ? err.message : '';
       registerPlaybackFailure(message.toLowerCase().includes('drm') ? 'drm' : 'spotify-playback');
-      if (targetTrack.preview_url) {
-        updateRound(activeRoundIndex, (round) => ({
-          ...round,
-          preparedPlayback: {
-            ...prepared,
-            source: 'preview',
-            mode: 'spotify_preview',
-            startMs: 0,
-            fallbackReason: 'spotify-playback-failed',
-          },
-          prepareStatus: 'ready',
-        }));
-      } else {
-        const emergencyPreviewTrack = rounds.find((candidate, index) => (
-          index !== activeRoundIndex && Boolean(candidate.track.preview_url)
-        ))?.track || null;
-        if (emergencyPreviewTrack?.preview_url) {
-          const emergencyPrepared: PreparedPlayback = {
-            ready: true,
-            mode: 'fallback_track',
-            source: 'preview',
-            startMs: 0,
-            resolvedTrack: emergencyPreviewTrack,
-            fallbackReason: 'emergency-preview',
-          };
-          updateRound(activeRoundIndex, (round) => ({
-            ...round,
-            preparedPlayback: emergencyPrepared,
-            prepareStatus: 'ready',
-          }));
-        }
+
+      const degradedPrepared = applyPreviewFallback(activeRoundIndex, prepared, 'spotify-playback-failed');
+      if (degradedPrepared) {
+        setSpotifyError(`${t('screens.gameplay.spotifyPlaybackFailed')} ${normalizeSpotifyError(message, t)} ${t('screens.gameplay.degradedToPreview')}`);
+        logPlaybackEvent('fallbackActivated', {
+          attemptId,
+          reason: 'spotify-playback-failed',
+          errorMessage: message,
+          fallbackTrackId: degradedPrepared.resolvedTrack?.id,
+        });
+        await startPreparedPlayback(degradedPrepared);
+        return;
       }
+
       setSpotifyError(`${t('screens.gameplay.spotifyPlaybackFailed')} ${normalizeSpotifyError(message, t)}`);
       setHookPlaying(false);
+      logPlaybackEvent('playbackFailed', {
+        attemptId,
+        source: 'spotify',
+        reason: 'spotify-playback-failed',
+        errorMessage: message,
+      });
     }
-  }, [activeRound, activeRoundIndex, clearHookStopTimer, currentPrepared, registerPlaybackFailure, rounds, scheduleHookStop, startHeardTracking, stopHeardTracking, t, updateRound, waitForSpotifyDeviceReady]);
+  }, [
+    activeRound,
+    activeRoundIndex,
+    applyPreviewFallback,
+    clearHookStopTimer,
+    currentPrepared,
+    registerPlaybackFailure,
+    scheduleHookStop,
+    startHeardTracking,
+    stopHeardTracking,
+    t,
+    waitForSpotifyDeviceReady,
+  ]);
 
   useEffect(() => {
     const load = async () => {
@@ -621,22 +739,6 @@ export default function GameplayScreen({
   }, [playlistId, t]);
 
   useEffect(() => {
-    supportsWidevineAudioPlayback().then((supported) => {
-      setPlaybackHealth((prev) => ({
-        ...prev,
-        drmSupported: supported,
-        previewOnlyMode: prev.previewOnlyMode || !supported,
-      }));
-    }).catch(() => {
-      setPlaybackHealth((prev) => ({
-        ...prev,
-        drmSupported: false,
-        previewOnlyMode: true,
-      }));
-    });
-  }, []);
-
-  useEffect(() => {
     spotifyPlayerRef.current = spotifyPlayer;
   }, [spotifyPlayer]);
 
@@ -645,8 +747,15 @@ export default function GameplayScreen({
   }, [spotifyDeviceId]);
 
   useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      const nextState = getSpotifyAuthState();
+      setPlaybackHealth((prev) => (prev.authState === nextState ? prev : { ...prev, authState: nextState }));
+    }, 1000);
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
     if (!rounds.length || playbackHealth.previewOnlyMode) return;
-    if (playbackHealth.drmSupported === false) return;
     if (!rounds.some((round) => canPlayViaSpotify(round.track) && !round.track.preview_url)) return;
 
     let cancelled = false;
@@ -669,18 +778,29 @@ export default function GameplayScreen({
           if (cancelled) return;
           setSpotifyDeviceId(device_id);
           setSpotifyError(null);
+          setPlaybackHealth((prev) => ({ ...prev, deviceState: 'ready' }));
+          logPlaybackEvent('sdkReady', { deviceId: device_id });
         });
 
         player.addListener('initialization_error', ({ message }: { message: string }) => {
           if (cancelled) return;
           registerPlaybackFailure(message.toLowerCase());
           setSpotifyError(normalizeSpotifyError(message, t));
+          logPlaybackEvent('sdkError', { kind: 'initialization_error', message });
         });
 
         player.addListener('playback_error', ({ message }: { message: string }) => {
           if (cancelled) return;
           registerPlaybackFailure(message.toLowerCase());
           setSpotifyError(normalizeSpotifyError(message, t));
+          logPlaybackEvent('sdkError', { kind: 'playback_error', message });
+        });
+
+        player.addListener('authentication_error', ({ message }: { message: string }) => {
+          if (cancelled) return;
+          setPlaybackHealth((prev) => ({ ...prev, authState: 'reauth_required' }));
+          setSpotifyError(normalizeSpotifyError(message, t));
+          logPlaybackEvent('sdkError', { kind: 'authentication_error', message });
         });
 
         const connected = await player.connect();
@@ -691,6 +811,7 @@ export default function GameplayScreen({
         registerPlaybackFailure('drm');
         const message = err instanceof Error ? err.message : t('screens.gameplay.spotifySdkUnavailable');
         setSpotifyError(normalizeSpotifyError(message, t));
+        logPlaybackEvent('sdkError', { kind: 'sdk_init_failed', message });
       }
     };
 
@@ -702,15 +823,20 @@ export default function GameplayScreen({
       setSpotifyPlayer(null);
       setSpotifyDeviceId(null);
     };
-  }, [playbackHealth.drmSupported, playbackHealth.previewOnlyMode, registerPlaybackFailure, rounds, t]);
+  }, [playbackHealth.previewOnlyMode, registerPlaybackFailure, rounds, t]);
 
   useEffect(() => {
     if (!activeRound) return;
-    prepareTrackPlayback(activeRoundIndex).catch(() => undefined);
     stopAllPlayback();
     setClipRemainingMs(HOOK_CLIP_MS);
     setHookRemainingMs(null);
-  }, [activeRound, activeRoundIndex, prepareTrackPlayback, stopAllPlayback]);
+  }, [activeRoundIndex, activeRound, stopAllPlayback]);
+
+  useEffect(() => {
+    if (!activeRound) return;
+    if (activeRound.prepareStatus !== 'idle') return;
+    prepareTrackPlayback(activeRoundIndex).catch(() => undefined);
+  }, [activeRound, activeRoundIndex, prepareTrackPlayback]);
 
   useEffect(() => {
     if (!hookClipEndsAt) {
@@ -733,6 +859,23 @@ export default function GameplayScreen({
 
   const togglePlayback = useCallback(async () => {
     if (!activeRound) return;
+
+    if (playbackHealth.previewOnlyMode && currentPrepared?.source === 'spotify') {
+      updateRound(activeRoundIndex, (round) => ({
+        ...round,
+        prepareStatus: 'idle',
+        preparedPlayback: null,
+      }));
+      const prepared = await prepareTrackPlayback(activeRoundIndex);
+      if (!prepared?.ready) {
+        const noPreviewFallback = prepared?.fallbackReason === 'no-preview-track-available';
+        setSpotifyError(noPreviewFallback ? t('screens.gameplay.noPreviewTracksAvailable') : t('screens.gameplay.prepareFailed'));
+        return;
+      }
+      await startPreparedPlayback(prepared);
+      return;
+    }
+
     if (!currentPrepared?.ready) {
       if (activeRound.prepareStatus === 'preparing') {
         setSpotifyError(t('screens.gameplay.preparing'));
@@ -740,7 +883,8 @@ export default function GameplayScreen({
       }
       const prepared = await prepareTrackPlayback(activeRoundIndex);
       if (!prepared?.ready) {
-        setSpotifyError(t('screens.gameplay.prepareFailed'));
+        const noPreviewFallback = prepared?.fallbackReason === 'no-preview-track-available';
+        setSpotifyError(noPreviewFallback ? t('screens.gameplay.noPreviewTracksAvailable') : t('screens.gameplay.prepareFailed'));
         return;
       }
       await startPreparedPlayback(prepared);
@@ -786,7 +930,7 @@ export default function GameplayScreen({
     } catch {
       await startPreparedPlayback();
     }
-  }, [activeRound, activeRoundIndex, clearHookStopTimer, clipRemainingMs, currentPrepared, hookClipEndsAt, hookPlaying, prepareTrackPlayback, scheduleHookStop, startHeardTracking, startPreparedPlayback, stopHeardTracking, t, updateRound]);
+  }, [activeRound, activeRoundIndex, clearHookStopTimer, clipRemainingMs, currentPrepared, hookClipEndsAt, hookPlaying, playbackHealth.previewOnlyMode, prepareTrackPlayback, scheduleHookStop, startHeardTracking, startPreparedPlayback, stopHeardTracking, t, updateRound]);
 
   const handleGuessChange = (field: 'title' | 'artist' | 'year', value: string) => {
     if (readOnlyRound || !activeRound || activeRound.submitted) return;
@@ -921,12 +1065,25 @@ export default function GameplayScreen({
         </div>
 
         <div className="hh-content rounded-3xl border border-slate-700/45 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 p-4 sm:p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_22px_42px_-30px_rgba(2,6,23,0.95)]">
+          <div className="mb-3 rounded-xl border border-slate-600/70 bg-slate-900/60 px-3 py-2.5">
+            <div className="flex items-center justify-between gap-2 text-[11px] text-slate-300">
+              <span>{t('screens.gameplay.roundLabel', { current: activeRoundIndex + 1, total: Math.max(rounds.length, 1) })}</span>
+              <span>{t('screens.gameplay.score', { score: scores[currentPlayerIdx]?.score || 0 })}</span>
+            </div>
+            <div className="mt-2 h-2 rounded-full bg-slate-700/85">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-orange-400 via-orange-400 to-rose-400 transition-all duration-200"
+                style={{ width: `${roundProgressPercent}%` }}
+              />
+            </div>
+          </div>
+
           <div className="grid gap-3 md:grid-cols-[120px_1fr]">
             <button
               type="button"
               onClick={() => togglePlayback().catch(() => undefined)}
               aria-label={hookPlaying ? t('screens.gameplay.pause') : t('screens.gameplay.playHook')}
-              className="relative h-[110px] w-full rounded-2xl border border-slate-600/70 bg-slate-900/70 overflow-hidden transition-all active:scale-[0.99]"
+              className="relative h-[120px] w-full rounded-2xl border border-slate-600/70 bg-slate-900/70 overflow-hidden transition-all active:scale-[0.99]"
             >
               {activeRound.revealedFields.title || activeRound.revealedFields.artist || activeRound.revealedFields.year ? (
                 currentTargetTrack?.album?.images?.[0]?.url ? (
@@ -938,7 +1095,7 @@ export default function GameplayScreen({
                 <div className="h-full w-full flex items-center justify-center text-xs text-slate-400">{t('screens.gameplay.coverHiddenUntilReveal')}</div>
               )}
               <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/20 text-white">
-                {hookPlaying ? <Pause size={56} strokeWidth={2} /> : <Play size={56} strokeWidth={2} />}
+                {hookPlaying ? <Pause size={64} strokeWidth={2} /> : <Play size={64} strokeWidth={2} />}
               </span>
             </button>
 
@@ -955,6 +1112,8 @@ export default function GameplayScreen({
                     : t('screens.gameplay.prepareFailed')}
               </div>
               {currentPrepared?.fallbackReason && <div className="text-amber-300">{t('screens.gameplay.fallbackActive')}</div>}
+              <div>{t('screens.gameplay.authStateLabel', { state: t(`screens.gameplay.authState.${playbackHealth.authState}`) })}</div>
+              <div>{t('screens.gameplay.deviceStateLabel', { state: t(`screens.gameplay.deviceState.${playbackHealth.deviceState}`) })}</div>
             </div>
           </div>
 
@@ -1028,6 +1187,9 @@ export default function GameplayScreen({
               {score.name}: {score.score}
             </span>
           ))}
+        </div>
+        <div className="hh-content mt-2 text-right text-[10px] text-slate-500 dark:text-slate-400">
+          build {buildInfo.sha} · asset {buildInfo.assetHash}
         </div>
       </motion.div>
     </div>

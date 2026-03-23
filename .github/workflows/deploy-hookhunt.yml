@@ -64,6 +64,7 @@ jobs:
         env:
           VITE_SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           VITE_SPOTIFY_REDIRECT_URI: https://hookhunt.leagueoffun.com/callback/
+          VITE_BUILD_SHA: ${{ github.sha }}
         run: pnpm --filter @leagueoffun/hookhunt build
 
       - name: 🔍 Validate Build Output
@@ -107,6 +108,16 @@ jobs:
           # Guardrail: never leak client secret into static bundle.
           if grep -R --line-number "SPOTIFY_CLIENT_SECRET" apps/${{ env.APP_NAME }}/dist >/dev/null 2>&1; then
             echo "❌ Found forbidden SPOTIFY_CLIENT_SECRET marker in dist output."
+            exit 1
+          fi
+
+          if grep -R --line-number "external-spotify-open" apps/${{ env.APP_NAME }}/dist/assets/*.js >/dev/null 2>&1; then
+            echo "❌ Found forbidden external Spotify fallback path in dist output."
+            exit 1
+          fi
+
+          if grep -R --line-number "requestMediaKeySystemAccess" apps/${{ env.APP_NAME }}/dist/assets/*.js >/dev/null 2>&1; then
+            echo "❌ Found blocking EME preflight marker in dist output."
             exit 1
           fi
 
@@ -170,3 +181,30 @@ jobs:
 
       - name: ✅ Build Complete
         run: echo "✅ HookHunt built and deployed successfully"
+
+      - name: 🧪 Verify Live HookHunt Runtime Signatures
+        run: |
+          echo "🧪 Checking live HookHunt bundle signatures..."
+          HTML=$(curl -fsSL https://hookhunt.leagueoffun.com)
+          JS_PATH=$(echo "$HTML" | grep -oE '/assets/index-[^"]+\.js' | head -n 1)
+
+          if [ -z "$JS_PATH" ]; then
+            echo "❌ Could not resolve live HookHunt JS bundle path."
+            exit 1
+          fi
+
+          JS_URL="https://hookhunt.leagueoffun.com${JS_PATH}"
+          echo "✅ Live bundle: ${JS_URL}"
+          JS_CONTENT=$(curl -fsSL "$JS_URL")
+
+          if echo "$JS_CONTENT" | grep -q "external-spotify-open"; then
+            echo "❌ Live bundle still contains external Spotify fallback marker."
+            exit 1
+          fi
+
+          if echo "$JS_CONTENT" | grep -q "requestMediaKeySystemAccess"; then
+            echo "❌ Live bundle still contains blocking EME preflight marker."
+            exit 1
+          fi
+
+          echo "✅ Live runtime signature check passed."

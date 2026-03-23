@@ -100,6 +100,7 @@ jobs:
         env:
           VITE_SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           VITE_SPOTIFY_REDIRECT_URI: https://hookhunt.leagueoffun.com/callback/
+          VITE_BUILD_SHA: ${{ github.sha }}
         run: |
           echo "🏗️ Building HookHunt..."
           pnpm --filter @leagueoffun/hookhunt build
@@ -125,6 +126,16 @@ jobs:
 
           if grep -R --line-number "SPOTIFY_CLIENT_SECRET" apps/hookhunt/dist >/dev/null 2>&1; then
             echo "❌ Found forbidden SPOTIFY_CLIENT_SECRET marker in dist output."
+            exit 1
+          fi
+
+          if grep -R --line-number "external-spotify-open" apps/hookhunt/dist/assets/*.js >/dev/null 2>&1; then
+            echo "❌ Found forbidden external Spotify fallback path in HookHunt bundle."
+            exit 1
+          fi
+
+          if grep -R --line-number "requestMediaKeySystemAccess" apps/hookhunt/dist/assets/*.js >/dev/null 2>&1; then
+            echo "❌ Found blocking EME preflight marker in HookHunt bundle."
             exit 1
           fi
 
@@ -425,6 +436,32 @@ jobs:
           echo "⚠️ Site accessibility check did not pass within timeout - deployment may still be propagating"
           echo "ℹ️ Smoke test is non-blocking; the deployment completed successfully"
           exit 0
+
+      - name: 🧪 Smoke Test - Verify HookHunt Runtime Signatures
+        run: |
+          echo "🧪 Verifying live HookHunt runtime signatures..."
+          HTML=$(curl -fsSL https://hookhunt.leagueoffun.com)
+          JS_PATH=$(echo "$HTML" | grep -oE '/assets/index-[^"]+\.js' | head -n 1)
+
+          if [ -z "$JS_PATH" ]; then
+            echo "❌ Could not resolve HookHunt JS bundle path from live HTML."
+            exit 1
+          fi
+
+          JS_URL="https://hookhunt.leagueoffun.com${JS_PATH}"
+          JS_CONTENT=$(curl -fsSL "$JS_URL")
+
+          if echo "$JS_CONTENT" | grep -q "external-spotify-open"; then
+            echo "❌ Live HookHunt bundle still contains external fallback marker."
+            exit 1
+          fi
+
+          if echo "$JS_CONTENT" | grep -q "requestMediaKeySystemAccess"; then
+            echo "❌ Live HookHunt bundle still contains blocking EME preflight marker."
+            exit 1
+          fi
+
+          echo "✅ HookHunt runtime signatures look correct."
 
   summary:
     name: 📊 Deployment Summary

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, LogIn, LogOut, Music, RefreshCw } from 'lucide-react';
@@ -57,20 +57,48 @@ export default function PlaylistSelectScreen({
   const canStart = Boolean(selectedPlaylistId) && !loading && !disabled;
   const displayName = profile?.display_name || profile?.email || profile?.id || 'Spotify';
 
+  const hydrateAuth = useCallback(async () => {
+    const storedToken = getStoredAccessToken();
+    if (storedToken) {
+      setToken((previous) => (previous === storedToken ? previous : storedToken));
+      return;
+    }
+
+    const validToken = await getValidAccessToken();
+    setToken(validToken);
+    if (!validToken) {
+      writeCachedProfile(null);
+      setProfile(null);
+    }
+  }, []);
+
   useEffect(() => {
-    const hydrateAuth = async () => {
-      const validToken = await getValidAccessToken();
-      setToken(validToken);
-      if (!validToken) {
-        writeCachedProfile(null);
-        setProfile(null);
-      }
-    };
     hydrateAuth().catch((err) => {
       console.error('Failed to hydrate Spotify auth:', err);
       setToken(null);
     });
-  }, []);
+  }, [hydrateAuth]);
+
+  useEffect(() => {
+    const onStorage = (event: StorageEvent) => {
+      if (!event.key || !event.key.startsWith('hookhunt.spotify.')) return;
+      hydrateAuth().catch(() => undefined);
+    };
+
+    const onFocus = () => {
+      hydrateAuth().catch(() => undefined);
+    };
+
+    window.addEventListener('storage', onStorage);
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onFocus);
+
+    return () => {
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onFocus);
+    };
+  }, [hydrateAuth]);
 
   const loadPlaylists = useCallback(async () => {
     if (!token) return;
