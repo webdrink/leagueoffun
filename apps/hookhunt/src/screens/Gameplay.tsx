@@ -367,7 +367,11 @@ export default function GameplayScreen({
   }, []);
 
   const findFallbackTrack = useCallback((startIndex: number): SpotifyTrack | null => {
-    const canUseSpotify = (track: SpotifyTrack) => !playbackHealth.previewOnlyMode && canPlayViaSpotify(track);
+    const canUseSpotify = (track: SpotifyTrack) => (
+      !playbackHealth.previewOnlyMode &&
+      playbackHealth.drmSupported !== false &&
+      canPlayViaSpotify(track)
+    );
 
     for (let i = startIndex + 1; i < rounds.length; i += 1) {
       const candidate = rounds[i]?.track;
@@ -390,7 +394,7 @@ export default function GameplayScreen({
       if (canUseSpotify(candidate)) return candidate;
     }
     return null;
-  }, [allTracks, playbackHealth.previewOnlyMode, rounds]);
+  }, [allTracks, playbackHealth.drmSupported, playbackHealth.previewOnlyMode, rounds]);
 
   const prepareTrackPlayback = useCallback(async (roundIndex: number): Promise<PreparedPlayback | null> => {
     const round = rounds[roundIndex];
@@ -416,7 +420,11 @@ export default function GameplayScreen({
       }
     }
 
-    const canUseSpotifyFull = !playbackHealth.previewOnlyMode && canPlayViaSpotify(baseTrack);
+    const canUseSpotifyFull = (
+      !playbackHealth.previewOnlyMode &&
+      playbackHealth.drmSupported !== false &&
+      canPlayViaSpotify(baseTrack)
+    );
 
     let prepared: PreparedPlayback;
 
@@ -474,7 +482,7 @@ export default function GameplayScreen({
       setActiveHookStartMs(prepared.startMs);
     }
     return prepared;
-  }, [activeRoundIndex, findFallbackTrack, playbackHealth.previewOnlyMode, rounds, updateRound]);
+  }, [activeRoundIndex, findFallbackTrack, playbackHealth.drmSupported, playbackHealth.previewOnlyMode, rounds, updateRound]);
 
   const startPreparedPlayback = useCallback(async (preparedOverride?: PreparedPlayback | null) => {
     const prepared = preparedOverride ?? currentPrepared;
@@ -614,9 +622,17 @@ export default function GameplayScreen({
 
   useEffect(() => {
     supportsWidevineAudioPlayback().then((supported) => {
-      setPlaybackHealth((prev) => ({ ...prev, drmSupported: supported }));
+      setPlaybackHealth((prev) => ({
+        ...prev,
+        drmSupported: supported,
+        previewOnlyMode: prev.previewOnlyMode || !supported,
+      }));
     }).catch(() => {
-      setPlaybackHealth((prev) => ({ ...prev, drmSupported: false }));
+      setPlaybackHealth((prev) => ({
+        ...prev,
+        drmSupported: false,
+        previewOnlyMode: true,
+      }));
     });
   }, []);
 
@@ -630,6 +646,7 @@ export default function GameplayScreen({
 
   useEffect(() => {
     if (!rounds.length || playbackHealth.previewOnlyMode) return;
+    if (playbackHealth.drmSupported === false) return;
     if (!rounds.some((round) => canPlayViaSpotify(round.track) && !round.track.preview_url)) return;
 
     let cancelled = false;
@@ -685,7 +702,7 @@ export default function GameplayScreen({
       setSpotifyPlayer(null);
       setSpotifyDeviceId(null);
     };
-  }, [playbackHealth.previewOnlyMode, registerPlaybackFailure, rounds, t]);
+  }, [playbackHealth.drmSupported, playbackHealth.previewOnlyMode, registerPlaybackFailure, rounds, t]);
 
   useEffect(() => {
     if (!activeRound) return;

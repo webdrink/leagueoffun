@@ -54,6 +54,7 @@ interface SpotifyAudioAnalysis {
 const API = 'https://api.spotify.com/v1';
 const hookEstimateCache = new Map<string, number | null>();
 let audioAnalysisAvailability: boolean | null = null;
+const ENABLE_AUDIO_ANALYSIS = (import.meta.env.VITE_ENABLE_SPOTIFY_AUDIO_ANALYSIS as string | undefined) === 'true';
 
 async function spotifyFetch(path: string, init: RequestInit = {}): Promise<Response> {
   const token = await getValidAccessToken();
@@ -197,6 +198,10 @@ export async function startPlaybackOnDevice(
 }
 
 async function getTrackAudioAnalysis(trackId: string): Promise<SpotifyAudioAnalysis | null> {
+  if (!ENABLE_AUDIO_ANALYSIS) {
+    return null;
+  }
+
   if (audioAnalysisAvailability === false) {
     return null;
   }
